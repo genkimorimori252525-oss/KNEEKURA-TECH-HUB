@@ -20,6 +20,19 @@ Recovered from original descriptor stores and isolated guarded metadata callback
 - 0x3c2100 ← com/elfmcys/yesstevemodel/ooOo0oOo0o000O00oOOO0oo0.o0OOooo0o0OO00OoOOOo0o0O(J)V (callback 0x418720, flags 2, access 266)
 - 0x3bf750 ← com/elfmcys/yesstevemodel/ooOOo000OOO0ooO0oo0ooooO.Oo0Oo0o00O00Oo0OOoOOoooo(Lcom/mojang/blaze3d/vertex/VertexConsumer;Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lorg/joml/Matrix4f;ZLcom/elfmcys/yesstevemodel/OOoOoooOOooO0o0000o0O0o0;[F[FIIIIFFFFZ)V (callback 0x418740, flags 2, access 266)
 
+## Find a native entry by its existing Java boundary
+
+These groups come from exact tuple joins to the prior declaration inventory, not new guesses about native bodies. Read the linked boundary before invoking or reusing an entry.
+
+- [Common setup/shutdown](COMMON-NATIVE-LIFECYCLE-EVIDENCE-2026-10-17.json):0x3c21a0,0x3c2310.
+- [Server model synchronization](SERVER-MODEL-SYNC-JAVA-EVIDENCE-2026-10-17.json):0x3c2920,0x3c5190,0x3c5500,0x3c6a40.
+- [Client compatibility initialization](CLIENT-COMPAT-INITIALIZATION-EVIDENCE-2026-10-17.json):0x3bc7c0.
+- [Client model reception](CLIENT-MODEL-SYNC-STATE-EVIDENCE-2026-10-17.json):0x3bee40.
+- [Native texture boundary](NATIVE-TEXTURE-JAVA-BOUNDARY-EVIDENCE-2026-10-17.json):0x3bf0c0(instance),0x3bf540(static).
+- [GeoModel lifetime](LOCATOR-MATRIX-PREPARATION-EVIDENCE-2026-10-17.json):0x3c1160.
+- [Audio decoder boundary](AUDIO-DECODER-JAVA-BOUNDARY-EVIDENCE-2026-10-17.json):0x3c1400,0x3c1600,0x3c1850,0x3c20d0,0x3c2100.
+- [Rendering](JAVA-RENDER-BOUNDARY-EVIDENCE-2026-10-17.json):0x3bf750.
+
 ## Scope and reproducibility
 
 [Exact evidence receipt](NATIVE-EXACT-BINDINGS-2026-10-18.json) preserves all source-payload, callback, classfile and pairing-instruction hashes. All seventeen recovered owner/name/descriptor/access/class-hash tuples also exactly match the pre-existing October17 declaration inventory. This cross-check does not use declaration order to infer addresses.

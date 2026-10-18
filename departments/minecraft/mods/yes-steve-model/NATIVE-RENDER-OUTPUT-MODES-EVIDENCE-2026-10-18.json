@@ -1,0 +1,2898 @@
+{
+  "format": "ysm-render-output-mode-continuation-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "jar_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "original_receipt_sha256": "90ee2e7985145dbabc031ece31f0abbac45779aa19dfbb708845c8bcd82be6cb",
+  "ranges": [
+    {
+      "start": "0x4c4aa0",
+      "end": "0x4c4c60",
+      "sha256": "b4d53b060c5c8725da0cb1c64e12862a5087cf7fa34a3a737cb72bab2bd0d058",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4999840
+      }
+    },
+    {
+      "start": "0x3982d0",
+      "end": "0x398350",
+      "sha256": "5784ca8fd0a545e7511eb80f93b5396701d31e11645e726734d3bd27aec77b3c",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3769040
+      }
+    },
+    {
+      "start": "0x37b9d0",
+      "end": "0x37bab0",
+      "sha256": "532e44318f9af25fd643c8452a1a27fc71c9be3e46140bcf79151bedb8e40ff3",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3652048
+      }
+    },
+    {
+      "start": "0x5766d0",
+      "end": "0x5767d0",
+      "sha256": "a9c99b496e4e400b3fbcbb322af5a1175f2d79cee173f54a04eb53e350adf52c",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5727952
+      }
+    },
+    {
+      "start": "0xcc9c90",
+      "end": "0xcc9df0",
+      "sha256": "b52b9ab22d38f3b907a0cc9d80e15b632e130bd3cc2d1f1c0613e30eb2fd48e9",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 13409424
+      }
+    },
+    {
+      "start": "0xcbf560",
+      "end": "0xcbf610",
+      "sha256": "24727bc76b760e6fc0d99463f19aabae21a7d9b6e927453b72268225759af921",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 13366624
+      }
+    }
+  ],
+  "anchors": [
+    {
+      "id": "initial_global_state",
+      "address": "0x37ba28",
+      "size": 21,
+      "bytes": "48890531919b000f110532919b000f11053b919b00",
+      "sha256": "9b715603c82c6f968e31d4c628773c0963afee2e22f3daa1f73b4a6e75c7662c",
+      "claim": "Output scratch object vtable at0xd34b60; buffer pointer0xd34b68 and capacity0xd34b70 zeroed by guarded initializer.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3652136
+      }
+    },
+    {
+      "id": "ensure_output_storage",
+      "address": "0x37bea9",
+      "size": 35,
+      "bytes": "895c246049c1e504488d3da88c9b004c89eeba01000000e8db8b14004c892dac8c9b00",
+      "sha256": "1e9c2a5482650cda9bd8afcdd320de884f2c01e294cd6fcce988c970745a4165",
+      "claim": "Ensure totalBoneCount*16 bytes at object0xd34b60 with initialize flag1; store requested logical byte count0xd34b78.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3653289
+      }
+    },
+    {
+      "id": "capacity_reuse",
+      "address": "0x4c4ab4",
+      "size": 25,
+      "bytes": "4889f34989fe488b47104839c60f86a20000004885c0747948",
+      "sha256": "3aacdbe494128d36a6399b136a73d84641aedcf8f93d7cb82ee840844bb507e1",
+      "claim": "If request<=capacity, branch directly to return0x4c4b69 without data clearing.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4999860
+      }
+    },
+    {
+      "id": "growth",
+      "address": "0x4c4ac7",
+      "size": 32,
+      "bytes": "4885c074794801c04839c3480f46d8498b7e084889dee8ae5180004885c0757a",
+      "sha256": "cf0c8bed26e78dcde199515409ea1e2672e6baac817ae130b675753f467b52dc",
+      "claim": "Nonzero insufficient capacity doubles capacity or uses requested size, calls0xcc9c90; successful path stores pointer/capacity without initialize flag or clearing.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4999879
+      }
+    },
+    {
+      "id": "first_allocation",
+      "address": "0x4c4b45",
+      "size": 36,
+      "bytes": "89d54889dfe811aa7f004885c00f848b0000004084ed0f85dd0000004989460849895e10",
+      "sha256": "96e7562c9e0f82f5811276d0cb2dae3b027c1dc628a6b040d73b851bd332e572",
+      "claim": "Zero-capacity allocation tests initialize flag; true branches to zero fill.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5000005
+      }
+    },
+    {
+      "id": "zero_fill",
+      "address": "0x4c4c3e",
+      "size": 24,
+      "bytes": "4889c731f64889da4989c7e8821a0b004c89f8e90bffffff",
+      "sha256": "6efd921df5324875afdbd86e8040fbc1858eebfec7e66e7bf62a7772d66184f9",
+      "claim": "Zero fill0x5766d0(pointer,0,capacity), then install pointer/capacity.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5000254
+      }
+    },
+    {
+      "id": "fill_implementation",
+      "address": "0x5766d0",
+      "size": 160,
+      "bytes": "4889f84885d20f84910000004883fa03770431c9eb7b400fb6fe4883fa20730431c9eb3c4889d14883e1e0660f6ec7660fefc9660f3800c14531c00f1f440000f3420f7f0400f3420f7f4400104983c0204c39c175ea4839ca7442f6c21c74314989c84889d14883e1fc660f6ec7660f60c0f20f70c000660f1f84000000000066420f7e04004983c0044c39c175f1eb074088340848ffc14839ca75f4c3cccc",
+      "sha256": "82766afa528548f266c51667af4bcdc783370a3b842199c7363ac011231cb524",
+      "claim": "Byte-fill implementation broadcasts low byte and writes buffer; ESI0 yields zero bytes.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5727952
+      }
+    },
+    {
+      "id": "mode_hash_lookup",
+      "address": "0x3982d0",
+      "size": 117,
+      "bytes": "48837f1800745289f14c8b4f084c39c9720989c831d241f7f189d1488b07488b04c84885c07448488b383b7708742690488b3f4885ff7437448b47084c89c24d39c872084489c031d241f7f139ca751f4439c675db4889f8c34883c7100f1f00488b3f4885ff74073b770875f3ebe631ff4889f8c3",
+      "sha256": "3f18a77ddb300697d8b410e78aaf321d68405b144c07e77ad9bb395d70bd3bf4",
+      "claim": "Exact integer-key lookup: key=node.u32(+8), value=node.u32(+12); absent key returns null.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3769040
+      }
+    },
+    {
+      "id": "mode_to_key",
+      "address": "0x37f650",
+      "size": 74,
+      "bytes": "4183f9037744418d71ff488b442428488d7818e8688c01004885c0742d448b600c496bc478418b44056c418d1c04ffc34c29ed48c1ed0349bdefeeeeeeeeeeeeee4c0fafede90fc8ffff",
+      "sha256": "039e50aa664fc5739d959dd7066f3a261c4f9520024c42e37a2ed629e06a6fd5",
+      "claim": "Modes1,2,3 map to native keys0,1,2. Use mapped start index and descriptor+0x6c descendant count.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3667536
+      }
+    },
+    {
+      "id": "output_write",
+      "address": "0x37e953",
+      "size": 33,
+      "bytes": "488b46080f28c80f590d1fe8cbff0f13080f12c0f30f59057199ccfff30f114008",
+      "sha256": "2834d3cdcc8bc59e68160e746d21972bb752a6a7febf90d809b0357848896330",
+      "claim": "Only output pointer dereference in inspected helper writes8 bytes at+0 and4 bytes at+8; no+12 writer.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3664211
+      }
+    },
+    {
+      "id": "output_copy",
+      "address": "0x37eac9",
+      "size": 62,
+      "bytes": "488bb424a80100004885f6743141f6c301742b488b9424a00100004c8d0495000000004c030575609b00498b064c89f7488b8c2498010000ff90a8060000",
+      "sha256": "aea02f530843e0eb407a49aa93fd189e6ac57cd6d69f47259d25702037d8dbd0",
+      "claim": "Conditional selected-range4-float copy-back; includes untracked slots within selected range when any tracking work occurred.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3664585
+      }
+    }
+  ],
+  "java_methods": [
+    {
+      "evidence_file": "FIRST-PERSON-RENDER-REGISTRY-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "14fcc862f027fba0480d316b539f6cb8a48a24ddcec66d85800256c220040880",
+      "class_sha256": "8b01bee8ffa1847e3f46a524c750e21480225c988e42d8cbd0903f6a34373402",
+      "member": {
+        "owner": "com/elfmcys/yesstevemodel/o0oo00OoO00OO0Oo0oo00ooo",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lnet/minecraft/client/player/LocalPlayer;Lcom/elfmcys/yesstevemodel/oOo0oO0OOo0ooOoo0oOo0oOo;Lcom/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O;Lnet/minecraft/world/entity/HumanoidArm;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IF)V",
+        "access": 1,
+        "code_sha256": "8ccf803f832f9a55614c7a6e82a589ba9aaf6c814d5def22b93d8aaa33fd0e17",
+        "exception_handlers": [],
+        "instructions": [
+          {
+            "offset": 0,
+            "opcode": "0x2a"
+          },
+          {
+            "offset": 1,
+            "opcode": "0xb4",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/o0oo00OoO00OO0Oo0oo00ooo",
+              "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+              "descriptor": "Lcom/elfmcys/yesstevemodel/oo0000o0OO0OooOo00oO0O0o;",
+              "cp_tag": 9
+            }
+          },
+          {
+            "offset": 4,
+            "opcode": "0xc6",
+            "branch_target": 18
+          },
+          {
+            "offset": 7,
+            "opcode": "0x2a"
+          },
+          {
+            "offset": 8,
+            "opcode": "0xb4",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/o0oo00OoO00OO0Oo0oo00ooo",
+              "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+              "descriptor": "Lcom/elfmcys/yesstevemodel/oo0000o0OO0OooOo00oO0O0o;",
+              "cp_tag": 9
+            }
+          },
+          {
+            "offset": 11,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/oo0000o0OO0OooOo00oO0O0o",
+              "name": "OO00OOOOo0Ooo0oo0o0Oo0OO",
+              "descriptor": "()Lnet/minecraft/world/entity/Entity;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 14,
+            "opcode": "0x2b"
+          },
+          {
+            "offset": 15,
+            "opcode": "0xa5",
+            "branch_target": 31
+          },
+          {
+            "offset": 18,
+            "opcode": "0x2a"
+          },
+          {
+            "offset": 19,
+            "opcode": "0xbb",
+            "reference": {
+              "class_name": "com/elfmcys/yesstevemodel/oo0000o0OO0OooOo00oO0O0o",
+              "cp_tag": 7
+            }
+          },
+          {
+            "offset": 22,
+            "opcode": "0x59"
+          },
+          {
+            "offset": 23,
+            "opcode": "0x2b"
+          },
+          {
+            "offset": 24,
+            "opcode": "0x2d"
+          },
+          {
+            "offset": 25,
+            "opcode": "0xb7",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/oo0000o0OO0OooOo00oO0O0o",
+              "name": "<init>",
+              "descriptor": "(Lnet/minecraft/client/player/LocalPlayer;Lcom/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O;)V",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 28,
+            "opcode": "0xb5",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/o0oo00OoO00OO0Oo0oo00ooo",
+              "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+              "descriptor": "Lcom/elfmcys/yesstevemodel/oo0000o0OO0OooOo00oO0O0o;",
+              "cp_tag": 9
+            }
+          },
+          {
+            "offset": 31,
+            "opcode": "0x2a"
+          },
+          {
+            "offset": 32,
+            "opcode": "0xb4",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/o0oo00OoO00OO0Oo0oo00ooo",
+              "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+              "descriptor": "Lcom/elfmcys/yesstevemodel/oo0000o0OO0OooOo00oO0O0o;",
+              "cp_tag": 9
+            }
+          },
+          {
+            "offset": 35,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/oo0000o0OO0OooOo00oO0O0o",
+              "name": "oOo0o0000OOOO0OooooO00oo",
+              "descriptor": "()V",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 38,
+            "opcode": "0x2a"
+          },
+          {
+            "offset": 39,
+            "opcode": "0xb4",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/o0oo00OoO00OO0Oo0oo00ooo",
+              "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+              "descriptor": "Lcom/elfmcys/yesstevemodel/oo0000o0OO0OooOo00oO0O0o;",
+              "cp_tag": 9
+            }
+          },
+          {
+            "offset": 42,
+            "opcode": "0x17"
+          },
+          {
+            "offset": 44,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/oo0000o0OO0OooOo00oO0O0o",
+              "name": "o0OOooo0o0OO00OoOOOo0o0O",
+              "descriptor": "(F)Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 47,
+            "opcode": "0x3a"
+          },
+          {
+            "offset": 49,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 51,
+            "opcode": "0xc7",
+            "branch_target": 55
+          },
+          {
+            "offset": 54,
+            "opcode": "0xb1"
+          },
+          {
+            "offset": 55,
+            "opcode": "0x2a"
+          },
+          {
+            "offset": 56,
+            "opcode": "0xb4",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/o0oo00OoO00OO0Oo0oo00ooo",
+              "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+              "descriptor": "Lcom/elfmcys/yesstevemodel/oo0000o0OO0OooOo00oO0O0o;",
+              "cp_tag": 9
+            }
+          },
+          {
+            "offset": 59,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/oo0000o0OO0OooOo00oO0O0o",
+              "name": "OOOoOO000000o0o0oOooo0o0",
+              "descriptor": "()Lcom/elfmcys/yesstevemodel/OOOO0O0O000O000000oOOO0o;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 62,
+            "opcode": "0x3a"
+          },
+          {
+            "offset": 64,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 66,
+            "opcode": "0xc7",
+            "branch_target": 70
+          },
+          {
+            "offset": 69,
+            "opcode": "0xb1"
+          },
+          {
+            "offset": 70,
+            "opcode": "0xbb",
+            "reference": {
+              "class_name": "com/elfmcys/yesstevemodel/oo0o0oOo0O0o00o0oO0O0OO0",
+              "cp_tag": 7
+            }
+          },
+          {
+            "offset": 73,
+            "opcode": "0x59"
+          },
+          {
+            "offset": 74,
+            "opcode": "0x2b"
+          },
+          {
+            "offset": 75,
+            "opcode": "0x2d"
+          },
+          {
+            "offset": 76,
+            "opcode": "0x2d"
+          },
+          {
+            "offset": 77,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O",
+              "name": "ooooO0o00oO0Oo0OOo0O0O0o",
+              "descriptor": "()Ljava/lang/String;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 80,
+            "opcode": "0xb7",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/oo0o0oOo0O0o00o0oO0O0OO0",
+              "name": "<init>",
+              "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/oo0OooOO0oOoOoOoo00oO000;Ljava/lang/String;)V",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 83,
+            "opcode": "0x3a"
+          },
+          {
+            "offset": 85,
+            "opcode": "0xb2",
+            "reference": {
+              "owner": "net/minecraftforge/common/MinecraftForge",
+              "name": "EVENT_BUS",
+              "descriptor": "Lnet/minecraftforge/eventbus/api/IEventBus;",
+              "cp_tag": 9
+            }
+          },
+          {
+            "offset": 88,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 90,
+            "opcode": "0xb9",
+            "reference": {
+              "owner": "net/minecraftforge/eventbus/api/IEventBus",
+              "name": "post",
+              "descriptor": "(Lnet/minecraftforge/eventbus/api/Event;)Z",
+              "cp_tag": 11
+            }
+          },
+          {
+            "offset": 95,
+            "opcode": "0x99",
+            "branch_target": 99
+          },
+          {
+            "offset": 98,
+            "opcode": "0xb1"
+          },
+          {
+            "offset": 99,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 101,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/oo0o0oOo0O0o00o0oO0O0OO0",
+              "name": "oOOOo0OOO0ooooo0O00OO0o0",
+              "descriptor": "()Lnet/minecraft/resources/ResourceLocation;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 104,
+            "opcode": "0xc7",
+            "branch_target": 114
+          },
+          {
+            "offset": 107,
+            "opcode": "0x2d"
+          },
+          {
+            "offset": 108,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O",
+              "name": "b_",
+              "descriptor": "()Lnet/minecraft/resources/ResourceLocation;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 111,
+            "opcode": "0xa7",
+            "branch_target": 119
+          },
+          {
+            "offset": 114,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 116,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/oo0o0oOo0O0o00o0oO0O0OO0",
+              "name": "oOOOo0OOO0ooooo0O00OO0o0",
+              "descriptor": "()Lnet/minecraft/resources/ResourceLocation;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 119,
+            "opcode": "0x3a"
+          },
+          {
+            "offset": 121,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 123,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/oo0o0oOo0O0o00o0oO0O0OO0",
+              "name": "oOOOo0OOO0ooooo0O00OO0o0",
+              "descriptor": "()Lnet/minecraft/resources/ResourceLocation;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 126,
+            "opcode": "0xc7",
+            "branch_target": 136
+          },
+          {
+            "offset": 129,
+            "opcode": "0x2d"
+          },
+          {
+            "offset": 130,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O",
+              "name": "oOOooo0000oOOOO00oOoOOOo",
+              "descriptor": "()I",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 133,
+            "opcode": "0xa7",
+            "branch_target": 137
+          },
+          {
+            "offset": 136,
+            "opcode": "0x3"
+          },
+          {
+            "offset": 137,
+            "opcode": "0x36"
+          },
+          {
+            "offset": 139,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 141,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 143,
+            "opcode": "0xb8",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0",
+              "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+              "descriptor": "(Lnet/minecraft/resources/ResourceLocation;)Lcom/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 146,
+            "opcode": "0xb9",
+            "reference": {
+              "owner": "net/minecraft/client/renderer/MultiBufferSource",
+              "name": "m_6299_",
+              "descriptor": "(Lnet/minecraft/client/renderer/RenderType;)Lcom/mojang/blaze3d/vertex/VertexConsumer;",
+              "cp_tag": 11
+            }
+          },
+          {
+            "offset": 151,
+            "opcode": "0x3a"
+          },
+          {
+            "offset": 153,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 155,
+            "opcode": "0xb2",
+            "reference": {
+              "owner": "net/minecraft/world/entity/HumanoidArm",
+              "name": "LEFT",
+              "descriptor": "Lnet/minecraft/world/entity/HumanoidArm;",
+              "cp_tag": 9
+            }
+          },
+          {
+            "offset": 158,
+            "opcode": "0xa6",
+            "branch_target": 165
+          },
+          {
+            "offset": 161,
+            "opcode": "0x4"
+          },
+          {
+            "offset": 162,
+            "opcode": "0xa7",
+            "branch_target": 166
+          },
+          {
+            "offset": 165,
+            "opcode": "0x5"
+          },
+          {
+            "offset": 166,
+            "opcode": "0x36"
+          },
+          {
+            "offset": 168,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 170,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/mojang/blaze3d/vertex/PoseStack",
+              "name": "m_85836_",
+              "descriptor": "()V",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 173,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 175,
+            "opcode": "0xb2",
+            "reference": {
+              "owner": "net/minecraft/world/entity/HumanoidArm",
+              "name": "LEFT",
+              "descriptor": "Lnet/minecraft/world/entity/HumanoidArm;",
+              "cp_tag": 9
+            }
+          },
+          {
+            "offset": 178,
+            "opcode": "0xa6",
+            "branch_target": 196
+          },
+          {
+            "offset": 181,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 183,
+            "opcode": "0x14",
+            "reference": {
+              "cp_tag": 6,
+              "value": 0.25
+            }
+          },
+          {
+            "offset": 186,
+            "opcode": "0x14",
+            "reference": {
+              "cp_tag": 6,
+              "value": 1.8
+            }
+          },
+          {
+            "offset": 189,
+            "opcode": "0xe"
+          },
+          {
+            "offset": 190,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/mojang/blaze3d/vertex/PoseStack",
+              "name": "m_85837_",
+              "descriptor": "(DDD)V",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 193,
+            "opcode": "0xa7",
+            "branch_target": 208
+          },
+          {
+            "offset": 196,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 198,
+            "opcode": "0x14",
+            "reference": {
+              "cp_tag": 6,
+              "value": -0.25
+            }
+          },
+          {
+            "offset": 201,
+            "opcode": "0x14",
+            "reference": {
+              "cp_tag": 6,
+              "value": 1.8
+            }
+          },
+          {
+            "offset": 204,
+            "opcode": "0xe"
+          },
+          {
+            "offset": 205,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/mojang/blaze3d/vertex/PoseStack",
+              "name": "m_85837_",
+              "descriptor": "(DDD)V",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 208,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 210,
+            "opcode": "0x12",
+            "reference": {
+              "cp_tag": 4,
+              "value": -1.0
+            }
+          },
+          {
+            "offset": 212,
+            "opcode": "0x12",
+            "reference": {
+              "cp_tag": 4,
+              "value": -1.0
+            }
+          },
+          {
+            "offset": 214,
+            "opcode": "0xc"
+          },
+          {
+            "offset": 215,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/mojang/blaze3d/vertex/PoseStack",
+              "name": "m_85841_",
+              "descriptor": "(FFF)V",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 218,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 220,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 222,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/mojang/blaze3d/vertex/PoseStack",
+              "name": "m_85850_",
+              "descriptor": "()Lcom/mojang/blaze3d/vertex/PoseStack$Pose;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 225,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 227,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/OOOO0O0O000O000000oOOO0o",
+              "name": "oOOOo0OOO0ooooo0O00OO0o0",
+              "descriptor": "()Lcom/elfmcys/yesstevemodel/OOoOoooOOooO0o0000o0O0o0;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 230,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 232,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/OOOO0O0O000O000000oOOO0o",
+              "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+              "descriptor": "()[F",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 235,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 237,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/OOOO0O0O000O000000oOOO0o",
+              "name": "o0OOooo0o0OO00OoOOOo0o0O",
+              "descriptor": "()[F",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 240,
+            "opcode": "0x15"
+          },
+          {
+            "offset": 242,
+            "opcode": "0x15"
+          },
+          {
+            "offset": 244,
+            "opcode": "0x15"
+          },
+          {
+            "offset": 246,
+            "opcode": "0xb2",
+            "reference": {
+              "owner": "net/minecraft/client/renderer/texture/OverlayTexture",
+              "name": "f_118083_",
+              "descriptor": "I",
+              "cp_tag": 9
+            }
+          },
+          {
+            "offset": 249,
+            "opcode": "0xc"
+          },
+          {
+            "offset": 250,
+            "opcode": "0xc"
+          },
+          {
+            "offset": 251,
+            "opcode": "0xc"
+          },
+          {
+            "offset": 252,
+            "opcode": "0xc"
+          },
+          {
+            "offset": 253,
+            "opcode": "0xb8",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/ooOOo000OOO0ooO0oo0ooooO",
+              "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+              "descriptor": "(Lcom/mojang/blaze3d/vertex/VertexConsumer;Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lcom/elfmcys/yesstevemodel/OOoOoooOOooO0o0000o0O0o0;[F[FIIIIFFFF)V",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 256,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 258,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/mojang/blaze3d/vertex/PoseStack",
+              "name": "m_85849_",
+              "descriptor": "()V",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 261,
+            "opcode": "0xb1"
+          }
+        ],
+        "supplemental_full_operand_records": [
+          {
+            "offset": 0,
+            "opcode": "0x2a",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 1,
+            "opcode": "0xb4",
+            "encoded_operands_hex": "0011"
+          },
+          {
+            "offset": 4,
+            "opcode": "0xc6",
+            "encoded_operands_hex": "000e"
+          },
+          {
+            "offset": 7,
+            "opcode": "0x2a",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 8,
+            "opcode": "0xb4",
+            "encoded_operands_hex": "0011"
+          },
+          {
+            "offset": 11,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "0018"
+          },
+          {
+            "offset": 14,
+            "opcode": "0x2b",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 15,
+            "opcode": "0xa5",
+            "encoded_operands_hex": "0010"
+          },
+          {
+            "offset": 18,
+            "opcode": "0x2a",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 19,
+            "opcode": "0xbb",
+            "encoded_operands_hex": "0014"
+          },
+          {
+            "offset": 22,
+            "opcode": "0x59",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 23,
+            "opcode": "0x2b",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 24,
+            "opcode": "0x2d",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 25,
+            "opcode": "0xb7",
+            "encoded_operands_hex": "0023"
+          },
+          {
+            "offset": 28,
+            "opcode": "0xb5",
+            "encoded_operands_hex": "0011"
+          },
+          {
+            "offset": 31,
+            "opcode": "0x2a",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 32,
+            "opcode": "0xb4",
+            "encoded_operands_hex": "0011"
+          },
+          {
+            "offset": 35,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "0026"
+          },
+          {
+            "offset": 38,
+            "opcode": "0x2a",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 39,
+            "opcode": "0xb4",
+            "encoded_operands_hex": "0011"
+          },
+          {
+            "offset": 42,
+            "opcode": "0x17",
+            "encoded_operands_hex": "08",
+            "local_index": 8
+          },
+          {
+            "offset": 44,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "002a"
+          },
+          {
+            "offset": 47,
+            "opcode": "0x3a",
+            "encoded_operands_hex": "09",
+            "local_index": 9
+          },
+          {
+            "offset": 49,
+            "opcode": "0x19",
+            "encoded_operands_hex": "09",
+            "local_index": 9
+          },
+          {
+            "offset": 51,
+            "opcode": "0xc7",
+            "encoded_operands_hex": "0004"
+          },
+          {
+            "offset": 54,
+            "opcode": "0xb1",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 55,
+            "opcode": "0x2a",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 56,
+            "opcode": "0xb4",
+            "encoded_operands_hex": "0011"
+          },
+          {
+            "offset": 59,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "002e"
+          },
+          {
+            "offset": 62,
+            "opcode": "0x3a",
+            "encoded_operands_hex": "0a",
+            "local_index": 10
+          },
+          {
+            "offset": 64,
+            "opcode": "0x19",
+            "encoded_operands_hex": "0a",
+            "local_index": 10
+          },
+          {
+            "offset": 66,
+            "opcode": "0xc7",
+            "encoded_operands_hex": "0004"
+          },
+          {
+            "offset": 69,
+            "opcode": "0xb1",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 70,
+            "opcode": "0xbb",
+            "encoded_operands_hex": "0032"
+          },
+          {
+            "offset": 73,
+            "opcode": "0x59",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 74,
+            "opcode": "0x2b",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 75,
+            "opcode": "0x2d",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 76,
+            "opcode": "0x2d",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 77,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "0036"
+          },
+          {
+            "offset": 80,
+            "opcode": "0xb7",
+            "encoded_operands_hex": "0039"
+          },
+          {
+            "offset": 83,
+            "opcode": "0x3a",
+            "encoded_operands_hex": "0b",
+            "local_index": 11
+          },
+          {
+            "offset": 85,
+            "opcode": "0xb2",
+            "encoded_operands_hex": "003f"
+          },
+          {
+            "offset": 88,
+            "opcode": "0x19",
+            "encoded_operands_hex": "0b",
+            "local_index": 11
+          },
+          {
+            "offset": 90,
+            "opcode": "0xb9",
+            "encoded_operands_hex": "00450200",
+            "argument_slot_count": 2,
+            "reserved_zero": 0
+          },
+          {
+            "offset": 95,
+            "opcode": "0x99",
+            "encoded_operands_hex": "0004"
+          },
+          {
+            "offset": 98,
+            "opcode": "0xb1",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 99,
+            "opcode": "0x19",
+            "encoded_operands_hex": "0b",
+            "local_index": 11
+          },
+          {
+            "offset": 101,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "0049"
+          },
+          {
+            "offset": 104,
+            "opcode": "0xc7",
+            "encoded_operands_hex": "000a"
+          },
+          {
+            "offset": 107,
+            "opcode": "0x2d",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 108,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "004c"
+          },
+          {
+            "offset": 111,
+            "opcode": "0xa7",
+            "encoded_operands_hex": "0008"
+          },
+          {
+            "offset": 114,
+            "opcode": "0x19",
+            "encoded_operands_hex": "0b",
+            "local_index": 11
+          },
+          {
+            "offset": 116,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "0049"
+          },
+          {
+            "offset": 119,
+            "opcode": "0x3a",
+            "encoded_operands_hex": "0c",
+            "local_index": 12
+          },
+          {
+            "offset": 121,
+            "opcode": "0x19",
+            "encoded_operands_hex": "0b",
+            "local_index": 11
+          },
+          {
+            "offset": 123,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "0049"
+          },
+          {
+            "offset": 126,
+            "opcode": "0xc7",
+            "encoded_operands_hex": "000a"
+          },
+          {
+            "offset": 129,
+            "opcode": "0x2d",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 130,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "0052"
+          },
+          {
+            "offset": 133,
+            "opcode": "0xa7",
+            "encoded_operands_hex": "0004"
+          },
+          {
+            "offset": 136,
+            "opcode": "0x3",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 137,
+            "opcode": "0x36",
+            "encoded_operands_hex": "0d",
+            "local_index": 13
+          },
+          {
+            "offset": 139,
+            "opcode": "0x19",
+            "encoded_operands_hex": "06",
+            "local_index": 6
+          },
+          {
+            "offset": 141,
+            "opcode": "0x19",
+            "encoded_operands_hex": "0c",
+            "local_index": 12
+          },
+          {
+            "offset": 143,
+            "opcode": "0xb8",
+            "encoded_operands_hex": "0057"
+          },
+          {
+            "offset": 146,
+            "opcode": "0xb9",
+            "encoded_operands_hex": "005b0200",
+            "argument_slot_count": 2,
+            "reserved_zero": 0
+          },
+          {
+            "offset": 151,
+            "opcode": "0x3a",
+            "encoded_operands_hex": "0e",
+            "local_index": 14
+          },
+          {
+            "offset": 153,
+            "opcode": "0x19",
+            "encoded_operands_hex": "04",
+            "local_index": 4
+          },
+          {
+            "offset": 155,
+            "opcode": "0xb2",
+            "encoded_operands_hex": "005f"
+          },
+          {
+            "offset": 158,
+            "opcode": "0xa6",
+            "encoded_operands_hex": "0007"
+          },
+          {
+            "offset": 161,
+            "opcode": "0x4",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 162,
+            "opcode": "0xa7",
+            "encoded_operands_hex": "0004"
+          },
+          {
+            "offset": 165,
+            "opcode": "0x5",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 166,
+            "opcode": "0x36",
+            "encoded_operands_hex": "0f",
+            "local_index": 15
+          },
+          {
+            "offset": 168,
+            "opcode": "0x19",
+            "encoded_operands_hex": "05",
+            "local_index": 5
+          },
+          {
+            "offset": 170,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "0064"
+          },
+          {
+            "offset": 173,
+            "opcode": "0x19",
+            "encoded_operands_hex": "04",
+            "local_index": 4
+          },
+          {
+            "offset": 175,
+            "opcode": "0xb2",
+            "encoded_operands_hex": "005f"
+          },
+          {
+            "offset": 178,
+            "opcode": "0xa6",
+            "encoded_operands_hex": "0012"
+          },
+          {
+            "offset": 181,
+            "opcode": "0x19",
+            "encoded_operands_hex": "05",
+            "local_index": 5
+          },
+          {
+            "offset": 183,
+            "opcode": "0x14",
+            "encoded_operands_hex": "0065"
+          },
+          {
+            "offset": 186,
+            "opcode": "0x14",
+            "encoded_operands_hex": "0067"
+          },
+          {
+            "offset": 189,
+            "opcode": "0xe",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 190,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "006c"
+          },
+          {
+            "offset": 193,
+            "opcode": "0xa7",
+            "encoded_operands_hex": "000f"
+          },
+          {
+            "offset": 196,
+            "opcode": "0x19",
+            "encoded_operands_hex": "05",
+            "local_index": 5
+          },
+          {
+            "offset": 198,
+            "opcode": "0x14",
+            "encoded_operands_hex": "006d"
+          },
+          {
+            "offset": 201,
+            "opcode": "0x14",
+            "encoded_operands_hex": "0067"
+          },
+          {
+            "offset": 204,
+            "opcode": "0xe",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 205,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "006c"
+          },
+          {
+            "offset": 208,
+            "opcode": "0x19",
+            "encoded_operands_hex": "05",
+            "local_index": 5
+          },
+          {
+            "offset": 210,
+            "opcode": "0x12",
+            "encoded_operands_hex": "6f"
+          },
+          {
+            "offset": 212,
+            "opcode": "0x12",
+            "encoded_operands_hex": "6f"
+          },
+          {
+            "offset": 214,
+            "opcode": "0xc",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 215,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "0073"
+          },
+          {
+            "offset": 218,
+            "opcode": "0x19",
+            "encoded_operands_hex": "0e",
+            "local_index": 14
+          },
+          {
+            "offset": 220,
+            "opcode": "0x19",
+            "encoded_operands_hex": "05",
+            "local_index": 5
+          },
+          {
+            "offset": 222,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "0077"
+          },
+          {
+            "offset": 225,
+            "opcode": "0x19",
+            "encoded_operands_hex": "0a",
+            "local_index": 10
+          },
+          {
+            "offset": 227,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "007a"
+          },
+          {
+            "offset": 230,
+            "opcode": "0x19",
+            "encoded_operands_hex": "0a",
+            "local_index": 10
+          },
+          {
+            "offset": 232,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "007d"
+          },
+          {
+            "offset": 235,
+            "opcode": "0x19",
+            "encoded_operands_hex": "0a",
+            "local_index": 10
+          },
+          {
+            "offset": 237,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "007f"
+          },
+          {
+            "offset": 240,
+            "opcode": "0x15",
+            "encoded_operands_hex": "0d",
+            "local_index": 13
+          },
+          {
+            "offset": 242,
+            "opcode": "0x15",
+            "encoded_operands_hex": "0f",
+            "local_index": 15
+          },
+          {
+            "offset": 244,
+            "opcode": "0x15",
+            "encoded_operands_hex": "07",
+            "local_index": 7
+          },
+          {
+            "offset": 246,
+            "opcode": "0xb2",
+            "encoded_operands_hex": "0085"
+          },
+          {
+            "offset": 249,
+            "opcode": "0xc",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 250,
+            "opcode": "0xc",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 251,
+            "opcode": "0xc",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 252,
+            "opcode": "0xc",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 253,
+            "opcode": "0xb8",
+            "encoded_operands_hex": "008a"
+          },
+          {
+            "offset": 256,
+            "opcode": "0x19",
+            "encoded_operands_hex": "05",
+            "local_index": 5
+          },
+          {
+            "offset": 258,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "008d"
+          },
+          {
+            "offset": 261,
+            "opcode": "0xb1",
+            "encoded_operands_hex": ""
+          }
+        ]
+      }
+    },
+    {
+      "evidence_file": "CLIENT-VIEW-MOVEMENT-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "9e8d7d2a7a5ed1d164b10aaadcf09551672a7d8736162434135785afcce3d108",
+      "class_sha256": "9210015ce45d2139b022c16fb3592e99f50da54b526e41d11e6d1bde751e499f",
+      "member": {
+        "owner": "com/elfmcys/yesstevemodel/O000O0O00ooo000O0oOOoo00",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lnet/minecraftforge/client/event/RenderHandEvent;Lnet/minecraft/client/player/AbstractClientPlayer;Lcom/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O;)V",
+        "access": 4106,
+        "code_sha256": "bc518b081c455bfe43be85f07ab545f0a623fc873453c8f79a7eac3ecc2193b3",
+        "exception_handlers": [],
+        "instructions": [
+          {
+            "offset": 0,
+            "opcode": "0x2c"
+          },
+          {
+            "offset": 1,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O",
+              "name": "o0ooooOo0o000OOo0oO00OoO",
+              "descriptor": "()Z",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 4,
+            "opcode": "0x9a",
+            "branch_target": 8
+          },
+          {
+            "offset": 7,
+            "opcode": "0xb1"
+          },
+          {
+            "offset": 8,
+            "opcode": "0x2c"
+          },
+          {
+            "offset": 9,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O",
+              "name": "ooooO0o00oO0Oo0OOo0O0O0o",
+              "descriptor": "()Ljava/lang/String;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 12,
+            "opcode": "0x4e"
+          },
+          {
+            "offset": 13,
+            "opcode": "0x2c"
+          },
+          {
+            "offset": 14,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O",
+              "name": "O0ooooOO0oOo000O0Oo00OOO",
+              "descriptor": "()Lcom/elfmcys/yesstevemodel/oOo0oO0OOo0ooOoo0oOo0oOo;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 17,
+            "opcode": "0x3a"
+          },
+          {
+            "offset": 19,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 21,
+            "opcode": "0xc6",
+            "branch_target": 38
+          },
+          {
+            "offset": 24,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 26,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/oOo0oO0OOo0ooOoo0oOo0oOo",
+              "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+              "descriptor": "()Lcom/elfmcys/yesstevemodel/Oo0o0o0o0OOo0000ooo00o00;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 29,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/Oo0o0o0o0OOo0000ooo00o00",
+              "name": "o0OOooo0o0OO00OoOOOo0o0O",
+              "descriptor": "()Lcom/elfmcys/yesstevemodel/OOoOoooOOooO0o0000o0O0o0;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 32,
+            "opcode": "0xb4",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/OOoOoooOOooO0o0000o0O0o0",
+              "name": "oOOo0Ooo0oOoo0O0OOOOo0oo",
+              "descriptor": "Z",
+              "cp_tag": 9
+            }
+          },
+          {
+            "offset": 35,
+            "opcode": "0x9a",
+            "branch_target": 39
+          },
+          {
+            "offset": 38,
+            "opcode": "0xb1"
+          },
+          {
+            "offset": 39,
+            "opcode": "0xb8",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/OOoO00ooO00OOO00O0o0000O",
+              "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+              "descriptor": "()Lcom/elfmcys/yesstevemodel/o0ooO0o0ooo000OOO0o0oo0o;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 42,
+            "opcode": "0x3a"
+          },
+          {
+            "offset": 44,
+            "opcode": "0x2a"
+          },
+          {
+            "offset": 45,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "net/minecraftforge/client/event/RenderHandEvent",
+              "name": "getPoseStack",
+              "descriptor": "()Lcom/mojang/blaze3d/vertex/PoseStack;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 48,
+            "opcode": "0x3a"
+          },
+          {
+            "offset": 50,
+            "opcode": "0x2a"
+          },
+          {
+            "offset": 51,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "net/minecraftforge/client/event/RenderHandEvent",
+              "name": "getMultiBufferSource",
+              "descriptor": "()Lnet/minecraft/client/renderer/MultiBufferSource;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 54,
+            "opcode": "0x3a"
+          },
+          {
+            "offset": 56,
+            "opcode": "0x2c"
+          },
+          {
+            "offset": 57,
+            "opcode": "0x3a"
+          },
+          {
+            "offset": 59,
+            "opcode": "0xb2",
+            "reference": {
+              "owner": "net/minecraftforge/common/MinecraftForge",
+              "name": "EVENT_BUS",
+              "descriptor": "Lnet/minecraftforge/eventbus/api/IEventBus;",
+              "cp_tag": 9
+            }
+          },
+          {
+            "offset": 62,
+            "opcode": "0xbb",
+            "reference": {
+              "class_name": "com/elfmcys/yesstevemodel/oo0o0oOo0O0o00o0oO0O0OO0",
+              "cp_tag": 7
+            }
+          },
+          {
+            "offset": 65,
+            "opcode": "0x59"
+          },
+          {
+            "offset": 66,
+            "opcode": "0x2b"
+          },
+          {
+            "offset": 67,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 69,
+            "opcode": "0x2d"
+          },
+          {
+            "offset": 70,
+            "opcode": "0xb7",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/oo0o0oOo0O0o00o0oO0O0OO0",
+              "name": "<init>",
+              "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/oo0OooOO0oOoOoOoo00oO000;Ljava/lang/String;)V",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 73,
+            "opcode": "0xb9",
+            "reference": {
+              "owner": "net/minecraftforge/eventbus/api/IEventBus",
+              "name": "post",
+              "descriptor": "(Lnet/minecraftforge/eventbus/api/Event;)Z",
+              "cp_tag": 11
+            }
+          },
+          {
+            "offset": 78,
+            "opcode": "0x99",
+            "branch_target": 82
+          },
+          {
+            "offset": 81,
+            "opcode": "0xb1"
+          },
+          {
+            "offset": 82,
+            "opcode": "0x2c"
+          },
+          {
+            "offset": 83,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O",
+              "name": "b_",
+              "descriptor": "()Lnet/minecraft/resources/ResourceLocation;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 86,
+            "opcode": "0x3a"
+          },
+          {
+            "offset": 88,
+            "opcode": "0x2c"
+          },
+          {
+            "offset": 89,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O",
+              "name": "oOOooo0000oOOOO00oOoOOOo",
+              "descriptor": "()I",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 92,
+            "opcode": "0x36"
+          },
+          {
+            "offset": 94,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 96,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 98,
+            "opcode": "0xb8",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0",
+              "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+              "descriptor": "(Lnet/minecraft/resources/ResourceLocation;)Lcom/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 101,
+            "opcode": "0xb9",
+            "reference": {
+              "owner": "net/minecraft/client/renderer/MultiBufferSource",
+              "name": "m_6299_",
+              "descriptor": "(Lnet/minecraft/client/renderer/RenderType;)Lcom/mojang/blaze3d/vertex/VertexConsumer;",
+              "cp_tag": 11
+            }
+          },
+          {
+            "offset": 106,
+            "opcode": "0x3a"
+          },
+          {
+            "offset": 108,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 110,
+            "opcode": "0xc6",
+            "branch_target": 208
+          },
+          {
+            "offset": 113,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 115,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/mojang/blaze3d/vertex/PoseStack",
+              "name": "m_85836_",
+              "descriptor": "()V",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 118,
+            "opcode": "0xb8",
+            "reference": {
+              "owner": "net/minecraft/client/Minecraft",
+              "name": "m_91087_",
+              "descriptor": "()Lnet/minecraft/client/Minecraft;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 121,
+            "opcode": "0xb4",
+            "reference": {
+              "owner": "net/minecraft/client/Minecraft",
+              "name": "f_91066_",
+              "descriptor": "Lnet/minecraft/client/Options;",
+              "cp_tag": 9
+            }
+          },
+          {
+            "offset": 124,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "net/minecraft/client/Options",
+              "name": "m_231830_",
+              "descriptor": "()Lnet/minecraft/client/OptionInstance;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 127,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "net/minecraft/client/OptionInstance",
+              "name": "m_231551_",
+              "descriptor": "()Ljava/lang/Object;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 130,
+            "opcode": "0xc0",
+            "reference": {
+              "class_name": "java/lang/Boolean",
+              "cp_tag": 7
+            }
+          },
+          {
+            "offset": 133,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "java/lang/Boolean",
+              "name": "booleanValue",
+              "descriptor": "()Z",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 136,
+            "opcode": "0x99",
+            "branch_target": 149
+          },
+          {
+            "offset": 139,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 141,
+            "opcode": "0x2a"
+          },
+          {
+            "offset": 142,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "net/minecraftforge/client/event/RenderHandEvent",
+              "name": "getPartialTick",
+              "descriptor": "()F",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 145,
+            "opcode": "0x2b"
+          },
+          {
+            "offset": 146,
+            "opcode": "0xb8",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/O000O0O00ooo000O0oOOoo00",
+              "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+              "descriptor": "(Lcom/mojang/blaze3d/vertex/PoseStack;FLnet/minecraft/world/entity/player/Player;)V",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 149,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 151,
+            "opcode": "0xe"
+          },
+          {
+            "offset": 152,
+            "opcode": "0x14",
+            "reference": {
+              "cp_tag": 6,
+              "value": -1.5
+            }
+          },
+          {
+            "offset": 155,
+            "opcode": "0xe"
+          },
+          {
+            "offset": 156,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/mojang/blaze3d/vertex/PoseStack",
+              "name": "m_85837_",
+              "descriptor": "(DDD)V",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 159,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 161,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 163,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/mojang/blaze3d/vertex/PoseStack",
+              "name": "m_85850_",
+              "descriptor": "()Lcom/mojang/blaze3d/vertex/PoseStack$Pose;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 166,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 168,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/oOo0oO0OOo0ooOoo0oOo0oOo",
+              "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+              "descriptor": "()Lcom/elfmcys/yesstevemodel/Oo0o0o0o0OOo0000ooo00o00;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 171,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/Oo0o0o0o0OOo0000ooo00o00",
+              "name": "o0OOooo0o0OO00OoOOOo0o0O",
+              "descriptor": "()Lcom/elfmcys/yesstevemodel/OOoOoooOOooO0o0000o0O0o0;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 174,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 176,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/oOo0oO0OOo0ooOoo0oOo0oOo",
+              "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+              "descriptor": "()Lcom/elfmcys/yesstevemodel/Oo0o0o0o0OOo0000ooo00o00;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 179,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/Oo0o0o0o0OOo0000ooo00o00",
+              "name": "o0OOooo0o0OO00OoOOOo0o0O",
+              "descriptor": "()Lcom/elfmcys/yesstevemodel/OOoOoooOOooO0o0000o0O0o0;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 182,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/OOoOoooOOooO0o0000o0O0o0",
+              "name": "o0OOooo0o0OO00OoOOOo0o0O",
+              "descriptor": "()[F",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 185,
+            "opcode": "0x1"
+          },
+          {
+            "offset": 186,
+            "opcode": "0x15"
+          },
+          {
+            "offset": 188,
+            "opcode": "0x6"
+          },
+          {
+            "offset": 189,
+            "opcode": "0x2a"
+          },
+          {
+            "offset": 190,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "net/minecraftforge/client/event/RenderHandEvent",
+              "name": "getPackedLight",
+              "descriptor": "()I",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 193,
+            "opcode": "0xb2",
+            "reference": {
+              "owner": "net/minecraft/client/renderer/texture/OverlayTexture",
+              "name": "f_118083_",
+              "descriptor": "I",
+              "cp_tag": 9
+            }
+          },
+          {
+            "offset": 196,
+            "opcode": "0xc"
+          },
+          {
+            "offset": 197,
+            "opcode": "0xc"
+          },
+          {
+            "offset": 198,
+            "opcode": "0xc"
+          },
+          {
+            "offset": 199,
+            "opcode": "0xc"
+          },
+          {
+            "offset": 200,
+            "opcode": "0xb8",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/ooOOo000OOO0ooO0oo0ooooO",
+              "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+              "descriptor": "(Lcom/mojang/blaze3d/vertex/VertexConsumer;Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lcom/elfmcys/yesstevemodel/OOoOoooOOooO0o0000o0O0o0;[F[FIIIIFFFF)V",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 203,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 205,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "com/mojang/blaze3d/vertex/PoseStack",
+              "name": "m_85849_",
+              "descriptor": "()V",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 208,
+            "opcode": "0xb1"
+          }
+        ],
+        "supplemental_full_operand_records": [
+          {
+            "offset": 0,
+            "opcode": "0x2c",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 1,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "00bf"
+          },
+          {
+            "offset": 4,
+            "opcode": "0x9a",
+            "encoded_operands_hex": "0004"
+          },
+          {
+            "offset": 7,
+            "opcode": "0xb1",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 8,
+            "opcode": "0x2c",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 9,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "00c3"
+          },
+          {
+            "offset": 12,
+            "opcode": "0x4e",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 13,
+            "opcode": "0x2c",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 14,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "00c7"
+          },
+          {
+            "offset": 17,
+            "opcode": "0x3a",
+            "encoded_operands_hex": "04",
+            "local_index": 4
+          },
+          {
+            "offset": 19,
+            "opcode": "0x19",
+            "encoded_operands_hex": "04",
+            "local_index": 4
+          },
+          {
+            "offset": 21,
+            "opcode": "0xc6",
+            "encoded_operands_hex": "0011"
+          },
+          {
+            "offset": 24,
+            "opcode": "0x19",
+            "encoded_operands_hex": "04",
+            "local_index": 4
+          },
+          {
+            "offset": 26,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "00cc"
+          },
+          {
+            "offset": 29,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "00d2"
+          },
+          {
+            "offset": 32,
+            "opcode": "0xb4",
+            "encoded_operands_hex": "00d7"
+          },
+          {
+            "offset": 35,
+            "opcode": "0x9a",
+            "encoded_operands_hex": "0004"
+          },
+          {
+            "offset": 38,
+            "opcode": "0xb1",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 39,
+            "opcode": "0xb8",
+            "encoded_operands_hex": "00de"
+          },
+          {
+            "offset": 42,
+            "opcode": "0x3a",
+            "encoded_operands_hex": "05",
+            "local_index": 5
+          },
+          {
+            "offset": 44,
+            "opcode": "0x2a",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 45,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "00e2"
+          },
+          {
+            "offset": 48,
+            "opcode": "0x3a",
+            "encoded_operands_hex": "06",
+            "local_index": 6
+          },
+          {
+            "offset": 50,
+            "opcode": "0x2a",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 51,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "00e6"
+          },
+          {
+            "offset": 54,
+            "opcode": "0x3a",
+            "encoded_operands_hex": "07",
+            "local_index": 7
+          },
+          {
+            "offset": 56,
+            "opcode": "0x2c",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 57,
+            "opcode": "0x3a",
+            "encoded_operands_hex": "08",
+            "local_index": 8
+          },
+          {
+            "offset": 59,
+            "opcode": "0xb2",
+            "encoded_operands_hex": "00ec"
+          },
+          {
+            "offset": 62,
+            "opcode": "0xbb",
+            "encoded_operands_hex": "00ee"
+          },
+          {
+            "offset": 65,
+            "opcode": "0x59",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 66,
+            "opcode": "0x2b",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 67,
+            "opcode": "0x19",
+            "encoded_operands_hex": "08",
+            "local_index": 8
+          },
+          {
+            "offset": 69,
+            "opcode": "0x2d",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 70,
+            "opcode": "0xb7",
+            "encoded_operands_hex": "00f1"
+          },
+          {
+            "offset": 73,
+            "opcode": "0xb9",
+            "encoded_operands_hex": "00f70200",
+            "argument_slot_count": 2,
+            "reserved_zero": 0
+          },
+          {
+            "offset": 78,
+            "opcode": "0x99",
+            "encoded_operands_hex": "0004"
+          },
+          {
+            "offset": 81,
+            "opcode": "0xb1",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 82,
+            "opcode": "0x2c",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 83,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "00ff"
+          },
+          {
+            "offset": 86,
+            "opcode": "0x3a",
+            "encoded_operands_hex": "09",
+            "local_index": 9
+          },
+          {
+            "offset": 88,
+            "opcode": "0x2c",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 89,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "0103"
+          },
+          {
+            "offset": 92,
+            "opcode": "0x36",
+            "encoded_operands_hex": "0a",
+            "local_index": 10
+          },
+          {
+            "offset": 94,
+            "opcode": "0x19",
+            "encoded_operands_hex": "07",
+            "local_index": 7
+          },
+          {
+            "offset": 96,
+            "opcode": "0x19",
+            "encoded_operands_hex": "09",
+            "local_index": 9
+          },
+          {
+            "offset": 98,
+            "opcode": "0xb8",
+            "encoded_operands_hex": "0108"
+          },
+          {
+            "offset": 101,
+            "opcode": "0xb9",
+            "encoded_operands_hex": "010c0200",
+            "argument_slot_count": 2,
+            "reserved_zero": 0
+          },
+          {
+            "offset": 106,
+            "opcode": "0x3a",
+            "encoded_operands_hex": "0b",
+            "local_index": 11
+          },
+          {
+            "offset": 108,
+            "opcode": "0x19",
+            "encoded_operands_hex": "05",
+            "local_index": 5
+          },
+          {
+            "offset": 110,
+            "opcode": "0xc6",
+            "encoded_operands_hex": "0062"
+          },
+          {
+            "offset": 113,
+            "opcode": "0x19",
+            "encoded_operands_hex": "06",
+            "local_index": 6
+          },
+          {
+            "offset": 115,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "010f"
+          },
+          {
+            "offset": 118,
+            "opcode": "0xb8",
+            "encoded_operands_hex": "0052"
+          },
+          {
+            "offset": 121,
+            "opcode": "0xb4",
+            "encoded_operands_hex": "0113"
+          },
+          {
+            "offset": 124,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "0119"
+          },
+          {
+            "offset": 127,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "011e"
+          },
+          {
+            "offset": 130,
+            "opcode": "0xc0",
+            "encoded_operands_hex": "0046"
+          },
+          {
+            "offset": 133,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "0049"
+          },
+          {
+            "offset": 136,
+            "opcode": "0x99",
+            "encoded_operands_hex": "000d"
+          },
+          {
+            "offset": 139,
+            "opcode": "0x19",
+            "encoded_operands_hex": "06",
+            "local_index": 6
+          },
+          {
+            "offset": 141,
+            "opcode": "0x2a",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 142,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "0122"
+          },
+          {
+            "offset": 145,
+            "opcode": "0x2b",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 146,
+            "opcode": "0xb8",
+            "encoded_operands_hex": "0124"
+          },
+          {
+            "offset": 149,
+            "opcode": "0x19",
+            "encoded_operands_hex": "06",
+            "local_index": 6
+          },
+          {
+            "offset": 151,
+            "opcode": "0xe",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 152,
+            "opcode": "0x14",
+            "encoded_operands_hex": "0127"
+          },
+          {
+            "offset": 155,
+            "opcode": "0xe",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 156,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "00a6"
+          },
+          {
+            "offset": 159,
+            "opcode": "0x19",
+            "encoded_operands_hex": "0b",
+            "local_index": 11
+          },
+          {
+            "offset": 161,
+            "opcode": "0x19",
+            "encoded_operands_hex": "06",
+            "local_index": 6
+          },
+          {
+            "offset": 163,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "012c"
+          },
+          {
+            "offset": 166,
+            "opcode": "0x19",
+            "encoded_operands_hex": "04",
+            "local_index": 4
+          },
+          {
+            "offset": 168,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "00cc"
+          },
+          {
+            "offset": 171,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "00d2"
+          },
+          {
+            "offset": 174,
+            "opcode": "0x19",
+            "encoded_operands_hex": "04",
+            "local_index": 4
+          },
+          {
+            "offset": 176,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "00cc"
+          },
+          {
+            "offset": 179,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "00d2"
+          },
+          {
+            "offset": 182,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "012f"
+          },
+          {
+            "offset": 185,
+            "opcode": "0x1",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 186,
+            "opcode": "0x15",
+            "encoded_operands_hex": "0a",
+            "local_index": 10
+          },
+          {
+            "offset": 188,
+            "opcode": "0x6",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 189,
+            "opcode": "0x2a",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 190,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "0132"
+          },
+          {
+            "offset": 193,
+            "opcode": "0xb2",
+            "encoded_operands_hex": "0138"
+          },
+          {
+            "offset": 196,
+            "opcode": "0xc",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 197,
+            "opcode": "0xc",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 198,
+            "opcode": "0xc",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 199,
+            "opcode": "0xc",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 200,
+            "opcode": "0xb8",
+            "encoded_operands_hex": "013d"
+          },
+          {
+            "offset": 203,
+            "opcode": "0x19",
+            "encoded_operands_hex": "06",
+            "local_index": 6
+          },
+          {
+            "offset": 205,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "0140"
+          },
+          {
+            "offset": 208,
+            "opcode": "0xb1",
+            "encoded_operands_hex": ""
+          }
+        ]
+      }
+    }
+  ],
+  "source_comparisons": [
+    {
+      "path": "/workspace/scratch/d91451022177/ysm-local-inputs/source/src/main/java/com/elfmcys/yesstevemodel/geckolib3/geo/NativeRenderer.java",
+      "sha256": "b8fb6c62b2ffa82798ca9832b470515963f6787e739e30f2ac549d5ff3f94076",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/ysm-local-inputs/source/src/main/java/com/elfmcys/yesstevemodel/client/renderer/CustomFirstPersonArmRenderer.java",
+      "sha256": "5434f9d6f365ce4f268b4bae09ae9896ced4a9623bd3baa3b65eea619fb4650b",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/ysm-local-inputs/source/src/main/java/com/elfmcys/yesstevemodel/client/event/RenderFirstPlayerBackground.java",
+      "sha256": "d787c65545a69d4e917518c955fb61a6a0c8c7cbb15825a3397da5f05c82557b",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6"
+    }
+  ],
+  "rip_relative_candidates": [
+    {
+      "displacement_address": "0x37ba2b",
+      "target": "0xd34b60",
+      "nearby": "0048890531919b000f110532"
+    },
+    {
+      "displacement_address": "0x37ba32",
+      "target": "0xd34b68",
+      "nearby": "000f110532919b000f11053b"
+    },
+    {
+      "displacement_address": "0x37ba39",
+      "target": "0xd34b78",
+      "nearby": "000f11053b919b000f110544"
+    },
+    {
+      "displacement_address": "0x37beb4",
+      "target": "0xd34b60",
+      "nearby": "04488d3da88c9b004c89eeba"
+    },
+    {
+      "displacement_address": "0x37bec8",
+      "target": "0xd34b78",
+      "nearby": "004c892dac8c9b00488b6c24"
+    },
+    {
+      "displacement_address": "0x37cb7b",
+      "target": "0xd34b68",
+      "nearby": "044c0315e97f9b004c892c01"
+    },
+    {
+      "displacement_address": "0x37eaef",
+      "target": "0xd34b68",
+      "nearby": "004c030575609b00498b064c"
+    }
+  ],
+  "target_executed": false,
+  "emulation_used": false,
+  "independent_semantic_review": "NOT_RUN",
+  "mode_contract": {
+    "0": "all",
+    "1": "left arm",
+    "2": "right arm",
+    "3": "background"
+  },
+  "output_contract": {
+    "slot3": "No semantic writer established. Zeroed on first allocation, no per-render reset; growth newly exposed bytes not guaranteed zero by this bounded analysis.",
+    "untracked_xyz": "Selected-range copy may carry prior native scratch values for untracked bones; global scratch is reused and not copied from Java output before processing.",
+    "growth": "Allocation wrapper does not clear on growth; lower allocator complete behavior not proved.",
+    "scope": "Static helper and direct allocator inspection, not whole-program alias analysis or observed runtime values."
+  }
+}

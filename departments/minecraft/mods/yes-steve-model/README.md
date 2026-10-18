@@ -20,7 +20,7 @@ Sound emission/resource lifetime: [SOUND-LIFECYCLE-INDEX-2026-10-17.md](SOUND-LI
 - Main focus: model runtime, Molang, animation controllers, per-entity state, rendering, model distribution and integration seams
 - Research status: **EXACT_JAR_ANCHORED / 955_CLASS_FOUNDATION_MAPPED / JAVA_OBFUSCATION_PARTIALLY_RECOVERED**
 - Whole-target status: **IN_PROGRESS / NOT COMPLETE**
-- Research date: 2026-10-05; latest continuation: **2026-10-17**
+- Research date: 2026-10-05; latest continuation: **2026-10-18**
 
 This workspace follows KNEEKURA's evidence rules: distributed artifact, release-line source candidate,
 frontier source, community reconnaissance and comparative implementations are kept as separate tracks.
@@ -33,6 +33,17 @@ Start with [the October17 pipeline index](JAVA-PIPELINE-INDEX-2026-10-17.md) for
 the state/query, controller, scheduler, storage and render-boundary chain.
 The central map remains669; recent cohorts are primary static analysis pending
 independent semantic review. [Scoped batch receipt](JAVA-PIPELINE-CHECKPOINT-2026-10-17.json).
+
+## Latest native research (opt-in)
+
+- [All17 exact native-entry bindings](NATIVE-EXACT-BINDINGS-RECOVERY-2026-10-18.md): source-backed addresses and exact original-JAR declaration matches; runtime registration remains unproven.
+- [Renderer/model lifetime](NATIVE-RENDER-LIFETIME-RECOVERY-2026-10-18.md): registry handles, retained ownership and12/4-float JNI copy seam.
+- [Output persistence and selected modes](NATIVE-RENDER-OUTPUT-MODES-RECOVERY-2026-10-18.md): conditional freshness, unknown fourth slot, LEFT_ARM/RIGHT_ARM/BACKGROUND selectors.
+- [Bone affine/parent propagation](NATIVE-BONE-AFFINE-RECOVERY-2026-10-18.md): explicit transform composition and optional authored algebra checks; native numeric equivalence remains open.
+- [Client native receive](NATIVE-CLIENT-RECEIVE-RECOVERY-2026-10-18.md): queued ownership, direct-buffer address/capacity and distinct texture registration.
+- [Current execution/recovery handoff](NATIVE-CURRENT-HANDOFF-2026-10-18.md): explicit scenarios and unfinished runtime boundaries.
+
+Open only the relevant seam. None of these links requires running tools, installing packages or performing a startup-wide audit.
 
 ## DISTRIBUTED ANCHOR
 

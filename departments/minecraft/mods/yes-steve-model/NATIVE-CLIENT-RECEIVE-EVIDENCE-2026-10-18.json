@@ -1,0 +1,453 @@
+{
+  "format": "ysm-native-model-receive-static-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "jar_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "target_executed": false,
+  "jvm_executed": false,
+  "emulation_performed": false,
+  "host_threads_created": false,
+  "exact_binding_source_is_prior_receipt": true,
+  "ranges": [
+    {
+      "start": "0x3bee40",
+      "end_exclusive": "0x3bf0b4",
+      "sha256": "4509dae2914279ddb29d8a28575356342689a5c3f8754f82209f196ed6533b62",
+      "file_offset": 3927616,
+      "scope": "receive entry and exception tails",
+      "assembly": "3bee40-3bf0b4.asm"
+    },
+    {
+      "start": "0x39e3f0",
+      "end_exclusive": "0x39e75d",
+      "sha256": "245bb3cf24ce67e580a1f1b5bac09d0c9895c247c2a79c621f27ee676d10490c",
+      "file_offset": 3793904,
+      "scope": "producer lookup",
+      "assembly": "39e3f0-39e75d.asm"
+    },
+    {
+      "start": "0x39e760",
+      "end_exclusive": "0x39ea2e",
+      "sha256": "fc977ff5b553606121a6c2910a4b21dbf351f03d1c3d5a8d9083ef36566db12d",
+      "file_offset": 3794784,
+      "scope": "enqueue",
+      "assembly": "39e760-39ea2e.asm"
+    },
+    {
+      "start": "0x399ee0",
+      "end_exclusive": "0x39d8e0",
+      "sha256": "6a31c654b36e5ff92307ea477708cba9bf18bab505e6ff215a6de49a317de3e5",
+      "file_offset": 3776224,
+      "scope": "consumer excerpt incl adjacent helpers; not all semantically reviewed",
+      "assembly": "399ee0-39d8e0.asm"
+    },
+    {
+      "start": "0x39d8e0",
+      "end_exclusive": "0x39d99c",
+      "sha256": "4b1c666bf65e062a9691817e6a424531ce2095e117e152d00e7bb39755b1139a",
+      "file_offset": 3791072,
+      "scope": "record move",
+      "assembly": "39d8e0-39d99c.asm"
+    },
+    {
+      "start": "0x3451f0",
+      "end_exclusive": "0x345263",
+      "sha256": "356fd0c15d6c8aa833eef1b19b60f1e563f408daad4a0e862d7619c684202651",
+      "file_offset": 3428848,
+      "scope": "global-ref deferred cleanup",
+      "assembly": "3451f0-345263.asm"
+    },
+    {
+      "start": "0x2aade0",
+      "end_exclusive": "0x2aade1",
+      "sha256": "ae3f4619b0413d70d3004b9131c3752153074e45725be13b9a148978895e359e",
+      "file_offset": 2797024,
+      "scope": "borrowed no-op cleanup",
+      "assembly": "2aade0-2aade1.asm"
+    },
+    {
+      "start": "0x3d0b20",
+      "end_exclusive": "0x3d0f20",
+      "sha256": "2fbe976c4c393b5ed179d51f44978b6c434576081242ce026daeeb6e0181bda4",
+      "file_offset": 4000544,
+      "scope": "decoder prefix only",
+      "assembly": "3d0b20-3d0f20.asm"
+    },
+    {
+      "start": "0x3577c0",
+      "end_exclusive": "0x35b8fc",
+      "sha256": "6870cd0133657072f47f18d440783ea19e7d48c61f3dce98897b8c61da17d28e",
+      "file_offset": 3504064,
+      "scope": "builder excerpt only; exits exceed range",
+      "assembly": "3577c0-35b8fc.asm"
+    },
+    {
+      "start": "0x375430",
+      "end_exclusive": "0x375b00",
+      "sha256": "5ff275a2bbfbd353736427ed21c18087164e6ce7ebd69a4a37d3b44d6a8ac69e",
+      "file_offset": 3626032,
+      "scope": "texture registry helper excerpt",
+      "assembly": "375430-375b00.asm"
+    },
+    {
+      "start": "0x3bf0c0",
+      "end_exclusive": "0x3bf540",
+      "sha256": "dd65afe42d98bd0da6fb3b2a4c685bd1d0e064b2346d71fb5ce1f04f81ca91b1",
+      "file_offset": 3928256,
+      "scope": "texture upload entry",
+      "assembly": "3bf0c0-3bf540.asm"
+    },
+    {
+      "start": "0x41b460",
+      "end_exclusive": "0x41b5f0",
+      "sha256": "28c850915d1633a0fdfbfce72b5396a22d321ebbba09fe0ff04f9c1259788aa9",
+      "file_offset": 4306016,
+      "scope": "JNI thread environment",
+      "assembly": "41b460-41b5f0.asm"
+    },
+    {
+      "start": "0x364a60",
+      "end_exclusive": "0x364af0",
+      "sha256": "9bb92fb7098a41f45a475aa8d2233e829855cdbcb1bb27d80484248a7ce7deaa",
+      "file_offset": 3557984,
+      "scope": "JNI NewObject varargs helper",
+      "assembly": "364a60-364af0.asm"
+    }
+  ],
+  "original_classes": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0",
+      "sha256": "6f85b1ec64d10ac43fe6c8cfd34c0b89889dd1832419da05cb2e407a69c3949e",
+      "super": "net/minecraft/client/renderer/texture/AbstractTexture",
+      "fields": [
+        {
+          "access": 18,
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "J"
+        },
+        {
+          "access": 2,
+          "name": "o0OOooo0o0OO00OoOOOo0o0O",
+          "descriptor": "Ljava/util/Map;"
+        }
+      ],
+      "native_methods": [
+        {
+          "access": 258,
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "()V"
+        },
+        {
+          "access": 266,
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(J)V"
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0OooO00ooo0OO000O0OoOoO",
+      "sha256": "203f7df0d59b7010c1da8809cbcea192b20d381fbb604f43eb5ee3f711afd3a4",
+      "super": "java/lang/Object",
+      "fields": [
+        {
+          "access": 74,
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "Ljava/util/Map;"
+        },
+        {
+          "access": 74,
+          "name": "o0OOooo0o0OO00OoOOOo0o0O",
+          "descriptor": "Ljava/util/Map;"
+        },
+        {
+          "access": 74,
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "Lcom/elfmcys/yesstevemodel/oOo0oO0OOo0ooOoo0oOo0oOo;"
+        },
+        {
+          "access": 74,
+          "name": "oOOOo0OOO0ooooo0O00OO0o0",
+          "descriptor": "Ljava/lang/Runnable;"
+        },
+        {
+          "access": 10,
+          "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+          "descriptor": "Lcom/elfmcys/yesstevemodel/Oo0o0oO0000oO00O00oo00OO;"
+        },
+        {
+          "access": 26,
+          "name": "Ooooo0oooO0oooOOOoO0000O",
+          "descriptor": "Ljava/util/concurrent/ConcurrentLinkedQueue;"
+        },
+        {
+          "access": 26,
+          "name": "oo0OoO00oOoo000O0000o0oo",
+          "descriptor": "Ljava/util/WeakHashMap;"
+        },
+        {
+          "access": 26,
+          "name": "oooooooOOoOOoO00OooOo00O",
+          "descriptor": "Lcom/elfmcys/yesstevemodel/o0OooO00ooo0OO000O0OoOoO$Oo0Oo0o00O00Oo0OOoOOoooo;"
+        },
+        {
+          "access": 74,
+          "name": "Oo00o0OooOOo0ooOoo0oO0o0",
+          "descriptor": "Lnet/minecraft/network/Connection;"
+        }
+      ],
+      "native_methods": [
+        {
+          "access": 266,
+          "name": "o0OOooo0o0OO00OoOOOo0o0O",
+          "descriptor": "(Ljava/nio/ByteBuffer;)V"
+        }
+      ]
+    }
+  ],
+  "bindings": [
+    {
+      "callback": "0x418620",
+      "native": "0x3bee40",
+      "registration_flags": 2,
+      "source": "0x46941",
+      "source_length": 101,
+      "source_sha256": "32072009b6cc28338dbacfd6980cab726a91ccb03ed5883a32c89adc2e02bbea",
+      "callback_sha256": "49ea782b234799a09dc57a8127598a95a1c2abe9a6619367e4e8ded9eb03d346",
+      "stop": {
+        "reason": "ENTRY_RETURN",
+        "pc": 4294207,
+        "address": 140733193388032,
+        "size": 0
+      },
+      "segments": [
+        {
+          "reason": "ENTRY_RETURN",
+          "pc": 4294207,
+          "address": 140733193388032,
+          "size": 0
+        }
+      ],
+      "attempted": 1847803,
+      "completed": 1847803,
+      "payload": "Lcom/elfmcys/yesstevemodel/o0OooO00ooo0OO000O0OoOoO;o0OOooo0o0OO00OoOOOo0o0O(Ljava/nio/ByteBuffer;)V",
+      "payload_sha256": "27acf8496c81fe9570e596f8e7a7055631bc334c45bae03a1ca1a021c5c13b3b",
+      "owner": "com/elfmcys/yesstevemodel/o0OooO00ooo0OO000O0OoOoO",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Ljava/nio/ByteBuffer;)V",
+      "class_sha256": "203f7df0d59b7010c1da8809cbcea192b20d381fbb604f43eb5ee3f711afd3a4",
+      "access": 266,
+      "acc_native": true,
+      "static": true,
+      "pairing_instruction_evidence": {
+        "callback": "0x418620",
+        "native": "0x3bee40",
+        "callback_lea": "0x414ee6",
+        "callback_store_plus_18": "0x414f27",
+        "native_lea": "0x414f2b",
+        "native_store_plus_20": "0x414f32",
+        "instructions": [
+          {
+            "role": "callback_lea",
+            "address": "0x414ee6",
+            "bytes": "488d2d33370000",
+            "sha256": "d00b6b518cc88207af283543a70c20ba2cb20b2a6146aba325a2bda747b35d4b"
+          },
+          {
+            "role": "callback_store",
+            "address": "0x414f27",
+            "bytes": "49896d18",
+            "sha256": "03fd91d3b4ec48de745d71a06996f2e4ca0c12eeb23ddbcec919b58f5af4c9c4"
+          },
+          {
+            "role": "native_lea",
+            "address": "0x414f2b",
+            "bytes": "488d050e9ffaff",
+            "sha256": "1bf9dfcbe38d27b58a8cc8dac66db0907bdb8f09e4aa9de69f678d2cf7f39f83"
+          },
+          {
+            "role": "native_store",
+            "address": "0x414f32",
+            "bytes": "49894520",
+            "sha256": "81f0edd3f467de47416397da894b80f61ca58c0687dc95f508c763ab530cd666"
+          }
+        ]
+      }
+    },
+    {
+      "callback": "0x418640",
+      "native": "0x3bf0c0",
+      "registration_flags": 2,
+      "source": "0x47813",
+      "source_length": 80,
+      "source_sha256": "13f5a60a42e51406885bf9d544acb59c6826f825f8ba9cfd90b8e00a0a07e8a5",
+      "callback_sha256": "f5060aaa76fb7da82ed917bea59d1ac3b818722b940a5397fc756f6da6039fc8",
+      "stop": {
+        "reason": "ENTRY_RETURN",
+        "pc": 4294239,
+        "address": 140733193388032,
+        "size": 0
+      },
+      "segments": [
+        {
+          "reason": "ENTRY_RETURN",
+          "pc": 4294239,
+          "address": 140733193388032,
+          "size": 0
+        }
+      ],
+      "attempted": 1601030,
+      "completed": 1601030,
+      "payload": "Lcom/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0;O00OOOooOoooOoo0o0o0oO0O()V",
+      "payload_sha256": "13d9e56ac1332de0a9a3bbc898e363232439974fd37287c71d4ae266dcec22e1",
+      "owner": "com/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0",
+      "name": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "()V",
+      "class_sha256": "6f85b1ec64d10ac43fe6c8cfd34c0b89889dd1832419da05cb2e407a69c3949e",
+      "access": 258,
+      "acc_native": true,
+      "static": false,
+      "pairing_instruction_evidence": {
+        "callback": "0x418640",
+        "native": "0x3bf0c0",
+        "callback_lea": "0x4150c3",
+        "callback_store_plus_18": "0x415103",
+        "native_lea": "0x415107",
+        "native_store_plus_20": "0x41510e",
+        "instructions": [
+          {
+            "role": "callback_lea",
+            "address": "0x4150c3",
+            "bytes": "4c8d2d76350000",
+            "sha256": "56fec2ee09f73efa591929f747b71adbf39f6562a0e41955324ba41420b66297"
+          },
+          {
+            "role": "callback_store",
+            "address": "0x415103",
+            "bytes": "4c896d18",
+            "sha256": "7ef41b2f1fd47d6c2feace084ed64ce949da2a0869f7f57d0b74ec9fce802e27"
+          },
+          {
+            "role": "native_lea",
+            "address": "0x415107",
+            "bytes": "488d05b29ffaff",
+            "sha256": "d61137e250b4050a3b5694167740f30ae38630db35fab4c8a23fdf1f688edc6e"
+          },
+          {
+            "role": "native_store",
+            "address": "0x41510e",
+            "bytes": "48894520",
+            "sha256": "cc01a458feea1b149ba6358c4beffe35bdbfbc9f64c25dde700cc126ee67a42a"
+          }
+        ]
+      }
+    },
+    {
+      "callback": "0x418660",
+      "native": "0x3bf540",
+      "registration_flags": 2,
+      "source": "0x44a12",
+      "source_length": 81,
+      "source_sha256": "c63602daee5ac097cbbc70fafc7f84c052acd6fe9d06608ef7ff210b62eccaf8",
+      "callback_sha256": "bf1aeeb04346d231a0555446306637a97636748350edaeee50cbc798417ba655",
+      "stop": {
+        "reason": "ENTRY_RETURN",
+        "pc": 4294271,
+        "address": 140733193388032,
+        "size": 0
+      },
+      "segments": [
+        {
+          "reason": "ENTRY_RETURN",
+          "pc": 4294271,
+          "address": 140733193388032,
+          "size": 0
+        }
+      ],
+      "attempted": 1577097,
+      "completed": 1577097,
+      "payload": "Lcom/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0;Oo0Oo0o00O00Oo0OOoOOoooo(J)V",
+      "payload_sha256": "4131880df69763d97f67a3c8c79b4d674899a3b38e34ec543fffca5a5b732fbf",
+      "owner": "com/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(J)V",
+      "class_sha256": "6f85b1ec64d10ac43fe6c8cfd34c0b89889dd1832419da05cb2e407a69c3949e",
+      "access": 266,
+      "acc_native": true,
+      "static": true,
+      "pairing_instruction_evidence": {
+        "callback": "0x418660",
+        "native": "0x3bf540",
+        "callback_lea": "0x4152ae",
+        "callback_store_plus_18": "0x4152e7",
+        "native_lea": "0x4152eb",
+        "native_store_plus_20": "0x4152f2",
+        "instructions": [
+          {
+            "role": "callback_lea",
+            "address": "0x4152ae",
+            "bytes": "488d2dab330000",
+            "sha256": "593a985df0ac09e677a166590589714406c42b5fd08dfcbc694bb4375e01e7ea"
+          },
+          {
+            "role": "callback_store",
+            "address": "0x4152e7",
+            "bytes": "49896d18",
+            "sha256": "03fd91d3b4ec48de745d71a06996f2e4ca0c12eeb23ddbcec919b58f5af4c9c4"
+          },
+          {
+            "role": "native_lea",
+            "address": "0x4152eb",
+            "bytes": "488d054ea2faff",
+            "sha256": "11e9ab0e3163af8af9c289ca686e03798b5e99605715b7263e67f93d2a8d409e"
+          },
+          {
+            "role": "native_store",
+            "address": "0x4152f2",
+            "bytes": "49894520",
+            "sha256": "81f0edd3f467de47416397da894b80f61ca58c0687dc95f508c763ab530cd666"
+          }
+        ]
+      }
+    }
+  ],
+  "jni_header_sha256": "99e64ebbe749e6df284f852f11b3c73f6ea97baf15120428f40f887fe0616e61",
+  "jni_slots": {
+    "NewGlobalRef": {
+      "slot": 21,
+      "offset": "0xa8"
+    },
+    "DeleteGlobalRef": {
+      "slot": 22,
+      "offset": "0xb0"
+    },
+    "NewObjectV": {
+      "slot": 29,
+      "offset": "0xe8"
+    },
+    "GetDirectBufferAddress": {
+      "slot": 230,
+      "offset": "0x730"
+    },
+    "GetDirectBufferCapacity": {
+      "slot": 231,
+      "offset": "0x738"
+    }
+  },
+  "source_documents": [
+    {
+      "path": "OPAQUE-MODEL-DATA-TRANSPORT-RECOVERY-2026-10-17.md",
+      "sha256": "326511e426c4184a1a13a1e55674df1fa319a90a7acab31d8b2b037c360531ce"
+    },
+    {
+      "path": "NATIVE-TEXTURE-JAVA-BOUNDARY-RECOVERY-2026-10-17.md",
+      "sha256": "1b7a9a71f22a3eb9240b1156269b182ee8f5febab430d515c0660de3143508b0"
+    },
+    {
+      "path": "NATIVE-GLOBAL-REFERENCE-COLLECTOR-2026-10-18.md",
+      "sha256": "04d41e1d38a447a382e4f96acb74f9a6da81e03a5127603b7644f06c50460bc4"
+    },
+    {
+      "path": "NATIVE-EXACT-BINDINGS-2026-10-18.json",
+      "sha256": "c907e34e24f0cca48e4746aee3e92219bd0b8428bcd51a659921fd49d48b1e1d"
+    }
+  ]
+}

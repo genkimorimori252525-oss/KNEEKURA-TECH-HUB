@@ -96,12 +96,16 @@ The [connected model-transfer review](MODEL-TRANSFER-BATCH-REVIEW-2026-10-17.md)
 
 ## Handshake and server model synchronization
 
-The [server synchronization boundary review](SERVER-SYNC-BATCH-REVIEW-2026-10-17.md) connects first-write handshake state, version agreement, server model publication, immutable result containers, Java send completion and client readiness. A fixed10 artifact batch passes; the separately pinned Netty source comparison is not loaded-runtime verification. Native declarations remain opaque and all recent semantics remain primary-only.
+The [server synchronization boundary review](SERVER-SYNC-BATCH-REVIEW-2026-10-17.md) connects first-write handshake state, version agreement, server model publication, immutable result containers, Java send completion and client readiness. A fixed10 artifact batch passes; the separately pinned Netty source comparison is not loaded-runtime verification. Native implementations were opaque in that Java-only review; later native-entry/renderer findings are linked below. Semantic interpretation remains primary-only.
 
 ## Optional consumers and administrative reload producers
 
 - [Optional probe consumer](TOP-OPTIONAL-CONSUMER-RECOVERY-2026-10-17.md): IMC registration offer, inspected-player versus initialized-vehicle gates, and conditional lazy-set consumer reachability. The fixed6 [checkpoint](TOP-CONSUMER-CHECKPOINT-2026-10-17.json) passes; plugin activation and repeated getter execution remain unproven.
 - [Model administration and startup reload](MODEL-ADMIN-RELOAD-RECOVERY-2026-10-17.md): privileged set/disable staging, command versus selection-packet validation, reload admission versus callbacks, and conditional feedback/nullability boundaries. The fixed7 [checkpoint](MODEL-ADMIN-CHECKPOINT-2026-10-17.json) passes; no commands or native loaders were executed.
+
+## Recovered native entries and rendering (October18)
+
+[All17 exact native-entry bindings](NATIVE-EXACT-BINDINGS-RECOVERY-2026-10-18.md) now join the Java declarations to original Linux functions;16 are static and one is instance-native. This resolves entry identity, not full native behavior or runtime registration. [Renderer/lifetime](NATIVE-RENDER-LIFETIME-RECOVERY-2026-10-18.md) and [output/mode contract](NATIVE-RENDER-OUTPUT-MODES-RECOVERY-2026-10-18.md) establish registry-based handles, conditional output copying, stale-untracked-output risks and selected rendering modes. Never interpret the fourth output float as a proven homogeneous W, nor assume every render refreshed all output. [Affine/parent propagation](NATIVE-BONE-AFFINE-RECOVERY-2026-10-18.md) supplies the mathematical transform contract; its binary64 checks do not certify native float32/trig/normal behavior.
 
 ## Native declarations and common lifecycle
 

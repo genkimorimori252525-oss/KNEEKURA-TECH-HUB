@@ -12,6 +12,12 @@ A separately declared initialized forgeclient release scenario supplies producti
 
 [Native renderer/lifetime contract](NATIVE-RENDER-LIFETIME-RECOVERY-2026-10-18.md) now connects the registry-key model handle, retained ownership,12-float input copy and conditional4-float output copy. Located output writer proves XYZ only; fourth slot and full transform/backend equivalence remain unresolved.17 source anchors checked; no visual/runtime correctness claim.
 
+[Output/mode continuation](NATIVE-RENDER-OUTPUT-MODES-RECOVERY-2026-10-18.md) joins mode1/2/3 to LEFT_ARM/RIGHT_ARM/BACKGROUND and establishes initially zeroed, reused-without-reset global scratch. Selected-range copying can include stale XYZ for untracked bones; fourth-slot meaning remains unproven.
+
+[Bone affine/parent propagation](NATIVE-BONE-AFFINE-RECOVERY-2026-10-18.md) recovers P·T((-x,y,z)/16)·T(p)·Rz·Ry·Rx·S·T(-p), depth-bank propagation and visibility gates. The optional algebra tool passes128+3 authored binary64 checks; not native float32/normal-matrix/visual equivalence. Next research isolates native normal arithmetic and client receive ownership/construction boundaries.
+
+[Client native receive](NATIVE-CLIENT-RECEIVE-RECOVERY-2026-10-18.md) connects ByteBuffer global-ref queueing to address/capacity consumption and a conditional texture-registration subpath. Texture registry d348b0 is distinct from renderer geometry registry d341b8; their construction bridge remains under investigation. Holding a global reference does not freeze buffer contents.
+
 Earlier checkpoints and active-chain statements below are historical; this section takes precedence.
 
 ## Goal and unchanged confidence

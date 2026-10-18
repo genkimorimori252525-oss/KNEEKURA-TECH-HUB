@@ -1,0 +1,463 @@
+{
+  "format": "ysm-render-transform-static-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "prior_receipt_sha256": "90ee2e7985145dbabc031ece31f0abbac45779aa19dfbb708845c8bcd82be6cb",
+  "ranges": [
+    {
+      "start": "0xd148a0",
+      "end": "0xd148c0",
+      "sha256": "34c6af7bd6b23035804a8f6b512ac305e04af03b745c2b52a1851a1d3e55d2bd",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 13715616
+      }
+    },
+    {
+      "start": "0x37cc1e",
+      "end": "0x37d29b",
+      "sha256": "6fdf719e69829904ba1f0439c629609c48419d21cd3285ab2cb5b8c627531cb0",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3656734
+      }
+    },
+    {
+      "start": "0x37e3ad",
+      "end": "0x37e9d2",
+      "sha256": "c1e49e26a3cd1cb08d9b9cac3cef83d3f9771f3a2f90c839029c02d83f7e5634",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3662765
+      }
+    },
+    {
+      "start": "0x37c8c4",
+      "end": "0x37c989",
+      "sha256": "0ec22f091f82af57839fef1a394e220c049d26bf2479222bc1f563d15f8fb3cc",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3655876
+      }
+    },
+    {
+      "start": "0x37cb40",
+      "end": "0x37cc1e",
+      "sha256": "0aa0ea73a279c06f0234040ff40107d8e27bb3985e428e8e375609594921288b",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3656512
+      }
+    }
+  ],
+  "anchors": [
+    {
+      "id": "seed_bank",
+      "address": "0x37c8c4",
+      "size": 197,
+      "bytes": "4589e8488b4500496bc8780fb6440870488b0da5829b00486bc0700f290401440f296c01100f296c01200f29740130f3440f104c2408f3440f114c0140f3440f108c240c010000f3440f114c0144f3440f108c2408010000f3440f114c0148f3440f108c2404010000f3440f114c014cf3440f108c2400010000f3440f114c0150f3440f108c24fc000000f3440f114c0154f3440f108c24f8000000f3440f114c0158f3440f108c24f4000000f3440f114c015cf3440f108c24f0000000f3440f114c0160",
+      "sha256": "0ec22f091f82af57839fef1a394e220c049d26bf2479222bc1f563d15f8fb3cc",
+      "claim": "Seed selected first-bone depth slot with incoming matrix columns and nine normal-matrix values.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3655876
+      }
+    },
+    {
+      "id": "traversal_gates",
+      "address": "0x37cb40",
+      "size": 222,
+      "bytes": "4d6bfc784c89e04c29c0488b0d47809b0048c1e007488d34014c037d004b8d146448c1e204488bbc24b00100004c8d2c174d89e249c1e2044c0315e97f9b004c892c014c89540108f30f1044172c410f2ec50f85151800000f8a0f18000031c0f3410f104518410f2ec575027b22f3410f10451c410f2ec575027b14f3410f104520410f2ec575207a1e660f1f440000418b476c4901c449ffc44d39cc0f825dffffffe9931e0000f3410f104528410f2ec5418b4f6c75027b0b4489dd4901cce9960600004885c90f847504000084c00f85381e000044899c2480000000",
+      "sha256": "0aa0ea73a279c06f0234040ff40107d8e27bb3985e428e8e375609594921288b",
+      "claim": "Descriptor stride120,input stride48,output stride16. Tracking before zero-scale skip; childrenHidden skips descriptor descendant count; loop increments index.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3656512
+      }
+    },
+    {
+      "id": "read_parent_bank",
+      "address": "0x37cc1e",
+      "size": 150,
+      "bytes": "410fb64770488b0d567f9b00486bc0700f2804010f2946100f284c01100f294e200f285401200f2956300f286401300f296640f30f105c0140f30f115e50f30f105c0144f30f115e54f30f105c0148f30f115e58f30f105c014cf30f115e5cf30f105c0150f30f115e60f30f105c0154f30f115e64f30f105c0158f30f115e68f30f105c015cf30f115e6cf30f105c0160f30f115e70",
+      "sha256": "0b0fdbfa01e414ecbce619702fc984eed2d3b8619bf2bd8a6b617076b20b6f2f",
+      "claim": "Read inherited four4-float columns and nine normal values at bank+112*descriptor.u8(+0x70).",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3656734
+      }
+    },
+    {
+      "id": "position",
+      "address": "0x37ccb4",
+      "size": 76,
+      "bytes": "f3410f105d0cf30f591d46b8ccfff3410f106d10f30f103da4b8ccfff30f59eff3410f107514f30f59f70fc6db000fc6ed000fc6f6000f59f20f58f40f59e90f58ee0f59d80f58dd0f295e40",
+      "sha256": "350aa32c0f1d5b0a32f291b0f71e81cb575903c208d1edf52ce8a4973af1f6ff",
+      "claim": "Add parent axes weighted(-positionX,+positionY,+positionZ)/16 to translation.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3656884
+      }
+    },
+    {
+      "id": "add_pivot",
+      "address": "0x37cd00",
+      "size": 52,
+      "bytes": "f3410f106760f3410f106f64f3410f1077680fc6e4000fc6ed000fc6f6000f59f20f58f30f59e90f58ee0f59e00f58e50f296640",
+      "sha256": "4d8310f1d16f1dd78f22d3791963f8e30cbfe4fdaa904d3eee2c396390c0c942",
+      "claim": "Add descriptor float3(+0x60,+0x64,+0x68) weighted by inherited axes.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3656960
+      }
+    },
+    {
+      "id": "trig",
+      "address": "0x37cd34",
+      "size": 124,
+      "bytes": "f3410f104500f30f114424604889f3e8587b9900f30f11442408f30f10442460e8577b99000f29442460f3410f104504f30f11442410e8317b99000f29442470f30f10442410e8317b9900f30f11442410f3410f104508f30f118424a0000000e8077b9900f30f11842490000000f30f108424a0000000e8007b9900",
+      "sha256": "600d641045e27a4745c290f611755f2d2ed65b107fcf56f9b74655189f2232a3",
+      "claim": "Call sinf/cosf on original input rotations X,Y,Z without angle conversion or sign reversal.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3657012
+      }
+    },
+    {
+      "id": "rotation_coefficients",
+      "address": "0x37cdb3",
+      "size": 407,
+      "bytes": "f30f107c24080f28eff30f59e8440f28742460410f28def30f59d8440f287c2470410f28f7f3440f10942490000000f3410f59f2f30f104c2410f30f59c1440f28c1440f28c9f3450f59c2410f28d70f571597f7cbff410f28cef3410f59ca0f28e7f30f59e6f3410f59f6f30f5cf5f3410f59eff30f5ce9f30f58e30f28cff3410f59c9f3410f59faf3410f59dff30f58dff3450f59f1440f28d8440fc6d800440f2853100f287b20450f59da440f28e5440fc6e500450f59e2440f28cb440fc6cb00450f59ca66410f3a21c010440f28d466450f3a21d010450fc6c000440f59c7450f58c3440f28dc440fc6dc00440f59df450f58dc440f286330660f3a21c2200f28d4660f3a21d110660f3a0cd00c660f3a21c5300fc6eb000fc6e600660f3a21de1c440f28ee440fc6ee00440f59ef450f58e9410f28f7410fc6f700410f59f4440f5cc60f28f90fc6f900410f59fc410f58fb410f28f6410fc6f600410f59f4410f58f5440f2943100f297b200f297330440f106350440f105b60450f28ec450f28cc450fc6cc240fc6c0c0410f59c1450f28cb",
+      "sha256": "1b78a9ad6acc07c38652b1616e3b8a9f1aa736fc27144854571b70a26f12c2cb",
+      "claim": "Scalar and vector coefficients establish columns of Rz*Ry*Rx; multiplied against inherited matrix columns.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3657139
+      }
+    },
+    {
+      "id": "rotation_store",
+      "address": "0x37cee9",
+      "size": 62,
+      "bytes": "410f28f7410fc6f700410f59f4440f5cc60f28f90fc6f900410f59fc410f58fb410f28f6410fc6f600410f59f4410f58f5440f2943100f297b200f297330",
+      "sha256": "f2817cc6eb462e0327b80d4f07d800ae7cb2d94cb121e7462ce207341ac4c852",
+      "claim": "Store rotated basis into per-bone scratch+0x10,+0x20,+0x30.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3657449
+      }
+    },
+    {
+      "id": "scale_basis",
+      "address": "0x37cfe6",
+      "size": 52,
+      "bytes": "f3410f1045180fc6c000410f59c00f294310f3410f105d1c0fc6db000f59df0f295b20f3410f1065200fc6e4000f59e60f296330",
+      "sha256": "78e443c11af66dc7fcf546dfed06c4c4b9a7a98037d320e9287d4b9d58857090",
+      "claim": "Multiply rotated basis columns independently by input scaleX,Y,Z.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3657702
+      }
+    },
+    {
+      "id": "remove_pivot",
+      "address": "0x37d1aa",
+      "size": 56,
+      "bytes": "0f284e40f3410f105760f3410f106f64f3410f1077680fc6d2000fc6ed000fc6f6000f59f40f5cce0f59eb0f5ccd0f59d00f5cca0f294e40",
+      "sha256": "39a23e5e3ea1e94aa25b74513e523f041567994fcd983ca6d37938e6a8ca731f",
+      "claim": "Subtract pivot-weighted final scaled/rotated basis from translation.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3658154
+      }
+    },
+    {
+      "id": "publish_children",
+      "address": "0x37d1e2",
+      "size": 185,
+      "bytes": "410fb64770488b0d92799b00486bc0700f294401700f2846200f298401800000000f2846300f298401900000000f2846400f298401a0000000f30f104650f30f118401b0000000f30f104654f30f118401b4000000f30f104658f30f118401b8000000f30f10465cf30f118401bc000000f30f104660f30f118401c0000000f30f104664f30f118401c4000000f30f104668f30f118401c8000000f30f10466cf30f118401cc000000f30f104670f30f118401d0000000b001",
+      "sha256": "ebea5ea33508f909f0be8e64eff5662cbfb5eb403aec4ec6e76fb81a9534ec77",
+      "claim": "Write complete affine and normal state into bank+112*(descriptor.u8(+0x70)+1).",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3658210
+      }
+    },
+    {
+      "id": "own_hidden",
+      "address": "0x37d324",
+      "size": 33,
+      "bytes": "4c8b2ef3410f104524410f2ec575027b084189ebe9661000004d01d34d89da84c0",
+      "sha256": "9dafa97a15449981687ca5bdc270ecf7ccc7d35b7be31c9ea0122b32fc2e2411",
+      "claim": "Own hidden slot9 nonzero or NaN skips geometry collection, after possible child-state publication.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3658532
+      }
+    },
+    {
+      "id": "tracked_pivot",
+      "address": "0x37e911",
+      "size": 193,
+      "bytes": "0f2846400f28c80fc6c8000f598c24700100000f28d00fc6d055410f59d20f28d80fc6d8aa0f599c24800100000fc6c0ff0f598424600100000f58c30f58c20f58c1488b46080f28c80f590d1fe8cbff0f13080f12c0f30f59057199ccfff30f1140080f284640f3410f104f60f3410f105764f3410f105f680fc6c9000fc6db000f595e300fc6d2000f5cc30f5956200f5cc20f594e100f5cc10f2946404c8b2e41b301b001f3410f104518410f2ec50f85e7e1ffff0f8b03e2ffffe9dce1ffff",
+      "sha256": "40e01b8b1a8483d7cfd613f28fa0b3e1cbe831d86758d0bb8f76a33f2e683826",
+      "claim": "Tracking transforms pivot-position translation to output before subtracting final-basis pivot; then returns to scale/children/geometry routing.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3664145
+      }
+    }
+  ],
+  "trig_import_chain": [
+    {
+      "entry": "0xd148a0",
+      "entry_bytes": "ff2532c00100",
+      "pointer_slot": "0xd308d8",
+      "pointer_bytes": "086f3d0100000000",
+      "stub": "0x13d6f08",
+      "stub_bytes": "ff25ea614700",
+      "import_metadata": {
+        "slot": "0x184d0f8",
+        "raw_value": "0x1845394",
+        "relocation_type": 7,
+        "symbol_index": 32,
+        "symbol_name": "sinf",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    },
+    {
+      "entry": "0xd148b0",
+      "entry_bytes": "ff252ac00100",
+      "pointer_slot": "0xd308e0",
+      "pointer_bytes": "0e6f3d0100000000",
+      "stub": "0x13d6f0e",
+      "stub_bytes": "ff25ec614700",
+      "import_metadata": {
+        "slot": "0x184d100",
+        "raw_value": "0x1459ac8",
+        "relocation_type": 7,
+        "symbol_index": 33,
+        "symbol_name": "cosf",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    }
+  ],
+  "constants": [
+    {
+      "address": "0x48508",
+      "bytes": "000080bd",
+      "floats": [
+        -0.0625
+      ]
+    },
+    {
+      "address": "0x48574",
+      "bytes": "0000803d",
+      "floats": [
+        0.0625
+      ]
+    },
+    {
+      "address": "0x3c5a0",
+      "bytes": "00000080000000800000008000000080",
+      "floats": [
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0
+      ]
+    }
+  ],
+  "java_slot_reference": {
+    "path": "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/BONE-STATE-RECOVERY-2026-10-17.md",
+    "sha256": "4e86eb75e8da225ade3a4d72e9bdf1469b87e876bd9107d62349ef5523b724d2"
+  },
+  "algebra_fixtures": {
+    "status": "PASS",
+    "random_algebra_comparisons": 128,
+    "hand_contract_checks": 3,
+    "max_absolute_error": 3.552713678800501e-15,
+    "arithmetic": "Python binary64; algebra consistency only, not native float32/trig-bit equivalence",
+    "target_executed": false
+  },
+  "fixture_source_sha256": "051580211c4c082600dccf622e5b46edcf1e1614a2b7f1c003680df5eb3cc443",
+  "target_executed": false,
+  "emulation_used": false,
+  "independent_semantic_review": "NOT_RUN",
+  "affine_formula": "P * T((-posX,posY,posZ)/16) * T(p) * Rz(rz) * Ry(ry) * Rx(rx) * S(scaleX,scaleY,scaleZ) * T(-p)",
+  "conditions": [
+    "Reachable transform-construction path and valid model/array metadata",
+    "Finite nonzero scales for nonsingular affine contract; float32 bit equivalence not claimed",
+    "p denotes native descriptor+0x60/+0x64/+0x68; Java pivot conversion not independently recovered here"
+  ],
+  "unresolved": [
+    "Exact normal-matrix approximation equivalence",
+    "Descriptor depth/pivot construction and consistency validation",
+    "All NaN, infinity, zero-scale and malformed metadata outcomes",
+    "External trig implementation and resulting float32 bits",
+    "Full tracking inverse-pose coordinate-frame interpretation"
+  ]
+}
