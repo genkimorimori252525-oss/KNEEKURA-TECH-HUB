@@ -27,6 +27,7 @@ class GuardedCPU:
         self.seed=seed&MASK;self.stride=stride&MASK;self.clock_reads=0;self.allocations=[];self.heap_used=0;self.malloc_calls=0
         self.fopen_calls=self.fgets_calls=self.fclose_calls=0;self.file_open=False;self.file_position=0
         self.fixture=f'Name:\tvirtual-ysm\nTracerPid:\t{pid}\n'.encode('ascii')
+        self.accelerate_crc=False;self.crc_profile_verified=None;self.crc_blocks=self.crc_iterations=self.crc_logical_steps=0
         self.attempted=self.completed=0;self.modeled_copies=self.opaque_copies=0;self.heap_writes=0;self.rollback_count=0
         self.known={STACK:bytearray(STACK_SIZE),HEAP:bytearray(HEAP_SIZE)};self.opaque={};self.image=[];self.exec_ranges=[];self.pages={}
         self.stop=None;self.pending=None;self.journal=[];self.writes=[];self.pc=0;self.oracle_seen=set();self.oracle_checks=0;self.oracle_enabled=False
@@ -123,6 +124,9 @@ class GuardedCPU:
         self.pc=address;raw=bytes(uc.mem_read(address,size));self.attempted+=1;self.emit('INS',f'{address:x}',raw.hex(),'Unicorn')
         self.check_oracle()
         if self.stop:return
+        if self.accelerate_crc and address==0x15f0d5e:
+            from native_crc32_loop_profile_ysm_265 import eligible
+            if eligible(self):self.pending='crc';uc.emu_stop();return
         if raw==b'\xf3\xa4' and self.level>=1:self.pending='copy'
         elif raw==b'\x0f\x31':
             if self.level>=2:self.pending='clock'
@@ -178,6 +182,9 @@ class GuardedCPU:
             self.demand(c<128,'NON_ASCII_ARGUMENT',a+k);out.append(c)
         self.demand(False,'STRING_ARGUMENT_LIMIT',a)
     def model(self,kind):
+        if kind=='crc':
+            from native_crc32_loop_profile_ysm_265 import apply_summary
+            apply_summary(self);return
         if kind=='copy':
             self.modeled_copies+=1;n=self.reg('RCX')
             if n==0:self.reg('RIP',self.pc+2);return
@@ -237,7 +244,7 @@ class GuardedCPU:
                 if not self.stop:self.completed+=1
         finally:
             timer.cancel();timer.join(timeout=1)
-        self.emit('COUNTS',f'attempted={self.attempted}',f'completed={self.completed}',f'rollbacks={self.rollback_count}',f'modeled_copy_steps={self.modeled_copies}',f'opaque_byte_copies={self.opaque_copies}',f'virtual_clock_reads={self.clock_reads}',f'virtual_malloc_calls={self.malloc_calls}',f'heap_write_events={self.heap_writes}',f'virtual_fopen_calls={self.fopen_calls}',f'virtual_fgets_calls={self.fgets_calls}',f'virtual_fclose_calls={self.fclose_calls}')
+        self.emit('COUNTS',f'attempted={self.attempted}',f'completed={self.completed}',f'rollbacks={self.rollback_count}',f'modeled_copy_steps={self.modeled_copies}',f'opaque_byte_copies={self.opaque_copies}',f'virtual_clock_reads={self.clock_reads}',f'virtual_malloc_calls={self.malloc_calls}',f'heap_write_events={self.heap_writes}',f'virtual_fopen_calls={self.fopen_calls}',f'virtual_fgets_calls={self.fgets_calls}',f'virtual_fclose_calls={self.fclose_calls}',f'crc_blocks={self.crc_blocks}',f'crc_iterations={self.crc_iterations}',f'crc_logical_instructions={self.crc_logical_steps}')
         for name in REGS:self.emit('STOP_REGISTER',name,f'{self.reg(name):x}')
         for name in FLAG_BITS:self.emit('STOP_REGISTER',name,f'{self.reg(name):x}')
         preserved=self.image_unchanged();self.emit('PRESERVATION',f'image_unchanged={preserved}')
@@ -246,11 +253,11 @@ class GuardedCPU:
         return self.stop
 
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--image',required=True,type=Path);p.add_argument('--out',required=True,type=Path);p.add_argument('--mode',choices=MODES,default='strict');p.add_argument('--steps',type=int,default=10000);p.add_argument('--seconds',type=int,default=60);p.add_argument('--seed',default='1122334455667788');p.add_argument('--stride',default='3e8');p.add_argument('--pid',type=int,default=0);a=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--image',required=True,type=Path);p.add_argument('--out',required=True,type=Path);p.add_argument('--mode',choices=MODES,default='strict');p.add_argument('--steps',type=int,default=10000);p.add_argument('--seconds',type=int,default=60);p.add_argument('--seed',default='1122334455667788');p.add_argument('--stride',default='3e8');p.add_argument('--pid',type=int,default=0);p.add_argument('--accelerate-crc',action='store_true');a=p.parse_args()
     if a.pid<0:raise ValueError('Negative fixture PID')
     data=a.image.read_bytes();before=hashlib.sha256(data).hexdigest()
     with a.out.open('w') as out:
-        cpu=GuardedCPU(out,a.mode,a.steps,a.seconds,int(a.seed,16),int(a.stride,16),a.pid);cpu.load_image(data);cpu.emit('CONFIG','engine=Unicorn2.1.4',f'mode={a.mode}',f'max_steps={a.steps}','imagebase=0','relocations=false','synthetic_registers=true','bss_zero=true');result=cpu.run(0x152eb19)
+        cpu=GuardedCPU(out,a.mode,a.steps,a.seconds,int(a.seed,16),int(a.stride,16),a.pid);cpu.load_image(data);cpu.accelerate_crc=a.accelerate_crc;cpu.emit('CONFIG','engine=Unicorn2.1.4',f'mode={a.mode}',f'max_steps={a.steps}','imagebase=0','relocations=false','synthetic_registers=true','bss_zero=true');result=cpu.run(0x152eb19)
     if hashlib.sha256(a.image.read_bytes()).hexdigest()!=before:raise AssertionError('Original file changed')
     print(json.dumps({'status':result,'attempted':cpu.attempted,'completed':cpu.completed,'oracles':cpu.oracle_checks,'image_unchanged':True}))
 if __name__=='__main__':main()

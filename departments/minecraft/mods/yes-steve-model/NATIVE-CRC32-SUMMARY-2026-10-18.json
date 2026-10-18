@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "target_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "trace_sha256": "31425baf928bfd082bcd445913e1316e8436d30650f6437e133ae73f877c8120",
+  "trace_receipt": [
+    "ORACLE\t174d06f\tZF\tactual=0\texpected=0",
+    "ORACLE\t174d06f\tRSP\tactual=700000007f88\texpected=700000007f88",
+    "ORACLE\t16668ff\tCF\tactual=0\texpected=0",
+    "ORACLE\t16668ff\tRCX\tactual=1\texpected=1",
+    "ORACLE\t16668ff\tR11D\tactual=d99b4c01\texpected=d99b4c01",
+    "ORACLE\t16b05fe\tCF\tactual=0\texpected=0",
+    "ORACLE\t171695b\tRSI\tactual=1499584\texpected=1499584",
+    "ORACLE\t14995c7\tCF\tactual=1\texpected=1",
+    "ORACLE\t14995c7\tSF\tactual=0\texpected=0",
+    "ORACLE\t1603de3\tSF\tactual=0\texpected=0",
+    "ORACLE\t1444517\tCF\tactual=0\texpected=0",
+    "ORACLE\t1444517\tZF\tactual=0\texpected=0",
+    "MODELED_CRC32\tsource=30\titerations=9\tlogical_instructions=252\tinitial=0\tresult=7b3da04a\tinput_sha256=3c3d9220208fc7d4de76472a75f69a5c1070168d08e0ef8f29d4cf0cd1c7475a\treference_cycle_steps=28\tremaining_iterations=1",
+    "MODELED_CRC32\tsource=14b6372\titerations=680368\tlogical_instructions=19050304\tinitial=0\tresult=68abbe53\tinput_sha256=0d06fc18afbf0db687ded822e280694d578b83a7c69ac8b837a8b935cb1dfba1\treference_cycle_steps=28\tremaining_iterations=1",
+    "MODELED_CRC32\tsource=13d6e60\titerations=747294\tlogical_instructions=20924232\tinitial=0\tresult=f41b0fc5\tinput_sha256=8149bb05ce098d0c8eff2285e3192fab881ea7abfc51ecee7808061692f602cd\treference_cycle_steps=28\tremaining_iterations=1",
+    "MODELED_CRC32\tsource=148e3d7\titerations=111746\tlogical_instructions=3128888\tinitial=0\tresult=ec199273\tinput_sha256=a6311a13e01c0b0a20c0dc3e5b76b13335ef3b4e3c0f4e5c1beabb2a4cfb5abe\treference_cycle_steps=28\tremaining_iterations=1",
+    "MODELED_CRC32\tsource=0\titerations=39\tlogical_instructions=1092\tinitial=0\tresult=50f5d66f\tinput_sha256=17da92cec2295debf82620b9a9553ddbae641741d5df6057e22405848bd88781\treference_cycle_steps=28\tremaining_iterations=1",
+    "MODELED_CRC32\tsource=40\titerations=671\tlogical_instructions=18788\tinitial=0\tresult=8d176627\tinput_sha256=f6058699774c6fb7957a4e73f72a49a78bc7a90fb72679a4037bb16e6a39b0d0\treference_cycle_steps=28\tremaining_iterations=1",
+    "MODELED_CRC32\tsource=155c527\titerations=546514\tlogical_instructions=15302392\tinitial=0\tresult=7d371fab\tinput_sha256=68d7ae743a4fd645be3e42ef375546cb30a881708db3a3e225133c24eb114bf2\treference_cycle_steps=28\tremaining_iterations=1",
+    "MODELED_CRC32\tsource=14a985e\titerations=51983\tlogical_instructions=1455524\tinitial=0\tresult=a22b47cc\tinput_sha256=7bf75ef32c0d36d76a9d91ae90740321175a61c9802d46d405c06982a9fc389d\treference_cycle_steps=28\tremaining_iterations=1",
+    "MODELED_CRC32\tsource=15e1c2e\titerations=2536401\tlogical_instructions=71019228\tinitial=0\tresult=d700f77\tinput_sha256=929224658967483a21dcb9522aebc3e7148629c19ac85ddf135308d24fd60597\treference_cycle_steps=28\tremaining_iterations=1",
+    "STOP\tEXTERNAL_OR_NULL_TARGET\tpc=13d8466\taddress=0\tsize=0",
+    "COUNTS\tattempted=1201610\tcompleted=1201609\trollbacks=1\tmodeled_copy_steps=4277\topaque_byte_copies=776\tvirtual_clock_reads=6\tvirtual_malloc_calls=1\theap_write_events=9\tvirtual_fopen_calls=1\tvirtual_fgets_calls=2\tvirtual_fclose_calls=1\tcrc_blocks=9\tcrc_iterations=4675025\tcrc_logical_instructions=130900700",
+    "PRESERVATION\timage_unchanged=True",
+    "BOUNDED_RESULT\tEXTERNAL_OR_NULL_TARGET\ttarget_host_library_execution=false\thost_file_access=false\toriginal_image_write_applied=false\ttransactional_fault_state=true"
+  ],
+  "tests": {
+    "guard_methods": 24,
+    "crc_methods": 8,
+    "differential_cases": 30
+  },
+  "scope": "Counterfactual proc-fixture pid0, synthetic clock, immutable image, no host target execution",
+  "mapping_promotions": 0,
+  "independent_semantic_review": "NOT_RUN",
+  "source_sha256": {
+    "native_crc32_loop_profile_ysm_265.py": "742b08be15d13ebec9770d61c2ecb9f2f35e2d013c5b64336712b6883af9ddd4",
+    "test_native_crc32_loop_profile_ysm_265.py": "9f2288c9177d94f80cb2c2601904f1e7d03ba14ac7b5dda39d1e245d5201373d",
+    "native_unicorn_guarded_ysm_265.py": "7cd8635b6999a051a33b7b4f372722c7a72410e30a2a353d96486bf48651a48e"
+  }
+}
