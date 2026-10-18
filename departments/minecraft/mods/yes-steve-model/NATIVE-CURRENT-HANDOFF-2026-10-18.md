@@ -1,6 +1,6 @@
 # Current native-analysis handoff — October 18
 
-Read this before resuming native work. Latest entry: [independent backend preflight and unresolved SHR flag discrepancy](NATIVE-SECOND-EMULATOR-PREFLIGHT-2026-10-18.md). Branch: `jolly/ysm-analysis-20261016`. Last verified analysis publication before this handoff: `02fc35cdbc7a0fef0206dc9e2b08c835e1983e79`. The project is unfinished.
+Read this before resuming native work. Latest entry: [guarded independent CPU backend](NATIVE-UNICORN-GUARDED-RESULT-2026-10-18.md). Branch: `jolly/ysm-analysis-20261016`. Last verified analysis publication before this handoff: `02fc35cdbc7a0fef0206dc9e2b08c835e1983e79`. The project is unfinished.
 
 ## Scope and confidence
 
@@ -77,3 +77,7 @@ NATIVE-VIRTUAL-HEAP-RESULT-2026-10-18.md supersedes the older not-yet-run heap s
 ## Current execution caution
 
 A second Ghidra discrepancy (SHR masked-count1 overflow flag) is confirmed by a toy and4096 independent host-toy cases, but not corrected in the retained Ghidra script. File failure and two authored proc-status fixtures all stop before any fgets/fclose at the same bad read. Do not infer TracerPid behavior or actual native failure from them. Unicorn2.1.4 is installed in an isolated external venv for an independent backend; only own-byte preflight has run. Normal Unicorn write-hook emu_stop still permits the write, so target work requires protected image pages plus tested transactional private-state guards first. Next implement/validate that bounded guard; no target Unicorn execution yet.
+
+## Latest independent-backend result
+
+Unicorn guarded backend is now implemented and24toy tests pass. Original pages are read/execute-only; rejected private candidate writes and CPU state roll back atomically. Strict9204-step prefix matches Ghidra; corrected SHR/JL path diverges at step175518 as expected. Two virtual proc fixtures each reach500000; TracerPid0 extended run reaches2000000 and fclose, with no image writes. Caller/clock/heap/file remain explicit models, not actual runtime. Current useful optimization: prove and accelerate the28-instruction masked-table CRC32 loop (standard table XOR0xa30cc68d, canceled each iteration), preserving all outputs and stack effects. No acceleration implemented yet. See NATIVE-UNICORN-GUARDED-RESULT-2026-10-18.md.

@@ -1,0 +1,353 @@
+{
+  "format": "kneekura.ysm-unicorn-guarded-backend.v1",
+  "engine": "Unicorn Python package2.1.4",
+  "wheel_sha256": "9d6e6dea140560de4ebd8446661f7ef84a357d428c14a3ef09dacd306ec8c239",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "guard_tests_passed": 24,
+  "guard_model": "Read/execute-only original pages; private-instruction CPU/memory transaction rolled back on guard failure. Unknown byte identities preserved; no real imported/OS calls.",
+  "strict_instruction_prefix_matches_ghidra": 9204,
+  "ghidra_first_instruction_path_difference_step": 175518,
+  "difference_branch": "0x14fd6ea",
+  "unicorn_successor": "0x176dca6",
+  "ghidra_successor": "0x14fd6f0",
+  "fixture_paths_identical_first_steps": 500000,
+  "trials": {
+    "unicorn-strict-fast-trial.tsv": {
+      "trace_sha256": "51d9d5705102114c4e1812a3e5009b85e671db596e03d8761a9b9fce05f71328",
+      "stop": [
+        "UNINITIALIZED_READ",
+        "pc=143beae",
+        "address=700000007d90",
+        "size=1"
+      ],
+      "counts": {
+        "attempted": 9204,
+        "completed": 9203,
+        "rollbacks": 1,
+        "modeled_copy_steps": 0,
+        "opaque_byte_copies": 0,
+        "virtual_clock_reads": 0,
+        "virtual_malloc_calls": 0,
+        "heap_write_events": 0,
+        "virtual_fopen_calls": 0,
+        "virtual_fgets_calls": 0,
+        "virtual_fclose_calls": 0
+      },
+      "unique_instruction_addresses": 3550,
+      "oracles_matched": 12,
+      "clock_reads": [],
+      "registers": {
+        "RAX": "0x700000007ef8",
+        "RBX": "0x3b653804",
+        "RCX": "0xe8",
+        "RDX": "0xc49ac70e",
+        "RSI": "0x700000007d90",
+        "RDI": "0x700000007c60",
+        "RBP": "0xb551f4d4b564a469",
+        "RSP": "0x700000007bf0",
+        "R8": "0x1544201",
+        "R9": "0x700000007c00",
+        "R10": "0x700000007d30",
+        "R11": "0x160cc74",
+        "R12": "0x0",
+        "R13": "0x0",
+        "R14": "0x0",
+        "R15": "0x0",
+        "RIP": "0x143beae",
+        "CF": "0x0",
+        "PF": "0x1",
+        "AF": "0x0",
+        "ZF": "0x0",
+        "SF": "0x0",
+        "IF": "0x1",
+        "OF": "0x0",
+        "DF": "0x0"
+      },
+      "preservation_confirmed": true
+    },
+    "unicorn-proc-fixture-0.tsv": {
+      "trace_sha256": "6956eac3f59fe0877583c2e6a77eadcbec9809c61cbf701c2e112759918173a9",
+      "stop": [
+        "INSTRUCTION_BUDGET",
+        "pc=155d172",
+        "address=155d172",
+        "size=0"
+      ],
+      "counts": {
+        "attempted": 500000,
+        "completed": 500000,
+        "rollbacks": 0,
+        "modeled_copy_steps": 4277,
+        "opaque_byte_copies": 776,
+        "virtual_clock_reads": 4,
+        "virtual_malloc_calls": 1,
+        "heap_write_events": 7,
+        "virtual_fopen_calls": 1,
+        "virtual_fgets_calls": 2,
+        "virtual_fclose_calls": 0
+      },
+      "unique_instruction_addresses": 49896,
+      "oracles_matched": 12,
+      "clock_reads": [
+        [
+          "0",
+          "1122334455667788"
+        ],
+        [
+          "1",
+          "1122334455667b70"
+        ],
+        [
+          "2",
+          "1122334455667f58"
+        ],
+        [
+          "3",
+          "1122334455668340"
+        ]
+      ],
+      "registers": {
+        "RAX": "0xfffc000000030002",
+        "RBX": "0x8b94fffe",
+        "RCX": "0xdc86",
+        "RDX": "0x700000007cc8",
+        "RSI": "0x144587a",
+        "RDI": "0x1440662",
+        "RBP": "0x700000007d8a",
+        "RSP": "0x700000007af8",
+        "R8": "0x145e3b5",
+        "R9": "0xc894fffffe03fffe",
+        "R10": "0xfffddc83",
+        "R11": "0x53b396da28afde9d",
+        "R12": "0x0",
+        "R13": "0x0",
+        "R14": "0xff000000",
+        "R15": "0x710000000000",
+        "RIP": "0x155d172",
+        "CF": "0x0",
+        "PF": "0x0",
+        "AF": "0x0",
+        "ZF": "0x0",
+        "SF": "0x0",
+        "IF": "0x1",
+        "OF": "0x0",
+        "DF": "0x0"
+      },
+      "preservation_confirmed": true
+    },
+    "unicorn-proc-fixture-1234.tsv": {
+      "trace_sha256": "320d707d5d8b5669943c80affc2b35faa1bc74ed44ce33bdb4772730df5b12d3",
+      "stop": [
+        "INSTRUCTION_BUDGET",
+        "pc=155d172",
+        "address=155d172",
+        "size=0"
+      ],
+      "counts": {
+        "attempted": 500000,
+        "completed": 500000,
+        "rollbacks": 0,
+        "modeled_copy_steps": 4277,
+        "opaque_byte_copies": 776,
+        "virtual_clock_reads": 4,
+        "virtual_malloc_calls": 1,
+        "heap_write_events": 7,
+        "virtual_fopen_calls": 1,
+        "virtual_fgets_calls": 2,
+        "virtual_fclose_calls": 0
+      },
+      "unique_instruction_addresses": 49896,
+      "oracles_matched": 12,
+      "clock_reads": [
+        [
+          "0",
+          "1122334455667788"
+        ],
+        [
+          "1",
+          "1122334455667b70"
+        ],
+        [
+          "2",
+          "1122334455667f58"
+        ],
+        [
+          "3",
+          "1122334455668340"
+        ]
+      ],
+      "registers": {
+        "RAX": "0xfffc000000030002",
+        "RBX": "0x8b94fffe",
+        "RCX": "0xdc86",
+        "RDX": "0x700000007cc8",
+        "RSI": "0x144587a",
+        "RDI": "0x1440662",
+        "RBP": "0x700000007d8a",
+        "RSP": "0x700000007af8",
+        "R8": "0x145e3b5",
+        "R9": "0xc894fffffe03fffe",
+        "R10": "0xfffddc83",
+        "R11": "0x53b396da28afde9d",
+        "R12": "0x0",
+        "R13": "0x0",
+        "R14": "0xff000000",
+        "R15": "0x710000000000",
+        "RIP": "0x155d172",
+        "CF": "0x0",
+        "PF": "0x0",
+        "AF": "0x0",
+        "ZF": "0x0",
+        "SF": "0x0",
+        "IF": "0x1",
+        "OF": "0x0",
+        "DF": "0x0"
+      },
+      "preservation_confirmed": true
+    },
+    "unicorn-proc-failure.tsv": {
+      "trace_sha256": "85cb605ba90fcfbe17a16c1be51bf1ec91610291603434ca7fbe887702b4e63f",
+      "stop": [
+        "INSTRUCTION_BUDGET",
+        "pc=15f0d69",
+        "address=15f0d69",
+        "size=0"
+      ],
+      "counts": {
+        "attempted": 500000,
+        "completed": 500000,
+        "rollbacks": 0,
+        "modeled_copy_steps": 4277,
+        "opaque_byte_copies": 776,
+        "virtual_clock_reads": 2,
+        "virtual_malloc_calls": 1,
+        "heap_write_events": 7,
+        "virtual_fopen_calls": 1,
+        "virtual_fgets_calls": 0,
+        "virtual_fclose_calls": 0
+      },
+      "unique_instruction_addresses": 44949,
+      "oracles_matched": 12,
+      "clock_reads": [
+        [
+          "0",
+          "1122334455667788"
+        ],
+        [
+          "1",
+          "1122334455667b70"
+        ]
+      ],
+      "registers": {
+        "RAX": "0x4f2000007f1c",
+        "RBX": "0x7c7800d1",
+        "RCX": "0xa4068",
+        "RDX": "0x9cf2b0e4a5",
+        "RSI": "0x7c7800b7",
+        "RDI": "0x14e1c53",
+        "RBP": "0x8a65c9ec30145124",
+        "RSP": "0x700000007ae8",
+        "R8": "0x700000007cc8",
+        "R9": "0x14feafe",
+        "R10": "0x14b84bb",
+        "R11": "0x170ec60",
+        "R12": "0x0",
+        "R13": "0x0",
+        "R14": "0x0",
+        "R15": "0x710000000000",
+        "RIP": "0x15f0d69",
+        "CF": "0x0",
+        "PF": "0x1",
+        "AF": "0x0",
+        "ZF": "0x0",
+        "SF": "0x0",
+        "IF": "0x1",
+        "OF": "0x0",
+        "DF": "0x0"
+      },
+      "preservation_confirmed": true
+    },
+    "unicorn-proc-fixture-0-2m.tsv": {
+      "trace_sha256": "918a2aa9587c86e3dc74fc10ec916c4d19d715cb68910fc55c4735472f16664b",
+      "stop": [
+        "INSTRUCTION_BUDGET",
+        "pc=15f0d84",
+        "address=15f0d84",
+        "size=0"
+      ],
+      "counts": {
+        "attempted": 2000000,
+        "completed": 2000000,
+        "rollbacks": 0,
+        "modeled_copy_steps": 4277,
+        "opaque_byte_copies": 776,
+        "virtual_clock_reads": 5,
+        "virtual_malloc_calls": 1,
+        "heap_write_events": 7,
+        "virtual_fopen_calls": 1,
+        "virtual_fgets_calls": 2,
+        "virtual_fclose_calls": 1
+      },
+      "unique_instruction_addresses": 86421,
+      "oracles_matched": 12,
+      "clock_reads": [
+        [
+          "0",
+          "1122334455667788"
+        ],
+        [
+          "1",
+          "1122334455667b70"
+        ],
+        [
+          "2",
+          "1122334455667f58"
+        ],
+        [
+          "3",
+          "1122334455668340"
+        ],
+        [
+          "4",
+          "1122334455668728"
+        ]
+      ],
+      "registers": {
+        "RAX": "0x4f2000007f1c",
+        "RBX": "0xe0",
+        "RCX": "0x9b90f",
+        "RDX": "0x9cf2b0e4a5",
+        "RSI": "0xbbbf9794",
+        "RDI": "0x14e1c53",
+        "RBP": "0x8a65c9ec30145124",
+        "RSP": "0x700000007ae0",
+        "R8": "0x700000007cc8",
+        "R9": "0x14feafe",
+        "R10": "0x14c0c14",
+        "R11": "0x170ec60",
+        "R12": "0x0",
+        "R13": "0x0",
+        "R14": "0xff000000",
+        "R15": "0x710000000000",
+        "RIP": "0x15f0d84",
+        "CF": "0x1",
+        "PF": "0x1",
+        "AF": "0x0",
+        "ZF": "0x0",
+        "SF": "0x0",
+        "IF": "0x1",
+        "OF": "0x0",
+        "DF": "0x0"
+      },
+      "preservation_confirmed": true
+    }
+  },
+  "raw_source_before_additional_environment_guards_sha256": "143c9b8290848890b36df2d0cbbf841e3f2765b519ba451f455a6fcb0b817792",
+  "current_script_sha256": "0de66a55c24222ba4003cac12c99b499a2f7a8a866acb2def9681c4410feb166",
+  "scope": "Synthetic caller, clock, heap and file cases; not actual MOD runtime, all-input proof, or native completion.",
+  "original_image_writes_applied": false,
+  "target_host_library_execution": false,
+  "host_proc_file_read": false,
+  "independent_semantic_review": "NOT_RUN",
+  "mapping_promotions": 0
+}
