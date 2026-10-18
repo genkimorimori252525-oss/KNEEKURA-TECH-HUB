@@ -83,3 +83,5 @@ Entity input の再利用なら最上段、Molang 実装なら evaluator と必�
 パーサー再利用時の注意：[failed parse → temp address](PARSER-FAILURE-TEMP-ADDRESS-2026-10-18.md)。一時変数の割当後に失敗し、同じparserを次に再利用すると、成功した次の式にもずれた番地が残り得る。成功後のresetは既存ASTを再採番しない。観測差には現在frameの論理サイズ・offset・残存値などの条件が必要で、実物の不具合再現ではない。限定独立レビュー済み。
 
 例外の境界：[Java parser → native](NATIVE-PARSER-EXCEPTION-BOUNDARY-2026-10-18.md)では、Javaが捕捉したfallbackと、捕捉されずnative例外へ移る失敗を区別する。nullでもpending例外の確認は通る。[resource user-function → worker](NATIVE-RESOURCE-FAILURE-WORKER-SKIP-2026-10-18.md)は後片付けが正常なら当該モデルをskipし次へ進める経路で、batch全体の失敗・原状復帰を意味しない。以前のnative staging recordsはこのcatchでは消去されないが、最終Java公開成功は未証明。controller経路は途中catchが異なるので一般化しない。限定独立レビュー済み。
+
+controller例外経路も追加確定：[controller failure transform](NATIVE-CONTROLLER-FAILURE-TRANSFORM-2026-10-18.md)。中間catchの両分岐はコード0x5bのnative例外を作って伝播し、正常な後片付けを前提にworkerのモデル単位skipへ接続する。Java側で捕捉済みのfallbackとは別で、正常map挿入へ戻るcatchではない。最終公開・全副作用のrollbackは保証しない。

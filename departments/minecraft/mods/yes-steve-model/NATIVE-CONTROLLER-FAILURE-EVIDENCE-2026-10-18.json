@@ -1,0 +1,294 @@
+{
+  "classification": "CONTROLLER_TRANSFORM_RETHROW_STATIC",
+  "so_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "windows": [
+    {
+      "start": "0x187e3a8",
+      "end_exclusive": "0x187e868",
+      "file_offset": 24007592,
+      "sha256": "16f249bb8820c5199f1ee0302eaa08a76a6bad1c41bacd348a1c6711ab2f7a92"
+    },
+    {
+      "start": "0x145db8",
+      "end_exclusive": "0x146261",
+      "file_offset": 1334712,
+      "sha256": "2cd0ac9fd22c07ffa54ac52aafa6f702b17c1564e0adf07679fd54e4f724665c"
+    },
+    {
+      "start": "0x187e354",
+      "end_exclusive": "0x187e3a8",
+      "file_offset": 24007508,
+      "sha256": "223278e520e03bc285a84651d4cd2472e90262bae9da30ce156daec6135cfc16"
+    },
+    {
+      "start": "0x145cb8",
+      "end_exclusive": "0x145db5",
+      "file_offset": 1334456,
+      "sha256": "4299e6bd03adc863759808d46624fa120636500435e0bcc7617c8381bbdb7845"
+    },
+    {
+      "start": "0x187f184",
+      "end_exclusive": "0x187fbd8",
+      "file_offset": 24011140,
+      "sha256": "2d85d9e318cbcf645b538709fd7f0c88c1d3edf323ba984ff5abfc294df1a2c6"
+    },
+    {
+      "start": "0x146720",
+      "end_exclusive": "0x147370",
+      "file_offset": 1337120,
+      "sha256": "264abeca9548b802e2db64e93e4935306e60da6365280c72fa6308f08f3187dc"
+    },
+    {
+      "start": "0x366110",
+      "end_exclusive": "0x368dd1",
+      "file_offset": 3563792,
+      "sha256": "b886bad544f5d57545e7a8f3ba5662279b2f011b05c42b4ccf489cfcffe75048"
+    },
+    {
+      "start": "0x365a10",
+      "end_exclusive": "0x366108",
+      "file_offset": 3562000,
+      "sha256": "ccee01ce1e5e5f4759f06be7705f7b5e719b8f3c558b2a9f56f246ee6ca0bf48"
+    },
+    {
+      "start": "0x36d8c0",
+      "end_exclusive": "0x373d4a",
+      "file_offset": 3594432,
+      "sha256": "5513421c7681ac1f0122d816607cdfd99e90c8dae0dc12dcc5d668352da7fc9d"
+    },
+    {
+      "start": "0x329990",
+      "end_exclusive": "0x329a30",
+      "file_offset": 3316112,
+      "sha256": "a9fe2a50380a7bcfc4b6b1e7db376b47b01701f548b3028895adfa03c9ecaf78"
+    },
+    {
+      "start": "0x4db980",
+      "end_exclusive": "0x4dbc00",
+      "file_offset": 5093760,
+      "sha256": "195ce6b7d2b25dff8538febf39f78683387d8eda292f422aaa09c1555ba82d9f"
+    },
+    {
+      "start": "0x4dbfc0",
+      "end_exclusive": "0x4dc150",
+      "file_offset": 5095360,
+      "sha256": "968f84835328d084486744a8d701ea062754578d83839e16d015599f1ee8c64d"
+    }
+  ],
+  "lsda_edges": [
+    {
+      "function": "0x366110",
+      "call": "0x366358",
+      "start": "0x366353",
+      "end": "0x36635d",
+      "landing": "0x368627",
+      "action": 0
+    },
+    {
+      "function": "0x366110",
+      "call": "0x366691",
+      "start": "0x366684",
+      "end": "0x366696",
+      "landing": "0x368653",
+      "action": 0
+    },
+    {
+      "function": "0x366110",
+      "call": "0x366abc",
+      "start": "0x366ab7",
+      "end": "0x366ac1",
+      "landing": "0x368683",
+      "action": 0
+    },
+    {
+      "function": "0x366110",
+      "call": "0x366bd8",
+      "start": "0x366bd3",
+      "end": "0x366bdd",
+      "landing": "0x36865b",
+      "action": 0
+    },
+    {
+      "function": "0x365a10",
+      "call": "0x365b39",
+      "start": "0x365b2e",
+      "end": "0x365b3e",
+      "landing": "0x365ee9",
+      "action": 3
+    },
+    {
+      "function": "0x36d8c0",
+      "call": "0x36e74f",
+      "start": "0x36e73e",
+      "end": "0x36e754",
+      "landing": "0x372cb8",
+      "action": 0
+    },
+    {
+      "function": "0x36d8c0",
+      "call": "0x36f337",
+      "start": "0x36f326",
+      "end": "0x36f33c",
+      "landing": "0x372c7f",
+      "action": 0
+    },
+    {
+      "function": "0x36d8c0",
+      "call": "0x36fb37",
+      "start": "0x36fb26",
+      "end": "0x36fb3c",
+      "landing": "0x372c72",
+      "action": 0
+    }
+  ],
+  "cleanup_control_flow": [
+    {
+      "start": "0x368627",
+      "visited_instruction_count": 34,
+      "terminals": [
+        {
+          "offset": "0x368d4f",
+          "target": "0x322a00"
+        }
+      ],
+      "normal_return_reachable_under_normal_called_helpers": false
+    },
+    {
+      "start": "0x368653",
+      "visited_instruction_count": 54,
+      "terminals": [
+        {
+          "offset": "0x368d4f",
+          "target": "0x322a00"
+        }
+      ],
+      "normal_return_reachable_under_normal_called_helpers": false
+    },
+    {
+      "start": "0x368683",
+      "visited_instruction_count": 86,
+      "terminals": [
+        {
+          "offset": "0x368d4f",
+          "target": "0x322a00"
+        }
+      ],
+      "normal_return_reachable_under_normal_called_helpers": false
+    },
+    {
+      "start": "0x36865b",
+      "visited_instruction_count": 93,
+      "terminals": [
+        {
+          "offset": "0x368d4f",
+          "target": "0x322a00"
+        }
+      ],
+      "normal_return_reachable_under_normal_called_helpers": false
+    },
+    {
+      "start": "0x365ee9",
+      "visited_instruction_count": 62,
+      "terminals": [
+        {
+          "offset": "0x365fdb",
+          "target": "0x2abe00"
+        },
+        {
+          "offset": "0x366041",
+          "target": "0x2abe00"
+        }
+      ],
+      "normal_return_reachable_under_normal_called_helpers": false
+    },
+    {
+      "start": "0x372cb8",
+      "visited_instruction_count": 16,
+      "terminals": [
+        {
+          "offset": "0x373548",
+          "target": "0x322a00"
+        }
+      ],
+      "normal_return_reachable_under_normal_called_helpers": false
+    },
+    {
+      "start": "0x372c7f",
+      "visited_instruction_count": 68,
+      "terminals": [
+        {
+          "offset": "0x373548",
+          "target": "0x322a00"
+        }
+      ],
+      "normal_return_reachable_under_normal_called_helpers": false
+    },
+    {
+      "start": "0x372c72",
+      "visited_instruction_count": 70,
+      "terminals": [
+        {
+          "offset": "0x373548",
+          "target": "0x322a00"
+        }
+      ],
+      "normal_return_reachable_under_normal_called_helpers": false
+    }
+  ],
+  "checks": [
+    {
+      "name": "code5b_typed_branch",
+      "offset": "0x365fad",
+      "bytes": "be5b000000",
+      "passed": true
+    },
+    {
+      "name": "code5b_other_branch",
+      "offset": "0x366016",
+      "bytes": "be5b000000",
+      "passed": true
+    },
+    {
+      "name": "payload_code_store16",
+      "offset": "0x3299a1",
+      "bytes": "668937",
+      "passed": true
+    },
+    {
+      "name": "typed_construct",
+      "offset": "0x365fc3",
+      "bytes": "e8f85f1700",
+      "passed": true
+    },
+    {
+      "name": "other_construct",
+      "offset": "0x366029",
+      "bytes": "e852591700",
+      "passed": true
+    },
+    {
+      "name": "typed_throw",
+      "offset": "0x365fdb",
+      "bytes": "e8205ef4ff",
+      "passed": true
+    },
+    {
+      "name": "other_throw",
+      "offset": "0x366041",
+      "bytes": "e8ba5df4ff",
+      "passed": true
+    },
+    {
+      "name": "normal_controller_insert",
+      "offset": "0x365b75",
+      "bytes": "e876efffff",
+      "passed": true
+    }
+  ],
+  "limitations": [
+    "CFG treats called cleanup helpers as returning normally, except known throw/resume/terminate targets",
+    "No target execution, no assets, no universal rollback or future completion",
+    "Exact old Throwable/nested-error identity preservation not claimed",
+    "Worker skip contract reused from independently reviewed native-worker-publication"
+  ]
+}

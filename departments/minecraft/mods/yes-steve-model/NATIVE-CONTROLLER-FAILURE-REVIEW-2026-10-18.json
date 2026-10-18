@@ -1,0 +1,251 @@
+{
+  "verdict": "CONDITIONAL_STATIC_ACCEPTANCE",
+  "so_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "windows": [
+    {
+      "start": "0x187e3a8",
+      "end_exclusive": "0x187e868",
+      "file_offset": 24007592,
+      "sha256": "16f249bb8820c5199f1ee0302eaa08a76a6bad1c41bacd348a1c6711ab2f7a92"
+    },
+    {
+      "start": "0x145db8",
+      "end_exclusive": "0x146261",
+      "file_offset": 1334712,
+      "sha256": "2cd0ac9fd22c07ffa54ac52aafa6f702b17c1564e0adf07679fd54e4f724665c"
+    },
+    {
+      "start": "0x187e354",
+      "end_exclusive": "0x187e3a8",
+      "file_offset": 24007508,
+      "sha256": "223278e520e03bc285a84651d4cd2472e90262bae9da30ce156daec6135cfc16"
+    },
+    {
+      "start": "0x145cb8",
+      "end_exclusive": "0x145db5",
+      "file_offset": 1334456,
+      "sha256": "4299e6bd03adc863759808d46624fa120636500435e0bcc7617c8381bbdb7845"
+    },
+    {
+      "start": "0x187f184",
+      "end_exclusive": "0x187fbd8",
+      "file_offset": 24011140,
+      "sha256": "2d85d9e318cbcf645b538709fd7f0c88c1d3edf323ba984ff5abfc294df1a2c6"
+    },
+    {
+      "start": "0x146720",
+      "end_exclusive": "0x147370",
+      "file_offset": 1337120,
+      "sha256": "264abeca9548b802e2db64e93e4935306e60da6365280c72fa6308f08f3187dc"
+    },
+    {
+      "start": "0x366110",
+      "end_exclusive": "0x368dd1",
+      "file_offset": 3563792,
+      "sha256": "b886bad544f5d57545e7a8f3ba5662279b2f011b05c42b4ccf489cfcffe75048"
+    },
+    {
+      "start": "0x365a10",
+      "end_exclusive": "0x366108",
+      "file_offset": 3562000,
+      "sha256": "ccee01ce1e5e5f4759f06be7705f7b5e719b8f3c558b2a9f56f246ee6ca0bf48"
+    },
+    {
+      "start": "0x36d8c0",
+      "end_exclusive": "0x373d4a",
+      "file_offset": 3594432,
+      "sha256": "5513421c7681ac1f0122d816607cdfd99e90c8dae0dc12dcc5d668352da7fc9d"
+    },
+    {
+      "start": "0x329990",
+      "end_exclusive": "0x329a30",
+      "file_offset": 3316112,
+      "sha256": "a9fe2a50380a7bcfc4b6b1e7db376b47b01701f548b3028895adfa03c9ecaf78"
+    },
+    {
+      "start": "0x4db980",
+      "end_exclusive": "0x4dbc00",
+      "file_offset": 5093760,
+      "sha256": "195ce6b7d2b25dff8538febf39f78683387d8eda292f422aaa09c1555ba82d9f"
+    },
+    {
+      "start": "0x4dbfc0",
+      "end_exclusive": "0x4dc150",
+      "file_offset": 5095360,
+      "sha256": "968f84835328d084486744a8d701ea062754578d83839e16d015599f1ee8c64d"
+    }
+  ],
+  "byte_checks": 8,
+  "lsda_edges": [
+    {
+      "function": "0x366110",
+      "call": "0x366358",
+      "start": "0x366353",
+      "end": "0x36635d",
+      "landing": "0x368627",
+      "action": 0
+    },
+    {
+      "function": "0x366110",
+      "call": "0x366691",
+      "start": "0x366684",
+      "end": "0x366696",
+      "landing": "0x368653",
+      "action": 0
+    },
+    {
+      "function": "0x366110",
+      "call": "0x366abc",
+      "start": "0x366ab7",
+      "end": "0x366ac1",
+      "landing": "0x368683",
+      "action": 0
+    },
+    {
+      "function": "0x366110",
+      "call": "0x366bd8",
+      "start": "0x366bd3",
+      "end": "0x366bdd",
+      "landing": "0x36865b",
+      "action": 0
+    },
+    {
+      "function": "0x365a10",
+      "call": "0x365b39",
+      "start": "0x365b2e",
+      "end": "0x365b3e",
+      "landing": "0x365ee9",
+      "action": 3
+    },
+    {
+      "function": "0x36d8c0",
+      "call": "0x36e74f",
+      "start": "0x36e73e",
+      "end": "0x36e754",
+      "landing": "0x372cb8",
+      "action": 0
+    },
+    {
+      "function": "0x36d8c0",
+      "call": "0x36f337",
+      "start": "0x36f326",
+      "end": "0x36f33c",
+      "landing": "0x372c7f",
+      "action": 0
+    },
+    {
+      "function": "0x36d8c0",
+      "call": "0x36fb37",
+      "start": "0x36fb26",
+      "end": "0x36fb3c",
+      "landing": "0x372c72",
+      "action": 0
+    }
+  ],
+  "controller_action_types": {
+    "action_base": "0x145da9",
+    "typebase": "0x145db8",
+    "type2_slot": "0x145db0",
+    "indirect": "0xd307a8",
+    "rtti": "0xd1d9e0",
+    "name": "N3err12YSMExceptionE",
+    "type1": "zero catch-all"
+  },
+  "independent_control_flow": [
+    {
+      "start": "0x368627",
+      "visited": 34,
+      "terminals": [
+        [
+          "0x368d4f",
+          "0x322a00"
+        ]
+      ],
+      "normal_return_reachable": false
+    },
+    {
+      "start": "0x368653",
+      "visited": 54,
+      "terminals": [
+        [
+          "0x368d4f",
+          "0x322a00"
+        ]
+      ],
+      "normal_return_reachable": false
+    },
+    {
+      "start": "0x368683",
+      "visited": 86,
+      "terminals": [
+        [
+          "0x368d4f",
+          "0x322a00"
+        ]
+      ],
+      "normal_return_reachable": false
+    },
+    {
+      "start": "0x36865b",
+      "visited": 93,
+      "terminals": [
+        [
+          "0x368d4f",
+          "0x322a00"
+        ]
+      ],
+      "normal_return_reachable": false
+    },
+    {
+      "start": "0x365ee9",
+      "visited": 62,
+      "terminals": [
+        [
+          "0x365fdb",
+          "0x2abe00"
+        ],
+        [
+          "0x366041",
+          "0x2abe00"
+        ]
+      ],
+      "normal_return_reachable": false
+    },
+    {
+      "start": "0x372cb8",
+      "visited": 16,
+      "terminals": [
+        [
+          "0x373548",
+          "0x322a00"
+        ]
+      ],
+      "normal_return_reachable": false
+    },
+    {
+      "start": "0x372c7f",
+      "visited": 68,
+      "terminals": [
+        [
+          "0x373548",
+          "0x322a00"
+        ]
+      ],
+      "normal_return_reachable": false
+    },
+    {
+      "start": "0x372c72",
+      "visited": 70,
+      "terminals": [
+        [
+          "0x373548",
+          "0x322a00"
+        ]
+      ],
+      "normal_return_reachable": false
+    }
+  ],
+  "conditions": "Normal called cleanup/construction helpers; only established throw-like2abe00 and resume322a00 treated as terminals",
+  "target_executed": false,
+  "reviewed_report_sha256": "cba4ff5c09009fa4f3224cb27549d02d3888281fcd28c670f412fd6b7d0a1bd0"
+}
