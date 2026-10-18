@@ -105,6 +105,8 @@ The [server synchronization boundary review](SERVER-SYNC-BATCH-REVIEW-2026-10-17
 
 ## Recovered native entries and rendering (October18)
 
+Use the [compact native reuse guide](NATIVE-REUSE-GUIDE-2026-10-18.md) for question-to-evidence routing and essential ownership/numeric/freshness boundaries.
+
 [All17 exact native-entry bindings](NATIVE-EXACT-BINDINGS-RECOVERY-2026-10-18.md) now join the Java declarations to original Linux functions;16 are static and one is instance-native. This resolves entry identity, not full native behavior or runtime registration. [Renderer/lifetime](NATIVE-RENDER-LIFETIME-RECOVERY-2026-10-18.md) and [output/mode contract](NATIVE-RENDER-OUTPUT-MODES-RECOVERY-2026-10-18.md) establish registry-based handles, conditional output copying, stale-untracked-output risks and selected rendering modes. Never interpret the fourth output float as a proven homogeneous W, nor assume every render refreshed all output. [Affine/parent propagation](NATIVE-BONE-AFFINE-RECOVERY-2026-10-18.md) supplies the mathematical transform contract; its binary64 checks do not certify native float32/trig/normal behavior.
 
 ## Native declarations and common lifecycle

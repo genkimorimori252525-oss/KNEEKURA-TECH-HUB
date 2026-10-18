@@ -1,0 +1,335 @@
+{
+  "format": "ysm-render-backend-metadata-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "jar_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "checkpoint_sha256": "5910f1c5b52de7aeb2313ae9885bc22fd385a27815885516287cd319e4271d84",
+  "java_base_sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+  "state_model": "Independent next6 checkpoint clone; five sequential metadata callbacks with fresh synthetic frames. No interrupted JNI continuation.",
+  "runtime_initialization_proven": false,
+  "runtime_rendering_proven": false,
+  "members": [
+    {
+      "callback": "0x40f6e0",
+      "manager_global": "0xd355d0",
+      "manager_offset": "0x128",
+      "kind": "method",
+      "descriptor_flags": 1,
+      "source": "0x3f223",
+      "source_length": 152,
+      "callback_sha256": "179a9d0a17a468959d5a42fa918714feb7c1c0d949893062fb2a24005b6f40e5",
+      "source_sha256": "524de1d71d18bde07b31d43efe414d944741df9b44d8f231ed9a1a997124f1b8",
+      "instruction_evidence": [
+        {
+          "role": "callback_lea",
+          "address": "0x40a1b8",
+          "bytes": "488d1d21550000",
+          "sha256": "248faa5f4a8937efb77899c9bd1d02c6fd4c9e33023cb99a017a5b69b214827f"
+        },
+        {
+          "role": "callback_store",
+          "address": "0x40a1fe",
+          "bytes": "49895f28",
+          "sha256": "6cd07fc0da245753dce0a70e35406553e606f4340cbaf3ea3b35934f87151b2a"
+        },
+        {
+          "role": "manager_descriptor_store",
+          "address": "0x40a224",
+          "bytes": "4d89be28010000",
+          "sha256": "ab22d7d241c5a8aad24c4e6f5588e99b178b700afda2613a119460b17062ae3d"
+        }
+      ],
+      "stop": {
+        "reason": "ENTRY_RETURN",
+        "pc": 4257535,
+        "address": 140733193388032,
+        "size": 0
+      },
+      "segments": [
+        {
+          "stop": {
+            "reason": "ENTRY_RETURN",
+            "pc": 4257535,
+            "address": 140733193388032,
+            "size": 0
+          },
+          "attempted": 2545428,
+          "completed": 2545428
+        }
+      ],
+      "payload": "Lcom/elfmcys/yesstevemodel/ooOOo000OOO0ooO0oo0ooooO$Oo0Oo0o00O00Oo0OOoOOoooo;Oo0Oo0o00O00Oo0OOoOOoooo(Lcom/mojang/blaze3d/vertex/VertexConsumer;I[F[I)V",
+      "payload_sha256": "fab1d3a8a6a5296e052406d4c102f0a262d2c99d0218632ae459fc4514c28c6b",
+      "owner": "com/elfmcys/yesstevemodel/ooOOo000OOO0ooO0oo0ooooO$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/mojang/blaze3d/vertex/VertexConsumer;I[F[I)V",
+      "static": true,
+      "classfile_status": "exact_match",
+      "declaring_class": "com/elfmcys/yesstevemodel/ooOOo000OOO0ooO0oo0ooooO$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "access": 9,
+      "class_sha256": "00c2f06933582e2045e088ceb12c77847635a66a8e3f5458a6bfbd959509cf9c",
+      "source_artifact": {
+        "id": "ysm",
+        "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+        "archive_kind": "jar",
+        "entry_count": 1853
+      }
+    },
+    {
+      "callback": "0x40f300",
+      "manager_global": "0xd355d8",
+      "manager_offset": "0x38",
+      "kind": "field",
+      "descriptor_flags": 0,
+      "source": "0x41ed0",
+      "source_length": 164,
+      "callback_sha256": "35de836decfcd0f1e9219a02f8238f54e31a395497b0ef2cc640f5e69308bc31",
+      "source_sha256": "2b996e382a22d0756860d6515211e00bb39511aadd6a89f60aa820fc2b80b205",
+      "instruction_evidence": [
+        {
+          "role": "callback_lea",
+          "address": "0x40a74d",
+          "bytes": "488d05ac4b0000",
+          "sha256": "6b8ef6f812efa28aedbf1a9b2938391919bf9fffab330e6f2e0ef275452c24bb"
+        },
+        {
+          "role": "callback_store",
+          "address": "0x40a754",
+          "bytes": "4889442428",
+          "sha256": "3dea137c35ad95a61ffbe26f7f85dd150675ab1bf5099b193473369a110d4d0e"
+        },
+        {
+          "role": "manager_descriptor_store",
+          "address": "0x40a78e",
+          "bytes": "49895e38",
+          "sha256": "a4881f77bb7a5bf6041a2807862eac0a236d6246cbedefb4c6b982c2f30380de"
+        }
+      ],
+      "stop": {
+        "reason": "ENTRY_RETURN",
+        "pc": 4256543,
+        "address": 140733193388032,
+        "size": 0
+      },
+      "segments": [
+        {
+          "stop": {
+            "reason": "ENTRY_RETURN",
+            "pc": 4256543,
+            "address": 140733193388032,
+            "size": 0
+          },
+          "attempted": 2756260,
+          "completed": 2756260
+        }
+      ],
+      "payload": "Lnet/caffeinemc/mods/sodium/client/render/vertex/buffer/DirectBufferBuilder;builder:Lnet/caffeinemc/mods/sodium/client/render/vertex/buffer/BufferBuilderExtension;",
+      "payload_sha256": "c4e8ede018d0bc1376464609aceff9b7f59a450ae21a85043971f48eb0ac3805",
+      "owner": "net/caffeinemc/mods/sodium/client/render/vertex/buffer/DirectBufferBuilder",
+      "name": "builder",
+      "descriptor": "Lnet/caffeinemc/mods/sodium/client/render/vertex/buffer/BufferBuilderExtension;",
+      "static": false,
+      "classfile_status": "not present in original YSM JAR or supplied java.base; decoded text exact, counterpart unverified"
+    },
+    {
+      "callback": "0x40f2e0",
+      "manager_global": "0xd355e0",
+      "manager_offset": "0x38",
+      "kind": "field",
+      "descriptor_flags": 0,
+      "source": "0x3fd89",
+      "source_length": 161,
+      "callback_sha256": "af4c534ae1dd913f2f85f43336c1e936c7fc7236f05b316508f25b42ebbe7250",
+      "source_sha256": "7b6a804c6e2365da6f49260a32857219269b00e3aa632363524b315c9e888c7e",
+      "instruction_evidence": [
+        {
+          "role": "callback_lea",
+          "address": "0x40a7da",
+          "bytes": "488d05ff4a0000",
+          "sha256": "9ef62a6fcd6b88bcde4eb7880c04dc84aa6d6a6610b9f69c580b13a7457be3a0"
+        },
+        {
+          "role": "callback_store",
+          "address": "0x40a7e1",
+          "bytes": "4889442428",
+          "sha256": "3dea137c35ad95a61ffbe26f7f85dd150675ab1bf5099b193473369a110d4d0e"
+        },
+        {
+          "role": "manager_descriptor_store",
+          "address": "0x40a81b",
+          "bytes": "49895e38",
+          "sha256": "a4881f77bb7a5bf6041a2807862eac0a236d6246cbedefb4c6b982c2f30380de"
+        }
+      ],
+      "stop": {
+        "reason": "ENTRY_RETURN",
+        "pc": 4256511,
+        "address": 140733193388032,
+        "size": 0
+      },
+      "segments": [
+        {
+          "stop": {
+            "reason": "ENTRY_RETURN",
+            "pc": 4256511,
+            "address": 140733193388032,
+            "size": 0
+          },
+          "attempted": 2644799,
+          "completed": 2644799
+        }
+      ],
+      "payload": "Lme/jellysquid/mods/sodium/client/render/vertex/buffer/SodiumBufferBuilder;builder:Lme/jellysquid/mods/sodium/client/render/vertex/buffer/ExtendedBufferBuilder;",
+      "payload_sha256": "54f83a6c2377998f81e9495a8db1257e0d4444e813122be40a8e48c07a1ac3ea",
+      "owner": "me/jellysquid/mods/sodium/client/render/vertex/buffer/SodiumBufferBuilder",
+      "name": "builder",
+      "descriptor": "Lme/jellysquid/mods/sodium/client/render/vertex/buffer/ExtendedBufferBuilder;",
+      "static": false,
+      "classfile_status": "not present in original YSM JAR or supplied java.base; decoded text exact, counterpart unverified"
+    },
+    {
+      "callback": "0x40f7c0",
+      "manager_global": "0xd355d0",
+      "manager_offset": "0x160",
+      "kind": "field",
+      "descriptor_flags": 4,
+      "source": "0x42b45",
+      "source_length": 51,
+      "callback_sha256": "361e04d106cfbc14c61b7dc26048456e97a8602b9f974d5c0ef712bc11759912",
+      "source_sha256": "c48df130888c3e986480bd7ec03f41d237a95752180944779d039efeab6e8722",
+      "instruction_evidence": [
+        {
+          "role": "callback_lea",
+          "address": "0x40a4a8",
+          "bytes": "488d0511530000",
+          "sha256": "4a2ea5cce8d634cd40df52545a3f6515f58ec6c4ded4f2a5029ea2004db42365"
+        },
+        {
+          "role": "callback_store",
+          "address": "0x40a4af",
+          "bytes": "4889842438050000",
+          "sha256": "79433733ffbc1632ce96c9550d8e8e5f960f64b86b36d3c65b969a3596a252b3"
+        },
+        {
+          "role": "manager_descriptor_store",
+          "address": "0x40a4f8",
+          "bytes": "49899e60010000",
+          "sha256": "251e3d35b147b51baa6d133d5e723f9fb51571523d2b36f2fb570440c03031d8"
+        }
+      ],
+      "stop": {
+        "reason": "ENTRY_RETURN",
+        "pc": 4257759,
+        "address": 140733193388032,
+        "size": 0
+      },
+      "segments": [
+        {
+          "stop": {
+            "reason": "ENTRY_RETURN",
+            "pc": 4257759,
+            "address": 140733193388032,
+            "size": 0
+          },
+          "attempted": 1233639,
+          "completed": 1233639
+        }
+      ],
+      "payload": "Lcom/mojang/blaze3d/vertex/VertexFormat;f_86014_:I",
+      "payload_sha256": "1454770b44be7b9fb773df23510d2f381e58d53ef3978fe7609b0750922ea555",
+      "owner": "com/mojang/blaze3d/vertex/VertexFormat",
+      "name": "f_86014_",
+      "descriptor": "I",
+      "static": false,
+      "classfile_status": "not present in original YSM JAR or supplied java.base; decoded text exact, counterpart unverified"
+    },
+    {
+      "callback": "0x40f7a0",
+      "manager_global": "0xd355d0",
+      "manager_offset": "0x158",
+      "kind": "field",
+      "descriptor_flags": 0,
+      "source": "0x43aea",
+      "source_length": 91,
+      "callback_sha256": "3280e8fe83bcad5427be071786b2c32452e28faafa13782836e4a287d67431bd",
+      "source_sha256": "e436bc68374605c2342cf431eefd58708b16fe0a3616f0fb48703b6251e322d1",
+      "instruction_evidence": [
+        {
+          "role": "callback_lea",
+          "address": "0x40a446",
+          "bytes": "488d0553530000",
+          "sha256": "bc642e6a9e5c70fef3f841d0782839e70680059229fa891f39a943d448cfb08e"
+        },
+        {
+          "role": "callback_store",
+          "address": "0x40a44d",
+          "bytes": "4889842458050000",
+          "sha256": "b1f00523c5df4fedfce8187b2f5f4e4d4be8d9088953687107c8dad36f00e60a"
+        },
+        {
+          "role": "manager_descriptor_store",
+          "address": "0x40a496",
+          "bytes": "49899e58010000",
+          "sha256": "f3572666b067470da53ebf00e759a86f2a95874cad26269f941ab71e659a81f7"
+        }
+      ],
+      "stop": {
+        "reason": "ENTRY_RETURN",
+        "pc": 4257727,
+        "address": 140733193388032,
+        "size": 0
+      },
+      "segments": [
+        {
+          "stop": {
+            "reason": "ENTRY_RETURN",
+            "pc": 4257727,
+            "address": 140733193388032,
+            "size": 0
+          },
+          "attempted": 1698299,
+          "completed": 1698299
+        }
+      ],
+      "payload": "Lcom/mojang/blaze3d/vertex/BufferBuilder;f_85658_:Lcom/mojang/blaze3d/vertex/VertexFormat;",
+      "payload_sha256": "397bbdf347f4dc6429ff5b36ddb68cfeb1bf0a848d64342c8270f8dcb3e8575a",
+      "owner": "com/mojang/blaze3d/vertex/BufferBuilder",
+      "name": "f_85658_",
+      "descriptor": "Lcom/mojang/blaze3d/vertex/VertexFormat;",
+      "static": false,
+      "classfile_status": "not present in original YSM JAR or supplied java.base; decoded text exact, counterpart unverified"
+    }
+  ],
+  "complete": true,
+  "static_helper_evidence": [
+    {
+      "address": "0x4064ce",
+      "length": 95,
+      "bytes": "498b4f10498b47184885c9741d498d57100f57c00f1102410f100f410f114e10410f110649894e20eb140f57c0410f114610410f110649c74620000000004989462841c74630000000004c8b7b084c3b7b1074104d89374983c7084c897b08",
+      "sha256": "9c6c473129dddfc75283ab7ae3af7938e7d6755f19630cbcb09dde2ba2b6e60b"
+    },
+    {
+      "address": "0x40678e",
+      "length": 95,
+      "bytes": "498b4f10498b47184885c9741d498d57100f57c00f1102410f100f410f114e10410f110649894e20eb140f57c0410f114610410f110649c74620000000004989462841c74630040000004c8b7b084c3b7b1074104d89374983c7084c897b08",
+      "sha256": "226ef2c3a088d400faa017008265ef9fe8218bb4b4505a6f30c6c54608af01de"
+    },
+    {
+      "address": "0x40a705",
+      "length": 7,
+      "bytes": "4c8935c4ae9200",
+      "sha256": "cb394d94886f248f9036e6f876d6c27857e1c6907f3c4d4bc6e475b6d8c467c6"
+    },
+    {
+      "address": "0x40a792",
+      "length": 7,
+      "bytes": "4c89353fae9200",
+      "sha256": "a1f699353b78f2ffc17b897d1aa42f0b4143271e2c89eec8b7fac3b856fb9ce2"
+    },
+    {
+      "address": "0x40a81f",
+      "length": 7,
+      "bytes": "4c8935baad9200",
+      "sha256": "a90a9d9ea551e396820ca6ff5d00dfd9d65c04a596230dbc1cc4f5cc5bff7061"
+    }
+  ],
+  "original_inputs_unchanged": true
+}

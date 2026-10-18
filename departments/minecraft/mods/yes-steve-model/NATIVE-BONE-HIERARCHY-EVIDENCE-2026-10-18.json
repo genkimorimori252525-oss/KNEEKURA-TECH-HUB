@@ -1,0 +1,280 @@
+{
+  "format": "ysm-bone-hierarchy-static-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "prior_geometry_receipt_sha256": "d911035f40312c4fcd495f0446d73686b73f60963d0f22f9821478efc6432504",
+  "ranges": [
+    {
+      "id": "hierarchy_and_flatten",
+      "start": "0x36a6e0",
+      "end": "0x36b197",
+      "sha256": "cc25ad970d9bbf1f605a5730526d655a46f019b39c083d0ef73b295636e50256",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3581664
+      }
+    },
+    {
+      "id": "ordered_insert",
+      "start": "0x369810",
+      "end": "0x369c78",
+      "sha256": "3081152e860db79ef768c1fc499c05234c947da6e622d396d0901db7c037d089",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3577872
+      }
+    },
+    {
+      "id": "name_lookup",
+      "start": "0x369c80",
+      "end": "0x369f20",
+      "sha256": "26a7e48da0fb761dd65d0ec4a5056991dbaa18b86f2ae3ac817890554325ce77",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3579008
+      }
+    },
+    {
+      "id": "tree_successor",
+      "start": "0x2ba620",
+      "end": "0x2ba669",
+      "sha256": "3499cfcd1f7e12862d2b6b188efbf41cac1c55500d42ca6a0fc763cebe233970",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 2860576
+      }
+    },
+    {
+      "id": "missing_parent",
+      "start": "0x36cba0",
+      "end": "0x36cc19",
+      "sha256": "e98552cc68b170a3eeb3a796b5e5dc3421fdfb8b5b69b0efd672011a97263858",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3591072
+      }
+    },
+    {
+      "id": "depth_and_descendant_copy",
+      "start": "0x3761c6",
+      "end": "0x3761d7",
+      "sha256": "c4de2c3793347880eeba217e079a7a52346bfa0a5ab7c34f5e2d1d8aad2ce1c5",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3629510
+      }
+    },
+    {
+      "id": "depth_capacity_publication",
+      "start": "0x378b6b",
+      "end": "0x378c98",
+      "sha256": "d1ce6042eb5c93843c0632998beaa735415d7f55af62f6e77a4db57ed58b0e65",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3640171
+      }
+    },
+    {
+      "id": "bank_size_check",
+      "start": "0x37bf83",
+      "end": "0x37bfb4",
+      "sha256": "47efe9019b50f47ea96bf84b3a230cebfc43ce330a6a19c3ffb857482d884473",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3653507
+      }
+    },
+    {
+      "id": "bank_resize_call",
+      "start": "0x37f6ab",
+      "end": "0x37f6b0",
+      "sha256": "ede6326b001cf0f874e3b2f3be9cc8425b1e009cda962f3917338e61f66ec712",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3667627
+      }
+    },
+    {
+      "id": "bank_resize",
+      "start": "0x3984d0",
+      "end": "0x398635",
+      "sha256": "7337ebac8a3b5dc3e2ff734cfedf88243936ecb7636508f97d5016e92bf225c9",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3769552
+      }
+    },
+    {
+      "id": "descendant_gate",
+      "start": "0x37cbe8",
+      "end": "0x37cc2e",
+      "sha256": "c83e8e2dbbec8557aea534f41a58a9ce8ded0a9331136fdb4da45579baad1a23",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3656680
+      }
+    },
+    {
+      "id": "bank_publish",
+      "start": "0x37d1e2",
+      "end": "0x37d29b",
+      "sha256": "ebea5ea33508f909f0be8e64eff5662cbfb5eb403aec4ec6e76fb81a9534ec77",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3658210
+      }
+    }
+  ],
+  "imports": [
+    {
+      "entry": "0xd14770",
+      "entry_bytes": "ff25cac00100",
+      "pointer_slot": "0xd30840",
+      "pointer_bytes": "966e3d0100000000",
+      "stub": "0x13d6e96",
+      "stub_bytes": "ff25c4614700",
+      "import_metadata": {
+        "slot": "0x184d060",
+        "raw_value": "0x18496d6",
+        "relocation_type": 7,
+        "symbol_index": 13,
+        "symbol_name": "memcmp",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    },
+    {
+      "entry": "0xd14780",
+      "entry_bytes": "ff25c2c00100",
+      "pointer_slot": "0xd30848",
+      "pointer_bytes": "9c6e3d0100000000",
+      "stub": "0x13d6e9c",
+      "stub_bytes": "ff25c6614700",
+      "import_metadata": {
+        "slot": "0x184d068",
+        "raw_value": "0x156fdc0",
+        "relocation_type": 7,
+        "symbol_index": 14,
+        "symbol_name": "bcmp",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    }
+  ],
+  "target_executed": false,
+  "emulation_used": false,
+  "scope": "Hierarchy construction, flattening, depth/count derivation and parent-bank sizing",
+  "unresolved": [
+    "No depth<=255 validation established in scoped hierarchy producer",
+    "No global input depth/cycle/completeness validation established",
+    "No runtime execution or allocation success proof",
+    "32-bit depth/count arithmetic and low-byte descriptor conversion require representability assumptions"
+  ]
+}

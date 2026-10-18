@@ -1,0 +1,2266 @@
+{
+  "format": "ysm-render-backend-static-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "jar_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "ranges": [
+    {
+      "start": "0x398e50",
+      "end_exclusive": "0x399750",
+      "sha256": "1b95b55ef851f211bbb8056661374c1afd946efe788e4fea55b2002270e506b4",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3771984
+      }
+    },
+    {
+      "start": "0x381f30",
+      "end_exclusive": "0x383e10",
+      "sha256": "5be1dc6deaaad0b66d40daf5d7b55b5cb4c050dfdcfad04679c6f446b3606c6a",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3678000
+      }
+    },
+    {
+      "start": "0x37fae0",
+      "end_exclusive": "0x381f30",
+      "sha256": "3b17deb30d58e9edb73474f21be222da19c171343434145f460afec6d5c6dfd7",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3668704
+      }
+    },
+    {
+      "start": "0x398760",
+      "end_exclusive": "0x398e50",
+      "sha256": "d0f343f8dcb6d50ffb6cc539510c6a1f0c1646f37dcb857ed7b8578abec86545",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3770208
+      }
+    },
+    {
+      "start": "0x384120",
+      "end_exclusive": "0x385080",
+      "sha256": "34f37cf662e44506b093f2fad1d3305d60d650a67fd4ab3bf3047a7e25e990ec",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3686688
+      }
+    },
+    {
+      "start": "0x388a20",
+      "end_exclusive": "0x38a300",
+      "sha256": "2e418dc5c7deecf3a4540caf4baef948cf534d4f9e296c795625e7ecc590bd64",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3705376
+      }
+    },
+    {
+      "start": "0x399820",
+      "end_exclusive": "0x399b40",
+      "sha256": "5d3833dfe4572d63ca2be3e4f7bb7b962bc2b6227b0a9ac60882175e2aabd33b",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3774496
+      }
+    },
+    {
+      "start": "0x409d00",
+      "end_exclusive": "0x40a83d",
+      "sha256": "6fb1173db773c89525172b5fd9c1dc558dcf3178d129e6890b4f926e1f76258d",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4234496
+      }
+    },
+    {
+      "start": "0x345d50",
+      "end_exclusive": "0x345e10",
+      "sha256": "0c034afdd9f7ba588c64ad08838fd41c2aa029c803510f21ff9fe8b54b104a27",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3431760
+      }
+    }
+  ],
+  "anchors": [
+    {
+      "id": "force_legacy",
+      "address": "0x398e5b",
+      "size": 8,
+      "bytes": "85d20f8594080000",
+      "sha256": "a3ada7139399ce3d7112ecd32d38ccf6bf827a9fc5263f3bad4f67cd39ad5416",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3771995
+      },
+      "claim": "Nonzero third argument jumps to return code6."
+    },
+    {
+      "id": "unwrap_a",
+      "address": "0x398e69",
+      "size": 98,
+      "bytes": "488b0568c79900807832010f8534020000498b7620488b4038488b10488b034889dfff900001000084c00f8415020000488b0538c79900488b4038488338000f8423050000488b50084885d20f8416050000498b7620488b034889dfff90f8020000",
+      "sha256": "dc2148550e3f5238112f851f1772433af190399e8724cc2c5f4558746ad74411",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3772009
+      },
+      "claim": "Manager d355d8 status+32==1 and IsInstanceOf metadata+38 class permit GetObjectField wrapper extraction."
+    },
+    {
+      "id": "unwrap_b",
+      "address": "0x3990c4",
+      "size": 94,
+      "bytes": "488b0515c59900807832010f858f000000498b7620488b4038488b10488b034889dfff900001000084c07474488b05e9c49900488b4038488338000f84b4030000488b50084885d20f84a7030000498b7620488b034889dfff90f8020000",
+      "sha256": "0313cba2d207c33a49ec4a873048fb332ffb1e2a89c7b0c7bf8cbb378f11605d",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3772612
+      },
+      "claim": "Manager d355e0 status+32==1 and IsInstanceOf metadata+38 class permit alternative GetObjectField extraction."
+    },
+    {
+      "id": "buffer_class_gate",
+      "address": "0x398f1e",
+      "size": 37,
+      "bytes": "488b05abc69900488b8050010000488b10488b034889dfff900001000084c00f841c030000",
+      "sha256": "78ede94dc98ba5949eedba2ae1ce1b4b15b8a707f1555d58bc01cfce107dca16",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3772190
+      },
+      "claim": "Working object must be instance of class metadata d355d0+150; failure marks fallback6."
+    },
+    {
+      "id": "format_gate",
+      "address": "0x398fec",
+      "size": 170,
+      "bytes": "488b05ddc59900488b8058010000488338000f845e030000488b50084885d20f8451030000488b034889dfff90f80200004885c00f841a04000048895c246048c744246800000000488d0d4507faff488d152e72fcff488954247848894c247048898424800000004889dfe804150800488bb424800000004885f60f84ee030000488b150cb399004885d20f84ea030000488b034889dfff90c000000084c00f84f7010000bb01000000",
+      "sha256": "bda83ac95d5c8a81b35826e7de1444dfb8c334b5316364e1804abe48680bd4ff",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3772396
+      },
+      "claim": "GetObjectField d355d0+158; IsSameObject against cached static object d34380 selects1."
+    },
+    {
+      "id": "extended_gate",
+      "address": "0x399288",
+      "size": 153,
+      "bytes": "488bb424800000000fb605f1b0990084c00f84be02000040b5013c010f85b6030000488b15dfb09900488b034889dfff90c000000084c00f849b030000488b0504c39900488b8060010000488338000f84cd020000488b50084885d20f84c0020000488bb42480000000488b034889dfff90200300004189c64889dfe8571208004183c6d04183fe087745488d056eeacbff4a630cb04801c1",
+      "sha256": "b38a0cd364e43f998b7e4d5bdc95a1b1178214a52dbf05b42afd829cd5f1ee0d",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3773064
+      },
+      "claim": "Cache byte d34388 must be1 and format IsSameObject d34390 before integer-field switch."
+    },
+    {
+      "id": "integer_dispatch",
+      "address": "0x399309",
+      "size": 89,
+      "bytes": "4183c6d04183fe087745488d056eeacbff4a630cb04801c1ffe1bb02000000e969fdffffbb03000000e95ffdffffbb04000000e955fdffff31c0803d2eb09900000f95c08d1c4083c302e93efdffffbb06000000e934fdffff",
+      "sha256": "2cf1b9b32b33f803382a0bccae5f982c6f055653b7fdbce9c63b29dba6a7ebc9",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3773193
+      },
+      "claim": "Unsigned range check of value-48 and9-entry relative jump table;48=>2,54=>4,55=>3,56=>2 or5,others=>6."
+    },
+    {
+      "id": "feature_cache",
+      "address": "0x39955d",
+      "size": 265,
+      "bytes": "4989f6488b0569c09900488b8070010000488b30488b50084889e74889d9e8b0030000488b7424204885f60f848b000000c605f3ad990001488b034889dfff90a8000000488905e8ad9900eb76bf18000000e80c14f1ff4989c6bf58000000e8ff0f930066c7003e00488d48184889480848c7401000000000c64018004889c14883c1480f57c00f1140284889483848c7404000000000c64048004c89f74889c6e87d231400488d35d6439800488d152f04f9ff4c89f7e8e727f1ffc60568ad9900ff488b05a9bf9900488b8088010000488b38488b70084889dae803040000880535ad99004889e7e8f5bcfaff0fb60536ad99004c89f640b5013c010f844afcffff488b84248000",
+      "sha256": "a5d972a800e36a2c7045cca9ab55a6d5bc122d1de989558141b0b406f58d9fd9",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3773789
+      },
+      "claim": "Initialize d34388 to1 or255 based on static object+170; cache global ref d34390 and static boolean+188 in d34378."
+    },
+    {
+      "id": "native_reserve",
+      "address": "0x398760",
+      "size": 557,
+      "bytes": "55415741564154534883ec30488b055dce9900488b8040010000488338000f840902000089d5488b50084885d20f84fa0100004189cf4989f64889fb31c0e84dc3fcff4889dfe8b51d0800488b051ece9900488b8050010000488338000f8428020000488b50084885d20f841b020000488b034889df4c89f6ff90200300004189c44889dfe8761d0800488b05dfcd9900488b8050010000488338000f8447020000488b50084885d20f843a0200004101ec488b034889df4c89f64489e1ff90680300004889dfe8341d0800488b059dcd9900488b8038010000488338000f8463020000488b50084885d20f8456020000488b034889df4c89f6ff902003000089c54889dfe8f61c0800488b055fcd9900488b8038010000488338000f8483020000488b50084885d20f84760200004101ef488b034889df4c89f64489f9ff90680300004889dfe8b41c0800488b051dcd9900488b8030010000488338000f849c020000488b50084885d20f848f020000488b034889df4c89f6ff90f80200004989c64885c00f84e302000048891c2448c744240800000000488d05800efaff488d0d6979fcff48894c241848894424104c897424204889dfe8421c0800488b034889df4c89f6ff90300700004889c3488b4424204885c0741d488944242848837c2410000f849e0200004889e7488d742428ff54241848c744242000000000488b4424104885c0740d4889e74889feba03000000ffd04863c54801c34889d84883c4305b415c415e415f5dc3",
+      "sha256": "b0e4156b097d7b31d5123e9f3b40acbb35d1b620b4227a9df1aa6ace5037385e",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3770208
+      },
+      "claim": "Reserve helper calls metadata+140, increments fields+150 byvertexcount and+138 bybytecount, GetDirectBufferAddress of objectfield+130, returns address+oldbyteoffset."
+    },
+    {
+      "id": "raw_producer_destination",
+      "address": "0x37fd5b",
+      "size": 32,
+      "bytes": "8b4010488b0c2403818c0000004c8d2cc049c1e502488b8424e80000004c0328",
+      "sha256": "8749e6085acf27041385b812258bbc128f720f1f5566b6f28c73ba95963cd1e1",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3669339
+      },
+      "claim": "Output destination is direct base plus36*(entry output index+batch base)."
+    },
+    {
+      "id": "raw_vertex_store",
+      "address": "0x3801fb",
+      "size": 78,
+      "bytes": "410f134d0066410f3a174d0802f20f104918f2410f114d104183f97f440f4dcb4889f341895d0c66458955186645895d1a8bb42490000000664189751c664589751e41887d204588452145884d22",
+      "sha256": "ec3b29a49dde783cfab83154be4972635c616a748ee3dc15fc5804fb37b39f0d",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3670523
+      },
+      "claim": "Concrete vertex writes xyz0..8,color0c,UV10..14,overlay18..1b,light1c..1f,normal bytes20..22; fourth byte23 not written in this block."
+    },
+    {
+      "id": "legacy_producer_install",
+      "address": "0x384ae8",
+      "size": 126,
+      "bytes": "488d0551009b004889442440488d44243848894424484c897c2450498b4608498b0e488d150f3f00004889542410488d5424404889542418488d542410498956204889c24829ca48c1ea034863d2f0490196c0000000f049ff46404839c874160f1f840000000000f390498b86c00000004885c075f249c7462000000000",
+      "sha256": "19fd0fa93d3cd6eca9858aad29aab7956cf5f47ae23e7d719c01c47cc5126e57",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3689192
+      },
+      "claim": "Wrapper384a50 installs388a20 context and waits for worker counter before flushing."
+    },
+    {
+      "id": "legacy_stream_destinations",
+      "address": "0x388ba6",
+      "size": 75,
+      "bytes": "8b4010488b0c2403818c000000488b359eb79a004c8d34c64c8d24c64983c418488b3d6bb79a004c8d044049c1e0044e8d2c074a8d2c074881c5900000004c8d54c6104a8d0c074883c160",
+      "sha256": "fad5315205b2c4b2708edcd21a5bd8b90a20a162de08cde4b489e7c8ec1de9ea",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3705766
+      },
+      "claim": "388a20 writes global native float bufferd34338 at48*index and intbufferd34358 at8*index."
+    },
+    {
+      "id": "legacy_vertex_store",
+      "address": "0x388fdc",
+      "size": 97,
+      "bytes": "448b7a04450f13750066450f3a17750802f20f104f18f2410f114d1c0f104a08410f114d0c45893e45894e04f30f12db0f599c24a0000000f30f12d20f599424b00000000f58d3f30f12df0f599c24900000000f58da410f135d24f3410f11452c",
+      "sha256": "763af8eeab3cc789910685775b4b74db4042a592c0233b9a7991de79e8c6c9ce",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3706844
+      },
+      "claim": "First vertex stores xyzfloat0..2,RGBA3..6,UV7..8,normal9..11; intoverlay0/light1."
+    },
+    {
+      "id": "legacy_flush",
+      "address": "0x384d01",
+      "size": 168,
+      "bytes": "8b0525f69a0085c00f849a000000488b35e2f59a00c1e0028d0c404c8b0515f69a00488b034889df31d2ff90a8060000488b35e8f59a008b0deef59a0001c94c8b0511f69a00488b034889df31d2ff9098060000448b05d0f59a004585c07448488b0568089b00488b8028010000488b304885f67440488b50084885d27437488b0599f59a004c8b0d6af59a00488b4c2438488904244889df31c0e8af0ffcff4889dfe8b7570900",
+      "sha256": "0070b9e584f08bfdf179a2790eecbe4e3abbfbdb9707e657cf24fd68cf1a1850",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3689729
+      },
+      "claim": "Copy12*count floats and2*count ints into Java arrays and call manager+128 withconsumer,count,floatarray,intarray."
+    },
+    {
+      "id": "static_void_jni",
+      "address": "0x345dc6",
+      "size": 12,
+      "bytes": "488b074889e1ff9070040000",
+      "sha256": "7618a23903ee877d23559a9bc87e41b0f6c8257aea071d7d971b79f0fcbf19d3",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3431878
+      },
+      "claim": "Varargs helper ultimately calls JNI CallStaticVoidMethodV slot470."
+    },
+    {
+      "id": "legacy_metadata_store",
+      "address": "0x40a1b8",
+      "size": 115,
+      "bytes": "488d1d2155000048899c24780200004c8d25f2cdf1ff4c89a42470020000bf38000000e8e0038c004989c7488d8424700200000f57c00f1100410f114710410f11074d89672049895f2841c74730010000004d8b66204d3b66280f84272700004d893c244983c4084d8966204d89be28010000",
+      "sha256": "06f299207fce3de34df03cd2db4c0137c12944c1ee5e21997c812196c1d44858",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4235704
+      },
+      "claim": "Callback40f6e0 assigned record+28; record published manager+128."
+    },
+    {
+      "id": "integer_metadata_store",
+      "address": "0x40a4a8",
+      "size": 87,
+      "bytes": "488d05115300004889842438050000488d0502cbf1ff4889842430050000488db424200500004c89f7e89ac2ffff4889c3488b8424300500004885c07412488dbc24200500004889feba03000000ffd049899e60010000",
+      "sha256": "716dbb6c8c1c6bb644d9f63f1c8194452438077a3b22d9d5e5db2cd53bff1cd9",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4236456
+      },
+      "claim": "Callback40f7c0 assigned manager+160."
+    },
+    {
+      "id": "wrapper_metadata_stores",
+      "address": "0x40a723",
+      "size": 278,
+      "bytes": "bf40000000e893fe8b004989c60f57c00f1140200f1140100f110066c740300101c64032000f29442410488d05ac4b00004889442428488d0560c8f1ff4889442420488d7424104c89f7e83ebdffff4889c3488b4424204885c0740f488d7c24104889feba03000000ffd049895e384c89353fae92000fb61551ae92004c89f7488bb424d8000000e810ec0000bf40000000e806fe8b004989c60f57c00f1140200f1140100f110066c740300101c64032000f29442410488d05ff4a00004889442428488d05d3c7f1ff4889442420488d7424104c89f7e8b1bcffff4889c3488b4424204885c0740f488d7c24104889feba03000000ffd049895e384c8935baad92000fb615c4ad92004c89f7488bb424d8000000e8",
+      "sha256": "57b0b3fda8b23115f181068d82763162fd11069f33c430fd48f152d776ca5898",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4237091
+      },
+      "claim": "Callbacks40f300/40f2e0 assigned+38 of managersd355d8/d355e0."
+    }
+  ],
+  "jump_tables": [
+    {
+      "address": "0x57d88",
+      "bytes": "9b153400d0153400d0153400d0153400d0153400d0153400af153400a5153400b9153400",
+      "sha256": "3eec6e22a6386f01e2cdbddd8a136b6a7d1a4d16a102d750e07e20cc9021bb78",
+      "targets": [
+        "0x399323",
+        "0x399358",
+        "0x399358",
+        "0x399358",
+        "0x399358",
+        "0x399358",
+        "0x399337",
+        "0x39932d",
+        "0x399341"
+      ]
+    },
+    {
+      "address": "0x585f8",
+      "bytes": "8e7a36007a7c3600607c3600467c3600127c36002c7c3600",
+      "sha256": "9199f6b31dce07386753952c27006a41bbc59db0620d0c7141242bc81c5f5b4b",
+      "targets": [
+        "0x3c0086",
+        "0x3c0272",
+        "0x3c0258",
+        "0x3c023e",
+        "0x3c020a",
+        "0x3c0224"
+      ]
+    },
+    {
+      "address": "0x58610",
+      "bytes": "177b3600627c3600487c36002e7c3600fa7b3600147c3600",
+      "sha256": "3fd7f84d72d276f687a6c1d95a251f70e860c573ed0a176ae2bdd56d67d91d78",
+      "targets": [
+        "0x3c0127",
+        "0x3c0272",
+        "0x3c0258",
+        "0x3c023e",
+        "0x3c020a",
+        "0x3c0224"
+      ]
+    }
+  ],
+  "java_evidence_sha256": "357be783e1c6332f2dfd52c094d6947e875375dd329a3adfcd757e55bc6ec147",
+  "java_methods": [
+    {
+      "class_sha256": "544736311b51af496a05a64c5b88cf60d1f324dc991675506cffd957602b9b4c",
+      "member": {
+        "owner": "com/elfmcys/yesstevemodel/ooOOo000OOO0ooO0oo0ooooO",
+        "name": "<init>",
+        "descriptor": "()V",
+        "access": 1,
+        "code_sha256": "476ac5b38e99fce01a0baab5e5685bc43f92560d03ca8371074d95f2df6955e1",
+        "exception_handlers": [],
+        "instructions": [
+          {
+            "offset": 0,
+            "opcode": "0x2a"
+          },
+          {
+            "offset": 1,
+            "opcode": "0xb7",
+            "reference": {
+              "owner": "java/lang/Object",
+              "name": "<init>",
+              "descriptor": "()V",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 4,
+            "opcode": "0xb1"
+          }
+        ],
+        "supplemental_full_operand_records": [
+          {
+            "offset": 0,
+            "opcode": "0x2a",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 1,
+            "opcode": "0xb7",
+            "encoded_operands_hex": "001f"
+          },
+          {
+            "offset": 4,
+            "opcode": "0xb1",
+            "encoded_operands_hex": ""
+          }
+        ]
+      }
+    },
+    {
+      "class_sha256": "544736311b51af496a05a64c5b88cf60d1f324dc991675506cffd957602b9b4c",
+      "member": {
+        "owner": "com/elfmcys/yesstevemodel/ooOOo000OOO0ooO0oo0ooooO",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lcom/mojang/blaze3d/vertex/VertexConsumer;Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lcom/elfmcys/yesstevemodel/OOoOoooOOooO0o0000o0O0o0;[F[FIIIIFFFF)V",
+        "access": 9,
+        "code_sha256": "25f5bac48a4920dcca09a36a1d5b210b24d27999ab0bbf06df0ae9b8b849f567",
+        "exception_handlers": [],
+        "instructions": [
+          {
+            "offset": 0,
+            "opcode": "0xb8",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo",
+              "name": "oOOOo0OOO0ooooo0O00OO0o0",
+              "descriptor": "()V",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 3,
+            "opcode": "0xb8",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/oo0OO00OOOOo0ooOOoOOo0O0",
+              "name": "o0OOooo0o0OO00OoOOOo0o0O",
+              "descriptor": "()Z",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 6,
+            "opcode": "0x9a",
+            "branch_target": 24
+          },
+          {
+            "offset": 9,
+            "opcode": "0xb2",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/OoOoOOoOOoOo0OooOOoO00Oo",
+              "name": "Oo00o0OooOOo0ooOoo0oO0o0",
+              "descriptor": "Lnet/minecraftforge/common/ForgeConfigSpec$BooleanValue;",
+              "cp_tag": 9
+            }
+          },
+          {
+            "offset": 12,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "net/minecraftforge/common/ForgeConfigSpec$BooleanValue",
+              "name": "get",
+              "descriptor": "()Ljava/lang/Object;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 15,
+            "opcode": "0xc0",
+            "reference": {
+              "class_name": "java/lang/Boolean",
+              "cp_tag": 7
+            }
+          },
+          {
+            "offset": 18,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "java/lang/Boolean",
+              "name": "booleanValue",
+              "descriptor": "()Z",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 21,
+            "opcode": "0x99",
+            "branch_target": 28
+          },
+          {
+            "offset": 24,
+            "opcode": "0x4"
+          },
+          {
+            "offset": 25,
+            "opcode": "0xa7",
+            "branch_target": 29
+          },
+          {
+            "offset": 28,
+            "opcode": "0x3"
+          },
+          {
+            "offset": 29,
+            "opcode": "0x36"
+          },
+          {
+            "offset": 31,
+            "opcode": "0xb8",
+            "reference": {
+              "owner": "com/mojang/blaze3d/systems/RenderSystem",
+              "name": "getProjectionMatrix",
+              "descriptor": "()Lorg/joml/Matrix4f;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 34,
+            "opcode": "0xb8",
+            "reference": {
+              "owner": "com/mojang/blaze3d/systems/RenderSystem",
+              "name": "getModelViewMatrix",
+              "descriptor": "()Lorg/joml/Matrix4f;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 37,
+            "opcode": "0xb2",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/ooOOo000OOO0ooO0oo0ooooO",
+              "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+              "descriptor": "Lorg/joml/Matrix4f;",
+              "cp_tag": 9
+            }
+          },
+          {
+            "offset": 40,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "org/joml/Matrix4f",
+              "name": "mul",
+              "descriptor": "(Lorg/joml/Matrix4fc;Lorg/joml/Matrix4f;)Lorg/joml/Matrix4f;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 43,
+            "opcode": "0x57"
+          },
+          {
+            "offset": 44,
+            "opcode": "0xb8",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/OoO00Oo00Ooo0OoOoo00o000",
+              "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+              "descriptor": "()Z",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 47,
+            "opcode": "0x9a",
+            "branch_target": 56
+          },
+          {
+            "offset": 50,
+            "opcode": "0xb8",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/OoO00Oo00Ooo0OoOoo00o000",
+              "name": "o0OOooo0o0OO00OoOOOo0o0O",
+              "descriptor": "()Z",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 53,
+            "opcode": "0x99",
+            "branch_target": 60
+          },
+          {
+            "offset": 56,
+            "opcode": "0x4"
+          },
+          {
+            "offset": 57,
+            "opcode": "0xa7",
+            "branch_target": 61
+          },
+          {
+            "offset": 60,
+            "opcode": "0x3"
+          },
+          {
+            "offset": 61,
+            "opcode": "0x36"
+          },
+          {
+            "offset": 63,
+            "opcode": "0x2a"
+          },
+          {
+            "offset": 64,
+            "opcode": "0x2b"
+          },
+          {
+            "offset": 65,
+            "opcode": "0xb2",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/ooOOo000OOO0ooO0oo0ooooO",
+              "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+              "descriptor": "Lorg/joml/Matrix4f;",
+              "cp_tag": 9
+            }
+          },
+          {
+            "offset": 68,
+            "opcode": "0x15"
+          },
+          {
+            "offset": 70,
+            "opcode": "0x2c"
+          },
+          {
+            "offset": 71,
+            "opcode": "0x2d"
+          },
+          {
+            "offset": 72,
+            "opcode": "0x19"
+          },
+          {
+            "offset": 74,
+            "opcode": "0x15"
+          },
+          {
+            "offset": 76,
+            "opcode": "0x15"
+          },
+          {
+            "offset": 78,
+            "opcode": "0x15"
+          },
+          {
+            "offset": 80,
+            "opcode": "0x15"
+          },
+          {
+            "offset": 82,
+            "opcode": "0x17"
+          },
+          {
+            "offset": 84,
+            "opcode": "0x17"
+          },
+          {
+            "offset": 86,
+            "opcode": "0x17"
+          },
+          {
+            "offset": 88,
+            "opcode": "0x17"
+          },
+          {
+            "offset": 90,
+            "opcode": "0x15"
+          },
+          {
+            "offset": 92,
+            "opcode": "0xb8",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/ooOOo000OOO0ooO0oo0ooooO",
+              "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+              "descriptor": "(Lcom/mojang/blaze3d/vertex/VertexConsumer;Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lorg/joml/Matrix4f;ZLcom/elfmcys/yesstevemodel/OOoOoooOOooO0o0000o0O0o0;[F[FIIIIFFFFZ)V",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 95,
+            "opcode": "0xb1"
+          }
+        ],
+        "supplemental_full_operand_records": [
+          {
+            "offset": 0,
+            "opcode": "0xb8",
+            "encoded_operands_hex": "0025"
+          },
+          {
+            "offset": 3,
+            "opcode": "0xb8",
+            "encoded_operands_hex": "002a"
+          },
+          {
+            "offset": 6,
+            "opcode": "0x9a",
+            "encoded_operands_hex": "0012"
+          },
+          {
+            "offset": 9,
+            "opcode": "0xb2",
+            "encoded_operands_hex": "0030"
+          },
+          {
+            "offset": 12,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "0034"
+          },
+          {
+            "offset": 15,
+            "opcode": "0xc0",
+            "encoded_operands_hex": "0036"
+          },
+          {
+            "offset": 18,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "0039"
+          },
+          {
+            "offset": 21,
+            "opcode": "0x99",
+            "encoded_operands_hex": "0007"
+          },
+          {
+            "offset": 24,
+            "opcode": "0x4",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 25,
+            "opcode": "0xa7",
+            "encoded_operands_hex": "0004"
+          },
+          {
+            "offset": 28,
+            "opcode": "0x3",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 29,
+            "opcode": "0x36",
+            "encoded_operands_hex": "0d",
+            "local_index": 13
+          },
+          {
+            "offset": 31,
+            "opcode": "0xb8",
+            "encoded_operands_hex": "003f"
+          },
+          {
+            "offset": 34,
+            "opcode": "0xb8",
+            "encoded_operands_hex": "0042"
+          },
+          {
+            "offset": 37,
+            "opcode": "0xb2",
+            "encoded_operands_hex": "0044"
+          },
+          {
+            "offset": 40,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "004a"
+          },
+          {
+            "offset": 43,
+            "opcode": "0x57",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 44,
+            "opcode": "0xb8",
+            "encoded_operands_hex": "004e"
+          },
+          {
+            "offset": 47,
+            "opcode": "0x9a",
+            "encoded_operands_hex": "0009"
+          },
+          {
+            "offset": 50,
+            "opcode": "0xb8",
+            "encoded_operands_hex": "004f"
+          },
+          {
+            "offset": 53,
+            "opcode": "0x99",
+            "encoded_operands_hex": "0007"
+          },
+          {
+            "offset": 56,
+            "opcode": "0x4",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 57,
+            "opcode": "0xa7",
+            "encoded_operands_hex": "0004"
+          },
+          {
+            "offset": 60,
+            "opcode": "0x3",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 61,
+            "opcode": "0x36",
+            "encoded_operands_hex": "0e",
+            "local_index": 14
+          },
+          {
+            "offset": 63,
+            "opcode": "0x2a",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 64,
+            "opcode": "0x2b",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 65,
+            "opcode": "0xb2",
+            "encoded_operands_hex": "0044"
+          },
+          {
+            "offset": 68,
+            "opcode": "0x15",
+            "encoded_operands_hex": "0d",
+            "local_index": 13
+          },
+          {
+            "offset": 70,
+            "opcode": "0x2c",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 71,
+            "opcode": "0x2d",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 72,
+            "opcode": "0x19",
+            "encoded_operands_hex": "04",
+            "local_index": 4
+          },
+          {
+            "offset": 74,
+            "opcode": "0x15",
+            "encoded_operands_hex": "05",
+            "local_index": 5
+          },
+          {
+            "offset": 76,
+            "opcode": "0x15",
+            "encoded_operands_hex": "06",
+            "local_index": 6
+          },
+          {
+            "offset": 78,
+            "opcode": "0x15",
+            "encoded_operands_hex": "07",
+            "local_index": 7
+          },
+          {
+            "offset": 80,
+            "opcode": "0x15",
+            "encoded_operands_hex": "08",
+            "local_index": 8
+          },
+          {
+            "offset": 82,
+            "opcode": "0x17",
+            "encoded_operands_hex": "09",
+            "local_index": 9
+          },
+          {
+            "offset": 84,
+            "opcode": "0x17",
+            "encoded_operands_hex": "0a",
+            "local_index": 10
+          },
+          {
+            "offset": 86,
+            "opcode": "0x17",
+            "encoded_operands_hex": "0b",
+            "local_index": 11
+          },
+          {
+            "offset": 88,
+            "opcode": "0x17",
+            "encoded_operands_hex": "0c",
+            "local_index": 12
+          },
+          {
+            "offset": 90,
+            "opcode": "0x15",
+            "encoded_operands_hex": "0e",
+            "local_index": 14
+          },
+          {
+            "offset": 92,
+            "opcode": "0xb8",
+            "encoded_operands_hex": "0052"
+          },
+          {
+            "offset": 95,
+            "opcode": "0xb1",
+            "encoded_operands_hex": ""
+          }
+        ]
+      }
+    },
+    {
+      "class_sha256": "544736311b51af496a05a64c5b88cf60d1f324dc991675506cffd957602b9b4c",
+      "member": {
+        "owner": "com/elfmcys/yesstevemodel/ooOOo000OOO0ooO0oo0ooooO",
+        "name": "<clinit>",
+        "descriptor": "()V",
+        "access": 8,
+        "code_sha256": "c24f4b094f814a71f86f6277f00ec6dac339d2ed18ab6a511f0e61875c10bd7e",
+        "exception_handlers": [],
+        "instructions": [
+          {
+            "offset": 0,
+            "opcode": "0xbb",
+            "reference": {
+              "class_name": "org/joml/Matrix4f",
+              "cp_tag": 7
+            }
+          },
+          {
+            "offset": 3,
+            "opcode": "0x59"
+          },
+          {
+            "offset": 4,
+            "opcode": "0xb7",
+            "reference": {
+              "owner": "org/joml/Matrix4f",
+              "name": "<init>",
+              "descriptor": "()V",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 7,
+            "opcode": "0xb3",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/ooOOo000OOO0ooO0oo0ooooO",
+              "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+              "descriptor": "Lorg/joml/Matrix4f;",
+              "cp_tag": 9
+            }
+          },
+          {
+            "offset": 10,
+            "opcode": "0xb1"
+          }
+        ],
+        "supplemental_full_operand_records": [
+          {
+            "offset": 0,
+            "opcode": "0xbb",
+            "encoded_operands_hex": "0046"
+          },
+          {
+            "offset": 3,
+            "opcode": "0x59",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 4,
+            "opcode": "0xb7",
+            "encoded_operands_hex": "0054"
+          },
+          {
+            "offset": 7,
+            "opcode": "0xb3",
+            "encoded_operands_hex": "0044"
+          },
+          {
+            "offset": 10,
+            "opcode": "0xb1",
+            "encoded_operands_hex": ""
+          }
+        ]
+      }
+    },
+    {
+      "class_sha256": "00c2f06933582e2045e088ceb12c77847635a66a8e3f5458a6bfbd959509cf9c",
+      "member": {
+        "owner": "com/elfmcys/yesstevemodel/ooOOo000OOO0ooO0oo0ooooO$Oo0Oo0o00O00Oo0OOoOOoooo",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lcom/mojang/blaze3d/vertex/VertexConsumer;I[F[I)V",
+        "access": 9,
+        "code_sha256": "8966bf971c2571df9ec6b337306b4501aa397973d721917005b19eb31f00d4c6",
+        "exception_handlers": [],
+        "instructions": [
+          {
+            "offset": 0,
+            "opcode": "0x3"
+          },
+          {
+            "offset": 1,
+            "opcode": "0x36"
+          },
+          {
+            "offset": 3,
+            "opcode": "0x3"
+          },
+          {
+            "offset": 4,
+            "opcode": "0x36"
+          },
+          {
+            "offset": 6,
+            "opcode": "0x3"
+          },
+          {
+            "offset": 7,
+            "opcode": "0x36"
+          },
+          {
+            "offset": 9,
+            "opcode": "0x15"
+          },
+          {
+            "offset": 11,
+            "opcode": "0x1b"
+          },
+          {
+            "offset": 12,
+            "opcode": "0xa2",
+            "branch_target": 123
+          },
+          {
+            "offset": 15,
+            "opcode": "0x2a"
+          },
+          {
+            "offset": 16,
+            "opcode": "0x2c"
+          },
+          {
+            "offset": 17,
+            "opcode": "0x15"
+          },
+          {
+            "offset": 19,
+            "opcode": "0x3"
+          },
+          {
+            "offset": 20,
+            "opcode": "0x60"
+          },
+          {
+            "offset": 21,
+            "opcode": "0x30"
+          },
+          {
+            "offset": 22,
+            "opcode": "0x2c"
+          },
+          {
+            "offset": 23,
+            "opcode": "0x15"
+          },
+          {
+            "offset": 25,
+            "opcode": "0x4"
+          },
+          {
+            "offset": 26,
+            "opcode": "0x60"
+          },
+          {
+            "offset": 27,
+            "opcode": "0x30"
+          },
+          {
+            "offset": 28,
+            "opcode": "0x2c"
+          },
+          {
+            "offset": 29,
+            "opcode": "0x15"
+          },
+          {
+            "offset": 31,
+            "opcode": "0x5"
+          },
+          {
+            "offset": 32,
+            "opcode": "0x60"
+          },
+          {
+            "offset": 33,
+            "opcode": "0x30"
+          },
+          {
+            "offset": 34,
+            "opcode": "0x2c"
+          },
+          {
+            "offset": 35,
+            "opcode": "0x15"
+          },
+          {
+            "offset": 37,
+            "opcode": "0x6"
+          },
+          {
+            "offset": 38,
+            "opcode": "0x60"
+          },
+          {
+            "offset": 39,
+            "opcode": "0x30"
+          },
+          {
+            "offset": 40,
+            "opcode": "0x2c"
+          },
+          {
+            "offset": 41,
+            "opcode": "0x15"
+          },
+          {
+            "offset": 43,
+            "opcode": "0x7"
+          },
+          {
+            "offset": 44,
+            "opcode": "0x60"
+          },
+          {
+            "offset": 45,
+            "opcode": "0x30"
+          },
+          {
+            "offset": 46,
+            "opcode": "0x2c"
+          },
+          {
+            "offset": 47,
+            "opcode": "0x15"
+          },
+          {
+            "offset": 49,
+            "opcode": "0x8"
+          },
+          {
+            "offset": 50,
+            "opcode": "0x60"
+          },
+          {
+            "offset": 51,
+            "opcode": "0x30"
+          },
+          {
+            "offset": 52,
+            "opcode": "0x2c"
+          },
+          {
+            "offset": 53,
+            "opcode": "0x15"
+          },
+          {
+            "offset": 55,
+            "opcode": "0x10",
+            "immediate": 6
+          },
+          {
+            "offset": 57,
+            "opcode": "0x60"
+          },
+          {
+            "offset": 58,
+            "opcode": "0x30"
+          },
+          {
+            "offset": 59,
+            "opcode": "0x2c"
+          },
+          {
+            "offset": 60,
+            "opcode": "0x15"
+          },
+          {
+            "offset": 62,
+            "opcode": "0x10",
+            "immediate": 7
+          },
+          {
+            "offset": 64,
+            "opcode": "0x60"
+          },
+          {
+            "offset": 65,
+            "opcode": "0x30"
+          },
+          {
+            "offset": 66,
+            "opcode": "0x2c"
+          },
+          {
+            "offset": 67,
+            "opcode": "0x15"
+          },
+          {
+            "offset": 69,
+            "opcode": "0x10",
+            "immediate": 8
+          },
+          {
+            "offset": 71,
+            "opcode": "0x60"
+          },
+          {
+            "offset": 72,
+            "opcode": "0x30"
+          },
+          {
+            "offset": 73,
+            "opcode": "0x2d"
+          },
+          {
+            "offset": 74,
+            "opcode": "0x15"
+          },
+          {
+            "offset": 76,
+            "opcode": "0x3"
+          },
+          {
+            "offset": 77,
+            "opcode": "0x60"
+          },
+          {
+            "offset": 78,
+            "opcode": "0x2e"
+          },
+          {
+            "offset": 79,
+            "opcode": "0x2d"
+          },
+          {
+            "offset": 80,
+            "opcode": "0x15"
+          },
+          {
+            "offset": 82,
+            "opcode": "0x4"
+          },
+          {
+            "offset": 83,
+            "opcode": "0x60"
+          },
+          {
+            "offset": 84,
+            "opcode": "0x2e"
+          },
+          {
+            "offset": 85,
+            "opcode": "0x2c"
+          },
+          {
+            "offset": 86,
+            "opcode": "0x15"
+          },
+          {
+            "offset": 88,
+            "opcode": "0x10",
+            "immediate": 9
+          },
+          {
+            "offset": 90,
+            "opcode": "0x60"
+          },
+          {
+            "offset": 91,
+            "opcode": "0x30"
+          },
+          {
+            "offset": 92,
+            "opcode": "0x2c"
+          },
+          {
+            "offset": 93,
+            "opcode": "0x15"
+          },
+          {
+            "offset": 95,
+            "opcode": "0x10",
+            "immediate": 10
+          },
+          {
+            "offset": 97,
+            "opcode": "0x60"
+          },
+          {
+            "offset": 98,
+            "opcode": "0x30"
+          },
+          {
+            "offset": 99,
+            "opcode": "0x2c"
+          },
+          {
+            "offset": 100,
+            "opcode": "0x15"
+          },
+          {
+            "offset": 102,
+            "opcode": "0x10",
+            "immediate": 11
+          },
+          {
+            "offset": 104,
+            "opcode": "0x60"
+          },
+          {
+            "offset": 105,
+            "opcode": "0x30"
+          },
+          {
+            "offset": 106,
+            "opcode": "0xb9",
+            "reference": {
+              "owner": "com/mojang/blaze3d/vertex/VertexConsumer",
+              "name": "m_5954_",
+              "descriptor": "(FFFFFFFFFIIFFF)V",
+              "cp_tag": 11
+            }
+          },
+          {
+            "offset": 111,
+            "opcode": "0x84"
+          },
+          {
+            "offset": 114,
+            "opcode": "0x84"
+          },
+          {
+            "offset": 117,
+            "opcode": "0x84"
+          },
+          {
+            "offset": 120,
+            "opcode": "0xa7",
+            "branch_target": 9
+          },
+          {
+            "offset": 123,
+            "opcode": "0xb1"
+          }
+        ],
+        "supplemental_full_operand_records": [
+          {
+            "offset": 0,
+            "opcode": "0x3",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 1,
+            "opcode": "0x36",
+            "encoded_operands_hex": "04",
+            "local_index": 4
+          },
+          {
+            "offset": 3,
+            "opcode": "0x3",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 4,
+            "opcode": "0x36",
+            "encoded_operands_hex": "05",
+            "local_index": 5
+          },
+          {
+            "offset": 6,
+            "opcode": "0x3",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 7,
+            "opcode": "0x36",
+            "encoded_operands_hex": "06",
+            "local_index": 6
+          },
+          {
+            "offset": 9,
+            "opcode": "0x15",
+            "encoded_operands_hex": "04",
+            "local_index": 4
+          },
+          {
+            "offset": 11,
+            "opcode": "0x1b",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 12,
+            "opcode": "0xa2",
+            "encoded_operands_hex": "006f"
+          },
+          {
+            "offset": 15,
+            "opcode": "0x2a",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 16,
+            "opcode": "0x2c",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 17,
+            "opcode": "0x15",
+            "encoded_operands_hex": "05",
+            "local_index": 5
+          },
+          {
+            "offset": 19,
+            "opcode": "0x3",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 20,
+            "opcode": "0x60",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 21,
+            "opcode": "0x30",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 22,
+            "opcode": "0x2c",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 23,
+            "opcode": "0x15",
+            "encoded_operands_hex": "05",
+            "local_index": 5
+          },
+          {
+            "offset": 25,
+            "opcode": "0x4",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 26,
+            "opcode": "0x60",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 27,
+            "opcode": "0x30",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 28,
+            "opcode": "0x2c",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 29,
+            "opcode": "0x15",
+            "encoded_operands_hex": "05",
+            "local_index": 5
+          },
+          {
+            "offset": 31,
+            "opcode": "0x5",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 32,
+            "opcode": "0x60",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 33,
+            "opcode": "0x30",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 34,
+            "opcode": "0x2c",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 35,
+            "opcode": "0x15",
+            "encoded_operands_hex": "05",
+            "local_index": 5
+          },
+          {
+            "offset": 37,
+            "opcode": "0x6",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 38,
+            "opcode": "0x60",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 39,
+            "opcode": "0x30",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 40,
+            "opcode": "0x2c",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 41,
+            "opcode": "0x15",
+            "encoded_operands_hex": "05",
+            "local_index": 5
+          },
+          {
+            "offset": 43,
+            "opcode": "0x7",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 44,
+            "opcode": "0x60",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 45,
+            "opcode": "0x30",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 46,
+            "opcode": "0x2c",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 47,
+            "opcode": "0x15",
+            "encoded_operands_hex": "05",
+            "local_index": 5
+          },
+          {
+            "offset": 49,
+            "opcode": "0x8",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 50,
+            "opcode": "0x60",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 51,
+            "opcode": "0x30",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 52,
+            "opcode": "0x2c",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 53,
+            "opcode": "0x15",
+            "encoded_operands_hex": "05",
+            "local_index": 5
+          },
+          {
+            "offset": 55,
+            "opcode": "0x10",
+            "encoded_operands_hex": "06"
+          },
+          {
+            "offset": 57,
+            "opcode": "0x60",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 58,
+            "opcode": "0x30",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 59,
+            "opcode": "0x2c",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 60,
+            "opcode": "0x15",
+            "encoded_operands_hex": "05",
+            "local_index": 5
+          },
+          {
+            "offset": 62,
+            "opcode": "0x10",
+            "encoded_operands_hex": "07"
+          },
+          {
+            "offset": 64,
+            "opcode": "0x60",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 65,
+            "opcode": "0x30",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 66,
+            "opcode": "0x2c",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 67,
+            "opcode": "0x15",
+            "encoded_operands_hex": "05",
+            "local_index": 5
+          },
+          {
+            "offset": 69,
+            "opcode": "0x10",
+            "encoded_operands_hex": "08"
+          },
+          {
+            "offset": 71,
+            "opcode": "0x60",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 72,
+            "opcode": "0x30",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 73,
+            "opcode": "0x2d",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 74,
+            "opcode": "0x15",
+            "encoded_operands_hex": "06",
+            "local_index": 6
+          },
+          {
+            "offset": 76,
+            "opcode": "0x3",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 77,
+            "opcode": "0x60",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 78,
+            "opcode": "0x2e",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 79,
+            "opcode": "0x2d",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 80,
+            "opcode": "0x15",
+            "encoded_operands_hex": "06",
+            "local_index": 6
+          },
+          {
+            "offset": 82,
+            "opcode": "0x4",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 83,
+            "opcode": "0x60",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 84,
+            "opcode": "0x2e",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 85,
+            "opcode": "0x2c",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 86,
+            "opcode": "0x15",
+            "encoded_operands_hex": "05",
+            "local_index": 5
+          },
+          {
+            "offset": 88,
+            "opcode": "0x10",
+            "encoded_operands_hex": "09"
+          },
+          {
+            "offset": 90,
+            "opcode": "0x60",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 91,
+            "opcode": "0x30",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 92,
+            "opcode": "0x2c",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 93,
+            "opcode": "0x15",
+            "encoded_operands_hex": "05",
+            "local_index": 5
+          },
+          {
+            "offset": 95,
+            "opcode": "0x10",
+            "encoded_operands_hex": "0a"
+          },
+          {
+            "offset": 97,
+            "opcode": "0x60",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 98,
+            "opcode": "0x30",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 99,
+            "opcode": "0x2c",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 100,
+            "opcode": "0x15",
+            "encoded_operands_hex": "05",
+            "local_index": 5
+          },
+          {
+            "offset": 102,
+            "opcode": "0x10",
+            "encoded_operands_hex": "0b"
+          },
+          {
+            "offset": 104,
+            "opcode": "0x60",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 105,
+            "opcode": "0x30",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 106,
+            "opcode": "0xb9",
+            "encoded_operands_hex": "002f0f00",
+            "argument_slot_count": 15,
+            "reserved_zero": 0
+          },
+          {
+            "offset": 111,
+            "opcode": "0x84",
+            "encoded_operands_hex": "0401",
+            "local_index": 4,
+            "increment": 1
+          },
+          {
+            "offset": 114,
+            "opcode": "0x84",
+            "encoded_operands_hex": "050c",
+            "local_index": 5,
+            "increment": 12
+          },
+          {
+            "offset": 117,
+            "opcode": "0x84",
+            "encoded_operands_hex": "0602",
+            "local_index": 6,
+            "increment": 2
+          },
+          {
+            "offset": 120,
+            "opcode": "0xa7",
+            "encoded_operands_hex": "ff91"
+          },
+          {
+            "offset": 123,
+            "opcode": "0xb1",
+            "encoded_operands_hex": ""
+          }
+        ]
+      }
+    }
+  ],
+  "java_source_sha256": "b8fb6c62b2ffa82798ca9832b470515963f6787e739e30f2ac549d5ff3f94076",
+  "source_revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+  "original_render_receipt_sha256": "90ee2e7985145dbabc031ece31f0abbac45779aa19dfbb708845c8bcd82be6cb",
+  "target_executed": false,
+  "emulation_used": false,
+  "independent_semantic_review": "NOT_RUN",
+  "unresolved": [
+    "Names of static format singleton fields atmanager+148/+170 and external fieldsemantics beyond decodedidentities",
+    "Full packed normal rounding/exception and allshader-format extensions",
+    "GUI special dispatch internals",
+    "Observed renderer/runtime success"
+  ],
+  "metadata_receipts": [
+    {
+      "path": "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/render-backend-metadata.json",
+      "sha256": "97a7b0496f16d51cb3df8110c669d00107f496ef63180c685acbd0779f8a8691",
+      "state_model": "Independent next6 checkpoint clone; five sequential metadata callbacks with fresh synthetic frames. No interrupted JNI continuation.",
+      "runtime_initialization_proven": false
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/render-backend-boolean-metadata.json",
+      "sha256": "5b2342564880e31dd2620cf409186e2759793862d002e71cf3ca2890ecd9dee6",
+      "state_model": "Independent next6 checkpoint clone; one bounded metadata callbacks with fresh synthetic frames. No interrupted JNI continuation.",
+      "runtime_initialization_proven": false
+    }
+  ],
+  "feature_java": {
+    "class_sha256": "f00ab0bfbcd3b948ae2665aa42bd75951046e3a83f8fe02e80282f3638b1cebe",
+    "methods": [
+      {
+        "owner": "com/elfmcys/yesstevemodel/O000O00Oooo0O00oO0oo0Oo0",
+        "name": "<init>",
+        "descriptor": "()V",
+        "access": 1,
+        "code_sha256": "2235d032ec0f6171a15233996a754d78c478c8f6d4b9761c234da33d638baec5",
+        "exception_handlers": [],
+        "instructions": [
+          {
+            "offset": 0,
+            "opcode": "0x2a"
+          },
+          {
+            "offset": 1,
+            "opcode": "0xb7",
+            "reference": {
+              "owner": "java/lang/Object",
+              "name": "<init>",
+              "descriptor": "()V",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 4,
+            "opcode": "0xb1"
+          }
+        ],
+        "supplemental_full_operand_records": [
+          {
+            "offset": 0,
+            "opcode": "0x2a",
+            "encoded_operands_hex": ""
+          },
+          {
+            "offset": 1,
+            "opcode": "0xb7",
+            "encoded_operands_hex": "000e"
+          },
+          {
+            "offset": 4,
+            "opcode": "0xb1",
+            "encoded_operands_hex": ""
+          }
+        ]
+      },
+      {
+        "owner": "com/elfmcys/yesstevemodel/O000O00Oooo0O00oO0oo0Oo0",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "()V",
+        "access": 9,
+        "code_sha256": "5bd4ae5501d4d042f1a5306f1df5f6b8ded2d9c54ea83620bb57c45ae9750705",
+        "exception_handlers": [],
+        "instructions": [
+          {
+            "offset": 0,
+            "opcode": "0xb8",
+            "reference": {
+              "owner": "net/minecraftforge/fml/ModList",
+              "name": "get",
+              "descriptor": "()Lnet/minecraftforge/fml/ModList;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 3,
+            "opcode": "0x12",
+            "reference": {
+              "string": "acceleratedrendering",
+              "cp_tag": 8
+            }
+          },
+          {
+            "offset": 5,
+            "opcode": "0xb6",
+            "reference": {
+              "owner": "net/minecraftforge/fml/ModList",
+              "name": "isLoaded",
+              "descriptor": "(Ljava/lang/String;)Z",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 8,
+            "opcode": "0xb3",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/O000O00Oooo0O00oO0oo0Oo0",
+              "name": "o0OOooo0o0OO00OoOOOo0o0O",
+              "descriptor": "Z",
+              "cp_tag": 9
+            }
+          },
+          {
+            "offset": 11,
+            "opcode": "0xb1"
+          }
+        ],
+        "supplemental_full_operand_records": [
+          {
+            "offset": 0,
+            "opcode": "0xb8",
+            "encoded_operands_hex": "0014"
+          },
+          {
+            "offset": 3,
+            "opcode": "0x12",
+            "encoded_operands_hex": "08"
+          },
+          {
+            "offset": 5,
+            "opcode": "0xb6",
+            "encoded_operands_hex": "0018"
+          },
+          {
+            "offset": 8,
+            "opcode": "0xb3",
+            "encoded_operands_hex": "001a"
+          },
+          {
+            "offset": 11,
+            "opcode": "0xb1",
+            "encoded_operands_hex": ""
+          }
+        ]
+      },
+      {
+        "owner": "com/elfmcys/yesstevemodel/O000O00Oooo0O00oO0oo0Oo0",
+        "name": "o0OOooo0o0OO00OoOOOo0o0O",
+        "descriptor": "()Z",
+        "access": 9,
+        "code_sha256": "eba4f0a68554e30a70752a0278393b0495a5298be4540a096bd33a8c6666fd22",
+        "exception_handlers": [],
+        "instructions": [
+          {
+            "offset": 0,
+            "opcode": "0xb2",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/O000O00Oooo0O00oO0oo0Oo0",
+              "name": "o0OOooo0o0OO00OoOOOo0o0O",
+              "descriptor": "Z",
+              "cp_tag": 9
+            }
+          },
+          {
+            "offset": 3,
+            "opcode": "0xac"
+          }
+        ],
+        "supplemental_full_operand_records": [
+          {
+            "offset": 0,
+            "opcode": "0xb2",
+            "encoded_operands_hex": "001a"
+          },
+          {
+            "offset": 3,
+            "opcode": "0xac",
+            "encoded_operands_hex": ""
+          }
+        ]
+      }
+    ],
+    "source_sha256": "dd08fc6aa9df7a87c82ec82852cdec998401d59f380c4d55ad2aac41cd2e6fb0",
+    "meaning": "Static boolean set by ModList.get().isLoaded(acceleratedrendering);cached atfirst extendedformat initialization"
+  }
+}

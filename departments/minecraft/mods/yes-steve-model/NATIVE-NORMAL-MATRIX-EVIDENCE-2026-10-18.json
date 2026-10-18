@@ -1,0 +1,311 @@
+{
+  "format": "ysm-render-normal-static-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "affine_receipt_sha256": "af37901de84e9cb802b1ec9758576b17ed9805dc9daef14ff2bfdf2092c328e3",
+  "windows": [
+    {
+      "start": "0x37cf27",
+      "end_exclusive": "0x37d1aa",
+      "sha256": "71c2ae5081b37a14b474114086b81e8a272355ff203d0e4294dcfe494e206692",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3657511
+      }
+    },
+    {
+      "start": "0x37e7a9",
+      "end_exclusive": "0x37e911",
+      "sha256": "b305153430194626362ccc79ee5560ee3a72bb3357b0880afa9950a533265872",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3663785
+      }
+    },
+    {
+      "start": "0x37ea5a",
+      "end_exclusive": "0x37ea78",
+      "sha256": "e0c7762ae44e479c2111b07b617a5cfd9188becb8ce20358547037a831edb1b0",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3664474
+      }
+    }
+  ],
+  "anchors": [
+    {
+      "id": "normal_rotation_packing",
+      "address": "0x37cf27",
+      "size": 191,
+      "bytes": "440f106350440f105b60450f28ec450f28cc450fc6cc240fc6c0c0410f59c1450f28cb66450f3a21cc8c450fc6eb4f450fc6e449410f59ec450f28e5450fc6e538450fc6d215450f59d4440f58d0450fc6ed8e410f59e5f30f1043700f58e50f57ed66410f3a0cee010f16dd440fc6d80e410f28eb410fc6eb240fc6d26a0f59d5410f58d2410fc6ce00450fc6db49410f59cb0f58cc440f16c8440f59cbf3410f16c1410f58c10f28e8660f15e8f30f58e80f1153500f114b60f30f116b70",
+      "sha256": "2e75e21d2b575e6feeb92f743c65780f2a1240fa918f02bf878249cd4a821aea",
+      "claim": "Nine normal values are column-major packed across4+4+1 floats; vector shuffles compute N*R."
+    },
+    {
+      "id": "scale_branch",
+      "address": "0x37d01a",
+      "size": 62,
+      "bytes": "f2410f107518f30f16fe0f2ef7f3450f104d2075687a66410f2ef9450f57ed75507a4e410f2ef54c8b4424504c8b4c24408bac24800000000f8752010000",
+      "sha256": "3b60e41ac55778bd29a9ffedef153a4f384bd087c3dc78a5966844e62c2d9d17",
+      "claim": "Ordered equality sx==sy==sz then ordered sx>0 bypasses rescaling; NaN comparisons go to general branch."
+    },
+    {
+      "id": "negative_fallthrough",
+      "address": "0x37d058",
+      "size": 43,
+      "bytes": "0f283541f5cbff0f57d60f1156500f57ce0f114e600f57eef30f116e70f2410f107518f3450f104d20eb29",
+      "sha256": "393578e034f768c8f092d17037b5c9617ccd988cd5aec51da2fb2e52515bd4b0",
+      "claim": "Sign XOR affects normal registers only. Reload original scales at0x37d075,0x37d07b; unconditional jump0x37d081 to general reciprocal path."
+    },
+    {
+      "id": "signed_reciprocal_product",
+      "address": "0x37d0ac",
+      "size": 54,
+      "bytes": "440f28056cc0cbff440f5ec6f3410f16f8f30f1035c7b0ccfff3410f5ef1450f28c8f3440f59cff3440f59ce450f2ec90f8a78190000",
+      "sha256": "861a80cc23efb64913ecca29396bf4f06928bce02bf841cf99c0029a7b3cb729",
+      "claim": "ux=1/sx,uy=1/sy,uz=1/sz; q=round(round(ux*uy)*uz). No abs/sign normalization."
+    },
+    {
+      "id": "signed_seed",
+      "address": "0x37d0e2",
+      "size": 39,
+      "bytes": "66440f7ec848984869c85555555548c1e92029c189c8d1f8c1e91f01c8058cfaa25466440f6ed0",
+      "sha256": "73259e0672bd62bf4ff3fcfe2b67b8ae1475d15d2313a2be43603c31681641f6",
+      "claim": "Canonical NaN detour excepted: reinterpret q bits as signed32, compute seed bits0x54a2fa8c-trunc(i/3) modulo2^32."
+    },
+    {
+      "id": "two_refinements",
+      "address": "0x37d109",
+      "size": 108,
+      "bytes": "66450f6fdaf3440f103dd9b4ccfff3450f59dff3450f59daf3450f59d9f3440f10355db0ccff450f28e6f3450f5ee3f3440f101d47b2ccfff3450f59d3f3450f58d4450f28daf3450f59dff3450f59daf3450f59d9450f28cef3450f5ecbf3440f591518b2ccfff3450f58d1",
+      "sha256": "eccf57b35c4b541d0bf5037b2f8c823361bec1e90991e3249622ad9dc122cc7e",
+      "claim": "Two ordered iterations h=(float32(2/3)*h)+1/(((3*h)*h)*q), with separate mul/div/add instructions."
+    },
+    {
+      "id": "column_scale",
+      "address": "0x37d175",
+      "size": 53,
+      "bytes": "450fc6c0400fc6fe00f3410f59f2450fc6d200450f59c2410f59d00f115650f30f59f5440f59d7440f59d1440f115660f30f117670",
+      "sha256": "28a49b0066b5be15aeeea6cd6811cbf4b534c5eb2b9e59d9ae71052cee0c7ab5",
+      "claim": "Apply h*ux to packed first column,h*uy to second,h*uz to third, retaining prior normal signflip if taken."
+    },
+    {
+      "id": "tracking_branch_duplicate",
+      "address": "0x37e7a9",
+      "size": 179,
+      "bytes": "f2410f105d18f30f16e30f2edcf3410f10752075557a530f2ee6440f28942420010000754e7a4c450f57ed410f2edd4c8b4424504c8b4c24400f87290100000f281db1ddcbff0f57d30f1156500f57cb0f114e600f57c3f30f114670f2410f105d18f3410f107520eb17440f289424200100004c8b4424504c8b4c2440450f57ed0f282defa8cbff0f5eebf30f16e5f30f101d4c99ccfff30f5ede0f28f5f30f59f4f30f59f30f2ef60f8a16020000660f7ef0",
+      "sha256": "702d4b0c3398e60efcaf666764017268389795b7178142da9b2789069ef66639",
+      "claim": "Tracking path repeats equality,positive shortcut,normal-only signflip,original-scale reload,reciprocal product."
+    },
+    {
+      "id": "canonical_nan",
+      "address": "0x37ea5a",
+      "size": 30,
+      "bytes": "b80000c07fe983e6ffffb80000c07fe9fcedffffb80000c07fe9e4fdffff",
+      "sha256": "e0c7762ae44e479c2111b07b617a5cfd9188becb8ce20358547037a831edb1b0",
+      "claim": "NaN product seed uses canonical integer0x7fc00000, but floating q is not replaced before refinement."
+    }
+  ],
+  "constants": [
+    {
+      "address": "0x39120",
+      "bytes": "0000803f0000803f0000000000000000",
+      "float_values": [
+        1.0,
+        1.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "address": "0x4818c",
+      "bytes": "0000803f",
+      "float_values": [
+        1.0
+      ]
+    },
+    {
+      "address": "0x485f0",
+      "bytes": "00004040",
+      "float_values": [
+        3.0
+      ]
+    },
+    {
+      "address": "0x48388",
+      "bytes": "abaa2a3f",
+      "float_values": [
+        0.6666666865348816
+      ]
+    },
+    {
+      "address": "0x3c5a0",
+      "bytes": "00000080000000800000008000000080",
+      "float_values": [
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0
+      ]
+    }
+  ],
+  "fixtures": {
+    "status": "PASS",
+    "signed_seed_checks": 1031,
+    "packed_rotation_checks": 128,
+    "scale_examples": [
+      {
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "model": {
+          "branch": "uniform-positive",
+          "factors": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      {
+        "scale": [
+          2,
+          2,
+          2
+        ],
+        "model": {
+          "branch": "uniform-positive",
+          "factors": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      {
+        "scale": [
+          -1,
+          -1,
+          -1
+        ],
+        "model": {
+          "branch": "uniform-nonpositive-sign-flip-then-refine",
+          "q": -1.0,
+          "seed_bits": "0x6a22fa8c",
+          "iterations": [
+            3.2838192823742943e+25,
+            2.1892130086390635e+25
+          ],
+          "factors": [
+            2.1892130086390635e+25,
+            2.1892130086390635e+25,
+            2.1892130086390635e+25
+          ]
+        }
+      },
+      {
+        "scale": [
+          2,
+          3,
+          4
+        ],
+        "model": {
+          "branch": "nonuniform-refine",
+          "q": 0.0416666679084301,
+          "seed_bits": "0x403f6c53",
+          "iterations": [
+            2.8882455825805664,
+            2.8845038414001465
+          ],
+          "factors": [
+            1.4422519207000732,
+            0.9615013003349304,
+            0.7211259603500366
+          ]
+        }
+      },
+      {
+        "scale": [
+          -2,
+          3,
+          4
+        ],
+        "model": {
+          "branch": "nonuniform-refine",
+          "q": -0.0416666679084301,
+          "seed_bits": "0x6aea16fd",
+          "iterations": [
+            9.43324064418137e+25,
+            6.288827096120913e+25
+          ],
+          "factors": [
+            -3.1444135480604565e+25,
+            2.0962757755684046e+25,
+            1.5722067740302282e+25
+          ]
+        }
+      },
+      {
+        "scale": [
+          -2,
+          -3,
+          4
+        ],
+        "model": {
+          "branch": "nonuniform-refine",
+          "q": 0.0416666679084301,
+          "seed_bits": "0x403f6c53",
+          "iterations": [
+            2.8882455825805664,
+            2.8845038414001465
+          ],
+          "factors": [
+            -1.4422519207000732,
+            -0.9615013003349304,
+            0.7211259603500366
+          ]
+        }
+      }
+    ],
+    "target_executed": false,
+    "scope": "Owned integer/algebra and rounded-binary32 models; no native differential execution, host FP environment or full SSE bit-equivalence claim"
+  },
+  "fixture_source_sha256": "67b04f5a146a4b58f2b5e8223150a363c898a04cbb89254dd900e12033844b43",
+  "target_executed": false,
+  "emulation_used": false,
+  "independent_semantic_review": "NOT_RUN",
+  "unresolved": [
+    "Full SSE floating environment: rounding mode,FTZ/DAZ,exceptions",
+    "External sinf/cosf bits",
+    "All zero/subnormal/NaN/infinity propagation and downstream normalization",
+    "Observed visual consequence or actual target correctness"
+  ]
+}

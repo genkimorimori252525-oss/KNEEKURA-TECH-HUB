@@ -1,0 +1,396 @@
+{
+  "format": "ysm-geometry-build-static-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "jar_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "target_executed": false,
+  "emulation_performed": false,
+  "prior_receive_receipt_unchanged": true,
+  "ranges": [
+    {
+      "start": "0x359fdc",
+      "end_exclusive": "0x35a0ff",
+      "sha256": "9ce2c559357c683890b52dfdbfb2abce2d48a7a5c14a5193fc93f3fb4f9f2148",
+      "file_offset": 3514332,
+      "scope": "receive builder stores callable"
+    },
+    {
+      "start": "0x35d250",
+      "end_exclusive": "0x35e210",
+      "sha256": "367695d50e6056d682e4d6f5b33b1bf805fa4abd8b356a7a287cca6be343de80",
+      "file_offset": 3527248,
+      "scope": "callable body"
+    },
+    {
+      "start": "0x36d8c0",
+      "end_exclusive": "0x36d986",
+      "sha256": "0bdfb3f63642338e62af3686fbcc267bf1b3b99ba42d3d67667dcf1b0cae92b4",
+      "file_offset": 3594432,
+      "scope": "higher model constructor prefix"
+    },
+    {
+      "start": "0x36ded6",
+      "end_exclusive": "0x36dfc6",
+      "sha256": "b23d422b71940f85afc6c3bcecc38e6a13bf3ad14d647e9102db52d6244c9d98",
+      "file_offset": 3595990,
+      "scope": "higher model constructor branches"
+    },
+    {
+      "start": "0x36f16e",
+      "end_exclusive": "0x36f1b6",
+      "sha256": "cf2613e551901d35149f46cd1e69345732397922c3a59abadbb313942e493259",
+      "file_offset": 3600750,
+      "scope": "alternate geometry caller"
+    },
+    {
+      "start": "0x36f95e",
+      "end_exclusive": "0x36f9a6",
+      "sha256": "96c17bc394db7ee9e6dc28346c5f1167b79eed8a3c853342526bd2036d673aa5",
+      "file_offset": 3602782,
+      "scope": "alternate geometry caller"
+    },
+    {
+      "start": "0x36a6e0",
+      "end_exclusive": "0x36d530",
+      "sha256": "26f8a66e3d2fdfdb7c7061c1da2ccf0acc4b388edb3c26577d0c5b86c5231b8f",
+      "file_offset": 3581664,
+      "scope": "geometry Java bridge; selected sequences reviewed"
+    },
+    {
+      "start": "0x375e30",
+      "end_exclusive": "0x37a570",
+      "sha256": "4fb8b6ba94d70b379aa6e9e5454912116fda6ac868b2d4f5841b284fd04f9c86",
+      "file_offset": 3628592,
+      "scope": "native geometry creation; selected sequences reviewed"
+    },
+    {
+      "start": "0x407761",
+      "end_exclusive": "0x4078f2",
+      "sha256": "5df04c925a1fa303c67cb888855b0e72ea449703d80202ce50be02ce47611bd8",
+      "file_offset": 4224865,
+      "scope": "three metadata descriptor stores"
+    },
+    {
+      "start": "0x410380",
+      "end_exclusive": "0x4103e0",
+      "sha256": "302beeee04e47e53bd5f99aa749edb931883ae582686fd77eed72471eaf7ba75",
+      "file_offset": 4260736,
+      "scope": "three encoded metadata callbacks"
+    },
+    {
+      "start": "0x364a60",
+      "end_exclusive": "0x364af0",
+      "sha256": "9bb92fb7098a41f45a475aa8d2233e829855cdbcb1bb27d80484248a7ce7deaa",
+      "file_offset": 3557984,
+      "scope": "NewObjectV helper"
+    },
+    {
+      "start": "0x3761c6",
+      "end_exclusive": "0x376240",
+      "sha256": "d0c2f96950d16bac7282ce7bbf5ebfa27b20bffc75b28bd8f58d6a2252643c58",
+      "file_offset": 3629510,
+      "scope": "native record metadata and pivot conversion"
+    },
+    {
+      "start": "0x36b2db",
+      "end_exclusive": "0x36b34e",
+      "sha256": "23f102d06bc74737d2aba5008f5f0302f6a98c6d48c75e9abe171ffd42fd7d56",
+      "file_offset": 3584731,
+      "scope": "bone constructor arguments"
+    },
+    {
+      "start": "0x36c3cc",
+      "end_exclusive": "0x36c431",
+      "sha256": "cdcf7108507b9858ba150010b0bd7723eddd1fa2bd8f9fd56ada1edb8051c586",
+      "file_offset": 3589068,
+      "scope": "geometry constructor arguments"
+    },
+    {
+      "start": "0x378b73",
+      "end_exclusive": "0x379060",
+      "sha256": "ebddc6981652d39c9dc3863492dd8bc6d160b40f23b761553008d162df038ac2",
+      "file_offset": 3640179,
+      "scope": "registry insertion"
+    },
+    {
+      "start": "0x37a213",
+      "end_exclusive": "0x37a2a6",
+      "sha256": "13f62d57e85af55eae6870369a403026e0c43e358ea03b7545715be77b54aaa1",
+      "file_offset": 3645971,
+      "scope": "returned packed flags and handle"
+    },
+    {
+      "start": "0x48574",
+      "end_exclusive": "0x48578",
+      "sha256": "b1801134f2c71f5540537dc8ab78eb44398b15f76af4ab4fdf3a24468d8e50d6",
+      "file_offset": 296308,
+      "scope": "float divisor constant"
+    }
+  ],
+  "classes": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoOoooOOooO0o0000o0O0o0",
+      "sha256": "123a7d826c7eccf77aed40e736667a86584ddb6b029261f9b4e69523ec633085",
+      "constructors": [
+        {
+          "access": 1,
+          "name": "<init>",
+          "descriptor": "([Lcom/elfmcys/yesstevemodel/oO0OO0OooO0Oo0OoO0oOooo0;[[Ljava/lang/String;[ZLcom/elfmcys/yesstevemodel/OOoOoO0000OooOOoO0ooOOOo;[ZJ)V"
+        }
+      ],
+      "fields": [
+        {
+          "access": 17,
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "Ljava/util/List;"
+        },
+        {
+          "access": 17,
+          "name": "o0OOooo0o0OO00OoOOOo0o0O",
+          "descriptor": "Lit/unimi/dsi/fastutil/ints/IntList;"
+        },
+        {
+          "access": 17,
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "Ljava/util/List;"
+        },
+        {
+          "access": 17,
+          "name": "oOOOo0OOO0ooooo0O00OO0o0",
+          "descriptor": "Lit/unimi/dsi/fastutil/ints/IntList;"
+        },
+        {
+          "access": 17,
+          "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+          "descriptor": "Ljava/util/List;"
+        },
+        {
+          "access": 17,
+          "name": "Ooooo0oooO0oooOOOoO0000O",
+          "descriptor": "Ljava/util/List;"
+        },
+        {
+          "access": 17,
+          "name": "oo0OoO00oOoo000O0000o0oo",
+          "descriptor": "Lit/unimi/dsi/fastutil/ints/IntList;"
+        },
+        {
+          "access": 17,
+          "name": "oooooooOOoOOoO00OooOo00O",
+          "descriptor": "Lit/unimi/dsi/fastutil/ints/IntList;"
+        },
+        {
+          "access": 17,
+          "name": "Oo00o0OooOOo0ooOoo0oO0o0",
+          "descriptor": "Lit/unimi/dsi/fastutil/ints/IntList;"
+        },
+        {
+          "access": 17,
+          "name": "o0OOO0o0o0OOo000oO00o00O",
+          "descriptor": "Lit/unimi/dsi/fastutil/ints/IntList;"
+        },
+        {
+          "access": 17,
+          "name": "O0OooOo0oOOoOoOoOooO000o",
+          "descriptor": "Lit/unimi/dsi/fastutil/ints/IntList;"
+        },
+        {
+          "access": 17,
+          "name": "ooOO000o0O0OOOoO0Oo0o0Oo",
+          "descriptor": "Lit/unimi/dsi/fastutil/ints/IntList;"
+        },
+        {
+          "access": 17,
+          "name": "OOOo0OOOoOO0O00Oo00ooOOO",
+          "descriptor": "Lit/unimi/dsi/fastutil/ints/IntList;"
+        },
+        {
+          "access": 17,
+          "name": "oOo0o0000OOOO0OooooO00oo",
+          "descriptor": "Lit/unimi/dsi/fastutil/ints/IntList;"
+        },
+        {
+          "access": 17,
+          "name": "O0ooooOO0oOo000O0Oo00OOO",
+          "descriptor": "Lit/unimi/dsi/fastutil/ints/IntList;"
+        },
+        {
+          "access": 17,
+          "name": "OO0ooO00OoO00o0OO0OOooO0",
+          "descriptor": "Lit/unimi/dsi/fastutil/ints/IntList;"
+        },
+        {
+          "access": 17,
+          "name": "Ooo0O0000OO0OOO0o0Oo0oOO",
+          "descriptor": "Lit/unimi/dsi/fastutil/ints/IntList;"
+        },
+        {
+          "access": 17,
+          "name": "o0o0Oooo00OoOoOOOooo0000",
+          "descriptor": "Z"
+        },
+        {
+          "access": 17,
+          "name": "ooooO0o00oO0Oo0OOo0O0O0o",
+          "descriptor": "Z"
+        },
+        {
+          "access": 17,
+          "name": "oOOo0Ooo0oOoo0O0OOOOo0oo",
+          "descriptor": "Z"
+        },
+        {
+          "access": 17,
+          "name": "O0o00oO0O0ooOOOo0oo0Oo00",
+          "descriptor": "Lcom/elfmcys/yesstevemodel/OOoOoO0000OooOOoO0ooOOOo;"
+        },
+        {
+          "access": 17,
+          "name": "oOOOooO00oo0oOooooOO0Oo0",
+          "descriptor": "[F"
+        },
+        {
+          "access": 18,
+          "name": "OO0O00oO0OOO00oOO0OoO0OO",
+          "descriptor": "J"
+        },
+        {
+          "access": 18,
+          "name": "o0OooO00ooo0OO000O0OoOoO",
+          "descriptor": "[Z"
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oO0OO0OooO0Oo0OoO0oOooo0",
+      "sha256": "d8f331525d8611d2ddc957b8036fd93b44ac946dcdaedc7246a882bd097695ea",
+      "constructors": [
+        {
+          "access": 1,
+          "name": "<init>",
+          "descriptor": "(Ljava/lang/String;ZZZFFFFFF)V"
+        }
+      ],
+      "fields": [
+        {
+          "access": 18,
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "Ljava/lang/String;"
+        },
+        {
+          "access": 18,
+          "name": "o0OOooo0o0OO00OoOOOo0o0O",
+          "descriptor": "I"
+        },
+        {
+          "access": 18,
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "Z"
+        },
+        {
+          "access": 18,
+          "name": "oOOOo0OOO0ooooo0O00OO0o0",
+          "descriptor": "Z"
+        },
+        {
+          "access": 18,
+          "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+          "descriptor": "Z"
+        },
+        {
+          "access": 18,
+          "name": "Ooooo0oooO0oooOOOoO0000O",
+          "descriptor": "F"
+        },
+        {
+          "access": 18,
+          "name": "oo0OoO00oOoo000O0000o0oo",
+          "descriptor": "F"
+        },
+        {
+          "access": 18,
+          "name": "oooooooOOoOOoO00OooOo00O",
+          "descriptor": "F"
+        },
+        {
+          "access": 18,
+          "name": "Oo00o0OooOOo0ooOoo0oO0o0",
+          "descriptor": "F"
+        },
+        {
+          "access": 18,
+          "name": "o0OOO0o0o0OOo000oO00o00O",
+          "descriptor": "F"
+        },
+        {
+          "access": 18,
+          "name": "O0OooOo0oOOoOoOoOooO000o",
+          "descriptor": "F"
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoOoO0000OooOOoO0ooOOOo",
+      "sha256": "253a13ba24166e730047fa0ddf6ad113b208e810bd0a1042952d9d93dc9dbd6b",
+      "constructors": [
+        {
+          "access": 1,
+          "name": "<init>",
+          "descriptor": "(Ljava/lang/String;DDDD[D)V"
+        }
+      ],
+      "fields": [
+        {
+          "access": 18,
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "Ljava/lang/String;"
+        },
+        {
+          "access": 18,
+          "name": "o0OOooo0o0OO00OoOOOo0o0O",
+          "descriptor": "D"
+        },
+        {
+          "access": 18,
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "D"
+        },
+        {
+          "access": 18,
+          "name": "oOOOo0OOO0ooooo0O00OO0o0",
+          "descriptor": "D"
+        },
+        {
+          "access": 18,
+          "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+          "descriptor": "D"
+        },
+        {
+          "access": 18,
+          "name": "Ooooo0oooO0oooOOOoO0000O",
+          "descriptor": "[D"
+        }
+      ]
+    }
+  ],
+  "jni_slots": {
+    "NewObjectV": "0xe8",
+    "NewStringUTF": "0x538",
+    "NewObjectArray": "0x560",
+    "SetObjectArrayElement": "0x570",
+    "NewBooleanArray": "0x578",
+    "NewDoubleArray": "0x5b0",
+    "SetBooleanArrayRegion": "0x678",
+    "SetDoubleArrayRegion": "0x6b0"
+  },
+  "pivot_scale": {
+    "address": "0x48574",
+    "bytes": "0000803d",
+    "value": 0.0625
+  },
+  "metadata_status": "Exact constructor identities confirmed by separate guarded metadata receipt; no runtime initialization/construction claim",
+  "metadata_receipt": {
+    "path": "../geometry-constructor-metadata.json",
+    "sha256": "462fbeda3a87caf946822b2e11bf06333d38e7890881a7ae6dfe77af0797ed14"
+  },
+  "binding_evidence_sha256": "90ee2e7985145dbabc031ece31f0abbac45779aa19dfbb708845c8bcd82be6cb"
+}

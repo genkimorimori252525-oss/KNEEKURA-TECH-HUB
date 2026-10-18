@@ -1,0 +1,189 @@
+{
+  "format": "ysm-geometry-constructor-metadata-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "jar_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "checkpoint_sha256": "5910f1c5b52de7aeb2313ae9885bc22fd385a27815885516287cd319e4271d84",
+  "state_model": "Separate next6 checkpoint clone; sequential metadata callbacks with fresh synthetic frames. Never resumes interrupted JNI frame.",
+  "runtime_initialization_proven": false,
+  "runtime_object_construction_proven": false,
+  "manager_global": "0xd355a8",
+  "manager_publication": {
+    "address": "0x4078d4",
+    "bytes": "4c8935cddc9200"
+  },
+  "constructors": [
+    {
+      "callback": "0x410380",
+      "manager_offset": "0x38",
+      "consumer_callsite": "0x36c42c",
+      "source": "0x459cb",
+      "source_length": 192,
+      "callback_sha256": "c48390cae30f48ad3769c8a716612a1e4c7170c591e3aee3ace3deeaca6320dd",
+      "source_sha256": "a30f4e456f0d0e852d2873a5ee58055e53112872a0e114af00f2ae7916bcf910",
+      "instruction_evidence": [
+        {
+          "role": "callback_lea",
+          "address": "0x407786",
+          "bytes": "4c8d3df38b0000",
+          "sha256": "04523a218c361c0e02f5c9605be73c530bf28991070298ab1c473ae2507367ac"
+        },
+        {
+          "role": "descriptor_callback_store_plus_28",
+          "address": "0x4077c1",
+          "bytes": "4c897b28",
+          "sha256": "094274c85eb3af55d6d4d60a550ac29a7ad01dcae382b6fe893a8b1ce240c4fb"
+        },
+        {
+          "role": "manager_descriptor_store",
+          "address": "0x4077ec",
+          "bytes": "49895e38",
+          "sha256": "a4881f77bb7a5bf6041a2807862eac0a236d6246cbedefb4c6b982c2f30380de"
+        }
+      ],
+      "stop": {
+        "reason": "ENTRY_RETURN",
+        "pc": 4260767,
+        "address": 140733193388032,
+        "size": 0
+      },
+      "segments": [
+        {
+          "stop": {
+            "reason": "ENTRY_RETURN",
+            "pc": 4260767,
+            "address": 140733193388032,
+            "size": 0
+          },
+          "attempted": 3120526,
+          "completed": 3120526
+        }
+      ],
+      "payload": "Lcom/elfmcys/yesstevemodel/OOoOoooOOooO0o0000o0O0o0;<init>([Lcom/elfmcys/yesstevemodel/oO0OO0OooO0Oo0OoO0oOooo0;[[Ljava/lang/String;[ZLcom/elfmcys/yesstevemodel/OOoOoO0000OooOOoO0ooOOOo;[ZJ)V",
+      "payload_sha256": "0fcd7bc712f8042bde87e2b9d9bc6f3bce263a5411a14aacde064c122e75fdbf",
+      "owner": "com/elfmcys/yesstevemodel/OOoOoooOOooO0o0000o0O0o0",
+      "name": "<init>",
+      "descriptor": "([Lcom/elfmcys/yesstevemodel/oO0OO0OooO0Oo0OoO0oOooo0;[[Ljava/lang/String;[ZLcom/elfmcys/yesstevemodel/OOoOoO0000OooOOoO0ooOOOo;[ZJ)V",
+      "access": 1,
+      "acc_native": false,
+      "static": false,
+      "class_sha256": "123a7d826c7eccf77aed40e736667a86584ddb6b029261f9b4e69523ec633085",
+      "classfile_exact_match": true
+    },
+    {
+      "callback": "0x4103a0",
+      "manager_offset": "0x40",
+      "consumer_callsite": "0x36b345",
+      "source": "0x44c67",
+      "source_length": 89,
+      "callback_sha256": "6cf6fd2bb90faeef7d4657073cd2f9d1d856a1f6d38a43fd2463e03cd458e456",
+      "source_sha256": "19553c3d5d973f9c3421ba9d07595ac818706320a999b30901730760e2c5a0dc",
+      "instruction_evidence": [
+        {
+          "role": "callback_lea",
+          "address": "0x4077f8",
+          "bytes": "488d1da18b0000",
+          "sha256": "bbda2eed4336dc5ab5948bba85d4208b215b32c7f20081e158497ed605490534"
+        },
+        {
+          "role": "descriptor_callback_store_plus_28",
+          "address": "0x407835",
+          "bytes": "49895f28",
+          "sha256": "6cd07fc0da245753dce0a70e35406553e606f4340cbaf3ea3b35934f87151b2a"
+        },
+        {
+          "role": "manager_descriptor_store",
+          "address": "0x407862",
+          "bytes": "4c893b",
+          "sha256": "bf6f7418224e3a140b39c5c4640d29e78081150dbd3b6715146db2f043be8ae5"
+        }
+      ],
+      "stop": {
+        "reason": "ENTRY_RETURN",
+        "pc": 4260799,
+        "address": 140733193388032,
+        "size": 0
+      },
+      "segments": [
+        {
+          "stop": {
+            "reason": "ENTRY_RETURN",
+            "pc": 4260799,
+            "address": 140733193388032,
+            "size": 0
+          },
+          "attempted": 1742443,
+          "completed": 1742443
+        }
+      ],
+      "payload": "Lcom/elfmcys/yesstevemodel/oO0OO0OooO0Oo0OoO0oOooo0;<init>(Ljava/lang/String;ZZZFFFFFF)V",
+      "payload_sha256": "078ba480170a1035d63c54e5b9969a4722d498e82609ec04fdb97017aa2dc324",
+      "owner": "com/elfmcys/yesstevemodel/oO0OO0OooO0Oo0OoO0oOooo0",
+      "name": "<init>",
+      "descriptor": "(Ljava/lang/String;ZZZFFFFFF)V",
+      "access": 1,
+      "acc_native": false,
+      "static": false,
+      "class_sha256": "d8f331525d8611d2ddc957b8036fd93b44ac946dcdaedc7246a882bd097695ea",
+      "classfile_exact_match": true
+    },
+    {
+      "callback": "0x4103c0",
+      "manager_offset": "0x48",
+      "consumer_callsite": "0x36c26c",
+      "source": "0x400c6",
+      "source_length": 86,
+      "callback_sha256": "32e0239835a3bd2cb43fd313983a7afa3087c881b40283d3d18f0baf1680cb64",
+      "source_sha256": "0910dd1e5a8282e42a9bcd515f3ee3ef3f3cf8d6b7cecc2d98e0a9ffb6154675",
+      "instruction_evidence": [
+        {
+          "role": "callback_lea",
+          "address": "0x40786d",
+          "bytes": "488d1d4c8b0000",
+          "sha256": "635b932dfe8ef062a29d79bd2b4d62530221573abd3cb72d7a701edc964f74c1"
+        },
+        {
+          "role": "descriptor_callback_store_plus_28",
+          "address": "0x4078aa",
+          "bytes": "49895f28",
+          "sha256": "6cd07fc0da245753dce0a70e35406553e606f4340cbaf3ea3b35934f87151b2a"
+        },
+        {
+          "role": "manager_descriptor_store",
+          "address": "0x4078d0",
+          "bytes": "4d897e48",
+          "sha256": "9e04f0d8fe073a3050de9a7df74947f313f8c5d6c991a0346b39de6490c6fc55"
+        }
+      ],
+      "stop": {
+        "reason": "ENTRY_RETURN",
+        "pc": 4260831,
+        "address": 140733193388032,
+        "size": 0
+      },
+      "segments": [
+        {
+          "stop": {
+            "reason": "ENTRY_RETURN",
+            "pc": 4260831,
+            "address": 140733193388032,
+            "size": 0
+          },
+          "attempted": 1670042,
+          "completed": 1670042
+        }
+      ],
+      "payload": "Lcom/elfmcys/yesstevemodel/OOoOoO0000OooOOoO0ooOOOo;<init>(Ljava/lang/String;DDDD[D)V",
+      "payload_sha256": "722c01ee08ef887ce476031c2a76dc26f6d0a6d66c5a13c8ce96b00c67937bcc",
+      "owner": "com/elfmcys/yesstevemodel/OOoOoO0000OooOOoO0ooOOOo",
+      "name": "<init>",
+      "descriptor": "(Ljava/lang/String;DDDD[D)V",
+      "access": 1,
+      "acc_native": false,
+      "static": false,
+      "class_sha256": "253a13ba24166e730047fa0ddf6ad113b208e810bd0a1042952d9d93dc9dbd6b",
+      "classfile_exact_match": true
+    }
+  ],
+  "complete": true,
+  "original_inputs_unchanged": true
+}

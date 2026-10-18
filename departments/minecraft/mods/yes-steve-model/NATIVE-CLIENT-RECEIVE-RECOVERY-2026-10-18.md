@@ -48,7 +48,7 @@ Consumer has a second state/task source d34610/d34880 and a retained state point
 
 This registry is connected to **NativeTexture**, not inferred from naming: exact native binding3bf0c0 is the native upload on owner `O0O00000Ooooo00oooo0ooo0`; existing Java dossier identifies that owner as NativeTexture. Original class extends Minecraft AbstractTexture, stores long nativeId, and declares upload()V/free(J)V.3bf0ff..3bf134 obtains the long handle through the manager d355c0+0x40 member (JNI GetLongField+0x328) and3bf149 onward looks it up under the same d34920 lock in the same d348b0/b8/c0/c8 registry. This establishes a receive-build-to-texture-storage connection. It does not prove an upload actually ran, GL success, texture byte format, or all constructor metadata decoded.
 
-The renderer/GeoModel registry reported independently by the parent is d341b8/c0/c8/d0 with lock d341f8. No alias, transfer, or exact model/bone/controller bridge to that registry is proven here. Do not merge these two registries just because both store native handles.
+The renderer/GeoModel registry documented independently in the renderer/lifetime evidence is d341b8/c0/c8/d0 with lock d341f8. No alias, transfer, or exact model/bone/controller bridge to that registry is proven here. Do not merge these two registries just because both store native handles.
 
 ## Explicit remaining boundaries
 

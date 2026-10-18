@@ -1,0 +1,66 @@
+{
+  "format": "ysm-native-bone-focused-static-review-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "jar_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "scope": "Independent original-byte review of four high-impact bone-render claims only",
+  "result": "No contradiction or unsupported high-impact statement found within stated bounds",
+  "ranges_and_anchors_rehashed": 64,
+  "ranges_may_overlap": true,
+  "original_elf_mapping_independently_checked": true,
+  "checks": [
+    {
+      "claim": "Affine order and common-source pivot scaling",
+      "addresses": [
+        "0x37ccb4..0x37cf27",
+        "0x37cfe6..0x37d016",
+        "0x37d1aa..0x37d1de",
+        "0x37620b..0x37623f",
+        "0x36b2f5..0x36b333"
+      ],
+      "result": "Supported; float-bit/runtime equivalence not certified"
+    },
+    {
+      "claim": "Conditional selected-range output copy can include stale untracked XYZ",
+      "addresses": [
+        "0x4c4ac1",
+        "0x37e953..0x37e96f",
+        "0x37e9b2",
+        "0x37eac9..0x37eb01",
+        "0x37bf0a..0x37bf28"
+      ],
+      "result": "Supported; fourth-slot writer/global aliases and growth initialization remain bounded"
+    },
+    {
+      "claim": "Depth bank reads d and publishes d+1 with maxDepth+1 capacity",
+      "addresses": [
+        "0x37cc1e",
+        "0x37d1e2",
+        "0x37cc05..0x37cc08",
+        "0x36adcc..0x36ae30",
+        "0x3761c6",
+        "0x378b73",
+        "0x378c56",
+        "0x378c8a",
+        "0x37bf83..0x37bfae",
+        "0x3984d0"
+      ],
+      "result": "Supported subject to finite rooted traversal, representable arithmetic and depth-width caveats"
+    },
+    {
+      "claim": "Uniform-negative normal branch falls through without scale abs normalization",
+      "addresses": [
+        "0x37d058..0x37d081",
+        "0x37d0ac",
+        "0x37e7e8..0x37e840",
+        "0x37d0e2"
+      ],
+      "result": "Supported; negative-scale arithmetic examples remain model behavior, not runtime defects"
+    }
+  ],
+  "whole_project_semantic_review": "NOT_RUN",
+  "whole_renderer_approval": false,
+  "runtime_equivalence_proven": false,
+  "malformed_input_safety_proven": false,
+  "target_executed": false,
+  "dependencies_added": false
+}

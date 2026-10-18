@@ -16,7 +16,7 @@ At 0x3270d1 it invokes each metadata callback, parses the resulting bounded stri
 
 At unicorn-jni-fmlcore-next6.checkpoint.json only: global 0xd35588 points to manager 0x4040010985a0. Field pointer vector +0/+8/+0x10 is begin/end/capacity: 0x404001058100 / 0x404001058148 / 0x404001058180, exactly 9 entries. Method pointer vector +0x18/+0x20/+0x28 is 0x4040010044c0 / 0x4040010044d0 / 0x4040010044d0, exactly 2 entries. Each descriptor is 0x38 bytes: class handle +0, memberID +8, metadata callable +0x10..+0x28, flags +0x30.
 
-At this historical checkpoint both methods and seven fields have nonzero resolved IDs. The active field is vector slot 0x404001058138, descriptor 0x404001012140; one further descriptor 0x404001012180 follows. Both have zero class/member IDs. Seven distinct class handles occur among the resolved records; this does not bound later classes. Parent continued the real JNI scenario independently, so these counts describe only the named checkpoint.
+At this historical checkpoint both methods and seven fields have nonzero resolved IDs. The active field is vector slot 0x404001058138, descriptor 0x404001012140; one further descriptor 0x404001012180 follows. Both have zero class/member IDs. Seven distinct class handles occur among the resolved records; this does not bound later classes. The main guarded JNI scenario continued independently, so these counts describe only the named checkpoint.
 
 Further resolver calls in 0x406b00 (callsite / global / manager size):
 - 0x4070d3 / 0xd35590 / 0xa0

@@ -36,6 +36,8 @@ independent semantic review. [Scoped batch receipt](JAVA-PIPELINE-CHECKPOINT-202
 
 ## Latest native research (opt-in)
 
+Start with the [compact native reuse guide](NATIVE-REUSE-GUIDE-2026-10-18.md); choose one seam rather than reading every dossier.
+
 - [All17 exact native-entry bindings](NATIVE-EXACT-BINDINGS-RECOVERY-2026-10-18.md): source-backed addresses and exact original-JAR declaration matches; runtime registration remains unproven.
 - [Renderer/model lifetime](NATIVE-RENDER-LIFETIME-RECOVERY-2026-10-18.md): registry handles, retained ownership and12/4-float JNI copy seam.
 - [Output persistence and selected modes](NATIVE-RENDER-OUTPUT-MODES-RECOVERY-2026-10-18.md): conditional freshness, unknown fourth slot, LEFT_ARM/RIGHT_ARM/BACKGROUND selectors.
