@@ -1,14 +1,14 @@
 {
   "format": "ysm-native-java-member-index-v1",
-  "scope": "Only the 13 explicitly selected metadata receipts; manager descriptor slots, not native registration bindings or central semantic mappings. No complete-manager coverage implied. new_guest_instructions_run refers only to index building; source callback execution provenance is retained in sources and entry evidence. The array-class source selects only member_index 1 (Object+0x80); its String+0x78 entry is already indexed and is not re-added.",
+  "scope": "Only the 14 explicitly selected metadata receipts; manager descriptor slots, not native registration bindings or central semantic mappings. No complete-manager coverage implied. new_guest_instructions_run refers only to index building; source callback execution provenance is retained in sources and entry evidence. The array-class source selects only member_index 1 (Object+0x80); its String+0x78 entry is already indexed and is not re-added.",
   "runtime_invocation_proven": false,
   "semantic_confidence_changed": false,
   "new_guest_instructions_run": 0,
-  "input_member_count": 52,
-  "unique_slot_count": 52,
+  "input_member_count": 54,
+  "unique_slot_count": 54,
   "duplicate_count": 0,
   "artifact_scope_counts": {
-    "original_YSM": 47,
+    "original_YSM": 49,
     "declared_JDK": 4,
     "declared_dependency": 1
   },
@@ -182,6 +182,19 @@
       "jar_sha256": null,
       "java_base_sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
       "state_model": "Read immutable checkpoint JSON, changed image-byte records and decompressed sparse data pages only; no CPU construction, callback or checkpoint resume. Selected member_index 1 only; member_index 0 duplicates an existing indexed slot and is excluded."
+    },
+    {
+      "path": "NATIVE-COLLECTOR-CALLBACK-METADATA-2026-10-18.json",
+      "sha256": "d4c1e44674aec0b2c6565b6e5db06ad1e452805cb74becb5558743783a9040d5",
+      "format": "ysm-collector-callback-metadata-v1",
+      "member_count": 2,
+      "method": "isolated_guarded_metadata_callbacks",
+      "checkpoint_sha256": "5910f1c5b52de7aeb2313ae9885bc22fd385a27815885516287cd319e4271d84",
+      "checkpoint_path": null,
+      "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+      "jar_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+      "java_base_sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+      "state_model": "Independent next6 checkpoint clone per callback; fresh synthetic frame; no interrupted JNI continuation. Both previously completed ENTRY_RETURN in one bounded segment each; this index build executes no guest instructions."
     }
   ],
   "entries": {
@@ -1950,6 +1963,74 @@
           "callback_sha256": null,
           "payload_sha256": null,
           "descriptor_flags": null
+        }
+      ]
+    },
+    "0xd35598+0x58": {
+      "kind": "method",
+      "static": true,
+      "access": 10,
+      "owner": "com/elfmcys/yesstevemodel/o0OooO00ooo0OO000O0OoOoO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/ooOOOo00o0000o0oO000oooO;Ljava/lang/String;ZZ)V",
+      "declaring_class": "com/elfmcys/yesstevemodel/o0OooO00ooo0OO000O0OoOoO",
+      "class_sha256": "203f7df0d59b7010c1da8809cbcea192b20d381fbb604f43eb5ee3f711afd3a4",
+      "source_artifact": {
+        "id": "ysm",
+        "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+        "archive_kind": "jar",
+        "entry_count": 1853
+      },
+      "classfile_status": "exact_match",
+      "access_status": "recorded_classfile_flags",
+      "manager_global": "0xd35598",
+      "manager_offset": "0x58",
+      "artifact_scope": "original_YSM",
+      "evidence": [
+        {
+          "receipt_path": "NATIVE-COLLECTOR-CALLBACK-METADATA-2026-10-18.json",
+          "receipt_sha256": "d4c1e44674aec0b2c6565b6e5db06ad1e452805cb74becb5558743783a9040d5",
+          "member_index": 0,
+          "checkpoint_sha256": "5910f1c5b52de7aeb2313ae9885bc22fd385a27815885516287cd319e4271d84",
+          "method": "isolated_guarded_metadata_callbacks",
+          "callback": "0x410460",
+          "callback_sha256": "af43b9c6b1fb356050b5cd310f351d5928f7317f5a1c3e7911289eb9f4dfb836",
+          "payload_sha256": "1815db50ecb6e84115efd637a152896b43a833fc92bf8ed4ab9e140bb6c917c6",
+          "descriptor_flags": 1
+        }
+      ]
+    },
+    "0xd35598+0x60": {
+      "kind": "method",
+      "static": true,
+      "access": 10,
+      "owner": "com/elfmcys/yesstevemodel/o0OooO00ooo0OO000O0OoOoO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "([Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;[Z)V",
+      "declaring_class": "com/elfmcys/yesstevemodel/o0OooO00ooo0OO000O0OoOoO",
+      "class_sha256": "203f7df0d59b7010c1da8809cbcea192b20d381fbb604f43eb5ee3f711afd3a4",
+      "source_artifact": {
+        "id": "ysm",
+        "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+        "archive_kind": "jar",
+        "entry_count": 1853
+      },
+      "classfile_status": "exact_match",
+      "access_status": "recorded_classfile_flags",
+      "manager_global": "0xd35598",
+      "manager_offset": "0x60",
+      "artifact_scope": "original_YSM",
+      "evidence": [
+        {
+          "receipt_path": "NATIVE-COLLECTOR-CALLBACK-METADATA-2026-10-18.json",
+          "receipt_sha256": "d4c1e44674aec0b2c6565b6e5db06ad1e452805cb74becb5558743783a9040d5",
+          "member_index": 1,
+          "checkpoint_sha256": "5910f1c5b52de7aeb2313ae9885bc22fd385a27815885516287cd319e4271d84",
+          "method": "isolated_guarded_metadata_callbacks",
+          "callback": "0x410480",
+          "callback_sha256": "3181f50032dbd3d14fc928561f4ddae8a6cf1b7fa1745c100f1d0c056d0b1465",
+          "payload_sha256": "ec0b67785ab65c9b2db484c55292dcede967875157dd4ba8c189dcb94e92ce1a",
+          "descriptor_flags": 1
         }
       ]
     }

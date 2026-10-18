@@ -1,8 +1,8 @@
 # Exact native manager → Java member lookup
 
-[member index](NATIVE-JAVA-MEMBER-INDEX-2026-10-18.json) is an authored lookup keyed by `manager-global+offset`, for example `0xd355b0+0x128`. It contains **52 unique slots from 13 specified continuation receipts**, with zero duplicate slots and zero contradictions:
+[member index](NATIVE-JAVA-MEMBER-INDEX-2026-10-18.json) is an authored lookup keyed by `manager-global+offset`, for example `0xd355b0+0x128`. It contains **54 unique slots from 14 specified metadata receipts**, with zero duplicate slots and zero contradictions:
 
-- 47 original-YSM declarations
+- 49 original-YSM declarations
 - 1 declared Minecraft dependency declaration: commons-lang3 Pair.of
 - 4 declared JDK java.base declarations read from existing modeled checkpoint metadata
 
@@ -14,12 +14,16 @@ The java-collection-checkpoint-proof schema does not record access flags, origin
 
 ## Evidence boundaries
 
-The 48 callback-derived identities came from bounded, isolated metadata decoding in cloned state, with fresh callback frames; the index does not replay them. The other4 entries are read-only existing modeled metadata/pointer proofs with zero guest instructions. Neither category establishes runtime invocation, full JNI initialization, successful object construction, live installed dependencies, enum initialization or asset processing. Existing declaration/source confidence is not promoted.
+The 50 callback-derived identities came from bounded, isolated metadata decoding in cloned state, with fresh callback frames; the index does not replay them. The other4 entries are read-only existing modeled metadata/pointer proofs with zero guest instructions. Neither category establishes runtime invocation, full JNI initialization, successful object construction, live installed dependencies, enum initialization or asset processing. Existing declaration/source confidence is not promoted.
 
 ## Validation
 
-The external builder validated source hashes, recorded payload identities/digests, static/access agreement and duplicate rejection. Repository integration rechecks all13 source receipt hashes and52 unique slot entries. Source instruction records remain in the linked receipts; no automatic whole-repository audit or callback replay is needed for a lookup.
+The external builder validated source hashes, recorded payload identities/digests, static/access agreement and duplicate rejection. Repository integration rechecks all14 source receipt hashes and54 unique slot entries. Source instruction records remain in the linked receipts; no automatic whole-repository audit or callback replay is needed for a lookup.
 
 ## ConfigForms extension
 
 Five exact original-YSM constructors and one read-only JDK Object.toString descriptor/class slot were added. The latter supplies the Object array class without invoking that method. Its access flags remain unrecorded, bringing access-unknown count to4. The array proof also contains already-indexed String+78; only its member_index1 (Object+80) is selected, so no duplicate source identity is promoted. [Extension validation](NATIVE-JAVA-MEMBER-INDEX-EXTENSION-2026-10-18.json) preserves all46 earlier entries and11 source records. Index construction itself runs zero guest instructions; the five new source callbacks retain their separate guarded execution evidence.
+
+## Collector callback extension
+
+Two exact private static original-YSM declarations at `0xd35598+0x58` and `0xd35598+0x60` were added from [isolated callback metadata](NATIVE-COLLECTOR-CALLBACK-METADATA-2026-10-18.json). The +58 overload accepts an obfuscated object, String and two booleans; +60 accepts three String arrays and one boolean array. They are distinct slots and overloads. The two callbacks used separate pinned next6 checkpoint clones and completed ENTRY_RETURN after 2,584,488 and 2,370,227 virtual instructions respectively, with unchanged JNI-call ledgers and validated return frames/registers. No actual JNI continuation or worker execution occurred. Publication and index building ran zero additional guest instructions. [Extension validation](NATIVE-COLLECTOR-MEMBER-INDEX-EXTENSION-2026-10-18.json) preserves all52 preceding entries and13 source records and verifies every preceding source file hash.

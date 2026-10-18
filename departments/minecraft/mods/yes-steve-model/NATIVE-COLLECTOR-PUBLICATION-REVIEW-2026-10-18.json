@@ -1,0 +1,44 @@
+{
+  "verdict": "CONDITIONAL_STATIC_ACCEPTANCE",
+  "so_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "primary_windows_verified": 16,
+  "byte_assertions_verified": 12,
+  "task_relocations": [
+    {
+      "slot": "0xd1b580",
+      "type": 8,
+      "target": "0x35f620",
+      "record": "0x18e5564",
+      "record_sha256": "eb08930cc7b9c848f7cc0d2fbe800dbda9ee8c6f2bfc9ba33359d8df5ccb610f"
+    },
+    {
+      "slot": "0xd1b5a8",
+      "type": 8,
+      "target": "0x35ef10",
+      "record": "0x18e55ac",
+      "record_sha256": "9a91376485fa73cbcadf0596c1b58dcb7695372fef08616b416f26f6a9a718b7"
+    }
+  ],
+  "metadata_receipt_sha256": "f5b2284f38321d59f95b61cdada7bf0681b0f83ea53a708efdab3474426161ca",
+  "metadata_scope": "Read-only reuse of separately guarded decoder result; callback/source/init bytes rechecked; decoder not rerun",
+  "java_class_sha256": "203f7df0d59b7010c1da8809cbcea192b20d381fbb604f43eb5ee3f711afd3a4",
+  "original_methods_matched": 13,
+  "callback_code_sha256": "b29bd955baa4d7e33c2acbdb8e2afe881ad93746c907e62d13a03d9e8c53949b",
+  "body_code_sha256": "5e4bd8ef6d0b29304edbd4c301764b52721a16cf862dfb9fe13700e1ef060859",
+  "tick_code_sha256": "a1b285b6789c8e3f2ec62eb801b0feebc692e32ef64d83ec59894ec51737f77a",
+  "published_map_field": {
+    "access": 74,
+    "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+    "descriptor": "Ljava/util/Map;"
+  },
+  "jni_static_void_v_offset": "0x470",
+  "jni_wrapper_sha256": "4f837df15ed09edc99e41bc23520005b9195e42abcb4e1d2b80afa83d79d0430",
+  "limitations": [
+    "No collector task execution or worker-drained evidence",
+    "Wait/release is not exception/result consumption proof",
+    "Builder Exception may return normally with no enqueue; null data may progress without enqueue",
+    "Queue receipt is distinct from later volatile map publication; no GPU completion or transaction"
+  ],
+  "target_executed": false,
+  "reviewed_report_sha256": "3801fa361a15f96aabb563dbbee652fd046a50d53dfbaf9d307cdbb68b31e46a"
+}

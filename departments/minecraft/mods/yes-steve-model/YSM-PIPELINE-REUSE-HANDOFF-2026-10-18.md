@@ -85,3 +85,5 @@ Entity input の再利用なら最上段、Molang 実装なら evaluator と必�
 例外の境界：[Java parser → native](NATIVE-PARSER-EXCEPTION-BOUNDARY-2026-10-18.md)では、Javaが捕捉したfallbackと、捕捉されずnative例外へ移る失敗を区別する。nullでもpending例外の確認は通る。[resource user-function → worker](NATIVE-RESOURCE-FAILURE-WORKER-SKIP-2026-10-18.md)は後片付けが正常なら当該モデルをskipし次へ進める経路で、batch全体の失敗・原状復帰を意味しない。以前のnative staging recordsはこのcatchでは消去されないが、最終Java公開成功は未証明。controller経路は途中catchが異なるので一般化しない。限定独立レビュー済み。
 
 controller例外経路も追加確定：[controller failure transform](NATIVE-CONTROLLER-FAILURE-TRANSFORM-2026-10-18.md)。中間catchの両分岐はコード0x5bのnative例外を作って伝播し、正常な後片付けを前提にworkerのモデル単位skipへ接続する。Java側で捕捉済みのfallbackとは別で、正常map挿入へ戻るcatchではない。最終公開・全副作用のrollbackは保証しない。
+
+最終公開への接続：[native staging → Java model map](NATIVE-COLLECTOR-PUBLICATION-JOIN-2026-10-18.md)。2つのcallbackを隔離メタデータ解析で解読し原本classfileへ一致。+58はモデル構築成功時だけqueueへ追加し、後のtickがvolatile mapを更新する。構築Exceptionを捕捉して通常returnしても追加されない経路がある。+60の既存map変更は別処理なので失敗時の旧model保持も保証しない。選択member索引は54件へ拡張、中心669map・実起動未確認は変更なし。

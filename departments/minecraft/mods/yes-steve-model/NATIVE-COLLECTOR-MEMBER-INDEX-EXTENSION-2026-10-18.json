@@ -1,0 +1,30 @@
+{
+  "format": "ysm-collector-member-index-extension-validation-v1",
+  "base_index_sha256": "747d071c05b2bf02a2ec25fc9ce77e948ad3c81737da7f608dc9ec7622ea97c6",
+  "updated_index_sha256": "cd0e1ed0c3ef19cfe849c0720d1dfeccf478da706b5c21ea8f988a61cf024bf7",
+  "new_receipt_public_path": "NATIVE-COLLECTOR-CALLBACK-METADATA-2026-10-18.json",
+  "new_receipt_sha256": "d4c1e44674aec0b2c6565b6e5db06ad1e452805cb74becb5558743783a9040d5",
+  "source_count": 14,
+  "unique_slot_count": 54,
+  "artifact_scope_counts": {
+    "original_YSM": 49,
+    "declared_JDK": 4,
+    "declared_dependency": 1
+  },
+  "duplicate_count": 0,
+  "added_slots": [
+    "0xd35598+0x58",
+    "0xd35598+0x60"
+  ],
+  "all_52_old_entries_preserved": true,
+  "all_13_old_sources_preserved": true,
+  "all_13_old_source_file_hashes_verified": true,
+  "all_other_old_top_level_values_preserved_except_scope_and_aggregates": true,
+  "two_exact_member_tuples_staticness_and_class_hashes_reverified_from_original_jar": true,
+  "new_guest_instructions_run": 0,
+  "new_guest_instructions_run_scope": "Publication/index-building only; source metadata callbacks previously executed 4,954,715 virtual instructions total in isolated clones.",
+  "runtime_invocation_proven": false,
+  "semantic_confidence_changed": false,
+  "repository_writes": false,
+  "suggested_static_document_path": "NATIVE-COLLECTOR-PUBLICATION-JOIN-2026-10-18.md"
+}
