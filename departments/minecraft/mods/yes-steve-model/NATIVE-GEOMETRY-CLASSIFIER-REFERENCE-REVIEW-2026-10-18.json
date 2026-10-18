@@ -1,0 +1,56 @@
+{
+  "status": "PASS_NO_BLOCKING_FINDINGS",
+  "scope": "Independent source review against original-byte predicate plus authored-only focused tests; not target compatibility verification",
+  "reviewed_files": [
+    {
+      "path": "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/tools/native_geometry_classifier_reference_ysm_265.py",
+      "sha256": "159427388f5c6785d0847ffbdd9b36c15bec037fb705ff08f62b36f3da581692"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/tools/test_native_geometry_classifier_reference_ysm_265.py",
+      "sha256": "646c6d4f83b08e68622ca8dec2ccb60dc6624a95504e7a0cd64113a092997628"
+    }
+  ],
+  "predicate_report_sha256": "b14e3a5479e603e65dd5a8adc45b030eb81b79dc9043e9d760836d88a0daeda9",
+  "tests": [
+    {
+      "name": "focused-suite",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-m",
+        "unittest",
+        "test_native_geometry_classifier_reference_ysm_265",
+        "-v"
+      ],
+      "cwd": "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/tools",
+      "returncode": 0,
+      "log": "focused-suite.txt",
+      "sha256": "7e29b1384ad3b35c3ea082e06ec1fb78de09f223410ce9bc45d6c58e78e22d77"
+    },
+    {
+      "name": "independent-review",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/main-geometry-classifier-review/review_tests.py"
+      ],
+      "cwd": "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/main-geometry-classifier-review",
+      "returncode": 0,
+      "log": "independent-review.txt",
+      "sha256": "bf92a12757f0214d13abfc83e9550bd87aa472f4d2740cd0d59297fd6bb27994"
+    }
+  ],
+  "independent_tests_sha256": "0552b88c385987cd9257a5bcc02df5addc89b55b7cbea8612e12a39a4f2f9834",
+  "focused_tests": 13,
+  "independent_tests": 4,
+  "original_target_executed": false,
+  "original_assets_read": false,
+  "repo_modified_by_reviewer": false,
+  "findings": [],
+  "limits": [
+    "Only RN-even, FTZ=False, DAZ=False, nontrapping value domain",
+    "Quiet NaNs by category only; no payload/sign/SNaN or MXCSR exception modeling",
+    "Injected binary32 acos provider; comparison provider is not original acosf",
+    "Input records authored and typed, not original asset decoding",
+    "Scalar dependency schedule reviewed; no instruction-timing or independent-operation ordering equivalence"
+  ]
+}

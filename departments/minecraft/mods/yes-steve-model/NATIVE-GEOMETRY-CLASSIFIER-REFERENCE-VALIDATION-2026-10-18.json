@@ -1,0 +1,43 @@
+{
+  "status": "PASS",
+  "kind": "authored reference validation, not target compatibility",
+  "files": [
+    {
+      "path": "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/tools/native_geometry_classifier_reference_ysm_265.py",
+      "sha256": "159427388f5c6785d0847ffbdd9b36c15bec037fb705ff08f62b36f3da581692"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/tools/test_native_geometry_classifier_reference_ysm_265.py",
+      "sha256": "646c6d4f83b08e68622ca8dec2ccb60dc6624a95504e7a0cd64113a092997628"
+    }
+  ],
+  "focused_tests": 13,
+  "independent_tests": 4,
+  "focused_command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-m",
+    "unittest",
+    "test_native_geometry_classifier_reference_ysm_265",
+    "-v"
+  ],
+  "focused_cwd": "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/tools",
+  "focused_returncode": 0,
+  "focused_log_sha256": "6ad19a5d862582b5e3fe618ccb34af9feb9798d5bcf33277a8e23fc444ca0583",
+  "usage_note_sha256": "ddbf1fb08b82d9eead5c37ef75f9295bb7689125822ff028b7b8e43cb00620c6",
+  "example": {
+    "status": "PASS",
+    "low_byte": 1,
+    "reason": "ordered-angle-pass",
+    "degrees": 180.0,
+    "acos_provenance": "comparison-only: Python math.acos binary64 then binary32 RN-even; not target acosf"
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/main-geometry-classifier-review/review.json",
+    "sha256": "65fb0c2472267e8a8da92311aea35c040b51d52912b5c9fc277cea300b26986f",
+    "status": "PASS_NO_BLOCKING_FINDINGS"
+  },
+  "original_assets_read": false,
+  "original_target_executed": false,
+  "broad_ci_run": false,
+  "commit_or_push": false
+}

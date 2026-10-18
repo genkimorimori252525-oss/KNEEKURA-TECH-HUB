@@ -95,3 +95,5 @@ Use [owned config/temp paths](NATIVE-INIT-PATH-CONSUMERS-2026-10-18.md), [builti
 ## Model configuration → renderer/Molang inputs
 
 [Main geometry flags](NATIVE-MAIN-GEOMETRY-FLAGS-2026-10-18.md) gives exact byte flow and a bounded truth table for build routing versus renderer bypass. [ConfigForms→Java](NATIVE-CONFIGFORMS-JAVA-JOIN-2026-10-18.md) joins model field order and native default selection to original Checkbox/Range/Radio constructors, completing the seam into existing Java form/expression/UI research. [Selected member index](NATIVE-JAVA-MEMBER-INDEX-2026-10-18.md) now contains52 slots; no central-map promotion.
+
+For the local six-record classification byte, use [source predicate](NATIVE-GEOMETRY-CLASSIFIER-PREDICATE-2026-10-18.md) and [authored reference/usage](NATIVE-GEOMETRY-CLASSIFIER-REFERENCE-2026-10-18.md). The reference accepts mathematical records only, reports per-operation traces and provider provenance, and explicitly excludes unknown target floating modes/acosf equivalence.

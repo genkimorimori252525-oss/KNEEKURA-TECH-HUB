@@ -1,0 +1,416 @@
+{
+  "format": "ysm-main-geometry-classifier-static-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "target_executed": false,
+  "assets_read": false,
+  "reference_implementation_created": false,
+  "ranges": [
+    {
+      "start": "0x376c4a",
+      "end_exclusive": "0x3774b8",
+      "sha256": "a64092cec27684618355057480dc07a1d7853824ed35dba53c4ab041cb176b37",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3632202
+      },
+      "scope": "whole classifier"
+    },
+    {
+      "start": "0x378430",
+      "end_exclusive": "0x37844a",
+      "sha256": "647684fea85c799c9bbea0fedcb218dcb62e30db022a93038295b9d248f6201c",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3638320
+      },
+      "scope": "later byte consumer"
+    },
+    {
+      "start": "0xd14860",
+      "end_exclusive": "0xd14866",
+      "sha256": "5561057ad90dfa085fa63d4f21f1dd5e53942e9d0f13702ce2ce8ac6bd17aeda",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 13715552
+      },
+      "scope": "PLT jump"
+    },
+    {
+      "start": "0xd308b8",
+      "end_exclusive": "0xd308c0",
+      "sha256": "fa446e644d7f98b676a0aafb8068df04bdf12c155e829b2c9f12a1be33027f7b",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 3,
+          "address": 13822760,
+          "memory_size": 1663960,
+          "file_offset": 13814568,
+          "file_size": 8920,
+          "flags": 6
+        },
+        "file_backed": true,
+        "file_offset": 13822136
+      },
+      "scope": "intermediate pointer"
+    },
+    {
+      "start": "0x13d6ef0",
+      "end_exclusive": "0x13d6ef6",
+      "sha256": "125f2d576ec8687be7432bf4394570d7d1431fee6ad18f0267ef315f9df93ddc",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 5,
+          "address": 20803168,
+          "memory_size": 4678048,
+          "file_offset": 19132000,
+          "file_size": 4678048,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 19132144
+      },
+      "scope": "import thunk"
+    },
+    {
+      "start": "0x184d0d8",
+      "end_exclusive": "0x184d0e0",
+      "sha256": "fda74b9893f89724d86ceefa360dcd388f6ed9e12c4bf8440d25117a8c99f0db",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 6,
+          "address": 25481216,
+          "memory_size": 22836,
+          "file_offset": 23810048,
+          "file_size": 22836,
+          "flags": 6
+        },
+        "file_backed": true,
+        "file_offset": 23810264
+      },
+      "scope": "dynamic import slot"
+    }
+  ],
+  "constants": [
+    {
+      "address": "0x3d170",
+      "bytes": "0000803e0000803e0000000000000000",
+      "float32": [
+        0.25,
+        0.25,
+        0.0,
+        0.0
+      ],
+      "sha256": "42abeacc126afd54ccf38c3e8d078ad9974bffc6d415700a1b54440f044fa976",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 250224
+      },
+      "scope": "packed mean multiplier"
+    },
+    {
+      "address": "0x482dc",
+      "bytes": "0000803e",
+      "float32": [
+        0.25
+      ],
+      "sha256": "75e253f50979177eba47b2d0805ad36038789108924514d2a761a70de057d16f",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 295644
+      },
+      "scope": "scalar mean multiplier"
+    },
+    {
+      "address": "0x482b8",
+      "bytes": "0000c040",
+      "float32": [
+        6.0
+      ],
+      "sha256": "fedcca07b1ccdacce623cb6d8afdeed0314e8508d763e228871f18d4e0ebb7c4",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 295608
+      },
+      "scope": "mean divisor"
+    },
+    {
+      "address": "0x4865c",
+      "bytes": "bd378635",
+      "float32": [
+        9.999999974752427e-07
+      ],
+      "sha256": "498983d3523edee13fe8f5185f80bc0741b90fa7e7b6298319e77da62cf744bb",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 296540
+      },
+      "scope": "norm skip threshold"
+    },
+    {
+      "address": "0x482bc",
+      "bytes": "000080bf",
+      "float32": [
+        -1.0
+      ],
+      "sha256": "c68830a25204a09f8e77aada6bc5807f607cccaaa0ebb2a7122d317584478a8b",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 295612
+      },
+      "scope": "lower clamp"
+    },
+    {
+      "address": "0x4818c",
+      "bytes": "0000803f",
+      "float32": [
+        1.0
+      ],
+      "sha256": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 295308
+      },
+      "scope": "upper clamp"
+    },
+    {
+      "address": "0x48578",
+      "bytes": "00003443",
+      "float32": [
+        180.0
+      ],
+      "sha256": "21b9ff9cf99927e92d16d0fcc3190c14680a24c02dad89f9777d5107fdeb5db1",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 296312
+      },
+      "scope": "degree multiplier"
+    },
+    {
+      "address": "0x48624",
+      "bytes": "db0f4940",
+      "float32": [
+        3.1415927410125732
+      ],
+      "sha256": "3a1d8964b4fe305b5d25d90b8ba168d95e559961da4a9b22df4558cc257e7e11",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 296484
+      },
+      "scope": "pi divisor"
+    },
+    {
+      "address": "0x48228",
+      "bytes": "0000b442",
+      "float32": [
+        90.0
+      ],
+      "sha256": "375f9f99bd284d0e60013f795d63d10f14ed23414c86cd3788905485d77a6a95",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 295464
+      },
+      "scope": "angle threshold"
+    }
+  ],
+  "import_resolution": {
+    "chain": [
+      "0xd14860",
+      "[0xd308b8]",
+      "0x13d6ef0",
+      "[0x184d0d8]"
+    ],
+    "relocation": "000000000184d0d8  0000001c00000007 R_X86_64_JUMP_SLOT     0000000000000000 acosf@GLIBC_2.2.5 + 0",
+    "calls": [
+      "0x377041",
+      "0x377148",
+      "0x37721d",
+      "0x3772e7",
+      "0x3773b4",
+      "0x377481"
+    ]
+  },
+  "records": [
+    {
+      "index": 0,
+      "base": "0x0",
+      "averaged_triples": [
+        "0x30",
+        "0x58",
+        "0x80",
+        "0xa8"
+      ],
+      "dot_multiplier_triple": "0x10"
+    },
+    {
+      "index": 1,
+      "base": "0xc0",
+      "averaged_triples": [
+        "0xf0",
+        "0x118",
+        "0x140",
+        "0x168"
+      ],
+      "dot_multiplier_triple": "0xd0"
+    },
+    {
+      "index": 2,
+      "base": "0x180",
+      "averaged_triples": [
+        "0x1b0",
+        "0x1d8",
+        "0x200",
+        "0x228"
+      ],
+      "dot_multiplier_triple": "0x190"
+    },
+    {
+      "index": 3,
+      "base": "0x240",
+      "averaged_triples": [
+        "0x270",
+        "0x298",
+        "0x2c0",
+        "0x2e8"
+      ],
+      "dot_multiplier_triple": "0x250"
+    },
+    {
+      "index": 4,
+      "base": "0x300",
+      "averaged_triples": [
+        "0x330",
+        "0x358",
+        "0x380",
+        "0x3a8"
+      ],
+      "dot_multiplier_triple": "0x310"
+    },
+    {
+      "index": 5,
+      "base": "0x3c0",
+      "averaged_triples": [
+        "0x3f0",
+        "0x418",
+        "0x440",
+        "0x468"
+      ],
+      "dot_multiplier_triple": "0x3d0"
+    }
+  ],
+  "prior_receipt": {
+    "path": "../main-geometry-two-flags-contract/evidence.json",
+    "sha256": "f11e8ee85c86adc37896f79fad5da4b01e831d3220018d3c53837e091678a8c1"
+  },
+  "scope": "Exact input offsets, binary32 arithmetic schedule, static imported acosf identity, comparison/output control flow; no visual naming or libm bit-exact/runtime guarantee"
+}

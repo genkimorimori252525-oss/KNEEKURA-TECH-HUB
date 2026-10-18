@@ -48,3 +48,7 @@ On the reviewed producer paths C implies Q, so Q OR C simplifies to Q, but retai
 The read354e00/version gates and selector1=`main` identity are inherited from prior receipts, not redone. Other selector/vector routes explicitly supply zeros as previously proven. No claim that every process retains the registry unchanged, no inventory of every payload+54 access in the ELF, no new UI names, no exact full geometric-classification semantics, and no renderer-equivalence claim. Original bytes suffice to close the requested argument-storage-immediate-branch gap.
 
 [Source window and inherited-contract evidence](NATIVE-MAIN-GEOMETRY-FLAGS-EVIDENCE-2026-10-18.json). The reproduction script and raw byte windows remain external.
+
+## Classification byte closure
+
+The previously unnamed C producer is now covered by an [exact bounded arithmetic predicate](NATIVE-GEOMETRY-CLASSIFIER-PREDICATE-2026-10-18.md) and a separately reviewed [authored reference](NATIVE-GEOMETRY-CLASSIFIER-REFERENCE-2026-10-18.md). It compares six record-average directions against supplied reference vectors through rounded angle tests; no visual class or normal-vector name is inferred.
