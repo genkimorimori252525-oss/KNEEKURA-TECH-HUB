@@ -21,3 +21,7 @@ The implemented harness follows a bounded harness with these constraints:
 - Retain reproducible scripts and derived evidence in GitHub; keep raw images, project database and raw traces outside Git. Verify preservation hashes and remote publication before reporting saved results.
 
 The current static frontier remains recorded by NATIVE-INIT-GUARD-CHAIN-RECOVERY-2026-10-18.md. The constant-propagation experiment is explicitly INCOMPLETE and does not itself authorize simulation.
+
+## Subsequent bounded extension within the original step cap
+
+The explicit opaque-copy mode adds a conservative unknown-byte copy model, tested against ordinary Ghidra execution on known data. Unknown bytes remain origin-tagged rather than receiving assumed values; ordinary consumers still halt. It completed the original 10,000-step budget without a non-stack write. See NATIVE-OPAQUE-COPY-TRIAL-2026-10-18.json. The requested 100,000-step budget is a pending new scope decision and has not been used.

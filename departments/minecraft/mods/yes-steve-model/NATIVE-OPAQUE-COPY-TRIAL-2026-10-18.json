@@ -1,0 +1,70 @@
+{
+  "format": "kneekura.ysm-opaque-copy-trial.v1",
+  "status": "INSTRUCTION_BUDGET_REACHED_NOT_INITIALIZER_COMPLETION",
+  "entry": "0x152eb19",
+  "stop_pc": "0x1446652",
+  "instruction_steps_attempted": 10000,
+  "instruction_steps_completed": 10000,
+  "unique_instruction_addresses": 3557,
+  "actual_pcode_operations": 87918,
+  "modeled_copy_steps": 658,
+  "opaque_byte_copy_events": 160,
+  "distinct_opaque_origins": 80,
+  "atomic_marker_pairs": 55,
+  "strict_trial_instruction_prefix_identical": true,
+  "static_oracles_matched": 47,
+  "self_tests": {
+    "baseline": 16,
+    "opaque_copy": 24,
+    "differential_known_copy_cases_included": 10
+  },
+  "model": "Only exact F3 A4 stack-to-stack REP MOVSB, one byte per step plus zero-count exit. Unknown byte identity kept in shadow map; no concrete fill. Any non-copy read of an opaque byte halts before use. Known overwrites clear shadow only after success. No symbolic arithmetic or branch guessing.",
+  "boundaries": {
+    "max_instructions": 10000,
+    "max_actual_pcode_ops": 1000000,
+    "max_seconds": 60,
+    "first_non_stack_write": "stop before application",
+    "host_native_execution": false,
+    "external_calls": "forbidden"
+  },
+  "post_first_copy_observed_edges": [
+    {
+      "step": 9445,
+      "from": "0x173afdb",
+      "to": "0x160cc74"
+    },
+    {
+      "step": 9453,
+      "from": "0x160cc8e",
+      "to": "0x160cc94"
+    },
+    {
+      "step": 9462,
+      "from": "0x160ccb6",
+      "to": "0x14fcf64"
+    },
+    {
+      "step": 9484,
+      "from": "0x14fcfaa",
+      "to": "0x14cb406"
+    },
+    {
+      "step": 9519,
+      "from": "0x143fd9e",
+      "to": "0x143fda3"
+    }
+  ],
+  "file_and_program_hashes_preserved": true,
+  "non_stack_write_applied": false,
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "input_assumptions": "Same synthetic zero caller registers and private stack as strict trial; unknown memory stays unknown",
+  "hashes": {
+    "bounded-init-opaque-trial.tsv": "4366d4a1118325731f5c2f295b918e8033ceb36ff7370bd8742aeb722294fab4",
+    "guarded-opaque-differential-self-test.tsv": "6062d8e87b95bdfacd16a8c36b0ec1ee82f2677c7a59b10ae2a5f9d2ee680aaf",
+    "guarded-strict-snapshot-source.java": "64ab9b653e6341486392cf69d5f0fab111f58280eee30b3d52aa7115603c13e2",
+    "YsmGuardedInitSimulation.java": "f1f2b7257a48ae63cca0d8eda37a1dd648805aefc42fe364c708f80eaf3d4a46"
+  },
+  "independent_semantic_review": "NOT_RUN",
+  "mapping_promotions": 0,
+  "next_budget_increase": "100000 requested; not executed pending owner response"
+}
