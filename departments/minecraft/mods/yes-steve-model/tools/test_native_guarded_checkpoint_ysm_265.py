@@ -46,6 +46,11 @@ class CheckpointTests(unittest.TestCase):
   state=capture(self.stopped())
   for key in ('crc_blocks','crc_iterations','crc_logical_steps','crc_counters_complete'):state['fields'].pop(key)
   r=self.cpu();restore(r,state);self.assertFalse(r.crc_counters_complete);self.assertEqual(r.crc_blocks,0)
+ def test_locale_fixture_and_readonly_state_roundtrip(self):
+  from native_c_locale_fixture_ysm_265 import ensure_c_locale
+  from native_unicorn_guarded_ysm_265 import ModelHalt
+  c=self.stopped();p=ensure_c_locale(c);state=capture(c);r=self.cpu();restore(r,state);self.assertEqual(r.c_locale_handle,p);self.assertEqual(r.fixture_reserved,8192);self.assertEqual(r.read_known(p+104,24),c.read_known(p+104,24));self.assertIsNotNone(r.unknown(p,104))
+  with self.assertRaises(ModelHalt):r.write_private(p+104,bytes(8))
  def test_capture_requires_stopped_state(self):
   with self.assertRaises(ValueError):capture(self.cpu())
 if __name__=='__main__':unittest.main()

@@ -13,7 +13,20 @@ class ShadowGuardedCPU(GuardedCPU):
     MAX_IMAGE_BYTES=8*1024*1024
     MAX_IMAGE_EVENTS=1000000
     def __init__(self,*args,**kwargs):
-        super().__init__(*args,**kwargs);self.shadow_ranges=[];self.shadow_expected={};self.shadow_events=0;self.shadow_bytes=0;self.reference_digests=None;self.lazy_new_calls=0;self.lazy_memset_calls=0;self.crc_counters_complete=True;self.loader_view_applied=False;self.loader_relocation_events=0;self.init_phase='dt-init';self.init_array_index=0;self.init_array_completed=[];self.call_in_progress=False;self.call_saved={}
+        super().__init__(*args,**kwargs);self.shadow_ranges=[];self.shadow_expected={};self.shadow_events=0;self.shadow_bytes=0;self.reference_digests=None;self.lazy_new_calls=0;self.lazy_memset_calls=0;self.crc_counters_complete=True;self.loader_view_applied=False;self.loader_relocation_events=0;self.init_phase='dt-init';self.init_array_index=0;self.init_array_completed=[];self.call_in_progress=False;self.call_saved={};self.c_locale_handle=0;self.locale_model_calls=0;self.thread_locale=(1<<64)-1;self.memory_model_calls=0;self.atexit_registrations=[];self.external_data_slots=[];self.external_data_guard_applied=False;self.environment_model_calls=0;self.stdio_fixture_base=0;self.external_data_bindings={};self.external_binding_events=0;self.heap_free_calls=0
+    def external_data_hit(self,a,n):
+        return next(((max(a,slot),name) for slot,name in getattr(self,'external_data_slots',[]) if slot<a+n and a<slot+8),None)
+    def unknown(self,a,n):
+        hit=self.external_data_hit(a,n)
+        return hit[0] if hit else super().unknown(a,n)
+    def read_known(self,a,n):
+        hit=self.external_data_hit(a,n)
+        if hit:self.emit('UNRESOLVED_DATA_SYMBOL',hit[1],f'address={hit[0]:x}');self.demand(False,'UNMODELED_EXTERNAL_DATA_READ',hit[0],n)
+        return super().read_known(a,n)
+    def _read(self,uc,access,a,n,value,user):
+        hit=self.external_data_hit(a,n)
+        if hit:self.emit('UNRESOLVED_DATA_SYMBOL',hit[1],f'address={hit[0]:x}');self.fail('UNMODELED_EXTERNAL_DATA_READ',hit[0],n);return
+        super()._read(uc,access,a,n,value,user)
     def reference_hashes(self):return [hashlib.sha256(v).hexdigest() for a,b,v in self.image]
     def shadow_region(self,a,n):
         return next((i for i,(lo,hi,_) in enumerate(self.image) if lo<=a and a+n<=hi and lo!=self.loader_name),None)
@@ -24,6 +37,13 @@ class ShadowGuardedCPU(GuardedCPU):
         if self.reference_digests is None:self.reference_digests=self.reference_hashes()
         self.uc.mem_protect(address,((size+4095)//4096)*4096,prot)
         self.shadow_ranges.append((address,address+size,prot));self.emit('SHADOW_IMAGE_RANGE',f'address={address:x}',f'size={size:x}',f'prot={prot}','working_copy_only=true','host_permissions_changed=false')
+    def write_model_memory(self,a,data):
+        n=len(data)
+        if not n:return
+        if self.private_region(a,n):self.write_private(a,data);return
+        self.demand(self.shadow_region(a,n) is not None and self.shadow_writable(a,n),'MODEL_WRITE_OUTSIDE_GRANTED_RANGE',a,n)
+        self.demand(self.shadow_events+1<=self.MAX_IMAGE_EVENTS and self.shadow_bytes+n<=self.MAX_IMAGE_BYTES,'SHADOW_WRITE_BUDGET',a,n)
+        self.uc.mem_write(a,data);self.commit_write(a,n)
     def _code(self,uc,address,size,user):
         super()._code(uc,address,size,user)
         if not self.stop and address==0x14f9c20 and bytes(uc.mem_read(address,size))==b'\xc3':self.pending='lazy-import';uc.emu_stop()
@@ -34,15 +54,27 @@ class ShadowGuardedCPU(GuardedCPU):
             resolver,link_map,index,target=struct.unpack('<QQQQ',self.read_known(sp,32))
             self.demand(resolver==0 and link_map==0,'UNEXPECTED_LAZY_BINDER_STATE',sp)
             self.emit('LAZY_IMPORT_FRONTIER',f'relocation_index={index}',f'caller_return={target:x}')
-            allocators={250:('_Znwm',0x184d7e8,0x13fe69d),205:('_Znam',0x184d680,0x1478e57),197:('memset',0x184d640,0x14c39b7)}
+            from native_c_locale_fixture_ysm_265 import IMPORTS as LOCALE_IMPORTS,SYMBOLS as LOCALE_SYMBOLS,model as locale_model
+            from native_memory_imports_ysm_265 import IMPORTS as MEMORY_IMPORTS,SYMBOLS as MEMORY_SYMBOLS,model as memory_model
+            from native_heap_imports_ysm_265 import IMPORTS as HEAP_IMPORTS,SYMBOLS as HEAP_SYMBOLS,model as heap_model
+            allocators={**LOCALE_IMPORTS,**MEMORY_IMPORTS,**HEAP_IMPORTS,6:('__cxa_atexit',0x184d048,0x15044c7),121:('secure_getenv',0x184d3e0,0x14bdbd9),250:('_Znwm',0x184d7e8,0x13fe69d),205:('_Znam',0x184d680,0x1478e57),197:('memset',0x184d640,0x14c39b7)}
             self.demand(index in allocators,'UNMODELED_LAZY_IMPORT',index)
             symbol,slot,stub=allocators[index]
             self.demand(self.read_known(slot,8)==struct.pack('<Q',stub) and self.read_known(stub,5)==b'\x68'+struct.pack('<I',index),'LAZY_IMPORT_IDENTITY_MISMATCH')
-            self.demand(self.code_allowed(target),'EXTERNAL_OR_NULL_TARGET',target)
-            if symbol=='memset':
+            self.demand(self.return_target_allowed(target,sp+32),'EXTERNAL_OR_NULL_TARGET',target)
+            if symbol=='__cxa_atexit':
+                function,arg,dso=self.reg('RDI'),self.reg('RSI'),self.reg('RDX')
+                self.demand(self.code_allowed(function) and len(self.atexit_registrations)<1024,'UNMODELED_ATEXIT_REGISTRATION',function)
+                self.atexit_registrations.append([function,arg,dso]);result=0;self.emit('VIRTUAL_ATEXIT_REGISTRATION',f'function={function:x}',f'argument={arg:x}',f'dso={dso:x}','callback_executed=false','host_registration=false')
+            elif symbol=='secure_getenv':
+                key=self.ascii(self.reg('RDI'));self.demand(key=='GLIBCXX_TUNABLES','UNMODELED_ENVIRONMENT_KEY');result=0;self.environment_model_calls+=1;self.emit('VIRTUAL_ENVIRONMENT_ABSENT',key,'host_environment_read=false')
+            elif symbol in LOCALE_SYMBOLS:result=locale_model(self,symbol)
+            elif symbol in HEAP_SYMBOLS:result=heap_model(self,symbol)
+            elif symbol in MEMORY_SYMBOLS:result=memory_model(self,symbol)
+            elif symbol=='memset':
                 result=self.reg('RDI');n=self.reg('RDX');value=self.reg('RSI')&255
                 self.demand(0<=n<=0x100000,'UNMODELED_MEMSET_SIZE',n)
-                if n:self.write_private(result,bytes([value])*n)
+                if n:self.write_model_memory(result,bytes([value])*n)
                 self.lazy_memset_calls+=1
             else:result=self.allocate(self.reg('RDI'),kind='operator-new');self.lazy_new_calls+=1
             self.reg('RAX',result);self.reg('RSP',sp+32);self.reg('RIP',target);self.emit('VIRTUAL_LAZY_IMPORT',f'symbol={symbol}',f'relocation_index={index}',f'result={result:x}','host_import_called=false');return
@@ -56,7 +88,8 @@ class ShadowGuardedCPU(GuardedCPU):
     def shadow_writable(self,a,n):
         for at in range(a,a+n):
             prot=next((prot for lo,hi,prot in reversed(self.shadow_ranges) if lo<=at<hi),0)
-            if not prot&2:return False
+            page_prot=next((prot for lo,hi,prot in reversed(self.shadow_ranges) if lo<=at<((hi+4095)&~4095)),0)
+            if not prot&2 or not page_prot&2:return False
         return True
     def _write(self,uc,access,a,n,value,user):
         if not any(lo<a+n and a<hi for lo,hi,_ in self.image):return super()._write(uc,access,a,n,value,user)
@@ -82,7 +115,7 @@ class ShadowGuardedCPU(GuardedCPU):
     def report_preservation(self):
         reference_ok=self.reference_digests is None or self.reference_hashes()==self.reference_digests
         expected_ok=self.expected_image_matches();unchanged=self.image_unchanged()
-        self.emit('SHADOW_PRESERVATION',f'immutable_reference_unchanged={reference_ok}',f'working_image_matches_committed_ledger={expected_ok}',f'working_image_equals_reference={unchanged}',f'committed_events={self.shadow_events}',f'committed_bytes={self.shadow_bytes}',f'virtual_operator_new_calls={self.lazy_new_calls}',f'virtual_memset_calls={self.lazy_memset_calls}',f'crc_counter_history_complete={self.crc_counters_complete}',f'loader_relocation_events={self.loader_relocation_events}',f'runtime_image_events={self.shadow_events-self.loader_relocation_events}')
+        self.emit('SHADOW_PRESERVATION',f'immutable_reference_unchanged={reference_ok}',f'working_image_matches_committed_ledger={expected_ok}',f'working_image_equals_reference={unchanged}',f'committed_events={self.shadow_events}',f'committed_bytes={self.shadow_bytes}',f'virtual_operator_new_calls={self.lazy_new_calls}',f'virtual_memset_calls={self.lazy_memset_calls}',f'crc_counter_history_complete={self.crc_counters_complete}',f'loader_relocation_events={self.loader_relocation_events}',f'runtime_image_events={self.shadow_events-self.loader_relocation_events-self.external_binding_events}',f'locale_model_calls={self.locale_model_calls}',f'memory_model_calls={self.memory_model_calls}',f'atexit_registrations={len(self.atexit_registrations)}',f'external_data_guard={self.external_data_guard_applied}',f'environment_model_calls={self.environment_model_calls}',f'external_binding_events={self.external_binding_events}',f'heap_free_calls={self.heap_free_calls}')
         if not reference_ok or not expected_ok:raise AssertionError('Unaccounted image mutation')
         self.emit('BOUNDED_RESULT',self.stop['reason'],'target_host_library_execution=false','host_file_access=false','host_permissions_changed=false',f'working_copy_image_writes={self.shadow_events}','transactional_fault_state=true')
 

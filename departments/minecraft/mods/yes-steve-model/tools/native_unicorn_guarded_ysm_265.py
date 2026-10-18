@@ -24,7 +24,7 @@ class GuardedCPU:
     def __init__(self,out,mode='strict',limit=10000,seconds=60,seed=0x1122334455667788,stride=1000,pid=0):
         if mode not in MODES or not 0<limit<=4000000 or not 0<seconds<=180:raise ValueError('Invalid bounded configuration')
         self.uc=Uc(UC_ARCH_X86,UC_MODE_64);self.out=out;self.level=MODES[mode];self.limit=limit;self.seconds=seconds
-        self.seed=seed&MASK;self.stride=stride&MASK;self.clock_reads=0;self.allocations=[];self.heap_used=0;self.malloc_calls=0
+        self.seed=seed&MASK;self.stride=stride&MASK;self.clock_reads=0;self.fixture_reserved=0;self.private_readonly=[];self.allocations=[];self.heap_used=0;self.malloc_calls=0
         self.fopen_calls=self.fgets_calls=self.fclose_calls=0;self.file_open=False;self.file_position=0
         self.fixture=f'Name:\tvirtual-ysm\nTracerPid:\t{pid}\n'.encode('ascii')
         self.cpuid_leaf1=None;self.cpuid_calls=0;self.protection_result='disabled';self.protection_calls=0;self.virtual_platform=False;self.platform_calls=0;self.virtual_loader='disabled';self.dladdr_calls=0;self.loader_name=0x730000000000;self.loader_ready=False
@@ -82,10 +82,16 @@ class GuardedCPU:
         for base,size in [(STACK,STACK_SIZE),(HEAP,HEAP_SIZE)]:
             if base<=a and a+n<=base+size:return base
         return None
-    def private_allowed(self,a,n):
+    def private_region(self,a,n):
         if n<=0:return False
         if STACK<=a and a+n<=STACK+STACK_SIZE:return True
         return self.level>=3 and any(start<=a and a+n<=start+size for start,size in self.allocations)
+    def private_allowed(self,a,n):
+        return self.private_region(a,n) and not any(lo<a+n and a<hi for lo,hi in self.private_readonly)
+    def reserve_fixture(self,n):
+        reserve=(n+15)&~15
+        self.demand(0<n<=0x10000 and reserve<=HEAP_SIZE-self.heap_used-self.fixture_reserved,'PRIVATE_FIXTURE_BUDGET',n)
+        a=HEAP+HEAP_SIZE-self.fixture_reserved-reserve;self.fixture_reserved+=reserve;self.allocations.append((a,n));self.emit('VIRTUAL_FIXTURE_STORAGE',f'address={a:x}',f'size={n}','within_existing_private_budget=true');return a
     def unknown(self,a,n):
         base=self.physical(a,n)
         if base is not None:
@@ -181,12 +187,14 @@ class GuardedCPU:
             if value!=expected:self.fail('ORACLE_DISAGREEMENT',self.pc);return
     def allocate(self,n,kind='malloc'):
         reserve=(max(n,1)+15)&~15
-        self.demand(0<=n<=HEAP_SIZE and reserve<=HEAP_SIZE-self.heap_used,'VIRTUAL_HEAP_EXHAUSTED',n)
+        self.demand(0<=n<=HEAP_SIZE and reserve<=HEAP_SIZE-self.heap_used-self.fixture_reserved,'VIRTUAL_HEAP_EXHAUSTED',n)
         a=HEAP+self.heap_used;self.heap_used+=reserve;self.allocations.append((a,n));self.malloc_calls+=int(kind=='malloc');self.emit('VIRTUAL_MALLOC' if kind=='malloc' else 'VIRTUAL_OPERATOR_NEW',f'{a:x}',f'size={n}',f'reserved={reserve}');return a
+    def return_target_allowed(self,target,after_sp):
+        return self.code_allowed(target) or (target==RETURN and after_sp==SP+8)
     def frame(self,push=True):
         sp=self.reg('RSP');self.demand(STACK<=sp and sp+(16 if push else 8)<=STACK+STACK_SIZE,'INVALID_IMPORT_FRAME',sp)
         if push:self.demand(int.from_bytes(self.read_known(sp,8),'little')==0,'UNEXPECTED_IMPORT_SLOT_VALUE',sp)
-        target=int.from_bytes(self.read_known(sp+(8 if push else 0),8),'little');self.demand(self.code_allowed(target),'EXTERNAL_OR_NULL_TARGET',target)
+        target=int.from_bytes(self.read_known(sp+(8 if push else 0),8),'little');self.demand(self.return_target_allowed(target,sp+(16 if push else 8)),'EXTERNAL_OR_NULL_TARGET',target)
         return sp,target
     def ascii(self,a):
         out=bytearray()
@@ -246,7 +254,7 @@ class GuardedCPU:
         if kind=='copy':
             self.modeled_copies+=1;n=self.reg('RCX')
             if n==0:self.reg('RIP',self.pc+2);return
-            src,dst,df=self.reg('RSI'),self.reg('RDI'),self.reg('DF');self.demand(self.private_allowed(src,1),'COPY_SOURCE_OUTSIDE_PRIVATE',src);self.demand(self.private_allowed(dst,1),'OUTSIDE_PRIVATE_WRITABLE_REGIONS',dst)
+            src,dst,df=self.reg('RSI'),self.reg('RDI'),self.reg('DF');self.demand(self.private_region(src,1),'COPY_SOURCE_OUTSIDE_PRIVATE',src);self.demand(self.private_allowed(dst,1),'OUTSIDE_PRIVATE_WRITABLE_REGIONS',dst)
             if self.unknown(src,1) is None:self.write_private(dst,self.read_known(src,1))
             else:
                 base=self.physical(dst);self.known[base][dst-base]=0;origin=self.opaque.get(src,src);self.opaque[dst]=origin;self.opaque_copies+=1;self.emit('OPAQUE_COPY',f'{src:x}',f'{dst:x}',f'origin={origin:x}');self.log_heap_write(dst,1)
@@ -298,6 +306,8 @@ class GuardedCPU:
                 if self.pending:
                     try:self.model(self.pending)
                     except ModelHalt:break
+                    if self.reg('RIP')==RETURN and self.reg('RSP')==SP+8:
+                        self.completed+=1;self.fail('ENTRY_RETURN',RETURN);break
                 else:
                     nxt=self.reg('RIP')
                     if self.returned_to_sentinel():

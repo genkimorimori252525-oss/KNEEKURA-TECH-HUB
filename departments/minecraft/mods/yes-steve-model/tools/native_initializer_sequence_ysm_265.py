@@ -50,7 +50,10 @@ def main():
         if a.resume_checkpoint:
             c.emit('CHECKPOINT_SOURCE_SHA256',read_checkpoint(c,a.resume_checkpoint))
             if not c.loader_view_applied:raise ValueError('Cannot use an unrelocated scenario snapshot for this sequence')
+            if not c.external_data_guard_applied:raise ValueError('Checkpoint predates external-data guards; replay fresh before making stronger claims')
         else:apply_loader_view(c,data)
+        from native_stdio_fixture_ysm_265 import ensure_stdio_bindings
+        ensure_stdio_bindings(c)
         r=run_sequence(c,m,a.steps,a.seconds);c.emit('CHECKPOINT_SAVED_SHA256',write_checkpoint(c,a.checkpoint_out))
     if hashlib.sha256(a.image.read_bytes()).hexdigest()!=before:raise AssertionError('Original file changed')
     print(json.dumps(r))

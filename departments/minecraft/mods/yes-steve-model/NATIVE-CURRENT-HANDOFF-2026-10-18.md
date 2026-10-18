@@ -1,6 +1,6 @@
 # Current YSM native-analysis handoff — October 18
 
-Read this entry first. Current report: [relocated initializer sequence](NATIVE-RELOCATED-INITIALIZER-SEQUENCE-RESULT-2026-10-18.md). Branch: jolly/ysm-analysis-20261016. The project remains unfinished. Older linked reports describe historical states, not today's frontier.
+Read this entry first. Current report: [eight callbacks and TLS frontier](NATIVE-C-LIBRARY-INITIALIZERS-RESULT-2026-10-18.md). Branch: jolly/ysm-analysis-20261016. The project remains unfinished. Older linked reports describe historical states, not today's frontier.
 
 ## Goal and unchanged confidence
 
@@ -19,9 +19,9 @@ Entry0x152eb19 is simulated with a protected Unicorn2.1.4 backend and explicit s
 
 Two masked CRC32 loops have pinned code/table contracts and60 full-state differential cases. Fifteen summaries cover528,156,776 logical loop-instruction effects; these are not actually interpreted instruction counts. CRC acceleration turns off conservatively after any working-image mutation.
 
-DT_INIT produces two eight-byte context/object pointers at0xedf060 and0xedf068. In-progress callback0 adds126 further runtime write events; the latest ledger totals8812 loader fixups plus128 runtime events(999 runtime bytes). A fresh full run now completes DT_INIT:3,290,734 native instruction/model invocations, final RET0x1d963d, declared return sentinel and exact post-return stack. The deterministic8812 RELATIVE-fixup scenario also returns in the same count. Init-array callback0 now stops at __newlocale(0x40,"C",0), lazy index133/slot0x184d440. Zero of45 callbacks have completed; JNI lifecycle remains.
+A fresh DT_INIT run returns after3,290,734 native instruction/model invocations. The deterministic8812 RELATIVE-fixup scenario also returns in the same count. The current authoritative sequence adds unresolved-external-data guards and explicit opaque stdio/C-locale/environment/heap fixtures. Callbacks0..7 have returned in order; callback8(entry0x326630) is paused at __tls_get_addr, lazy index122, descriptor0xd2cf38. Eight of45 callbacks are complete.
 
-The latest sequence checkpoint preserves relocated working state and callback0's in-progress frame. Continue it using native_initializer_sequence_ysm_265.py rather than resetting the callback. Older completed-DT_INIT snapshots belong to the separate unrelocated scenario. Early snapshots omitted CRC diagnostic counts; their prior CRC history is now explicitly marked incomplete. Architectural/private-state restart equivalence was independently checked against a fresh full-prefix run; see the checkpoint report for exact scope.
+Resume the latest guarded sequence checkpoint with native_initializer_sequence_ysm_265.py; preserve its in-progress callback frame. Older raw-slot snapshots are rejected because unresolved external data must never be treated as zero pointers into the mapped ELF header. PT_TLS is216 initialized/15408 total bytes, alignment16; its three DTPMOD64 descriptors still need an explicit single-thread model. JNI lifecycle remains separate.
 
 ## Reuse and runtime contracts
 
@@ -56,3 +56,5 @@ These reports retain exact previous scopes, source hashes and limitations. Do no
 - [working-image/checkpoint evidence](NATIVE-SHADOW-CHECKPOINT-RESULT-2026-10-18.md)
 
 - [DT_INIT return evidence](NATIVE-DT-INIT-RETURN-RESULT-2026-10-18.md)
+
+- [relocated initializer sequence](NATIVE-RELOCATED-INITIALIZER-SEQUENCE-RESULT-2026-10-18.md)

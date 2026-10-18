@@ -1,5 +1,7 @@
 # Deterministic loader view and ordered initializer sequence
 
+Historical raw-slot checkpoint. External-object reads are now guarded; see NATIVE-C-LIBRARY-INITIALIZERS-RESULT-2026-10-18.md for the authoritative continuation.
+
 Before invoking init-array callbacks, the working-image driver now applies8812 symbol-zero R_X86_64_RELATIVE entries at analysis base0. Every destination was verified inside an ELF writable PT_LOAD segment. Their total size is70496 bytes. Initial ELF writable permissions are modeled before target execution; later protection requests still override them. Original file/reference bytes remain unchanged and each working fixup enters the mutation ledger.
 
 Only deterministic RELATIVE relocations are applied. Four R_X86_64_64,38 GLOB_DAT,257 JUMP_SLOT and3 TLS-module entries remain unresolved; imported functions are still narrow explicit models, not host calls. This remains a partial synthetic loader, not a fully linked live process.

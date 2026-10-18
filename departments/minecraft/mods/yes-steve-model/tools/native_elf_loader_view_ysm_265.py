@@ -22,10 +22,14 @@ def manifest(data):
             if not any(r['address']<=address and address+8<=r['address']+r['memory_size'] and r['flags']&2 for r in rs):raise ValueError('RELATIVE destination outside writable ELF segment')
             fixups.append((address,addend&MASK))
         else:unresolved.append((address,info,addend))
+    external_data=[];strings=data_at(data,rs,one(5),one(10))
+    for address,info,addend in unresolved:
+        symbol=info>>32;name,kind,other,section,value,size=struct.unpack('<IBBHQQ',data_at(data,rs,one(6)+symbol*24,24))
+        if section==0 and kind&15 in (1,6):external_data.append([address,strings[name:].split(b'\0')[0].decode('ascii')])
     init=array_targets(one(25),data_at(data,rs,one(25),one(27)),rels+plt)
     if len(fixups)!=8812 or len(init)!=45 or one(12)!=0x152eb19:raise ValueError('Pinned initializer inventory changed')
     writable=[(r['address']&~4095,r['address']+r['memory_size']-(r['address']&~4095),((r['flags']&4)>>2)|(r['flags']&2)|((r['flags']&1)<<2)) for r in rs if r['flags']&2]
-    return {'dt_init':one(12),'initializers':[e['relative_target'] for e in init],'init_slots':[e['slot'] for e in init],'fixups':fixups,'writable':writable,'unresolved':unresolved}
+    return {'dt_init':one(12),'initializers':[e['relative_target'] for e in init],'init_slots':[e['slot'] for e in init],'fixups':fixups,'writable':writable,'unresolved':unresolved,'external_data_slots':external_data}
 
 def apply_fixups(cpu,writable,fixups):
     if cpu.attempted or cpu.shadow_events or cpu.loader_view_applied:raise ValueError('Loader view must precede all target execution and image stores')
@@ -41,4 +45,4 @@ def apply_fixups(cpu,writable,fixups):
     if not cpu.expected_image_matches():raise AssertionError('Loader working image disagrees with ledger')
 
 def apply_loader_view(cpu,data):
-    m=manifest(data);apply_fixups(cpu,m['writable'],m['fixups']);return m
+    m=manifest(data);apply_fixups(cpu,m['writable'],m['fixups']);cpu.external_data_slots=m['external_data_slots'];cpu.external_data_guard_applied=True;return m

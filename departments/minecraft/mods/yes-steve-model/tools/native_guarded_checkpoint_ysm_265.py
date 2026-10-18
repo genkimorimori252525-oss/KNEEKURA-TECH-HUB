@@ -7,7 +7,7 @@ import base64,hashlib,json,zlib,ctypes
 import unicorn
 from unicorn.unicorn_py3.unicorn import UcContext
 from native_unicorn_guarded_ysm_265 import STACK,STACK_SIZE,HEAP,HEAP_SIZE
-FIELDS=('level seed stride clock_reads allocations heap_used malloc_calls fopen_calls fgets_calls fclose_calls file_open file_position accelerate_crc modeled_copies opaque_copies heap_writes rollback_count oracle_checks oracle_enabled virtual_loader dladdr_calls loader_ready virtual_platform platform_calls protection_result protection_calls cpuid_calls shadow_events shadow_bytes lazy_new_calls lazy_memset_calls crc_blocks crc_iterations crc_logical_steps crc_counters_complete loader_view_applied loader_relocation_events init_phase init_array_index init_array_completed call_in_progress call_saved').split()
+FIELDS=('level seed stride clock_reads allocations heap_used malloc_calls fopen_calls fgets_calls fclose_calls file_open file_position accelerate_crc modeled_copies opaque_copies heap_writes rollback_count oracle_checks oracle_enabled virtual_loader dladdr_calls loader_ready virtual_platform platform_calls protection_result protection_calls cpuid_calls shadow_events shadow_bytes lazy_new_calls lazy_memset_calls crc_blocks crc_iterations crc_logical_steps crc_counters_complete loader_view_applied loader_relocation_events init_phase init_array_index init_array_completed call_in_progress call_saved fixture_reserved private_readonly c_locale_handle locale_model_calls thread_locale memory_model_calls atexit_registrations external_data_slots external_data_guard_applied environment_model_calls stdio_fixture_base external_data_bindings external_binding_events heap_free_calls').split()
 class ContextHeader(ctypes.Structure):
     # Pinned Unicorn2.1.4 uc_priv.h. Memory snapshot pointers are not CPU state.
     _fields_=[('context_size',ctypes.c_size_t),('mode',ctypes.c_int),('arch',ctypes.c_int),('snapshot_level',ctypes.c_int),('ramblock_freed',ctypes.c_bool),('last_block',ctypes.c_void_p),('fv',ctypes.c_void_p)]
@@ -46,13 +46,16 @@ def restore(cpu,state):
         if any(v not in (0,1) for v in known):raise ValueError('Invalid initialized mask')
         private[a]=(data,known)
     fields=dict(state['fields']);fields.setdefault('lazy_new_calls',0);fields.setdefault('lazy_memset_calls',0)
-    defaults={'loader_view_applied':False,'loader_relocation_events':0,'init_phase':'dt-init','init_array_index':0,'init_array_completed':[],'call_in_progress':False,'call_saved':{}}
+    defaults={'loader_view_applied':False,'loader_relocation_events':0,'init_phase':'dt-init','init_array_index':0,'init_array_completed':[],'call_in_progress':False,'call_saved':{},'fixture_reserved':0,'private_readonly':[],'c_locale_handle':0,'locale_model_calls':0,'thread_locale':(1<<64)-1,'memory_model_calls':0,'atexit_registrations':[],'external_data_slots':[],'external_data_guard_applied':False,'environment_model_calls':0,'stdio_fixture_base':0,'external_data_bindings':{},'external_binding_events':0,'heap_free_calls':0}
     for key,value in defaults.items():fields.setdefault(key,value)
     old_crc=any(name not in fields for name in ('crc_blocks','crc_iterations','crc_logical_steps'))
     for name in ('crc_blocks','crc_iterations','crc_logical_steps'):fields.setdefault(name,0)
     fields.setdefault('crc_counters_complete',not old_crc)
     if set(fields)!=set(FIELDS) or not 0<=fields['level']<=5 or not 0<=fields['heap_used']<=HEAP_SIZE:raise ValueError('Invalid checkpoint fields')
     if not 0<=fields['shadow_bytes']<=cpu.MAX_IMAGE_BYTES or not 0<=fields['shadow_events']<=cpu.MAX_IMAGE_EVENTS:raise ValueError('Invalid checkpoint quota')
+    if not 0<=fields['fixture_reserved']<=HEAP_SIZE-fields['heap_used']:raise ValueError('Invalid fixture budget')
+    for lo,hi in fields['private_readonly']:
+        if not HEAP<=lo<hi<=HEAP+HEAP_SIZE or not any(a<=lo and hi<=a+n for a,n in fields['allocations']):raise ValueError('Invalid readonly fixture range')
     for a,n in fields['allocations']:
         if not HEAP<=a or not 0<=n<=HEAP_SIZE or a+n>HEAP+HEAP_SIZE:raise ValueError('Invalid checkpoint allocation')
     for a,origin in state['opaque']:
