@@ -1,0 +1,1643 @@
+{
+  "format": "kneekura.ysm-native-initializer-write-audit.v1",
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "dependency_lift_sha256": "cb0592f8536a2aa158bf3978090b7c8963ed1f7c72fa61cdae8266ed059c6302",
+  "prefix_count": 46,
+  "direct_write_operations": [
+    {
+      "entry": 2796256,
+      "instruction": 2796279,
+      "pcode_sha256": "14d381c4ac3882563a2c2e6af7c58564520e40b09972585f5cd6b0296fa0bf86",
+      "kind": "direct",
+      "address": 13831712,
+      "size": 16
+    },
+    {
+      "entry": 2796256,
+      "instruction": 2796286,
+      "pcode_sha256": "0be2f682b48cfb9b3c0f0bd5f48d89eb827d6a4fcb83f80554fed7d17afd4952",
+      "kind": "direct",
+      "address": 13831728,
+      "size": 16
+    },
+    {
+      "entry": 2796256,
+      "instruction": 2796297,
+      "pcode_sha256": "3ff73d0099d2a5c11e9171663a13e21272ca6b344d84bec20b43c557957e3117",
+      "kind": "direct",
+      "address": 13831744,
+      "size": 8
+    },
+    {
+      "entry": 2796256,
+      "instruction": 2796308,
+      "pcode_sha256": "d8e06ce2b151dd4f20a81800d82470a2a786ee240bcde83f82040183f3768d51",
+      "kind": "direct",
+      "address": 13831768,
+      "size": 8
+    },
+    {
+      "entry": 2796256,
+      "instruction": 2796319,
+      "pcode_sha256": "00be10f1a3c00290e4e6e0bca4c080fc8c6946d6cf867cfa3a39026ad0549c23",
+      "kind": "direct",
+      "address": 13831752,
+      "size": 16
+    },
+    {
+      "entry": 3384592,
+      "instruction": 3384600,
+      "pcode_sha256": "1649638dbb4473381ff604e3eeb513fd1b97b6f51989a6af67345961aa12b00d",
+      "kind": "direct",
+      "address": 13842504,
+      "size": 8
+    },
+    {
+      "entry": 3384592,
+      "instruction": 3384614,
+      "pcode_sha256": "4681b39a98b2aa4b7bee92bf3e2bc05764eb5d749039f0f3776a16edcde4f076",
+      "kind": "direct",
+      "address": 13842512,
+      "size": 8
+    },
+    {
+      "entry": 3384592,
+      "instruction": 3384628,
+      "pcode_sha256": "7b2a3d0a3ee837baa41c0daf570d90cc3e1a73c617ea35534b6fc87a8efcf958",
+      "kind": "direct",
+      "address": 13842520,
+      "size": 16
+    },
+    {
+      "entry": 3384592,
+      "instruction": 3384635,
+      "pcode_sha256": "1a54914d49dfdb6d524dfd8bfd32b5d7c56d1c6eb6993fe627285552297e50ee",
+      "kind": "direct",
+      "address": 13842536,
+      "size": 4
+    },
+    {
+      "entry": 3384592,
+      "instruction": 3384645,
+      "pcode_sha256": "31e50684accfdb309d6ca11a9cf5225759467d8f4b96420dfe2a9a49ffd94ce8",
+      "kind": "direct",
+      "address": 13842544,
+      "size": 16
+    },
+    {
+      "entry": 3388384,
+      "instruction": 3388385,
+      "pcode_sha256": "989279c484a2bcea9432728449fa77e88528bbad304f015be27aaee178f406bd",
+      "kind": "direct",
+      "address": 13845400,
+      "size": 8
+    },
+    {
+      "entry": 3388384,
+      "instruction": 3388396,
+      "pcode_sha256": "e2e120c4f19f705832d3293ee08d5ea59ee31aa94b605c7fe42e2e2dde23f78c",
+      "kind": "direct",
+      "address": 13845408,
+      "size": 4
+    },
+    {
+      "entry": 3388384,
+      "instruction": 3388406,
+      "pcode_sha256": "31362fdccb798d455052c53f9f6c354f01b256d19d1ed44327845551b518b880",
+      "kind": "direct",
+      "address": 13845416,
+      "size": 8
+    },
+    {
+      "entry": 3388384,
+      "instruction": 3388417,
+      "pcode_sha256": "5fadfc63f3e5866077b554b28e24a08827bb6983bd03f7442e6251c0a558a1d1",
+      "kind": "direct",
+      "address": 13846004,
+      "size": 8
+    },
+    {
+      "entry": 3388384,
+      "instruction": 3388428,
+      "pcode_sha256": "38226c0b18e674d3eb85ecaee2b361159b8ff368cbf4f5ad01798852d342817f",
+      "kind": "direct",
+      "address": 13845440,
+      "size": 8
+    },
+    {
+      "entry": 3390640,
+      "instruction": 3390648,
+      "pcode_sha256": "e15332d40f2285fbcfc44cf321769daccfee7a79ecf4b13aa3957c94cff25416",
+      "kind": "direct",
+      "address": 13846704,
+      "size": 8
+    },
+    {
+      "entry": 3390640,
+      "instruction": 3390662,
+      "pcode_sha256": "dbd2608eaba91a7b493ccc4255b4f4a092c5246460d8231ffbd01d099d7d665b",
+      "kind": "direct",
+      "address": 13846712,
+      "size": 8
+    },
+    {
+      "entry": 3390640,
+      "instruction": 3390676,
+      "pcode_sha256": "3b1f3d0723bdbedadecdf7600e8ae5db118bb088ba2c6916ba6ea91f5fb59179",
+      "kind": "direct",
+      "address": 13846720,
+      "size": 16
+    },
+    {
+      "entry": 3390640,
+      "instruction": 3390683,
+      "pcode_sha256": "d5024338987c6817446e6ea942f4e45a9a19afe3f6d6d09053c953f89089b8f7",
+      "kind": "direct",
+      "address": 13846736,
+      "size": 4
+    },
+    {
+      "entry": 3390640,
+      "instruction": 3390693,
+      "pcode_sha256": "eb4c5214e08821179712d3978edd2dcc41a04278eb14b3ef86996d8df551118f",
+      "kind": "direct",
+      "address": 13846744,
+      "size": 16
+    },
+    {
+      "entry": 3390800,
+      "instruction": 3390807,
+      "pcode_sha256": "9df342ab56d60c848bd79bf8952a68cabb801105cec57f532477764807c5614f",
+      "kind": "direct",
+      "address": 13846880,
+      "size": 16
+    },
+    {
+      "entry": 3390800,
+      "instruction": 3390814,
+      "pcode_sha256": "55753b7a7520a4e9c70a650f55bc7e93e457235a4442a38d35ebc8ebbaf725c0",
+      "kind": "direct",
+      "address": 13846864,
+      "size": 16
+    },
+    {
+      "entry": 3390800,
+      "instruction": 3390821,
+      "pcode_sha256": "21497b20f21c65fb23e6f6aaa240a43c548295baf810a85b5058a41bf5aec9a1",
+      "kind": "direct",
+      "address": 13846896,
+      "size": 8
+    },
+    {
+      "entry": 3391392,
+      "instruction": 3391396,
+      "pcode_sha256": "dc0d18cd41c976ef4fb5f92234ca8bcccb456744b9259d478e593d59a18f9dbf",
+      "kind": "direct",
+      "address": 13847648,
+      "size": 8
+    },
+    {
+      "entry": 3391392,
+      "instruction": 3391407,
+      "pcode_sha256": "b39cd7490e5720bbdc34f521cd7bd4adc39d72ccff591e571d8a00146aedd8c6",
+      "kind": "direct",
+      "address": 13847656,
+      "size": 4
+    },
+    {
+      "entry": 3391392,
+      "instruction": 3391417,
+      "pcode_sha256": "17036c28c35a1b9e65caf8560a68d76f9bf279abc21aef882b46ff5631be9bce",
+      "kind": "direct",
+      "address": 13847664,
+      "size": 8
+    },
+    {
+      "entry": 3391392,
+      "instruction": 3391428,
+      "pcode_sha256": "e8311fdb4b02929dff30cf8e7ca4103787de293d8212f4b339ffe224c20b515e",
+      "kind": "direct",
+      "address": 13848252,
+      "size": 8
+    },
+    {
+      "entry": 3391392,
+      "instruction": 3391439,
+      "pcode_sha256": "a0ddbc6c5b8cb1921adf58ced71a6eb7b127781c6ef6440aca575a6de05c12aa",
+      "kind": "direct",
+      "address": 13847688,
+      "size": 8
+    },
+    {
+      "entry": 3412176,
+      "instruction": 3412187,
+      "pcode_sha256": "35cd146e46e530a372ad71c853c8df3c5794911f3fc032d98c04afebaf341a9f",
+      "kind": "direct",
+      "address": 13848456,
+      "size": 8
+    },
+    {
+      "entry": 3412176,
+      "instruction": 3412204,
+      "pcode_sha256": "bc27ce4f03319fa23f921a3ee9a84d5f93074961323fcf10e9efdc3a3213fae4",
+      "kind": "direct",
+      "address": 13848472,
+      "size": 8
+    },
+    {
+      "entry": 3412176,
+      "instruction": 3412211,
+      "pcode_sha256": "a7e89b9d50c2f8ef7343806b3cf7020c1d603473b0b5951ab07c77701e49c06f",
+      "kind": "direct",
+      "address": 13848480,
+      "size": 2
+    },
+    {
+      "entry": 3412176,
+      "instruction": 3412220,
+      "pcode_sha256": "ba944c6082de993e86351457acbfa109b7e12ed72aeb8789e658cc28ecf6f996",
+      "kind": "direct",
+      "address": 13848464,
+      "size": 8
+    },
+    {
+      "entry": 3412176,
+      "instruction": 3412231,
+      "pcode_sha256": "2b60af2500107ab03edfbd6248493259a2c582af77566ba861eae90092932416",
+      "kind": "direct",
+      "address": 13848482,
+      "size": 1
+    },
+    {
+      "entry": 3413200,
+      "instruction": 3413344,
+      "pcode_sha256": "4a0fef3d83658d2058009d9be8053412ae4f007b4d17995ae42c8f048ba0d7b8",
+      "kind": "direct",
+      "address": 13848640,
+      "size": 8
+    },
+    {
+      "entry": 3413200,
+      "instruction": 3413351,
+      "pcode_sha256": "ded1ea92b904171234f1ac69ee6d50adce0dfbaf5907571a0937429655353cb8",
+      "kind": "direct",
+      "address": 13848648,
+      "size": 8
+    },
+    {
+      "entry": 3413200,
+      "instruction": 3413365,
+      "pcode_sha256": "63faf3252910bf49a4b4b2ee2741db02c4e8af3e01d2e7c2673b61bfc6d03fe2",
+      "kind": "direct",
+      "address": 13848656,
+      "size": 16
+    },
+    {
+      "entry": 3413200,
+      "instruction": 3413372,
+      "pcode_sha256": "a6af8281db05d631fdd715d773e7225ba13059dc2e33ce7476c8cf7fdceb237c",
+      "kind": "direct",
+      "address": 13848672,
+      "size": 4
+    },
+    {
+      "entry": 3413200,
+      "instruction": 3413389,
+      "pcode_sha256": "d26a106c64379ad1daf9e02b15dd0688b226ae7b01c48a28d896b40f8846e55b",
+      "kind": "direct",
+      "address": 13848680,
+      "size": 16
+    },
+    {
+      "entry": 3419840,
+      "instruction": 3419847,
+      "pcode_sha256": "9e0b0c7167f1647ad1278312e5449db372533f054bd7847f08324807d9a77747",
+      "kind": "direct",
+      "address": 13848808,
+      "size": 8
+    },
+    {
+      "entry": 3419840,
+      "instruction": 3419861,
+      "pcode_sha256": "95fbe12d8ede6f700d581371b9b9bb0358299b4bcf981cb7573bef87033acfa7",
+      "kind": "direct",
+      "address": 13848816,
+      "size": 8
+    },
+    {
+      "entry": 3419840,
+      "instruction": 3419875,
+      "pcode_sha256": "ee3fa73d11293e3da95d60a67a92b20712cbdc6eb838af358231e4755aa6633c",
+      "kind": "direct",
+      "address": 13848824,
+      "size": 16
+    },
+    {
+      "entry": 3419840,
+      "instruction": 3419882,
+      "pcode_sha256": "1c2490ad5b6cc666e4b6678ce5e27a8582500923f2bbe1dd3e756b203d5b5480",
+      "kind": "direct",
+      "address": 13848840,
+      "size": 4
+    },
+    {
+      "entry": 3419840,
+      "instruction": 3419892,
+      "pcode_sha256": "7287199e18edc14c6af40ecce01a17929435e9a9a2a55987d5605fbafcb349e3",
+      "kind": "direct",
+      "address": 13848848,
+      "size": 16
+    },
+    {
+      "entry": 3420224,
+      "instruction": 3420227,
+      "pcode_sha256": "a0baff82b26f7b95dda656f201b4b2cdce8900cb85c435e8b50eaba6b57245be",
+      "kind": "direct",
+      "address": 13849472,
+      "size": 16
+    },
+    {
+      "entry": 3420224,
+      "instruction": 3420234,
+      "pcode_sha256": "e41cd0ebc4941665a10dad6990e8a43032e2aa395e1a0d4efba3bf4e850dd7b2",
+      "kind": "direct",
+      "address": 13849456,
+      "size": 16
+    },
+    {
+      "entry": 3420224,
+      "instruction": 3420241,
+      "pcode_sha256": "ded91641d2afbd27a929cc73826a631b4e2c17697b7d0ec696e3035795ec681c",
+      "kind": "direct",
+      "address": 13849488,
+      "size": 1
+    },
+    {
+      "entry": 3420544,
+      "instruction": 3420551,
+      "pcode_sha256": "7f506f5759cb9561ed92d70a1f1662209e4b94d881f080f6874afe44fc43cb4e",
+      "kind": "direct",
+      "address": 13850104,
+      "size": 8
+    },
+    {
+      "entry": 3420544,
+      "instruction": 3420565,
+      "pcode_sha256": "68dd99dd5c1ab29c407d8b4c4d59d1f7d768f4b2328351da34a6cba7017703c9",
+      "kind": "direct",
+      "address": 13850112,
+      "size": 8
+    },
+    {
+      "entry": 3420544,
+      "instruction": 3420579,
+      "pcode_sha256": "45f9c859a11638c8c5e606cac3ff4bfeb773dbf4e400e51316b6451d9125ee7c",
+      "kind": "direct",
+      "address": 13850120,
+      "size": 16
+    },
+    {
+      "entry": 3420544,
+      "instruction": 3420586,
+      "pcode_sha256": "2ca9a90712c0ec6d143c2b2c5160e73af0573f39b3d8573144372077aa8f6c15",
+      "kind": "direct",
+      "address": 13850136,
+      "size": 4
+    },
+    {
+      "entry": 3420544,
+      "instruction": 3420596,
+      "pcode_sha256": "92e69d656396ef431de2591b98b6f00c2a68e267c78aa15d47edcb6643ea689a",
+      "kind": "direct",
+      "address": 13850144,
+      "size": 16
+    },
+    {
+      "entry": 3420720,
+      "instruction": 3420727,
+      "pcode_sha256": "4fa3293ee609c949156991eaf27d36af63208a83feaee094d8914ebc4c3c2734",
+      "kind": "direct",
+      "address": 13850264,
+      "size": 8
+    },
+    {
+      "entry": 3420720,
+      "instruction": 3420741,
+      "pcode_sha256": "66f252d343d7299a33db1baf96e0c36bf318482a1c4f6b2a007af6667252a5d7",
+      "kind": "direct",
+      "address": 13850272,
+      "size": 8
+    },
+    {
+      "entry": 3420720,
+      "instruction": 3420755,
+      "pcode_sha256": "0058b2e7c36d0479760328aafdd916cda98b6161316508b1295eaa45d0f346bb",
+      "kind": "direct",
+      "address": 13850280,
+      "size": 16
+    },
+    {
+      "entry": 3420720,
+      "instruction": 3420762,
+      "pcode_sha256": "8de235e9e79de092845006f3e40dec335d2df38906bfec95910c766e19a35eee",
+      "kind": "direct",
+      "address": 13850296,
+      "size": 4
+    },
+    {
+      "entry": 3420720,
+      "instruction": 3420772,
+      "pcode_sha256": "930825270addaf370088b0b5d79b85a4e0765984c6938a1ba5f37f4e20eee793",
+      "kind": "direct",
+      "address": 13850304,
+      "size": 16
+    },
+    {
+      "entry": 3420800,
+      "instruction": 3420801,
+      "pcode_sha256": "a2ed3dbfd9bf0b46e15c196c1e1c365d615c4e8aaf357f2d5519d3295d51d3e1",
+      "kind": "direct",
+      "address": 13850344,
+      "size": 8
+    },
+    {
+      "entry": 3420800,
+      "instruction": 3420812,
+      "pcode_sha256": "48efc8b1a62558dca2b9f5a993b2134ec400ec337c43b67627af2574e4b9b90f",
+      "kind": "direct",
+      "address": 13850352,
+      "size": 4
+    },
+    {
+      "entry": 3420800,
+      "instruction": 3420822,
+      "pcode_sha256": "2b587b82fd2823da3051a1ddb60121082d6b31071ab8ea9f188e450bc074b9e5",
+      "kind": "direct",
+      "address": 13850360,
+      "size": 8
+    },
+    {
+      "entry": 3420800,
+      "instruction": 3420833,
+      "pcode_sha256": "ca3b6eba613c2b5db8902a0b39cc360ef815c4870c1d2a825aa6ef775b077a8c",
+      "kind": "direct",
+      "address": 13850948,
+      "size": 8
+    },
+    {
+      "entry": 3420800,
+      "instruction": 3420844,
+      "pcode_sha256": "03cd17012e95d269c06545a09b9fda765fba02342a986b1f1ec29794a010f511",
+      "kind": "direct",
+      "address": 13850384,
+      "size": 8
+    },
+    {
+      "entry": 3422064,
+      "instruction": 3422185,
+      "pcode_sha256": "c1788bef585d36c42ea68e29bb9339a77fff3266c8e3915ed640d85bd863aa9d",
+      "kind": "direct",
+      "address": 13851664,
+      "size": 8
+    },
+    {
+      "entry": 3422064,
+      "instruction": 3422192,
+      "pcode_sha256": "4e354082e2e2f669c3843df3ba1afcc72b67b8fc72a1d8315afdfb51818c7e62",
+      "kind": "direct",
+      "address": 13851672,
+      "size": 8
+    },
+    {
+      "entry": 3422064,
+      "instruction": 3422206,
+      "pcode_sha256": "c8e8678050e2c0f0cb2bb525be2816a56b53a3633e4067227c4abeea69327d18",
+      "kind": "direct",
+      "address": 13851680,
+      "size": 16
+    },
+    {
+      "entry": 3422064,
+      "instruction": 3422213,
+      "pcode_sha256": "3878f89be92897f679e58cbd3bad7659fbef727a9e04d6c87f284b23b09d14ab",
+      "kind": "direct",
+      "address": 13851696,
+      "size": 4
+    },
+    {
+      "entry": 3422064,
+      "instruction": 3422230,
+      "pcode_sha256": "48447b40e98d4f0648f4133bcbbb89deb440fb32ee8f3e9834502d488357fbed",
+      "kind": "direct",
+      "address": 13851704,
+      "size": 16
+    },
+    {
+      "entry": 3424048,
+      "instruction": 3424052,
+      "pcode_sha256": "64998c8c4f7ce171c63593ef1935b0cee9b1604687df6b7151d415fae031de9a",
+      "kind": "direct",
+      "address": 13851800,
+      "size": 16
+    },
+    {
+      "entry": 3424048,
+      "instruction": 3424059,
+      "pcode_sha256": "c987e7249cf45e49b09967474b7485cec6cea12fcf1c3d45e01d29f9f2896092",
+      "kind": "direct",
+      "address": 13851816,
+      "size": 8
+    },
+    {
+      "entry": 4048496,
+      "instruction": 4048496,
+      "pcode_sha256": "2ead55db7c500a73d52056acc4d85041fcdff1997bdafc7e3c9dc99f39621eb8",
+      "kind": "direct",
+      "address": 13848744,
+      "size": 4
+    },
+    {
+      "entry": 4048496,
+      "instruction": 4048502,
+      "pcode_sha256": "213fa71c02dd9e3475c908ee3d844e2a5eddf2e02cb5887f57a7a0507e47fd21",
+      "kind": "direct",
+      "address": 13848752,
+      "size": 8
+    }
+  ],
+  "unresolved_store_operations": [
+    {
+      "entry": 2796256,
+      "instruction": 2796256,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 2796256,
+      "instruction": 2796269,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 2796256,
+      "instruction": 2796271,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 2796256,
+      "instruction": 2796273,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 2796256,
+      "instruction": 2796274,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 2796256,
+      "instruction": 2796326,
+      "pcode_sha256": "ab02e01dedcc1974873f811cf77fb72ef015a284f7594d486a81d0f375240c1f",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 2852384,
+      "instruction": 2852395,
+      "pcode_sha256": "f1ea22af5839bd4f73e236529b08434a827a050fb75efb2f255ac61c3e2c88b5",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3302848,
+      "instruction": 3302848,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3302960,
+      "instruction": 3302960,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3302960,
+      "instruction": 3302961,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3302960,
+      "instruction": 3302963,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3302960,
+      "instruction": 3302965,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3302960,
+      "instruction": 3302967,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3302960,
+      "instruction": 3302969,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3304144,
+      "instruction": 3304144,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3304144,
+      "instruction": 3304145,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3304144,
+      "instruction": 3304147,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3304592,
+      "instruction": 3304592,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3304592,
+      "instruction": 3304593,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3304592,
+      "instruction": 3304595,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3304592,
+      "instruction": 3304597,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3304592,
+      "instruction": 3304599,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3304592,
+      "instruction": 3304601,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3304592,
+      "instruction": 3304602,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3384592,
+      "instruction": 3384592,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3384592,
+      "instruction": 3384669,
+      "pcode_sha256": "9ef351f9fe948f548319afc4e3531cdb759d6f40cc4d8e06319c4da6e3850289",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3384704,
+      "instruction": 3384704,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3384704,
+      "instruction": 3384705,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3384704,
+      "instruction": 3384707,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3384704,
+      "instruction": 3384709,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3384704,
+      "instruction": 3384711,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3384704,
+      "instruction": 3384713,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3384704,
+      "instruction": 3384738,
+      "pcode_sha256": "4e5eb7ff867fb12b17d27f8bc4fa1baf7777aff6e9cd27621ea886d144edf412",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3388016,
+      "instruction": 3388016,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3388016,
+      "instruction": 3388018,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3388016,
+      "instruction": 3388019,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3388016,
+      "instruction": 3388037,
+      "pcode_sha256": "02c67ae50189e597fab3e6fa237307cdc7381b3c9da1cde3e2f3d8dbcfd57af3",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3388192,
+      "instruction": 3388192,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3388192,
+      "instruction": 3388194,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3388192,
+      "instruction": 3388195,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3388192,
+      "instruction": 3388213,
+      "pcode_sha256": "69db3a7058d27e204ce6d64c631286eee47d9b7c1953c09f3b4501bcddc85424",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3388336,
+      "instruction": 3388336,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3388336,
+      "instruction": 3388354,
+      "pcode_sha256": "e0df6a7c927db1f522cce2655ac5f8807eaaa28a0179907f856b0aa9c5b337ce",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3388384,
+      "instruction": 3388384,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3388384,
+      "instruction": 3388453,
+      "pcode_sha256": "4a4ada3e03672b57490bd54d3f7705928f7abcc86a347d51566a8c962b139a3a",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3390640,
+      "instruction": 3390640,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3390640,
+      "instruction": 3390717,
+      "pcode_sha256": "d25c959a8dd58458efdc8c64656ada00230461b106dbde5ca22b21e8b1084f52",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3390800,
+      "instruction": 3390800,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3390800,
+      "instruction": 3390802,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3390800,
+      "instruction": 3390803,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3390800,
+      "instruction": 3390859,
+      "pcode_sha256": "cd61147161d6e88e044b7664f432c010e2e6eaa1fdf411d9b1623c569e9c6395",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3391344,
+      "instruction": 3391344,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3391344,
+      "instruction": 3391362,
+      "pcode_sha256": "87bbe93dfa1974af58b1a470d34812bd57fb21c4f1a59ac686615fa9f14adf2a",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3391392,
+      "instruction": 3391392,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3391392,
+      "instruction": 3391394,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3391392,
+      "instruction": 3391395,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3391392,
+      "instruction": 3391464,
+      "pcode_sha256": "8d67d705ea85f15e8af3ba8360c53e8ec03298bb878f5a7aaa5066e80f952ed6",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3392880,
+      "instruction": 3392880,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3392880,
+      "instruction": 3392881,
+      "pcode_sha256": "1ab8ad4560e4af5b98d815c1535ebaef4604222a8d8664d41010ce3d33d86c40",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3406480,
+      "instruction": 3406480,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3406480,
+      "instruction": 3406481,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3406480,
+      "instruction": 3406483,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3406480,
+      "instruction": 3406485,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3406480,
+      "instruction": 3406487,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3406480,
+      "instruction": 3406489,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3406480,
+      "instruction": 3406502,
+      "pcode_sha256": "d3814e5fda8b089ffe78928934753e9269131054e652a5a2a11c315363d20c84",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3412176,
+      "instruction": 3412176,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3412176,
+      "instruction": 3412178,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3412176,
+      "instruction": 3412179,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3412176,
+      "instruction": 3412245,
+      "pcode_sha256": "baed4e04bafc4218347bec3dc20fc74385f47ea88c757a2df06b5b17283450c5",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3413200,
+      "instruction": 3413200,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3413200,
+      "instruction": 3413201,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3413200,
+      "instruction": 3413203,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3413200,
+      "instruction": 3413205,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3413200,
+      "instruction": 3413207,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3413200,
+      "instruction": 3413209,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3413200,
+      "instruction": 3413232,
+      "pcode_sha256": "42193c9ddb7ad5186b625a5995d1c9bd6f9b28fdfe9e5f5cc13a8aac1e3945fe",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3413200,
+      "instruction": 3413237,
+      "pcode_sha256": "42193c9ddb7ad5186b625a5995d1c9bd6f9b28fdfe9e5f5cc13a8aac1e3945fe",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3413200,
+      "instruction": 3413242,
+      "pcode_sha256": "47a83ca6780b6bfd9c78744adc0c33cff38afb03393ecbd06401841fe2d7c12c",
+      "kind": "unresolved",
+      "size": 4
+    },
+    {
+      "entry": 3413200,
+      "instruction": 3413250,
+      "pcode_sha256": "42193c9ddb7ad5186b625a5995d1c9bd6f9b28fdfe9e5f5cc13a8aac1e3945fe",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3413200,
+      "instruction": 3413259,
+      "pcode_sha256": "a67fbd219aea708b8bb01b9abe31dbf7808a36bd442fa5a8545120c8531f53cc",
+      "kind": "unresolved",
+      "size": 1
+    },
+    {
+      "entry": 3413200,
+      "instruction": 3413269,
+      "pcode_sha256": "42193c9ddb7ad5186b625a5995d1c9bd6f9b28fdfe9e5f5cc13a8aac1e3945fe",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3413200,
+      "instruction": 3413274,
+      "pcode_sha256": "42193c9ddb7ad5186b625a5995d1c9bd6f9b28fdfe9e5f5cc13a8aac1e3945fe",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3413200,
+      "instruction": 3413279,
+      "pcode_sha256": "42193c9ddb7ad5186b625a5995d1c9bd6f9b28fdfe9e5f5cc13a8aac1e3945fe",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3413200,
+      "instruction": 3413288,
+      "pcode_sha256": "a67fbd219aea708b8bb01b9abe31dbf7808a36bd442fa5a8545120c8531f53cc",
+      "kind": "unresolved",
+      "size": 1
+    },
+    {
+      "entry": 3413200,
+      "instruction": 3413298,
+      "pcode_sha256": "42193c9ddb7ad5186b625a5995d1c9bd6f9b28fdfe9e5f5cc13a8aac1e3945fe",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3413200,
+      "instruction": 3413303,
+      "pcode_sha256": "42193c9ddb7ad5186b625a5995d1c9bd6f9b28fdfe9e5f5cc13a8aac1e3945fe",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3413200,
+      "instruction": 3413318,
+      "pcode_sha256": "42193c9ddb7ad5186b625a5995d1c9bd6f9b28fdfe9e5f5cc13a8aac1e3945fe",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3413200,
+      "instruction": 3413323,
+      "pcode_sha256": "42193c9ddb7ad5186b625a5995d1c9bd6f9b28fdfe9e5f5cc13a8aac1e3945fe",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3413200,
+      "instruction": 3413332,
+      "pcode_sha256": "a67fbd219aea708b8bb01b9abe31dbf7808a36bd442fa5a8545120c8531f53cc",
+      "kind": "unresolved",
+      "size": 1
+    },
+    {
+      "entry": 3413200,
+      "instruction": 3413398,
+      "pcode_sha256": "2618f32cc65932db7f224e917f74c5b3f206a36b0406a04055893d7c899151a6",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3417008,
+      "instruction": 3417008,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3417008,
+      "instruction": 3417009,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3417008,
+      "instruction": 3417011,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3417008,
+      "instruction": 3417013,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3417008,
+      "instruction": 3417015,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3417008,
+      "instruction": 3417017,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3417008,
+      "instruction": 3417030,
+      "pcode_sha256": "18fa085ff2b708f05a4eef1687eafdaa9bea3a10c1d817a26a6c7777fb0bcfa1",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3419920,
+      "instruction": 3419920,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3419920,
+      "instruction": 3419922,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3419920,
+      "instruction": 3419923,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3419920,
+      "instruction": 3419934,
+      "pcode_sha256": "7e2c5036780bf670a1a86d17d6b01be8c47c2b7c19db1681b5ac201f10a38a26",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3420288,
+      "instruction": 3420288,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3420288,
+      "instruction": 3420290,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3420288,
+      "instruction": 3420291,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3420288,
+      "instruction": 3420302,
+      "pcode_sha256": "ded01f36f76a34bdfa4ed3cb61900da6bb5ca47a35e72b54914feab230c8dbac",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3420624,
+      "instruction": 3420624,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3420624,
+      "instruction": 3420626,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3420624,
+      "instruction": 3420628,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3420624,
+      "instruction": 3420646,
+      "pcode_sha256": "e9ed436e48174a76051f1d878323ef6b52674ca160715b2b2231a5bf3bbb49d1",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3420800,
+      "instruction": 3420800,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3420800,
+      "instruction": 3420869,
+      "pcode_sha256": "148a2d5718a15ca4c14c4c3727d149573fccf8eb6a7fe1b0a544c1ebfd1bdbd1",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3421968,
+      "instruction": 3421968,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3421968,
+      "instruction": 3421970,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3421968,
+      "instruction": 3421972,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3421968,
+      "instruction": 3421990,
+      "pcode_sha256": "fbe44361be7cff96a475a9531d9a89ae12655f1daf1ef4e009b5663f9c85c109",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3422064,
+      "instruction": 3422064,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3422064,
+      "instruction": 3422065,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3422064,
+      "instruction": 3422067,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3422064,
+      "instruction": 3422069,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3422064,
+      "instruction": 3422071,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3422064,
+      "instruction": 3422073,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3422064,
+      "instruction": 3422083,
+      "pcode_sha256": "8f661a57a3d3e2c3ffaed9b8deeeadffd102c98081f037b72aa9a2f23dcca551",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3422064,
+      "instruction": 3422087,
+      "pcode_sha256": "47a83ca6780b6bfd9c78744adc0c33cff38afb03393ecbd06401841fe2d7c12c",
+      "kind": "unresolved",
+      "size": 4
+    },
+    {
+      "entry": 3422064,
+      "instruction": 3422095,
+      "pcode_sha256": "4440901f5173750c83cd4a90c5f6851fff29faefb0095d6350f5d7c7c61bc1a4",
+      "kind": "unresolved",
+      "size": 2
+    },
+    {
+      "entry": 3422064,
+      "instruction": 3422102,
+      "pcode_sha256": "42193c9ddb7ad5186b625a5995d1c9bd6f9b28fdfe9e5f5cc13a8aac1e3945fe",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3422064,
+      "instruction": 3422111,
+      "pcode_sha256": "a67fbd219aea708b8bb01b9abe31dbf7808a36bd442fa5a8545120c8531f53cc",
+      "kind": "unresolved",
+      "size": 1
+    },
+    {
+      "entry": 3422064,
+      "instruction": 3422116,
+      "pcode_sha256": "47a83ca6780b6bfd9c78744adc0c33cff38afb03393ecbd06401841fe2d7c12c",
+      "kind": "unresolved",
+      "size": 4
+    },
+    {
+      "entry": 3422064,
+      "instruction": 3422129,
+      "pcode_sha256": "42193c9ddb7ad5186b625a5995d1c9bd6f9b28fdfe9e5f5cc13a8aac1e3945fe",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3422064,
+      "instruction": 3422144,
+      "pcode_sha256": "42193c9ddb7ad5186b625a5995d1c9bd6f9b28fdfe9e5f5cc13a8aac1e3945fe",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3422064,
+      "instruction": 3422149,
+      "pcode_sha256": "4440901f5173750c83cd4a90c5f6851fff29faefb0095d6350f5d7c7c61bc1a4",
+      "kind": "unresolved",
+      "size": 2
+    },
+    {
+      "entry": 3422064,
+      "instruction": 3422156,
+      "pcode_sha256": "42193c9ddb7ad5186b625a5995d1c9bd6f9b28fdfe9e5f5cc13a8aac1e3945fe",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3422064,
+      "instruction": 3422165,
+      "pcode_sha256": "a67fbd219aea708b8bb01b9abe31dbf7808a36bd442fa5a8545120c8531f53cc",
+      "kind": "unresolved",
+      "size": 1
+    },
+    {
+      "entry": 3422064,
+      "instruction": 3422170,
+      "pcode_sha256": "47a83ca6780b6bfd9c78744adc0c33cff38afb03393ecbd06401841fe2d7c12c",
+      "kind": "unresolved",
+      "size": 4
+    },
+    {
+      "entry": 3422064,
+      "instruction": 3422239,
+      "pcode_sha256": "f4cc38c44adc01e497e2996f19df91e679d4b4879e32580febdae6f5ef4a31cc",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3424048,
+      "instruction": 3424048,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3424048,
+      "instruction": 3424082,
+      "pcode_sha256": "a44b6a872eb4022ee73bf7747058b51856ffebd61a7070b8589af02f73ac8eb7",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3424160,
+      "instruction": 3424160,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3424160,
+      "instruction": 3424161,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3424160,
+      "instruction": 3424163,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3424160,
+      "instruction": 3424165,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3424160,
+      "instruction": 3424167,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3424160,
+      "instruction": 3424169,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3424160,
+      "instruction": 3424179,
+      "pcode_sha256": "8fa40f72154fd2ba2000332d05eea017df82f879ca4b99cb199a33ca28aae0e4",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3652064,
+      "instruction": 3652064,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    },
+    {
+      "entry": 3652288,
+      "instruction": 3652288,
+      "pcode_sha256": "6ed8c2aef7b0be56e2b0982f5f4d9c41006ef4c782ae77586d8f0f3b8f6ef297",
+      "kind": "unresolved",
+      "size": 8
+    }
+  ],
+  "watched_interval": {
+    "address": 13815112,
+    "size": 19
+  },
+  "direct_overlaps": [],
+  "resolved_import_chains": [
+    {
+      "original_stub": 13715216,
+      "first_slot": 13830160,
+      "relative_addend": 20803204,
+      "second_slot": 25481288,
+      "symbol_index": 10,
+      "symbol_name": "__cxa_atexit",
+      "prefix_sites": 11
+    },
+    {
+      "original_stub": 13717104,
+      "first_slot": 13831104,
+      "relative_addend": 20803894,
+      "second_slot": 25482208,
+      "symbol_index": 130,
+      "symbol_name": "secure_getenv",
+      "prefix_sites": 1
+    }
+  ],
+  "other_direct_targets": [
+    1939120,
+    2852704,
+    2873024,
+    3032960,
+    3247568,
+    3312992,
+    3393008,
+    3580032,
+    5727952,
+    13411776,
+    22236372
+  ],
+  "environment_string": {
+    "address": 287335,
+    "text": "GLIBCXX_TUNABLES",
+    "caller_prefix": 2796256
+  },
+  "scope": "Only 46 captured first-transfer prefixes; subsequent blocks, indirect stores and callees remain unresolved",
+  "all_initializer_effects_resolved": false,
+  "file_state_immutability_proven": false,
+  "actual_import_binding_verified": false,
+  "target_executed": false,
+  "native_emulator_run": false,
+  "independent_semantic_review": "NOT_RUN"
+}
