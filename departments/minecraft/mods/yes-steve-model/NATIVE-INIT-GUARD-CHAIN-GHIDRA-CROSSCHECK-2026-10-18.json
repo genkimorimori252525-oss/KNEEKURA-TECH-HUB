@@ -1,0 +1,822 @@
+{
+  "format": "kneekura.ysm-native-ghidra-crosscheck.v1",
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "ghidra_release": "12.1.4",
+  "ghidra_archive_sha256": "ddac49f903da9d5bac833e5cc79395098b9c33cfd3279be5f31bd00387d2d4db",
+  "gnu_version": "GNU objdump (GNU Binutils for Debian) 2.44",
+  "manifest_sha256": "de807e79b5edb299f37e0ab0eaaaece84b20343b9ef7587291e53a9679f82dfc",
+  "memory_manifest_sha256": "51b7e941941b43588b5c4446e50c3b7f43e1aece1cae9e4e09ff65c3244e36d9",
+  "lift_sha256": "582a34061c4c95bd50694b08e2a6aaa186828900da561b05b88fb26b52c079b1",
+  "script_sha256": "8e7c36b40485b472f845f501354b048a59417b72b578bd742bc0cf3ae02baf1a",
+  "range_count": 112,
+  "instruction_occurrences": 1013,
+  "unique_instruction_addresses": 1009,
+  "ranges": [
+    {
+      "address": 1939248,
+      "size": 5,
+      "sha256": "f2caa9e32b1dce79ce64efba5806a764e131b9d00f8f88603f6b8002f83abcf3",
+      "instruction_occurrences": 1,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 2796256,
+      "size": 75,
+      "sha256": "4923c965b4d6ac40bd1b10423548acaa35ea0075a2875038754d0005e7fc6a9d",
+      "instruction_occurrences": 15,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 2852384,
+      "size": 16,
+      "sha256": "5dc6cd058ec6ef4ebca9d90a59c7e0ebb41aed61ac5f30d6df42e0cc5431b43f",
+      "instruction_occurrences": 3,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 2954672,
+      "size": 12,
+      "sha256": "ebb39831e8591e9d8b2577f16cdc7cdf4672cc892d0ebb5f6d7e78d33e082d0a",
+      "instruction_occurrences": 3,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3017088,
+      "size": 12,
+      "sha256": "62d0d15618c94c6d969efa033204075c3a71401a690fb1712b6b95b41681fe14",
+      "instruction_occurrences": 3,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3102000,
+      "size": 12,
+      "sha256": "1fb821597ba1c894087a2cb2bff0d234f56f8d34b36146c2bef14212ef8df92b",
+      "instruction_occurrences": 3,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3198128,
+      "size": 12,
+      "sha256": "b9d6effeed40e73b63d765b7812982334fe145ceac376430e76427a56738c6c0",
+      "instruction_occurrences": 3,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3302848,
+      "size": 12,
+      "sha256": "ff2e9ff596c068f5863b82ccc6b10799a08ad7c0c76f0a5a550467c2fdc52cf2",
+      "instruction_occurrences": 4,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3302960,
+      "size": 25,
+      "sha256": "87344c281780e8c53420a0702b93583c7c1fe467feab4f3c8a245d11c2d2c93d",
+      "instruction_occurrences": 10,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3304144,
+      "size": 15,
+      "sha256": "3b30e0f1cf44a914f6aaf02ea09fcbff458f0135c8a1a102fbdce5e958bcb0b7",
+      "instruction_occurrences": 6,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3304592,
+      "size": 22,
+      "sha256": "d44022b698171fb82544b8f0eb5f870f4bc51c990fcb96b62e11fb7eb1d08636",
+      "instruction_occurrences": 10,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3384592,
+      "size": 82,
+      "sha256": "da97918143f754d86d75420eb9c2765b503930124fb00e240ccbf282fa44e848",
+      "instruction_occurrences": 13,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3384704,
+      "size": 39,
+      "sha256": "1506dd324fc09675a10315064eee912a7e2e629ed7c3ecf0d102afb729d747d0",
+      "instruction_occurrences": 11,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3388016,
+      "size": 26,
+      "sha256": "e9a332daaadb859a66e2de8719667dd6fc13f842da2895b516b7ea8674c6ee78",
+      "instruction_occurrences": 7,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3388160,
+      "size": 26,
+      "sha256": "f2f12f719d0962c5b2f94216de7bed2d25e157ffd02b2a27c02e50d7db0c3b3b",
+      "instruction_occurrences": 4,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3388192,
+      "size": 26,
+      "sha256": "8e3d8b200621c2b7825e0a760197360eb131bfecfabad6d2ce5e92b2ad2af367",
+      "instruction_occurrences": 7,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3388336,
+      "size": 23,
+      "sha256": "a08269f788ca0f5243e6e19852d8c135398ba5c7a3656234746f6c7b4931faa2",
+      "instruction_occurrences": 5,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3388384,
+      "size": 74,
+      "sha256": "ddfab17e8a8de0ec6e0e78d1b696bcf77f154ff769e8f6a4dc74767f92f0936e",
+      "instruction_occurrences": 10,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3390640,
+      "size": 82,
+      "sha256": "bf8a394af1cc1956782fd57bf13cd15a99b6549b70c6d45271307ce9e7bce4cd",
+      "instruction_occurrences": 13,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3390800,
+      "size": 64,
+      "sha256": "fc3e6d78b75789d74c96c23b9e7ebe30421ca5e904b67aedf53294ebb18f1b8c",
+      "instruction_occurrences": 13,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3391344,
+      "size": 23,
+      "sha256": "036bae74ea55cfb17b1bfd65fb429812467cbb320e65d791cfd9001a80ea8afb",
+      "instruction_occurrences": 5,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3391392,
+      "size": 77,
+      "sha256": "9f67bc5d0364a68944ec92a9c0b3839cd69600deabe3a4058e87b093c22e6424",
+      "instruction_occurrences": 12,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3392880,
+      "size": 6,
+      "sha256": "9d74b0720a98c09f97854ba856428f10a4f8ff9387229d6ba4f81d7bad5ac883",
+      "instruction_occurrences": 2,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3406480,
+      "size": 27,
+      "sha256": "60431720272b98186c24b54e3fbd159752857f17e2be9d303efec446ec3da2c8",
+      "instruction_occurrences": 9,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3412176,
+      "size": 74,
+      "sha256": "d82871149070cd36ad103f00fef302fcdbc3e6c6ba6495fc4fe7e7287445a056",
+      "instruction_occurrences": 12,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3413168,
+      "size": 26,
+      "sha256": "61e131035406735c2c4d5268d5a0de70c5ea91a79351bbd60118a9621d67e7e2",
+      "instruction_occurrences": 4,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3413200,
+      "size": 203,
+      "sha256": "8cf223eb742dee1c56c8dddf0fa268ac33736f740e5db045e7e4b26ac2b40eeb",
+      "instruction_occurrences": 36,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3416976,
+      "size": 26,
+      "sha256": "d6d9e9ec2e4820a3bc191f1155f9603ca2b4ab173409d1787ed29a0b23b2a7a3",
+      "instruction_occurrences": 4,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3417008,
+      "size": 27,
+      "sha256": "90655c23a3da8398dd7e1c5dfca5673498eb51c8a8759bd8b413e8510a0b9459",
+      "instruction_occurrences": 9,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3419840,
+      "size": 78,
+      "sha256": "01db031cb1473167268b31f5edfad6683e8639b5547a485a97819ab009f59209",
+      "instruction_occurrences": 11,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3419920,
+      "size": 19,
+      "sha256": "61d2285b9341d09b893e698d7cc3de04366f93d1d50666b504e2d5be1fdbb663",
+      "instruction_occurrences": 6,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3420224,
+      "size": 50,
+      "sha256": "10e8dcc574a8e2fc2d5380606031164378a06a0f0ba65da3ce191f71c2b60004",
+      "instruction_occurrences": 8,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3420288,
+      "size": 19,
+      "sha256": "fba8c5d635d02881bc5141bfc513567a21936e437cbf0f3ca6a0050779a94fe6",
+      "instruction_occurrences": 6,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3420544,
+      "size": 78,
+      "sha256": "38d77c1d5d947c6cad88ea62794ec1bce5738ddb45aee7e944d4025ddeb9b275",
+      "instruction_occurrences": 11,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3420624,
+      "size": 27,
+      "sha256": "bc7bb42120a0604d09118893c39221b8939a61fbeff0617e48ee10a82191d840",
+      "instruction_occurrences": 7,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3420720,
+      "size": 78,
+      "sha256": "0c24617a87a9883b1ca80105cfd9b299df8cb5779edc3417e3b21dca1cd1f6f4",
+      "instruction_occurrences": 11,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3420800,
+      "size": 74,
+      "sha256": "226ea3a7893864993185dbaab33f975f67e25e7b265fb86c719beec9a95c3a29",
+      "instruction_occurrences": 10,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3421968,
+      "size": 27,
+      "sha256": "9c0eb52ea592cb40a7bde882f67aeee5b876accceaf2b581934c5fe5497fe982",
+      "instruction_occurrences": 7,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3422064,
+      "size": 180,
+      "sha256": "8d8fcb09762523577848589fae000f4be693c7677320fc362dde83b87256c243",
+      "instruction_occurrences": 32,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3424048,
+      "size": 39,
+      "sha256": "94cdce54e6e2c89cade2e8a01e7c7ee30f34f939aced209090b158cdddbe27e1",
+      "instruction_occurrences": 7,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3424160,
+      "size": 24,
+      "sha256": "8e5f3081d82d657fd1d4cac6bf4bfb24bd9db1f22bf65f5a6f4caadb531776e6",
+      "instruction_occurrences": 9,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3426352,
+      "size": 26,
+      "sha256": "f3e93eecc42f3dcfce5c029ebf1e2e3140df78da73751fb91011fe29bc837c2c",
+      "instruction_occurrences": 4,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3652064,
+      "size": 12,
+      "sha256": "f9a1bac050dfb231e710e272190862dc2fc1bbce753401030a9a0abaabcf7996",
+      "instruction_occurrences": 4,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 3652288,
+      "size": 12,
+      "sha256": "f059cf3bbf3e8ee6fc9537b7627985d3d1a008cb14551f9d241d429e4e700f8e",
+      "instruction_occurrences": 4,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 4048496,
+      "size": 16,
+      "sha256": "1269de8916a7438268b24803158a9bd138e9edb3c57775e7075f2bc25a901461",
+      "instruction_occurrences": 4,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 15637053,
+      "size": 163,
+      "sha256": "994988bacb9f6a24f7c0a63b0cf14c2c7f9a6f23604984a8f7e22eb4e998c79f",
+      "instruction_occurrences": 35,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 15723967,
+      "size": 97,
+      "sha256": "c4e8fd750f06a5e1d6f11a617ffbdc9871db1c47775ae300ee39456f583453b1",
+      "instruction_occurrences": 24,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 15761391,
+      "size": 75,
+      "sha256": "b81e89d65a542cdfbcf693f7fd6b527c3ecfa2236e0dd3969f276111c744bd6c",
+      "instruction_occurrences": 18,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 15773332,
+      "size": 56,
+      "sha256": "fdf0617561bffa85df604d9fcefbdbd404435f6e99264074b4ebc350b3ec4c4e",
+      "instruction_occurrences": 8,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 15842229,
+      "size": 36,
+      "sha256": "56a85d340606a13e5f582ee435c0cc94846625ad8d6eb141adadd48125ae47fb",
+      "instruction_occurrences": 7,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 15847166,
+      "size": 9,
+      "sha256": "56193ea668147e17a016f0c93bfd0777efd482ed9c9eee0148f70b0af959a011",
+      "instruction_occurrences": 3,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 15893305,
+      "size": 6,
+      "sha256": "5ef1da17f4a43642c53068b8eda4e600b0dccd3558f979d1680a29b437528f19",
+      "instruction_occurrences": 1,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 16161888,
+      "size": 73,
+      "sha256": "24a816009b91e8e84dff992ae3460864cbbf3cb95efce2b05a16c5a3ce22fd37",
+      "instruction_occurrences": 14,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 16370748,
+      "size": 69,
+      "sha256": "c5ba46617ad712389f5f1c9637a1e3d3cbbb62aa5578e1b893dc212243cf0a26",
+      "instruction_occurrences": 18,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 16389328,
+      "size": 22,
+      "sha256": "26a8ae1ac185e6277ee5c3bbec6ee30165581bf2adf787efceb330a331f7b617",
+      "instruction_occurrences": 5,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 17173437,
+      "size": 137,
+      "sha256": "e8b66fda0032d563d67312ed6ee64b46cd278212d563438214c0355aff119fb0",
+      "instruction_occurrences": 29,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 17351933,
+      "size": 8,
+      "sha256": "a105e21a7784844b9f4715e72660bba6015e960d91698106f25efaf8eb399f3e",
+      "instruction_occurrences": 2,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 17460252,
+      "size": 9,
+      "sha256": "aa4784f5e89ae058e6c4aa2373338a42c7977dffa3845ad7f1b311448fa5cadf",
+      "instruction_occurrences": 3,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 17561945,
+      "size": 30,
+      "sha256": "9f43224331dae68099adb5845f11860c2c8728f856412d7df204252837125f36",
+      "instruction_occurrences": 5,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 17561951,
+      "size": 24,
+      "sha256": "7b0ff29ade6591580ac76feb2b77e5163aededd399a534c82e85ed8b2efe8cb2",
+      "instruction_occurrences": 4,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 17562446,
+      "size": 18,
+      "sha256": "486dd0f134b968963d667aea6c5b485f8fe00b8c1ab24f985c2a106514a85736",
+      "instruction_occurrences": 5,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 17635188,
+      "size": 44,
+      "sha256": "c0732fe8f0e0cd5780dc426912274b2c94241440c3dcf785728ab444417a26d7",
+      "instruction_occurrences": 8,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 17697234,
+      "size": 29,
+      "sha256": "5f9a589792b84be992a7f106631a5d235794789ebc0eb0917ffc9562eb551af0",
+      "instruction_occurrences": 8,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 17796853,
+      "size": 5,
+      "sha256": "60f62bdb3c0e74936eb0fd7962b4e25adcfba2d3065b9c5c33cbaeb39690e4c2",
+      "instruction_occurrences": 1,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 17828269,
+      "size": 20,
+      "sha256": "43503ae28355d4c07fd593d1ac94e491fc81b74ac2b420d5b462d16fcfe3aaca",
+      "instruction_occurrences": 5,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 18292752,
+      "size": 27,
+      "sha256": "165c017af3c2c066955d2802607f30e2f8f4f6372f8454e37afe597be18fd17a",
+      "instruction_occurrences": 6,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 18390919,
+      "size": 44,
+      "sha256": "c763edeac462e016c0aa80f35d5ec1f84e6b63e253cc6df143d03717d33d66b7",
+      "instruction_occurrences": 9,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 18496149,
+      "size": 74,
+      "sha256": "967855e68d2114ccb3ba1c50a61a42d839d2f9a7dab7f27bf128e6720c09125b",
+      "instruction_occurrences": 16,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 18799997,
+      "size": 32,
+      "sha256": "f19be026d045e66bef0480d283e971bef94ed41314042f98af8b08eb6680132a",
+      "instruction_occurrences": 6,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 18834636,
+      "size": 96,
+      "sha256": "50cc1c0004b7b035126966ba48e31f7d79711c8731566bf9d43158052b066529",
+      "instruction_occurrences": 21,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 19004964,
+      "size": 17,
+      "sha256": "cfec10266b488173587aabb2c23acf1a8bdfe7b47b9053266cdc2253c1d5bc98",
+      "instruction_occurrences": 3,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 19322053,
+      "size": 10,
+      "sha256": "f1e31f594fd755ce015bf34c83c4bd91fd5c87f8ed80b4846cd8bc7442907765",
+      "instruction_occurrences": 2,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 19524205,
+      "size": 33,
+      "sha256": "b8fadecb5b504d07b5c3609ed4240d13a6a0e33b2f55432479ec2a7f97017b31",
+      "instruction_occurrences": 8,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 19572128,
+      "size": 5,
+      "sha256": "708fc3cebb6c35aecc28bfcca665877efd5946f578a5031bbf92bc045e3c4718",
+      "instruction_occurrences": 1,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 19675729,
+      "size": 207,
+      "sha256": "6ecb584c49329a0e33a0e4c53e947d1e7e49e4042fb8d0cb6f40d60a675d76b2",
+      "instruction_occurrences": 51,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 19678721,
+      "size": 61,
+      "sha256": "9681f378beff3ac8b1ebbcbd55b959f5b30c2c17d75ad35c87cd3513f485b91f",
+      "instruction_occurrences": 14,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 19678782,
+      "size": 13,
+      "sha256": "e69607d590c4a0359c6cb454e620df83d265df2c6cb66181ae07610a294c3980",
+      "instruction_occurrences": 3,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 19773042,
+      "size": 30,
+      "sha256": "5baa6f19ba375fe33a91deceaf7b8599a75c68e7a95d7a9d0b5924902b329424",
+      "instruction_occurrences": 8,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 19785132,
+      "size": 64,
+      "sha256": "e8c486f6312581a33b1cb94e0a5da9a5fd5979047f6b0d1e4fe269df4e0be998",
+      "instruction_occurrences": 14,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 19988144,
+      "size": 10,
+      "sha256": "475ddcdd3c2a4d02d3b492b9fee85aa37b9110958bb6495d709de68c2f670ae7",
+      "instruction_occurrences": 3,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 19995584,
+      "size": 46,
+      "sha256": "1dee7707122df9e28f78e02d7c13110b29648f41135cabe7c382d878c5e72a3c",
+      "instruction_occurrences": 9,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 20660804,
+      "size": 22,
+      "sha256": "c009e98d9b011392cc56b1b9db922e1cb111fc4118a465eb7b9dcf8fbffd3b19",
+      "instruction_occurrences": 4,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 21251296,
+      "size": 61,
+      "sha256": "042c72b2a189595b01f970991b61a17987772b69a9cded02f5903934870e6aed",
+      "instruction_occurrences": 16,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 21599620,
+      "size": 73,
+      "sha256": "7bd8f15e9c94c5a0cbfb67e11b5c55f99198515939718a5b6527cf774938abcb",
+      "instruction_occurrences": 21,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 21617655,
+      "size": 20,
+      "sha256": "b50cf58fed713e38f8901a7552deec141492f6a9e211f972d18acaeee1845b6b",
+      "instruction_occurrences": 5,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 22211353,
+      "size": 5,
+      "sha256": "55607f898fa5db83c6e66d8d59d33c6d8fecc49032530c4b3721c812f5316113",
+      "instruction_occurrences": 1,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 22236372,
+      "size": 5,
+      "sha256": "5d2b4f2851604078e4e12a5b507fb40a96715d01273427d4be37ef09ed399b95",
+      "instruction_occurrences": 1,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 22254606,
+      "size": 21,
+      "sha256": "0892c3e6f8a8e5c023915e7c301d33e0520f04362ab8b23d3cd2c76ede8f7fde",
+      "instruction_occurrences": 4,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 22471511,
+      "size": 124,
+      "sha256": "c37c573ba10216089d416836a251062a45fd73949e12b62c75cce89d11890787",
+      "instruction_occurrences": 27,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 22502330,
+      "size": 15,
+      "sha256": "a1e59d7fbe2cb4645ac118780fb773e1c396adec61fdc2a04ab71c0e1fca1234",
+      "instruction_occurrences": 6,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 22606318,
+      "size": 5,
+      "sha256": "c419b330049f05d680ccd120c588a7b63c996a8f1700a6eb78006130c1346f6d",
+      "instruction_occurrences": 1,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 23084515,
+      "size": 6,
+      "sha256": "314b69d37d5c580226be8a8a83204cb2eaf0f3aea292ec99439af8db9b40d98d",
+      "instruction_occurrences": 1,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 23119311,
+      "size": 7,
+      "sha256": "aeb076c1ee150041660bce53897e9b5cd101e5218081f5d0db99f71b32d72b96",
+      "instruction_occurrences": 2,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 23156036,
+      "size": 34,
+      "sha256": "330340f148da9533c21cdaa97285dafa185d119233377097833c8381f43f913d",
+      "instruction_occurrences": 7,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 23488604,
+      "size": 169,
+      "sha256": "4d75aa8f72e229f1b95021f5e046b9c843a92bed20310189c975478231a2d605",
+      "instruction_occurrences": 33,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 23571932,
+      "size": 67,
+      "sha256": "28d45025980682ce722e97c4394c3dbd8a2f2d80462bba06bd7b9f03b76738e8",
+      "instruction_occurrences": 17,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 23790929,
+      "size": 179,
+      "sha256": "ba5f9f0d9ed0be90ecce58d4a725e00edeb10a6ce66da9c53f82d3755cc3b0ec",
+      "instruction_occurrences": 38,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 23943577,
+      "size": 49,
+      "sha256": "0b9dbf219a302b45578c5fdd5a96e0714a0dbe18414fb96bdc9fd04fe00caeb7",
+      "instruction_occurrences": 11,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 24209751,
+      "size": 7,
+      "sha256": "a80084aa5f3cdde79c2507e606927f9a4f3646906cfc93f4d8a1fbd80a352815",
+      "instruction_occurrences": 2,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 24279834,
+      "size": 5,
+      "sha256": "a757ec31ae5b4042cb506c0e740bfc413e9581386153ee33545391d286dc8f74",
+      "instruction_occurrences": 1,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 24375835,
+      "size": 37,
+      "sha256": "7622833454466e52714a4268014fc92e7b2e770d4ba06de1a4f1efe100658dd6",
+      "instruction_occurrences": 10,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 24426736,
+      "size": 49,
+      "sha256": "825b4e8908af553979b78237684761ab5b9461c943078850deec11936e318c49",
+      "instruction_occurrences": 10,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 24432732,
+      "size": 25,
+      "sha256": "43c99885faf8a8cb70aa38b3ce56d90c32b21914c141931d86a76dc88d75da52",
+      "instruction_occurrences": 4,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 24479618,
+      "size": 20,
+      "sha256": "bd29898c2f7737b99b0a7db063c4ce17f989651cac009fde7444547d1a25772a",
+      "instruction_occurrences": 3,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 24620552,
+      "size": 10,
+      "sha256": "5470f0874db3c1ff5757a56c607f0ea6259ced0f1b8f2e9d9343fa3862f06691",
+      "instruction_occurrences": 2,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 24650151,
+      "size": 15,
+      "sha256": "73b5ea9c00aea743ff0f3d462d721f72f17d7682270bf30b1003e100f5e5b2df",
+      "instruction_occurrences": 3,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 24819948,
+      "size": 28,
+      "sha256": "0a4888952aad24d2e56276e2b4cd447950cf0e8eac024a2fff04590f3dfbbf8a",
+      "instruction_occurrences": 8,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 24907853,
+      "size": 13,
+      "sha256": "941cdb2903a5ccb0cdaa9601afbc5d77db3fd89a33e935440ae050b2b497ab05",
+      "instruction_occurrences": 3,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 24968286,
+      "size": 27,
+      "sha256": "f2f2b9b31e5aac4a9cc68cab6fcf05cb2e08172a0516e0c2dfafd6050943bfab",
+      "instruction_occurrences": 5,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 24999011,
+      "size": 32,
+      "sha256": "c6d16793bac6e14be01ccb877b8c17bed37213d07636bf70ba3fc5ad24e7e5ff",
+      "instruction_occurrences": 8,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 25014183,
+      "size": 13,
+      "sha256": "bf25202b2c7f928698d4457f81c6cc1180e9d3f5ff307b7f2205abbcd5ddd4a7",
+      "instruction_occurrences": 3,
+      "address_length_bytes_match": true
+    },
+    {
+      "address": 25374142,
+      "size": 5,
+      "sha256": "547b9b0e1c71d1a51710abb231c82b5a36da22d9ab083114bdfa2e9dccdc6fcc",
+      "instruction_occurrences": 1,
+      "address_length_bytes_match": true
+    }
+  ],
+  "full_file_backed_load_segments_matched": 7,
+  "imported_data_words": {
+    "d2cd48": "52ec51dc",
+    "d2cd4c": "a314743b"
+  },
+  "selected_pcode_sha256": {
+    "0xee9ad7": "e6dff7143ac70c455a93ae8270f15e058ba60e8ec66473fb79c585992428d13a",
+    "0xee9ada": "010621e18bc998f246f7dd376c840c293134e4e7e591c94962ec9105dad487d5",
+    "0x1060c43": "54a8bfd81aaef45a6953ea5edc8ddaf05c3b463f16a9f92e8fcc7c1055e6403e",
+    "0x10d1780": "82288743d0211cfb90dbb032c7ae884c48578d82151ebe3c8fa4a815c5bca40d",
+    "0x10d179a": "23fec214e6c68084b24294db342ff3bcea68171012230d19711390d3b1423e57"
+  },
+  "automatic_analysis": false,
+  "relocations_applied": false,
+  "external_libraries_loaded": false,
+  "target_executed": false,
+  "native_emulator_run": false,
+  "scope": "Exact imported file-backed memory and selected decoder boundaries/bytes; not whole-function recovery or semantic equivalence",
+  "independent_semantic_review": "NOT_RUN",
+  "native_bindings_resolved": false,
+  "runtime_data_immutability_proven": false
+}

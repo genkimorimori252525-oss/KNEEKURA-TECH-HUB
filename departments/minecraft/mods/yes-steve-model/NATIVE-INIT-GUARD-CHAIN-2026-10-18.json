@@ -1,0 +1,112 @@
+{
+  "format": "kneekura.ysm-native-init-guard-chain.v1",
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "dependency_prologue_sha256": "61ee19ea91c7243ba9ad4aa624433a7d759edb10ebeec5019ede527e35c701b9",
+  "segments": [
+    {
+      "address": 21599620,
+      "size": 73,
+      "sha256": "7bd8f15e9c94c5a0cbfb67e11b5c55f99198515939718a5b6527cf774938abcb"
+    },
+    {
+      "address": 23084515,
+      "size": 6,
+      "sha256": "314b69d37d5c580226be8a8a83204cb2eaf0f3aea292ec99439af8db9b40d98d"
+    },
+    {
+      "address": 21251296,
+      "size": 61,
+      "sha256": "042c72b2a189595b01f970991b61a17987772b69a9cded02f5903934870e6aed"
+    },
+    {
+      "address": 24426736,
+      "size": 49,
+      "sha256": "825b4e8908af553979b78237684761ab5b9461c943078850deec11936e318c49"
+    },
+    {
+      "address": 24375835,
+      "size": 37,
+      "sha256": "7622833454466e52714a4268014fc92e7b2e770d4ba06de1a4f1efe100658dd6"
+    },
+    {
+      "address": 22471511,
+      "size": 124,
+      "sha256": "c37c573ba10216089d416836a251062a45fd73949e12b62c75cce89d11890787"
+    },
+    {
+      "address": 21617655,
+      "size": 20,
+      "sha256": "b50cf58fed713e38f8901a7552deec141492f6a9e211f972d18acaeee1845b6b"
+    },
+    {
+      "address": 22254606,
+      "size": 21,
+      "sha256": "0892c3e6f8a8e5c023915e7c301d33e0520f04362ab8b23d3cd2c76ede8f7fde"
+    }
+  ],
+  "flags": {
+    "r10d_before_sbb": 14645,
+    "edi_at_sbb": 3516807479,
+    "r10d_after_sbb": 778174462,
+    "borrow": 1,
+    "sign": 0,
+    "jb_taken": true,
+    "jns_taken": true,
+    "rdx_at_push": 0,
+    "rax_before_second_cqo": 187,
+    "second_cqo_rdx": 0
+  },
+  "branches": [
+    {
+      "address": 21599687,
+      "target": 23084515,
+      "condition": "JB",
+      "taken": true
+    },
+    {
+      "address": 23084515,
+      "target": 21251296,
+      "condition": "JNS",
+      "taken": true
+    },
+    {
+      "address": 21251351,
+      "target": 24426736,
+      "condition": "JA",
+      "taken": true
+    }
+  ],
+  "ja_both_carry_cases": [
+    {
+      "r9_after_xadd": 0,
+      "rdx": 3117427417,
+      "carry": 0,
+      "zero": 0,
+      "taken": true
+    },
+    {
+      "r9_after_xadd": 0,
+      "rdx": 3117427416,
+      "carry": 0,
+      "zero": 0,
+      "taken": true
+    }
+  ],
+  "additional_file_byte_values_needed_for_these_predicates": false,
+  "next_frontier": {
+    "address": 22254624,
+    "bytes": "c21800",
+    "assembly": "ret    0x18",
+    "destination_resolved": false
+  },
+  "assumptions": [
+    "Prior conditional DT_INIT candidate is reached under its recorded assumptions",
+    "Pinned instructions and normal memory completion without external interference",
+    "No assumption is made that decoded byte values or later indirect stores are harmless"
+  ],
+  "target_executed": false,
+  "native_emulator_run": false,
+  "initializer_effects_resolved": false,
+  "independent_semantic_review": "NOT_RUN"
+}
