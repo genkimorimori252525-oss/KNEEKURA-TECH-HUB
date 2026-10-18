@@ -1,0 +1,87 @@
+{
+  "status": "CONDITIONAL_BUILTIN_SUBTYPE_INVARIANT",
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "structural_method_matches": 94,
+  "independent_semantic_review": "NOT_RUN",
+  "runtime_executed": false,
+  "repo_modified": false,
+  "whole_source_equivalence": "NOT_ESTABLISHED",
+  "prior_divergence_preserved": true,
+  "minimal_invariant": "If the first accepted axis point is BeginningTransitionPoint and its progress takes the non-near-zero cast path, every subsequent accepted axis point must be BeginningTransitionPoint when read.",
+  "builtins": {
+    "linear": "Default return-this startNew; stored stable duration.",
+    "segmented": "New search cursor over same unchanged segment list; length is cached final endpoint, not current cursor bound."
+  },
+  "conditions": [
+    "Normal completion with finite render times and finite duration.",
+    "Same controller-managed initialization epoch and same stable beginning boundary across successful players.",
+    "No independent player/queue mutation, data mutation during initialization, or callback reentry.",
+    "All players processed before consumer visitation.",
+    "Missing selection has null pending nextAnim from ordinary consumed/reset lifecycle."
+  ],
+  "table": [
+    {
+      "case": "Successful selection",
+      "producer_evidence": "C.transition calls startNew at 526, assigns transition at 531, indicateReload at 539, selection at 555. P.setAnimation stores nextAnim at 97. P.loadNextAnim consumes/nulls nextAnim at 13; sets current animation/loop at 24/35 and activates bone queues at 119. C.process calls every holder P.process at 336 before aggregation at 383\u2013465.",
+      "consumer_consequence": "Successful selected players initialize on the same controller process call and renderTicks. P.process writes offset at 132 and local ticks=0 at 135\u2013136. With common stable L>0, each takes beginning; L<=0 all take running.",
+      "qualification": "Requires normal completion, built-in duration behavior, no external state/queue changes and a synchronized controller-managed player cohort."
+    },
+    {
+      "case": "Missing animation",
+      "producer_evidence": "P.setAnimation resetToIdle at 46; missing lookup returns at 75 without setting nextAnim. P.loadNextAnim null branch returns false at 9\u201310. P.process returns at 129 if no next animation. resetToIdle deactivates queues at 69 and clears active list at 79.",
+      "consumer_consequence": "Under the ordinary consumed-nextAnim invariant, missing selection contributes no active queues; it cannot contribute an old running point alongside newly beginning players.",
+      "qualification": "resetToIdle itself does NOT clear nextAnim; full reset clears it at 7. Therefore the missing-selection statement requires nextAnim already null (normal completed prior processing or fresh/reset player). Multiple direct selections before process or interrupted/reentrant lifecycle are outside this proof."
+    },
+    {
+      "case": "Missing bone",
+      "producer_evidence": "P.loadNextAnim missing map entry branches 93\u219296\u219256 before activation.",
+      "consumer_consequence": "No queue contribution for that bone.",
+      "qualification": "No attempt to synthesize a default point."
+    },
+    {
+      "case": "Empty axis lists",
+      "producer_evidence": "B.setActive empty-list branches at 9/50/91 write null searchers at 38/79/120. It resets point fields at 148. P.process resets queues at 170; B.resetQueues null writes at 2/7/12. P.runBeginningTransition gates each axis at 89/119/149; runAnimation likewise only writes existing searchers.",
+      "consumer_consequence": "Empty axes remain null after each normal processing pass and are rejected by Q; they do not introduce a different subtype.",
+      "qualification": "A bone queue can be active with every axis null. This is not equivalent to accepting three default points."
+    },
+    {
+      "case": "Beginning phase",
+      "producer_evidence": "P.runBeginningTransition invokes the typed beginning factory at 108/138/182-or-202 and writes rotation/position/scale at 111/141/205. Factory creates T at 10 and invokes its constructor at 36.",
+      "consumer_consequence": "Every non-null emitted axis point has the beginning subtype.",
+      "qualification": "Factory requires frames.search(0) cast to TransitionKeyFrame at 29; malformed data can fail before the successful completion assumed here. No claim of malformed-input safety."
+    },
+    {
+      "case": "Scale beginning disabled",
+      "producer_evidence": "Both scale branches call the same beginning-point factory (182 and 202), with the disabled branch using transition length and progress 1.",
+      "consumer_consequence": "The scale flag changes numerical arguments but never substitutes a keyframe point during the beginning phase.",
+      "qualification": "Equal progress is unnecessary for subtype safety and should not be inferred from subtype homogeneity."
+    },
+    {
+      "case": "Beginning\u2192running boundary",
+      "producer_evidence": "P.process resets queues at 170, compares ticks with length at 189\u2013195, enters running at 240, then calls runAnimation at 379. P.runAnimation writes keyframe points at 85/108/131; its factory creates KeyFramePoint at 9.",
+      "consumer_consequence": "With synchronized offset and common stable duration, all successful players cross on the same call, including exact equality. No old beginning fields survive reset.",
+      "qualification": "Consumer must run after the whole controller processing call, not midway through player updates. A numerical mixture of later running/ending/idle states is possible, but no built-in return from those states to beginning without a new synchronized controller selection."
+    },
+    {
+      "case": "Filtered holders",
+      "producer_evidence": "C.process condition evaluation at 305 and allowEmitting AND at 317\u2013335 still converge on P.process at 336. Dirty aggregation adds condition/queue pairs at 465. Q checks condition, active and non-null gates (rotation 69/92/107; position 66/89/104; scale 69/92/107).",
+      "consumer_consequence": "False conditions remove accepted entries, but do not postpone initialization or beginning completion. Any filtered subsequence of a homogeneous cohort remains homogeneous.",
+      "qualification": "Callback side effects/reentry are excluded, rather than assumed impossible. Zero weight alone is not an exclusion gate."
+    },
+    {
+      "case": "After beginning completes",
+      "producer_evidence": "Running emits KeyFramePoint; ending emits EndingTransitionPoint (P ending writes 90/118/146); idle deactivates/clears.",
+      "consumer_consequence": "Different animation lengths/loop types may mix running/ending/absent points after the shared beginning phase; this does not trigger a first-beginning cast requirement because no accepted beginning point remains.",
+      "qualification": "This proves subtype compatibility only, not equal weights, transforms, progress or semantic equivalence of blended output."
+    }
+  ],
+  "not_proven": [
+    "Runtime/native transition selection restricted to these builtins.",
+    "Safety of arbitrary external transition implementations or writers.",
+    "Normal completion for malformed search/frame input.",
+    "Equal progress, offsets, weights, or blended numerical semantics.",
+    "Observed exception or universal safety."
+  ],
+  "structural_evidence_file": "verified-methods.json",
+  "report_file": "report.md"
+}

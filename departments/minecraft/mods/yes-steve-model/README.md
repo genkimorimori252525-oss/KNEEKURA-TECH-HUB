@@ -1,5 +1,7 @@
 # Yes Steve Model (YSM) — architecture / animation / renderer research
 
+日本語の最短入口：[Entity state → Molang → Controller → Bone → Renderer 再利用ハンドオフ](YSM-PIPELINE-REUSE-HANDOFF-2026-10-18.md)。必要な層だけを読み、静的証拠・隔離メタデータ解析・自作参照テスト・実行確認を区別する。
+
 
 Need a known query/class quickly? Use the optional [evidence locator](EVIDENCE-LOCATOR-2026-10-17.md); no startup audit or tool installation.
 

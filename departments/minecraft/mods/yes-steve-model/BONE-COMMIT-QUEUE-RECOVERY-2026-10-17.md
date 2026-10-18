@@ -199,3 +199,7 @@ This cohort passed independent static review and is included in the 662-mapping
 checkpoint. See [verification](ANIMATION-PIPELINE-VERIFICATION-2026-10-17.json).
 The continuing research queue remains active; runtime and whole-source equivalence
 are not established.
+
+## October18 bounded producer-invariant update
+
+[Producer→consumer subtype proof](BEDROCK-QUEUE-PRODUCER-INVARIANT-2026-10-18.md) now establishes sufficient synchronized, stable-data conditions for the exact built-in linear and segmented transitions. This is conditional rather than universal safety: missing-animation exclusion additionally requires null pending nextAnim, because resetToIdle does not clear it. External mutation/reentry and arbitrary transition implementations remain outside the proof; equal progress is not inferred.

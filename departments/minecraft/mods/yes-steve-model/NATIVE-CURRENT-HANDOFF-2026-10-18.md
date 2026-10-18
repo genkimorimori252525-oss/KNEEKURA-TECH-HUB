@@ -1,5 +1,7 @@
 # Current YSM native-analysis handoff — October 18
 
+日本語の最短入口：[Entity state → Molang → Controller → Bone → Renderer 再利用ハンドオフ](YSM-PIPELINE-REUSE-HANDOFF-2026-10-18.md)。必要な層だけを読み、静的証拠・隔離メタデータ解析・自作参照テスト・実行確認を区別する。
+
 Read the [compact reuse guide](NATIVE-REUSE-GUIDE-2026-10-18.md) first, then only the linked seam needed. Branch: jolly/ysm-analysis-20261016. The project remains unfinished. The current snapshot below takes precedence over historical next-step statements.
 
 ## Current working snapshot
@@ -14,6 +16,10 @@ Read the [compact reuse guide](NATIVE-REUSE-GUIDE-2026-10-18.md) first, then onl
 - **Lookup rather than replay:** [52 selected Java-member slots](NATIVE-JAVA-MEMBER-INDEX-2026-10-18.md) cover47 original-YSM,1 declared commons dependency and4 declared JDK members. These are declaration identities, not native-registration counts or central-map promotions. Read source receipts only for the needed seam.
 - **Runtime frontier:** `UNMODELED_STAT_PATH_OR_ABI`, __xstat ABI1 on `/tmp`, caller `0x31122e`, checkpoint SHA256 `52bfa6d4103ec1ded965474d4151466cbb2b215118c73a3901b148d688a77b6a`. Two virtual workers remain unexecuted; Path state unchanged; no new JNI calls or pending Java exception. Actual RegisterNatives/JNI_OnLoad/render success remains unproved.
 - **Confidence unchanged:** Java map669 entries (405 CONFIRMED+264 HIGH), SHA256dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30. Whole-project semantic review NOT_RUN; focused reviews have only their stated bounds. Source-range/JSON/link checks are not runtime tests. Authored MT reference passes10 scoped tests; not native execution equivalence.
+
+## Controller→Bone producer precondition
+
+[Bedrock queue subtype invariant](BEDROCK-QUEUE-PRODUCER-INVARIANT-2026-10-18.md) now supplies a conditional built-in proof for synchronized normal processing with stable data and no external mutation/reentry. Both linear and segmented clones share a stable beginning boundary. Missing-animation exclusion additionally requires pending nextAnim already null; resetToIdle alone does not clear it. Subtype safety does not imply equal progress or whole-runtime correctness.94 structural method matches; independent semantic review NOT_RUN.
 
 ## Model configuration and renderer joins
 

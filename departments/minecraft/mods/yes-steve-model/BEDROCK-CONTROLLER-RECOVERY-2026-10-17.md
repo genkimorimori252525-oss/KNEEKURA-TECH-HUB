@@ -92,3 +92,7 @@ independent approval of this prose. See the companion verification JSON.
 
 Next: animatable model reload/update scheduling and the call boundary supplying
 renderTicks/shouldTick, then revisit the remaining homogeneity prerequisites.
+
+## October18 bounded producer-invariant update
+
+[Producer→consumer subtype proof](BEDROCK-QUEUE-PRODUCER-INVARIANT-2026-10-18.md) now establishes sufficient synchronized, stable-data conditions for the exact built-in linear and segmented transitions. This is conditional rather than universal safety: missing-animation exclusion additionally requires null pending nextAnim, because resetToIdle does not clear it. External mutation/reentry and arbitrary transition implementations remain outside the proof; equal progress is not inferred.
