@@ -1,0 +1,214 @@
+{
+  "classification": "BOUNDED_COLLECTOR_WAIT_AND_GUARD_SKIP_LIFETIME",
+  "so_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "windows": [
+    {
+      "start": "0x41bd80",
+      "end_exclusive": "0x41bdc4",
+      "file_offset": 4308352,
+      "sha256": "7cf35dc56b89dc4d5524d1c6c6e867870da0d8b6d0f1163ea824e56d82545503"
+    },
+    {
+      "start": "0x41ce80",
+      "end_exclusive": "0x41d10b",
+      "file_offset": 4312704,
+      "sha256": "4ddf96065c90e29a71445ce425d3df9cc0117e621cb7f01445a21c6fc8951838"
+    },
+    {
+      "start": "0x2e3ec0",
+      "end_exclusive": "0x2e4050",
+      "file_offset": 3030720,
+      "sha256": "764689aa1c66d0a0642764892548bdd80b76af1f5f4711c48b5935442a7667ac"
+    },
+    {
+      "start": "0x360430",
+      "end_exclusive": "0x36056b",
+      "file_offset": 3540016,
+      "sha256": "25d41d8b5e234ac686bfad162985fb37fc910ccbfa7b7cc2835cbe7d7eb11a15"
+    },
+    {
+      "start": "0x360690",
+      "end_exclusive": "0x360722",
+      "file_offset": 3540624,
+      "sha256": "3cdeca2e7803f147ad4bfe3f173976e4cd012b67e3cc3ae406555bbe6088700f"
+    },
+    {
+      "start": "0x2f86b0",
+      "end_exclusive": "0x2f86cd",
+      "file_offset": 3114672,
+      "sha256": "da02f494c8e1d35ea159d1aee18d5714100cbb33c4a24c6f4f5872bc507b4724"
+    },
+    {
+      "start": "0x339780",
+      "end_exclusive": "0x3397a7",
+      "file_offset": 3381120,
+      "sha256": "732e92d46595dc147a28af2da7febe91c6dc6bb49c0825f87682ed9c4db62870"
+    },
+    {
+      "start": "0x41cbf0",
+      "end_exclusive": "0x41cd00",
+      "file_offset": 4312048,
+      "sha256": "0b10c0264b4bdf192765451af44f3f03954bcc4f25e476771c66f99aef5966e8"
+    },
+    {
+      "start": "0x41c850",
+      "end_exclusive": "0x41c929",
+      "file_offset": 4311120,
+      "sha256": "f44208154ff560ac4f864bce7ad93f8b56f813703b5a1160bd2785cb2ef48f8c"
+    },
+    {
+      "start": "0x41c250",
+      "end_exclusive": "0x41c270",
+      "file_offset": 4309584,
+      "sha256": "822742d02ee89c36d903a8aec33924a9e8433982de916cd2bf99a8c7ea56316f"
+    },
+    {
+      "start": "0x345d00",
+      "end_exclusive": "0x345d45",
+      "file_offset": 3431680,
+      "sha256": "272d7a9cacd95b7dec09f1e40036ec3a8adb719e115d7465505d8301ac540a52"
+    },
+    {
+      "start": "0x35eeb0",
+      "end_exclusive": "0x35ef10",
+      "file_offset": 3534512,
+      "sha256": "68c14d4a734736a00c6a24008abce165bff6e26a6cc6280cb8aac912122a46cf"
+    },
+    {
+      "start": "0x3454e0",
+      "end_exclusive": "0x3456b4",
+      "file_offset": 3429600,
+      "sha256": "c80460279b82574c13b687cf24b273f17b42326e18936c33b23270bdc8fe8b52"
+    },
+    {
+      "start": "0x35ac22",
+      "end_exclusive": "0x35acac",
+      "file_offset": 3517474,
+      "sha256": "688ef3e595dca5bf9e9e2236c16bc16ce12b6186a51f653c21dc375dd2f6c491"
+    },
+    {
+      "start": "0x35a70f",
+      "end_exclusive": "0x35a75c",
+      "file_offset": 3516175,
+      "sha256": "c25cb9e43e9ea00129c65f6b6fb402a12aa4c690b202e8cde79dc7f4c79027ad"
+    }
+  ],
+  "byte_assertions": {
+    "0x41cf74": "31c9",
+    "0x2e3ed2": "84c9",
+    "0x2e3ed4": "0f8416010000",
+    "0x2e4007": "b801000000",
+    "0x41cf90": "84c8",
+    "0x41d02d": "e93e000000",
+    "0x41d092": "488d059733f4ff",
+    "0x36043a": "48c7411000000000",
+    "0x360522": "874310",
+    "0x41cbfd": "ff10",
+    "0x41cc37": "e81438f4ff",
+    "0x41c85c": "0f849a000000",
+    "0x34566a": "41874610"
+  },
+  "lsda": [
+    {
+      "function": "0x41cbf0",
+      "site": "0x41cbfd",
+      "fde": "0x188b2a4",
+      "lsda": "0x150cac",
+      "start": "0x41cbfd",
+      "end": "0x41cbff",
+      "landing": "0x41cc95",
+      "action": 1
+    },
+    {
+      "function": "0x41cbf0",
+      "site": "0x41cc37",
+      "fde": "0x188b2a4",
+      "lsda": "0x150cac",
+      "start": "0x41cc32",
+      "end": "0x41cc3c",
+      "landing": "0x41cc6f",
+      "action": 1
+    },
+    {
+      "function": "0x41d070",
+      "site": "0x41d0ad",
+      "fde": "0x188b384",
+      "lsda": "0x150d14",
+      "start": "0x41d0aa",
+      "end": "0x41d0b2",
+      "landing": "0x41d0e1",
+      "action": 0
+    },
+    {
+      "function": "0x41ce80",
+      "site": "0x41cf7c",
+      "fde": "0x188b31c",
+      "lsda": "0x150cec",
+      "start": "0x41cf6e",
+      "end": "0x41cf81",
+      "landing": "0x41d051",
+      "action": 0
+    }
+  ],
+  "import_chains": [
+    {
+      "symbol": "pthread_once",
+      "chain": [
+        {
+          "instruction": "0xd147a0",
+          "got": "0xd30858",
+          "type": 8,
+          "addend": "0x13d6ea8"
+        },
+        {
+          "instruction": "0x13d6ea8",
+          "got": "0x184d078",
+          "type": 7,
+          "addend": "0x0"
+        }
+      ]
+    },
+    {
+      "symbol": "syscall",
+      "chain": [
+        {
+          "instruction": "0xd14840",
+          "got": "0xd308a8",
+          "type": 8,
+          "addend": "0x13d6ee4"
+        },
+        {
+          "instruction": "0x13d6ee4",
+          "got": "0x184d0c8",
+          "type": 7,
+          "addend": "0x0"
+        }
+      ]
+    }
+  ],
+  "task_relocations": [
+    {
+      "slot": "0xd1b580",
+      "target": "0x35f620"
+    },
+    {
+      "slot": "0xd1b590",
+      "target": "0x35eeb0"
+    },
+    {
+      "slot": "0xd1b5a8",
+      "target": "0x35ef10"
+    },
+    {
+      "slot": "0xd1b5b8",
+      "target": "0x345d20"
+    }
+  ],
+  "limits": [
+    "Normal helper completion; no runtime progress or universal queue-drain guarantee",
+    "Ordinary normal return waits for ready=1; ready can mean skipped/error completion, not Java callback success",
+    "Guard fallback does not invoke task body or enqueue it",
+    "Selected consumer completion paths end body access before ready; no whole-program all-writer proof",
+    "Exceptions/termination before readiness and stored exception consumption remain distinct"
+  ]
+}

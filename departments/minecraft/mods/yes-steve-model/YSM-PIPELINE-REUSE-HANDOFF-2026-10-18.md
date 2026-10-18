@@ -87,3 +87,5 @@ Entity input の再利用なら最上段、Molang 実装なら evaluator と必�
 controller例外経路も追加確定：[controller failure transform](NATIVE-CONTROLLER-FAILURE-TRANSFORM-2026-10-18.md)。中間catchの両分岐はコード0x5bのnative例外を作って伝播し、正常な後片付けを前提にworkerのモデル単位skipへ接続する。Java側で捕捉済みのfallbackとは別で、正常map挿入へ戻るcatchではない。最終公開・全副作用のrollbackは保証しない。
 
 最終公開への接続：[native staging → Java model map](NATIVE-COLLECTOR-PUBLICATION-JOIN-2026-10-18.md)。2つのcallbackを隔離メタデータ解析で解読し原本classfileへ一致。+58はモデル構築成功時だけqueueへ追加し、後のtickがvolatile mapを更新する。構築Exceptionを捕捉して通常returnしても追加されない経路がある。+60の既存map変更は別処理なので失敗時の旧model保持も保証しない。選択member索引は54件へ拡張、中心669map・実起動未確認は変更なし。
+
+collector待機の追加確定：[wait / guard skip / capture lifetime](NATIVE-COLLECTOR-WAIT-LIFETIME-2026-10-18.md)。実際の固定引数では時間切れfalse返却経路へ入らず、通常returnはready=1観測後。選択した通常consumerではbody終了後にreadyを公開する。guard時はbodyを実行せず完了状態にするためready≠callback成功。異常unwindや全queue drain、保存例外の消費は別の未確定境界。

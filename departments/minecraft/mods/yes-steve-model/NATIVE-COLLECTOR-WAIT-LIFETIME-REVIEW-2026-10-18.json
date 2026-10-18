@@ -1,0 +1,120 @@
+{
+  "verdict": "CONDITIONAL_STATIC_ACCEPTANCE",
+  "so_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "reviewed_report_sha256": "55ef0d71ce1fcde093f0fa7c1ba3cc7d9997ae026ddba0e594cf34c8c10cbf0b",
+  "reviewed_receipt_sha256": "d0f739491b9d9dca1360b24f0fd3aab8bf3be9adece1933e65dfe62e47459e96",
+  "verified_original_windows": 15,
+  "verified_byte_assertions": 13,
+  "independent_lsda": [
+    {
+      "function": "0x41cbf0",
+      "fde": "0x188b2a4",
+      "lsda": "0x150cac",
+      "call": "0x41cbfd",
+      "coverage": [
+        "0x41cbfd",
+        "0x41cbff",
+        "0x41cc95"
+      ],
+      "action": 1
+    },
+    {
+      "function": "0x41cbf0",
+      "fde": "0x188b2a4",
+      "lsda": "0x150cac",
+      "call": "0x41cc37",
+      "coverage": [
+        "0x41cc32",
+        "0x41cc3c",
+        "0x41cc6f"
+      ],
+      "action": 1
+    },
+    {
+      "function": "0x41d070",
+      "fde": "0x188b384",
+      "lsda": "0x150d14",
+      "call": "0x41d0ad",
+      "coverage": [
+        "0x41d0aa",
+        "0x41d0b2",
+        "0x41d0e1"
+      ],
+      "action": 0
+    },
+    {
+      "function": "0x41ce80",
+      "fde": "0x188b31c",
+      "lsda": "0x150cec",
+      "call": "0x41cf7c",
+      "coverage": [
+        "0x41cf6e",
+        "0x41cf81",
+        "0x41d051"
+      ],
+      "action": 0
+    }
+  ],
+  "imports": [
+    {
+      "symbol": "pthread_once",
+      "chain": [
+        [
+          "0xd147a0",
+          "0xd30858",
+          8,
+          "0x13d6ea8"
+        ],
+        [
+          "0x13d6ea8",
+          "0x184d078",
+          7,
+          "0x0"
+        ]
+      ]
+    },
+    {
+      "symbol": "syscall",
+      "chain": [
+        [
+          "0xd14840",
+          "0xd308a8",
+          8,
+          "0x13d6ee4"
+        ],
+        [
+          "0x13d6ee4",
+          "0x184d0c8",
+          7,
+          "0x0"
+        ]
+      ]
+    }
+  ],
+  "additional_windows": [
+    {
+      "start": "0x35abe0",
+      "end_exclusive": "0x35ac3f",
+      "file_offset": "0x35abe0",
+      "sha256": "8ca767904947087a768b5ffc467518623f3603618ec893bc93bd7345ece4a69a"
+    },
+    {
+      "start": "0x2aade0",
+      "end_exclusive": "0x2aade1",
+      "file_offset": "0x2aade0",
+      "sha256": "ae3f4619b0413d70d3004b9131c3752153074e45725be13b9a148978895e359e"
+    }
+  ],
+  "emitter_state_virtual_slot": {
+    "slot": "0xd1c0c8",
+    "type": "R_X86_64_RELATIVE",
+    "target": "0x2aade0",
+    "instruction": "ret"
+  },
+  "limits": [
+    "Selected normal completion paths only; other state writers not exhaustively excluded",
+    "No runtime task execution, queue drain, liveness or unconditional stack lifetime guarantee",
+    "Readiness can represent skipped/error completion and is not exception consumption or Java publication"
+  ],
+  "target_executed": false
+}
