@@ -1,0 +1,54 @@
+{
+  "original_native_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "flags": {
+    "value": "0x15",
+    "caller": "0x3d9b25",
+    "compiler": "0x32c1e0",
+    "stores": [
+      "0x32c1fd",
+      "0x32c2c8"
+    ],
+    "interpretation": [
+      "ECMAScript",
+      "icase",
+      "optimize"
+    ],
+    "evidence": "Pinned GCC14.2 blob definitions plus corresponding native scanner and matcher dispatch",
+    "original_build_release_known": false,
+    "optimization_effect_proved": false,
+    "case_mechanism": "locale facet transformation for pattern and candidate; callback 0x339600; exact facet/locale unavailable"
+  },
+  "match": {
+    "wrapper": "0x3d1930",
+    "caller": "0x3d9872",
+    "input": "full original archive record name",
+    "match_flags": 0,
+    "wrapper_mode": true,
+    "exact_executor_mode": 0,
+    "acceptance_check": "0x3d3e47..0x3d3e58 rejects mode==0 and current!=end",
+    "full_range_match_supported": true,
+    "prefix_check_case_sensitive": true
+  },
+  "errors": {
+    "EOF_check": "0x32c5d4..0x32c5e3",
+    "failure": "0x32c781 -> 0x2fa678, code 5",
+    "pinned_upstream_name": "error_paren",
+    "silently_skip_invalid_rule_proved": false,
+    "outer_error_handling": "not audited"
+  },
+  "empty_pattern": {
+    "configuration_empty_lines": "skipped before compilation",
+    "compiler_empty_input": "sets EOF at 0x32c399; pinned grammar supports empty alternative",
+    "nonempty_name_match": "empty pattern cannot satisfy exact end condition for nonempty input",
+    "executed": false
+  },
+  "limits": [
+    "original libstdc++ build release not identified",
+    "actual locale/facets and non-ASCII behavior unavailable",
+    "complete regex dialect compatibility not proved",
+    "no executed rules or original archive/configuration reads",
+    "no implementation or extraction-safety claim"
+  ],
+  "next_recommended": "numeric ostream/hash-manifest formatting; every retained entry depends on it",
+  "later_unresolved": "duplicate-name policy; not researched in this task"
+}

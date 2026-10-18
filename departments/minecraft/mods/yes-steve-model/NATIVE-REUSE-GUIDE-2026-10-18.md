@@ -87,3 +87,5 @@ The [next explicit absent-environment cohort](NATIVE-ABSENT-ENVIRONMENT-CONTINUA
 ## Native initialization I/O and archive boundary
 
 Use [owned config/temp paths](NATIVE-INIT-PATH-CONSUMERS-2026-10-18.md), [builtin cleanup/notice output](NATIVE-BUILTIN-CLEANUP-NOTICE-2026-10-18.md), [ModList-to-archive graph](NATIVE-MODLIST-MAP-CONTRACT-2026-10-18.md), then [archive integrity/resource consumers](NATIVE-ARCHIVE-PATH-CONSUMER-2026-10-18.md). These static contracts distinguish destructive cleanup, metadata identity, actual filesystem state, filtered integrity and resource writes; none is a blanket successful initialization fixture.
+
+[Blacklist line filtering and destination selection](NATIVE-BUILTIN-SELECTION-2026-10-18.md) distinguishes untrimmed patterns, CR→LF processing, exact prefix gating and lexical suffix normalization. [Regex semantics](NATIVE-BLACKLIST-REGEX-2026-10-18.md) proves full-range matching and native-supported option mapping. Path containment remains unproved, not demonstrated unsafe or safe.

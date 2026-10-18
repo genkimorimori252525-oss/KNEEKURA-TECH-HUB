@@ -1,0 +1,73 @@
+{
+  "original_native_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "scope": "static bytes only, no archive payload, runtime or user configuration inspection",
+  "blacklist": {
+    "path": "<config-root>/blacklist.txt",
+    "read_pc": "0x3d8f03",
+    "default_write_pc": "0x3d8f4c",
+    "default_native_literal": "0xd2ecd0",
+    "default_length": 3145,
+    "newline_rule": "replace CR with LF, then LF split",
+    "skip_rules": [
+      "empty line",
+      "first byte #",
+      "all characters accepted by isblank"
+    ],
+    "whitespace_trim": false,
+    "inline_comment_strip": false,
+    "compile_pc": "0x3d9b2b",
+    "compile_flags": "0x15",
+    "flags_interpretation": "ECMAScript|icase|optimize in auxiliary GCC14 headers; exact original build compatibility conditional",
+    "actual_rules": null
+  },
+  "isblank_import": {
+    "plt": "0xd14980",
+    "relative_slot": "0xd30948",
+    "trampoline": "0x13d6f5c",
+    "import_slot": "0x184d168",
+    "symbol": "isblank@GLIBC_2.2.5",
+    "runtime_binding_verified": false
+  },
+  "selection": {
+    "required_prefix": "assets/yes_steve_model/builtin/",
+    "prefix_length": 31,
+    "prefix_case_sensitive": true,
+    "regex_input": "full original archive name, before prefix removal/normalization",
+    "match_pc": "0x3d9872",
+    "match_helper": "0x3d1930",
+    "match_flags": 0,
+    "match_mode": true,
+    "on_any_match": "skip record at 0x3d989a -> 0x3d97f0"
+  },
+  "destination": {
+    "suffix_creation_pc": "0x3d9905",
+    "normalization_pc": "0x3d9915",
+    "normalization_helper": "0x31df40",
+    "join_pc": "0x3d9927",
+    "base_global": "0xd352f8",
+    "write_pc": "0x3d99ce",
+    "containment_proved": false,
+    "reason": "component normalization can preserve dotdot; generic join has replacement branch; no explicit final descendant/containment or symlink check in audited callsite",
+    "exploitable_traversal_demonstrated": false
+  },
+  "unresolved": [
+    "actual file state and rules",
+    "pinned original regex implementation/dialect/locale behavior",
+    "invalid-pattern recovery",
+    "complete path-parser/root semantics",
+    "earlier archive-parser constraints and actual names",
+    "final filesystem containment and writer behavior"
+  ],
+  "auxiliary_sources": [
+    {
+      "path": "/usr/include/c++/14/bits/regex_constants.h",
+      "sha256": "cae4df35f37b2874c0b76c103d8e214ee976a9d0f12d4c8d79ca545494ee0229",
+      "role": "auxiliary local GCC 14 structural reference; not pinned original build"
+    },
+    {
+      "path": "/usr/include/c++/14/bits/regex.tcc",
+      "sha256": "92b66095ba85125efc4070cf246bc363b8d4cd9952d514e05b017769d53b804a",
+      "role": "auxiliary local GCC 14 structural reference; not pinned original build"
+    }
+  ]
+}

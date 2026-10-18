@@ -1,0 +1,43 @@
+{
+  "repository": "gcc-mirror/gcc",
+  "ref": "releases/gcc-14.2.0",
+  "purpose": "Explicitly pinned comparison source; original binary build release is not established",
+  "sources": {
+    "regex_constants.h": {
+      "sha": "437895f1dc399f494a91b442b370ffd88b2f581e",
+      "url": "https://github.com/gcc-mirror/gcc/blob/releases/gcc-14.2.0/libstdc%2B%2B-v3/include/bits/regex_constants.h",
+      "local_git_blob_sha1": "437895f1dc399f494a91b442b370ffd88b2f581e",
+      "local_sha256": "cae4df35f37b2874c0b76c103d8e214ee976a9d0f12d4c8d79ca545494ee0229"
+    },
+    "regex.tcc": {
+      "sha": "5cf217ef777c89274aebcf0a46350a4614943f4d",
+      "url": "https://github.com/gcc-mirror/gcc/blob/releases/gcc-14.2.0/libstdc%2B%2B-v3/include/bits/regex.tcc",
+      "local_git_blob_sha1": "5cf217ef777c89274aebcf0a46350a4614943f4d",
+      "local_sha256": "92b66095ba85125efc4070cf246bc363b8d4cd9952d514e05b017769d53b804a"
+    },
+    "regex_compiler.tcc": {
+      "sha": "3c6cb6649df0ad02025f38ba2c96e3a819cd5f18",
+      "url": "https://github.com/gcc-mirror/gcc/blob/releases/gcc-14.2.0/libstdc%2B%2B-v3/include/bits/regex_compiler.tcc",
+      "local_git_blob_sha1": "3c6cb6649df0ad02025f38ba2c96e3a819cd5f18",
+      "local_sha256": "b41c1339c5e54832cceaabffcec31019cc366899f59f661eb417b2cec92363ad"
+    },
+    "regex_executor.tcc": {
+      "sha": "d23f566953b2246604ef86230e8a7678a274ecea",
+      "url": "https://github.com/gcc-mirror/gcc/blob/releases/gcc-14.2.0/libstdc%2B%2B-v3/include/bits/regex_executor.tcc",
+      "local_git_blob_sha1": "d23f566953b2246604ef86230e8a7678a274ecea",
+      "local_sha256": "708d70ae586584fd2d396781c108979ea0dcf17ac840b0afed3120e27dc0c8f0"
+    },
+    "regex_error.h": {
+      "sha": "b73b312d7e06623a11ba42297dcf9ceb110dcb38",
+      "url": "https://github.com/gcc-mirror/gcc/blob/releases/gcc-14.2.0/libstdc%2B%2B-v3/include/bits/regex_error.h",
+      "local_git_blob_sha1": "b73b312d7e06623a11ba42297dcf9ceb110dcb38",
+      "local_sha256": "c2dbaac3af02f967ded59c30bf420fb530835267b0e01e4931256800e140bd75"
+    },
+    "regex_compiler.h": {
+      "sha": "5501d709e854f179ad5146c26505c02f2910c52b",
+      "url": "https://github.com/gcc-mirror/gcc/blob/releases/gcc-14.2.0/libstdc%2B%2B-v3/include/bits/regex_compiler.h",
+      "local_git_blob_sha1": "5501d709e854f179ad5146c26505c02f2910c52b",
+      "local_sha256": "79dbde1d6249f5a3f582f8452093f9d0ebc85d1ab73b92f2791d0f09a61ecf14"
+    }
+  }
+}
