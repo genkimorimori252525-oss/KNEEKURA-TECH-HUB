@@ -1,0 +1,16 @@
+{
+  "status": "CONDITIONAL_STATIC_ACCEPTANCE",
+  "jar_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "fresh_methods": 105,
+  "claims": [
+    "same-parser address shift survives later cache reset",
+    "retained runtime root fixture requires logical offset and size",
+    "empty frame and initialized local are counterexamples to universal observable difference"
+  ],
+  "limits": [
+    "No Java, original parser/evaluator, native/assets, CI, network, downloads or Git changes",
+    "Authored symbolic assertions are not target/native oracle",
+    "Illustrative text tokenization not independently established"
+  ],
+  "fresh_evidence_sha256": "151651dc9edaa04e82ea437251315eb979b2f2910bdcb44c93340d9bf7fb0dc7"
+}

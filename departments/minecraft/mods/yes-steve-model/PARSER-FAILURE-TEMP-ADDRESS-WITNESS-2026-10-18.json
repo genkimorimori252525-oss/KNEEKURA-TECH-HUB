@@ -1,0 +1,32 @@
+{
+  "kind": "AUTHORED_SYMBOLIC_MODEL_NOT_TARGET_EXECUTION",
+  "failure_prefix": {
+    "a": 0,
+    "next": 1
+  },
+  "same_parser_next_success_capture": {
+    "b": 1
+  },
+  "after_success_next_parse_capture": {
+    "c": 0
+  },
+  "retained_root_fixture": [
+    11,
+    22
+  ],
+  "polluted_b_read": 22,
+  "clean_b_read": 11,
+  "same_name_reuses_old_slot": true,
+  "fresh_empty_frame_read": null,
+  "assigned_local_read": 7,
+  "conditions": [
+    "Failure after temp binding but before successful transient reset",
+    "Normal scoped-only pool return",
+    "Same parser instance subsequently selected; no intervening successful transient reset",
+    "Runtime observation uses an existing appropriate frame/storage"
+  ],
+  "limits": [
+    "No target parsing/evaluation, pool scheduling or model behavior executed",
+    "No specification violation or actual gameplay defect established"
+  ]
+}
