@@ -1,6 +1,6 @@
 # Current YSM native-analysis handoff — October 18
 
-Read this entry first. Current report: [all45 initializers complete in the isolated scenario](NATIVE-INITIALIZER-SEQUENCE-COMPLETE-RESULT-2026-10-18.md). Branch: jolly/ysm-analysis-20261016. The project remains unfinished. Older linked reports describe historical states, not today's frontier.
+Read this entry first. Current report: [JNI artifact bridge and bounded continuation](NATIVE-JNI-ARTIFACT-BRIDGE-RESULT-2026-10-18.md). Initializer evidence: [all45 complete in the isolated scenario](NATIVE-INITIALIZER-SEQUENCE-COMPLETE-RESULT-2026-10-18.md). Branch: jolly/ysm-analysis-20261016. The project remains unfinished. Older linked reports describe historical states, not today's frontier.
 
 ## Goal and unchanged confidence
 
@@ -17,13 +17,13 @@ Recover reusable entity state → Molang → controller → bone → renderer be
 
 Entry0x152eb19 is simulated with a protected Unicorn2.1.4 backend and explicit synthetic environment inputs. Its immutable file/reference is preserved. The separate opt-in working-image driver permits only bounded recorded guest-state writes with transactional rollback and complete expected-image verification. No target host-native execution, real imports or OS permission changes occur.
 
-Two masked CRC32 loops have pinned code/table contracts and60 full-state differential cases. Fifteen summaries cover528,156,776 logical loop-instruction effects; these are not actually interpreted instruction counts. CRC acceleration turns off conservatively after any working-image mutation.
+Two masked CRC32 loops have pinned code/table contracts and60 full-state differential cases. Fifteen summaries cover528,156,776 logical loop-instruction effects; these are not actually interpreted instruction counts. Those two older profiles turn off after any working-image mutation. Three new JNI CRC profiles independently validate unchanged source/code/table bytes and allow unrelated image writes; 90 own-state cases and two actual checkpoint A/B comparisons pass.
 
 A fresh DT_INIT run returns after3,290,734 native instruction/model invocations. The deterministic8812 RELATIVE-fixup scenario also returns in the same count. The current authoritative sequence adds unresolved-external-data guards and explicit opaque stdio/C-locale/environment/heap fixtures. Callbacks0..44 now return in order; phase=done, no in-progress call.244 scoped test methods pass.45/45 is initializer-array progress only, not overall recovery or real runtime completion.
 
 The latest completed-initializer checkpoint is unicorn-init-sync-batch.checkpoint.json, SHA-256 a63e08364467e41d0bfa61cbb80b44f63baf5c32b431d5c770dc8c40a31f267d, cumulative3464756 completed invocations. Batched and split continuations match all state. The driver uses SyncGuardedCPU with four opaque semaphores, known-byte memory search, virtual TLS and bounded sparse anonymous memory. Final sparse backing89pages/364544bytes; no256GiB host reservation.
 
-Uncorrected exploratory pre-PSHUFB-fix snapshots remain superseded. Keep the final initializer checkpoint separate from JNI lifecycle experiments. Preliminary JNI_OnLoad reachesPC0x4120f6 while copying an opaque64-byte JavaVM invoke table; static follow-up calls GetEnv at offset0x30 with version0x000a0000. Next build an explicit invocation/JNI table scenario, then validate any observed registrations against exact original JAR descriptors. No Java/native binding recovery is yet claimed.
+Uncorrected exploratory pre-PSHUFB-fix snapshots remain superseded. Keep initializer checkpoints separate from JNI lifecycle experiments. Current JNI_OnLoad enters artifact-backed JavaVM/JNIEnv gateways and verifies three java.base method descriptors, but no RegisterNatives calls have been recovered. The 371-test JNI/artifact/stack/batching cohort uses immutable official JDK library bytes without executing any JVM body. The latest continuation reaches a bounded stack-capacity frontier at PC0x32a4cb, store0x6fffffffff90, RSP0x6fffffffff50. See the current report and JSON receipt for exact hashes and next steps. An explicit bounded 1 MiB stack scenario passes that frontier; 100,000 instructions under legacy and batched execution produce identical checkpoint hashes. Continue from jni-live-batch-compare-batched.checkpoint.json while the next run is pending; completion is not assumed.
 
 ## Reuse and runtime contracts
 
@@ -40,7 +40,7 @@ Ghidra12.1.4 memory XCHG32 upper-register clearing and SHR overflow-flag behavio
 
 CPUID leaf1 ignores incoming ECX. File-backed executable addresses below0x1000 are valid in this ELF;0xf38 is protected code. Address0 still stops. These corrected harness assumptions must not be reported as target bugs.
 
-JNI_OnLoad's conditional candidate continuations still depend on file-state words0xd2cd48..0xd2cd5a. DT_INIT progress is not proof that those words retain their file values in real runtime. JNI_OnUnload,45 init-array callbacks, Android bodies and Windows virtual-only export regions remain separate unresolved work. Windows RVAs are not file offsets.
+JNI_OnLoad's conditional candidate continuations still depend on file-state words0xd2cd48..0xd2cd5a. DT_INIT progress is not proof that those words retain their file values in real runtime. JNI_OnUnload, real-runtime initializer behavior, Android bodies and Windows virtual-only export regions remain separate unresolved work. Windows RVAs are not file offsets.
 
 Legacy register PSHUFB is modeled to correct Unicorn2.1.4 copying uninitialized upper384 vector bits. Preserve those bits; never just exclude them from checkpoint comparison. Own-byte/hardware permutation fixtures establish the correction. No YSM code ran natively.
 

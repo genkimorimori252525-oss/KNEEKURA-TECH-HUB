@@ -45,7 +45,7 @@ class AllocatorFixtureTests(unittest.TestCase):
         self.assertEqual(c.read_known(a, PAGE), before)
 
     def test_unknown_paths_flags_and_descriptors_rejected(self):
-        for path, flags in [('/etc/passwd', 0x80000), ('/dev/urandom', 0)]:
+        for path, flags in [('/etc/passwd', 0x80000), ('/dev/urandom', 4)]:
             c = self.cpu()
             with self.assertRaises(ModelHalt): self.call(c, 'open', self.string(c, path), flags)
             self.assertFalse(c.os_fixture['entropy_open'])
@@ -146,8 +146,40 @@ class AllocatorFixtureTests(unittest.TestCase):
                 state['os_fixture'].update(clock_calls=calls, monotonic_ns=ns)
                 with self.assertRaises(ValueError): self.cpu().restore_sparse(state)
 
+    def test_readlink_fixture_has_no_nul_and_truncates(self):
+        c = self.cpu(); path = self.string(c, '/proc/self/exe'); a = c.vm_map(PAGE); c.write_model_memory(a, b'X'*64)
+        self.assertEqual(self.call(c, 'readlink', path, a, 4096), len('/virtual/jdk/bin/java'))
+        self.assertEqual(c.read_known(a, 22), b'/virtual/jdk/bin/javaX')
+        self.assertEqual(self.call(c, 'readlink', path, a, 3), 3)
+        self.assertEqual(c.read_known(a, 3), b'/vi')
+        self.assertEqual(c.os_fixture['readlink_calls'], 2)
+
+    def test_readlink_rejects_unknown_path_and_zero_buffer(self):
+        for path, size in [('/etc/passwd', 64), ('/proc/self/exe', 0)]:
+            c = self.cpu()
+            with self.assertRaises(ModelHalt): self.call(c, 'readlink', self.string(c, path), 0xdead, size)
+            self.assertEqual(c.os_fixture['readlink_calls'], 0)
+
+    def test_virtual_stat_exact_layout_for_two_declared_files(self):
+        for path, mode in [('/virtual/jdk/bin/java', 0o100755), ('/virtual/jdk/lib/server/libjvm.so', 0o100644)]:
+            c = self.cpu(); a = c.vm_map(PAGE)
+            self.assertEqual(self.call(c, '__xstat', 1, self.string(c, path), a), 0)
+            data = c.read_known(a, 144)
+            self.assertEqual(struct.unpack_from('<QQQIII', data), (1,1,1,mode,1000,1000))
+            self.assertEqual(struct.unpack_from('<qqq', data, 48), (0,4096,0))
+            self.assertEqual(data[72:], bytes(72))
+
+    def test_stat_unknown_path_or_abi_rejected(self):
+        for version, path in [(0, '/virtual/jdk/bin/java'), (1, '/etc/passwd')]:
+            c = self.cpu(); a = c.vm_map(PAGE)
+            with self.assertRaises(ModelHalt): self.call(c, '__xstat', version, self.string(c, path), a)
+            self.assertEqual(c.vm_pages, {})
+
+    def test_entropy_readonly_open_without_cloexec(self):
+        c = self.cpu(); self.assertEqual(self.call(c, 'open', self.string(c, '/dev/urandom'), 0), FD)
+
     def test_declared_imports_are_exact(self):
-        self.assertEqual(len(IMPORTS), 13)
-        self.assertEqual(SYMBOLS, {'__errno_location', 'open', 'read', 'close', 'prctl', 'mmap', 'madvise', 'mprotect', 'munmap', 'clock_gettime'})
+        self.assertEqual(len(IMPORTS), 15)
+        self.assertEqual(SYMBOLS, {'__errno_location', 'open', 'read', 'close', 'prctl', 'mmap', 'madvise', 'mprotect', 'munmap', 'clock_gettime', 'readlink', '__xstat'})
 
 if __name__ == '__main__': unittest.main()

@@ -39,4 +39,11 @@ class CLocaleTests(unittest.TestCase):
  def test_normal_heap_respects_fixture_reservation(self):
   c=self.cpu();ensure_c_locale(c)
   with self.assertRaises(ModelHalt):c.allocate(HEAP_SIZE)
+ def test_tolower_all_unsigned_bytes_and_eof(self):
+  c=ShadowGuardedCPU(io.StringIO(),'heap')
+  for value in list(range(256))+[0xffffffff]:
+   c.reg('RDI',value);self.assertEqual(model(c,'tolower'),value+32 if 65<=value<=90 else value)
+ def test_tolower_undefined_negative_rejected(self):
+  c=ShadowGuardedCPU(io.StringIO(),'heap');c.reg('RDI',0xfffffffe)
+  with self.assertRaises(ModelHalt):model(c,'tolower')
 if __name__=='__main__':unittest.main()

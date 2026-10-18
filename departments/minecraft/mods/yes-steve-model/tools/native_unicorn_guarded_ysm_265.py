@@ -10,9 +10,14 @@ from pathlib import Path
 from unicorn import Uc, UcError, UC_ARCH_X86, UC_MODE_64, UC_PROT_READ, UC_PROT_WRITE, UC_PROT_EXEC, UC_PROT_ALL, UC_HOOK_CODE, UC_HOOK_MEM_READ, UC_HOOK_MEM_WRITE, UC_HOOK_MEM_INVALID, UC_QUERY_TIMEOUT, UC_MEM_FETCH_UNMAPPED, UC_MEM_FETCH_PROT
 from unicorn import x86_const as X
 from native_export_backing_ysm_265 import regions
+from native_crc32_loop_profile_ysm_265 import PROFILES as CRC_PROFILES
 
 IMAGE_SHA='15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22'
-STACK=0x700000000000; STACK_SIZE=0x10000; SP=STACK+0x8008
+# Fixed 1 MiB private stack fixture, extended only downward. Absolute guest
+# pointers and the original upper boundary remain stable; new bytes are unknown.
+LEGACY_STACK=0x700000000000; LEGACY_STACK_SIZE=0x10000
+SP=LEGACY_STACK+0x8008; STACK_SIZE=0x100000
+STACK=LEGACY_STACK+LEGACY_STACK_SIZE-STACK_SIZE
 HEAP=0x710000000000; HEAP_SIZE=0x100000; FILE_HANDLE=0x720000000000
 RETURN=0x7fff00000000; MASK=(1<<64)-1
 REGS={n:getattr(X,'UC_X86_REG_'+n) for n in ['RAX','RBX','RCX','RDX','RSI','RDI','RBP','RSP','R8','R9','R10','R11','R12','R13','R14','R15','RIP']}
@@ -30,12 +35,14 @@ class GuardedCPU:
         self.cpuid_leaf1=None;self.cpuid_calls=0;self.protection_result='disabled';self.protection_calls=0;self.virtual_platform=False;self.platform_calls=0;self.virtual_loader='disabled';self.dladdr_calls=0;self.loader_name=0x730000000000;self.loader_ready=False
         self.accelerate_crc=False;self.crc_profile_verified=None;self.crc_blocks=self.crc_iterations=self.crc_logical_steps=0
         self.attempted=self.completed=0;self.modeled_copies=self.opaque_copies=0;self.heap_writes=0;self.rollback_count=0
+        self.scenario_extensions=[]
         self.known={STACK:bytearray(STACK_SIZE),HEAP:bytearray(HEAP_SIZE)};self.opaque={};self.image=[];self.exec_ranges=[];self.pages={}
         self.current_raw=b'';self.return_fetch=False;self.stop=None;self.pending=None;self.journal=[];self.writes=[];self.pc=0;self.oracle_seen=set();self.oracle_checks=0;self.oracle_enabled=False
         self.uc.mem_map(STACK,STACK_SIZE,UC_PROT_READ|UC_PROT_WRITE);self.uc.mem_map(HEAP,HEAP_SIZE,UC_PROT_READ|UC_PROT_WRITE)
         for reg in REGS.values():self.uc.reg_write(reg,0)
         self.reg('RSP',SP);self.uc.reg_write(X.UC_X86_REG_EFLAGS,0x202)
         self.write_private(SP,struct.pack('<Q',RETURN),log=False)
+        self.emit('STACK_SCENARIO_INPUTS',f'base={STACK:x}',f'size={STACK_SIZE}',f'initial_sp={SP:x}','initial_bytes=unknown-except-return-sentinel','bounded=true','host_target_execution=false')
         self.uc.hook_add(UC_HOOK_CODE,self._code)
         self.uc.hook_add(UC_HOOK_MEM_READ,self._read)
         self.uc.hook_add(UC_HOOK_MEM_WRITE,self._write)
@@ -131,7 +138,7 @@ class GuardedCPU:
         self.pc=address;raw=bytes(uc.mem_read(address,size));self.current_raw=raw;self.attempted+=1;self.emit('INS',f'{address:x}',raw.hex(),'Unicorn')
         self.check_oracle()
         if self.stop:return
-        if self.accelerate_crc and address in (0x15f0d5e,0x1503f30):
+        if self.accelerate_crc and address in CRC_PROFILES:
             from native_crc32_loop_profile_ysm_265 import eligible
             if eligible(self):self.pending='crc';uc.emu_stop();return
         from native_pshufb_semantics_ysm_265 import decode as decode_pshufb

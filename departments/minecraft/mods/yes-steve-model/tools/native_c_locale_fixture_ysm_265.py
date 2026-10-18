@@ -5,7 +5,7 @@ The fixture is read-only and reserved from the existing1MiB private-memory budge
 """
 import struct
 MASK=(1<<64)-1
-IMPORTS={133:('__newlocale',0x184d440,0x14317d7),134:('__freelocale',0x184d448,0x153d476),135:('__duplocale',0x184d450,0x14f696d),143:('__uselocale',0x184d490,0x162872d),148:('__ctype_get_mb_cur_max',0x184d4b8,0x14ae489),159:('__wctype_l',0x184d510,0x14317e1),162:('__iswctype_l',0x184d528,0x141e7ae),163:('wctob',0x184d530,0x1619a68),164:('btowc',0x184d538,0x1411a32)}
+IMPORTS={54:('tolower',0x184d1c8,0x149286e),133:('__newlocale',0x184d440,0x14317d7),134:('__freelocale',0x184d448,0x153d476),135:('__duplocale',0x184d450,0x14f696d),143:('__uselocale',0x184d490,0x162872d),148:('__ctype_get_mb_cur_max',0x184d4b8,0x14ae489),159:('__wctype_l',0x184d510,0x14317e1),162:('__iswctype_l',0x184d528,0x141e7ae),163:('wctob',0x184d530,0x1619a68),164:('btowc',0x184d538,0x1411a32)}
 SYMBOLS={x[0] for x in IMPORTS.values()}
 CLASSES=('upper','lower','alpha','digit','xdigit','space','print','graph','blank','cntrl','punct','alnum')
 DESC=0x760000000000
@@ -39,7 +39,9 @@ def ensure_c_locale(cpu):
 
 def require_c(cpu,handle):cpu.demand(cpu.c_locale_handle!=0 and handle==cpu.c_locale_handle,'UNKNOWN_C_LOCALE_HANDLE',handle)
 def model(cpu,symbol):
-    if symbol=='__newlocale':
+    if symbol=='tolower':
+        c=cpu.reg('RDI')&0xffffffff;cpu.demand(c<=255 or c==0xffffffff,'UNDEFINED_TOLOWER_INPUT',c);result=convert(-1 if c==0xffffffff else c,False)&0xffffffff
+    elif symbol=='__newlocale':
         mask=cpu.reg('RDI')&0xffffffff;name=cpu.ascii(cpu.reg('RSI'));base=cpu.reg('RDX')
         cpu.demand(name=='C' and (mask==64 or mask&~0x1fbf==0) and (base==0 or (cpu.c_locale_handle and base==cpu.c_locale_handle)),'UNMODELED_LOCALE_REQUEST')
         result=ensure_c_locale(cpu)

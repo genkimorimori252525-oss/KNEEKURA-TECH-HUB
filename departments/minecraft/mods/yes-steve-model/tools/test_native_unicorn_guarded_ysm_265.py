@@ -1,7 +1,7 @@
 """Own-byte guard/CPU fixtures. No target image is loaded by this suite."""
 import io,struct,unittest
 from unicorn import x86_const as X
-from native_unicorn_guarded_ysm_265 import GuardedCPU,ModelHalt,STACK,STACK_SIZE,SP,HEAP,HEAP_SIZE,FILE_HANDLE,RETURN
+from native_unicorn_guarded_ysm_265 import GuardedCPU,ModelHalt,LEGACY_STACK,LEGACY_STACK_SIZE,STACK,STACK_SIZE,SP,HEAP,HEAP_SIZE,FILE_HANDLE,RETURN
 TOY=0x100000;DATA=0x200000
 class GuardTests(unittest.TestCase):
     def cpu(self,code,mode='strict',limit=1):
@@ -73,4 +73,19 @@ class GuardTests(unittest.TestCase):
     def test_resource_configuration_rejected(self):
         for kwargs in ({'limit':0},{'limit':4000001},{'seconds':0},{'seconds':181}):
             with self.assertRaises(ValueError):GuardedCPU(io.StringIO(),**kwargs)
+    def test_stack_fixture_absolute_addresses_and_bound(self):
+        c=self.cpu('90');self.assertEqual(SP,0x700000008008);self.assertEqual(STACK_SIZE,0x100000);self.assertEqual(STACK+STACK_SIZE,LEGACY_STACK+LEGACY_STACK_SIZE)
+        self.assertEqual(c.reg('RSP'),SP);self.assertEqual(c.read_known(SP,8),struct.pack('<Q',RETURN));self.assertEqual(c.unknown(STACK,1),STACK)
+        self.assertFalse(c.private_allowed(STACK-1,1));self.assertFalse(c.private_allowed(STACK+STACK_SIZE,1));self.assertFalse(c.code_allowed(STACK))
+    def test_downward_stack_write_and_read_at_previous_fault_address(self):
+        c=self.cpu('488903488b13',limit=2);address=0x6fffffffff90;c.reg('RSP',0x6fffffffff50);c.reg('RBX',address);c.reg('RAX',0x11223344);c.run(TOY)
+        self.assertEqual(c.completed,2);self.assertEqual(c.reg('RDX'),0x11223344);self.assertEqual(c.read_known(address,8),struct.pack('<Q',0x11223344))
+    def test_downward_stack_unknown_read_still_fails(self):
+        c=self.cpu('488b03');c.reg('RBX',0x6fffffffff90);c.reg('RAX',0x99);c.run(TOY)
+        self.assertEqual(c.stop['reason'],'UNINITIALIZED_READ');self.assertEqual(c.completed,0);self.assertEqual(c.reg('RAX'),0x99)
+    def test_stack_lower_guard_push_rolls_back(self):
+        c=self.cpu('50');c.reg('RSP',STACK);c.reg('RAX',0x123);c.run(TOY)
+        self.assertEqual(c.completed,0);self.assertEqual(c.reg('RSP'),STACK);self.assertEqual(c.reg('RIP'),TOY);self.assertEqual(c.unknown(STACK,8),STACK)
+    def test_stack_lower_first_byte_can_be_initialized(self):
+        c=self.cpu('c60342');c.reg('RBX',STACK);c.run(TOY);self.assertEqual(c.completed,1);self.assertEqual(c.read_known(STACK,1),b'B');self.assertEqual(c.unknown(STACK+1,1),STACK+1)
 if __name__=='__main__':unittest.main()

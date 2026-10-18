@@ -1,0 +1,309 @@
+{
+  "scope": "isolated JNI_OnLoad continuation; not host runtime success",
+  "original_so_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "jvm_artifact": {
+    "sha256": "462fa559157ee8a862e7e4b8a4a74f8abbf5e1a9deb64f22ee23c7e8c43f698b",
+    "size": 26963256,
+    "virtual_path": "/virtual/jdk/lib/server/libjvm.so"
+  },
+  "java_sources": {
+    "ysm": {
+      "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+      "archive_kind": "jar",
+      "entry_count": 1853
+    },
+    "java.base": {
+      "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+      "archive_kind": "jmod",
+      "entry_count": 7622
+    }
+  },
+  "jni_calls": [
+    [
+      "vm",
+      6,
+      "GetEnv"
+    ],
+    [
+      "vm",
+      6,
+      "GetEnv"
+    ],
+    [
+      "env",
+      6,
+      "FindClass"
+    ],
+    [
+      "env",
+      21,
+      "NewGlobalRef"
+    ],
+    [
+      "env",
+      23,
+      "DeleteLocalRef"
+    ],
+    [
+      "env",
+      33,
+      "GetMethodID"
+    ],
+    [
+      "env",
+      33,
+      "GetMethodID"
+    ],
+    [
+      "env",
+      6,
+      "FindClass"
+    ],
+    [
+      "env",
+      21,
+      "NewGlobalRef"
+    ],
+    [
+      "env",
+      23,
+      "DeleteLocalRef"
+    ],
+    [
+      "env",
+      33,
+      "GetMethodID"
+    ]
+  ],
+  "class_proofs": {
+    "java/io/File": {
+      "sha256": "6515f14f42b2602af6d987e92b0318a4e2a8ac90252c7ff057eb728ce7a2d88b",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    "java/nio/file/Path": {
+      "sha256": "a742da0be8612380a06ebd1b770f2554567fd0cf34e90398b5fc5797604c5e66",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    }
+  },
+  "method_proofs": [
+    {
+      "requested_class": "java/io/File",
+      "name": "<init>",
+      "descriptor": "(Ljava/lang/String;)V",
+      "static": false,
+      "declaring_class": "java/io/File",
+      "class_sha256": "6515f14f42b2602af6d987e92b0318a4e2a8ac90252c7ff057eb728ce7a2d88b",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    {
+      "requested_class": "java/io/File",
+      "name": "toPath",
+      "descriptor": "()Ljava/nio/file/Path;",
+      "static": false,
+      "declaring_class": "java/io/File",
+      "class_sha256": "6515f14f42b2602af6d987e92b0318a4e2a8ac90252c7ff057eb728ce7a2d88b",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    {
+      "requested_class": "java/nio/file/Path",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "static": false,
+      "declaring_class": "java/nio/file/Path",
+      "class_sha256": "a742da0be8612380a06ebd1b770f2554567fd0cf34e90398b5fc5797604c5e66",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    }
+  ],
+  "pending_exception": null,
+  "stop": {
+    "reason": "OUTSIDE_PRIVATE_WRITABLE_REGIONS",
+    "pc": 3318987,
+    "address": 123145302310800,
+    "size": 8
+  },
+  "checkpoint_sha256": "eaf4b2f89ad48d949cc91bb613f6e3ce31625af32b2aade259a9c79dbeb0ae22",
+  "checkpoint_basename": "unicorn-jni-crc-fast-next.checkpoint.json",
+  "completed_this_continuation": 2377240,
+  "initializer_guard_checkpoint_sha256": "2067ba7f262bc4181a4357fcc6ad4d27de0894f937ce0a71ef7143c45322db22",
+  "scoped_test_methods": 371,
+  "test_result": "PASS",
+  "crc_actual_checkpoint_differentials": [
+    {
+      "all_checks_pass": true,
+      "acceleration_comparison": true,
+      "excluded_model_fields": [
+        "accelerate_crc",
+        "crc_blocks",
+        "crc_iterations",
+        "crc_logical_steps",
+        "rollback_count"
+      ],
+      "checks": {
+        "format_and_engine_equal": true,
+        "cpu_context_equal_excluding_host_only_fields": true,
+        "model_state_equal_excluding_diagnostic_rollbacks": true,
+        "logical_instruction_effects_equal": true,
+        "sparse_state_equal": true,
+        "images_equal": true,
+        "opaque_equal": true,
+        "fixture_equal": true,
+        "cpuid_leaf1_equal": true,
+        "oracle_seen_equal": true,
+        "shadow_ranges_equal": true,
+        "patches_equal": true,
+        "origin_stop_equal": true,
+        "700000000000_bytes_equal": true,
+        "700000000000_known_equal": true,
+        "710000000000_bytes_equal": true,
+        "710000000000_known_equal": true
+      },
+      "cumulative_completed": 11793684,
+      "diagnostic_rollback_counts": [
+        2,
+        2
+      ],
+      "cpu_context_payload_sha256": "b3409895bde6de7f83a9fbf0fbf1f4c3bd7b59bef5ee0f09df12b742695861fe",
+      "normalization": "Unicorn2.1.4 CPU-only context; unused memory-snapshot header and pinned x86 host TCG retaddr zeroed. All remaining CPU payload bytes compared. Acceleration diagnostics/configuration excluded explicitly; compare completed+crc_logical_steps-crc_blocks.",
+      "host_target_execution": false,
+      "profile": "p4"
+    },
+    {
+      "all_checks_pass": true,
+      "acceleration_comparison": true,
+      "excluded_model_fields": [
+        "accelerate_crc",
+        "crc_blocks",
+        "crc_iterations",
+        "crc_logical_steps",
+        "rollback_count"
+      ],
+      "checks": {
+        "format_and_engine_equal": true,
+        "cpu_context_equal_excluding_host_only_fields": true,
+        "model_state_equal_excluding_diagnostic_rollbacks": true,
+        "logical_instruction_effects_equal": true,
+        "sparse_state_equal": true,
+        "images_equal": true,
+        "opaque_equal": true,
+        "fixture_equal": true,
+        "cpuid_leaf1_equal": true,
+        "oracle_seen_equal": true,
+        "shadow_ranges_equal": true,
+        "patches_equal": true,
+        "origin_stop_equal": true,
+        "700000000000_bytes_equal": true,
+        "700000000000_known_equal": true,
+        "710000000000_bytes_equal": true,
+        "710000000000_known_equal": true
+      },
+      "cumulative_completed": 12066598,
+      "diagnostic_rollback_counts": [
+        3,
+        3
+      ],
+      "cpu_context_payload_sha256": "de41bfc3bc43095146faab3a1125e35ad1fe59b9606c7357f49e5c9ea6463b29",
+      "normalization": "Unicorn2.1.4 CPU-only context; unused memory-snapshot header and pinned x86 host TCG retaddr zeroed. All remaining CPU payload bytes compared. Acceleration diagnostics/configuration excluded explicitly; compare completed+crc_logical_steps-crc_blocks.",
+      "host_target_execution": false,
+      "profile": "p5"
+    }
+  ],
+  "target_host_execution": false,
+  "host_jvm_called": false,
+  "native_registrations_recovered": 0,
+  "independent_semantic_review": "NOT_RUN",
+  "batched_actual_checkpoint_differential": {
+    "all_checks_pass": true,
+    "acceleration_comparison": false,
+    "excluded_model_fields": [
+      "rollback_count"
+    ],
+    "checks": {
+      "format_and_engine_equal": true,
+      "cpu_context_equal_excluding_host_only_fields": true,
+      "model_state_equal_excluding_diagnostic_rollbacks": true,
+      "cumulative_completed_equal": true,
+      "sparse_state_equal": true,
+      "images_equal": true,
+      "opaque_equal": true,
+      "fixture_equal": true,
+      "cpuid_leaf1_equal": true,
+      "oracle_seen_equal": true,
+      "shadow_ranges_equal": true,
+      "patches_equal": true,
+      "origin_stop_equal": true,
+      "stack_layout_equal": true,
+      "scenario_extensions_equal": true,
+      "private_region_keys_equal": true,
+      "6ffffff10000_bytes_equal": true,
+      "6ffffff10000_known_equal": true,
+      "710000000000_bytes_equal": true,
+      "710000000000_known_equal": true
+    },
+    "cumulative_completed": 18448198,
+    "diagnostic_rollback_counts": [
+      4,
+      4
+    ],
+    "cpu_context_payload_sha256": "910b0e6178025c8d971c1dc32c621d2385ca1713e4bd17793e1c57987f7fb8b4",
+    "normalization": "Unicorn2.1.4 CPU-only context; unused memory-snapshot header and pinned x86 host TCG retaddr zeroed. All remaining CPU payload bytes compared.",
+    "host_target_execution": false,
+    "runs": [
+      {
+        "backend": "legacy",
+        "seconds": 2.540721901001234,
+        "completed": 100000,
+        "stop": {
+          "reason": "INSTRUCTION_BUDGET",
+          "pc": 284578,
+          "address": 284578,
+          "size": 0
+        },
+        "checkpoint_sha256": "87132c24260938fac37a83357f6d23a4d8a423cab5a45c26599b671704de1514"
+      },
+      {
+        "backend": "batched",
+        "seconds": 1.5284013019991107,
+        "completed": 100000,
+        "stop": {
+          "reason": "INSTRUCTION_BUDGET",
+          "pc": 284578,
+          "address": 284578,
+          "size": 0
+        },
+        "checkpoint_sha256": "87132c24260938fac37a83357f6d23a4d8a423cab5a45c26599b671704de1514"
+      }
+    ]
+  },
+  "stack_scenario_extension": {
+    "base": "0x6ffffff10000",
+    "size": 1048576,
+    "initial_sp": "0x700000008008",
+    "legacy_migration_requires_explicit_opt_in": true,
+    "added_bytes_known": false
+  }
+}

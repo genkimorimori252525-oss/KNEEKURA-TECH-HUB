@@ -42,4 +42,6 @@ class MemoryTests(unittest.TestCase):
   with self.assertRaises(ModelHalt):model(c,'memchr')
  def test_strchr_match_nul_and_absent(self):
   c=self.cpu();c.reg('RDI',DATA);c.reg('RSI',99);self.assertEqual(model(c,'strchr'),DATA+2);c.reg('RSI',0);self.assertEqual(model(c,'strchr'),DATA+3);c.reg('RSI',100);self.assertEqual(model(c,'strchr'),0)
+ def test_bcmp_reports_equal_and_different(self):
+  c=self.cpu();c.reg('RDI',SP+32);c.reg('RSI',DATA);c.reg('RDX',4);self.assertEqual(model(c,'bcmp'),0);c.reg('RDI',SP+36);self.assertNotEqual(model(c,'bcmp'),0)
 if __name__=='__main__':unittest.main()

@@ -13,7 +13,7 @@ class SparseGuardedCPU(ShadowGuardedCPU):
     MAX_PAGES=2048;MAX_VIRTUAL=1<<40;MAX_REGIONS=64;MAX_VM_WRITE_BYTES=64<<20;MAX_VM_EVENTS=1000000
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs);self.vm_regions=[];self.vm_pages={};self.vm_next=BASE;self.vm_write_events=self.vm_write_bytes=self.vm_map_calls=self.vm_unmap_calls=self.vm_protect_calls=0
-        self.os_fixture={'errno_block':0,'errno_input':2,'entropy_offset':0,'entropy_open':False,'entropy_seed':'ysm265-isolated-snmalloc-fixture-v1','monotonic_ns':0,'clock_calls':0,'calls':0,'names':[],'advice':[]}
+        self.os_fixture={'errno_block':0,'errno_input':2,'entropy_offset':0,'entropy_open':False,'entropy_seed':'ysm265-isolated-snmalloc-fixture-v1','exe_path':'/virtual/jdk/bin/java','readlink_calls':0,'monotonic_ns':0,'clock_calls':0,'calls':0,'names':[],'advice':[]}
         self.emit('SPARSE_SCENARIO_INPUTS','page_size=4096',f'physical_page_cap={self.MAX_PAGES}',f'virtual_bytes_cap={self.MAX_VIRTUAL}','errno_initial=2','entropy_seed=ysm265-isolated-snmalloc-fixture-v1','anonymous_initial_bytes=zero','mmap_address_policy=deterministic-power-of-two-aligned','host_os_calls=false')
     def vm_cover(self,a,n,access=0):
         if n<=0 or a<BASE or a+n>LIMIT:return None
@@ -135,8 +135,9 @@ class SparseGuardedCPU(ShadowGuardedCPU):
         if len(regions)>self.MAX_REGIONS or len(pages)>self.MAX_PAGES:raise ValueError('Sparse checkpoint resource limit')
         for key,limit in [('write_events',self.MAX_VM_EVENTS),('write_bytes',self.MAX_VM_WRITE_BYTES),('map_calls',self.MAX_VM_EVENTS),('unmap_calls',self.MAX_VM_EVENTS),('protect_calls',self.MAX_VM_EVENTS)]:
             if type(s[key]) is not int or not 0<=s[key]<=limit:raise ValueError('Invalid sparse checkpoint counter')
-        os=copy.deepcopy(s['os_fixture']);os.setdefault('monotonic_ns',0);os.setdefault('clock_calls',0)
+        os=copy.deepcopy(s['os_fixture']);os.setdefault('exe_path','/virtual/jdk/bin/java');os.setdefault('readlink_calls',0);os.setdefault('monotonic_ns',0);os.setdefault('clock_calls',0)
         if set(os)!=set(self.os_fixture) or type(os['entropy_open']) is not bool or type(os['entropy_offset']) is not int or not 0<=os['entropy_offset']<=4096 or os['entropy_seed']!=self.os_fixture['entropy_seed'] or os['errno_input']!=2:raise ValueError('Invalid allocator OS fixture')
+        if os['exe_path']!='/virtual/jdk/bin/java' or type(os['readlink_calls']) is not int or not 0<=os['readlink_calls']<=self.MAX_VM_EVENTS:raise ValueError('Invalid executable path fixture')
         if type(os['clock_calls']) is not int or not 0<=os['clock_calls']<=self.MAX_VM_EVENTS or os['monotonic_ns']!=os['clock_calls']*1000000:raise ValueError('Invalid virtual clock fixture')
         if type(os['calls']) is not int or not 0<=os['calls']<=self.MAX_VM_EVENTS or len(os['names'])>4096 or len(os['advice'])>4096:raise ValueError('Invalid allocator OS budget')
         if os['errno_block'] and (not self.private_region(os['errno_block'],16) or not any(a==os['errno_block'] and n==16 for a,n in self.fixture_regions)):raise ValueError('Invalid errno fixture storage')

@@ -25,7 +25,8 @@ def manifest(data):
     external_data=[];strings=data_at(data,rs,one(5),one(10))
     for address,info,addend in unresolved:
         symbol=info>>32;name,kind,other,section,value,size=struct.unpack('<IBBHQQ',data_at(data,rs,one(6)+symbol*24,24))
-        if section==0 and kind&15 in (1,6):external_data.append([address,strings[name:].split(b'\0')[0].decode('ascii')])
+        symbol_name=strings[name:].split(b'\0')[0].decode('ascii')
+        if section==0 and (kind&15 in (1,6) or symbol_name in ('JNI_GetCreatedJavaVMs','JNI_CreateJavaVM','JNI_GetDefaultJavaVMInitArgs')):external_data.append([address,symbol_name])
     init=array_targets(one(25),data_at(data,rs,one(25),one(27)),rels+plt)
     if len(fixups)!=8812 or len(init)!=45 or one(12)!=0x152eb19:raise ValueError('Pinned initializer inventory changed')
     tls_headers=[p for p in ph if p[0]==7]

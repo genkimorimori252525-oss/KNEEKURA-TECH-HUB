@@ -1,18 +1,18 @@
 """Bounded byte-level C memory/string import models, no host libc invocation."""
-IMPORTS={8:('strchr',0x184d058,0x15ba9f4),47:('memchr',0x184d190,0x140b6f8),7:('strlen',0x184d050,0x145cdc4),9:('memcmp',0x184d060,0x18496d6),78:('strcmp',0x184d288,0x15c47e1),128:('strncmp',0x184d418,0x15bd0f5),198:('memcpy',0x184d648,0x1845005),211:('strncmp',0x184d6b0,0x15e6473),219:('strlen',0x184d6f0,0x15cae7e)}
+IMPORTS={10:('bcmp',0x184d068,0x156fdc0),8:('strchr',0x184d058,0x15ba9f4),47:('memchr',0x184d190,0x140b6f8),7:('strlen',0x184d050,0x145cdc4),9:('memcmp',0x184d060,0x18496d6),78:('strcmp',0x184d288,0x15c47e1),128:('strncmp',0x184d418,0x15bd0f5),198:('memcpy',0x184d648,0x1845005),211:('strncmp',0x184d6b0,0x15e6473),219:('strlen',0x184d6f0,0x15cae7e)}
 SYMBOLS={x[0] for x in IMPORTS.values()}
 MAX_BYTES=0x100000
 MAX_STRING=0x10000
 
 def model(cpu,symbol):
     a,b,n=cpu.reg('RDI'),cpu.reg('RSI'),cpu.reg('RDX')
-    if symbol in ('memcmp','memcpy','strncmp','memchr'):cpu.demand(n<=MAX_BYTES,'MEMORY_MODEL_SIZE_LIMIT',n)
+    if symbol in ('memcmp','bcmp','memcpy','strncmp','memchr'):cpu.demand(n<=MAX_BYTES,'MEMORY_MODEL_SIZE_LIMIT',n)
     if symbol=='memcpy':
         cpu.demand(n==0 or not(a<b+n and b<a+n),'UNDEFINED_MEMCPY_OVERLAP',a,n)
         data=cpu.read_known(b,n) if n else b''
         if n:cpu.write_model_memory(a,data)
         result=a
-    elif symbol=='memcmp':
+    elif symbol in ('memcmp','bcmp'):
         left=cpu.read_known(a,n) if n else b'';right=cpu.read_known(b,n) if n else b'';result=next((x-y for x,y in zip(left,right) if x!=y),0)&0xffffffff
     elif symbol in ('memchr','strchr'):
         result=0;limit=n if symbol=='memchr' else MAX_STRING;terminated=False
