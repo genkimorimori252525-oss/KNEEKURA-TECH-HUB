@@ -1,0 +1,204 @@
+{
+  "scope": "read-only static original-native/classfile extraction and immutable checkpoint metadata; no guest/native/JVM execution, filesystem scenario, asset decode, or repository changes",
+  "original_native_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "checkpoint_sha256": "05122784aea6927c2a8f1d48a2fb16f98e73b0d3919ab48ea4b1725f76d106b1",
+  "producer": {
+    "singleton": "private static INSTANCE defaults to null; <clinit> initializes LOGGER only; ModList.of constructs then putstatic INSTANCE at bytecode offset 9",
+    "normal_callsite": "ModLoader.gatherAndInitializeMods: waitForScanToComplete at bytecode 39; LoadingModList.getModFiles -> ModFileInfo.getFile stream at 43..64; LoadingModList.getMods at 73; ModList.of at 76",
+    "map": "private final Map<String,ModFileInfo> fileById; ModList constructor derives modFiles from input ModFile.getModFileInfo, then getMods/flatMap(Collection.stream)/cast(ModInfo), Collectors.toMap(ModInfo.getModId,ModInfo.getOwningFile)",
+    "map_concrete_type": "Pinned java.base Collectors.toMap(Function,Function) bootstrap #63 supplies HashMap::<init>; do not generalize across unpinned JDKs",
+    "loading_completion": "Publication does not establish all mods initialized: ModLoader checks loadingExceptions after of, may setLoadedMods(emptyList) and throw"
+  },
+  "query": {
+    "key": "yes_steve_model",
+    "length": 15,
+    "new_string_utf_call": "0x3d6de7",
+    "bytes_proof": "0x3d6daf stores yes_stev, +7 store from r15 initialized 0x3d585f stores ve_model; NUL at +15 0x3d6dd5",
+    "cached_method": "java/util/HashMap.get:(Ljava/lang/Object;)Ljava/lang/Object;",
+    "return": "If key is present in successfully constructed map, owning ModFileInfo; otherwise null; native tests result at 0x3d6e8c and branches to 0x3da893 on null"
+  },
+  "native_chain": [
+    {
+      "pc": "0x3d6b59",
+      "operation": "GetStaticObjectField",
+      "global_address": "0xd35588",
+      "offset": "0x48",
+      "member_id": "0x7d0000000070",
+      "metadata": {
+        "requested_class": "net/minecraftforge/fml/ModList",
+        "name": "INSTANCE",
+        "descriptor": "Lnet/minecraftforge/fml/ModList;",
+        "static": true,
+        "declaring_class": "net/minecraftforge/fml/ModList",
+        "class_sha256": "fdd3e0015416c2aba2e94dfff38008ae295d24e4c46eacad6b5dc88214d43baa",
+        "source": {
+          "id": "fmlcore-1.20.1-47.4.0",
+          "sha256": "483f2d764a3a426f09a51cb37eb552830ffac8132da6bb3afbd7d825e6a34fd2",
+          "archive_kind": "jar",
+          "entry_count": 86
+        }
+      }
+    },
+    {
+      "pc": "0x3d6bdb",
+      "operation": "GetObjectField",
+      "global_address": "0xd35588",
+      "offset": "0x50",
+      "member_id": "0x7d0000000080",
+      "metadata": {
+        "requested_class": "net/minecraftforge/fml/ModList",
+        "name": "fileById",
+        "descriptor": "Ljava/util/Map;",
+        "static": false,
+        "declaring_class": "net/minecraftforge/fml/ModList",
+        "class_sha256": "fdd3e0015416c2aba2e94dfff38008ae295d24e4c46eacad6b5dc88214d43baa",
+        "source": {
+          "id": "fmlcore-1.20.1-47.4.0",
+          "sha256": "483f2d764a3a426f09a51cb37eb552830ffac8132da6bb3afbd7d825e6a34fd2",
+          "archive_kind": "jar",
+          "entry_count": 86
+        }
+      }
+    },
+    {
+      "pc": "0x3d6e87",
+      "operation": "CallObjectMethodV via 0x36d530",
+      "global_address": "0xd356e0",
+      "offset": "0x70",
+      "member_id": "0x7c0000000070",
+      "metadata": {
+        "requested_class": "java/util/HashMap",
+        "name": "get",
+        "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+        "static": false,
+        "declaring_class": "java/util/HashMap",
+        "class_sha256": "8435b00bf2cf42391cc63f44cfe2dc52e96e3dfe7219932249feb67660a320cd",
+        "source": {
+          "id": "java.base",
+          "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+          "archive_kind": "jmod",
+          "entry_count": 7622
+        }
+      }
+    },
+    {
+      "pc": "0x3d70c1",
+      "operation": "GetObjectField",
+      "global_address": "0xd35588",
+      "offset": "0x58",
+      "member_id": "0x7d0000000090",
+      "metadata": {
+        "requested_class": "net/minecraftforge/fml/loading/moddiscovery/ModFileInfo",
+        "name": "modFile",
+        "descriptor": "Lnet/minecraftforge/fml/loading/moddiscovery/ModFile;",
+        "static": false,
+        "declaring_class": "net/minecraftforge/fml/loading/moddiscovery/ModFileInfo",
+        "class_sha256": "6ae5398b5d6bda2b0ea517ecb6df4bfe79cb0ea412f5747c6f6dbc925a016023",
+        "source": {
+          "id": "fmlloader-1.20.1-47.4.0",
+          "sha256": "d17c218af5c62fa4928019614aa8a5075279f8545efe21325baf46b80f4a5ac9",
+          "archive_kind": "jar",
+          "entry_count": 158
+        }
+      }
+    },
+    {
+      "pc": "0x3d72b6",
+      "operation": "GetObjectField",
+      "global_address": "0xd35588",
+      "offset": "0x60",
+      "member_id": "0x7d00000000a0",
+      "metadata": {
+        "requested_class": "net/minecraftforge/fml/loading/moddiscovery/ModFile",
+        "name": "jar",
+        "descriptor": "Lcpw/mods/jarhandling/SecureJar;",
+        "static": false,
+        "declaring_class": "net/minecraftforge/fml/loading/moddiscovery/ModFile",
+        "class_sha256": "b74c0de16221faa35bf7cf9a76e3a02bece631db6560e9c8d499ac26630081bb",
+        "source": {
+          "id": "fmlloader-1.20.1-47.4.0",
+          "sha256": "d17c218af5c62fa4928019614aa8a5075279f8545efe21325baf46b80f4a5ac9",
+          "archive_kind": "jar",
+          "entry_count": 158
+        }
+      }
+    },
+    {
+      "pc": "0x3d74a9",
+      "operation": "CallObjectMethodV via 0x36d530",
+      "global_address": "0xd35588",
+      "offset": "0x68",
+      "member_id": "0x7c00000001b0",
+      "metadata": {
+        "requested_class": "cpw/mods/jarhandling/SecureJar",
+        "name": "getPrimaryPath",
+        "descriptor": "()Ljava/nio/file/Path;",
+        "static": false,
+        "declaring_class": "cpw/mods/jarhandling/SecureJar",
+        "class_sha256": "4597855c58ead7bdf4827381568ad121250d26d5da21233145a56991baf26cc2",
+        "source": {
+          "id": "securejarhandler-2.1.10",
+          "sha256": "7ec9207f47bc8847a16566b9a3b4ced8d073c49592897eb30ce2aaf643fdfcab",
+          "archive_kind": "jar",
+          "entry_count": 57
+        }
+      }
+    },
+    {
+      "pc": "0x3d769b",
+      "operation": "CallObjectMethodV via 0x36d530",
+      "global_address": "0xd356e0",
+      "offset": "0x50",
+      "member_id": "0x7c0000000030",
+      "metadata": {
+        "requested_class": "java/nio/file/Path",
+        "name": "toAbsolutePath",
+        "descriptor": "()Ljava/nio/file/Path;",
+        "static": false,
+        "declaring_class": "java/nio/file/Path",
+        "class_sha256": "a742da0be8612380a06ebd1b770f2554567fd0cf34e90398b5fc5797604c5e66",
+        "source": {
+          "id": "java.base",
+          "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+          "archive_kind": "jmod",
+          "entry_count": 7622
+        }
+      }
+    },
+    {
+      "pc": "0x3d788d",
+      "operation": "CallObjectMethodV via 0x36d530",
+      "global_address": "0xd356e0",
+      "offset": "0x48",
+      "member_id": "0x7c0000000020",
+      "metadata": {
+        "requested_class": "java/nio/file/Path",
+        "name": "toString",
+        "descriptor": "()Ljava/lang/String;",
+        "static": false,
+        "declaring_class": "java/nio/file/Path",
+        "class_sha256": "a742da0be8612380a06ebd1b770f2554567fd0cf34e90398b5fc5797604c5e66",
+        "source": {
+          "id": "java.base",
+          "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+          "archive_kind": "jmod",
+          "entry_count": 7622
+        }
+      }
+    }
+  ],
+  "downstream": "0x3d7a63 passes resulting Java String to 0x4192b0; 0x3d7a80 constructs native path via 0x35c9c0; owned path is moved into global 0xd35258. No archive read/open or existence result is established.",
+  "unavailable": [
+    "Whether ModList.of has run in the target Java lifecycle",
+    "Actual installed/discovered ModFile/ModInfo list, map size, keys, membership, or singleton object",
+    "A concrete yes_steve_model ModFileInfo/ModFile/SecureJar object graph",
+    "SecureJar implementation/primary Path value, default directory or absolute Path string",
+    "Pending Java exception state and any following filesystem status/open outcome"
+  ],
+  "conditional": [
+    "Singleton nonnull requires successful publication by ModList.of or other explicit trusted lifecycle input",
+    "Normal constructor requires valid input lists/casts and successful collection; duplicate keys fail instead of yielding an arbitrary last-wins map",
+    "Map get success requires the exact yes_steve_model key with owning ModFileInfo and compatible HashMap receiver",
+    "Each further object/Path return must be independently supplied with provenance, not derived from FMLPaths or presence of a jar on disk"
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "imports": [
+    {
+      "plt": "0xd15270",
+      "relative_slot": "0xd30dc0",
+      "trampoline": "0x13d72b6",
+      "import": {
+        "slot": "0x184d5e0",
+        "raw_value": "0x14f7c8f",
+        "relocation_type": 7,
+        "symbol_index": 195,
+        "symbol_name": "dirfd",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    },
+    {
+      "plt": "0xd15280",
+      "relative_slot": "0xd30dc8",
+      "trampoline": "0x13d72bc",
+      "import": {
+        "slot": "0x184d5e8",
+        "raw_value": "0x155ec68",
+        "relocation_type": 7,
+        "symbol_index": 196,
+        "symbol_name": "openat",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    },
+    {
+      "plt": "0xd15290",
+      "relative_slot": "0xd30dd0",
+      "trampoline": "0x13d72c2",
+      "import": {
+        "slot": "0x184d5f0",
+        "raw_value": "0x14e615c",
+        "relocation_type": 7,
+        "symbol_index": 197,
+        "symbol_name": "fdopendir",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    },
+    {
+      "plt": "0xd152a0",
+      "relative_slot": "0xd30dd8",
+      "trampoline": "0x13d72c8",
+      "import": {
+        "slot": "0x184d5f8",
+        "raw_value": "0x150ceea",
+        "relocation_type": 7,
+        "symbol_index": 198,
+        "symbol_name": "unlinkat",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    },
+    {
+      "plt": "0xd152b0",
+      "relative_slot": "0xd30de0",
+      "trampoline": "0x13d72ce",
+      "import": {
+        "slot": "0x184d600",
+        "raw_value": "0x1509080",
+        "relocation_type": 7,
+        "symbol_index": 199,
+        "symbol_name": "remove",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    },
+    {
+      "plt": "0xd14b10",
+      "relative_slot": "0xd30a10",
+      "trampoline": "0x13d6ff2",
+      "import": {
+        "slot": "0x184d230",
+        "raw_value": "0x1439904",
+        "relocation_type": 7,
+        "symbol_index": 74,
+        "symbol_name": "fopen",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    },
+    {
+      "plt": "0xd14b70",
+      "relative_slot": "0xd30a40",
+      "trampoline": "0x13d7016",
+      "import": {
+        "slot": "0x184d260",
+        "raw_value": "0x1524c50",
+        "relocation_type": 7,
+        "symbol_index": 80,
+        "symbol_name": "fclose",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    },
+    {
+      "plt": "0xd14ad0",
+      "relative_slot": "0xd309f0",
+      "trampoline": "0x13d6fda",
+      "import": {
+        "slot": "0x184d210",
+        "raw_value": "0x1426dd4",
+        "relocation_type": 7,
+        "symbol_index": 70,
+        "symbol_name": "closedir",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    }
+  ],
+  "openmode": {
+    "value": "0x34",
+    "table_entry": "0x543f4",
+    "branch_target": "0x2baf40",
+    "literal": "0x3ecbc",
+    "value_string": "wb"
+  },
+  "notice_bytes_hex": "54686973206469726563746f727920697320636c65617265642065766572792074696d65207468652067616d6520737461727473210d0ae8afa5e79baee5bd95e4bc9ae59ca8e6af8fe6aca1e6b8b8e6888fe590afe58aa8e697b6e6b885e7a9baefbc81"
+}

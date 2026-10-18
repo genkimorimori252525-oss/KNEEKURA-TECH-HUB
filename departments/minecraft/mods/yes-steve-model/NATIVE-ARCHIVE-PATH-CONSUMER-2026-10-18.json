@@ -1,0 +1,90 @@
+{
+  "scope": "static original-byte/classfile-metadata analysis only; no original archive payload inspection, execution, passing fixture or bypass",
+  "path_global": "0xd35258",
+  "path_value": "unavailable; depends on initialized discovered-mod graph and SecureJar primary path",
+  "original_native_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "status": {
+    "pc": "0x3d8866",
+    "helper": "0x311210",
+    "required_tag": 1,
+    "failure_branch": "0x3da953"
+  },
+  "open": {
+    "constructor_pc": "0x3d8897",
+    "constructor": "0x4dab30",
+    "open_pc": "0x4d8ced",
+    "function": "fopen",
+    "mode": "rb"
+  },
+  "records": {
+    "stride": 72,
+    "name_pointer_offset": 16,
+    "name_length_offset": 24,
+    "requested_output_length_offset": 64,
+    "excluded_prefixes": [
+      {
+        "record": "0x404001020ac0",
+        "pointer": "0x404f6",
+        "length": 16,
+        "text": "META-INF/native/",
+        "sha256": "1f087c984611805b0031c809686a61c33ceafcee538862cf27a4b3fb7634ac99"
+      },
+      {
+        "record": "0x404001020ad0",
+        "pointer": "0x43290",
+        "length": 14,
+        "text": "META-INF/jars/",
+        "sha256": "8674e1d83a4f526c1e2c6520bb03a0691670ba89f5ea3b468e0750990318a4de"
+      }
+    ],
+    "read_call_pc": "0x3d89ea",
+    "read_helper": "0x4dad30"
+  },
+  "integrity": {
+    "record_hash_pc": "0x3d8a0c",
+    "hash_helper": "0x573dd0",
+    "seed": "0x94d2ba004e0ef9dd",
+    "collection": "name-comparison ordered tree; duplicate handling unresolved",
+    "serialization": "name + LF + numeric-stream representation of stored 64-bit hash + LF; exact numeric formatting unresolved",
+    "aggregate_hash_pc": "0x3d8d25",
+    "comparison_pc": "0x3d8de5",
+    "expected": "0x048417704ddff4de",
+    "inequality_target": "0x3daa88",
+    "failure_code": 51,
+    "failure_exception_helper_pc": "0x3daaf4",
+    "actual_hash": null,
+    "verified": false
+  },
+  "later_resources": {
+    "prefix": "assets/yes_steve_model/builtin/",
+    "prefix_length": 31,
+    "prefix_check_pc": "0x3d97fd..0x3d982c",
+    "additional_predicate": "0x3d9872 calls 0x3d1930; semantics not fully resolved",
+    "record_read_pc": "0x3d98d9",
+    "destination_join_pc": "0x3d9927",
+    "destination_global": "0xd352f8",
+    "write_call_pc": "0x3d99ce",
+    "write_helper": "0x4dfb30",
+    "observed_writes": false
+  },
+  "registration_boundary": {
+    "normal_init_return": "0x3d9aa8",
+    "caller": "0x413bd3",
+    "intervening_guard_early_return": "0x413c79",
+    "next_manager_init": "0x413c82 -> 0x406b00",
+    "17_descriptor_start": "0x413c97",
+    "registration_dispatch": "0x416175 -> 0x327000",
+    "JNI_RegisterNatives": "0x327e73",
+    "completion_established": false
+  },
+  "unavailable": [
+    "actual runtime archive path",
+    "status/open/read/seek/parser outcomes",
+    "archive records and payload bytes",
+    "content hashes or aggregate equality",
+    "exact stream numeric formatting and duplicate-name handling",
+    "blacklist content/pattern semantics",
+    "safe builtin destination/write outcomes",
+    "further manager initialization and native registration completion"
+  ]
+}

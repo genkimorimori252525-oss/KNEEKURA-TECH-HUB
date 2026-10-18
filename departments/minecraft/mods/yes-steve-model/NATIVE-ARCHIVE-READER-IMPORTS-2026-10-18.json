@@ -1,0 +1,84 @@
+{
+  "original_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "imports": [
+    {
+      "plt": "0xd14770",
+      "relative_slot": "0xd30840",
+      "trampoline": "0x13d6e96",
+      "import_slot": "0x184d060",
+      "elf_relocation": "000000000184d060  0000000d00000007 R_X86_64_JUMP_SLOT     0000000000000000 memcmp@GLIBC_2.2.5 + 0"
+    },
+    {
+      "plt": "0xd14780",
+      "relative_slot": "0xd30848",
+      "trampoline": "0x13d6e9c",
+      "import_slot": "0x184d068",
+      "elf_relocation": "000000000184d068  0000000e00000007 R_X86_64_JUMP_SLOT     0000000000000000 bcmp@GLIBC_2.2.5 + 0"
+    },
+    {
+      "plt": "0xd14b10",
+      "relative_slot": "0xd30a10",
+      "trampoline": "0x13d6ff2",
+      "import_slot": "0x184d230",
+      "elf_relocation": "000000000184d230  0000004a00000007 R_X86_64_JUMP_SLOT     0000000000000000 fopen@GLIBC_2.2.5 + 0"
+    },
+    {
+      "plt": "0xd14b20",
+      "relative_slot": "0xd30a18",
+      "trampoline": "0x13d6ff8",
+      "import_slot": "0x184d238",
+      "elf_relocation": "000000000184d238  0000004b00000007 R_X86_64_JUMP_SLOT     0000000000000000 fread@GLIBC_2.2.5 + 0"
+    },
+    {
+      "plt": "0xd14b30",
+      "relative_slot": "0xd30a20",
+      "trampoline": "0x13d6ffe",
+      "import_slot": "0x184d240",
+      "elf_relocation": "000000000184d240  0000004c00000007 R_X86_64_JUMP_SLOT     0000000000000000 ferror@GLIBC_2.2.5 + 0"
+    },
+    {
+      "plt": "0xd14b40",
+      "relative_slot": "0xd30a28",
+      "trampoline": "0x13d7004",
+      "import_slot": "0x184d248",
+      "elf_relocation": "000000000184d248  0000004d00000007 R_X86_64_JUMP_SLOT     0000000000000000 fwrite@GLIBC_2.2.5 + 0"
+    },
+    {
+      "plt": "0xd14b50",
+      "relative_slot": "0xd30a30",
+      "trampoline": "0x13d700a",
+      "import_slot": "0x184d250",
+      "elf_relocation": "000000000184d250  0000004e00000007 R_X86_64_JUMP_SLOT     0000000000000000 ftello@GLIBC_2.2.5 + 0"
+    },
+    {
+      "plt": "0xd14b60",
+      "relative_slot": "0xd30a38",
+      "trampoline": "0x13d7010",
+      "import_slot": "0x184d258",
+      "elf_relocation": "000000000184d258  0000004f00000007 R_X86_64_JUMP_SLOT     0000000000000000 fseeko@GLIBC_2.2.5 + 0"
+    },
+    {
+      "plt": "0xd14b70",
+      "relative_slot": "0xd30a40",
+      "trampoline": "0x13d7016",
+      "import_slot": "0x184d260",
+      "elf_relocation": "000000000184d260  0000005000000007 R_X86_64_JUMP_SLOT     0000000000000000 fclose@GLIBC_2.2.5 + 0"
+    }
+  ],
+  "literals": [
+    {
+      "address": "0x42799",
+      "bytes_hex": "726200",
+      "text": "rb"
+    },
+    {
+      "addresses": [
+        "0x3aad0",
+        "0x369c0"
+      ],
+      "text": "assets/yes_steve_model/builtin/",
+      "length": 31
+    }
+  ],
+  "runtime_binding_verified": false
+}

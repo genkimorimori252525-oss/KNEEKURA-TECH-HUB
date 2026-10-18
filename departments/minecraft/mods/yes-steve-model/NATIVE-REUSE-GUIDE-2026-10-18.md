@@ -83,3 +83,7 @@ A fourth [focused review](NATIVE-KEYFRAME-JOIN-FOCUSED-REVIEW-2026-10-18.md) ind
 [Reviewed Path model and bounded continuation](NATIVE-FORGE-PATH-CONTINUATION-2026-10-18.md) documents the synthetic config path, 71 scoped tests, independent review and strict next secure_getenv("TMPDIR") stop. This does not prove real Forge setup or filesystem success.
 
 The [next explicit absent-environment cohort](NATIVE-ABSENT-ENVIRONMENT-CONTINUATION-2026-10-18.md) reaches the mandatory `/tmp` status query. Environment selection and filesystem status remain separate contracts.
+
+## Native initialization I/O and archive boundary
+
+Use [owned config/temp paths](NATIVE-INIT-PATH-CONSUMERS-2026-10-18.md), [builtin cleanup/notice output](NATIVE-BUILTIN-CLEANUP-NOTICE-2026-10-18.md), [ModList-to-archive graph](NATIVE-MODLIST-MAP-CONTRACT-2026-10-18.md), then [archive integrity/resource consumers](NATIVE-ARCHIVE-PATH-CONSUMER-2026-10-18.md). These static contracts distinguish destructive cleanup, metadata identity, actual filesystem state, filtered integrity and resource writes; none is a blanket successful initialization fixture.
