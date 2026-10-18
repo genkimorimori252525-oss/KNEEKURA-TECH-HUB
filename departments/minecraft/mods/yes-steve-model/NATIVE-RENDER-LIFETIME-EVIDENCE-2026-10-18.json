@@ -1,0 +1,709 @@
+{
+  "format": "ysm-native-render-contract-static-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "jar_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "binding_receipt_sha256": "c907e34e24f0cca48e4746aee3e92219bd0b8428bcd51a659921fd49d48b1e1d",
+  "bindings": [
+    {
+      "callback": "0x418680",
+      "native": "0x3c1160",
+      "registration_flags": 2,
+      "source": "0x3e485",
+      "source_length": 81,
+      "source_sha256": "28453487e7987e530beb12634fd2b64b8b8f240b9f79d6cc57c98afdf69c0785",
+      "callback_sha256": "7ecce6b78bbb9bea265756cd20c22e993de201fcc4800d2fe438378e8b95177b",
+      "stop": {
+        "reason": "ENTRY_RETURN",
+        "pc": 4294303,
+        "address": 140733193388032,
+        "size": 0
+      },
+      "segments": [
+        {
+          "reason": "ENTRY_RETURN",
+          "pc": 4294303,
+          "address": 140733193388032,
+          "size": 0
+        }
+      ],
+      "attempted": 1591603,
+      "completed": 1591603,
+      "payload": "Lcom/elfmcys/yesstevemodel/OOoOoooOOooO0o0000o0O0o0;Oo0Oo0o00O00Oo0OOoOOoooo(J)V",
+      "payload_sha256": "988f8de001c494518d8789cd37798e8213c0a7f2419b5c9fc6c38d0cac16e458",
+      "owner": "com/elfmcys/yesstevemodel/OOoOoooOOooO0o0000o0O0o0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(J)V",
+      "class_sha256": "123a7d826c7eccf77aed40e736667a86584ddb6b029261f9b4e69523ec633085",
+      "access": 266,
+      "acc_native": true,
+      "static": true,
+      "pairing_instruction_evidence": {
+        "callback": "0x418680",
+        "native": "0x3c1160",
+        "callback_lea": "0x41549d",
+        "callback_store_plus_18": "0x4154dd",
+        "native_lea": "0x4154e1",
+        "native_store_plus_20": "0x4154e8",
+        "instructions": [
+          {
+            "role": "callback_lea",
+            "address": "0x41549d",
+            "bytes": "4c8d3ddc310000",
+            "sha256": "ec3590e9ce9ba801a9bc42d6df5876d852b476c5ea2af54c4337816944d111a1"
+          },
+          {
+            "role": "callback_store",
+            "address": "0x4154dd",
+            "bytes": "4c897d18",
+            "sha256": "be3c8ca8cfcb43bcfd5448c043f517b9e9f0af62ad6ec7ab4302e7002fb6f834"
+          },
+          {
+            "role": "native_lea",
+            "address": "0x4154e1",
+            "bytes": "488d0578bcfaff",
+            "sha256": "fbdcc9981a5597226ba84e7fa50fb563793ff54bde2cf6853f9c73501c3ad737"
+          },
+          {
+            "role": "native_store",
+            "address": "0x4154e8",
+            "bytes": "48894520",
+            "sha256": "cc01a458feea1b149ba6358c4beffe35bdbfbc9f64c25dde700cc126ee67a42a"
+          }
+        ]
+      }
+    },
+    {
+      "callback": "0x418740",
+      "native": "0x3bf750",
+      "registration_flags": 2,
+      "source": "0x408d2",
+      "source_length": 249,
+      "source_sha256": "1f7f30682e76c71870b9ee47606370763c191b65f33c7607fb4057b238968d33",
+      "callback_sha256": "d59f889c3a5b5b8215c252f500d5ada19baeef303141b09b48b81ee6fd4b8696",
+      "stop": {
+        "reason": "ENTRY_RETURN",
+        "pc": 4294495,
+        "address": 140733193388032,
+        "size": 0
+      },
+      "segments": [
+        {
+          "reason": "ENTRY_RETURN",
+          "pc": 4294495,
+          "address": 140733193388032,
+          "size": 0
+        }
+      ],
+      "attempted": 3890811,
+      "completed": 3890811,
+      "payload": "Lcom/elfmcys/yesstevemodel/ooOOo000OOO0ooO0oo0ooooO;Oo0Oo0o00O00Oo0OOoOOoooo(Lcom/mojang/blaze3d/vertex/VertexConsumer;Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lorg/joml/Matrix4f;ZLcom/elfmcys/yesstevemodel/OOoOoooOOooO0o0000o0O0o0;[F[FIIIIFFFFZ)V",
+      "payload_sha256": "d633c81644638f44deecb597a8cf451e517cd466927f50ce6d07c76c9bdd6f97",
+      "owner": "com/elfmcys/yesstevemodel/ooOOo000OOO0ooO0oo0ooooO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/mojang/blaze3d/vertex/VertexConsumer;Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lorg/joml/Matrix4f;ZLcom/elfmcys/yesstevemodel/OOoOoooOOooO0o0000o0O0o0;[F[FIIIIFFFFZ)V",
+      "class_sha256": "544736311b51af496a05a64c5b88cf60d1f324dc991675506cffd957602b9b4c",
+      "access": 266,
+      "acc_native": true,
+      "static": true,
+      "pairing_instruction_evidence": {
+        "callback": "0x418740",
+        "native": "0x3bf750",
+        "callback_lea": "0x415fb6",
+        "callback_store_plus_18": "0x415fec",
+        "native_lea": "0x415ff0",
+        "native_store_plus_20": "0x415ff7",
+        "instructions": [
+          {
+            "role": "callback_lea",
+            "address": "0x415fb6",
+            "bytes": "488d1d83270000",
+            "sha256": "4c42fa212c3981cc1f35c84fd81bd4e2c2ed97c225f901eb771ee30a45597ccf"
+          },
+          {
+            "role": "callback_store",
+            "address": "0x415fec",
+            "bytes": "49895d18",
+            "sha256": "e79ae91d1f1b7374d020092b2e10bd8def07d4024d63782c4d499cbeab02532b"
+          },
+          {
+            "role": "native_lea",
+            "address": "0x415ff0",
+            "bytes": "488d055997faff",
+            "sha256": "2902cc90737ae3752f2eb47349848bacc80cd76871af3bad17dfc30273670076"
+          },
+          {
+            "role": "native_store",
+            "address": "0x415ff7",
+            "bytes": "49894520",
+            "sha256": "81f0edd3f467de47416397da894b80f61ca58c0687dc95f508c763ab530cd666"
+          }
+        ]
+      }
+    }
+  ],
+  "method": "ELF PT_LOAD source bytes via native_export_backing.regions/data_at; objdump raw x86-64 windows; manual static dataflow; JNI slot names from pinned local header catalog",
+  "target_executed": false,
+  "emulation_used": false,
+  "jvm_started": false,
+  "host_worker_threads_started": false,
+  "independent_semantic_review": "NOT_RUN",
+  "ranges": [
+    {
+      "start": "0x3bf750",
+      "end_exclusive": "0x3c1160",
+      "sha256": "39078c9353177a32fbc1a33e36cafa349225e4d6a07369c34d97fde56c8a565c",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3929936
+      }
+    },
+    {
+      "start": "0x3c1160",
+      "end_exclusive": "0x3c1400",
+      "sha256": "7dce37e22dd3078335491de80b4095dc42cc60913b859f09daaa308b618adb1d",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3936608
+      }
+    },
+    {
+      "start": "0x398e50",
+      "end_exclusive": "0x399080",
+      "sha256": "d94c7497a001956e429a2f0d6b94781b9c286004feff86d3a73c761579a100c2",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3771984
+      },
+      "window_not_proven_function_boundary": true
+    },
+    {
+      "start": "0x385080",
+      "end_exclusive": "0x385390",
+      "sha256": "f79a81a086b3839697cdca59a36cab45f32ca372eb0771a598d6793254abffaa",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3690624
+      },
+      "window_not_proven_function_boundary": true
+    },
+    {
+      "start": "0x383e10",
+      "end_exclusive": "0x384120",
+      "sha256": "19c3547e35a09b09407e2548a7f072f6a7595ce98f57c2f783f81d3c624cb1ff",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3685904
+      },
+      "window_not_proven_function_boundary": true
+    },
+    {
+      "start": "0x41a560",
+      "end_exclusive": "0x41a650",
+      "sha256": "b15a75763b34becfa658703a2633b303564ba0c6a9296007622d4028830000c6",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4302176
+      },
+      "window_not_proven_function_boundary": true
+    },
+    {
+      "start": "0x37bd80",
+      "end_exclusive": "0x37f990",
+      "sha256": "50713f24806721a753e74dd20dd140dc062b63ae26b1a65aed7bd363c95d2e26",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3652992
+      },
+      "window_not_proven_function_boundary": true
+    }
+  ],
+  "claims": [
+    {
+      "id": "model_handle_field",
+      "address": "0x3bf8d2",
+      "size": 12,
+      "bytes": "488b034889dfff9028030000",
+      "sha256": "2f82847d0e0fad2499056a10668d12f82afa4472f6e104b2ceffe9918cb4369f",
+      "claim": "JNI GetLongField slot0x328 reads handle from model; JNI field metadata from global catalog+0x178.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3930322
+      }
+    },
+    {
+      "id": "registry_lookup",
+      "address": "0x3bf907",
+      "size": 142,
+      "bytes": "48833dc148970000741d488b0da84897004c89e84809c848c1e82074274c89e831d248f7f1eb24488d059348970066662e0f1f840000000000488b004c3b680875f7eb1e4489e831d2f7f1488b055f489700488b04d00f1f00488b004c3b680875f7488b48180f1040100f298424f00000004885c9741048833dead5960000741ef0ff4108eb0a48833ddad59600",
+      "sha256": "6aa291472203dff9fc4d5f3008effc16731760b902f6b31bb32c7f4c6db704a4",
+      "claim": "Handle-key search in registry0xd341b8; node+8 key, node+0x10 model pointer, node+0x18 ownership control block. No direct handle-to-pointer cast.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3930375
+      }
+    },
+    {
+      "id": "ownership_retain",
+      "address": "0x3bf969",
+      "size": 64,
+      "bytes": "488b48180f1040100f298424f00000004885c9741048833dead5960000741ef0ff4108eb0a48833ddad59600007411488d3d59489700e80c4e9500eb03ff4108",
+      "sha256": "82c7d5d21d1f8f40343ac6b7cdb7fd33cac2c56aabf34c232ae849df04316dfb",
+      "claim": "Copy pointer/control block pair; increment control+8 (atomic when global0xd2cf70 set), unlock registry.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3930473
+      }
+    },
+    {
+      "id": "release_unlink",
+      "address": "0x3c134b",
+      "size": 16,
+      "bytes": "488b07498900488b5f184885db744e48",
+      "sha256": "fb9e4fa90f0f10185828291f27e8d2f539a8089b2acc450f907d884ddfdf85dd",
+      "claim": "Unlink matching node from registry and load ownership control block from node+0x18.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3937099
+      }
+    },
+    {
+      "id": "release_ownership",
+      "address": "0x3c135a",
+      "size": 95,
+      "bytes": "488b430848b901000000010000004839c8752248c7430800000000488b034989fe4889dfff5010488b034889dfff50184c89f7eb1948833dd9bb9600007445b8fffffffff00fc1430883f8017441be20000000e8ee60900048ff0d172e9700",
+      "sha256": "3538c1d72e600b010425b7fc68255c1be146ba34f1772787827fcda9621daf65",
+      "claim": "Shared-ownership-style release: count-pair0x100000001 fast path calls vtable+0x10,+0x18; otherwise decrement strong count; free0x20-byte node and decrement map size.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3937114
+      }
+    },
+    {
+      "id": "render_prepare_call",
+      "address": "0x3bffcf",
+      "size": 25,
+      "bytes": "4889df4c89f6488b4c24104d89e84189e9415250e898bdfbff",
+      "sha256": "fca37120afc55c04c379d4cd67cefc1f4cf3071f2a4971e043081acdc17e2b7d",
+      "claim": "0x37bd80 receives env,input-array,output-array,pose,model-pointer,mode,texture-index,static-boolean.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3932111
+      }
+    },
+    {
+      "id": "input_region_copy",
+      "address": "0x37bf03",
+      "size": 75,
+      "bytes": "488b353e8c9b00428d04a50000000048898424a00100008d144089d84d89e54429e0c1e00248898424980100008d0c404889b424b00100004c8d0496498b064c89f74c89feff9068060000",
+      "sha256": "37ee24ccad73a8302f793571eadd93335f877e81a70aa5329bcff771ce03cc69",
+      "claim": "GetFloatArrayRegion: start=12*startBone, length=12*(endBone-startBone), native buffer offset=48*startBone.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3653379
+      }
+    },
+    {
+      "id": "native_bone_stride",
+      "address": "0x37cb40",
+      "size": 72,
+      "bytes": "4d6bfc784c89e04c29c0488b0d47809b0048c1e007488d34014c037d004b8d146448c1e204488bbc24b00100004c8d2c174d89e249c1e2044c0315e97f9b004c892c014c89540108",
+      "sha256": "b3f48298372bd17a29feae310d15687dc0afa55a70802b917b522119ad63b16b",
+      "claim": "Native model descriptor stride0x78; input stride0x30; output stride0x10; per-selected-bone scratch stride0x80.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3656512
+      }
+    },
+    {
+      "id": "tracking_predicate",
+      "address": "0x37cb88",
+      "size": 22,
+      "bytes": "f30f1044172c410f2ec50f85151800000f8a0f180000",
+      "sha256": "a354ec4b4cbda4012cc6bfa678bd36249585bc00fd424177b8ce22c5c9eb3fba",
+      "claim": "Input slot11 tested against0. Tracking path taken for unequal or unordered (NaN); not Java exact-one getter semantics.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3656584
+      }
+    },
+    {
+      "id": "output_xyz_store",
+      "address": "0x37e911",
+      "size": 99,
+      "bytes": "0f2846400f28c80fc6c8000f598c24700100000f28d00fc6d055410f59d20f28d80fc6d8aa0f599c24800100000fc6c0ff0f598424600100000f58c30f58c20f58c1488b46080f28c80f590d1fe8cbff0f13080f12c0f30f59057199ccfff30f114008",
+      "sha256": "bfb0d76bde0ddc917806d59a81f6620f25fa7ec333289ee0732a955d6e8ae883",
+      "claim": "Four-lane transformed translation is computed; first two lanes multiplied by(-16,+16), third by+16; stores only output+0,+4,+8 in this writer.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3664145
+      }
+    },
+    {
+      "id": "output_dirty",
+      "address": "0x37e9af",
+      "size": 8,
+      "bytes": "4c8b2e41b301b001",
+      "sha256": "e883b9f22fdbf2ae42cf3a3e0cdc2af55c0dc8cf8884714170b8e7f2a1a58a45",
+      "claim": "Tracking transform sets accumulated flag r11b=1.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3664303
+      }
+    },
+    {
+      "id": "output_region_copy",
+      "address": "0x37eac9",
+      "size": 62,
+      "bytes": "488bb424a80100004885f6743141f6c301742b488b9424a00100004c8d0495000000004c030575609b00498b064c89f7488b8c2498010000ff90a8060000",
+      "sha256": "aea02f530843e0eb407a49aa93fd189e6ac57cd6d69f47259d25702037d8dbd0",
+      "claim": "SetFloatArrayRegion only when output array nonnull and flag bit0 set; start=4*startBone,length=4*(endBone-startBone).",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3664585
+      }
+    },
+    {
+      "id": "mode_selector",
+      "address": "0x37f650",
+      "size": 74,
+      "bytes": "4183f9037744418d71ff488b442428488d7818e8688c01004885c0742d448b600c496bc478418b44056c418d1c04ffc34c29ed48c1ed0349bdefeeeeeeeeeeeeee4c0fafede90fc8ffff",
+      "sha256": "039e50aa664fc5739d959dd7066f3a261c4f9520024c42e37a2ed629e06a6fd5",
+      "claim": "Nonzero mode>3 returns false; modes1..3 look up selector mode-1 in model+0x18; start=node+0xc,end=start+descriptor[start].u32(+0x6c)+1.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3667536
+      }
+    },
+    {
+      "id": "negative_texture_gate",
+      "address": "0x37be26",
+      "size": 74,
+      "bytes": "85c00f886c3800004d8b284c89442428498b68084939ed0f845738000089c6498b4538492b453048c1e80348bfcdcccccccccccccc480faff84889b424900100004839f70f862a380000",
+      "sha256": "7b45d1cee7f413213e1a9ed82e067a028e8119f542ca637608d049b1dc079cf3",
+      "claim": "Negative texture index, empty model vector or texture index outside first descriptor texture-table length return false before array-region read.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3653158
+      }
+    },
+    {
+      "id": "draw_gate",
+      "address": "0x3bffec",
+      "size": 18,
+      "bytes": "833d3d4c9700000f95c184c80f8412060000",
+      "sha256": "2f1538f661a384c833c46a1c6eb47153a001730573e55c140c80cdfa73b18127",
+      "claim": "Proceed to draw dispatch only when prepare return low-byte true and total-count0xd34c30 nonzero.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3932140
+      }
+    },
+    {
+      "id": "thread_dispatch",
+      "address": "0x3c02ce",
+      "size": 104,
+      "bytes": "488d155b1cfcff4889942408010000488d9424d80000004889942410010000488d942408010000498956204889c24829ca48c1ea034863d2f0490196c0000000f049ff46404839c874160f1f840000000000f390498b86c00000004885c075f249c7462000000000",
+      "sha256": "bc79934f4d5db6623ea956abd65625c20a1d7e40ee48e8cfed2dfbe9620d1e8c",
+      "claim": "Raw-buffer branch publishes callback0x381f30 and arguments into worker state, increments counters and spins until pending count0. Static architecture evidence only; no host workers started.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3932878
+      }
+    },
+    {
+      "id": "exception_check",
+      "address": "0x41a567",
+      "size": 47,
+      "bytes": "488b07ff902007000084c075084883c4085b415ec34889dfe8acfdffff488b034889dfff9088000000bf18000000e8",
+      "sha256": "439f6db6577c72907f2e011b4d93ad4825d79cf9923d520bec3d08ff95d2e5a8",
+      "claim": "Helper0x41a560 checks JNI ExceptionCheck slot0x720 and on pending exception calls helper then ExceptionClear slot0x88 and constructs native exception.",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4302183
+      }
+    }
+  ],
+  "constants": [
+    {
+      "address": "0x3d180",
+      "bytes": "000080c1000080410000000000000000",
+      "floats": [
+        -16.0,
+        16.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "address": "0x482e0",
+      "bytes": "00008041",
+      "floats": [
+        16.0
+      ]
+    },
+    {
+      "address": "0x48508",
+      "bytes": "000080bd",
+      "floats": [
+        -0.0625
+      ]
+    },
+    {
+      "address": "0x48574",
+      "bytes": "0000803d",
+      "floats": [
+        0.0625
+      ]
+    }
+  ],
+  "jump_tables": [
+    {
+      "address": "0x585f8",
+      "bytes": "8e7a36007a7c3600607c3600467c3600127c36002c7c3600",
+      "targets": [
+        "0x3c0086",
+        "0x3c0272",
+        "0x3c0258",
+        "0x3c023e",
+        "0x3c020a",
+        "0x3c0224"
+      ]
+    },
+    {
+      "address": "0x58610",
+      "bytes": "177b3600627c3600487c36002e7c3600fa7b3600147c3600",
+      "targets": [
+        "0x3c0127",
+        "0x3c0272",
+        "0x3c0258",
+        "0x3c023e",
+        "0x3c020a",
+        "0x3c0224"
+      ]
+    }
+  ],
+  "unresolved": [
+    "Fourth output slot semantics and contents",
+    "Complete matrix algebra and parent propagation equivalence",
+    "Full backend type enum identity and callback-to-Java writer resolution",
+    "All error/exception safety and missing-handle behavior",
+    "Concurrent render/global scratch safety",
+    "Successful runtime rendering or JNI registration"
+  ]
+}

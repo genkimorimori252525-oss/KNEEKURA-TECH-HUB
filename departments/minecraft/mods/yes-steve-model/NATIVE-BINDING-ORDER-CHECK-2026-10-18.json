@@ -1,0 +1,22 @@
+{
+  "bounded_order_check": "Two callbacks in reversed order, new independent clone of same checkpoint; no general claim for every permutation",
+  "order": [
+    "0x418560",
+    "0x418540"
+  ],
+  "checks": [
+    {
+      "callback": "0x418560",
+      "exact_payload_and_classfile_match": true
+    },
+    {
+      "callback": "0x418540",
+      "exact_payload_and_classfile_match": true
+    }
+  ],
+  "main_receipt_sha256": "c907e34e24f0cca48e4746aee3e92219bd0b8428bcd51a659921fd49d48b1e1d",
+  "reverse_run_receipt_sha256": "3533da5f8edfe56fe98e47377f9406604e3dbc8151575e29a983fb3d3ea1dfcb",
+  "script_sha256": "635cda50fa7c896f0914e416e2f538e3a95afaef8dc10ac29e4cced7e8069cfa",
+  "trace_sha256": "88a557e8687bf764d4e6c154f59d69372b0b4faa727c7710582df53f830b96fd",
+  "runtime_registration_success_proven": false
+}

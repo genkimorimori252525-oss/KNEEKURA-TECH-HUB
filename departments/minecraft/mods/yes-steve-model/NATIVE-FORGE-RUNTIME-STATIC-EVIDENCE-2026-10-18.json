@@ -1,0 +1,825 @@
+{
+  "schema": "forge-runtime-state-static-receipt-v1",
+  "scope": "Read-only Python classfile inspection; no Java/native execution or initialization. Runtime field values require explicit fixture selection.",
+  "artifacts": {
+    "fmlloader-1.20.1-47.4.0.jar": {
+      "path": "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/forge-1.20.1-47.4.0/fmlloader-1.20.1-47.4.0.jar",
+      "sha256": "d17c218af5c62fa4928019614aa8a5075279f8545efe21325baf46b80f4a5ac9",
+      "size": 267079
+    },
+    "mergetool-1.1.5-api.jar": {
+      "path": "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/forge-1.20.1-47.4.0/mergetool-1.1.5-api.jar",
+      "sha256": "39d9a3d9277c1402b8e7b97f917ce278241cf1796312aec85b87f19a376dd99a",
+      "size": 2572
+    }
+  },
+  "classes": {
+    "net/minecraftforge/fml/loading/FMLEnvironment": {
+      "artifact": "fmlloader-1.20.1-47.4.0.jar",
+      "sha256": "2f2fb82b18a0c15be7200cef816f49a9e31ae9f89d6a2b1a1c3f84cf5bc03a75",
+      "access": 33,
+      "super": "java/lang/Object",
+      "fields": [
+        {
+          "access": 25,
+          "name": "dist",
+          "descriptor": "Lnet/minecraftforge/api/distmarker/Dist;",
+          "constant_value_attributes": []
+        },
+        {
+          "access": 25,
+          "name": "naming",
+          "descriptor": "Ljava/lang/String;",
+          "constant_value_attributes": []
+        },
+        {
+          "access": 25,
+          "name": "production",
+          "descriptor": "Z",
+          "constant_value_attributes": []
+        },
+        {
+          "access": 25,
+          "name": "secureJarsEnabled",
+          "descriptor": "Z",
+          "constant_value_attributes": []
+        }
+      ],
+      "methods": [
+        {
+          "access": 8,
+          "name": "<clinit>",
+          "descriptor": "()V",
+          "max_stack": 2,
+          "max_locals": 0,
+          "code_file_offset": 2715,
+          "code_length": 44,
+          "code_hex": "b8002fb30025b80035b3002bb800399a000eb8003d1243b6004599000704a7000403b3004bb8004eb30051b1"
+        }
+      ],
+      "constant_pool_references": {
+        "37": [
+          9,
+          [
+            7,
+            "net/minecraftforge/fml/loading/FMLEnvironment"
+          ],
+          [
+            12,
+            "dist",
+            "Lnet/minecraftforge/api/distmarker/Dist;"
+          ]
+        ],
+        "43": [
+          9,
+          [
+            7,
+            "net/minecraftforge/fml/loading/FMLEnvironment"
+          ],
+          [
+            12,
+            "naming",
+            "Ljava/lang/String;"
+          ]
+        ],
+        "47": [
+          10,
+          [
+            7,
+            "net/minecraftforge/fml/loading/FMLLoader"
+          ],
+          [
+            12,
+            "getDist",
+            "()Lnet/minecraftforge/api/distmarker/Dist;"
+          ]
+        ],
+        "53": [
+          10,
+          [
+            7,
+            "net/minecraftforge/fml/loading/FMLLoader"
+          ],
+          [
+            12,
+            "getNaming",
+            "()Ljava/lang/String;"
+          ]
+        ],
+        "57": [
+          10,
+          [
+            7,
+            "net/minecraftforge/fml/loading/FMLLoader"
+          ],
+          [
+            12,
+            "isProduction",
+            "()Z"
+          ]
+        ],
+        "61": [
+          10,
+          [
+            7,
+            "java/lang/System"
+          ],
+          [
+            12,
+            "getProperties",
+            "()Ljava/util/Properties;"
+          ]
+        ],
+        "67": [
+          8,
+          "production"
+        ],
+        "69": [
+          10,
+          [
+            7,
+            "java/util/Properties"
+          ],
+          [
+            12,
+            "containsKey",
+            "(Ljava/lang/Object;)Z"
+          ]
+        ],
+        "75": [
+          9,
+          [
+            7,
+            "net/minecraftforge/fml/loading/FMLEnvironment"
+          ],
+          [
+            12,
+            "production",
+            "Z"
+          ]
+        ],
+        "78": [
+          10,
+          [
+            7,
+            "net/minecraftforge/fml/loading/FMLLoader"
+          ],
+          [
+            12,
+            "isSecureJarEnabled",
+            "()Z"
+          ]
+        ],
+        "81": [
+          9,
+          [
+            7,
+            "net/minecraftforge/fml/loading/FMLEnvironment"
+          ],
+          [
+            12,
+            "secureJarsEnabled",
+            "Z"
+          ]
+        ]
+      }
+    },
+    "net/minecraftforge/fml/loading/FMLLoader": {
+      "artifact": "fmlloader-1.20.1-47.4.0.jar",
+      "sha256": "b8218bd0d18c2887589b235e59a9fd27a3e18dca63c017c7e890d86f2bdd8f6d",
+      "access": 33,
+      "super": "java/lang/Object",
+      "fields": [
+        {
+          "access": 10,
+          "name": "dist",
+          "descriptor": "Lnet/minecraftforge/api/distmarker/Dist;",
+          "constant_value_attributes": []
+        },
+        {
+          "access": 10,
+          "name": "commonLaunchHandler",
+          "descriptor": "Lnet/minecraftforge/fml/loading/targets/CommonLaunchHandler;",
+          "constant_value_attributes": []
+        },
+        {
+          "access": 10,
+          "name": "production",
+          "descriptor": "Z",
+          "constant_value_attributes": []
+        }
+      ],
+      "methods": [
+        {
+          "access": 8,
+          "name": "setupLaunchHandler",
+          "descriptor": "(Lcpw/mods/modlauncher/api/IEnvironment;Ljava/util/Map;)V",
+          "max_stack": 4,
+          "max_locals": 4,
+          "code_file_offset": 15537,
+          "code_length": 301,
+          "code_hex": "2ab20122b901280100c00116b9012d0200130131b60133c001374d2b1301392cb9013b0300572a2cb9014102004eb2000db200131301442cb9001b04002db60146990020b2000db200131301472cb900d60400bb0149592cba014b0000b7014cbf2db6014dc1014e9a0029b2000db200131301502db6014dc00152b60066b60154b900d60400bb014959130157b7014cbf2db6014dc0014eb301592db6014dc00152b9015d0100b301602ab20164b901280100c00116b9012d020013016703bd0137b80169b9016e0100b60133c0016fb30174b20159b60178b3017bb20159b6017eb30182b20159b60186b30189bb018d592bb7018fb30192b20062b60196b2017b130199b8019bb901a10200b2000db200131301a6b20192b9001b0400b20084b601a8b20182b901a10200b1"
+        },
+        {
+          "access": 9,
+          "name": "getDist",
+          "descriptor": "()Lnet/minecraftforge/api/distmarker/Dist;",
+          "max_stack": 1,
+          "max_locals": 0,
+          "code_file_offset": 16606,
+          "code_length": 4,
+          "code_hex": "b20182b0"
+        },
+        {
+          "access": 9,
+          "name": "isProduction",
+          "descriptor": "()Z",
+          "max_stack": 1,
+          "max_locals": 0,
+          "code_file_offset": 17124,
+          "code_length": 4,
+          "code_hex": "b20189ac"
+        }
+      ],
+      "constant_pool_references": {
+        "290": [
+          9,
+          [
+            7,
+            "cpw/mods/modlauncher/api/IEnvironment$Keys"
+          ],
+          [
+            12,
+            "LAUNCHTARGET",
+            "Ljava/util/function/Supplier;"
+          ]
+        ],
+        "301": [
+          11,
+          [
+            7,
+            "cpw/mods/modlauncher/api/IEnvironment"
+          ],
+          [
+            12,
+            "getProperty",
+            "(Lcpw/mods/modlauncher/api/TypesafeMap$Key;)Ljava/util/Optional;"
+          ]
+        ],
+        "321": [
+          11,
+          [
+            7,
+            "cpw/mods/modlauncher/api/IEnvironment"
+          ],
+          [
+            12,
+            "findLaunchHandler",
+            "(Ljava/lang/String;)Ljava/util/Optional;"
+          ]
+        ],
+        "345": [
+          9,
+          [
+            7,
+            "net/minecraftforge/fml/loading/FMLLoader"
+          ],
+          [
+            12,
+            "commonLaunchHandler",
+            "Lnet/minecraftforge/fml/loading/targets/CommonLaunchHandler;"
+          ]
+        ],
+        "376": [
+          10,
+          [
+            7,
+            "net/minecraftforge/fml/loading/targets/CommonLaunchHandler"
+          ],
+          [
+            12,
+            "getNaming",
+            "()Ljava/lang/String;"
+          ]
+        ],
+        "379": [
+          9,
+          [
+            7,
+            "net/minecraftforge/fml/loading/FMLLoader"
+          ],
+          [
+            12,
+            "naming",
+            "Ljava/lang/String;"
+          ]
+        ],
+        "382": [
+          10,
+          [
+            7,
+            "net/minecraftforge/fml/loading/targets/CommonLaunchHandler"
+          ],
+          [
+            12,
+            "getDist",
+            "()Lnet/minecraftforge/api/distmarker/Dist;"
+          ]
+        ],
+        "386": [
+          9,
+          [
+            7,
+            "net/minecraftforge/fml/loading/FMLLoader"
+          ],
+          [
+            12,
+            "dist",
+            "Lnet/minecraftforge/api/distmarker/Dist;"
+          ]
+        ],
+        "390": [
+          10,
+          [
+            7,
+            "net/minecraftforge/fml/loading/targets/CommonLaunchHandler"
+          ],
+          [
+            12,
+            "isProduction",
+            "()Z"
+          ]
+        ],
+        "393": [
+          9,
+          [
+            7,
+            "net/minecraftforge/fml/loading/FMLLoader"
+          ],
+          [
+            12,
+            "production",
+            "Z"
+          ]
+        ]
+      }
+    },
+    "net/minecraftforge/fml/loading/targets/ForgeClientLaunchHandler": {
+      "artifact": "fmlloader-1.20.1-47.4.0.jar",
+      "sha256": "1a6d6404974e3b19e0bfc9e222246bc7a2cbbd30cceeacebd8d86db9b473759e",
+      "access": 33,
+      "super": "net/minecraftforge/fml/loading/targets/CommonClientLaunchHandler",
+      "fields": [],
+      "methods": [
+        {
+          "access": 1,
+          "name": "name",
+          "descriptor": "()Ljava/lang/String;",
+          "max_stack": 1,
+          "max_locals": 1,
+          "code_file_offset": 1699,
+          "code_length": 3,
+          "code_hex": "1207b0"
+        }
+      ],
+      "constant_pool_references": {
+        "7": [
+          8,
+          "forgeclient"
+        ]
+      }
+    },
+    "net/minecraftforge/fml/loading/targets/ForgeServerLaunchHandler": {
+      "artifact": "fmlloader-1.20.1-47.4.0.jar",
+      "sha256": "c6fbed7bdc4509db4444fb41216a6bd7487792cbe58cb78760a1b56431115589",
+      "access": 33,
+      "super": "net/minecraftforge/fml/loading/targets/CommonServerLaunchHandler",
+      "fields": [],
+      "methods": [
+        {
+          "access": 1,
+          "name": "name",
+          "descriptor": "()Ljava/lang/String;",
+          "max_stack": 1,
+          "max_locals": 1,
+          "code_file_offset": 2072,
+          "code_length": 3,
+          "code_hex": "1207b0"
+        }
+      ],
+      "constant_pool_references": {
+        "7": [
+          8,
+          "forgeserver"
+        ]
+      }
+    },
+    "net/minecraftforge/fml/loading/targets/CommonClientLaunchHandler": {
+      "artifact": "fmlloader-1.20.1-47.4.0.jar",
+      "sha256": "5c0f65787747a5080936560a333a5ad689b3b8fa9e4b09c1bc5e63ef3c85a2b8",
+      "access": 1057,
+      "super": "net/minecraftforge/fml/loading/targets/CommonLaunchHandler",
+      "fields": [],
+      "methods": [
+        {
+          "access": 1,
+          "name": "getDist",
+          "descriptor": "()Lnet/minecraftforge/api/distmarker/Dist;",
+          "max_stack": 1,
+          "max_locals": 1,
+          "code_file_offset": 3715,
+          "code_length": 4,
+          "code_hex": "b20007b0"
+        },
+        {
+          "access": 1,
+          "name": "isProduction",
+          "descriptor": "()Z",
+          "max_stack": 1,
+          "max_locals": 1,
+          "code_file_offset": 3834,
+          "code_length": 2,
+          "code_hex": "04ac"
+        }
+      ],
+      "constant_pool_references": {
+        "7": [
+          9,
+          [
+            7,
+            "net/minecraftforge/api/distmarker/Dist"
+          ],
+          [
+            12,
+            "CLIENT",
+            "Lnet/minecraftforge/api/distmarker/Dist;"
+          ]
+        ]
+      }
+    },
+    "net/minecraftforge/fml/loading/targets/CommonServerLaunchHandler": {
+      "artifact": "fmlloader-1.20.1-47.4.0.jar",
+      "sha256": "d1eae8da34de37ad8ca7a87e489a8fbed510f72bcd1f2acb0b4366895da06522",
+      "access": 1057,
+      "super": "net/minecraftforge/fml/loading/targets/CommonLaunchHandler",
+      "fields": [],
+      "methods": [
+        {
+          "access": 1,
+          "name": "getDist",
+          "descriptor": "()Lnet/minecraftforge/api/distmarker/Dist;",
+          "max_stack": 1,
+          "max_locals": 1,
+          "code_file_offset": 4564,
+          "code_length": 4,
+          "code_hex": "b20007b0"
+        },
+        {
+          "access": 1,
+          "name": "isProduction",
+          "descriptor": "()Z",
+          "max_stack": 1,
+          "max_locals": 1,
+          "code_file_offset": 4683,
+          "code_length": 2,
+          "code_hex": "04ac"
+        }
+      ],
+      "constant_pool_references": {
+        "7": [
+          9,
+          [
+            7,
+            "net/minecraftforge/api/distmarker/Dist"
+          ],
+          [
+            12,
+            "DEDICATED_SERVER",
+            "Lnet/minecraftforge/api/distmarker/Dist;"
+          ]
+        ]
+      }
+    },
+    "net/minecraftforge/fml/loading/targets/CommonLaunchHandler": {
+      "artifact": "fmlloader-1.20.1-47.4.0.jar",
+      "sha256": "9b12a223c8f4d5217475167afb406c327c087f6ae97c6b1b3688d9f6596e645a",
+      "access": 1057,
+      "super": "java/lang/Object",
+      "fields": [
+        {
+          "access": 28,
+          "name": "LOGGER",
+          "descriptor": "Lorg/slf4j/Logger;",
+          "constant_value_attributes": []
+        }
+      ],
+      "methods": [
+        {
+          "access": 1025,
+          "name": "getDist",
+          "descriptor": "()Lnet/minecraftforge/api/distmarker/Dist;"
+        },
+        {
+          "access": 1,
+          "name": "isProduction",
+          "descriptor": "()Z",
+          "max_stack": 1,
+          "max_locals": 1,
+          "code_file_offset": 6395,
+          "code_length": 2,
+          "code_hex": "03ac"
+        }
+      ],
+      "constant_pool_references": {}
+    },
+    "net/minecraftforge/fml/loading/targets/CommonDevLaunchHandler": {
+      "artifact": "fmlloader-1.20.1-47.4.0.jar",
+      "sha256": "ee68e86abc59662f65a026c7cba5e30305bc2136ebdac676828adb62cad21d6b",
+      "access": 1057,
+      "super": "net/minecraftforge/fml/loading/targets/CommonLaunchHandler",
+      "fields": [],
+      "methods": [
+        {
+          "access": 1,
+          "name": "isProduction",
+          "descriptor": "()Z",
+          "max_stack": 1,
+          "max_locals": 1,
+          "code_file_offset": 8578,
+          "code_length": 2,
+          "code_hex": "03ac"
+        }
+      ],
+      "constant_pool_references": {}
+    },
+    "net/minecraftforge/fml/loading/targets/ForgeClientDevLaunchHandler": {
+      "artifact": "fmlloader-1.20.1-47.4.0.jar",
+      "sha256": "bed7bcce22a9e156a4b6a2ecd03c05b9968896c8881c995a3e0fbf79f5ac14ec",
+      "access": 33,
+      "super": "net/minecraftforge/fml/loading/targets/CommonDevLaunchHandler",
+      "fields": [],
+      "methods": [
+        {
+          "access": 1,
+          "name": "name",
+          "descriptor": "()Ljava/lang/String;",
+          "max_stack": 1,
+          "max_locals": 1,
+          "code_file_offset": 845,
+          "code_length": 3,
+          "code_hex": "1207b0"
+        },
+        {
+          "access": 1,
+          "name": "getDist",
+          "descriptor": "()Lnet/minecraftforge/api/distmarker/Dist;",
+          "max_stack": 1,
+          "max_locals": 1,
+          "code_file_offset": 904,
+          "code_length": 4,
+          "code_hex": "b20009b0"
+        }
+      ],
+      "constant_pool_references": {
+        "7": [
+          8,
+          "forgeclientdev"
+        ],
+        "9": [
+          9,
+          [
+            7,
+            "net/minecraftforge/api/distmarker/Dist"
+          ],
+          [
+            12,
+            "CLIENT",
+            "Lnet/minecraftforge/api/distmarker/Dist;"
+          ]
+        ]
+      }
+    },
+    "net/minecraftforge/fml/loading/targets/ForgeServerDevLaunchHandler": {
+      "artifact": "fmlloader-1.20.1-47.4.0.jar",
+      "sha256": "441611384b1cfca132557aea6fa51f688243cf1b2ca1f9b7fc7e9ff9ee538d82",
+      "access": 33,
+      "super": "net/minecraftforge/fml/loading/targets/CommonDevLaunchHandler",
+      "fields": [],
+      "methods": [
+        {
+          "access": 1,
+          "name": "name",
+          "descriptor": "()Ljava/lang/String;",
+          "max_stack": 1,
+          "max_locals": 1,
+          "code_file_offset": 855,
+          "code_length": 3,
+          "code_hex": "1207b0"
+        },
+        {
+          "access": 1,
+          "name": "getDist",
+          "descriptor": "()Lnet/minecraftforge/api/distmarker/Dist;",
+          "max_stack": 1,
+          "max_locals": 1,
+          "code_file_offset": 914,
+          "code_length": 4,
+          "code_hex": "b20009b0"
+        }
+      ],
+      "constant_pool_references": {
+        "7": [
+          8,
+          "forgeserverdev"
+        ],
+        "9": [
+          9,
+          [
+            7,
+            "net/minecraftforge/api/distmarker/Dist"
+          ],
+          [
+            12,
+            "DEDICATED_SERVER",
+            "Lnet/minecraftforge/api/distmarker/Dist;"
+          ]
+        ]
+      }
+    },
+    "net/minecraftforge/api/distmarker/Dist": {
+      "artifact": "mergetool-1.1.5-api.jar",
+      "sha256": "232942ceea0aefeb8ab48436f914847a1acc0222af1a39fabc2d6a57f1ac36e4",
+      "access": 16433,
+      "super": "java/lang/Enum",
+      "fields": [
+        {
+          "access": 16409,
+          "name": "CLIENT",
+          "descriptor": "Lnet/minecraftforge/api/distmarker/Dist;",
+          "constant_value_attributes": []
+        },
+        {
+          "access": 16409,
+          "name": "DEDICATED_SERVER",
+          "descriptor": "Lnet/minecraftforge/api/distmarker/Dist;",
+          "constant_value_attributes": []
+        },
+        {
+          "access": 4122,
+          "name": "$VALUES",
+          "descriptor": "[Lnet/minecraftforge/api/distmarker/Dist;",
+          "constant_value_attributes": []
+        }
+      ],
+      "methods": [
+        {
+          "access": 8,
+          "name": "<clinit>",
+          "descriptor": "()V",
+          "max_stack": 4,
+          "max_locals": 0,
+          "code_file_offset": 1187,
+          "code_length": 46,
+          "code_hex": "bb000459120903b7000ab30008bb000459120b04b7000ab3000c05bd00045903b20008535904b2000c53b30001b1"
+        }
+      ],
+      "constant_pool_references": {
+        "1": [
+          9,
+          [
+            7,
+            "net/minecraftforge/api/distmarker/Dist"
+          ],
+          [
+            12,
+            "$VALUES",
+            "[Lnet/minecraftforge/api/distmarker/Dist;"
+          ]
+        ],
+        "8": [
+          9,
+          [
+            7,
+            "net/minecraftforge/api/distmarker/Dist"
+          ],
+          [
+            12,
+            "CLIENT",
+            "Lnet/minecraftforge/api/distmarker/Dist;"
+          ]
+        ],
+        "9": [
+          8,
+          "CLIENT"
+        ],
+        "10": [
+          10,
+          [
+            7,
+            "net/minecraftforge/api/distmarker/Dist"
+          ],
+          [
+            12,
+            "<init>",
+            "(Ljava/lang/String;I)V"
+          ]
+        ],
+        "11": [
+          8,
+          "DEDICATED_SERVER"
+        ],
+        "12": [
+          9,
+          [
+            7,
+            "net/minecraftforge/api/distmarker/Dist"
+          ],
+          [
+            12,
+            "DEDICATED_SERVER",
+            "Lnet/minecraftforge/api/distmarker/Dist;"
+          ]
+        ]
+      }
+    }
+  },
+  "derived_semantics": {
+    "FMLEnvironment.dist": "FMLLoader.getDist()",
+    "FMLEnvironment.production": "FMLLoader.isProduction() || System.getProperties().containsKey(\"production\")",
+    "FMLLoader.setupLaunchHandler": "Assigns dist and production from selected CommonLaunchHandler.getDist() / isProduction().",
+    "constant_warning": "Public static final is not ConstantValue. Both FMLEnvironment fields have no ConstantValue attribute. Property value false still counts as present.",
+    "initialized_phase_assumption": "Fixtures represent successful normal launch-handler setup and FMLEnvironment initialization; static proof does not execute or establish either."
+  },
+  "profiles": [
+    {
+      "launch_target": "forgeclient",
+      "handler": "ForgeClientLaunchHandler",
+      "dist": "CLIENT",
+      "handler_production": true,
+      "production_property_present": false,
+      "FMLEnvironment.production": true
+    },
+    {
+      "launch_target": "forgeclient",
+      "handler": "ForgeClientLaunchHandler",
+      "dist": "CLIENT",
+      "handler_production": true,
+      "production_property_present": true,
+      "FMLEnvironment.production": true
+    },
+    {
+      "launch_target": "forgeserver",
+      "handler": "ForgeServerLaunchHandler",
+      "dist": "DEDICATED_SERVER",
+      "handler_production": true,
+      "production_property_present": false,
+      "FMLEnvironment.production": true
+    },
+    {
+      "launch_target": "forgeserver",
+      "handler": "ForgeServerLaunchHandler",
+      "dist": "DEDICATED_SERVER",
+      "handler_production": true,
+      "production_property_present": true,
+      "FMLEnvironment.production": true
+    },
+    {
+      "launch_target": "forgeclientdev",
+      "handler": "ForgeClientDevLaunchHandler",
+      "dist": "CLIENT",
+      "handler_production": false,
+      "production_property_present": false,
+      "FMLEnvironment.production": false
+    },
+    {
+      "launch_target": "forgeclientdev",
+      "handler": "ForgeClientDevLaunchHandler",
+      "dist": "CLIENT",
+      "handler_production": false,
+      "production_property_present": true,
+      "FMLEnvironment.production": true
+    },
+    {
+      "launch_target": "forgeserverdev",
+      "handler": "ForgeServerDevLaunchHandler",
+      "dist": "DEDICATED_SERVER",
+      "handler_production": false,
+      "production_property_present": false,
+      "FMLEnvironment.production": false
+    },
+    {
+      "launch_target": "forgeserverdev",
+      "handler": "ForgeServerDevLaunchHandler",
+      "dist": "DEDICATED_SERVER",
+      "handler_production": false,
+      "production_property_present": true,
+      "FMLEnvironment.production": true
+    }
+  ],
+  "fixture_requirements": [
+    "Explicit opted-in launch profile, with no inference from metadata lookup of a Dist constant.",
+    "Record artifact/class hashes, selected target, property-presence and initialized-phase assumption in checkpoint provenance.",
+    "Typed symbolic Dist enum references with stable identity only; no invented live Java object.",
+    "Absent explicit fixture, runtime field read remains unsupported."
+  ]
+}

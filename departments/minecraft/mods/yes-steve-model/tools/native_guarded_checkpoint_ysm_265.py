@@ -98,6 +98,7 @@ def restore(cpu,state,*,allow_stack_extension=False):
         lo,hi,original=cpu.image[index]
         if index not in cpu.shadow_expected:cpu.shadow_expected[index]=bytearray(original)
         cpu.shadow_expected[index][address-lo:address-lo+len(data)]=data;cpu.uc.mem_write(address,data)
+    if (state.get('sparse') or {}).get('forge_runtime') is not None and not hasattr(cpu,'configure_forge_runtime'):raise ValueError('Checkpoint requires Forge runtime-state backend')
     if any((state.get('sparse') or {}).get('mutex',{}).get(k) for k in ('objects','calls')) and not hasattr(cpu,'mutex_objects'):raise ValueError('Checkpoint requires mutex-capable backend')
     if any((state.get('sparse') or {}).get('once',{}).get(k) for k in ('objects','pending','calls')) and not hasattr(cpu,'once_objects'):raise ValueError('Checkpoint requires once-callback backend')
     if (state.get('sparse') or {}).get('threads',{}).get('enabled') and not hasattr(cpu,'threads_enabled'):raise ValueError('Checkpoint requires thread-capable backend')

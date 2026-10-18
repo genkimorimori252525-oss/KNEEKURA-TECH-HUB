@@ -1,0 +1,11 @@
+# Explicit Forge runtime-state boundary
+
+Class metadata alone does not establish initialized static values. The exact fmlloader1.20.1-47.4.0 bytecode computes FMLEnvironment.production from FMLLoader.isProduction() OR presence of system-property key production; even a value "false" counts as present. Dist comes from the selected launch handler. Neither field has a ConstantValue attribute. [Original classfile evidence](NATIVE-FORGE-RUNTIME-STATIC-EVIDENCE-2026-10-18.json) pins class hashes, bytecode and handler inheritance.
+
+The new opt-in fixture supports release forgeclient and forgeserver, whose concrete handlers report production=true and CLIENT/DEDICATED_SERVER respectively. It requires explicit initialized-state assumption and property-key presence. These are declared synthetic inputs, not observations of the user's installation. It cannot silently enable itself or change after use. CLI requires all three flags: --forge-runtime-profile forgeclient --forge-runtime-initialized --forge-production-property absent.
+
+Only exact pinned production/dist enum field reads, typed enum identity comparisons and deletion of those local enum references are supported. Each read returns a fresh symbolic local reference with stable enum identity; handles never alias jclass. Unknown objects, wrong fields/staticness/descriptors/provenance, dead references, pending-exception misuse, malformed checkpoints and restoration into an incompatible backend fail closed. A separate bounded ledger preserves these runtime operations without altering existing JNI metadata proofs.
+
+The initialized forgeclient scenario completes six runtime calls: production read, two enum reads, unequal identity comparison, and deletion of both local references. It also completes three ExceptionCheck calls. It then stops at FMLPaths.CONFIGDIR, whose runtime object is deliberately not invented. Both deferred workers remain unexecuted and no Java exception is pending. [Checkpoint and exact ledger receipt](NATIVE-FORGE-RUNTIME-2026-10-18.json).
+
+The five affected explicit unittest modules pass101tests. Tests use authored bytes/metadata fixtures; the separate original-artifact continuation validates real pinned metadata and guarded guest behavior. No actual JVM, Java initializer, host thread or target-native execution occurs. No whole-project CI is needed for this scoped change.

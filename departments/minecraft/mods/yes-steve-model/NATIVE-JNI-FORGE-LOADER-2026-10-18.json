@@ -253,5 +253,82 @@
         }
       }
     ]
+  },
+  "latest_runtime_state_frontier": {
+    "checkpoint_basename": "unicorn-jni-dist-next1.checkpoint.json",
+    "checkpoint_sha256": "af930823c9a03c87320194c0edc86b6ddf061bbf244834354538fc77ea65db74",
+    "stop": {
+      "reason": "UNMODELED_JNI_CALL",
+      "pc": 135239940399536,
+      "address": 146,
+      "size": 0
+    },
+    "jni_method": "GetStaticBooleanField",
+    "requested_field": {
+      "requested_class": "net/minecraftforge/fml/loading/FMLEnvironment",
+      "name": "production",
+      "descriptor": "Z",
+      "static": true,
+      "declaring_class": "net/minecraftforge/fml/loading/FMLEnvironment",
+      "class_sha256": "2f2fb82b18a0c15be7200cef816f49a9e31ae9f89d6a2b1a1c3f84cf5bc03a75",
+      "source": {
+        "id": "fmlloader-1.20.1-47.4.0",
+        "sha256": "d17c218af5c62fa4928019614aa8a5075279f8545efe21325baf46b80f4a5ac9",
+        "archive_kind": "jar",
+        "entry_count": 158
+      }
+    },
+    "method_count": 29,
+    "field_count": 14,
+    "jni_call_count": 123,
+    "dependency_provenance": {
+      "profile_library": {
+        "name": "net.minecraftforge:mergetool:1.1.5:api",
+        "downloads": {
+          "artifact": {
+            "path": "net/minecraftforge/mergetool/1.1.5/mergetool-1.1.5-api.jar",
+            "url": "https://maven.minecraftforge.net/net/minecraftforge/mergetool/1.1.5/mergetool-1.1.5-api.jar",
+            "sha1": "f3da18e12c696d35a47c82cbb2cc8b5aa15e1154",
+            "size": 2572
+          }
+        }
+      },
+      "download_url": "https://mirror.sjtu.edu.cn/bmclapi/net/minecraftforge/mergetool/1.1.5/mergetool-1.1.5-api.jar",
+      "sha256": "39d9a3d9277c1402b8e7b97f917ce278241cf1796312aec85b87f19a376dd99a",
+      "executed": false
+    },
+    "Dist_field_proof": {
+      "requested_class": "net/minecraftforge/api/distmarker/Dist",
+      "name": "DEDICATED_SERVER",
+      "descriptor": "Lnet/minecraftforge/api/distmarker/Dist;",
+      "static": true,
+      "declaring_class": "net/minecraftforge/api/distmarker/Dist",
+      "class_sha256": "232942ceea0aefeb8ab48436f914847a1acc0222af1a39fabc2d6a57f1ac36e4",
+      "source": {
+        "id": "mergetool-1.1.5-api",
+        "sha256": "39d9a3d9277c1402b8e7b97f917ce278241cf1796312aec85b87f19a376dd99a",
+        "archive_kind": "jar",
+        "entry_count": 9
+      }
+    },
+    "pending_exception": null,
+    "workers": {
+      "2": {
+        "start": 3132592,
+        "arg": 70643639402880,
+        "state": "pending",
+        "detached": true,
+        "executed": false
+      },
+      "3": {
+        "start": 3132592,
+        "arg": 70643638879360,
+        "state": "pending",
+        "detached": true,
+        "executed": false
+      }
+    },
+    "runtime_field_values_supplied": false,
+    "jni_success_established": false
   }
 }

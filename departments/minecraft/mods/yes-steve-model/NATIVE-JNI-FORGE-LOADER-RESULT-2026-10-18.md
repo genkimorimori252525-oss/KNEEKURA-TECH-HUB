@@ -29,3 +29,11 @@ The source-backed continuation verifies ForgeConfigSpec$ConfigValue.get():Object
 Sources: [Forge official download checksums](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.20.1.html), [SJTUG public artifact index](https://mirror.sjtu.edu.cn/bmclapi/net/minecraftforge/forge/1.20.1-47.4.0/). The SHA-256 pins are locally calculated after validating the original distribution's SHA-1 chain. The mirror itself is not treated as the authority for version compatibility or the expected hashes.
 
 The same verified installer profile also pins fmlcore (118,914 bytes, SHA-256 483f2d764a3a426f09a51cb37eb552830ffac8132da6bb3afbd7d825e6a34fd2). Adding it resolves the observed ModList.INSTANCE and fileById field descriptors. These private implementation references make the declared Forge profile material; do not generalize them to arbitrary Forge versions.
+
+## First Forge metadata phase completed; runtime state boundary
+
+The next missing class, net/minecraftforge/api/distmarker/Dist, is supplied by the original mergetool 1.1.5 API JAR. The verified installer version.json pins its size (2,572 bytes) and SHA-1 f3da18e12c696d35a47c82cbb2cc8b5aa15e1154. The mirror artifact matches both; locally calculated SHA-256 is 39d9a3d9277c1402b8e7b97f917ce278241cf1796312aec85b87f19a376dd99a. This is the sixth explicit dependency archive, read as metadata only.
+
+The continuation resolves Dist.DEDICATED_SERVER and reaches GetStaticBooleanField for FMLEnvironment.production. The checkpoint unicorn-jni-dist-next1.checkpoint.json has SHA-256 af930823c9a03c87320194c0edc86b6ddf061bbf244834354538fc77ea65db74. It records 29 method proofs, 14 field proofs and 123 completed JNI gateway calls. The unresolved static-field read itself is not counted as completed. Both workers remain pending, detached and unexecuted; no pending Java exception exists.
+
+This boundary is materially different from a missing class definition: classfile metadata proves a field exists, but does not establish its initialized runtime value. No guessed production flag, enum instance or successful object read has been substituted. Main-path continuation requires an explicit, evidence-informed runtime-state scenario. Independent isolated callback decoding can recover registration metadata without claiming that this boundary or real RegisterNatives has completed.

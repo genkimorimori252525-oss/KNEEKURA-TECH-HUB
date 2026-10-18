@@ -1,0 +1,131 @@
+{
+  "scope": "Explicit initialized release forgeclient synthetic runtime field scenario",
+  "checkpoint_basename": "unicorn-jni-forgeclient-next1.checkpoint.json",
+  "checkpoint_sha256": "05122784aea6927c2a8f1d48a2fb16f98e73b0d3919ab48ea4b1725f76d106b1",
+  "stop": {
+    "reason": "UNMODELED_FORGE_RUNTIME_FIELD",
+    "pc": 135239940403072,
+    "address": 0,
+    "size": 0
+  },
+  "next_unmodeled_field": {
+    "requested_class": "net/minecraftforge/fml/loading/FMLPaths",
+    "name": "CONFIGDIR",
+    "descriptor": "Lnet/minecraftforge/fml/loading/FMLPaths;",
+    "static": true,
+    "declaring_class": "net/minecraftforge/fml/loading/FMLPaths",
+    "class_sha256": "c8fc0d33845a5aa3c285115f320cf23dc016fe0cdab183dd2cd3e8d8257675c5",
+    "source": {
+      "id": "fmlloader-1.20.1-47.4.0",
+      "sha256": "d17c218af5c62fa4928019614aa8a5075279f8545efe21325baf46b80f4a5ac9",
+      "archive_kind": "jar",
+      "entry_count": 158
+    }
+  },
+  "forge_runtime": {
+    "config": {
+      "profile": "forgeclient",
+      "initialized": true,
+      "production_property_present": false,
+      "production": true,
+      "dist": "CLIENT",
+      "synthetic_declared_state": true,
+      "class_initialization_executed": false,
+      "provenance": {
+        "net/minecraftforge/fml/loading/FMLEnvironment": {
+          "artifact_sha256": "d17c218af5c62fa4928019614aa8a5075279f8545efe21325baf46b80f4a5ac9",
+          "class_sha256": "2f2fb82b18a0c15be7200cef816f49a9e31ae9f89d6a2b1a1c3f84cf5bc03a75"
+        },
+        "net/minecraftforge/api/distmarker/Dist": {
+          "artifact_sha256": "39d9a3d9277c1402b8e7b97f917ce278241cf1796312aec85b87f19a376dd99a",
+          "class_sha256": "232942ceea0aefeb8ab48436f914847a1acc0222af1a39fabc2d6a57f1ac36e4"
+        },
+        "net/minecraftforge/fml/loading/targets/CommonClientLaunchHandler": {
+          "artifact_sha256": "d17c218af5c62fa4928019614aa8a5075279f8545efe21325baf46b80f4a5ac9",
+          "class_sha256": "5c0f65787747a5080936560a333a5ad689b3b8fa9e4b09c1bc5e63ef3c85a2b8"
+        },
+        "net/minecraftforge/fml/loading/targets/CommonServerLaunchHandler": {
+          "artifact_sha256": "d17c218af5c62fa4928019614aa8a5075279f8545efe21325baf46b80f4a5ac9",
+          "class_sha256": "d1eae8da34de37ad8ca7a87e489a8fbed510f72bcd1f2acb0b4366895da06522"
+        }
+      }
+    },
+    "refs": {
+      "138538465099776": {
+        "type": "net/minecraftforge/api/distmarker/Dist",
+        "constant": "CLIENT",
+        "active": false
+      },
+      "138538465099792": {
+        "type": "net/minecraftforge/api/distmarker/Dist",
+        "constant": "DEDICATED_SERVER",
+        "active": false
+      }
+    },
+    "calls": [
+      {
+        "index": 146,
+        "class": 133040906973440,
+        "field": 137438953472192,
+        "result": 1
+      },
+      {
+        "index": 145,
+        "class": 133040906973440,
+        "field": 137438953472176,
+        "result": 138538465099776
+      },
+      {
+        "index": 145,
+        "class": 133040906973952,
+        "field": 137438953472208,
+        "result": 138538465099792
+      },
+      {
+        "index": 24,
+        "left": 138538465099776,
+        "right": 138538465099792,
+        "result": 0
+      },
+      {
+        "index": 23,
+        "ref": 138538465099792
+      },
+      {
+        "index": 23,
+        "ref": 138538465099776
+      }
+    ]
+  },
+  "workers": {
+    "2": {
+      "start": 3132592,
+      "arg": 70643639402880,
+      "state": "pending",
+      "detached": true,
+      "executed": false
+    },
+    "3": {
+      "start": 3132592,
+      "arg": 70643638879360,
+      "state": "pending",
+      "detached": true,
+      "executed": false
+    }
+  },
+  "pending_exception": null,
+  "tests": {
+    "count": 101,
+    "result": "PASS",
+    "modules": [
+      "test_native_forge_runtime_fixture_ysm_265",
+      "test_native_guarded_checkpoint_ysm_265",
+      "test_native_jni_fixture_ysm_265",
+      "test_native_jni_metadata_bridge_ysm_265",
+      "test_native_batched_cpu_ysm_265"
+    ]
+  },
+  "actual_class_initialization_executed": false,
+  "JNI_OnLoad_completed": false,
+  "RegisterNatives_success": false
+}
