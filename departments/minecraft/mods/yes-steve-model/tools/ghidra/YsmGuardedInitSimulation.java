@@ -38,6 +38,9 @@ public class YsmGuardedInitSimulation extends GhidraScript {
  static class Halt extends RuntimeException { Halt(String s){super(s);} }
  class Guard implements PcodeEmulationCallbacks<byte[]> {
   final AddressSet code; final PrintWriter out; final int limit; final long opLimit;
+  static final long FILE_HANDLE=0x720000000000L;
+  boolean virtualProcFixture=false,fileOpen=false;byte[] procFixture=new byte[0];int procPosition=0;long fgetsRetPc=0x13d84a0L,fclosePc=0x13d84a1L,fgetsCalls=0,fcloseCalls=0;
+  boolean virtualProcUnavailable=false;long fopenRetPc=0x13d8499L,fopenCalls=0;
   boolean normalizeXchg32=true;long zeroExtensionCorrections=0;
   boolean virtualHeap=false;long heapUsed=0,mallocRetPc=0x13d8472L,mallocCalls=0,heapWrites=0;final List<long[]> allocations=new ArrayList<>();final Set<Long> oracleSeen=new HashSet<>();
   boolean virtualClock=false;long clockSeed=0,clockStride=0,clockReads=0;
@@ -104,6 +107,30 @@ public class YsmGuardedInitSimulation extends GhidraScript {
    long returnTo=knownStackWord(t,sp+8);targetGuard(toAddr(returnTo),"virtual_malloc_return");
    long pointer=allocate(reg(t,"RDI"));reg(t,"RAX",pointer);reg(t,"RSP",sp+16);t.overrideCounter(toAddr(returnTo));completed++;throw new ModeledStep();
   }
+  String knownAscii(PcodeThread<byte[]> t,long a){
+   StringBuilder value=new StringBuilder();for(int k=0;k<256;k++){checkTime();byte[] b=peek(t,a+k);if(b==null)halt("UNKNOWN_STRING_ARGUMENT","virtual_file",a+k,1);int c=b[0]&255;if(c==0)return value.toString();if(c>127)halt("NON_ASCII_STRING_ARGUMENT","virtual_file",a+k,1);value.append((char)c);}halt("STRING_ARGUMENT_LIMIT","virtual_file",a,256);return null;
+  }
+  void modelUnavailableProc(PcodeThread<byte[]> t){
+   checkTime();if(ops>=opLimit)halt("PCODE_BUDGET","before_virtual_fopen",pc,0);long sp=reg(t,"RSP");if(knownStackWord(t,sp)!=0)halt("UNEXPECTED_FOPEN_SLOT_VALUE","frame",sp,8);long returnTo=knownStackWord(t,sp+8);targetGuard(toAddr(returnTo),"virtual_fopen_return");
+   String path=knownAscii(t,reg(t,"RDI")),mode=knownAscii(t,reg(t,"RSI"));
+   if(!path.equals("/proc/self/status")||!mode.equals("r"))halt("UNMODELED_FILE_REQUEST","virtual_fopen",pc,0);
+   if(virtualProcFixture&&fileOpen)halt("VIRTUAL_FILE_ALREADY_OPEN","virtual_fopen",pc,0);
+   long result=virtualProcFixture?FILE_HANDLE:0;if(virtualProcFixture){fileOpen=true;procPosition=0;}
+   fopenCalls++;out.println("VIRTUAL_FOPEN\tpath=/proc/self/status\tmode=r\tresult="+Long.toHexString(result)+"\tscenario="+(virtualProcFixture?"authored_fixture":"synthetic_unavailable")+"\thost_file_access=false");
+   reg(t,"RAX",result);reg(t,"RSP",sp+16);t.overrideCounter(toAddr(returnTo));completed++;throw new ModeledStep();
+  }
+  long importReturn(PcodeThread<byte[]> t,boolean pushRet){long sp=reg(t,"RSP");if(pushRet&&knownStackWord(t,sp)!=0)halt("UNEXPECTED_IMPORT_SLOT_VALUE","frame",sp,8);long a=knownStackWord(t,sp+(pushRet?8:0));targetGuard(toAddr(a),"virtual_file_return");return a;}
+  byte[] fixtureLine(int n){if(n<2||n>4096)halt("UNMODELED_FGETS_SIZE","virtual_fgets",n,0);if(procPosition>=procFixture.length)return null;int end=procPosition;while(end<procFixture.length&&end-procPosition<n-1){if(procFixture[end++]==10)break;}byte[] line=Arrays.copyOfRange(procFixture,procPosition,end+1);line[line.length-1]=0;procPosition=end;return line;}
+  void modelFgets(PcodeThread<byte[]> t){
+   checkTime();if(ops>=opLimit)halt("PCODE_BUDGET","before_virtual_fgets",pc,0);long ret=importReturn(t,true),sp=reg(t,"RSP"),buf=reg(t,"RDI");
+   if(!fileOpen||reg(t,"RDX")!=FILE_HANDLE)halt("UNKNOWN_FILE_HANDLE","virtual_fgets",pc,0);
+   int oldPosition=procPosition;byte[] line=fixtureLine((int)reg(t,"RSI"));
+   if(line!=null){try{writeGuard(toAddr(buf).getAddressSpace(),buf,line.length,"virtual_fgets");}catch(Halt e){procPosition=oldPosition;throw e;}t.getState().setVar(toAddr(buf),line.length,false,line);clearOpaque(toAddr(buf).getAddressSpace(),buf,line.length);heapWrite(buf,line.length,"virtual_fgets");}
+   fgetsCalls++;out.println("VIRTUAL_FGETS\tbuffer="+Long.toHexString(buf)+"\tbytes="+(line==null?0:line.length)+"\tposition="+procPosition+"\teof="+(line==null)+"\thost_file_access=false");reg(t,"RAX",line==null?0:buf);reg(t,"RSP",sp+16);t.overrideCounter(toAddr(ret));completed++;throw new ModeledStep();
+  }
+  void modelFclose(PcodeThread<byte[]> t){
+   checkTime();if(ops>=opLimit)halt("PCODE_BUDGET","before_virtual_fclose",pc,0);long ret=importReturn(t,false),sp=reg(t,"RSP");if(!fileOpen||reg(t,"RDI")!=FILE_HANDLE)halt("UNKNOWN_FILE_HANDLE","virtual_fclose",pc,0);fileOpen=false;fcloseCalls++;out.println("VIRTUAL_FCLOSE\thost_file_access=false");reg(t,"RAX",0);reg(t,"RSP",sp+8);t.overrideCounter(toAddr(ret));completed++;throw new ModeledStep();
+  }
   void checkTime(){if(System.nanoTime()>deadline)halt("TIME_BUDGET","clock",pc,0);}
   void writeGuard(AddressSpace space,long addr,int n,String route){if(active&&space.isMemorySpace()&&!privateRange(addr,n))halt(virtualHeap?"OUTSIDE_PRIVATE_WRITABLE_REGIONS":"NON_STACK_WRITE",route,addr,n);}
   void targetGuard(Address target,String route){if(target.getOffset()<0x1000||!code.contains(target))halt("EXTERNAL_OR_NULL_TARGET",route,target.getOffset(),0);}
@@ -116,6 +143,9 @@ public class YsmGuardedInitSimulation extends GhidraScript {
    if(i.toString().contains("FS:")||i.toString().contains("GS:"))halt("SEGMENTED_CONTEXT_UNSUPPORTED","instruction",pc,0);
    if(!code.contains(i.getMinAddress(),i.getMaxAddress()))halt("OUTSIDE_CODE_RANGE","instruction",pc,i.getLength());
    checkOracle(t);attempted++;try {out.println("INS\t"+Long.toHexString(pc)+"\t"+HexFormat.of().formatHex(i.getBytes())+"\t"+i.toString());} catch(MemoryAccessException e){halt("DECODE_BYTES_UNAVAILABLE","instruction",pc,i.getLength());}
+   if((virtualProcUnavailable||virtualProcFixture)&&pc==fopenRetPc){try{if(!Arrays.equals(i.getBytes(),hex("c3")))halt("FOPEN_STUB_MISMATCH","virtual_file",pc,i.getLength());modelUnavailableProc(t);}catch(MemoryAccessException e){halt("DECODE_BYTES_UNAVAILABLE","virtual_file",pc,i.getLength());}}
+   if(virtualProcFixture&&pc==fgetsRetPc){try{if(!Arrays.equals(i.getBytes(),hex("c3")))halt("FGETS_STUB_MISMATCH","virtual_file",pc,i.getLength());modelFgets(t);}catch(MemoryAccessException e){halt("DECODE_BYTES_UNAVAILABLE","virtual_file",pc,i.getLength());}}
+   if(virtualProcFixture&&pc==fclosePc){if(!m.startsWith("JMP")||i.getLength()!=6)halt("FCLOSE_STUB_MISMATCH","virtual_file",pc,i.getLength());modelFclose(t);}
    if(virtualHeap&&pc==mallocRetPc){try{if(!Arrays.equals(i.getBytes(),hex("c3")))halt("MALLOC_STUB_MISMATCH","virtual_malloc",pc,i.getLength());modelMalloc(t);}catch(MemoryAccessException e){halt("DECODE_BYTES_UNAVAILABLE","virtual_malloc",pc,i.getLength());}}
    if(opaqueCopy){try{if(Arrays.equals(i.getBytes(),hex("f3a4"))){if(!m.startsWith("MOVSB"))halt("COPY_DECODE_MISMATCH","opaque_copy",pc,0);modelCopy(t);}}catch(MemoryAccessException e){halt("DECODE_BYTES_UNAVAILABLE","opaque_copy",pc,i.getLength());}}
   }
@@ -171,11 +201,12 @@ public class YsmGuardedInitSimulation extends GhidraScript {
    guard.active=true;guard.deadline=System.nanoTime()+guard.timeBudgetNanos;
    try{while(true){monitor.checkCancelled();try{thread.stepInstruction();}catch(ModeledStep e){/* Exact copy semantics completed; no engine frame was entered. */}}}
    catch(Throwable e){if(guard.stop==null){guard.stop="UNEXPECTED_ENGINE_ERROR";guard.via=e.getClass().getName();guard.out.println("ENGINE_ERROR\t"+e);}}
-   finally{guard.active=false;for(String name:List.of("RAX","RBX","RCX","RDX","RSI","RDI","RBP","RSP","R8","R9","R10","R11","R12","R13","R14","R15","CF","ZF","SF","OF","PF","AF","DF")){Register r=currentProgram.getRegister(name);guard.out.println("STOP_REGISTER\t"+name+"\t"+thread.getState().inspectRegisterValue(r).getUnsignedValue().toString(16));}guard.out.println("COUNTS\tattempted="+guard.attempted+"\tcompleted="+guard.completed+"\tpcode="+guard.ops+"\tatomic_pairs="+guard.atomicPairs+"\tmodeled_copy_steps="+guard.modeledCopies+"\topaque_byte_copies="+guard.opaqueCopies+"\tvirtual_clock_reads="+guard.clockReads+"\tvirtual_malloc_calls="+guard.mallocCalls+"\theap_write_events="+guard.heapWrites+"\txchg32_zeroext_corrections="+guard.zeroExtensionCorrections);}
+   finally{guard.active=false;for(String name:List.of("RAX","RBX","RCX","RDX","RSI","RDI","RBP","RSP","R8","R9","R10","R11","R12","R13","R14","R15","CF","ZF","SF","OF","PF","AF","DF")){Register r=currentProgram.getRegister(name);guard.out.println("STOP_REGISTER\t"+name+"\t"+thread.getState().inspectRegisterValue(r).getUnsignedValue().toString(16));}guard.out.println("COUNTS\tattempted="+guard.attempted+"\tcompleted="+guard.completed+"\tpcode="+guard.ops+"\tatomic_pairs="+guard.atomicPairs+"\tmodeled_copy_steps="+guard.modeledCopies+"\topaque_byte_copies="+guard.opaqueCopies+"\tvirtual_clock_reads="+guard.clockReads+"\tvirtual_malloc_calls="+guard.mallocCalls+"\theap_write_events="+guard.heapWrites+"\txchg32_zeroext_corrections="+guard.zeroExtensionCorrections+"\tvirtual_fopen_calls="+guard.fopenCalls+"\tvirtual_fgets_calls="+guard.fgetsCalls+"\tvirtual_fclose_calls="+guard.fcloseCalls);}
   }
  }
  byte[] hex(String s){return HexFormat.of().parseHex(s);}
  int approvedInstructionLimit(String mode){
+  if(mode.equals("run-isolated-virtual-heap-init-500k")||mode.equals("run-isolated-no-proc-init-500k")||mode.equals("run-isolated-proc-fixture-init-500k"))return 500000;
   if(mode.equals("run-approved-ysm-init")||mode.equals("run-approved-opaque-copy-init"))return 10000;
   if(mode.equals("run-approved-opaque-copy-init-100k")||mode.equals("run-approved-virtual-tsc-init-100k")||mode.equals("run-approved-virtual-heap-init-100k"))return 100000;
   throw new IllegalArgumentException("Unknown bounded mode");
@@ -205,7 +236,7 @@ public class YsmGuardedInitSimulation extends GhidraScript {
   Trial atomicBad=toy(out,"nonstack_atomic_exchange",hex("48c7c300200000488703"),20,1000);atomicBad.run();require(atomicBad.guard.stop.equals("NON_STACK_WRITE"),"atomic write guard");require(Arrays.equals(atomicBad.emu.getSharedState().getVar(toAddr(0x2000),8,false,Reason.INSPECT),new byte[8]),"atomic nonstack applied");passed++;
   String stopBefore=a.guard.stop;byte[] known=a.inspectMemory(SP-8,8);require(known!=null&&HexFormat.of().formatHex(known).equals("8877665544332211"),"known inspection");passed++;
   require(a.inspectMemory(SP+32,1)==null&&a.guard.stop.equals(stopBefore),"unknown inspection preserves stop");passed++;
-  require(approvedInstructionLimit("run-approved-ysm-init")==10000&&approvedInstructionLimit("run-approved-opaque-copy-init")==10000&&approvedInstructionLimit("run-approved-opaque-copy-init-100k")==100000,"mode limits");boolean badMode=false;try{approvedInstructionLimit("unbounded");}catch(IllegalArgumentException badModeException){badMode=true;}require(badMode,"invalid mode accepted");passed++;
+  require(approvedInstructionLimit("run-approved-ysm-init")==10000&&approvedInstructionLimit("run-approved-opaque-copy-init")==10000&&approvedInstructionLimit("run-approved-opaque-copy-init-100k")==100000&&approvedInstructionLimit("run-isolated-virtual-heap-init-500k")==500000,"mode limits");boolean badMode=false;try{approvedInstructionLimit("unbounded");}catch(IllegalArgumentException badModeException){badMode=true;}require(badMode,"invalid mode accepted");passed++;
   out.println("SELF_TEST_PASS\t"+passed+"\tysm_target_simulated=false");println("GUARDED_SIMULATION_SELF_TEST_PASS "+passed);
  }
  void configureCopy(Trial t,long src,long dst,long count,int df){t.guard.opaqueCopy=true;t.guard.reg(t.thread,"RSI",src);t.guard.reg(t.thread,"RDI",dst);t.guard.reg(t.thread,"RCX",count);t.guard.reg(t.thread,"DF",df);t.guard.reg(t.thread,"RDX",dst);}
@@ -287,6 +318,33 @@ public class YsmGuardedInitSimulation extends GhidraScript {
   Trial regs=toy(out,"register_register_xchg32",hex("4587c8"),20,1000);regs.guard.reg(regs.thread,"R8",0xffffffffaabbccddL);regs.guard.reg(regs.thread,"R9",0x1122334455667788L);regs.run();require(regs.guard.reg(regs.thread,"R8")==0x55667788L&&regs.guard.reg(regs.thread,"R9")==0xaabbccddL&&regs.guard.zeroExtensionCorrections==0,"register exchange changed");passed++;
   out.println("XCHG32_NORMALIZATION_SELF_TEST_PASS\t"+passed+"\tysm_target_simulated=false");println("XCHG32_NORMALIZATION_SELF_TEST_PASS "+passed);
  }
+ Trial fileToy(PrintWriter out,String name,String path,String mode){
+  Trial t=toy(out,name,hex("c390"),20,1000);t.guard.virtualProcUnavailable=true;t.guard.fopenRetPc=TOY;
+  t.thread.getState().setVar(toAddr(SP),8,false,new byte[8]);t.thread.getState().setVar(toAddr(SP+8),8,false,t.thread.getArithmetic().fromConst(TOY+1,8));
+  byte[] p=(path+"\0").getBytes(java.nio.charset.StandardCharsets.US_ASCII),m=(mode+"\0").getBytes(java.nio.charset.StandardCharsets.US_ASCII);t.thread.getState().setVar(toAddr(SP+64),p.length,false,p);t.thread.getState().setVar(toAddr(SP+128),m.length,false,m);t.guard.reg(t.thread,"RDI",SP+64);t.guard.reg(t.thread,"RSI",SP+128);return t;
+ }
+ void fileTests(PrintWriter out){
+  int passed=0;Trial a=fileToy(out,"virtual_proc_failure","/proc/self/status","r");a.run();require(a.guard.stop.equals("EXTERNAL_OR_NULL_TARGET")&&a.guard.fopenCalls==1&&a.guard.reg(a.thread,"RAX")==0&&a.guard.reg(a.thread,"RSP")==SP+16,"failure scenario");passed++;
+  Trial b=fileToy(out,"virtual_unknown_file","/unknown","r");b.run();require(b.guard.stop.equals("UNMODELED_FILE_REQUEST")&&b.guard.fopenCalls==0,"unexpected file modeled");passed++;
+  Trial c=fileToy(out,"virtual_write_mode","/proc/self/status","w");c.run();require(c.guard.stop.equals("UNMODELED_FILE_REQUEST")&&c.guard.fopenCalls==0,"write mode modeled");passed++;
+  Trial d=fileToy(out,"virtual_unknown_path_bytes","/proc/self/status","r");d.guard.reg(d.thread,"RDI",SP+256);d.run();require(d.guard.stop.equals("UNKNOWN_STRING_ARGUMENT"),"unknown pathname guessed");passed++;
+  Trial e=fileToy(out,"virtual_file_external_return","/proc/self/status","r");e.thread.getState().setVar(toAddr(SP+8),8,false,e.thread.getArithmetic().fromConst(0xdeadbeefL,8));e.run();require(e.guard.stop.equals("EXTERNAL_OR_NULL_TARGET")&&e.guard.fopenCalls==0,"external return model");passed++;
+  out.println("VIRTUAL_FILE_SELF_TEST_PASS\t"+passed+"\tysm_target_simulated=false");println("VIRTUAL_FILE_SELF_TEST_PASS "+passed);
+ }
+ void fixtureTests(PrintWriter out){
+  int passed=0;byte[] fixture="Name:\tfixture\nTracerPid:\t0\n".getBytes(java.nio.charset.StandardCharsets.US_ASCII);
+  Trial opened=fileToy(out,"fixture_open","/proc/self/status","r");opened.guard.virtualProcFixture=true;opened.guard.procFixture=fixture;opened.run();require(opened.guard.fileOpen&&opened.guard.reg(opened.thread,"RAX")==Guard.FILE_HANDLE,"fixture open handle");passed++;
+  Trial line=fileToy(out,"fixture_line_read","/proc/self/status","r");line.guard.virtualProcFixture=true;line.guard.fopenRetPc=-1;line.guard.fgetsRetPc=TOY;line.guard.fileOpen=true;line.guard.procFixture=fixture;line.guard.reg(line.thread,"RDI",SP+256);line.guard.reg(line.thread,"RSI",128);line.guard.reg(line.thread,"RDX",Guard.FILE_HANDLE);line.run();require(line.guard.stop.equals("EXTERNAL_OR_NULL_TARGET")&&new String(line.inspectMemory(SP+256,15),java.nio.charset.StandardCharsets.US_ASCII).equals("Name:\tfixture\n\0"),"fgets newline/terminator");passed++;
+  Trial fragment=fileToy(out,"fixture_fragments","/proc/self/status","r");fragment.guard.procFixture=fixture;require(Arrays.equals(fragment.guard.fixtureLine(5),new byte[]{'N','a','m','e',0})&&fragment.guard.procPosition==4,"fgets truncation");passed++;
+  Trial eof=fileToy(out,"fixture_eof","/proc/self/status","r");eof.guard.virtualProcFixture=true;eof.guard.fopenRetPc=-1;eof.guard.fgetsRetPc=TOY;eof.guard.fileOpen=true;eof.guard.procFixture=fixture;eof.guard.procPosition=fixture.length;eof.guard.reg(eof.thread,"RDI",SP+256);eof.guard.reg(eof.thread,"RSI",128);eof.guard.reg(eof.thread,"RDX",Guard.FILE_HANDLE);put(eof,SP+256,0x42);eof.run();require(eof.guard.reg(eof.thread,"RAX")==0&&eof.inspectMemory(SP+256,1)[0]==0x42,"EOF wrote buffer");passed++;
+  Trial bad=fileToy(out,"fixture_invalid_handle","/proc/self/status","r");bad.guard.virtualProcFixture=true;bad.guard.fopenRetPc=-1;bad.guard.fgetsRetPc=TOY;bad.guard.fileOpen=true;bad.guard.reg(bad.thread,"RDX",0xdead);bad.run();require(bad.guard.stop.equals("UNKNOWN_FILE_HANDLE"),"unknown file handle");passed++;
+  Trial outside=fileToy(out,"fixture_image_write","/proc/self/status","r");outside.guard.virtualProcFixture=true;outside.guard.fopenRetPc=-1;outside.guard.fgetsRetPc=TOY;outside.guard.fileOpen=true;outside.guard.procFixture=fixture;outside.guard.reg(outside.thread,"RDI",0x2000);outside.guard.reg(outside.thread,"RSI",128);outside.guard.reg(outside.thread,"RDX",Guard.FILE_HANDLE);outside.run();require(outside.guard.stop.equals("NON_STACK_WRITE")&&outside.guard.procPosition==0&&Arrays.equals(outside.inspectMemory(0x2000,8),new byte[8]),"file buffer escaped guard");passed++;
+  Trial closed=toy(out,"fixture_close",hex("ff250000000090"),20,1000);closed.guard.virtualProcFixture=true;closed.guard.fileOpen=true;closed.guard.fclosePc=TOY;closed.guard.reg(closed.thread,"RDI",Guard.FILE_HANDLE);closed.thread.getState().setVar(toAddr(SP),8,false,closed.thread.getArithmetic().fromConst(TOY+6,8));closed.run();require(closed.guard.stop.equals("EXTERNAL_OR_NULL_TARGET")&&!closed.guard.fileOpen&&closed.guard.reg(closed.thread,"RSP")==SP+8&&closed.guard.fcloseCalls==1,"close transition");passed++;
+  out.println("PROC_FIXTURE_SELF_TEST_PASS\t"+passed+"\tysm_target_simulated=false");println("PROC_FIXTURE_SELF_TEST_PASS "+passed);
+ }
+ void shiftFlagProbe(PrintWriter out){
+  Trial t=toy(out,"shr_masked_one_probe",hex("41c0eae1"),20,1000);t.guard.reg(t.thread,"R10",0xde);t.guard.reg(t.thread,"OF",0);t.run();out.println("SHIFT_FLAG_PROBE\tR10="+Long.toHexString(t.guard.reg(t.thread,"R10"))+"\tOF="+t.guard.reg(t.thread,"OF")+"\texpected_OF=1\tysm_target_simulated=false");
+ }
  void verifyMemory(String manifest) throws Exception {
   java.util.List<String> rows=Files.readAllLines(Path.of(manifest));require(rows.size()==7,"Expected seven load segments");
   for(String line:rows){String[] f=line.split("\t");long a=Long.parseUnsignedLong(f[0],16);int n=Integer.parseInt(f[1]);require(n>0&&n<26000000,"Invalid segment size");byte[] bytes=new byte[n];require(currentProgram.getMemory().getBytes(toAddr(a),bytes)==n,"Short memory read");require(HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(bytes)).equals(f[2]),"Memory hash mismatch");}
@@ -295,29 +353,34 @@ public class YsmGuardedInitSimulation extends GhidraScript {
   String[] args=getScriptArgs();require(args.length>=2,"mode output [memory-manifest image] required");
   require(currentProgram.getLanguageID().toString().equals("x86:LE:64:default"),"Wrong language");
   try(PrintWriter out=new PrintWriter(Files.newBufferedWriter(Path.of(args[1])))){
+   if(args[0].equals("probe-shr-flags")){shiftFlagProbe(out);return;}
    if(args[0].equals("probe-xchg32")){zeroExtensionProbe(out);return;}
    if(args[0].equals("self-test")){selfTest(out);return;}
    if(args[0].equals("self-test-opaque-copy")){selfTest(out);opaqueTests(out);return;}
    if(args[0].equals("self-test-virtual-clock")){selfTest(out);opaqueTests(out);clockTests(out);return;}
    if(args[0].equals("self-test-virtual-heap")){selfTest(out);opaqueTests(out);clockTests(out);heapTests(out);zeroExtensionTests(out);return;}
-   boolean heapMode=args[0].equals("run-approved-virtual-heap-init-100k");boolean clockMode=heapMode||args[0].equals("run-approved-virtual-tsc-init-100k");
-   require((clockMode&&args.length==6)||(!clockMode&&args.length==4),"Explicit bounded mode arguments required");
+   if(args[0].equals("self-test-virtual-file")){selfTest(out);opaqueTests(out);clockTests(out);heapTests(out);zeroExtensionTests(out);fileTests(out);fixtureTests(out);return;}
+   boolean fixtureMode=args[0].equals("run-isolated-proc-fixture-init-500k");boolean fileMode=fixtureMode||args[0].equals("run-isolated-no-proc-init-500k");boolean heapMode=fileMode||args[0].equals("run-approved-virtual-heap-init-100k")||args[0].equals("run-isolated-virtual-heap-init-500k");boolean clockMode=heapMode||args[0].equals("run-approved-virtual-tsc-init-100k");
+   require((clockMode&&args.length==(fixtureMode?7:6))||(!clockMode&&args.length==4),"Explicit bounded mode arguments required");
    approvedInstructionLimit(args[0]);
    String fileHash=HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(Files.readAllBytes(Path.of(args[3]))));require(fileHash.equals(IMAGE_SHA),"Wrong native image");
    require(currentProgram.getImageBase().getOffset()==0,"Expected analysis base zero");
    verifyMemory(args[2]);
    AddressSet code=new AddressSet();for(MemoryBlock b:currentProgram.getMemory().getBlocks())if(b.isInitialized()&&b.isExecute())code.addRange(b.getStart(),b.getEnd());
-   int instructionLimit=approvedInstructionLimit(args[0]);Trial t=new Trial(code,out,instructionLimit,1000000);t.guard.opaqueCopy=!args[0].equals("run-approved-ysm-init");
+   int instructionLimit=approvedInstructionLimit(args[0]);long opBudget=instructionLimit>100000?5000000:1000000;Trial t=new Trial(code,out,instructionLimit,opBudget);t.guard.opaqueCopy=!args[0].equals("run-approved-ysm-init");
    if(heapMode){
     require(currentProgram.getMemory().getBlock(toAddr(HEAP_LOW))==null&&currentProgram.getMemory().getBlock(toAddr(HEAP_LOW+HEAP_SIZE-1))==null,"Virtual heap overlaps image");
     byte[] stub=new byte[7];currentProgram.getMemory().getBytes(toAddr(0x13d846c),stub);require(Arrays.equals(stub,hex("ff35b6534700c3")),"Wrong malloc thunk");
     byte[] slot=new byte[8];currentProgram.getMemory().getBytes(toAddr(0x184d828),slot);require(Arrays.equals(slot,new byte[8]),"Unexpected relocated malloc slot");
     t.guard.virtualHeap=true;out.println("HEAP_MODEL\tbase="+Long.toHexString(HEAP_LOW)+"\tcapacity="+HEAP_SIZE+"\tuninitialized=true\tactual_external_call=false");
    }
+   if(fileMode){byte[] stub=new byte[7];currentProgram.getMemory().getBytes(toAddr(0x13d8493),stub);require(Arrays.equals(stub,hex("ff35bf534700c3")),"Wrong fopen thunk");byte[] slot=new byte[8];currentProgram.getMemory().getBytes(toAddr(0x184d858),slot);require(Arrays.equals(slot,new byte[8]),"Unexpected fopen slot");t.guard.virtualProcUnavailable=!fixtureMode;t.guard.virtualProcFixture=fixtureMode;
+    if(fixtureMode){int pid=Integer.parseInt(args[6]);require(pid>=0,"Fixture PID must be nonnegative");t.guard.procFixture=("Name:\tvirtual-ysm\nTracerPid:\t"+pid+"\n").getBytes(java.nio.charset.StandardCharsets.US_ASCII);byte[] more=new byte[13];currentProgram.getMemory().getBytes(toAddr(0x13d849a),more);require(Arrays.equals(more,hex("ff35c0534700c3ff25c1534700")),"Wrong file read/close thunks");out.println("FILE_FIXTURE\ttracer_pid="+pid+"\tbytes="+t.guard.procFixture.length+"\tsha256="+HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(t.guard.procFixture))+"\tauthored_not_host_data=true");}
+    out.println("FILE_MODEL\tsynthetic_proc_unavailable="+!fixtureMode+"\thost_file_access=false\terrno_unmodeled=true");}
    if(clockMode){t.guard.virtualClock=true;t.guard.clockSeed=Long.parseUnsignedLong(args[4],16);t.guard.clockStride=Long.parseUnsignedLong(args[5],16);out.println("CLOCK_SCENARIO\tseed="+args[4]+"\tstride="+args[5]+"\thost_clock_used=false");}
    EmulatorUtilities.loadProgram(t.emu,currentProgram);t.initialize(0x152eb19);
    out.println("MODEL\topaque_private_copy="+t.guard.opaqueCopy+"\tvirtual_heap="+t.guard.virtualHeap+"\toracles=first_visit_initial_entry");
-   out.println("CONFIG\tDT_INIT=152eb19\timagebase=0\tregister_inputs=synthetic_zero_except_rsp_pc_if\tstack_uninitialized_except_return\tmax_instructions="+instructionLimit+"\tmax_pcode=1000000\tmax_seconds=60\thost_native_execution=false");
+   out.println("CONFIG\tDT_INIT=152eb19\timagebase=0\tregister_inputs=synthetic_zero_except_rsp_pc_if\tstack_uninitialized_except_return\tmax_instructions="+instructionLimit+"\tmax_pcode="+opBudget+"\tmax_seconds=60\thost_native_execution=false");
    t.run();require(!t.guard.stop.equals("UNEXPECTED_ENGINE_ERROR"),"Unexpected engine error; do not claim a valid target result");
    verifyMemory(args[2]);require(HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(Files.readAllBytes(Path.of(args[3])))).equals(fileHash),"Original file changed");
    if(t.guard.pc==0x143beaeL&&t.guard.stop.equals("UNINITIALIZED_READ")){
@@ -327,6 +390,13 @@ public class YsmGuardedInitSimulation extends GhidraScript {
    }
    long stoppedSp=t.guard.reg(t.thread,"RSP");
    if(t.guard.stack(stoppedSp,64))for(int k=0;k<64;k++){byte[] v=t.inspectMemory(stoppedSp+k,1);out.println("STOP_STACK_BYTE\t"+Long.toHexString(stoppedSp+k)+"\t"+(v==null?"UNKNOWN":HexFormat.of().formatHex(v)));}
+   if(t.guard.stop.equals("EXTERNAL_OR_NULL_TARGET"))for(String arg:List.of("RDI","RSI")){
+    long ptr=t.guard.reg(t.thread,arg);for(int k=0;k<256;k++){byte[] v=t.inspectMemory(ptr+k,1);out.println("STOP_ARG_BYTE\t"+arg+"\t"+Long.toUnsignedString(ptr+k,16)+"\t"+(v==null?"UNKNOWN":HexFormat.of().formatHex(v)));if(v==null||v[0]==0)break;}
+   }
+   int snapshotObjects=0;
+   for(long[] allocation:t.guard.allocations){if(snapshotObjects++>=16)break;int n=(int)Math.min(allocation[1],512);out.println("HEAP_SNAPSHOT\t"+Long.toHexString(allocation[0])+"\trequested="+allocation[1]+"\tobserved="+n);
+    for(int k=0;k<n;k++){byte[] v=t.inspectMemory(allocation[0]+k,1);out.println("HEAP_BYTE\t"+Long.toHexString(allocation[0]+k)+"\t"+(v==null?"UNKNOWN":HexFormat.of().formatHex(v)));}
+   }
    out.println("PRESERVATION\tfile_and_seven_program_segments_unchanged=true");
    out.println("BOUNDED_RESULT\t"+t.guard.stop+"\toriginal_image_sha256="+fileHash+"\thost_native_execution=false\toriginal_image_write_applied=false\tvirtual_heap="+t.guard.virtualHeap);println("BOUNDED_DT_INIT_STOP "+t.guard.stop);
   }

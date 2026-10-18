@@ -1,0 +1,330 @@
+{
+  "format": "kneekura.ysm-model-diagnostics.v1",
+  "status": "GHIDRA_SHR_OF_DISCREPANCY_UNCORRECTED_PENDING_INDEPENDENT_BACKEND",
+  "profiles": {
+    "bounded-init-heap-500k-trial.tsv": {
+      "trace_sha256": "910dc0ff0369d405f502fbd92a19a951d5f6a394d2c6e04b00784464ebfa46bb",
+      "stop": [
+        "EXTERNAL_OR_NULL_TARGET",
+        "computed_transfer",
+        "pc=13d8499",
+        "address=0",
+        "size=0"
+      ],
+      "counts": {
+        "attempted": 172884,
+        "completed": 172883,
+        "pcode": 1674417,
+        "atomic_pairs": 472,
+        "modeled_copy_steps": 4277,
+        "opaque_byte_copies": 776,
+        "virtual_clock_reads": 2,
+        "virtual_malloc_calls": 1,
+        "heap_write_events": 7,
+        "xchg32_zeroext_corrections": 28
+      },
+      "unique_instruction_addresses": 20045,
+      "oracles_matched": 12,
+      "clock_reads": [
+        [
+          "0",
+          "1122334455667788"
+        ],
+        [
+          "1",
+          "1122334455667b70"
+        ]
+      ],
+      "registers": {
+        "RAX": "0x3",
+        "RBX": "0x6703d509",
+        "RCX": "0x60",
+        "RDX": "0x0",
+        "RSI": "0x700000007fa6",
+        "RDI": "0x700000007f90",
+        "RBP": "0x148d57f",
+        "RSP": "0x700000007dc8",
+        "R8": "0x0",
+        "R9": "0x0",
+        "R10": "0x0",
+        "R11": "0x0",
+        "R12": "0x0",
+        "R13": "0x0",
+        "R14": "0x0",
+        "R15": "0x710000000000",
+        "CF": "0x0",
+        "ZF": "0x0",
+        "SF": "0x0",
+        "OF": "0x0",
+        "PF": "0x0",
+        "AF": "0x0",
+        "DF": "0x0"
+      },
+      "preservation_confirmed": true
+    },
+    "bounded-init-no-proc-trial.tsv": {
+      "trace_sha256": "67fa8f04ff77e15a86a830e3d71ef4a82c73a0f1bc4d8d8712afd6ece0e0b36d",
+      "stop": [
+        "UNINITIALIZED_READ",
+        "state",
+        "pc=14fd705",
+        "address=9596c06b",
+        "size=4"
+      ],
+      "counts": {
+        "attempted": 175522,
+        "completed": 175521,
+        "pcode": 1698353,
+        "atomic_pairs": 493,
+        "modeled_copy_steps": 4277,
+        "opaque_byte_copies": 776,
+        "virtual_clock_reads": 2,
+        "virtual_malloc_calls": 1,
+        "heap_write_events": 7,
+        "xchg32_zeroext_corrections": 30,
+        "virtual_fopen_calls": 1
+      },
+      "unique_instruction_addresses": 21396,
+      "oracles_matched": 12,
+      "clock_reads": [
+        [
+          "0",
+          "1122334455667788"
+        ],
+        [
+          "1",
+          "1122334455667b70"
+        ]
+      ],
+      "registers": {
+        "RAX": "0xffffffff1cfc58c4",
+        "RBX": "0x95",
+        "RCX": "0x5116ebdcab76ba45",
+        "RDX": "0x95",
+        "RSI": "0x84000000",
+        "RDI": "0x1763000",
+        "RBP": "0x700000007dae",
+        "RSP": "0x700000007b00",
+        "R8": "0x43888395",
+        "R9": "0x25727205",
+        "R10": "0x9596c06b",
+        "R11": "0xffff0000",
+        "R12": "0x0",
+        "R13": "0x0",
+        "R14": "0x0",
+        "R15": "0x710000000000",
+        "CF": "0x1",
+        "ZF": "0x0",
+        "SF": "0x0",
+        "OF": "0x0",
+        "PF": "0x1",
+        "AF": "0x0",
+        "DF": "0x0"
+      },
+      "preservation_confirmed": true
+    },
+    "bounded-init-proc-fixture-0.tsv": {
+      "trace_sha256": "33c730fd6880fdc15958607c462365e2ed4e7e5d0694a2319f4054dabf72c452",
+      "stop": [
+        "UNINITIALIZED_READ",
+        "state",
+        "pc=14fd705",
+        "address=9596c06b",
+        "size=4"
+      ],
+      "counts": {
+        "attempted": 175522,
+        "completed": 175521,
+        "pcode": 1698353,
+        "atomic_pairs": 493,
+        "modeled_copy_steps": 4277,
+        "opaque_byte_copies": 776,
+        "virtual_clock_reads": 2,
+        "virtual_malloc_calls": 1,
+        "heap_write_events": 7,
+        "xchg32_zeroext_corrections": 30,
+        "virtual_fopen_calls": 1,
+        "virtual_fgets_calls": 0,
+        "virtual_fclose_calls": 0
+      },
+      "unique_instruction_addresses": 21396,
+      "oracles_matched": 12,
+      "clock_reads": [
+        [
+          "0",
+          "1122334455667788"
+        ],
+        [
+          "1",
+          "1122334455667b70"
+        ]
+      ],
+      "registers": {
+        "RAX": "0xffffffff1cfc58c4",
+        "RBX": "0x95",
+        "RCX": "0x5116ebdcab76ba45",
+        "RDX": "0x95",
+        "RSI": "0x84000000",
+        "RDI": "0x1763000",
+        "RBP": "0x700000007dae",
+        "RSP": "0x700000007b00",
+        "R8": "0x43888395",
+        "R9": "0x25727205",
+        "R10": "0x9596c06b",
+        "R11": "0xffff0000",
+        "R12": "0x0",
+        "R13": "0x0",
+        "R14": "0x0",
+        "R15": "0x710000000000",
+        "CF": "0x1",
+        "ZF": "0x0",
+        "SF": "0x0",
+        "OF": "0x0",
+        "PF": "0x1",
+        "AF": "0x0",
+        "DF": "0x0"
+      },
+      "preservation_confirmed": true
+    },
+    "bounded-init-proc-fixture-1234.tsv": {
+      "trace_sha256": "96c23bea787003b1e93fe6c09291ee1269184d497b26ad2b8e4fda2b833f425f",
+      "stop": [
+        "UNINITIALIZED_READ",
+        "state",
+        "pc=14fd705",
+        "address=9596c06b",
+        "size=4"
+      ],
+      "counts": {
+        "attempted": 175522,
+        "completed": 175521,
+        "pcode": 1698353,
+        "atomic_pairs": 493,
+        "modeled_copy_steps": 4277,
+        "opaque_byte_copies": 776,
+        "virtual_clock_reads": 2,
+        "virtual_malloc_calls": 1,
+        "heap_write_events": 7,
+        "xchg32_zeroext_corrections": 30,
+        "virtual_fopen_calls": 1,
+        "virtual_fgets_calls": 0,
+        "virtual_fclose_calls": 0
+      },
+      "unique_instruction_addresses": 21396,
+      "oracles_matched": 12,
+      "clock_reads": [
+        [
+          "0",
+          "1122334455667788"
+        ],
+        [
+          "1",
+          "1122334455667b70"
+        ]
+      ],
+      "registers": {
+        "RAX": "0xffffffff1cfc58c4",
+        "RBX": "0x95",
+        "RCX": "0x5116ebdcab76ba45",
+        "RDX": "0x95",
+        "RSI": "0x84000000",
+        "RDI": "0x1763000",
+        "RBP": "0x700000007dae",
+        "RSP": "0x700000007b00",
+        "R8": "0x43888395",
+        "R9": "0x25727205",
+        "R10": "0x9596c06b",
+        "R11": "0xffff0000",
+        "R12": "0x0",
+        "R13": "0x0",
+        "R14": "0x0",
+        "R15": "0x710000000000",
+        "CF": "0x1",
+        "ZF": "0x0",
+        "SF": "0x0",
+        "OF": "0x0",
+        "PF": "0x1",
+        "AF": "0x0",
+        "DF": "0x0"
+      },
+      "preservation_confirmed": true
+    }
+  },
+  "blocked_file_arguments": {
+    "RDI": "/proc/self/status",
+    "RSI": "r"
+  },
+  "file_imports": [
+    {
+      "slot": "0x184d858",
+      "raw_value": "0x0",
+      "relocation_type": 6,
+      "symbol_index": 283,
+      "symbol_name": "fopen",
+      "addend": 0,
+      "actual_runtime_binding_verified": false
+    },
+    {
+      "slot": "0x184d860",
+      "raw_value": "0x0",
+      "relocation_type": 6,
+      "symbol_index": 284,
+      "symbol_name": "fgets",
+      "addend": 0,
+      "actual_runtime_binding_verified": false
+    },
+    {
+      "slot": "0x184d868",
+      "raw_value": "0x0",
+      "relocation_type": 6,
+      "symbol_index": 285,
+      "symbol_name": "fclose",
+      "addend": 0,
+      "actual_runtime_binding_verified": false
+    }
+  ],
+  "proc_fixtures_consumed_by_target": false,
+  "fgets_calls_in_all_file_scenarios": 0,
+  "fclose_calls_in_all_file_scenarios": 0,
+  "host_file_access_for_target": false,
+  "shr_toy": {
+    "input_byte": "0xde",
+    "count_immediate": "0xe1",
+    "effective_count": 1,
+    "result": "0x6f",
+    "ghidra_of": 0,
+    "independent_host_cpu_of": 1,
+    "host_toy_cases_passed": 4096,
+    "ysm_target_host_execution": false
+  },
+  "ghidra_fixture_test_counts": [
+    17,
+    24,
+    8,
+    13,
+    40,
+    5,
+    7
+  ],
+  "unicorn_package": {
+    "version": "2.1.4",
+    "source": "https://pypi.org/project/unicorn/2.1.4/",
+    "wheel_sha256": "9d6e6dea140560de4ebd8446661f7ef84a357d428c14a3ef09dacd306ec8c239",
+    "installed_in_isolated_external_venv": true
+  },
+  "unicorn_toy_preflight": {
+    "xchg32_zero_extension": true,
+    "shr_of_count_one": true,
+    "code_hook_stop_prevents_instruction": true,
+    "read_hook_stop_prevents_register_load": true,
+    "normal_write_hook_stop_prevents_write": false,
+    "target_simulated_with_unicorn": false,
+    "required_next_guard_design": "Protect image pages read/execute only and use transactional private-state writes; do not assume emu_stop in a normal write hook prevents a store."
+  },
+  "hashes": {
+    "YsmGuardedInitSimulation.java": "84687257139a24f4d2145cd41f8265d278978c3ae2ab502c03ed3423cbc8139a",
+    "shr_overflow_flag_toy.c": "2d997db84dfc7fd85559ee426342dfd0e1d1ed77ac2efa8c34bd9fa8996c644c",
+    "unicorn_guard_preflight_ysm_265.py": "06ae69701fc0159fb9c30fff58722dc5b924f6e9a9df643a5ab1e00bafdb8cd1",
+    "shr-flags-probe.tsv": "c0bee9db8303b877be30398a78f732c2980326cad15519da49d539f6f2cdd03b"
+  }
+}

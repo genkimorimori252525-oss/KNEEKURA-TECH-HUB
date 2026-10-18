@@ -1,6 +1,6 @@
 # Current native-analysis handoff — October 18
 
-Read this before resuming native work. Latest entry: [virtual heap and model correction](NATIVE-VIRTUAL-HEAP-RESULT-2026-10-18.md). Branch: `jolly/ysm-analysis-20261016`. Last verified analysis publication before this handoff: `02fc35cdbc7a0fef0206dc9e2b08c835e1983e79`. The project is unfinished.
+Read this before resuming native work. Latest entry: [independent backend preflight and unresolved SHR flag discrepancy](NATIVE-SECOND-EMULATOR-PREFLIGHT-2026-10-18.md). Branch: `jolly/ysm-analysis-20261016`. Last verified analysis publication before this handoff: `02fc35cdbc7a0fef0206dc9e2b08c835e1983e79`. The project is unfinished.
 
 ## Scope and confidence
 
@@ -73,3 +73,7 @@ The owner approved the next virtual-heap/malloc stage: maximum1MiB, allow privat
 ## Latest verified heap/model checkpoint
 
 NATIVE-VIRTUAL-HEAP-RESULT-2026-10-18.md supersedes the older not-yet-run heap status. The isolated malloc model allocates424 bytes and records seven8-byte object writes. A genuine pinned-Ghidra memory-XCHG32 zero-extension discrepancy was reproduced with a toy and independently with36 host toy cases (no target code). A focused post-instruction normalization fixes only that ISA effect.102harness tests pass. Replayed clock paths remain identical; corrected heap run reaches100000cap before0x1815afd, with28normalizations and no original-image write. The old63,810-step out-of-region write is an emulator artifact, not native behavior. Oracles are first-visit-scoped (12checks), avoiding invalid absolute-RSP assumptions across reused prologues. Working mode remains explicit synthetic clock+virtual heap, not actual runtime.
+
+## Current execution caution
+
+A second Ghidra discrepancy (SHR masked-count1 overflow flag) is confirmed by a toy and4096 independent host-toy cases, but not corrected in the retained Ghidra script. File failure and two authored proc-status fixtures all stop before any fgets/fclose at the same bad read. Do not infer TracerPid behavior or actual native failure from them. Unicorn2.1.4 is installed in an isolated external venv for an independent backend; only own-byte preflight has run. Normal Unicorn write-hook emu_stop still permits the write, so target work requires protected image pages plus tested transactional private-state guards first. Next implement/validate that bounded guard; no target Unicorn execution yet.
