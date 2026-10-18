@@ -55,8 +55,8 @@ def main():
     with a.out.open('w') as out:
         cpu_type=SyncGuardedCPU
         if a.deferred_threads:
-            from native_pthread_once_fixture_ysm_265 import OnceThreadCPU
-            cpu_type=OnceThreadCPU
+            from native_pthread_mutex_fixture_ysm_265 import MutexThreadCPU
+            cpu_type=MutexThreadCPU
         if a.batch_size!=1:
             from native_batched_cpu_ysm_265 import BatchedMixin
             cpu_type=type('BatchedInitializerCPU',(BatchedMixin,cpu_type),{})

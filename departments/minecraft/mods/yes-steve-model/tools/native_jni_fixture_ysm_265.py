@@ -6,7 +6,7 @@ objects; artifact-derived function addresses are intercepted before execution.
 """
 import copy,hashlib,struct,time
 from unicorn import UC_PROT_READ,UC_PROT_EXEC
-from native_pthread_once_fixture_ysm_265 import OnceThreadCPU
+from native_pthread_mutex_fixture_ysm_265 import MutexThreadCPU
 from native_unicorn_guarded_ysm_265 import ModelHalt
 TRAPS=0x780000000000;ENV_TABLE=TRAPS+0x1000;VM_TABLE=TRAPS+0x2000;VERSION=0x000a0000
 # Official JDK21 jni.h SHA256 99e64ebbe749e6df284f852f11b3c73f6ea97baf15120428f40f887fe0616e61
@@ -18,7 +18,7 @@ CALLEE=('RBX','RBP','R12','R13','R14','R15')
 VM_NAMES=['reserved0','reserved1','reserved2','DestroyJavaVM','AttachCurrentThread','DetachCurrentThread','GetEnv','AttachCurrentThreadAsDaemon']
 
 def table(names,base):return b''.join(struct.pack('<Q',0 if n.startswith('reserved') else TRAPS+16*(base+i)) for i,n in enumerate(names))
-class JniGuardedCPU(OnceThreadCPU):
+class JniGuardedCPU(MutexThreadCPU):
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs);self.jni_state=None;self.jni_expected={};self.jni_gateways={};self.jvm_artifact_bytes=None;self.jvm_view=None;self.jvm_interfaces_ready=False;self.java_metadata=None
     def jni_hit(self,a,n):return any(lo<a+n and a<lo+len(v) for lo,v in getattr(self,'jni_expected',{}).items())
@@ -50,7 +50,7 @@ class JniGuardedCPU(OnceThreadCPU):
                 if bytes(self.uc.mem_read(slot,8))!=bytes(8):raise ValueError('Unexpected unbound JVM import')
                 self.external_data_slots.append([slot,name])
         self.configure_jni_pages();vm=self.reserve_fixture(8);env=self.reserve_fixture(8);self.write_private(vm,struct.pack('<Q',VM_TABLE));self.write_private(env,struct.pack('<Q',ENV_TABLE));self.private_readonly.extend([(vm,vm+8),(env,env+8)])
-        self.jni_state={'table_slots':len(ENV_NAMES),'version':VERSION,'vm':vm,'env':env,'calls':[],'getenv_calls':0,'getversion_calls':0,'cpuid_basic_calls':0,'phdr_info':0,'phdr_callbacks':0,'pending_callbacks':[],'classes':{},'jvm_artifact':None,'pending_exception':None,'deleted_local_refs':[],'jvm_loader_calls':0,'jvm_open_refs':0,'jvm_phdr_info':0,'jvm_name':0,'jvm_interfaces':None,'java_sources':None,'java_source_extensions':[],'class_proofs':{},'global_refs':[],'methods':{},'fields':{}};self.emit('JNI_SCENARIO','jni_version=0xa0000','virtual_thread=attached','synthetic_vm_and_env=true','host_jvm=false')
+        self.jni_state={'table_slots':len(ENV_NAMES),'version':VERSION,'vm':vm,'env':env,'calls':[],'getenv_calls':0,'getversion_calls':0,'cpuid_basic_calls':0,'phdr_info':0,'phdr_callbacks':0,'pending_callbacks':[],'classes':{},'jvm_artifact':None,'pending_exception':None,'cleared_exceptions':[],'deleted_local_refs':[],'jvm_loader_calls':0,'jvm_open_refs':0,'jvm_phdr_info':0,'jvm_name':0,'jvm_interfaces':None,'java_sources':None,'java_source_extensions':[],'class_proofs':{},'global_refs':[],'methods':{},'fields':{}};self.emit('JNI_SCENARIO','jni_version=0xa0000','virtual_thread=attached','synthetic_vm_and_env=true','host_jvm=false')
     def configure_jvm_artifact(self,data,initial=False):
         if self.jni_state is None or not 64<=len(data)<=64*1024*1024 or data[:6]!=b'\x7fELF\x02\x01':raise ValueError('Invalid read-only JVM artifact')
         metadata={'sha256':hashlib.sha256(data).hexdigest(),'size':len(data),'virtual_path':'/virtual/jdk/lib/server/libjvm.so'}
@@ -162,7 +162,7 @@ class JniGuardedCPU(OnceThreadCPU):
         self.emit('JNI_CALL_FRONTIER',f'kind={category}',f'index={index}',name,*(f'{r}={self.reg(r):x}' for r in ['RDI','RSI','RDX','RCX','R8','R9']))
         self.validate_interface(category,self.reg('RDI'))
         if category=='env' and s['pending_exception'] is not None:
-            self.demand(name in ('ExceptionCheck','DeleteLocalRef','DeleteGlobalRef'),'JNI_CALL_WITH_PENDING_EXCEPTION',index)
+            self.demand(name in ('ExceptionCheck','ExceptionClear','DeleteLocalRef','DeleteGlobalRef'),'JNI_CALL_WITH_PENDING_EXCEPTION',index)
         if category=='vm' and name=='GetEnv':
             self.demand(self.reg('RDX')&0xffffffff==VERSION,'UNMODELED_JNI_VERSION');self.write_model_memory(self.reg('RSI'),struct.pack('<Q',s['env']));result=0;s['getenv_calls']+=1
         elif category=='env' and name=='FindClass':
@@ -189,6 +189,10 @@ class JniGuardedCPU(OnceThreadCPU):
             except ValueError:self.demand(False,'UNMODELED_JAVA_'+label)
             self.demand(record is not None,'UNMODELED_JAVA_'+label)
             item={'requested_class':owner,'name':member,'descriptor':descriptor,'static':static,'declaring_class':record['declaring_class'],'class_sha256':record['class_sha256'],'source':record['source']};self.demand(len(collection)<4096 or item in collection.values(),'JAVA_'+label+'_HANDLE_BUDGET');result=next((int(k) for k,v in collection.items() if v==item),base+16*len(collection));collection[str(result)]=item;self.emit('VERIFIED_JAVA_'+label+'_ID',owner,member,descriptor,f'handle={result:x}','metadata_only=true','java_initialization_not_executed=true')
+        elif category=='env' and name=='ExceptionClear':
+            if s['pending_exception'] is not None:
+                self.demand(len(s['cleared_exceptions'])<4096,'JAVA_EXCEPTION_LEDGER_BUDGET');s['cleared_exceptions'].append(copy.deepcopy(s['pending_exception']));s['pending_exception']=None
+            result=self.reg('RAX');self.emit('VIRTUAL_JAVA_EXCEPTION_CLEAR','explicit_guest_call=true',f'cleared_count={len(s["cleared_exceptions"])}','host_jvm_called=false')
         elif category=='env' and name=='ExceptionCheck':result=int(s['pending_exception'] is not None)
         elif category=='env' and name=='ThrowNew':
             cls=self.reg('RSI');self.demand(str(cls) in s['classes'] and s['classes'][str(cls)]=='java/lang/RuntimeException' and cls not in s['deleted_local_refs'] and s['pending_exception'] is None,'INVALID_JNI_THROW_CLASS_OR_STATE');message=self.ascii(self.reg('RDX'));s['pending_exception']={'class':s['classes'][str(cls)],'message':message};result=0;self.emit('VIRTUAL_JAVA_EXCEPTION_PENDING',s['classes'][str(cls)],f'message_sha256={hashlib.sha256(message.encode()).hexdigest()}','host_exception_created=false')
@@ -213,15 +217,18 @@ class JniGuardedCPU(OnceThreadCPU):
     def restore_sparse(self,s):
         super().restore_sparse(s);state=s.get('jni')
         if state is None:return
-        state=copy.deepcopy(state);state.setdefault('cpuid_basic_calls',0);state.setdefault('phdr_info',0);state.setdefault('phdr_callbacks',0);state.setdefault('pending_callbacks',[]);state.setdefault('classes',{});state.setdefault('jvm_artifact',None);state.setdefault('pending_exception',None);state.setdefault('deleted_local_refs',[]);state.setdefault('jvm_loader_calls',0);state.setdefault('jvm_open_refs',0);state.setdefault('jvm_phdr_info',0);state.setdefault('jvm_name',0);state.setdefault('jvm_interfaces',None);state.setdefault('java_sources',None);state.setdefault('java_source_extensions',[]);state.setdefault('class_proofs',{});state.setdefault('global_refs',[]);state.setdefault('methods',{});state.setdefault('fields',{})
-        if set(state)!={'table_slots','version','vm','env','calls','getenv_calls','getversion_calls','cpuid_basic_calls','phdr_info','phdr_callbacks','pending_callbacks','classes','jvm_artifact','pending_exception','deleted_local_refs','jvm_loader_calls','jvm_open_refs','jvm_phdr_info','jvm_name','jvm_interfaces','java_sources','java_source_extensions','class_proofs','global_refs','methods','fields'} or state['version']!=VERSION or state['table_slots']!=len(ENV_NAMES) or len(state['calls'])>4096:raise ValueError('Invalid JNI scenario')
+        state=copy.deepcopy(state);state.setdefault('cpuid_basic_calls',0);state.setdefault('phdr_info',0);state.setdefault('phdr_callbacks',0);state.setdefault('pending_callbacks',[]);state.setdefault('classes',{});state.setdefault('jvm_artifact',None);state.setdefault('pending_exception',None);state.setdefault('cleared_exceptions',[]);state.setdefault('deleted_local_refs',[]);state.setdefault('jvm_loader_calls',0);state.setdefault('jvm_open_refs',0);state.setdefault('jvm_phdr_info',0);state.setdefault('jvm_name',0);state.setdefault('jvm_interfaces',None);state.setdefault('java_sources',None);state.setdefault('java_source_extensions',[]);state.setdefault('class_proofs',{});state.setdefault('global_refs',[]);state.setdefault('methods',{});state.setdefault('fields',{})
+        if set(state)!={'table_slots','version','vm','env','calls','getenv_calls','getversion_calls','cpuid_basic_calls','phdr_info','phdr_callbacks','pending_callbacks','classes','jvm_artifact','pending_exception','cleared_exceptions','deleted_local_refs','jvm_loader_calls','jvm_open_refs','jvm_phdr_info','jvm_name','jvm_interfaces','java_sources','java_source_extensions','class_proofs','global_refs','methods','fields'} or state['version']!=VERSION or state['table_slots']!=len(ENV_NAMES) or len(state['calls'])>4096:raise ValueError('Invalid JNI scenario')
         for key in ['getenv_calls','getversion_calls','cpuid_basic_calls']:
             if type(state[key]) is not int or not 0<=state[key]<=4096:raise ValueError('Invalid JNI counter')
-        if any(call not in [['vm',6,'GetEnv'],['env',4,'GetVersion'],['env',6,'FindClass'],['env',14,'ThrowNew'],['env',23,'DeleteLocalRef'],['env',21,'NewGlobalRef'],['env',22,'DeleteGlobalRef'],['env',33,'GetMethodID'],['env',113,'GetStaticMethodID'],['env',228,'ExceptionCheck'],['env',94,'GetFieldID'],['env',144,'GetStaticFieldID']] for call in state['calls']) or state['getenv_calls']!=state['calls'].count(['vm',6,'GetEnv']) or state['getversion_calls']!=state['calls'].count(['env',4,'GetVersion']):raise ValueError('Invalid JNI call ledger')
+        if any(call not in [['vm',6,'GetEnv'],['env',4,'GetVersion'],['env',6,'FindClass'],['env',14,'ThrowNew'],['env',17,'ExceptionClear'],['env',23,'DeleteLocalRef'],['env',21,'NewGlobalRef'],['env',22,'DeleteGlobalRef'],['env',33,'GetMethodID'],['env',113,'GetStaticMethodID'],['env',228,'ExceptionCheck'],['env',94,'GetFieldID'],['env',144,'GetStaticFieldID']] for call in state['calls']) or state['getenv_calls']!=state['calls'].count(['vm',6,'GetEnv']) or state['getversion_calls']!=state['calls'].count(['env',4,'GetVersion']):raise ValueError('Invalid JNI call ledger')
         for key,expected in [('vm',VM_TABLE),('env',ENV_TABLE)]:
             if not any(lo<=state[key] and state[key]+8<=hi for lo,hi in self.private_readonly) or not self.private_region(state[key],8) or self.read_known(state[key],8)!=struct.pack('<Q',expected):raise ValueError('Invalid JNI handle')
         exception=state['pending_exception']
         if exception is not None and (set(exception)!={'class','message'} or exception['class']!='java/lang/RuntimeException' or not isinstance(exception['message'],str) or len(exception['message'])>256 or not exception['message'].isascii()):raise ValueError('Invalid pending exception')
+        if not isinstance(state['cleared_exceptions'],list) or len(state['cleared_exceptions'])>state['calls'].count(['env',17,'ExceptionClear']):raise ValueError('Invalid cleared exception ledger')
+        for item in state['cleared_exceptions']:
+            if not isinstance(item,dict) or set(item)!={'class','message'} or item['class']!='java/lang/RuntimeException' or not isinstance(item['message'],str) or len(item['message'])>256 or not item['message'].isascii():raise ValueError('Invalid cleared exception record')
         if not isinstance(state['deleted_local_refs'],list) or len(state['deleted_local_refs'])>1024 or len(set(state['deleted_local_refs']))!=len(state['deleted_local_refs']) or any(type(x) is not int or str(x) not in state['classes'] for x in state['deleted_local_refs']):raise ValueError('Invalid local reference ledger')
         if any(type(state[k]) is not int or not 0<=state[k]<=1024 for k in ('jvm_loader_calls','jvm_open_refs')) or state['jvm_open_refs']>state['jvm_loader_calls']:raise ValueError('Invalid JVM loader ledger')
         artifact=state['jvm_artifact']

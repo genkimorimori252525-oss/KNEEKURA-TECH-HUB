@@ -41,3 +41,13 @@ Byte0xd35988 is zero in the snapshot. When set to1, the alternate branch drains 
 The existing missing-thread fixture checks weak __pthread_key_create GLOB_DAT0xd2cf70, finds zero, and throws before pthread_create. The complete negative JNI result is documented separately in NATIVE-JNI-THREAD-GUARD-RESULT-2026-10-18.md.
 
 A bounded deferred-worker model may reserve a pending worker and postpone its scheduling through the main JNI boundary, but must expose the worker as unexecuted and stop at join/blocking operations requiring a scheduler. Complete concurrent claims require faithful pthread_once/TLS destructor, attachment ownership, queue atomic, semaphore wakeup and detached-completion behavior. Native registrations and entity→Molang→bone→renderer execution are still separate unfinished goals.
+
+## Static positive caller continuation
+
+After collector construction returns to0x413630, 0x41363f moves its future/state to global0xd35960. The move at0x39d539–0x39d541 clears the source ownership/wait flag+0x20; immediate destruction of that moved-from local at0x413647 therefore skips its real wait path. This establishes no immediate collector wait on this path, not freedom to defer arbitrary shutdown.
+
+With non-null saved JNIEnv, a second std::thread is created at0x4136cc and detached at0x4136e6. Its state vptr is0xd1ba18 and captured function0x3cc080. It starts with bookkeeping0x3ccb80 on global0xd34ed8, then handles a separate queue/semaphore global0xd34ed0, blocking at sem_wait0x3cc143 and retrying EINTR. Its higher-level purpose remains unknown.
+
+Main setup0x413728 calls0x3dbaf0 with callback0x4181c0 and uses mutex lock/unlock. The recorded negative snapshot has byte0xd35570=0, selecting queued callback handling. A callback can wake the second worker with sem_post. CPUID leaf0 at0x413753 precedes native descriptor resolution0x4193c0 at0x413bc6.
+
+This resolver concretely uses the existing FindClass/NewGlobalRef/DeleteLocalRef, GetMethodID/GetStaticMethodID and GetFieldID/GetStaticFieldID slots. Failed lookup paths include ExceptionCheck and ExceptionClear. Exact later class/member text is still encoded in payloads such as source0x4343b length0x5d and0x43498 length0x4b; do not assign plaintext names before byte-backed decoding. No RegisterNatives arguments were established in this static slice.

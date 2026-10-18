@@ -17,3 +17,9 @@ The 13 affected modules pass 208 own-byte test methods, including batched callba
 Use native_initializer_sequence_ysm_265.py --deferred-threads for a fresh scenario, optionally --batch-size 256. A resumed initializer snapshot must already carry this capability; it cannot be silently added afterward. The JNI driver preserves the lifecycle automatically. Keep all input binaries, raw traces and snapshots outside Git.
 
 [Receipt](NATIVE-DEFERRED-THREAD-INITIALIZERS-2026-10-18.json) records the fresh checkpoint and lifecycle state. [Collector static map](NATIVE-GLOBAL-REFERENCE-COLLECTOR-2026-10-18.md) distinguishes reference entries, control/work entries, daemon attachment, TLS cleanup, waiting and shutdown obligations still needed for worker execution.
+
+## Prepared post-collector model batch
+
+Static caller analysis establishes another detached thread, main-thread default-mutex use and explicit JNI exception clearing before later descriptor resolution. A bounded GNU/Linux x86-64 40-byte default-mutex model is integrated for that observed call family. Static initialization requires all bytes known zero; dynamic initialization accepts only null attributes. Storage remains opaque and immutable to native/model raw accesses. Owner is the virtual main thread while workers are deferred. Recursive lock and invalid lifecycle operations stop; busy trylock returns EBUSY directly, without changing errno. Nonempty mutex snapshots require a mutex-capable backend.
+
+ExceptionClear runs only for an actual intercepted guest call, retains cleared RuntimeException records in the checkpoint, and does not synthesize missing-class/member exceptions to bypass unsupported metadata. These additions pass a nine-module affected suite of 156 own-byte tests. Actual post-collector execution is still pending in the fresh JNI replay; test success is not a claim that either background worker has run.

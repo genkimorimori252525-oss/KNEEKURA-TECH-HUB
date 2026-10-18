@@ -106,5 +106,12 @@
     "sha256": "1c186f64ed9d924b2fc5714fd5df8934bb4a1168af8feb4d3428ea4ee14dd23a",
     "stop": "INSTRUCTION_BUDGET",
     "pending_exception": null
+  },
+  "prepared_post_collector_models": {
+    "mutex": "bounded opaque 40-byte GNU default mutex, virtual main owner only",
+    "exception_clear": "explicit guest call, cleared-error ledger retained",
+    "affected_test_methods": 156,
+    "test_result": "PASS",
+    "actual_post_collector_observation": "PENDING"
   }
 }

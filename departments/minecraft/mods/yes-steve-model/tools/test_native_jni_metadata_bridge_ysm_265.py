@@ -68,6 +68,9 @@ class MetadataBridgeTests(unittest.TestCase):
   c=self.cpu();new=self.extended_metadata();new.sources['ysm']['sha256']='0'*64
   with self.assertRaises(ValueError):c.configure_java_metadata(new,allow_source_extension=True)
   self.assertEqual(c.jni_state['java_source_extensions'],[])
+ def test_explicit_exception_clear_preserves_error_history(self):
+  c=self.cpu();self.call(c,17);self.assertEqual(c.jni_state['cleared_exceptions'],[]);c.jni_state['pending_exception']={'class':'java/lang/RuntimeException','message':'owned failure'};self.call(c,17);self.assertIsNone(c.jni_state['pending_exception']);self.assertEqual(c.jni_state['cleared_exceptions'],[{'class':'java/lang/RuntimeException','message':'owned failure'}]);self.assertEqual(self.call(c,228),0);self.cls(c)
+  c.stop={'reason':'TEST'};state=capture(c);d=JniGuardedCPU(io.StringIO(),'heap',limit=1);d.add_image(RET,b'\x90'*16);d.protect_image();restore(d,state);d.configure_java_metadata(self.metadata());self.assertEqual(d.jni_state['cleared_exceptions'],c.jni_state['cleared_exceptions'])
 class FieldBridgeTests(unittest.TestCase):
  cpu=MetadataBridgeTests.cpu
  string=MetadataBridgeTests.string
