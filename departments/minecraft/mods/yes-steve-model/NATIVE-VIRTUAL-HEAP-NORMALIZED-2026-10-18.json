@@ -1,0 +1,393 @@
+{
+  "format": "kneekura.ysm-virtual-heap-normalized.v1",
+  "scenario": {
+    "clock_seed_hex": "1122334455667788",
+    "clock_stride_hex": "3e8",
+    "heap_base": "0x710000000000",
+    "heap_capacity": 1048576,
+    "heap_policy": "Only requested allocated byte ranges writable; uninitialized and no host malloc",
+    "clock_and_heap_are_explicit_models": true
+  },
+  "latest_trial": {
+    "trace_sha256": "944f6b0c81f5714d8f28636949802f0667ef263e9e02f51365087c32127e4603",
+    "stop": [
+      "INSTRUCTION_BUDGET",
+      "instruction",
+      "pc=1815afd",
+      "address=1815afd",
+      "size=0"
+    ],
+    "counts": {
+      "attempted": 100000,
+      "completed": 100000,
+      "pcode": 893113,
+      "atomic_pairs": 467,
+      "modeled_copy_steps": 4277,
+      "opaque_byte_copies": 776,
+      "virtual_clock_reads": 2,
+      "virtual_malloc_calls": 1,
+      "heap_write_events": 7,
+      "xchg32_zeroext_corrections": 28
+    },
+    "unique_instruction_addresses": 19977,
+    "oracles_matched": 12,
+    "clock_reads": [
+      [
+        "0",
+        "1122334455667788"
+      ],
+      [
+        "1",
+        "1122334455667b70"
+      ]
+    ],
+    "registers": {
+      "RAX": "0x328304",
+      "RBX": "0x1543209",
+      "RCX": "0xffffffda7cc4019d",
+      "RDX": "0x3fffffff6fe4c03e",
+      "RSI": "0x96",
+      "RDI": "0x601ac955",
+      "RBP": "0x700000007da4",
+      "RSP": "0x700000007af0",
+      "R8": "0x14b0580",
+      "R9": "0xfffffffb42d252d0",
+      "R10": "0xc33",
+      "R11": "0x161a095",
+      "R12": "0x0",
+      "R13": "0x0",
+      "R14": "0x0",
+      "R15": "0x0",
+      "CF": "0x1",
+      "ZF": "0x0",
+      "SF": "0x1",
+      "OF": "0x0",
+      "PF": "0x1",
+      "AF": "0x0",
+      "DF": "0x0"
+    },
+    "preservation_confirmed": true
+  },
+  "allocations": [
+    [
+      "710000000000",
+      "size=424",
+      "reserved=432",
+      "total_reserved=432"
+    ]
+  ],
+  "heap_write_events": [
+    [
+      "pc=173af70",
+      "address=710000000188",
+      "size=8",
+      "via=store"
+    ],
+    [
+      "pc=15eb1e5",
+      "address=710000000018",
+      "size=8",
+      "via=store"
+    ],
+    [
+      "pc=1431e12",
+      "address=710000000198",
+      "size=8",
+      "via=store"
+    ],
+    [
+      "pc=16b6b58",
+      "address=710000000028",
+      "size=8",
+      "via=store"
+    ],
+    [
+      "pc=1794b02",
+      "address=710000000068",
+      "size=8",
+      "via=store"
+    ],
+    [
+      "pc=13dc56f",
+      "address=710000000050",
+      "size=8",
+      "via=store"
+    ],
+    [
+      "pc=17c50ed",
+      "address=710000000060",
+      "size=8",
+      "via=store"
+    ]
+  ],
+  "zeroextension_correction_count": 28,
+  "first_zeroextension_correction": {
+    "step": 18923,
+    "record": "XCHG32_ZEROEXT\tpc=0152c6cf\tregister=R10\tbefore=ffffffff8a389de9\tafter=8a389de9"
+  },
+  "prior_faulty_heap_trial": {
+    "trace_sha256": "c15f4b54e9bc491a2e35c01581a44cafa5a682954788c924e1cca8df53bbe743",
+    "stop": [
+      "OUTSIDE_PRIVATE_WRITABLE_REGIONS",
+      "store",
+      "pc=14d8c08",
+      "address=6fff00007afb",
+      "size=4"
+    ],
+    "counts": {
+      "attempted": 63811,
+      "completed": 63810,
+      "pcode": 541878,
+      "atomic_pairs": 296,
+      "modeled_copy_steps": 4277,
+      "opaque_byte_copies": 776,
+      "virtual_clock_reads": 1,
+      "virtual_malloc_calls": 1,
+      "heap_write_events": 7
+    },
+    "unique_instruction_addresses": 14538,
+    "oracles_matched": 12,
+    "clock_reads": [
+      [
+        "0",
+        "1122334455667788"
+      ]
+    ],
+    "registers": {
+      "RAX": "0xfffffff74ebe0000",
+      "RBX": "0x7f",
+      "RCX": "0xed",
+      "RDX": "0xf4241f1c",
+      "RSI": "0x15acf56",
+      "RDI": "0xd41e",
+      "RBP": "0x700000007db0",
+      "RSP": "0x700000007af0",
+      "R8": "0xdf5646b6622a795",
+      "R9": "0xffffffff00000000",
+      "R10": "0xdf26d050",
+      "R11": "0x1557d82",
+      "R12": "0x0",
+      "R13": "0x0",
+      "R14": "0x0",
+      "R15": "0x0",
+      "CF": "0x0",
+      "ZF": "0x1",
+      "SF": "0x0",
+      "OF": "0x0",
+      "PF": "0x1",
+      "AF": "0x0",
+      "DF": "0x0"
+    },
+    "preservation_confirmed": true
+  },
+  "faulty_trial_instruction_prefix_retained": true,
+  "prior_bad_address_is_not_native_behavior": true,
+  "corrected_clock_replays": [
+    {
+      "seed_hex": "0",
+      "instruction_path_unchanged": true,
+      "trace_sha256": "a1be1e137665ee0704b4eb0c6e054c461580fe04b2ecf30040c0644c89118afb",
+      "stop": [
+        "INSTRUCTION_BUDGET",
+        "instruction",
+        "pc=14127df",
+        "address=14127df",
+        "size=0"
+      ],
+      "counts": {
+        "attempted": 100000,
+        "completed": 100000,
+        "pcode": 809642,
+        "atomic_pairs": 146,
+        "modeled_copy_steps": 4277,
+        "opaque_byte_copies": 776,
+        "virtual_clock_reads": 1,
+        "virtual_malloc_calls": 0,
+        "heap_write_events": 0,
+        "xchg32_zeroext_corrections": 1
+      },
+      "unique_instruction_addresses": 11336,
+      "oracles_matched": 12,
+      "clock_reads": [
+        [
+          "0",
+          "0"
+        ]
+      ],
+      "registers": {
+        "RAX": "0x179e43d",
+        "RBX": "0x1580aed",
+        "RCX": "0x179e43d",
+        "RDX": "0xffff",
+        "RSI": "0x14319d8",
+        "RDI": "0x178baad",
+        "RBP": "0x28d8d79a",
+        "RSP": "0x700000007b60",
+        "R8": "0x8fbaf237",
+        "R9": "0x378",
+        "R10": "0x9cff3f37",
+        "R11": "0x179f02d",
+        "R12": "0x0",
+        "R13": "0x0",
+        "R14": "0x0",
+        "R15": "0x0",
+        "CF": "0x0",
+        "ZF": "0x0",
+        "SF": "0x0",
+        "OF": "0x0",
+        "PF": "0x1",
+        "AF": "0x0",
+        "DF": "0x0"
+      },
+      "preservation_confirmed": true
+    },
+    {
+      "seed_hex": "100000000",
+      "instruction_path_unchanged": true,
+      "trace_sha256": "b3dc52e6da5df67b778e96d85baacf2ef08cb05e2ea99e5f368985e9153b69de",
+      "stop": [
+        "INSTRUCTION_BUDGET",
+        "instruction",
+        "pc=14127df",
+        "address=14127df",
+        "size=0"
+      ],
+      "counts": {
+        "attempted": 100000,
+        "completed": 100000,
+        "pcode": 809642,
+        "atomic_pairs": 146,
+        "modeled_copy_steps": 4277,
+        "opaque_byte_copies": 776,
+        "virtual_clock_reads": 1,
+        "virtual_malloc_calls": 0,
+        "heap_write_events": 0,
+        "xchg32_zeroext_corrections": 1
+      },
+      "unique_instruction_addresses": 11336,
+      "oracles_matched": 12,
+      "clock_reads": [
+        [
+          "0",
+          "100000000"
+        ]
+      ],
+      "registers": {
+        "RAX": "0x14d33c8",
+        "RBX": "0x1580aed",
+        "RCX": "0x14d33c8",
+        "RDX": "0xffff",
+        "RSI": "0x14319d8",
+        "RDI": "0x178baad",
+        "RBP": "0x3bb08c32",
+        "RSP": "0x700000007b60",
+        "R8": "0x9cd66a61",
+        "R9": "0x309",
+        "R10": "0x9cff3f37",
+        "R11": "0x14d3fb8",
+        "R12": "0x0",
+        "R13": "0x0",
+        "R14": "0x0",
+        "R15": "0x0",
+        "CF": "0x0",
+        "ZF": "0x0",
+        "SF": "0x0",
+        "OF": "0x0",
+        "PF": "0x1",
+        "AF": "0x0",
+        "DF": "0x0"
+      },
+      "preservation_confirmed": true
+    },
+    {
+      "seed_hex": "1122334455667788",
+      "instruction_path_unchanged": true,
+      "trace_sha256": "537478b229aa3aa64f9be9fdde237e686370d555563edd6326fedbf12220b318",
+      "stop": [
+        "EXTERNAL_OR_NULL_TARGET",
+        "computed_transfer",
+        "pc=13d8472",
+        "address=0",
+        "size=0"
+      ],
+      "counts": {
+        "attempted": 48847,
+        "completed": 48846,
+        "pcode": 403724,
+        "atomic_pairs": 147,
+        "modeled_copy_steps": 4277,
+        "opaque_byte_copies": 776,
+        "virtual_clock_reads": 1,
+        "virtual_malloc_calls": 0,
+        "heap_write_events": 0,
+        "xchg32_zeroext_corrections": 1
+      },
+      "unique_instruction_addresses": 11699,
+      "oracles_matched": 12,
+      "clock_reads": [
+        [
+          "0",
+          "1122334455667788"
+        ]
+      ],
+      "registers": {
+        "RAX": "0xedf060",
+        "RBX": "0x0",
+        "RCX": "0x0",
+        "RDX": "0x0",
+        "RSI": "0x0",
+        "RDI": "0x1a8",
+        "RBP": "0x700000007fe8",
+        "RSP": "0x700000007dc8",
+        "R8": "0x0",
+        "R9": "0x0",
+        "R10": "0x0",
+        "R11": "0x0",
+        "R12": "0x0",
+        "R13": "0x0",
+        "R14": "0x0",
+        "R15": "0x0",
+        "CF": "0x0",
+        "ZF": "0x1",
+        "SF": "0x0",
+        "OF": "0x0",
+        "PF": "0x0",
+        "AF": "0x0",
+        "DF": "0x0"
+      },
+      "preservation_confirmed": true
+    }
+  ],
+  "tests": {
+    "baseline": 17,
+    "opaque_copy": 24,
+    "virtual_clock": 8,
+    "virtual_heap_and_oracle_scope": 13,
+    "xchg32_normalization": 40,
+    "independent_host_authored_toy": 36
+  },
+  "original_target_loaded_or_executed_on_host": false,
+  "independent_semantic_review": "NOT_RUN",
+  "original_image_unchanged": true,
+  "mapping_promotions": 0,
+  "hashes": {
+    "YsmGuardedInitSimulation.java": "5fc7e3777c72bf6bb5becb4ef63ad85532e27cb71168056fe1ba4c0ae05fe65d",
+    "xchg32_zero_extension_toy.c": "7e719a15496fdcb2a10f6f3c8dc4604510eadde7357bcaa69e4125f8f30f495c",
+    "guarded-pre-zeroext-source.java": "12e53cba164b51ce018e771995744bbf46936c33f0bf7ef8d469be593bda2431",
+    "xchg32-probe.tsv": "dddede57ff81ebe475468a1887d6d492ca07debdfcc1b26994ae32e6218587bd",
+    "guarded-heap-normalized-self-test.tsv": "80675f5a33a2f787d089692dc5ef11bffb0bbbb374c3b40d382ffd6877037429",
+    "bounded-init-heap-normalized-trial.tsv": "944f6b0c81f5714d8f28636949802f0667ef263e9e02f51365087c32127e4603"
+  },
+  "decoder_crosscheck": {
+    "format": "kneekura.ysm-simulation-decoder-crosscheck.v1",
+    "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+    "trace_sha256": "944f6b0c81f5714d8f28636949802f0667ef263e9e02f51365087c32127e4603",
+    "instruction_occurrences": 100000,
+    "unique_addresses": 19977,
+    "range_count": 1275,
+    "all_address_length_bytes_match": true,
+    "gnu_version": "GNU objdump (GNU Binutils for Debian) 2.44",
+    "target_executed_by_this_tool": false,
+    "scope": "Decoder boundaries and original bytes only. Not p-code equivalence, whole native recovery, all caller-state proof, or emulator model semantic certification."
+  }
+}

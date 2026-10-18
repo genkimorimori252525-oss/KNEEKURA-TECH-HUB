@@ -1,6 +1,6 @@
 # Current native-analysis handoff — October 18
 
-Read this before resuming native work. Branch: `jolly/ysm-analysis-20261016`. Last verified analysis publication before this handoff: `02fc35cdbc7a0fef0206dc9e2b08c835e1983e79`. The project is unfinished.
+Read this before resuming native work. Latest entry: [virtual heap and model correction](NATIVE-VIRTUAL-HEAP-RESULT-2026-10-18.md). Branch: `jolly/ysm-analysis-20261016`. Last verified analysis publication before this handoff: `02fc35cdbc7a0fef0206dc9e2b08c835e1983e79`. The project is unfinished.
 
 ## Scope and confidence
 
@@ -69,3 +69,7 @@ NATIVE-SIMULATION-DECODER-CROSSCHECK-2026-10-18.json verifies the 10,000-step tr
 The 100,000-step increase was approved and used. Start with NATIVE-VIRTUAL-CLOCK-RESULT-2026-10-18.md and its receipt. Clock-disabled mode stops at RDTSC after 28,869 completed steps. Three explicit clock samples show input-sensitive paths: two hit 100,000 cap, the mixed seed reaches a malloc import boundary after 48,846 completed steps. Raw slot 0x184d828 is zero because relocations were disabled; ELF GLOB_DAT symbol277 names malloc. RDI requests424 bytes; caller return candidate0x13d91f2. No actual import was executed. Tests17+24+8pass, original hashes preserved.
 
 The owner approved the next virtual-heap/malloc stage: maximum1MiB, allow private-stack and virtual-heap writes, stop before original-image writes, retain100000-step bound and no actual external/OS calls. Not yet implemented/run. Avoid unnecessary confirmation for safe reversible changes within the requested isolated analysis. Existing absolute-RSP oracle at0x174d06f was proved for the original entry context; scope it to that entry before reusing the harness across later protected prologues, rather than forcing a later caller frame to match.
+
+## Latest verified heap/model checkpoint
+
+NATIVE-VIRTUAL-HEAP-RESULT-2026-10-18.md supersedes the older not-yet-run heap status. The isolated malloc model allocates424 bytes and records seven8-byte object writes. A genuine pinned-Ghidra memory-XCHG32 zero-extension discrepancy was reproduced with a toy and independently with36 host toy cases (no target code). A focused post-instruction normalization fixes only that ISA effect.102harness tests pass. Replayed clock paths remain identical; corrected heap run reaches100000cap before0x1815afd, with28normalizations and no original-image write. The old63,810-step out-of-region write is an emulator artifact, not native behavior. Oracles are first-visit-scoped (12checks), avoiding invalid absolute-RSP assumptions across reused prologues. Working mode remains explicit synthetic clock+virtual heap, not actual runtime.
