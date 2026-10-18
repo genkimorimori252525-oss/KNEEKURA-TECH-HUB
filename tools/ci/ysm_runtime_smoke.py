@@ -78,6 +78,23 @@ def error_code(exc):
     return 'INTERNAL_ERROR'
 
 
+COMMAND_KINDS = {('docker','info'):'DOCKER_INFO', ('docker','pull'):'DOCKER_PULL',
+    ('docker','create'):'DOCKER_CREATE', ('docker','start'):'DOCKER_START',
+    ('docker','inspect'):'DOCKER_INSPECT', ('docker','image','inspect'):'DOCKER_IMAGE_INSPECT',
+    ('docker','rm'):'DOCKER_REMOVE', ('docker','kill'):'DOCKER_KILL'}
+
+
+def record_error(report, exc):
+    # Preserve the first failure if cleanup subsequently fails. No URLs/headers/messages.
+    if 'error_code' in report:return
+    report['error_code']=error_code(exc)
+    if isinstance(exc,urllib.error.HTTPError) and type(exc.code) is int and 100<=exc.code<=599:
+        report['http_status']=exc.code
+    kind=getattr(exc,'command_kind',None);code=getattr(exc,'command_exit_code',None)
+    if isinstance(exc,Blocked) and kind in COMMAND_KINDS.values() and type(code) is int and -255<=code<=255:
+        report['command_kind']=kind;report['command_exit_code']=code
+
+
 def digest(data):
     return hashlib.sha256(data).hexdigest()
 
@@ -138,6 +155,11 @@ def summary(report):
            'worker_queue_execution':'NOT_OBSERVED','worker_drain':'NOT_OBSERVED'}
     if report.get('stage') in STAGES:out['stage']=report['stage']
     if report.get('error_code') in ERROR_CODES:out['error_code']=report['error_code']
+    status=report.get('http_status')
+    if report.get('error_code')=='HTTP_FAILURE' and type(status) is int and 100<=status<=599:out['http_status']=status
+    kind=report.get('command_kind');code=report.get('command_exit_code')
+    if kind in COMMAND_KINDS.values() and type(code) is int and -255<=code<=255:
+        out['command_kind']=kind;out['command_exit_code']=code
     for phase in ('control','ysm'):
         r = report.get(phase, {})
         allowed = ('PASS','NOT_RUN','NOT_READY','CRASH_137','TIMEOUT','OOM','NONZERO_EXIT','BLOCKED')
@@ -260,7 +282,11 @@ class IO:
 
 def checked(io, argv, timeout=60):
     code,data=io.command(argv,timeout=timeout)
-    if code:raise Blocked('command failed')
+    if code:
+        exc=Blocked('command failed')
+        exc.command_kind=COMMAND_KINDS.get(tuple(argv[:3]),COMMAND_KINDS.get(tuple(argv[:2])))
+        exc.command_exit_code=code
+        raise exc
     return data
 
 
@@ -484,7 +510,7 @@ def execute(lock, env, io_adapter, report=None):
         report['stage']='COMPLETE'
         return report
     except Exception as exc:
-        report['error_code']=error_code(exc)
+        record_error(report,exc)
         raise
     finally:
         # Restore permissions only in this run-owned tree to allow deletion.
@@ -510,7 +536,7 @@ def main():
         report.update(lock_sha256=digest(raw),harness_sha256=digest(Path(__file__).read_bytes()),commit=os.environ['GITHUB_SHA'])
         success=report['control']['result']=='PASS' and report['ysm']['result']=='PASS'
     except Exception as exc:
-        report.setdefault('error_code',error_code(exc))
+        record_error(report,exc)
         # Exceptions may contain target output or private paths; never emit their text.
         report.setdefault('control',{'result':'BLOCKED'});report.setdefault('ysm',{'result':'NOT_RUN'})
     print(summary(report))
