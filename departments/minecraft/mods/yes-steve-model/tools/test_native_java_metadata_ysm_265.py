@@ -282,5 +282,13 @@ class FieldTests(unittest.TestCase):
         self.assertIsNone(data.lookup_field('example/Child', 'bits', 'J'))
 
 
+    def test_module_descriptors_do_not_shadow_platform_or_each_other(self):
+        base=archive({'classes/module-info.class':b'owned module descriptor'},jmod=True)
+        one=archive({'module-info.class':b'first owned descriptor','first/Type.class':class_bytes('first/Type')})
+        two=archive({'module-info.class':b'second owned descriptor','second/Type.class':class_bytes('second/Type')})
+        m=metadata.JavaMetadata.from_buffers(java_base=base,dependency_buffers={'first':(one,hashlib.sha256(one).hexdigest()),'second':(two,hashlib.sha256(two).hexdigest())})
+        self.assertEqual(m.class_info('first/Type')['source']['id'],'first');self.assertEqual(m.class_info('second/Type')['source']['id'],'second')
+        with self.assertRaisesRegex(metadata.MetadataError,'module descriptor'):m.class_info('module-info')
+
 if __name__ == '__main__':
     unittest.main()

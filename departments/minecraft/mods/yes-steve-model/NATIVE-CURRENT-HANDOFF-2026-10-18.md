@@ -1,6 +1,6 @@
 # Current YSM native-analysis handoff — October 18
 
-Read this entry first. Current report: [fresh deferred-thread initializer scenario](NATIVE-DEFERRED-THREAD-INITIALIZERS-RESULT-2026-10-18.md). Previous: [completed negative JNI result](NATIVE-JNI-THREAD-GUARD-RESULT-2026-10-18.md). Previous: [dependency metadata](NATIVE-JNI-DEPENDENCY-METADATA-RESULT-2026-10-18.md). Previous: [artifact bridge](NATIVE-JNI-ARTIFACT-BRIDGE-RESULT-2026-10-18.md). Initializer evidence: [all45 complete in the isolated scenario](NATIVE-INITIALIZER-SEQUENCE-COMPLETE-RESULT-2026-10-18.md). Branch: jolly/ysm-analysis-20261016. The project remains unfinished. Older linked reports describe historical states, not today's frontier.
+Read this entry first. Current report: [fresh JNI reaches Forge loader metadata](NATIVE-JNI-FORGE-LOADER-RESULT-2026-10-18.md). Previous: [deferred-thread initializer scenario](NATIVE-DEFERRED-THREAD-INITIALIZERS-RESULT-2026-10-18.md). Previous: [completed negative JNI result](NATIVE-JNI-THREAD-GUARD-RESULT-2026-10-18.md). Previous: [dependency metadata](NATIVE-JNI-DEPENDENCY-METADATA-RESULT-2026-10-18.md). Previous: [artifact bridge](NATIVE-JNI-ARTIFACT-BRIDGE-RESULT-2026-10-18.md). Initializer evidence: [all45 complete in the isolated scenario](NATIVE-INITIALIZER-SEQUENCE-COMPLETE-RESULT-2026-10-18.md). Branch: jolly/ysm-analysis-20261016. The project remains unfinished. Older linked reports describe historical states, not today's frontier.
 
 ## Goal and unchanged confidence
 
@@ -66,3 +66,5 @@ These reports retain exact previous scopes, source hashes and limitations. Do no
 - [eight-callback C-library stage](NATIVE-C-LIBRARY-INITIALIZERS-RESULT-2026-10-18.md)
 
 - [TLS/sparse allocator and PSHUFB correction](NATIVE-TLS-SPARSE-INITIALIZERS-RESULT-2026-10-18.md)
+
+Latest positive continuation: unicorn-jni-thread-next33.checkpoint.json reaches SecureJar after two virtual detached pending workers and a main mutex lock/unlock. Both workers remain unexecuted. Pinned securejarhandler-2.1.10 is now an explicit metadata input; SecureJar.getPrimaryPath resolves. See current receipt for original artifact hashes and exact frontier.

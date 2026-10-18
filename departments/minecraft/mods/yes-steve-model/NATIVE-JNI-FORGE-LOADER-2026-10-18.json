@@ -1,0 +1,115 @@
+{
+  "scope": "fresh deferred-thread JNI passes former missing-thread failure and reaches Forge loader metadata",
+  "checkpoint_basename": "unicorn-jni-thread-next33.checkpoint.json",
+  "checkpoint_sha256": "09f2b76086aa01f02d9d540a008fced70571cd32401624c67796ed0539a5fe1d",
+  "stop": {
+    "reason": "UNMODELED_JAVA_CLASS",
+    "pc": 135239940439776,
+    "address": 0,
+    "size": 0
+  },
+  "requested_class": "cpw/mods/jarhandling/SecureJar",
+  "threads": {
+    "enabled": true,
+    "entries": [
+      3132592
+    ],
+    "records": {
+      "2": {
+        "start": 3132592,
+        "arg": 70643639402880,
+        "state": "pending",
+        "detached": true,
+        "executed": false
+      },
+      "3": {
+        "start": 3132592,
+        "arg": 70643638879360,
+        "state": "pending",
+        "detached": true,
+        "executed": false
+      }
+    },
+    "keys": {},
+    "calls": 4,
+    "boundary": false,
+    "schedule": "defer-all-workers-through-main-jni-boundary"
+  },
+  "mutex": {
+    "objects": {
+      "13848576": {
+        "kind": "default",
+        "size": 40,
+        "active": true,
+        "owner": 0
+      }
+    },
+    "calls": 2
+  },
+  "once": {
+    "objects": {
+      "13834696": {
+        "state": "done",
+        "callback": 3112016
+      },
+      "13834684": {
+        "state": "done",
+        "callback": 2854640
+      }
+    },
+    "pending": [],
+    "calls": 44
+  },
+  "pending_exception": null,
+  "method_count": 27,
+  "field_count": 5,
+  "dependency_provenance": {
+    "url": "https://maven.neoforged.net/releases/cpw/mods/securejarhandler/2.1.10/securejarhandler-2.1.10.jar",
+    "sha256": "7ec9207f47bc8847a16566b9a3b4ced8d073c49592897eb30ce2aaf643fdfcab",
+    "size": 88749,
+    "entry_count": 57,
+    "SecureJar_class_sha256": "4597855c58ead7bdf4827381568ad121250d26d5da21233145a56991baf26cc2",
+    "manifest": "Manifest-Version: 1.0\r\nSpecification-Title: securejarhandler\r\nSpecification-Vendor: forge\r\nSpecification-Version: 1\r\nImplementation-Title: securejarhandler\r\nImplementation-Version: 2.1.10+2.1.10+main.96a7b6a8\r\nImplementation-Vendor: forge\r\nImplementation-Timestamp: 2023-06-15T22:48:18.223557879Z\r\nGit-Commit: 96a7b6a8\r\nGit-Branch: main\r\nBuild-Number: 2.1.10\r\n\r\n",
+    "forge_build_url": "https://github.com/MinecraftForge/MinecraftForge/blob/1.20.1/build.gradle",
+    "forge_build_sha256": "a926659e0226eff5897d92e6e83ec6c070a6ec7b0c97223a7ca90355c296a553",
+    "forge_build_evidence": {
+      "MC_VERSION_line": 50,
+      "SECUREJARHANDLER_VERSION_line": 61,
+      "version": "2.1.10"
+    }
+  },
+  "metadata_tests": {
+    "affected_methods": 42,
+    "result": "PASS"
+  },
+  "workers_executed": 0,
+  "native_registrations_recovered": 0,
+  "target_host_execution": false,
+  "jni_success_established": false,
+  "continued_checkpoint": {
+    "basename": "unicorn-jni-forge-first.checkpoint.json",
+    "sha256": "f11c10f6f6a494848f891223916e4ecf765b3cc5bddd67089931dbf14ba4b98d",
+    "stop": {
+      "reason": "INSTRUCTION_BUDGET",
+      "pc": 20531487,
+      "address": 20531487,
+      "size": 0
+    },
+    "SecureJar_method_proofs": [
+      {
+        "requested_class": "cpw/mods/jarhandling/SecureJar",
+        "name": "getPrimaryPath",
+        "descriptor": "()Ljava/nio/file/Path;",
+        "static": false,
+        "declaring_class": "cpw/mods/jarhandling/SecureJar",
+        "class_sha256": "4597855c58ead7bdf4827381568ad121250d26d5da21233145a56991baf26cc2",
+        "source": {
+          "id": "securejarhandler-2.1.10",
+          "sha256": "7ec9207f47bc8847a16566b9a3b4ced8d073c49592897eb30ce2aaf643fdfcab",
+          "archive_kind": "jar",
+          "entry_count": 57
+        }
+      }
+    ]
+  }
+}

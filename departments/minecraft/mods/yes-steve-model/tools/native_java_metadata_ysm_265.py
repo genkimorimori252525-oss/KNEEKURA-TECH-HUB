@@ -217,7 +217,7 @@ class JavaMetadata:
                 if key == "java.base":
                     continue
                 for entry in index:
-                    if not entry.endswith(".class"):
+                    if not entry.endswith(".class") or entry == "module-info.class":
                         continue
                     if key != "ysm" and (entry.startswith("java/") or "classes/" + entry in platform):
                         raise MetadataError("dependency platform class shadowing")
@@ -256,6 +256,7 @@ class JavaMetadata:
 
     def class_info(self, internal_name):
         name = _name(internal_name)
+        if name == "module-info":raise MetadataError("module descriptor is not ordinary class metadata")
         if name in self._cache:
             return copy.deepcopy(self._cache[name])
         # Platform classes must not be shadowed by an application JAR.
