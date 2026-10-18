@@ -1,0 +1,394 @@
+{
+  "format": "ysm-geometry-packed-attachment-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "ranges": [
+    {
+      "name": "descriptor_and_container_setup",
+      "start": "0x375e30",
+      "end_exclusive": "0x376c30",
+      "sha256": "591debffef0bed9457739ff222bae67c1efc4cc7fed6fdedf7d5e46d0601da89",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3628592
+      }
+    },
+    {
+      "name": "source_span",
+      "start": "0x376c4a",
+      "end_exclusive": "0x376c72",
+      "sha256": "6d41ad41da000bf63926cedf75956a9fc3027b14d64da70538067fac8df2553c",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3632202
+      }
+    },
+    {
+      "name": "local_gate_publication",
+      "start": "0x377496",
+      "end_exclusive": "0x3774b8",
+      "sha256": "62198c40a23377a95c3670790419c6250a03bacae78ffe73277f748bf48cb981",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3634326
+      }
+    },
+    {
+      "name": "temporary_vectors",
+      "start": "0x3774b8",
+      "end_exclusive": "0x377551",
+      "sha256": "3463a0586b7ceb98566a47b28e8045cc8e5e781509b3a325268d3a5622b7130f",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3634360
+      }
+    },
+    {
+      "name": "external_index",
+      "start": "0x3775e6",
+      "end_exclusive": "0x377613",
+      "sha256": "d1e912fec84a42b1428cd50e470a3d1472537527ef0a0d226efeb0567987921f",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3634662
+      }
+    },
+    {
+      "name": "class1_flag",
+      "start": "0x377e9a",
+      "end_exclusive": "0x377ebe",
+      "sha256": "be7fb746b118ba9aa49b096bb78821725119819a59a033273b18f16b9a36b8df",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3636890
+      }
+    },
+    {
+      "name": "attachment",
+      "start": "0x378430",
+      "end_exclusive": "0x378b6b",
+      "sha256": "c2110daa1d77f30595266f117fe479ebc2a5e44a812622be9b58676eea2a97db",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3638320
+      }
+    },
+    {
+      "name": "payload_move_registry_node",
+      "start": "0x378b6b",
+      "end_exclusive": "0x378dfd",
+      "sha256": "10f3c0748dfe72dd38790abf4d755f02693ba5a49b87dc751da4477dfad7b69c",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3640171
+      }
+    },
+    {
+      "name": "registry_finalize",
+      "start": "0x379027",
+      "end_exclusive": "0x37904a",
+      "sha256": "a7b452a265c280fd727e3b11737a82e7bf4785622eccc230e0e4cc12665d0007",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3641383
+      }
+    },
+    {
+      "name": "batch_header_finalization",
+      "start": "0x37904a",
+      "end_exclusive": "0x37a213",
+      "sha256": "db2919fd633f7b5f09a9772b2fa496bd825b44e10d671d704d40a24374377b77",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3641418
+      }
+    },
+    {
+      "name": "return_flags_cleanup",
+      "start": "0x37a213",
+      "end_exclusive": "0x37a335",
+      "sha256": "6a99eadb791e8b9b4829c439f598c091cb0d9a3765bfcafdb8b463e1518c0b55",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3645971
+      }
+    },
+    {
+      "name": "batch_growth_copy",
+      "start": "0x37ac20",
+      "end_exclusive": "0x37aeb2",
+      "sha256": "c64b40e79e13f2da822a0be4af67dec4c29b507f1dd9495fa8c3432505e61902",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3648544
+      }
+    },
+    {
+      "name": "byte_copy",
+      "start": "0x5767d0",
+      "end_exclusive": "0x576854",
+      "sha256": "6efa154f166ea083383a880cc3e315513e6babd2a31b40d8097d361395ec47ec",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5728208
+      }
+    },
+    {
+      "name": "java_flags",
+      "start": "0x36c358",
+      "end_exclusive": "0x36c43e",
+      "sha256": "f3776a8b871cfe11fcc180d9b241739be680d7f0199e416419a9917f830d63c2",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3588952
+      }
+    },
+    {
+      "name": "render_collections",
+      "start": "0x37d29b",
+      "end_exclusive": "0x37d324",
+      "sha256": "ed5844d75d138a6532f1abba5a12f3253a97c2acf7bc8599fa88e954aadf52af",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3658395
+      }
+    },
+    {
+      "name": "render_count_use",
+      "start": "0x37e9d2",
+      "end_exclusive": "0x37ea38",
+      "sha256": "a5b05ea8cd8004a7b48938448dc14eddf233dac5f5a9419c425c8bdcc9c4706b",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3664338
+      }
+    },
+    {
+      "name": "render_borrow_enqueue",
+      "start": "0x398640",
+      "end_exclusive": "0x398670",
+      "sha256": "54bf68372073c428cbb9e2d9dee15ad217ba61b5f908d9c16aebea14910ef601",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3769920
+      }
+    }
+  ],
+  "prior_receipts": [
+    {
+      "path": "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/primitive-packed-consumer-contract/evidence.json",
+      "sha256": "6e594c8b3131a1e0dfc437e5fef4677e236ba8472961ffddc70d977bbd9e05e3"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/primitive-pair-classifier-contract/evidence.json",
+      "sha256": "9c2d05d0f41bc891eefc53ec6eed5b8c44e895f30a6d09d5a6cbdbde62925817"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/geometry-build-contract/evidence.json",
+      "sha256": "d911035f40312c4fcd495f0446d73686b73f60963d0f22f9821478efc6432504"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/render-contract/receipt.json",
+      "sha256": "90ee2e7985145dbabc031ece31f0abbac45779aa19dfbb708845c8bcd82be6cb"
+    }
+  ],
+  "layouts": {
+    "descriptor_stride": "0x78",
+    "descriptor_container_vectors": [
+      "0x0",
+      "0x18",
+      "0x30",
+      "0x48"
+    ],
+    "external_container_stride": "0x28",
+    "batch_stride": "0x38",
+    "packed_stride": "0x5c",
+    "container_fields": {
+      "0/8/10": "batch begin/end/capacity",
+      "18/1c": "uint32 accumulated counts",
+      "20": "name-prefix predicate byte"
+    },
+    "batch_fields": {
+      "0/8/10": "packed begin/end/capacity before header finalization",
+      "18": "uint32 bounded-count metadata",
+      "1c": "header XOR state byte",
+      "1d..34": "24-byte XOR header mask"
+    }
+  },
+  "routing": {
+    "gate": "((source_byte_span==0x480) & incoming_R9_low_byte) | local_byte_at_stack_c",
+    "gate_nonzero": {
+      "A": "descriptor+0x48",
+      "B": "descriptor+0x0"
+    },
+    "gate_zero": {
+      "A": "descriptor+0x30",
+      "B_count6": "descriptor+0x0",
+      "B_other_nonempty": "descriptor+0x18"
+    }
+  },
+  "ownership": "packed temporary -> allocated copy -> batch-owned allocated copy; growth deep-copies existing batches; source temporaries freed; top-level descriptor vector and map moved into shared geometry payload",
+  "flag_outputs": "class1[k] is sticky across processed bones/items, copied into builder result vector and JNI boolean array; not geometry payload",
+  "limits": [
+    "Local gate predicate mathematical derivation remains outside scope",
+    "Batch and container labels beyond exact offsets/predicates unproven",
+    "No full backend draw, lifecycle race, exception-path or allocation-success proof",
+    "Header masks are generated at native runtime; no observed runtime values or target execution",
+    "Prior pair classifier domain and cardinality limits remain in force"
+  ],
+  "target_executed": false,
+  "assets_read": false,
+  "repository_modified": false
+}

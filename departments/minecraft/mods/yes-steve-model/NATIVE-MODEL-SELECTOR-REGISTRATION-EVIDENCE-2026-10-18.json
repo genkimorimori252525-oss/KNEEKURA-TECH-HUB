@@ -1,0 +1,286 @@
+{
+  "format": "ysm-model-selector-registration-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "ranges": [
+    {
+      "name": "initializer",
+      "start": "0x326ad0",
+      "end_exclusive": "0x326c8a",
+      "sha256": "33038448e1948838647683ed895b8fcca17162cdd0f60f23fc9e93fceab1a0f2",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3304144
+      }
+    },
+    {
+      "name": "node_cleanup",
+      "start": "0x326ec0",
+      "end_exclusive": "0x326f0a",
+      "sha256": "4b9fc4bf6d0a43e8ff9378eacfe01c01da86197ce7085982b005bcb7920a6b05",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3305152
+      }
+    },
+    {
+      "name": "insert_links",
+      "start": "0x2ba6d0",
+      "end_exclusive": "0x2ba725",
+      "sha256": "33fd90d39bdd5ec89b9ea26f8506b9d6e41e4bfba9703de864a82c14a5292383",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 2860752
+      }
+    },
+    {
+      "name": "insert_header_links",
+      "start": "0x2ba958",
+      "end_exclusive": "0x2ba97a",
+      "sha256": "3e3f1d6130da7a927692247e8f3311bffe025899d6c86382d82b0a6c487598c4",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 2861400
+      }
+    },
+    {
+      "name": "label_lookup_consumer",
+      "start": "0x445de7",
+      "end_exclusive": "0x445ec8",
+      "sha256": "4bf003bca1e0557d0c9298ce13a9aebf595870b78857af42dffbeeeed09d56e2",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4480487
+      }
+    },
+    {
+      "name": "label_map_lookup",
+      "start": "0x456ea0",
+      "end_exclusive": "0x456f33",
+      "sha256": "6c42be9c0c0da20ca35bca776c8abaeaaba33f2e79df1c14d1e0fe509eccb98c",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4550304
+      }
+    },
+    {
+      "name": "numeric_label_lookup",
+      "start": "0x460c8f",
+      "end_exclusive": "0x460cda",
+      "sha256": "08aaa9a44ca6617c1e214257d76dbbd911949a2a379e4120f46736d50f1adbae",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4590735
+      }
+    },
+    {
+      "name": "numeric_label_found",
+      "start": "0x460d4a",
+      "end_exclusive": "0x460d77",
+      "sha256": "0c24584ff7d90ac8624eff46f05f41b1da7c35870899f95a281a7dcd0a6d177f",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4590922
+      }
+    },
+    {
+      "name": "atexit_plt",
+      "start": "0xd14710",
+      "end_exclusive": "0xd14720",
+      "sha256": "6abce57b46e124e38b805c26d07848fb2997e8efbe961669c514dacea9884b7c",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 13715216
+      }
+    },
+    {
+      "name": "atexit_stub",
+      "start": "0x13d6e84",
+      "end_exclusive": "0x13d6e8a",
+      "sha256": "6f057d475fad401d5eec0265df022f41f5ad094aa68278c8ad88d88ab59f4aa0",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 5,
+          "address": 20803168,
+          "memory_size": 4678048,
+          "file_offset": 19132000,
+          "file_size": 4678048,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 19132036
+      }
+    }
+  ],
+  "initializer_registration": {
+    "init_array": "0xd163d8",
+    "size": 360,
+    "index": 9,
+    "slot": "0xd16420",
+    "relocation_type": 8,
+    "addend": "0x326ad0"
+  },
+  "labels": [
+    {
+      "key": 1,
+      "address": "0x42d46",
+      "label": "main",
+      "length": 4,
+      "span_sha256": "2498c4cd987b16bdca8edb572c79e077433c77ea77b844557d156e7e324496f6",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 273734
+      }
+    },
+    {
+      "key": 2,
+      "address": "0x44c57",
+      "label": "arm",
+      "length": 3,
+      "span_sha256": "b3e0f9ec50250c1caea234285dd105cfac90e39b8db24dbd794d82dadd12e4a5",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 281687
+      }
+    }
+  ],
+  "node_size": "0x40",
+  "node_fields": {
+    "key": "+0x20 uint32",
+    "label_length": "+0x28 uint64",
+    "label_pointer": "+0x30 borrowed literal",
+    "flag": "+0x38 byte=1"
+  },
+  "normal_initializer_keys": [
+    1,
+    2
+  ],
+  "normal_initializer_count": 2,
+  "header": "0xd35ba8",
+  "root": "0xd35bb0",
+  "first": "0xd35bb8",
+  "last": "0xd35bc0",
+  "count": "0xd35bc8",
+  "guard": "0xd35bd0",
+  "cleanup_registration": {
+    "slot": "0x184d048",
+    "raw_value": "0x15044c7",
+    "relocation_type": 7,
+    "symbol_index": 10,
+    "symbol_name": "__cxa_atexit",
+    "addend": 0,
+    "actual_runtime_binding_verified": false
+  },
+  "prior_receipt": {
+    "path": "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/model-geometry-selection-contract/evidence.json",
+    "sha256": "daa9c885ea4de174aead618c037d49fef9baed5c112aad1040036feaf829af6a"
+  },
+  "limits": [
+    "Static normal-initialization result, not an observed installed runtime or checkpoint tree",
+    "Flag semantic name and Java metadata association unproven",
+    "Labels are native exact strings; no expanded anatomical or renderer-mode interpretation",
+    "Reference scan is candidate discovery, not exhaustive proof against indirect mutation"
+  ],
+  "target_executed": false,
+  "assets_read": false,
+  "repository_modified": false
+}

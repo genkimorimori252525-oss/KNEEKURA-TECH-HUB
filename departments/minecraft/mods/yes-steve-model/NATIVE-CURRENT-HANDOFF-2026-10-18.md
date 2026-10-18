@@ -1,8 +1,18 @@
 # Current YSM native-analysis handoff — October 18
 
-Read this entry first. Current result: [all17 exact native-entry bindings](NATIVE-EXACT-BINDINGS-RECOVERY-2026-10-18.md). Runtime fixture: [explicit Forge state](NATIVE-FORGE-RUNTIME-RESULT-2026-10-18.md). Previous: [fresh JNI reaches Forge loader metadata](NATIVE-JNI-FORGE-LOADER-RESULT-2026-10-18.md). Previous: [deferred-thread initializer scenario](NATIVE-DEFERRED-THREAD-INITIALIZERS-RESULT-2026-10-18.md). Previous: [completed negative JNI result](NATIVE-JNI-THREAD-GUARD-RESULT-2026-10-18.md). Previous: [dependency metadata](NATIVE-JNI-DEPENDENCY-METADATA-RESULT-2026-10-18.md). Previous: [artifact bridge](NATIVE-JNI-ARTIFACT-BRIDGE-RESULT-2026-10-18.md). Initializer evidence: [all45 complete in the isolated scenario](NATIVE-INITIALIZER-SEQUENCE-COMPLETE-RESULT-2026-10-18.md). Branch: jolly/ysm-analysis-20261016. The project remains unfinished. Older linked reports describe historical states, not today's frontier.
+Read the [compact reuse guide](NATIVE-REUSE-GUIDE-2026-10-18.md) first, then only the linked seam needed. Branch: jolly/ysm-analysis-20261016. The project remains unfinished. The current snapshot below takes precedence over historical next-step statements.
 
-## Latest authoritative frontier
+## Current working snapshot
+
+- **Active static frontier:** renderer consumption/unmasking of finalized batch pointer headers, and selector3 provider output-channel contract. No target execution is needed for these bounded traces.
+- **Latest joined contracts:** [model selection](NATIVE-MODEL-GEOMETRY-SELECTION-RECOVERY-2026-10-18.md) connects optional map and both entry vectors to geometry; [selector initializer](NATIVE-MODEL-SELECTOR-REGISTRATION-RECOVERY-2026-10-18.md) proves native labels1=`main`,2=`arm` under normal fresh construction. [Packing](NATIVE-PRIMITIVE-PACKED-CONSUMER-RECOVERY-2026-10-18.md), [numeric/classifier rules](NATIVE-PRIMITIVE-PAIR-CLASSIFIER-RECOVERY-2026-10-18.md) and [attachment](NATIVE-GEOMETRY-PACKED-ATTACHMENT-RECOVERY-2026-10-18.md) connect serialized records to owned nested buffers and renderer collections. Header pointer triples are XOR-masked after construction; do not inspect them as unconditionally plain pointers.
+- **Provider scope:** [registry/output boundary](NATIVE-PROVIDER-OUTPUT-FORMAT-RECOVERY-2026-10-18.md) distinguishes selectors1..5. [Selector2 PNG](NATIVE-PNG-OUTPUT-CHANNEL-RECOVERY-2026-10-18.md) proves successful-path RGBA8 and IHDR dimensions, so its sampled fourth byte is alpha. Other providers are not generalized. No original asset was decoded.
+- **Runtime frontier unchanged:** explicit initialized forgeclient fixture stops at unmodeled FMLPaths.CONFIGDIR; checkpoint SHA25605122784aea6927c2a8f1d48a2fb16f98e73b0d3919ab48ea4b1725f76d106b1. Two virtual workers remain unexecuted. Do not invent the missing object or assume real RegisterNatives/JNI_OnLoad/render success.
+- **Confidence unchanged:** Java map669 entries (405 CONFIRMED+264 HIGH), SHA256dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30. Whole-project semantic review NOT_RUN; focused reviews have only their stated bounds. Source-range/JSON/link checks are not runtime tests. Authored MT reference passes10 scoped tests; not native execution equivalence.
+
+## Evidence progression (historical order)
+
+
 
 The sixth pinned dependency, mergetool1.1.5-api, resolves Dist.DEDICATED_SERVER. Current main checkpoint: unicorn-jni-dist-next1.checkpoint.json, SHA-256 af930823c9a03c87320194c0edc86b6ddf061bbf244834354538fc77ea65db74. First Forge metadata manager is resolved; GetStaticBooleanField(FMLEnvironment.production) stops because runtime field values are not modeled. Totals:29 method proofs,14 field proofs,123 completed JNI gateway calls. These are metadata proofs, not native bindings. Two virtual workers remain detached/pending/unexecuted; no Java exception is pending.
 
@@ -34,7 +44,7 @@ Use the [compact native reuse guide](NATIVE-REUSE-GUIDE-2026-10-18.md) rather th
 
 [Selector3 root/package](NATIVE-SELECTOR3-SCHEMA-RECOVERY-2026-10-18.md) now joins parsed/copy-owned fields to the deferred builder. [Resource acquisition](NATIVE-SOURCE-ACQUISITION-RECOVERY-2026-10-18.md) proves copied paths, bounded rb reads and borrowed top-level model lifetime without executing a file read. [Modern root/bones](NATIVE-MODERN-MODEL-SCHEMA-RECOVERY-2026-10-18.md), [legacy conversion](NATIVE-LEGACY-MODEL-SCHEMA-RECOVERY-2026-10-18.md) and [versions19..26](NATIVE-MODEL-V19-26-RECOVERY-2026-10-18.md) distinguish root representations throughout accepted versions1..32 and join shared347dd0→348550 bone storage. Native property doubles originate from float32 wire values. [Nested primitive records](NATIVE-BONE-PRIMITIVE-SCHEMA-RECOVERY-2026-10-18.md) have23 float32 values (92 wire bytes), despite0xc0 native stride; semantic position/normal/UV labels are not yet established by the parser alone. Current work follows exact model entry selection into36a6e0 and primitive packing consumers in375e30. Root opaque sections, full validation and runtime model loading remain unproven.
 
-Earlier checkpoints and active-chain statements below are historical; this section takes precedence.
+Earlier checkpoints and active-chain statements below are historical. The current working snapshot at the top takes precedence.
 
 ## Goal and unchanged confidence
 

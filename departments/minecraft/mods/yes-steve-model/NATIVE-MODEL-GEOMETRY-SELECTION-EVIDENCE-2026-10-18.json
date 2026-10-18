@@ -1,0 +1,241 @@
+{
+  "format": "ysm-model-geometry-selection-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "ranges": [
+    {
+      "name": "producer_arguments",
+      "start": "0x36d8c0",
+      "end_exclusive": "0x36d8e6",
+      "sha256": "f2560126773c3b67e7a742be644421efd65b3d481995adac397c6b5571fe7e68",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3594432
+      }
+    },
+    {
+      "name": "optional_map_gate",
+      "start": "0x36d99f",
+      "end_exclusive": "0x36dad6",
+      "sha256": "72412755aa1e9bbd6c38669ec4d0a7ac587bcbd6018185983d1e5699c46e088e",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3594655
+      }
+    },
+    {
+      "name": "map_auxiliary_collection",
+      "start": "0x36dad6",
+      "end_exclusive": "0x36dd7b",
+      "sha256": "4dfdc6437e44e5d4337154b747d9ea682492fdf7a500b2cb8813057b1ace97ce",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3594966
+      }
+    },
+    {
+      "name": "selector_lookup_geometry_calls",
+      "start": "0x36dd7b",
+      "end_exclusive": "0x36e01c",
+      "sha256": "87f505cba49db08b5e32cf6a4f962a6876601e1af2ade2b9d8b791e7013bb863",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3595643
+      }
+    },
+    {
+      "name": "first_vector_selection",
+      "start": "0x36ef0e",
+      "end_exclusive": "0x36f1b6",
+      "sha256": "842411e92e57c4c5563b61a84cee7abeec1e0cd0c42a6d57935dd4f8c02bc41a",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3600142
+      }
+    },
+    {
+      "name": "second_vector_selection",
+      "start": "0x36f704",
+      "end_exclusive": "0x36f9a6",
+      "sha256": "55c6f41e394dc4300a17aba6929b975d35b62204890491f955e32e61455b6257",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3602180
+      }
+    },
+    {
+      "name": "source_aggregate_identity",
+      "start": "0x36a6e0",
+      "end_exclusive": "0x36a7ab",
+      "sha256": "b68c70dd7d9d739d47cbcfc0fea79517a330d7f1c48533d6323d1d98711b8ec5",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3581664
+      }
+    },
+    {
+      "name": "caller_model_lifetime",
+      "start": "0x35d500",
+      "end_exclusive": "0x35d550",
+      "sha256": "cdd671bdeed23b9d4bf1b22903643d6aca6359837480201e2da1e3ac8d1bbe63",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3527936
+      }
+    },
+    {
+      "name": "caller_model_release",
+      "start": "0x35dcae",
+      "end_exclusive": "0x35dcd2",
+      "sha256": "925426cf73f5c667d4bcea36b1f7dea4d5abc55d6a88ed00f0097e65dae3786b",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3529902
+      }
+    }
+  ],
+  "prior_receipts": [
+    {
+      "path": "source-acquisition-contract/evidence.json",
+      "sha256": "07b8f3929b0665f01bed5e300099bfdcd77958d8961a6763520e0388c88b5820"
+    },
+    {
+      "path": "legacy-model-contract/evidence.json",
+      "sha256": "d3bf6e651d9b8993680251216934f54933942d5fd80e88f60e37598cc5f50c8a"
+    },
+    {
+      "path": "model-v19-26-contract/evidence.json",
+      "sha256": "e5c409be9bf386def86c11f060a07d190b986e14a543497f5aff5cf9e749ecd9"
+    },
+    {
+      "path": "model-modern-schema-contract/evidence.json",
+      "sha256": "2ff0539314ec44ea0b673108268627bc122e9afe20b8188c50681414d70c83e0"
+    },
+    {
+      "path": "bone-hierarchy-contract/evidence.json",
+      "sha256": "b9dcb618586745d9d6b3797c8c523b067f49c9931107bfed0d4ffd27654b0d49"
+    },
+    {
+      "path": "geometry-build-contract/evidence.json",
+      "sha256": "d911035f40312c4fcd495f0446d73686b73f60963d0f22f9821478efc6432504"
+    }
+  ],
+  "model_arg": "36d8c0 RDX=M; borrowed",
+  "integer_map": {
+    "presence": "M+140==1",
+    "header": "M+10",
+    "selector_tree_sentinel": "d35ba8",
+    "selector_first": "d35bb8",
+    "selector_count": "d35bc8",
+    "selector_value": "tree node+20 uint32",
+    "source": "matched map node+18",
+    "key1_call": "36df27",
+    "other_key_call": "36dfa2",
+    "missing": "null Java array slot"
+  },
+  "vectors": [
+    {
+      "begin_end": "M+148/M+150",
+      "stride": "348",
+      "source": "E+28",
+      "call": "36f1ad"
+    },
+    {
+      "begin_end": "M+160/M+168",
+      "stride": "348",
+      "source": "E+28",
+      "call": "36f99d"
+    }
+  ],
+  "callee_identity": "36a70a stores RDX as A+0 at stack+160; bone vector uses RDX+8/+10",
+  "ownership": "borrowed model-owned source; prior caller frees model after geometry; no whole-model retention proof",
+  "limits": [
+    "Selector tree initializer/contents/semantic names unproven",
+    "Adapter metadata names and auxiliary collection element meanings unproven",
+    "JNI failure and all exception paths not audited",
+    "No runtime entry selection or constructed geometry claim"
+  ],
+  "target_executed": false,
+  "assets_read": false,
+  "repository_modified": false
+}

@@ -1,0 +1,402 @@
+{
+  "format": "ysm-provider-output-format-static-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "target_executed": false,
+  "emulation_performed": false,
+  "repository_modified": false,
+  "ranges": [
+    {
+      "name": "registration",
+      "start": "0x343fa0",
+      "end_exclusive": "0x34442a",
+      "sha256": "ab00abd0a2062ca7ca0698e454866b542093bc409d035a90ae7158060d2e86d2",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3424160
+      }
+    },
+    {
+      "name": "selector_dispatch_and_copy",
+      "start": "0x4c8000",
+      "end_exclusive": "0x4c81b4",
+      "sha256": "a9b59a0cb3aba3e46bcfe332c4ad1328462b206d4289257e277062423d1918ae",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5013504
+      }
+    },
+    {
+      "name": "allocation_success_path",
+      "start": "0x4c4aa0",
+      "end_exclusive": "0x4c4b74",
+      "sha256": "f3767062c56820c144e71c6070d40028bab1646dd65334815b8fb31cdb079d15",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4999840
+      }
+    },
+    {
+      "name": "byte_copy",
+      "start": "0x5767d0",
+      "end_exclusive": "0x576854",
+      "sha256": "6efa154f166ea083383a880cc3e315513e6babd2a31b40d8097d361395ec47ec",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5728208
+      }
+    },
+    {
+      "name": "selector2_header_call",
+      "start": "0x4ceab0",
+      "end_exclusive": "0x4cec67",
+      "sha256": "1a435b657ba751ec3aed71cff3c70959fbeba02ebb2dcd8503779a5dcb41ec50",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5040816
+      }
+    },
+    {
+      "name": "selector2_output",
+      "start": "0x4cf298",
+      "end_exclusive": "0x4cf2ef",
+      "sha256": "8dc2ca46faeeb50e0c214a69c90665e2d569bc23be8357f9568fcfc12f978b80",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5042840
+      }
+    },
+    {
+      "name": "selector2_header_read",
+      "start": "0x4ea5a0",
+      "end_exclusive": "0x4ea6df",
+      "sha256": "07a601a3e0a2aff8c55dfef7bd1241f7e138f6d4804920aecaac40705b2eeb1f",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5154208
+      }
+    },
+    {
+      "name": "selector3",
+      "start": "0x4ce470",
+      "end_exclusive": "0x4ce56e",
+      "sha256": "fdb6ad350053d85b9fd457f2915ce7e5aa74ac24b031cd148ca63b870e47233b",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5039216
+      }
+    },
+    {
+      "name": "selector4_setup",
+      "start": "0x4d3ff0",
+      "end_exclusive": "0x4d4170",
+      "sha256": "852871d11e10d1d456bdec333f52f6fed1e4eab9681c8320abb55f3fd60c2f97",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5062640
+      }
+    },
+    {
+      "name": "selector5_entry",
+      "start": "0x4cad00",
+      "end_exclusive": "0x4cae60",
+      "sha256": "bb7790c9dce256a21e572e372b7907f57a06c95773e42618a4515378a423bf56",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5025024
+      }
+    },
+    {
+      "name": "selector5_output_setup",
+      "start": "0x4cc135",
+      "end_exclusive": "0x4cc22c",
+      "sha256": "068834d4d59fd648d5b3adc5b1ed004541cce416a5075725c360e9aa3ee5b22a",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5030197
+      }
+    }
+  ],
+  "relocations": [
+    {
+      "slot": "0xd16518",
+      "target": "0x343fa0",
+      "type": "R_X86_64_RELATIVE",
+      "record_va": "0x18da164",
+      "record_backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 7,
+          "address": 25508160,
+          "memory_size": 769184,
+          "file_offset": 23832896,
+          "file_size": 769184,
+          "flags": 6
+        },
+        "file_backed": true,
+        "file_offset": 24383844
+      },
+      "sha256": "20a9fdfe9ea1630cb128a2bc3f6a4773a3a86e59f3182934c17f275e282094c5",
+      "raw_slot": "0000000000000000"
+    },
+    {
+      "slot": "0xd1d700",
+      "target": "0x4ceab0",
+      "type": "R_X86_64_RELATIVE",
+      "record_va": "0x18e9c5c",
+      "record_backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 7,
+          "address": 25508160,
+          "memory_size": 769184,
+          "file_offset": 23832896,
+          "file_size": 769184,
+          "flags": 6
+        },
+        "file_backed": true,
+        "file_offset": 24448092
+      },
+      "sha256": "054a845ca278a34dc33449b5a55dffd9a1c082353bd855b27c66fd3441bc33d5",
+      "raw_slot": "0000000000000000"
+    },
+    {
+      "slot": "0xd1d6c8",
+      "target": "0x4ce470",
+      "type": "R_X86_64_RELATIVE",
+      "record_va": "0x18e9be4",
+      "record_backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 7,
+          "address": 25508160,
+          "memory_size": 769184,
+          "file_offset": 23832896,
+          "file_size": 769184,
+          "flags": 6
+        },
+        "file_backed": true,
+        "file_offset": 24447972
+      },
+      "sha256": "8d31ff7636a4fcaea496917379fd5e55bee685e31784a85983f10788325ac3b2",
+      "raw_slot": "0000000000000000"
+    },
+    {
+      "slot": "0xd1d738",
+      "target": "0x4d3ff0",
+      "type": "R_X86_64_RELATIVE",
+      "record_va": "0x18e9cd4",
+      "record_backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 7,
+          "address": 25508160,
+          "memory_size": 769184,
+          "file_offset": 23832896,
+          "file_size": 769184,
+          "flags": 6
+        },
+        "file_backed": true,
+        "file_offset": 24448212
+      },
+      "sha256": "ec81a4e26cb344ea04747d9629499e591301126f8c48d71e68584e2cc778b130",
+      "raw_slot": "0000000000000000"
+    },
+    {
+      "slot": "0xd1d690",
+      "target": "0x4cad00",
+      "type": "R_X86_64_RELATIVE",
+      "record_va": "0x18e9b6c",
+      "record_backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 7,
+          "address": 25508160,
+          "memory_size": 769184,
+          "file_offset": 23832896,
+          "file_size": 769184,
+          "flags": 6
+        },
+        "file_backed": true,
+        "file_offset": 24447852
+      },
+      "sha256": "f5d8e1edbce3c3e48672b5f152dca93448f2b8150e9cfa5c618ad737fb8289dd",
+      "raw_slot": "0000000000000000"
+    }
+  ],
+  "exploratory_windows": [
+    {
+      "file": "343f80.bin",
+      "start": "0x343f80",
+      "size": 192,
+      "sha256": "83276ac5b3b64e00f2c3ca1598fdb93ed99ab75237829e30e1653ce98a8aba29",
+      "status": "exploratory window; not a complete semantic trace"
+    },
+    {
+      "file": "344000.bin",
+      "start": "0x344000",
+      "size": 1136,
+      "sha256": "339ab83c179a070345e302b57c65e2ccedcf59a99b354088cf9ddddab88ad726",
+      "status": "exploratory window; not a complete semantic trace"
+    },
+    {
+      "file": "4c4aa0.bin",
+      "start": "0x4c4aa0",
+      "size": 384,
+      "sha256": "fee620f7f60e36f69578233433c6fafeebc4c8997266e096da069307853957b6",
+      "status": "exploratory window; not a complete semantic trace"
+    },
+    {
+      "file": "4c7e80.bin",
+      "start": "0x4c7e80",
+      "size": 820,
+      "sha256": "80b2e7cf1c73e9d903fa190297b01dee7929cbfa0a0bd49dd64c5812277e3c00",
+      "status": "exploratory window; not a complete semantic trace"
+    },
+    {
+      "file": "4cad00.bin",
+      "start": "0x4cad00",
+      "size": 13040,
+      "sha256": "2c0200601418488a3a79b211d97a5c1e5320e2ce1f3fab5ada504e0102944a32",
+      "status": "exploratory window; not a complete semantic trace"
+    },
+    {
+      "file": "4ce470.bin",
+      "start": "0x4ce470",
+      "size": 448,
+      "sha256": "1ed0dc39d1281cd7587679cbee3dcfad485895c86086c518f275388cb5b3b048",
+      "status": "exploratory window; not a complete semantic trace"
+    },
+    {
+      "file": "4ceab0.bin",
+      "start": "0x4ceab0",
+      "size": 9632,
+      "sha256": "483d76aa34a884779c7cf90c96b0428dea3d32c9a879e42d69265931021b38d0",
+      "status": "exploratory window; not a complete semantic trace"
+    },
+    {
+      "file": "4d3ff0.bin",
+      "start": "0x4d3ff0",
+      "size": 14624,
+      "sha256": "9d4448ec30edae8e8a7ceafb8462d2c8f8eea8a948ddcfc0e5b17917f39487b3",
+      "status": "exploratory window; not a complete semantic trace"
+    },
+    {
+      "file": "4ea5a0.bin",
+      "start": "0x4ea5a0",
+      "size": 688,
+      "sha256": "85c27c8e731689b2e98b7723b851ffa17e636e1c7a71c759300040177c344f5c",
+      "status": "exploratory window; not a complete semantic trace"
+    },
+    {
+      "file": "5767d0.bin",
+      "start": "0x5767d0",
+      "size": 128,
+      "sha256": "fcb0546ef79f0dc54f8021e8969e72ad0ab688e11c9b8c31f455d3b673dda0cf",
+      "status": "exploratory window; not a complete semantic trace"
+    }
+  ],
+  "init_array": {
+    "start": "0xd163d8",
+    "size": 360
+  },
+  "prior_receipt_sha256": "9c2d05d0f41bc891eefc53ec6eed5b8c44e895f30a6d09d5a6cbdbde62925817"
+}

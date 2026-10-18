@@ -1,0 +1,278 @@
+{
+  "prior_primitive_receipt_sha256": "238ef3bc8bed8a8bae14fbbbb2e26b66eeb9e626eee14deb1cc64057acdb09fd",
+  "format": "ysm-primitive-packed-consumer-static-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "target_executed": false,
+  "emulation_performed": false,
+  "repository_modified": false,
+  "ranges": [
+    {
+      "name": "builder_args",
+      "start": "0x375e30",
+      "end_exclusive": "0x375eb5",
+      "sha256": "0461926963716637cb80b6a132bd7a3309191e668592dbd872ade6d59fd9c476",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3628592
+      }
+    },
+    {
+      "name": "wrapper_selection",
+      "start": "0x375fc5",
+      "end_exclusive": "0x375fe5",
+      "sha256": "6cd0b4c7b413aa8c202d46c67275c1b79ab9b4a04cf1126111e03f78adc7d4a3",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3628997
+      }
+    },
+    {
+      "name": "group_selection",
+      "start": "0x376c0d",
+      "end_exclusive": "0x376c72",
+      "sha256": "9858da13c4f8898d6ec3609b6c74ec733a47e12579235d0d3e386518e66a9430",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3632141
+      }
+    },
+    {
+      "name": "inner_iteration_and_pack",
+      "start": "0x3774b0",
+      "end_exclusive": "0x377613",
+      "sha256": "360c50a41d01446df9b75432dbb14b0549166a9ec808125f82e171f135d7f22b",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3634352
+      }
+    },
+    {
+      "name": "pair_scale_prefix",
+      "start": "0x377613",
+      "end_exclusive": "0x377687",
+      "sha256": "5576260b913689f64f81b6eeaf2c2b022280f0d8116339f66d41f6c2d8b7249e",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3634707
+      }
+    },
+    {
+      "name": "scalar_loads_and_branch",
+      "start": "0x377e34",
+      "end_exclusive": "0x377ebe",
+      "sha256": "d44116e68498b1e34c8a960bef467e1e1eac4766ba2e39741acc6e92803c99af",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3636788
+      }
+    },
+    {
+      "name": "alternate_pack",
+      "start": "0x3780e0",
+      "end_exclusive": "0x37819a",
+      "sha256": "513d181ba4bc9a268182b5f7f064f8bc4d4dd3c318d7d29c16b5748ca6947279",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3637472
+      }
+    },
+    {
+      "name": "caller_args_save",
+      "start": "0x36a6e0",
+      "end_exclusive": "0x36a712",
+      "sha256": "1171ae07cba74ff811ba2203e58f8e5c0ba0b967b36cce2d38d8e65e11723828",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3581664
+      }
+    },
+    {
+      "name": "caller_pair_save",
+      "start": "0x36a81a",
+      "end_exclusive": "0x36a82a",
+      "sha256": "d18e1b1cfcf277156dcc7a434e18a63aaf3053e6914e1fe85bf90f70c1939be1",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3581978
+      }
+    },
+    {
+      "name": "caller_builder_call",
+      "start": "0x36b164",
+      "end_exclusive": "0x36b197",
+      "sha256": "bbcb967136a7a605343efe7f77c02cc6a3296ea8483b55164edcfb7382b3eb82",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3584356
+      }
+    },
+    {
+      "name": "external_vector_build",
+      "start": "0x36da01",
+      "end_exclusive": "0x36daaf",
+      "sha256": "02a62172dcb911cd8a9e63f5038419262af7d35f532db6e5dd0fa4848441b131",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3594753
+      }
+    },
+    {
+      "name": "external_item_build",
+      "start": "0x36db11",
+      "end_exclusive": "0x36db91",
+      "sha256": "a98055af94586dc743776a2cd6057186f6c6fe8ae8b75164bd3889d5fb3401bf",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3595025
+      }
+    },
+    {
+      "name": "external_vector_argument",
+      "start": "0x36dea2",
+      "end_exclusive": "0x36df2c",
+      "sha256": "20003cb7e5e02bcad18b90840f1c21d83705e5d13aafc1f881ed44e5af1e64f6",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3595938
+      }
+    },
+    {
+      "name": "pair_provider",
+      "start": "0x4c8000",
+      "end_exclusive": "0x4c812f",
+      "sha256": "94c0ad06b3ac7977476b0f80b9eaac8d13fddfbea40462b444d17ef620950899",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5013504
+      }
+    }
+  ],
+  "relocations": [],
+  "scope": "Selected aligned sequences only, no complete decoder or runtime validation"
+}
