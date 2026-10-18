@@ -1,0 +1,718 @@
+{
+  "format": "ysm-client-native-startup-static-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "jar_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "ranges": [
+    {
+      "id": "entry",
+      "start": "0x3bc7c0",
+      "end_exclusive": "0x3bee40",
+      "sha256": "c9b7734e7b38641348f8675261cacf7327cb6ee20a23832cd8a5492d731720f8",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3917760
+      }
+    },
+    {
+      "id": "module_search",
+      "start": "0x41d110",
+      "end_exclusive": "0x41d500",
+      "sha256": "bcd41d4d356cbd7b3ae2cbf85ed350370caace739dd45f6d49927612104f6758",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4313360
+      }
+    },
+    {
+      "id": "resolve_exports",
+      "start": "0x41d500",
+      "end_exclusive": "0x41db40",
+      "sha256": "5a6d00dcf21d6397e4ce8f057e88d84b32a831d00f1b8adab0e53121d8626c90",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4314368
+      }
+    },
+    {
+      "id": "cleanup_callback",
+      "start": "0x328590",
+      "end_exclusive": "0x328685",
+      "sha256": "51dcb2cdcdab62b7f6ded52257452efac808119e7db0ee3c154a78dee382d59f",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3310992
+      }
+    },
+    {
+      "id": "cleanup_request_prefix",
+      "start": "0x39d9a0",
+      "end_exclusive": "0x39da01",
+      "sha256": "2722e39fde97d239464dff4cb789681ee38b61e11aef98f2aa76ce596b1c16fb",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3791264
+      }
+    },
+    {
+      "id": "extra_registration_callbacks",
+      "start": "0x33a470",
+      "end_exclusive": "0x33a510",
+      "sha256": "0d65cc24f8d62aa64efb3c78dab15f4aae068fa99aa365b8ae1f4e261099eb4a",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3384432
+      }
+    },
+    {
+      "id": "registration_dispatch_prefix",
+      "start": "0x327000",
+      "end_exclusive": "0x3270d5",
+      "sha256": "ae675cd62da642bbfa53dfe0a15c4d28d05fa70fd6f42244ed1a426e055fcb86",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3305472
+      }
+    },
+    {
+      "id": "java_exception_helper",
+      "start": "0x328900",
+      "end_exclusive": "0x328960",
+      "sha256": "02fe4f350c1643f148e2a94785306b7ec7956d7588b4feecd0ebb05b96aa7d39",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3311872
+      }
+    },
+    {
+      "id": "static_object_call",
+      "start": "0x3654b0",
+      "end_exclusive": "0x36553a",
+      "sha256": "9883cd12a4c31a12f2b848753db114cac5a0b5c99f7f51fef983118625286378",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3560624
+      }
+    },
+    {
+      "id": "worker_wrapper",
+      "start": "0x41acf0",
+      "end_exclusive": "0x41b030",
+      "sha256": "a16d6860009a1357cf9f55bd6c7dd67df3ce03f851e5b918d284c890d234ec7a",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4304112
+      }
+    },
+    {
+      "id": "worker_move",
+      "start": "0x39d470",
+      "end_exclusive": "0x39d584",
+      "sha256": "4c44a018605ddbb246a1e9f85579d66c55c3b4c562e42a44fc50ad5aad06c4a3",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3789936
+      }
+    },
+    {
+      "id": "shutdown_registry",
+      "start": "0x3dbaf0",
+      "end_exclusive": "0x3dbd20",
+      "sha256": "e4e4d35c0e02b1a67236b7c3c7f6dd0748a78b1cc7f601f29218c35480395c12",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4045552
+      }
+    },
+    {
+      "id": "worker_count_source",
+      "start": "0x2fcdf0",
+      "end_exclusive": "0x2fce30",
+      "sha256": "4b0261f6d591c3f949229b1fa97058f7d1d7b2532dc43b493d872cd39b93bdc2",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3132912
+      }
+    }
+  ],
+  "binding": {
+    "callback": "0x418600",
+    "native": "0x3bc7c0",
+    "registration_flags": 2,
+    "source": "0x449b1",
+    "source_length": 97,
+    "source_sha256": "8857e23b852f38e89c88f76dc38cf94b430e40851f0097c1b4134436ebd0d186",
+    "callback_sha256": "eb85399d59ca37078ee6a8a795e0be5201d2c64e1c6cb5fde9a5d828fd3c2fc8",
+    "stop": {
+      "reason": "ENTRY_RETURN",
+      "pc": 4294175,
+      "address": 140733193388032,
+      "size": 0
+    },
+    "segments": [
+      {
+        "reason": "ENTRY_RETURN",
+        "pc": 4294175,
+        "address": 140733193388032,
+        "size": 0
+      }
+    ],
+    "attempted": 1740101,
+    "completed": 1740101,
+    "payload": "Lcom/elfmcys/yesstevemodel/OOoo00oOOoooooooooOooOOo;Oo0Oo0o00O00Oo0OOoOOoooo()Ljava/lang/Object;",
+    "payload_sha256": "d425031793116638927a78f23b1218f357c69578b3f07dc0ae65e2e80410ac99",
+    "owner": "com/elfmcys/yesstevemodel/OOoo00oOOoooooooooOooOOo",
+    "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+    "descriptor": "()Ljava/lang/Object;",
+    "class_sha256": "e80665f6d0cb75575317442b177dbc720a53734f0153c9a9485bc8932513fe7d",
+    "access": 265,
+    "acc_native": true,
+    "static": true,
+    "pairing_instruction_evidence": {
+      "callback": "0x418600",
+      "native": "0x3bc7c0",
+      "callback_lea": "0x414d03",
+      "callback_store_plus_18": "0x414d43",
+      "native_lea": "0x414d47",
+      "native_store_plus_20": "0x414d4e",
+      "instructions": [
+        {
+          "role": "callback_lea",
+          "address": "0x414d03",
+          "bytes": "4c8d2df6380000",
+          "sha256": "07e2a2f9d5dad17978b6780e054c498b251916c65aa3c1a51cf02a62681ed9d1"
+        },
+        {
+          "role": "callback_store",
+          "address": "0x414d43",
+          "bytes": "4c896d18",
+          "sha256": "7ef41b2f1fd47d6c2feace084ed64ce949da2a0869f7f57d0b74ec9fce802e27"
+        },
+        {
+          "role": "native_lea",
+          "address": "0x414d47",
+          "bytes": "488d05727afaff",
+          "sha256": "13c47a1b1772f4def753738b36fe56d29b50ebe82ca5092bad92abe65097a7c9"
+        },
+        {
+          "role": "native_store",
+          "address": "0x414d4e",
+          "bytes": "48894520",
+          "sha256": "cc01a458feea1b149ba6358c4beffe35bdbfbc9f64c25dde700cc126ee67a42a"
+        }
+      ]
+    }
+  },
+  "imports": [
+    {
+      "entry": "0xd146d0",
+      "first_slot": "0xd307f0",
+      "stub": "0x13d6e6c",
+      "proof": {
+        "slot": "0x184d028",
+        "raw_value": "0x148d264",
+        "relocation_type": 7,
+        "symbol_index": 6,
+        "symbol_name": "dlsym",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    },
+    {
+      "entry": "0xd146f0",
+      "first_slot": "0xd30800",
+      "stub": "0x13d6e78",
+      "proof": {
+        "slot": "0x184d038",
+        "raw_value": "0x14fa167",
+        "relocation_type": 7,
+        "symbol_index": 8,
+        "symbol_name": "dlopen",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    },
+    {
+      "entry": "0xd14a00",
+      "first_slot": "0xd30988",
+      "stub": "0x13d6f8c",
+      "proof": {
+        "slot": "0x184d1a8",
+        "raw_value": "0x15eda1c",
+        "relocation_type": 7,
+        "symbol_index": 54,
+        "symbol_name": "dl_iterate_phdr",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    },
+    {
+      "entry": "0xd14e80",
+      "first_slot": "0xd30bc8",
+      "stub": "0x13d713c",
+      "proof": {
+        "slot": "0x184d3e8",
+        "raw_value": "0x14f0844",
+        "relocation_type": 7,
+        "symbol_index": 131,
+        "symbol_name": "__tls_get_addr",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    },
+    {
+      "entry": "0xd14790",
+      "first_slot": "0xd30850",
+      "stub": "0x13d6ea2",
+      "proof": {
+        "slot": "0x184d070",
+        "raw_value": "0x162887e",
+        "relocation_type": 7,
+        "symbol_index": 15,
+        "symbol_name": "pthread_mutex_lock",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    },
+    {
+      "entry": "0xd147b0",
+      "first_slot": "0xd30860",
+      "stub": "0x13d6eae",
+      "proof": {
+        "slot": "0x184d080",
+        "raw_value": "0x1598bf2",
+        "relocation_type": 7,
+        "symbol_index": 17,
+        "symbol_name": "pthread_mutex_unlock",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    }
+  ],
+  "lwjgl_exports": [
+    {
+      "instruction": "0x3bcc36",
+      "address": "0x41f9f",
+      "text": "Java_org_lwjgl_opengl_GL11C_nglTexImage2D__IIIIIIIIJ",
+      "sha256": "9b56399af32f9db6b4a480dcabf70b11b63bb8b7f1a441aba69cb4d4bb3dcba2"
+    },
+    {
+      "instruction": "0x3bcc4c",
+      "address": "0x4036c",
+      "text": "Java_org_lwjgl_opengl_GL11C_nglTexSubImage2D__IIIIIIIIJ",
+      "sha256": "130e57b61dc75f39f58c788cec3ddb9d940f826f8c18e3f42233cc82a34b0c55"
+    },
+    {
+      "instruction": "0x3bcc62",
+      "address": "0x47897",
+      "text": "Java_org_lwjgl_opengl_GL11C_glTexParameteri",
+      "sha256": "89e23c4d303142517bbc7d3e8fc836ac398319b26295da64f46a88f19f2d4930"
+    },
+    {
+      "instruction": "0x3bcc78",
+      "address": "0x44e7f",
+      "text": "Java_org_lwjgl_opengl_GL11C_glTexParameterf",
+      "sha256": "17cb1df1af25de23b074b422540e133c5696f3cb336d25d978671c15de365afa"
+    },
+    {
+      "instruction": "0x3bcc97",
+      "address": "0x3ea65",
+      "text": "Java_org_lwjgl_opengl_GL11C_glPixelStorei",
+      "sha256": "b64b835df823680c5b49d4693e1176d102eae1658391c3a38ab5e3aa301b3a1f"
+    },
+    {
+      "instruction": "0x3bccad",
+      "address": "0x460b3",
+      "text": "Java_org_lwjgl_opengl_GL11C_nglGenTextures__IJ",
+      "sha256": "ae573436a691488b1891845a4be285d5fe8feaae199edf901151f6ded57cdba7"
+    },
+    {
+      "instruction": "0x3bccc3",
+      "address": "0x3dc10",
+      "text": "Java_org_lwjgl_opengl_GL11C_nglDeleteTextures__IJ",
+      "sha256": "437d135735e9ddfea6ba219b6c6289ba590276fce6a6389fe6c2f8d0b1511b77"
+    },
+    {
+      "instruction": "0x3bccd9",
+      "address": "0x3fe9f",
+      "text": "Java_org_lwjgl_opengl_GL11C_glBindTexture",
+      "sha256": "abd880e03839e8946900fb8ccf40474360b7138c7cec6ddca3b428bc04114272"
+    },
+    {
+      "instruction": "0x3bccef",
+      "address": "0x419a0",
+      "text": "Java_org_lwjgl_opengl_GL44C_nglBindTextures__IIJ",
+      "sha256": "3f377de72b89d61cd9eb7e9b753b002ac9a7c50949957ea93a48b28572d0f1b1"
+    },
+    {
+      "instruction": "0x3bcd05",
+      "address": "0x3ea8f",
+      "text": "Java_org_lwjgl_opengl_GL11C_glDrawArrays",
+      "sha256": "b3342d5e61693e6ae150f8f7d677dd00bed57870f7ce4eeec36e3a6018aa9571"
+    },
+    {
+      "instruction": "0x3bcd1b",
+      "address": "0x443ff",
+      "text": "Java_org_lwjgl_opengl_GL11_glEnableClientState",
+      "sha256": "57a011bab8d7b2c037a289a99560844accde7bbe2ca4dbe163115c175dca6ddb"
+    },
+    {
+      "instruction": "0x3bcd31",
+      "address": "0x435ef",
+      "text": "Java_org_lwjgl_opengl_GL11_glDisableClientState",
+      "sha256": "f06261b1d016a744df94687dcf4b373375cf785a8ca6290a746ead8cefc5cf4e"
+    },
+    {
+      "instruction": "0x3bcd47",
+      "address": "0x3f367",
+      "text": "Java_org_lwjgl_opengl_GL13_glClientActiveTexture",
+      "sha256": "e0e90784996761858e394628400f7c7de2cb9200a058cd8f4a7a4ccf9ec0a62f"
+    },
+    {
+      "instruction": "0x3bcd5d",
+      "address": "0x44ab4",
+      "text": "Java_org_lwjgl_opengl_GL11_nglVertexPointer",
+      "sha256": "3d3cbaecd486b376c7f7fe31a5d8156e5308cfeef263632c9bda9be8ed4c2ec2"
+    },
+    {
+      "instruction": "0x3bcd73",
+      "address": "0x419d1",
+      "text": "Java_org_lwjgl_opengl_GL11_nglNormalPointer",
+      "sha256": "2c54b709758891dc844c0f01f8e083210f2166022c5c5b2af99d2ff41db13ba2"
+    },
+    {
+      "instruction": "0x3bcd89",
+      "address": "0x42bb0",
+      "text": "Java_org_lwjgl_opengl_GL11_nglColorPointer",
+      "sha256": "7ea87a22604bb1b3f78177d8a10a3c3758a981bcb97c92f8efda0a37faacea8e"
+    },
+    {
+      "instruction": "0x3bcd9f",
+      "address": "0x41482",
+      "text": "Java_org_lwjgl_opengl_GL11_nglTexCoordPointer",
+      "sha256": "a9014eaf850949769819a8ab2619fd09f7704aa90321204b512e85091447b8f6"
+    },
+    {
+      "instruction": "0x3bcdb5",
+      "address": "0x414b0",
+      "text": "Java_org_lwjgl_opengl_GL20C_glEnableVertexAttribArray",
+      "sha256": "5cefe798042637a6ec177fa0202e9a64885d979b6f8661c0535c67c2ccc2900b"
+    },
+    {
+      "instruction": "0x3bcdcb",
+      "address": "0x472e6",
+      "text": "Java_org_lwjgl_opengl_GL20C_nglVertexAttribPointer",
+      "sha256": "bcfca1e8c093828b0eb780ebc2b5f20eee60161b6d6fb3e1ffdb628391bb6cd5"
+    },
+    {
+      "instruction": "0x3bcdea",
+      "address": "0x45cf3",
+      "text": "Java_org_lwjgl_opengl_GL20C_glDisableVertexAttribArray",
+      "sha256": "677ab10114118fd59bd9e47f08c550531be3c742cad018214d6e2c8288251a72"
+    },
+    {
+      "instruction": "0x3bce00",
+      "address": "0x3dc42",
+      "text": "Java_org_lwjgl_opengl_GL11C_nglGetIntegerv__IJ",
+      "sha256": "9caa82cbcdb3af18e8f2efe460d9b0e63f85841b8eedf7e4101f94ef21ed42f6"
+    },
+    {
+      "instruction": "0x3bce16",
+      "address": "0x452ce",
+      "text": "Java_org_lwjgl_opengl_GL43C_glCopyImageSubData",
+      "sha256": "ffd278f559ced095e3a866463155419693bb663e0ce0b63dc7f803bbeff37593"
+    },
+    {
+      "instruction": "0x3bce35",
+      "address": "0x3dc71",
+      "text": "Java_org_lwjgl_opengl_GL11C_nglGetTexImage__IIIIJ",
+      "sha256": "7740bab41e7b673a5c4c0a5fc498cbead84d9b84b115d8bb5799921d47593a68"
+    },
+    {
+      "instruction": "0x3bce54",
+      "address": "0x403a4",
+      "text": "Java_org_lwjgl_opengl_GL45C_nglGetTextureSubImage__IIIIIIIIIIIJ",
+      "sha256": "5fab99bcaa26b6380a0ad49a118c0c89ee9c2c3bae4a0e11ed9981602ae0a835"
+    },
+    {
+      "instruction": "0x3bce73",
+      "address": "0x42bdb",
+      "text": "Java_org_lwjgl_opengl_GL42C_glBindImageTexture",
+      "sha256": "c34527faca5caf10207f0784f6f246c397f8e9bcecad292daf1d940f11e5e6fe"
+    },
+    {
+      "instruction": "0x3bce92",
+      "address": "0x40de5",
+      "text": "Java_org_lwjgl_opengl_GL44C_nglBindImageTextures__IIJ",
+      "sha256": "baeeefce961311de1b49f58390006bebe985583971240c7de96ea5dc92efd70f"
+    },
+    {
+      "instruction": "0x3bcea8",
+      "address": "0x46f1e",
+      "text": "Java_org_lwjgl_opengl_GL43C_glTextureView",
+      "sha256": "c9be0aa97aac4f1c58e2cf11198244f1a892dc5d6e44c8e415aa99f77ee14404"
+    },
+    {
+      "instruction": "0x3bcec7",
+      "address": "0x47319",
+      "text": "Java_org_lwjgl_opengl_GL31C_glTexBuffer",
+      "sha256": "8ca933c3f0370e125441552aeeeab7ea1bd537ea39d1e0aaa9007da56adeebaa"
+    },
+    {
+      "instruction": "0x3bcedd",
+      "address": "0x414e6",
+      "text": "Java_org_lwjgl_opengl_GL43C_glTexBufferRange",
+      "sha256": "ba0b7826e6a19afd9c73dc5e2bdd2c49e82e7a8dac2cd6c7ec98004f31803ad7"
+    },
+    {
+      "instruction": "0x3bcef3",
+      "address": "0x3ee64",
+      "text": "Java_org_lwjgl_opengl_GL45C_glTextureBuffer",
+      "sha256": "3f2b401153f9e39ae1fcd994be1e53b1d49effb319ac35fbd4e4e417869e8a84"
+    },
+    {
+      "instruction": "0x3bcf09",
+      "address": "0x41fd4",
+      "text": "Java_org_lwjgl_opengl_GL45C_glTextureBufferRange",
+      "sha256": "9d1612268286412a05b8bc7a51c0f9679374089aede39d8a96c9c9abaaabec04"
+    },
+    {
+      "instruction": "0x3bcf1f",
+      "address": "0x419fd",
+      "text": "Java_org_lwjgl_opengl_GL32C_glFramebufferTexture",
+      "sha256": "cba5de30fddbb0bf579082c7bc92d926639c41f07aafdda2b05abd3a2585b586"
+    },
+    {
+      "instruction": "0x3bcf35",
+      "address": "0x3dca3",
+      "text": "Java_org_lwjgl_opengl_GL30C_glFramebufferTexture2D",
+      "sha256": "6b7cc3176beebafafecbaa28984b410f54e8dcd401bb54a606c1776659f0d18a"
+    },
+    {
+      "instruction": "0x3bcf4b",
+      "address": "0x43198",
+      "text": "Java_org_lwjgl_opengl_GL30C_glFramebufferTextureLayer",
+      "sha256": "0776f5fb19e896ded8a0ac7fde19511347c76ef903c171429ff07df93b873921"
+    },
+    {
+      "instruction": "0x3bcf61",
+      "address": "0x44eab",
+      "text": "Java_org_lwjgl_opengl_GL45C_glNamedFramebufferTexture",
+      "sha256": "76125cd57a226c47049a4a42196453143da9bfe6e6afd4e9ad495a76f03aca0e"
+    },
+    {
+      "instruction": "0x3bcf77",
+      "address": "0x3f398",
+      "text": "Java_org_lwjgl_opengl_GL45C_glNamedFramebufferTextureLayer",
+      "sha256": "5439213ac3b00979930dc29b17630df46c85fd2d4a9701efd6c96fd87af945b9"
+    },
+    {
+      "instruction": "0x3bcf8d",
+      "address": "0x40a16",
+      "text": "Java_org_lwjgl_opengl_EXTFramebufferObject_glFramebufferTexture2DEXT",
+      "sha256": "7c999a17c816b66044eefcfdba52f2aa2d0181974cf2d5d1ed6fa5247f83e03a"
+    }
+  ],
+  "additional_registration": [
+    {
+      "callback": "0x33a470",
+      "source": "0x43370",
+      "source_length": 47,
+      "source_sha256": "34771149f98af66845a8ceb8a0082e35cfa1bfcc2f32e8e4ffbb40ee25328a45",
+      "native": "0x3c2320",
+      "flags": 2,
+      "identity": "UNDECODED"
+    },
+    {
+      "callback": "0x33a490",
+      "source": "0x3dedd",
+      "source_length": 47,
+      "source_sha256": "5677353d1bfadf803e0172588f612a1d1406d259a731a7e1e00fcea2fc4ff621",
+      "native": "0x3c2560",
+      "flags": 2,
+      "identity": "UNDECODED"
+    },
+    {
+      "callback": "0x33a4b0",
+      "source": "0x42da9",
+      "source_length": 61,
+      "source_sha256": "57b1a58b19a18bbd1955f6fa576238b5327b2d07027af0a5885ef51aad529f2d",
+      "native": "0x3c2650",
+      "flags": 2,
+      "identity": "UNDECODED"
+    },
+    {
+      "callback": "0x33a4d0",
+      "source": "0x4279c",
+      "source_length": 61,
+      "source_sha256": "ba904e83923d118aaa89a48a12a58c49b18efef2b92c8f356283d68e5a15de10",
+      "native": "0x3c2740",
+      "flags": 2,
+      "identity": "UNDECODED"
+    },
+    {
+      "callback": "0x33a4f0",
+      "source": "0x42de6",
+      "source_length": 49,
+      "source_sha256": "b9d9af857ea06b1904b375e68fa62ea38e75b9712c9db5edea72fcf437b210e7",
+      "native": "0x3c2830",
+      "flags": 2,
+      "identity": "UNDECODED"
+    }
+  ],
+  "source_evidence": [
+    {
+      "path": "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/CLIENT-COMPAT-INITIALIZATION-EVIDENCE-2026-10-17.json",
+      "sha256": "424a4858eab57e0a2d3671a5078421068c213f8a88dcedbeade2f40584c79e49"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/CLIENT-COMPAT-INITIALIZATION-RECOVERY-2026-10-17.md",
+      "sha256": "d809cc3ab372a8e3b3ae8e953b052a1ea228919dfaa36765849ed76610d09ddd"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/NATIVE-EXACT-BINDINGS-2026-10-18.json",
+      "sha256": "c907e34e24f0cca48e4746aee3e92219bd0b8428bcd51a659921fd49d48b1e1d"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/NATIVE-RENDER-BACKENDS-RECOVERY-2026-10-18.md",
+      "sha256": "21c85c0cd924e2a6f44c076f8f1d616e80380421eb09674c279f3d20bc93b7ef"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/NATIVE-REGISTRATION-MECHANISM-2026-10-18.md",
+      "sha256": "1fb2e17d53ffc9176dca180acc60dd10fbbb7cb80affd40ce6668aeea968f421"
+    }
+  ],
+  "module_filename": {
+    "parts": [
+      {
+        "address": "0x3aae0",
+        "bytes": "6c69626c776a676c5f6f70656e676c2e"
+      },
+      {
+        "address": "0x39890",
+        "bytes": "736f"
+      }
+    ],
+    "text": "liblwjgl_opengl.so"
+  },
+  "target_executed": false,
+  "JVM_executed": false,
+  "emulation_performed": false,
+  "repository_edits": false
+}

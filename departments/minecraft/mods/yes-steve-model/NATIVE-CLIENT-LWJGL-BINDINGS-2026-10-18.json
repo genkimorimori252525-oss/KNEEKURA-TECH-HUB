@@ -1,0 +1,374 @@
+{
+  "format": "ysm-client-startup-registration-five-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "jar_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "checkpoint_sha256": "5910f1c5b52de7aeb2313ae9885bc22fd385a27815885516287cd319e4271d84",
+  "java_base_sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+  "state_model": "Independent next6 checkpoint clone; five sequential metadata callbacks with fresh synthetic frames. No interrupted JNI continuation.",
+  "runtime_RegisterNatives_success": false,
+  "runtime_client_startup_proven": false,
+  "coverage": "Separate five descriptors assembled inside native entry 0x3bc7c0; does not alter the original17 declaration-set receipt",
+  "registration_callsite": {
+    "address": "0x3bd5d8",
+    "target": "0x327000",
+    "mode": 0,
+    "mode_and_call_bytes": "31d2e8239af6ff"
+  },
+  "bindings": [
+    {
+      "callback": "0x33a470",
+      "native": "0x3c2320",
+      "registration_flags": 2,
+      "source": "0x43370",
+      "source_length": 47,
+      "callback_sha256": "2b477b58a7a3370af085edd218efd4ff522fb36e6862b707f116351a330d2878",
+      "source_sha256": "34771149f98af66845a8ceb8a0082e35cfa1bfcc2f32e8e4ffbb40ee25328a45",
+      "instruction_evidence": [
+        {
+          "role": "callback_lea",
+          "address": "0x3bcfed",
+          "bytes": "488d057cd4f7ff",
+          "sha256": "79409205a2c50af1c08e44f1ff952c692d011d7fab50a7bf514708cd460a3976"
+        },
+        {
+          "role": "callback_store",
+          "address": "0x3bcff4",
+          "bytes": "49894718",
+          "sha256": "fc6cedbf0f94b46e3684d475d16a7458f529e5b65f62986bb4bcde37573fdd25"
+        },
+        {
+          "role": "native_lea",
+          "address": "0x3bcff8",
+          "bytes": "488d0521530000",
+          "sha256": "0f086fda3d76f9d983d04586190105cbb4d98e40acb37775ba52b5f46c155b77"
+        },
+        {
+          "role": "native_store",
+          "address": "0x3bcfff",
+          "bytes": "49894720",
+          "sha256": "e5a2963b961386cdbbdfab4cb18f608df2fe7896fd9b247033fa82855269ee0a"
+        }
+      ],
+      "stop": {
+        "reason": "ENTRY_RETURN",
+        "pc": 3384463,
+        "address": 140733193388032,
+        "size": 0
+      },
+      "segments": [
+        {
+          "stop": {
+            "reason": "ENTRY_RETURN",
+            "pc": 3384463,
+            "address": 140733193388032,
+            "size": 0
+          },
+          "attempted": 1172445,
+          "completed": 1172445
+        }
+      ],
+      "payload": "Lorg/lwjgl/opengl/GL11C;nglDeleteTextures(IJ)V",
+      "payload_sha256": "a734a51ac526666d1cdc61a4bfa5882a7a44e324ce5c646ead516af74242ac68",
+      "owner": "org/lwjgl/opengl/GL11C",
+      "name": "nglDeleteTextures",
+      "descriptor": "(IJ)V",
+      "classfile_status": "exact_declared_dependency_match",
+      "acc_native": true,
+      "static": true,
+      "access": 265,
+      "class_sha256": "557eadf8676d1a99a996fb7fbf04fdf4ff8d08252b3ec0e4c8192bd98b09353b",
+      "source_artifact": {
+        "id": "lwjgl-opengl-3.3.1",
+        "sha256": "e436d2144f3a36fff772fd64233316809b795f390defd4d55660fc686e7c2834",
+        "archive_kind": "jar",
+        "entry_count": 484
+      }
+    },
+    {
+      "callback": "0x33a490",
+      "native": "0x3c2560",
+      "registration_flags": 2,
+      "source": "0x3dedd",
+      "source_length": 47,
+      "callback_sha256": "f24e9d77737d8da66c4ce23a9c7b856699176ad79cd1f0b8f9051ade13720540",
+      "source_sha256": "5677353d1bfadf803e0172588f612a1d1406d259a731a7e1e00fcea2fc4ff621",
+      "instruction_evidence": [
+        {
+          "role": "callback_lea",
+          "address": "0x3bd02c",
+          "bytes": "488d1d5dd4f7ff",
+          "sha256": "c428692706ff9bc5d21ca9ec08ea8db2252b6da480a44a4824a95caa013c69e2"
+        },
+        {
+          "role": "callback_store",
+          "address": "0x3bd068",
+          "bytes": "49895e48",
+          "sha256": "1a18fd5ee69c5f7503cc1d2de2c0f4ae39227a302454b62e818df58218acc714"
+        },
+        {
+          "role": "native_lea",
+          "address": "0x3bd06c",
+          "bytes": "488d05ed540000",
+          "sha256": "a165d34bf8159c7d3b9cbae2c05a434d271730a9453b80d388c1faa81a7b42f6"
+        },
+        {
+          "role": "native_store",
+          "address": "0x3bd073",
+          "bytes": "49894650",
+          "sha256": "5893f3bf711b3026161bcceff6503da6769b254e6a99ce13e46164a97b08e766"
+        }
+      ],
+      "stop": {
+        "reason": "ENTRY_RETURN",
+        "pc": 3384495,
+        "address": 140733193388032,
+        "size": 0
+      },
+      "segments": [
+        {
+          "stop": {
+            "reason": "ENTRY_RETURN",
+            "pc": 3384495,
+            "address": 140733193388032,
+            "size": 0
+          },
+          "attempted": 1146475,
+          "completed": 1146475
+        }
+      ],
+      "payload": "Lorg/lwjgl/opengl/GL11C;nglGetTexImage(IIIIJ)V",
+      "payload_sha256": "fef5986b4367bc859492bb66be712ac8316514748c5f05473f295f63795430ec",
+      "owner": "org/lwjgl/opengl/GL11C",
+      "name": "nglGetTexImage",
+      "descriptor": "(IIIIJ)V",
+      "classfile_status": "exact_declared_dependency_match",
+      "acc_native": true,
+      "static": true,
+      "access": 265,
+      "class_sha256": "557eadf8676d1a99a996fb7fbf04fdf4ff8d08252b3ec0e4c8192bd98b09353b",
+      "source_artifact": {
+        "id": "lwjgl-opengl-3.3.1",
+        "sha256": "e436d2144f3a36fff772fd64233316809b795f390defd4d55660fc686e7c2834",
+        "archive_kind": "jar",
+        "entry_count": 484
+      }
+    },
+    {
+      "callback": "0x33a4b0",
+      "native": "0x3c2650",
+      "registration_flags": 2,
+      "source": "0x42da9",
+      "source_length": 61,
+      "callback_sha256": "892a3b02df9ff9631d3d86bae4315e9d27c61a508c9851649fe5528826a86d47",
+      "source_sha256": "57b1a58b19a18bbd1955f6fa576238b5327b2d07027af0a5885ef51aad529f2d",
+      "instruction_evidence": [
+        {
+          "role": "callback_lea",
+          "address": "0x3bd114",
+          "bytes": "488d1d95d3f7ff",
+          "sha256": "a0a45186ec363a4db832f623db0f11f18d544209bd8998f19343d5001876340b"
+        },
+        {
+          "role": "callback_store",
+          "address": "0x3bd159",
+          "bytes": "49895f78",
+          "sha256": "9b705734c33b4c49b9bf4381669c6bf8abc4f3b85389cba5557d29bbe08a62c5"
+        },
+        {
+          "role": "native_lea",
+          "address": "0x3bd15d",
+          "bytes": "488d05ec540000",
+          "sha256": "567822a85ee45a85ddb1e2475ebd67c06359f9d243bb97b14c91bdc752fcb730"
+        },
+        {
+          "role": "native_store",
+          "address": "0x3bd164",
+          "bytes": "49898780000000",
+          "sha256": "5808e24b1e6573b17cf38c3b9bc9926d9b0ca40ff058070fe906426ce0cf5417"
+        }
+      ],
+      "stop": {
+        "reason": "ENTRY_RETURN",
+        "pc": 3384527,
+        "address": 140733193388032,
+        "size": 0
+      },
+      "segments": [
+        {
+          "stop": {
+            "reason": "ENTRY_RETURN",
+            "pc": 3384527,
+            "address": 140733193388032,
+            "size": 0
+          },
+          "attempted": 1254997,
+          "completed": 1254997
+        }
+      ],
+      "payload": "Lorg/lwjgl/opengl/GL45C;nglGetTextureSubImage(IIIIIIIIIIIJ)V",
+      "payload_sha256": "885db875d1968e504483041ff2a82feab66fd7faaec09a1edea5633a8a9827d8",
+      "owner": "org/lwjgl/opengl/GL45C",
+      "name": "nglGetTextureSubImage",
+      "descriptor": "(IIIIIIIIIIIJ)V",
+      "classfile_status": "exact_declared_dependency_match",
+      "acc_native": true,
+      "static": true,
+      "access": 265,
+      "class_sha256": "f8c0df9bf85f7f2e344ec861b8e2cf600029a4662c74b9c35a82528a12649b27",
+      "source_artifact": {
+        "id": "lwjgl-opengl-3.3.1",
+        "sha256": "e436d2144f3a36fff772fd64233316809b795f390defd4d55660fc686e7c2834",
+        "archive_kind": "jar",
+        "entry_count": 484
+      }
+    },
+    {
+      "callback": "0x33a4d0",
+      "native": "0x3c2740",
+      "registration_flags": 2,
+      "source": "0x4279c",
+      "source_length": 61,
+      "callback_sha256": "e547c69863cc744eac8e90653422dfca7638d6f57371708e65a2a090243e23ed",
+      "source_sha256": "ba904e83923d118aaa89a48a12a58c49b18efef2b92c8f356283d68e5a15de10",
+      "instruction_evidence": [
+        {
+          "role": "callback_lea",
+          "address": "0x3bd259",
+          "bytes": "488d1570d2f7ff",
+          "sha256": "7669cf6b1a3415b1deb0f25cea91c87b4f1e3e52f0b080af0123117fc65cdd01"
+        },
+        {
+          "role": "callback_store",
+          "address": "0x3bd283",
+          "bytes": "48895518",
+          "sha256": "aee07b3a4612f1f4a885f3a32fdfbe2eb400a8beaaae1e953fc64515de11eef6"
+        },
+        {
+          "role": "native_lea",
+          "address": "0x3bd287",
+          "bytes": "488d05b2540000",
+          "sha256": "8af84f502cdfe520e8abbe0cf7dc43d92bddbf74d23e2a511054b1506fee2f6a"
+        },
+        {
+          "role": "native_store",
+          "address": "0x3bd28e",
+          "bytes": "48894520",
+          "sha256": "cc01a458feea1b149ba6358c4beffe35bdbfbc9f64c25dde700cc126ee67a42a"
+        }
+      ],
+      "stop": {
+        "reason": "ENTRY_RETURN",
+        "pc": 3384559,
+        "address": 140733193388032,
+        "size": 0
+      },
+      "segments": [
+        {
+          "stop": {
+            "reason": "ENTRY_RETURN",
+            "pc": 3384559,
+            "address": 140733193388032,
+            "size": 0
+          },
+          "attempted": 1368409,
+          "completed": 1368409
+        }
+      ],
+      "payload": "Lorg/lwjgl/opengl/GL43C;glCopyImageSubData(IIIIIIIIIIIIIII)V",
+      "payload_sha256": "c3bd6e08ca5fce94a026a2c36e848b5e34f51b6632fa0094dba96f3fa36c2fdd",
+      "owner": "org/lwjgl/opengl/GL43C",
+      "name": "glCopyImageSubData",
+      "descriptor": "(IIIIIIIIIIIIIII)V",
+      "classfile_status": "exact_declared_dependency_match",
+      "acc_native": true,
+      "static": true,
+      "access": 265,
+      "class_sha256": "91093c9d92095bcd6aa03f4a48e6f1f97e6e13a673612705bd90cf2bc748c508",
+      "source_artifact": {
+        "id": "lwjgl-opengl-3.3.1",
+        "sha256": "e436d2144f3a36fff772fd64233316809b795f390defd4d55660fc686e7c2834",
+        "archive_kind": "jar",
+        "entry_count": 484
+      }
+    },
+    {
+      "callback": "0x33a4f0",
+      "native": "0x3c2830",
+      "registration_flags": 2,
+      "source": "0x42de6",
+      "source_length": 49,
+      "callback_sha256": "a353dfacee163476ce9e1e1aa1461a47c2f521de4e4aa6c382ba1e29fdff894e",
+      "source_sha256": "b9d9af857ea06b1904b375e68fa62ea38e75b9712c9db5edea72fcf437b210e7",
+      "instruction_evidence": [
+        {
+          "role": "callback_lea",
+          "address": "0x3bd413",
+          "bytes": "488d05d6d0f7ff",
+          "sha256": "7346b5991fdabf6bc66c2347fb0bfda9a98773529fc94ffd1e9bd6740ee64217"
+        },
+        {
+          "role": "callback_store",
+          "address": "0x3bd43f",
+          "bytes": "48894518",
+          "sha256": "dc52ebe557d41f012951c91cc8b1a85b626e6be5e64d11ffdf3424a01b3fa8d7"
+        },
+        {
+          "role": "native_lea",
+          "address": "0x3bd443",
+          "bytes": "488d05e6530000",
+          "sha256": "40926fbeefdf589a0680ffa289498bac6952a06374e4cc8b2b43edcb0bd66e59"
+        },
+        {
+          "role": "native_store",
+          "address": "0x3bd44a",
+          "bytes": "48894520",
+          "sha256": "cc01a458feea1b149ba6358c4beffe35bdbfbc9f64c25dde700cc126ee67a42a"
+        }
+      ],
+      "stop": {
+        "reason": "ENTRY_RETURN",
+        "pc": 3384591,
+        "address": 140733193388032,
+        "size": 0
+      },
+      "segments": [
+        {
+          "stop": {
+            "reason": "ENTRY_RETURN",
+            "pc": 3384591,
+            "address": 140733193388032,
+            "size": 0
+          },
+          "attempted": 1129223,
+          "completed": 1129223
+        }
+      ],
+      "payload": "Lorg/lwjgl/opengl/GL43C;glTextureView(IIIIIIII)V",
+      "payload_sha256": "64916646bb05610644f4cdeedd32d9450446ec18a84fdda51ddb2730f53a00ac",
+      "owner": "org/lwjgl/opengl/GL43C",
+      "name": "glTextureView",
+      "descriptor": "(IIIIIIII)V",
+      "classfile_status": "exact_declared_dependency_match",
+      "acc_native": true,
+      "static": true,
+      "access": 265,
+      "class_sha256": "91093c9d92095bcd6aa03f4a48e6f1f97e6e13a673612705bd90cf2bc748c508",
+      "source_artifact": {
+        "id": "lwjgl-opengl-3.3.1",
+        "sha256": "e436d2144f3a36fff772fd64233316809b795f390defd4d55660fc686e7c2834",
+        "archive_kind": "jar",
+        "entry_count": 484
+      }
+    }
+  ],
+  "complete": true,
+  "original_inputs_unchanged": true,
+  "decoded_receipt_sha256": "65b70b3849a804758219f896354a1d702f07f00de980b862fc10b505a382b711",
+  "declared_dependency": {
+    "id": "lwjgl-opengl-3.3.1",
+    "sha256": "e436d2144f3a36fff772fd64233316809b795f390defd4d55660fc686e7c2834",
+    "provenance_sha256": "3b54d886c58fe93260a2a1f7393f7e8a1d4df24aff019b94ee4a36ff6e485204",
+    "scope": "Official Minecraft 1.20.1 declared dependency, not evidence of installed runtime"
+  },
+  "all_five_declared_dependency_native_matches": true
+}

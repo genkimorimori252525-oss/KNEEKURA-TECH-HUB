@@ -1,0 +1,331 @@
+{
+  "format": "ysm-texture-upload-release-static-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "jar_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "bindings": [
+    {
+      "callback": "0x418640",
+      "native": "0x3bf0c0",
+      "registration_flags": 2,
+      "source": "0x47813",
+      "source_length": 80,
+      "source_sha256": "13f5a60a42e51406885bf9d544acb59c6826f825f8ba9cfd90b8e00a0a07e8a5",
+      "callback_sha256": "f5060aaa76fb7da82ed917bea59d1ac3b818722b940a5397fc756f6da6039fc8",
+      "stop": {
+        "reason": "ENTRY_RETURN",
+        "pc": 4294239,
+        "address": 140733193388032,
+        "size": 0
+      },
+      "segments": [
+        {
+          "reason": "ENTRY_RETURN",
+          "pc": 4294239,
+          "address": 140733193388032,
+          "size": 0
+        }
+      ],
+      "attempted": 1601030,
+      "completed": 1601030,
+      "payload": "Lcom/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0;O00OOOooOoooOoo0o0o0oO0O()V",
+      "payload_sha256": "13d9e56ac1332de0a9a3bbc898e363232439974fd37287c71d4ae266dcec22e1",
+      "owner": "com/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0",
+      "name": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "()V",
+      "class_sha256": "6f85b1ec64d10ac43fe6c8cfd34c0b89889dd1832419da05cb2e407a69c3949e",
+      "access": 258,
+      "acc_native": true,
+      "static": false,
+      "pairing_instruction_evidence": {
+        "callback": "0x418640",
+        "native": "0x3bf0c0",
+        "callback_lea": "0x4150c3",
+        "callback_store_plus_18": "0x415103",
+        "native_lea": "0x415107",
+        "native_store_plus_20": "0x41510e",
+        "instructions": [
+          {
+            "role": "callback_lea",
+            "address": "0x4150c3",
+            "bytes": "4c8d2d76350000",
+            "sha256": "56fec2ee09f73efa591929f747b71adbf39f6562a0e41955324ba41420b66297"
+          },
+          {
+            "role": "callback_store",
+            "address": "0x415103",
+            "bytes": "4c896d18",
+            "sha256": "7ef41b2f1fd47d6c2feace084ed64ce949da2a0869f7f57d0b74ec9fce802e27"
+          },
+          {
+            "role": "native_lea",
+            "address": "0x415107",
+            "bytes": "488d05b29ffaff",
+            "sha256": "d61137e250b4050a3b5694167740f30ae38630db35fab4c8a23fdf1f688edc6e"
+          },
+          {
+            "role": "native_store",
+            "address": "0x41510e",
+            "bytes": "48894520",
+            "sha256": "cc01a458feea1b149ba6358c4beffe35bdbfbc9f64c25dde700cc126ee67a42a"
+          }
+        ]
+      }
+    },
+    {
+      "callback": "0x418660",
+      "native": "0x3bf540",
+      "registration_flags": 2,
+      "source": "0x44a12",
+      "source_length": 81,
+      "source_sha256": "c63602daee5ac097cbbc70fafc7f84c052acd6fe9d06608ef7ff210b62eccaf8",
+      "callback_sha256": "bf1aeeb04346d231a0555446306637a97636748350edaeee50cbc798417ba655",
+      "stop": {
+        "reason": "ENTRY_RETURN",
+        "pc": 4294271,
+        "address": 140733193388032,
+        "size": 0
+      },
+      "segments": [
+        {
+          "reason": "ENTRY_RETURN",
+          "pc": 4294271,
+          "address": 140733193388032,
+          "size": 0
+        }
+      ],
+      "attempted": 1577097,
+      "completed": 1577097,
+      "payload": "Lcom/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0;Oo0Oo0o00O00Oo0OOoOOoooo(J)V",
+      "payload_sha256": "4131880df69763d97f67a3c8c79b4d674899a3b38e34ec543fffca5a5b732fbf",
+      "owner": "com/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(J)V",
+      "class_sha256": "6f85b1ec64d10ac43fe6c8cfd34c0b89889dd1832419da05cb2e407a69c3949e",
+      "access": 266,
+      "acc_native": true,
+      "static": true,
+      "pairing_instruction_evidence": {
+        "callback": "0x418660",
+        "native": "0x3bf540",
+        "callback_lea": "0x4152ae",
+        "callback_store_plus_18": "0x4152e7",
+        "native_lea": "0x4152eb",
+        "native_store_plus_20": "0x4152f2",
+        "instructions": [
+          {
+            "role": "callback_lea",
+            "address": "0x4152ae",
+            "bytes": "488d2dab330000",
+            "sha256": "593a985df0ac09e677a166590589714406c42b5fd08dfcbc694bb4375e01e7ea"
+          },
+          {
+            "role": "callback_store",
+            "address": "0x4152e7",
+            "bytes": "49896d18",
+            "sha256": "03fd91d3b4ec48de745d71a06996f2e4ca0c12eeb23ddbcec919b58f5af4c9c4"
+          },
+          {
+            "role": "native_lea",
+            "address": "0x4152eb",
+            "bytes": "488d054ea2faff",
+            "sha256": "11e9ab0e3163af8af9c289ca686e03798b5e99605715b7263e67f93d2a8d409e"
+          },
+          {
+            "role": "native_store",
+            "address": "0x4152f2",
+            "bytes": "49894520",
+            "sha256": "81f0edd3f467de47416397da894b80f61ca58c0687dc95f508c763ab530cd666"
+          }
+        ]
+      }
+    }
+  ],
+  "original_owner_fields": [
+    {
+      "access": 18,
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "J"
+    },
+    {
+      "access": 2,
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "Ljava/util/Map;"
+    }
+  ],
+  "ranges": [
+    {
+      "id": "upload",
+      "start": "0x3bf0c0",
+      "end_exclusive": "0x3bf53d",
+      "sha256": "e9f3f2d4189686ccce1aade14cf8f8499858f514c432adebaff83bfea9ef19a9",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3928256
+      }
+    },
+    {
+      "id": "release",
+      "start": "0x3bf540",
+      "end_exclusive": "0x3bf74f",
+      "sha256": "ad7abf3ca9953e0f62c6c659d86869fb2653e8b7c5d7dd9f6c30ebf266ac8398",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3929408
+      }
+    },
+    {
+      "id": "reapply_source_transform",
+      "start": "0x3a58e0",
+      "end_exclusive": "0x3a59ed",
+      "sha256": "7cd3aae1bd45de15d5714170064decc341a485a108ed405f2554d09d1a98fd9f",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3823840
+      }
+    },
+    {
+      "id": "xor_transform",
+      "start": "0x4df880",
+      "end_exclusive": "0x4dfaa2",
+      "sha256": "6c0376aebd9862b1de89714d97af4447b1c98119644c5793ae953ce1d2406155",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5109888
+      }
+    },
+    {
+      "id": "texture_manager_metadata",
+      "start": "0x4089db",
+      "end_exclusive": "0x408b27",
+      "sha256": "d1d451e409fe2c7317639ceec2137ab3d68003bbe26fd2b206b38ba0e342ab27",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4229595
+      }
+    },
+    {
+      "id": "texture_metadata_callbacks",
+      "start": "0x40fe20",
+      "end_exclusive": "0x40fe80",
+      "sha256": "14d4d2223301a6d63e66ef4fc2e7a4383d483cd38b7cccdaa078b068ccefff26",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4259360
+      }
+    },
+    {
+      "id": "gl_upload_and_registry_insert",
+      "start": "0x3a52c0",
+      "end_exclusive": "0x3a5824",
+      "sha256": "d2b6f97af8b281af6740f88a296e8771ac8ae1a50b98c75880109d82d9709179",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3822272
+      }
+    }
+  ],
+  "sources": [
+    {
+      "path": "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/NATIVE-TEXTURE-JAVA-BOUNDARY-EVIDENCE-2026-10-17.json",
+      "sha256": "20ee34dc6eaea491facb82dd143c0e9a06e1e51d735d040814b640b2e7c9ce4a"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/NATIVE-TEXTURE-JAVA-BOUNDARY-RECOVERY-2026-10-17.md",
+      "sha256": "1b7a9a71f22a3eb9240b1156269b182ee8f5febab430d515c0660de3143508b0"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/NATIVE-EXACT-BINDINGS-2026-10-18.json",
+      "sha256": "c907e34e24f0cca48e4746aee3e92219bd0b8428bcd51a659921fd49d48b1e1d"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/../ysm-local-inputs/ghidra-static-20261018/output/model-receive-contract/REPORT.md",
+      "sha256": "bb6ea6851cf41345efb24a79f5d40a0a65b538b11930d0754ec2ec731de77904"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/../ysm-local-inputs/ghidra-static-20261018/output/model-receive-contract/evidence.json",
+      "sha256": "1fd605070816b39274dda31008cfe4e30cede95c86d3a647a0157a04e8b755d1"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/../ysm-local-inputs/ghidra-static-20261018/output/client-wrapper-contract/evidence.json",
+      "sha256": "8441e9c4d7afcded633c4df1612cd6168e2c83077459b87c5a7830ebcf0bc10b"
+    }
+  ],
+  "unresolved_long_field_metadata": {
+    "manager": "0xd355c0",
+    "record_offset": "0x40",
+    "callback": "0x40fe40",
+    "callback_lea": "0x408a77",
+    "record_store": "0x408ab8",
+    "global_store": "0x408b09",
+    "JNI_GetLongField": "0x3bf12e",
+    "identity": "UNDECODED"
+  },
+  "target_execution": false,
+  "JVM_execution": false,
+  "emulation_performed": false,
+  "GL_operations_executed": false,
+  "repository_edits": false
+}

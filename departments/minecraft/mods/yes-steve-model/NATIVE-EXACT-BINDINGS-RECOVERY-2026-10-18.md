@@ -41,7 +41,7 @@ The input SO SHA-256 is15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f
 
 Exactly one binding,0x3bf0c0, is an instance native: its second JNI argument is jobject. The other16 are static and receive jclass. This distinction must be preserved by any wrapper or subsequent body analysis.
 
-This completes the exact entry-binding inventory only. It does not establish full implementation semantics, runtime registration, JNI_OnLoad completion, thread scheduling, actual Minecraft execution or overall deobfuscation. Java mapping remains669; no entry is automatically promoted. Independent semantic review of the complete project remains NOT_RUN.
+This completes the original-YSM declaration mapping for this JNI_OnLoad registration table only. Client startup has a separately recovered [five-descriptor LWJGL registration site](NATIVE-CLIENT-STARTUP-RECOVERY-2026-10-18.md), whose exact identities and [wrapper behavior](NATIVE-LWJGL-WRAPPERS-RECOVERY-2026-10-18.md) are tracked separately. Do not interpret this receipt as a census of all registration sites. It does not establish full implementation semantics, runtime registration, JNI_OnLoad completion, thread scheduling, actual Minecraft execution or overall deobfuscation. Java mapping remains669; no entry is automatically promoted. Independent semantic review of the complete project remains NOT_RUN.
 
 ## Reusable evidence/replay tool
 

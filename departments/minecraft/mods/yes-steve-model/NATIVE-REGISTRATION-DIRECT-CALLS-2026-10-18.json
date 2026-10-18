@@ -1,0 +1,65 @@
+{
+  "format": "ysm-registration-direct-calls-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "target": "0x327000",
+  "scanned_executable_file_backed_segments": [
+    {
+      "kind": "PT_LOAD",
+      "index": 1,
+      "address": 0,
+      "memory_size": 13718256,
+      "file_offset": 0,
+      "file_size": 13718256,
+      "flags": 5,
+      "sha256": "fce299732ac197e070a8a6ee16a20169917e739dd7ca9f06b6fd0ce8ff6d9d27"
+    },
+    {
+      "kind": "PT_LOAD",
+      "index": 4,
+      "address": 15490560,
+      "memory_size": 5308498,
+      "file_offset": 13823488,
+      "file_size": 5308498,
+      "flags": 5,
+      "sha256": "37814039f0083a1b9b14785df8a4ca3ffd0c03726cb5378a04809fcbad2c3712"
+    },
+    {
+      "kind": "PT_LOAD",
+      "index": 5,
+      "address": 20803168,
+      "memory_size": 4678048,
+      "file_offset": 19132000,
+      "file_size": 4678048,
+      "flags": 5,
+      "sha256": "a7527a58eac5e050a02f7677d32d49e87a2325905fa92c6fd491178168ea2b93"
+    }
+  ],
+  "raw_e8_candidates": [
+    {
+      "address": "0x3bd5d8",
+      "file_offset": "0x3bd5d8",
+      "bytes": "e8239af6ff",
+      "context_start": "0x3bd5be",
+      "context_end_exclusive": "0x3bd5dd",
+      "context_sha256": "43a774aebd3ea1cf5779490f183e5123da68ef583fede21b0f572e6b087f6f2e",
+      "context_file": "client_registration_call_context.asm",
+      "alignment": "Aligned sequence; client entry linear decode / onload incoming branch to 0x416159 and existing original registration evidence"
+    },
+    {
+      "address": "0x416175",
+      "file_offset": "0x416175",
+      "bytes": "e8860ef1ff",
+      "context_start": "0x416159",
+      "context_end_exclusive": "0x416189",
+      "context_sha256": "48d823151be915e6c2699ea153055dbc7f3c0f646750c8b1e6fe550610e5542f",
+      "context_file": "onload_registration_call_context.asm",
+      "alignment": "Aligned sequence; client entry linear decode / onload incoming branch to 0x416159 and existing original registration evidence"
+    }
+  ],
+  "confirmed_aligned_direct_call_count": 2,
+  "limitations": [
+    "Only E8 rel32 encodings in original executable file-backed PT_LOAD regions.",
+    "No indirect calls, tail jumps, decoded/decrypted/runtime-generated code, runtime relocation patches, or non-executable data-as-code discovery.",
+    "Static callsites are possible registration attempts, not runtime invocation or RegisterNatives success."
+  ]
+}

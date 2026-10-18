@@ -1,0 +1,60 @@
+{
+  "format": "ysm-shutdown-gl-focused-static-review-v1",
+  "scope": "Independent bounded review of delayed self-termination setup and five LWJGL wrappers",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "dependency_sha256": "e436d2144f3a36fff772fd64233316809b795f390defd4d55660fc686e7c2834",
+  "result": "No contradiction found within stated limits",
+  "checks": [
+    {
+      "claim": "First shutdown with argument1 installs detached self-termination helper",
+      "addresses": [
+        "0x3c2310",
+        "0x3dbd4a..0x3dbd7f",
+        "0x3dbddd",
+        "0x3dbdf5",
+        "0xd1bb00",
+        "0x3dc180",
+        "0x3dc1ba..0x3dc1c6"
+      ],
+      "verified": "Original import chains/vtable relocation, requested10-second sleep, EINTR-only retry, getpid/kill9; no guaranteed delay/termination or complete cancellation analysis"
+    },
+    {
+      "claim": "Four wrappers compare first Java integer and skip on membership, otherwise preserve arguments",
+      "addresses": [
+        "0x3c2560",
+        "0x3c2650",
+        "0x3c2740",
+        "0x3c2830",
+        "0x3c2646",
+        "0x3c2736",
+        "0x3c2826",
+        "0x3c2916"
+      ],
+      "verified": "EDX to R10D, full32-bit equality, match return, miss restored argument forwarding"
+    },
+    {
+      "claim": "DeleteTextures forwards before erasure",
+      "addresses": [
+        "0x3c2332",
+        "0x3c238f",
+        "0x3c236d",
+        "0x3c237c"
+      ],
+      "verified": "Saved export called first with jclass zeroed; registry erasure follows"
+    },
+    {
+      "claim": "All five native pairings and descriptors",
+      "verified": "Original pairing instruction bytes, saved export slots and independently parsed exact public/static/native declarations match pinned dependency"
+    }
+  ],
+  "parameter_role_sources": [
+    "https://raw.githubusercontent.com/LWJGL/lwjgl3/3.3.1/modules/lwjgl/opengl/src/generated/java/org/lwjgl/opengl/GL11C.java",
+    "https://raw.githubusercontent.com/LWJGL/lwjgl3/3.3.1/modules/lwjgl/opengl/src/generated/java/org/lwjgl/opengl/GL43C.java"
+  ],
+  "parameter_role_limits": "nglGetTexImage firstinteger is GLenum target/face; glTextureView firstinteger is destination texture, origtexture is third; do not label every compared value a source texture ID",
+  "target_executed": false,
+  "shutdown_emulated": false,
+  "signals_sent": false,
+  "runtime_registration_proven": false,
+  "whole_project_semantic_review": "NOT_RUN"
+}

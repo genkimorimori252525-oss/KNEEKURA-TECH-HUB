@@ -1,0 +1,47 @@
+{
+  "checkpoint": "unicorn-jni-dist-next1.checkpoint.json",
+  "sha256": "af930823c9a03c87320194c0edc86b6ddf061bbf244834354538fc77ea65db74",
+  "global": "0xd356e0",
+  "manager": "0x40400109d040",
+  "records": [
+    {
+      "offset": "0x98",
+      "descriptor_pointer": "0x404001011500",
+      "field_handle": "0x7d0000000000",
+      "proof": {
+        "requested_class": "java/util/UUID",
+        "name": "mostSigBits",
+        "descriptor": "J",
+        "static": false,
+        "declaring_class": "java/util/UUID",
+        "class_sha256": "fc75ab76e8f853fbbd48268bdc27b84a33d129ffc65c2d2dea3ff74b97184e08",
+        "source": {
+          "id": "java.base",
+          "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+          "archive_kind": "jmod",
+          "entry_count": 7622
+        }
+      }
+    },
+    {
+      "offset": "0xa0",
+      "descriptor_pointer": "0x404001011540",
+      "field_handle": "0x7d0000000010",
+      "proof": {
+        "requested_class": "java/util/UUID",
+        "name": "leastSigBits",
+        "descriptor": "J",
+        "static": false,
+        "declaring_class": "java/util/UUID",
+        "class_sha256": "fc75ab76e8f853fbbd48268bdc27b84a33d129ffc65c2d2dea3ff74b97184e08",
+        "source": {
+          "id": "java.base",
+          "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+          "archive_kind": "jmod",
+          "entry_count": 7622
+        }
+      }
+    }
+  ],
+  "guest_instructions_run": 0
+}

@@ -1,0 +1,566 @@
+{
+  "format": "ysm-common-lifecycle-static-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "jar_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "ranges": [
+    {
+      "id": "init_entry",
+      "start": "0x3c21a0",
+      "end_exclusive": "0x3c230e",
+      "sha256": "e81114d9288bcdf1f34d4a6bc0961dc4a6bb517a2c9bf0a2e86739087a255e93",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3940768
+      }
+    },
+    {
+      "id": "shutdown_entry",
+      "start": "0x3c2310",
+      "end_exclusive": "0x3c231a",
+      "sha256": "4e4d651ccde860b9144d79e493bbab9776d925e8ca62de85d7d7281a6685bdd3",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3941136
+      }
+    },
+    {
+      "id": "shutdown_registry",
+      "start": "0x3dbaf0",
+      "end_exclusive": "0x3dbd20",
+      "sha256": "e4e4d35c0e02b1a67236b7c3c7f6dd0748a78b1cc7f601f29218c35480395c12",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4045552
+      }
+    },
+    {
+      "id": "shutdown_dispatch",
+      "start": "0x3dbd20",
+      "end_exclusive": "0x3dbf2d",
+      "sha256": "dced7c4f227e6230e4a9c82951f4c6da113d4437af6a5d50dc40a7ea03943f97",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4046112
+      }
+    },
+    {
+      "id": "thread_thunk_errors",
+      "start": "0x2fccb0",
+      "end_exclusive": "0x2fcce8",
+      "sha256": "22f9b933161a1d25cd60416c9b3700851b726e3922754a5237a5328f15c8b1b3",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3132592
+      }
+    },
+    {
+      "id": "thread_join_detach_create",
+      "start": "0x2fccf0",
+      "end_exclusive": "0x2fcdf0",
+      "sha256": "b6c5edfd20d6ccc809872628d7390cf312669c990cbd98b3f83194365e810ac8",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3132656
+      }
+    },
+    {
+      "id": "self_termination_body",
+      "start": "0x3dc180",
+      "end_exclusive": "0x3dc1d1",
+      "sha256": "3c3056e3a44ee7724976c2bf23aceefb62c9d51cfddae227c1dbe434962be19d",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4047232
+      }
+    },
+    {
+      "id": "server_worker_install",
+      "start": "0x3c9cb1",
+      "end_exclusive": "0x3c9ded",
+      "sha256": "53bc3e318da3229a6e801d0536b85bff63b7646bea357c126c9479c957bbce30",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3972273
+      }
+    },
+    {
+      "id": "server_shutdown",
+      "start": "0x3cb010",
+      "end_exclusive": "0x3cb0db",
+      "sha256": "f38ec3a6f62b8d272c2d1c1e8c9cf9f6c65c952b99f2c0f40232bf75b222223f",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3977232
+      }
+    },
+    {
+      "id": "collector_registration",
+      "start": "0x413702",
+      "end_exclusive": "0x41374c",
+      "sha256": "0e59edcf94339757abd85585e8a4dc6dd385aa476898da241d24a9f8463e5a84",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4273922
+      }
+    },
+    {
+      "id": "collector_executor_shutdown",
+      "start": "0x4181c0",
+      "end_exclusive": "0x4184aa",
+      "sha256": "60bd6e2079222b3fc4d90d9196b855b15fab87a0a2790cf4deade5a7143a3de0",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4293056
+      }
+    },
+    {
+      "id": "worker_wrapper",
+      "start": "0x41acf0",
+      "end_exclusive": "0x41b030",
+      "sha256": "a16d6860009a1357cf9f55bd6c7dd67df3ce03f851e5b918d284c890d234ec7a",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4304112
+      }
+    },
+    {
+      "id": "worker_handle_move",
+      "start": "0x39d470",
+      "end_exclusive": "0x39d584",
+      "sha256": "4c44a018605ddbb246a1e9f85579d66c55c3b4c562e42a44fc50ad5aad06c4a3",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3789936
+      }
+    },
+    {
+      "id": "init_executor_task",
+      "start": "0x3c9743",
+      "end_exclusive": "0x3c980b",
+      "sha256": "876565911a2ee66952c1b0acff57aca5484cae44a1a0f624db7dc373a43235f6",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3970883
+      }
+    }
+  ],
+  "exact_bindings": [
+    {
+      "callback": "0x418540",
+      "native": "0x3c21a0",
+      "registration_flags": 0,
+      "source": "0x451da",
+      "source_length": 97,
+      "source_sha256": "36263b08add52e60b3c956926ec05476f17df95c5f53b1db2ee704a077611dae",
+      "callback_sha256": "7da482301f9501f1405cb37bf287e6cc3f64a4f73b6aa633c26d110b12410bcb",
+      "stop": {
+        "reason": "ENTRY_RETURN",
+        "pc": 4293983,
+        "address": 140733193388032,
+        "size": 0
+      },
+      "attempted": 1837169,
+      "completed": 1837169,
+      "payload": "Lcom/elfmcys/yesstevemodel/OoOo0ooo0o00O0oooO0oooOo;o0OOooo0o0OO00OoOOOo0o0O()Ljava/lang/Object;",
+      "payload_sha256": "6bd3ba37d00e1e3909b3c48406f94cddfe86d52df3bcae8b2a8b74291d59ea17",
+      "owner": "com/elfmcys/yesstevemodel/OoOo0ooo0o00O0oooO0oooOo",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "()Ljava/lang/Object;",
+      "class_sha256": "0c08232b45349e89c7ddf923423b4cf8dd33fe8382034db7b32a31158c8ecfc5",
+      "access": 266,
+      "acc_native": true,
+      "static": true,
+      "pairing_instruction_evidence": {
+        "callback": "0x418540",
+        "native": "0x3c21a0",
+        "callback_lea": "0x413ccb",
+        "callback_store_plus_18": "0x413cd2",
+        "native_lea": "0x413cd6",
+        "native_store_plus_20": "0x413cdd",
+        "instructions": [
+          {
+            "role": "callback_lea",
+            "address": "0x413ccb",
+            "bytes": "488d056e480000",
+            "sha256": "20ae6a3cb0235cc76d4047894ebb6977da1e7d9c99a9a9e46a6e95dd830ae755"
+          },
+          {
+            "role": "callback_store",
+            "address": "0x413cd2",
+            "bytes": "49894618",
+            "sha256": "5b5a9bfc3ce0b12660c4218efee7998eeaea51f9a9bf128522a538c2f2c87d49"
+          },
+          {
+            "role": "native_lea",
+            "address": "0x413cd6",
+            "bytes": "488d05c3e4faff",
+            "sha256": "39fd0e24cfc676dc97e1762bbe1a5b9d278664744d08ef2d263e00ac1968c085"
+          },
+          {
+            "role": "native_store",
+            "address": "0x413cdd",
+            "bytes": "49894620",
+            "sha256": "3ea6ada36fa511c2fe860f1db4481883e28fea2949fac204d2eaa82cc58f2cf8"
+          }
+        ]
+      }
+    },
+    {
+      "callback": "0x418560",
+      "native": "0x3c2310",
+      "registration_flags": 0,
+      "source": "0x468f1",
+      "source_length": 80,
+      "source_sha256": "c17bb131963fc16fed53c0e0cceae47c74cfe03dce55078ba0d641a9e25b0cf6",
+      "callback_sha256": "bac1065d0a9e7a4b35fad2269646e61532d4c0ab56225ccbcbaf5b67ae074309",
+      "stop": {
+        "reason": "ENTRY_RETURN",
+        "pc": 4294015,
+        "address": 140733193388032,
+        "size": 0
+      },
+      "attempted": 1585132,
+      "completed": 1585132,
+      "payload": "Lcom/elfmcys/yesstevemodel/OoOo0ooo0o00O0oooO0oooOo;O00OOOooOoooOoo0o0o0oO0O()V",
+      "payload_sha256": "964f975b8cd6b66fa345db11cade09f626a8ee7e11b6c57cf722efa6f353e528",
+      "owner": "com/elfmcys/yesstevemodel/OoOo0ooo0o00O0oooO0oooOo",
+      "name": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "()V",
+      "class_sha256": "0c08232b45349e89c7ddf923423b4cf8dd33fe8382034db7b32a31158c8ecfc5",
+      "access": 266,
+      "acc_native": true,
+      "static": true,
+      "pairing_instruction_evidence": {
+        "callback": "0x418560",
+        "native": "0x3c2310",
+        "callback_lea": "0x413d81",
+        "callback_store_plus_18": "0x413d88",
+        "native_lea": "0x413d8d",
+        "native_store_plus_20": "0x413d94",
+        "instructions": [
+          {
+            "role": "callback_lea",
+            "address": "0x413d81",
+            "bytes": "488d05d8470000",
+            "sha256": "acf7f6c73896c4b94ea07f0d7fe0528f740d3b1df68daca518105304cd0b9185"
+          },
+          {
+            "role": "callback_store",
+            "address": "0x413d88",
+            "bytes": "4989441f18",
+            "sha256": "23c92ed26fb6ae73a4a3cddeca1162fcaa9045316e85cc631f0c1b78a6fd83ac"
+          },
+          {
+            "role": "native_lea",
+            "address": "0x413d8d",
+            "bytes": "488d057ce5faff",
+            "sha256": "2a7a212edae9418a1adfc4a24a57afff28668687773842128e9ffbadc0cebe66"
+          },
+          {
+            "role": "native_store",
+            "address": "0x413d94",
+            "bytes": "4989441f20",
+            "sha256": "0acb5d81267e9ac60dc6ced37b60764cd0282f9f53375d017d6ffa925326b244"
+          }
+        ]
+      }
+    }
+  ],
+  "imports": [
+    {
+      "entry": "0xd14880",
+      "first_slot": "0xd308c8",
+      "stub": "0x13d6efc",
+      "elf_slot": "0x184d0e8",
+      "proof": {
+        "slot": "0x184d0e8",
+        "raw_value": "0x1565534",
+        "relocation_type": 7,
+        "symbol_index": 30,
+        "symbol_name": "pthread_create",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    },
+    {
+      "entry": "0xd14890",
+      "first_slot": "0xd308d0",
+      "stub": "0x13d6f02",
+      "elf_slot": "0x184d0f0",
+      "proof": {
+        "slot": "0x184d0f0",
+        "raw_value": "0x15c3d75",
+        "relocation_type": 7,
+        "symbol_index": 31,
+        "symbol_name": "pthread_join",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    },
+    {
+      "entry": "0xd15260",
+      "first_slot": "0xd30db8",
+      "stub": "0x13d72b0",
+      "elf_slot": "0x184d5d8",
+      "proof": {
+        "slot": "0x184d5d8",
+        "raw_value": "0x145bb1c",
+        "relocation_type": 7,
+        "symbol_index": 194,
+        "symbol_name": "pthread_detach",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    },
+    {
+      "entry": "0xd149a0",
+      "first_slot": "0xd30958",
+      "stub": "0x13d6f68",
+      "elf_slot": "0x184d178",
+      "proof": {
+        "slot": "0x184d178",
+        "raw_value": "0x140834d",
+        "relocation_type": 7,
+        "symbol_index": 48,
+        "symbol_name": "nanosleep",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    },
+    {
+      "entry": "0xd14850",
+      "first_slot": "0xd308b0",
+      "stub": "0x13d6eea",
+      "elf_slot": "0x184d0d0",
+      "proof": {
+        "slot": "0x184d0d0",
+        "raw_value": "0x142bc04",
+        "relocation_type": 7,
+        "symbol_index": 27,
+        "symbol_name": "__errno_location",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    },
+    {
+      "entry": "0xd149c0",
+      "first_slot": "0xd30968",
+      "stub": "0x13d6f74",
+      "elf_slot": "0x184d188",
+      "proof": {
+        "slot": "0x184d188",
+        "raw_value": "0x14f0d20",
+        "relocation_type": 7,
+        "symbol_index": 50,
+        "symbol_name": "getpid",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    },
+    {
+      "entry": "0xd149b0",
+      "first_slot": "0xd30960",
+      "stub": "0x13d6f6e",
+      "elf_slot": "0x184d180",
+      "proof": {
+        "slot": "0x184d180",
+        "raw_value": "0x152026f",
+        "relocation_type": 7,
+        "symbol_index": 49,
+        "symbol_name": "kill",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    },
+    {
+      "entry": "0xd14790",
+      "first_slot": "0xd30850",
+      "stub": "0x13d6ea2",
+      "elf_slot": "0x184d070",
+      "proof": {
+        "slot": "0x184d070",
+        "raw_value": "0x162887e",
+        "relocation_type": 7,
+        "symbol_index": 15,
+        "symbol_name": "pthread_mutex_lock",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    },
+    {
+      "entry": "0xd147b0",
+      "first_slot": "0xd30860",
+      "stub": "0x13d6eae",
+      "elf_slot": "0x184d080",
+      "proof": {
+        "slot": "0x184d080",
+        "raw_value": "0x1598bf2",
+        "relocation_type": 7,
+        "symbol_index": 17,
+        "symbol_name": "pthread_mutex_unlock",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    },
+    {
+      "entry": "0xd148f0",
+      "first_slot": "0xd30900",
+      "stub": "0x13d6f26",
+      "elf_slot": "0x184d120",
+      "proof": {
+        "slot": "0x184d120",
+        "raw_value": "0x160a642",
+        "relocation_type": 7,
+        "symbol_index": 37,
+        "symbol_name": "sem_post",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    }
+  ],
+  "timer_vtable_relocation": {
+    "slot": "0xd1bb00",
+    "raw_value": "0x0",
+    "relocation_type": 8,
+    "symbol_index": 0,
+    "symbol_name": "",
+    "addend": 4047232,
+    "actual_runtime_binding_verified": false
+  },
+  "java_boundary_evidence_sha256": "215d6e50a2aee1bce74a8ade20e17a2915a5b95a327e749dd811badc8fa6e1ad",
+  "target_executed": false,
+  "emulation_performed": false,
+  "host_threads_started": false,
+  "unresolved": [
+    "Complete initialization resource inventory and failure rollback",
+    "Completion-state virtual method identities and all waiter semantics",
+    "Actual worker scheduling, task draining and callback completion",
+    "Whole-program timer cancellation outside scoped call paths"
+  ]
+}

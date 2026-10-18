@@ -1,0 +1,24 @@
+{
+  "checkpoint": "unicorn-jni-dist-next1.checkpoint.json",
+  "sha256": "af930823c9a03c87320194c0edc86b6ddf061bbf244834354538fc77ea65db74",
+  "global": "0xd356e0",
+  "manager": "0x40400109d040",
+  "offset": "0x120",
+  "descriptor_pointer": "0x404001011980",
+  "method_handle": "0x7c0000000180",
+  "proof": {
+    "requested_class": "java/util/function/Consumer",
+    "name": "accept",
+    "descriptor": "(Ljava/lang/Object;)V",
+    "static": false,
+    "declaring_class": "java/util/function/Consumer",
+    "class_sha256": "d837ed1e3331ee715d027c5a8444e40c7169b6b1979fd8b0b044cfdfb2dd08b9",
+    "source": {
+      "id": "java.base",
+      "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+      "archive_kind": "jmod",
+      "entry_count": 7622
+    }
+  },
+  "guest_instructions_run": 0
+}
