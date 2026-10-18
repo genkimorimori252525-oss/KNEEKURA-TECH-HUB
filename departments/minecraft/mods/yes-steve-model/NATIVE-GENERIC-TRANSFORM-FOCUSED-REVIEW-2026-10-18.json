@@ -1,0 +1,66 @@
+{
+  "format": "ysm-generic-transform-focused-review-v1",
+  "date": "2026-10-18",
+  "result": "NO_CONTRADICTION_WITHIN_SCOPED_CLAIMS",
+  "method": "Separate read-only original-byte review",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "checked_claims": [
+    {
+      "claim": "HChaCha-form state, eight quarter-round groups, output words 0..3 and 12..15 without feed-forward",
+      "anchors": [
+        "0x576495..0x5765f8",
+        "0x57660b..0x5766bc"
+      ]
+    },
+    {
+      "claim": "Fixed caller count 30 passes through constructor into both transforms",
+      "anchors": [
+        "0x3d0c6f",
+        "0x3d0c75",
+        "0x4dc4be..0x4dc4c1",
+        "0x4dc4ec"
+      ]
+    },
+    {
+      "claim": "Derived bytes, zero counter, K+0x30 tail and pending buffer state",
+      "anchors": [
+        "0x4dc4c4..0x4dc4d4",
+        "0x4dc4d9",
+        "0x4dc4e1..0x4dc4e5"
+      ]
+    },
+    {
+      "claim": "Generic block all-word feed-forward, nullable-source XOR/direct output",
+      "anchors": [
+        "0x575ffa..0x57607c",
+        "0x57608a..0x576117"
+      ]
+    },
+    {
+      "claim": "Partial output consumes one block; low counter increment/carry and writeback; local zero-fill request only",
+      "anchors": [
+        "0x5762e2",
+        "0x5762ef",
+        "0x5763f0",
+        "0x5763fb",
+        "0x576405..0x576414"
+      ]
+    }
+  ],
+  "verified_hashes": "Original SO, generic function range, 11 stream ranges, five linked receipt/source hashes",
+  "verified_relocations": {
+    "0xd1ded0": "0x575bc0",
+    "0xd1ded8": "0x576430",
+    "0xd2ff38": "0x5766d0"
+  },
+  "target_executed": false,
+  "emulation_performed": false,
+  "assets_processed": false,
+  "limits": [
+    "Not actual backend selection",
+    "Not optimized-backend equivalence",
+    "Not authentication or security approval",
+    "Not full buffering/exception audit",
+    "Not whole-project semantic review"
+  ]
+}

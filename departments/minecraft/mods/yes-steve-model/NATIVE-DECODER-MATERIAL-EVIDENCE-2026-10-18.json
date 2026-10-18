@@ -1,0 +1,265 @@
+{
+  "format": "ysm-decoder-material-provenance-static-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "ranges": [
+    {
+      "name": "decoder_seed",
+      "start": "0x3d0b20",
+      "end_exclusive": "0x3d0c7a",
+      "sha256": "aee5ce483f259a6140c052c3f0803c9804436e3de26eacf0cda8f1b9d53758fd",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4000544
+      }
+    },
+    {
+      "name": "generator",
+      "start": "0x43bfe0",
+      "end_exclusive": "0x43c2b6",
+      "sha256": "343c3a45f9d224288b3de95929512968e93efa83a0b617a58f3b342848faee65",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4440032
+      }
+    },
+    {
+      "name": "xor_read",
+      "start": "0x4dd600",
+      "end_exclusive": "0x4dd680",
+      "sha256": "d4ae85f8856614efe9d3edf7a1b4fc30970c4e5c96d15fb20b0fde172cfb8e12",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5101056
+      }
+    },
+    {
+      "name": "xor_bytes",
+      "start": "0x4df880",
+      "end_exclusive": "0x4dfa93",
+      "sha256": "ba2c9330358bef98c73d1b10bf9511990188d85cbcef1277da02703dca84c053",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5109888
+      }
+    },
+    {
+      "name": "selector3_material",
+      "start": "0x39a815",
+      "end_exclusive": "0x39a85c",
+      "sha256": "e64405203141fc6d14a1febc1923b7183df94475fae2782498294d21de0bee7e",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3778581
+      }
+    },
+    {
+      "name": "selector5_material",
+      "start": "0x39ac64",
+      "end_exclusive": "0x39acab",
+      "sha256": "89a262fa3e653c06fcc838cdc71a2d1a13934799ee007e203ef92f060bebccac",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3779684
+      }
+    },
+    {
+      "name": "selector1_material",
+      "start": "0x39c620",
+      "end_exclusive": "0x39c64f",
+      "sha256": "e34276e21c1891a1a9a2eb2518c3f4c765b0cf62537c071b54ae2fc2b2da9d06",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3786272
+      }
+    },
+    {
+      "name": "selector2_material",
+      "start": "0x403cd8",
+      "end_exclusive": "0x403d24",
+      "sha256": "eb13b8b74a03c0d2adbdecf426ae0059fad68ae6274a65f36d64c3492eef6919",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4209880
+      }
+    }
+  ],
+  "fixed_material": {
+    "address": "0xd1ba88",
+    "length": 56,
+    "sha256": "21000f85ea2398c0e403fa25e9929e1beb9b0f898b4e287cef66a1001fcc562b",
+    "backing": {
+      "region": {
+        "kind": "PT_LOAD",
+        "index": 2,
+        "address": 13722352,
+        "memory_size": 97552,
+        "file_offset": 13718256,
+        "file_size": 96312,
+        "flags": 6
+      },
+      "file_backed": true,
+      "file_offset": 13740680
+    },
+    "bytes_not_exported": true,
+    "relocations_in_span": []
+  },
+  "generator_constants": [
+    {
+      "address": "0x375a0",
+      "qwords": [
+        "0xffffffff80000000",
+        "0xffffffff80000000"
+      ],
+      "sha256": "f199f2c103da453713161b199eeca8c735b353441612cd0b5f7c8b5093a8d26b"
+    },
+    {
+      "address": "0x3b5d0",
+      "qwords": [
+        "0x7ffffffe",
+        "0x7ffffffe"
+      ],
+      "sha256": "23d76a70184585f0df01c582f3dcceac54f4ad4d6a2b6995759baed5ede601c9"
+    },
+    {
+      "address": "0x37990",
+      "qwords": [
+        "0xb5026f5aa96619e9",
+        "0xb5026f5aa96619e9"
+      ],
+      "sha256": "e9b9d6231f1d25b40dcc8455dbcd7f07396f835526a98b9e23f1427dd59aecd9"
+    },
+    {
+      "address": "0x39110",
+      "qwords": [
+        "0x7ffffffe",
+        "0xffffffff80000000"
+      ],
+      "sha256": "502769fa772c57b3ffe93c9d1b3c4cbcc76275fae19b6324293f6d3343370049"
+    },
+    {
+      "address": "0x3c590",
+      "qwords": [
+        "0xffffffff80000000",
+        "0x7ffffffe"
+      ],
+      "sha256": "5a6af82033528d38573cc141f44a9beeb871e4fdf377e0cb4ced96bd2848884d"
+    }
+  ],
+  "prior_receipts": [
+    {
+      "path": "shared-decoder-contract/evidence.json",
+      "sha256": "704de3897db3206c8e00edaeb97603d0bed2d736f668ba33b4b30fc1494981c8"
+    },
+    {
+      "path": "decoder-stream-contract/evidence.json",
+      "sha256": "edaf7a3bdc77e978027326214f8d1cf9d837370bc595098899e5a9182965d39e"
+    },
+    {
+      "path": "model-receive-contract/evidence.json",
+      "sha256": "1fd605070816b39274dda31008cfe4e30cede95c86d3a647a0157a04e8b755d1"
+    },
+    {
+      "path": "server-transport-contract/evidence.json",
+      "sha256": "d62b11ee826812c959fb9dd49b7cd2dcc1b1c41aabd05c164519cbc33e68f3e5"
+    }
+  ],
+  "seed": "573dd0(K,L,0xd017cbba7b5d3581)",
+  "state": {
+    "allocation_bytes": "0x9e0",
+    "upstream_pointer": "A+0",
+    "generator_base": "G=A+8",
+    "words": "G[0..311]",
+    "index": "G+0x9c0",
+    "cached_word": "G+0x9c8",
+    "cached_word_used_bytes": "G+0x9d0"
+  },
+  "provenance": {
+    "selector1": "image-backed K=0xd1ba88,L=56; original PT_LOAD writable; no whole-program immutability claim",
+    "selector3": "client retained state+8 virtual+18 gives K,+20 gives L",
+    "selector5": "client retained state+48 virtual+18 gives K,+20 gives L",
+    "selector2": "active server state+d8 virtual+18 gives K,+20 gives L"
+  },
+  "unresolved": [
+    "Constructors and writers of dynamic material subobjects",
+    "Whole-program writes to image-backed fixed material",
+    "Caller validity and minimum readable size56",
+    "Exact original hash algorithm name",
+    "Actual processing and backend selection"
+  ],
+  "target_executed": false,
+  "assets_extracted": false,
+  "material_bytes_exported": false,
+  "standalone_decoder_created": false
+}

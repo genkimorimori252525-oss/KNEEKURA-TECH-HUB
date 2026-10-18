@@ -1,0 +1,25 @@
+{
+  "format": "ysm-authored-mt-reference-validation-v1",
+  "tests_passed": 10,
+  "scope": "Authored numerical model only; not native execution equivalence",
+  "official_vector": {
+    "seed": 5489,
+    "ordinal": 10000,
+    "expected": 9981545732273789042,
+    "url": "https://github.com/gcc-mirror/gcc/blob/2ee5e4300186a92ad73f1a1a64cb918dc76c8d67/libstdc%2B%2B-v3/testsuite/26_numerics/random/mt19937_64.cc",
+    "source_sha256": "0b5bacbeb73374322a84f7c15ce3c1df557c816154b7baf7f4fc43edf674183e",
+    "source_retained": "external; not needed by integrated tests"
+  },
+  "files": [
+    {
+      "path": "tools/native_mt19937_64_reference_ysm_265.py",
+      "sha256": "42fb7c3fc870f1fd30b257b9702c30cb442baad76e619ba0b6822733a1406099"
+    },
+    {
+      "path": "tools/test_native_mt19937_64_reference_ysm_265.py",
+      "sha256": "3dc25cb300ac78604bc6a23eec4fb965afbba99695cf5fee1df42d0ee0ee5ee8"
+    }
+  ],
+  "target_executed": false,
+  "assets_processed": false
+}

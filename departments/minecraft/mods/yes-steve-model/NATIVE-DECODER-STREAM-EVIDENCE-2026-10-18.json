@@ -1,0 +1,430 @@
+{
+  "format": "ysm-decoder-buffered-byte-flow-static-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "ranges": [
+    {
+      "name": "setup",
+      "start": "0x4dc3a0",
+      "end_exclusive": "0x4dc50d",
+      "sha256": "0f4b22b526027dc38d00accd8e11f83ba82e572eb98fa290b78319ce96021674",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5096352
+      }
+    },
+    {
+      "name": "refill_normal",
+      "start": "0x4dc550",
+      "end_exclusive": "0x4dc980",
+      "sha256": "c6b96148f23ef7fe6da61319524a306c83be2e72cef746fa4c032473ea814264",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5096784
+      }
+    },
+    {
+      "name": "buffered_read",
+      "start": "0x4dd1d0",
+      "end_exclusive": "0x4dd342",
+      "sha256": "e834336c4dc083eab6d1b96e97d9d3ca18eb9a6b65161d34b4a0ace6440e169e",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5099984
+      }
+    },
+    {
+      "name": "alignment_dispatch",
+      "start": "0x574820",
+      "end_exclusive": "0x5749dc",
+      "sha256": "5d7a14c1ac45c51e5a20dcc3a687de3d12a589ce7a24a0628e84b27e3a3e2a06",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5720096
+      }
+    },
+    {
+      "name": "generic_block_xor",
+      "start": "0x575bc0",
+      "end_exclusive": "0x576428",
+      "sha256": "7f98b4cc0c5c8168aaea6e84eeaea20e7ed4ff589c2a431043c472e45b123712",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5725120
+      }
+    },
+    {
+      "name": "fill",
+      "start": "0x5766d0",
+      "end_exclusive": "0x57676e",
+      "sha256": "2f2b72b25499e4d3bcf8956b3b0939f2f512fd9af2ffbac7669792eb01863238",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5727952
+      }
+    },
+    {
+      "name": "copy",
+      "start": "0x5767d0",
+      "end_exclusive": "0x576854",
+      "sha256": "6efa154f166ea083383a880cc3e315513e6babd2a31b40d8097d361395ec47ec",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5728208
+      }
+    },
+    {
+      "name": "no_op_hook",
+      "start": "0x2aade0",
+      "end_exclusive": "0x2aade1",
+      "sha256": "ae3f4619b0413d70d3004b9131c3752153074e45725be13b9a148978895e359e",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 2797024
+      }
+    },
+    {
+      "name": "data_getter",
+      "start": "0x2ba410",
+      "end_exclusive": "0x2ba415",
+      "sha256": "8e3eaf4f4b235f364076d47e3b5b95d9e60a71cf19dd62030d0fa20e80858d2e",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 2860048
+      }
+    },
+    {
+      "name": "size_getter",
+      "start": "0x4c4a90",
+      "end_exclusive": "0x4c4a95",
+      "sha256": "87b488c93c952c68bc55fb37a790b7103a651a90bd3a077a4f75297fa846f60b",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4999824
+      }
+    },
+    {
+      "name": "span_advance_normal",
+      "start": "0x4d8380",
+      "end_exclusive": "0x4d83ac",
+      "sha256": "e4991382aabd3f484de53453f68cdf6a19017c276e43afeebd90c83f2f005ddc",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5079936
+      }
+    }
+  ],
+  "relocations": [
+    {
+      "slot": "0xd1ded0",
+      "raw_value": "0x0",
+      "relocation_type": 8,
+      "symbol_index": 0,
+      "symbol_name": "",
+      "addend": 5725120,
+      "actual_runtime_binding_verified": false,
+      "addend_hex": "0x575bc0"
+    },
+    {
+      "slot": "0xd1d860",
+      "raw_value": "0x0",
+      "relocation_type": 8,
+      "symbol_index": 0,
+      "symbol_name": "",
+      "addend": 5099984,
+      "actual_runtime_binding_verified": false,
+      "addend_hex": "0x4dd1d0"
+    },
+    {
+      "slot": "0xd1d868",
+      "raw_value": "0x0",
+      "relocation_type": 8,
+      "symbol_index": 0,
+      "symbol_name": "",
+      "addend": 5096784,
+      "actual_runtime_binding_verified": false,
+      "addend_hex": "0x4dc550"
+    },
+    {
+      "slot": "0xd1d870",
+      "raw_value": "0x0",
+      "relocation_type": 8,
+      "symbol_index": 0,
+      "symbol_name": "",
+      "addend": 2797024,
+      "actual_runtime_binding_verified": false,
+      "addend_hex": "0x2aade0"
+    },
+    {
+      "slot": "0xd2ff38",
+      "raw_value": "0x0",
+      "relocation_type": 8,
+      "symbol_index": 0,
+      "symbol_name": "",
+      "addend": 5727952,
+      "actual_runtime_binding_verified": false,
+      "addend_hex": "0x5766d0"
+    },
+    {
+      "slot": "0xd1d540",
+      "raw_value": "0x0",
+      "relocation_type": 8,
+      "symbol_index": 0,
+      "symbol_name": "",
+      "addend": 2860048,
+      "actual_runtime_binding_verified": false,
+      "addend_hex": "0x2ba410"
+    },
+    {
+      "slot": "0xd1d548",
+      "raw_value": "0x0",
+      "relocation_type": 8,
+      "symbol_index": 0,
+      "symbol_name": "",
+      "addend": 2860048,
+      "actual_runtime_binding_verified": false,
+      "addend_hex": "0x2ba410"
+    },
+    {
+      "slot": "0xd1d550",
+      "raw_value": "0x0",
+      "relocation_type": 8,
+      "symbol_index": 0,
+      "symbol_name": "",
+      "addend": 4999824,
+      "actual_runtime_binding_verified": false,
+      "addend_hex": "0x4c4a90"
+    }
+  ],
+  "prior_receipts_and_primary_sources": [
+    {
+      "path": "shared-decoder-contract/evidence.json",
+      "sha256": "704de3897db3206c8e00edaeb97603d0bed2d736f668ba33b4b30fc1494981c8"
+    },
+    {
+      "path": "decoder-resolver-contract/evidence.json",
+      "sha256": "d0cd6699936b4fdd26f5817ed973805aeb26460ff5b1ab6d2296a5685f308c0d"
+    },
+    {
+      "path": "decoder-generic-contract/evidence.json",
+      "sha256": "230438247864d8d376cdaa5455e312903f8e285a8b6669c573d0ce3d81c919cd"
+    },
+    {
+      "path": "decoder-generic-contract/rfc8439.txt",
+      "sha256": "25bef70fbf7a07ff45c2fe4cb7c6ce954eac687413d8610603268b4e4415324c"
+    },
+    {
+      "path": "decoder-generic-contract/draft-irtf-cfrg-xchacha-03.txt",
+      "sha256": "fa796b50265eeee383d40e82fed880267c7835e1b3d64c50c4f06162adaa1cfd"
+    }
+  ],
+  "state_base": "S=B+0x58",
+  "layout": {
+    "+0x00..0x1f": "copied 32-byte transform output",
+    "+0x20..0x27": "64-bit block counter, initially zero",
+    "+0x28..0x2f": "K[0x30..0x37]",
+    "+0x30": "64-bit rounds, initialized30",
+    "+0x38": "pending byte count, initiallyzero",
+    "+0x40..0x7f": "pending64-byte block"
+  },
+  "generic_quarter_rounds": [
+    {
+      "start": "0x575e65",
+      "end_exclusive": "0x575e91",
+      "indices": [
+        0,
+        4,
+        8,
+        12
+      ]
+    },
+    {
+      "start": "0x575e91",
+      "end_exclusive": "0x575ec2",
+      "indices": [
+        1,
+        5,
+        9,
+        13
+      ]
+    },
+    {
+      "start": "0x575ec2",
+      "end_exclusive": "0x575ef5",
+      "indices": [
+        2,
+        6,
+        10,
+        14
+      ]
+    },
+    {
+      "start": "0x575ef5",
+      "end_exclusive": "0x575f27",
+      "indices": [
+        3,
+        7,
+        11,
+        15
+      ]
+    },
+    {
+      "start": "0x575f27",
+      "end_exclusive": "0x575f59",
+      "indices": [
+        0,
+        5,
+        10,
+        15
+      ]
+    },
+    {
+      "start": "0x575f59",
+      "end_exclusive": "0x575f8a",
+      "indices": [
+        1,
+        6,
+        11,
+        12
+      ]
+    },
+    {
+      "start": "0x575f8a",
+      "end_exclusive": "0x575fbd",
+      "indices": [
+        2,
+        7,
+        8,
+        13
+      ]
+    },
+    {
+      "start": "0x575fbd",
+      "end_exclusive": "0x575ff0",
+      "indices": [
+        3,
+        4,
+        9,
+        14
+      ]
+    }
+  ],
+  "generic_contract": {
+    "input": "S, nullable source, destination, byte length",
+    "state": "four constants, eight copied output words, two counter words, two K-tail words",
+    "feed_forward": true,
+    "counter": "increment low32, carry into high32 per block including partial; write back S+20/+24",
+    "zero_length": "early return",
+    "partial_block": "local64-byte scratch, copy requested tail count only; consumes whole counter block",
+    "null_source": "emit keystream directly",
+    "rounds": 30
+  },
+  "unresolved": [
+    "Actual backend choice and equivalence of other implementations",
+    "All exception metadata",
+    "Caller-global material validity",
+    "Authentication guarantees",
+    "Runtime completion"
+  ],
+  "target_executed": false,
+  "backend_tests_executed": false,
+  "assets_extracted": false
+}
