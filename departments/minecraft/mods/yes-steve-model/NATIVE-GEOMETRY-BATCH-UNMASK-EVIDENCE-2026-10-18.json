@@ -1,0 +1,328 @@
+{
+  "format": "ysm-geometry-batch-unmask-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "ranges": [
+    {
+      "name": "consumer_container",
+      "start": "0x3820c9",
+      "end_exclusive": "0x38210e",
+      "sha256": "d5575f2dce6e30c70fa905e5dc39024324e25768e401daedc98d7f6026586819",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3678409
+      }
+    },
+    {
+      "name": "consumer_unmask_walk",
+      "start": "0x3821d0",
+      "end_exclusive": "0x38230d",
+      "sha256": "790500d622431a55caebec812f303832c2c941d20b2d65da5e483d38556fba30",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3678672
+      }
+    },
+    {
+      "name": "consumer_count_predicate",
+      "start": "0x38254c",
+      "end_exclusive": "0x382566",
+      "sha256": "2f7280a00089e9de13a60e6048aba506c5f62fbc5deb1319f4a073e90b610622",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3679564
+      }
+    },
+    {
+      "name": "consumer_count_finish",
+      "start": "0x38274e",
+      "end_exclusive": "0x38279a",
+      "sha256": "902be05c2cf98a6ede501ca45361bf1ed3d64186839f338765ca96fea486f4b9",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3680078
+      }
+    },
+    {
+      "name": "mask_state_and_generator",
+      "start": "0x37904a",
+      "end_exclusive": "0x379497",
+      "sha256": "76a5154a2c7a178873f9f2aad77fab1a830f2fc1c40990870c47bcc5e23135f3",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3641418
+      }
+    },
+    {
+      "name": "mask_lazy_setup",
+      "start": "0x379497",
+      "end_exclusive": "0x379583",
+      "sha256": "fa346d4e098d67870586373598042733f07132d1832e59a4d20518969f144d5c",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3642519
+      }
+    },
+    {
+      "name": "seed_state",
+      "start": "0x4df620",
+      "end_exclusive": "0x4df749",
+      "sha256": "8e5dc7589c2f981597c4ceabdedcf20b3615ae849b57e7a003153deb7ee611b0",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5109280
+      }
+    },
+    {
+      "name": "seed_provider_dispatch",
+      "start": "0x2fa460",
+      "end_exclusive": "0x2fa4e7",
+      "sha256": "5cd509ea565297cf9e94937275ec9b817fc2a5c77bbd7ddbcb2c4aad158f79e3",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3122272
+      }
+    },
+    {
+      "name": "provider_initialization",
+      "start": "0x2f9f80",
+      "end_exclusive": "0x2fa083",
+      "sha256": "f3330533e0b2ad7a36e46f60ecdbca729799b40ffca6f8672bfb30a58da4627b",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3121024
+      }
+    },
+    {
+      "name": "provider_choices",
+      "start": "0x2fa100",
+      "end_exclusive": "0x2fa2d0",
+      "sha256": "3edcfdf4c1469edbe1a5ab5812c035903d1648389aee46a171aa13e1a8c25850",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3121408
+      }
+    },
+    {
+      "name": "hardware_callbacks",
+      "start": "0x2f9ba0",
+      "end_exclusive": "0x2f9c6e",
+      "sha256": "29a69e93a6ef7a41e2eb956952871e5910b16cb4ee6de9978cb779151c9e24ea",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3120032
+      }
+    },
+    {
+      "name": "cleanup_decode",
+      "start": "0x37ae09",
+      "end_exclusive": "0x37ae56",
+      "sha256": "a64264ecbad4024aa26bb27fce999dbde2d133a9b2ba2dff8b5a815a0b4fdb6d",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3649033
+      }
+    }
+  ],
+  "imports": [
+    {
+      "thunk": "0xd14e80",
+      "first_slot": "0xd30bc8",
+      "stub": "0x13d713c",
+      "import_metadata": {
+        "slot": "0x184d3e8",
+        "raw_value": "0x14f0844",
+        "relocation_type": 7,
+        "symbol_index": 131,
+        "symbol_name": "__tls_get_addr",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    },
+    {
+      "thunk": "0xd14da0",
+      "first_slot": "0xd30b58",
+      "stub": "0x13d70e8",
+      "import_metadata": {
+        "slot": "0x184d378",
+        "raw_value": "0x151a7bf",
+        "relocation_type": 7,
+        "symbol_index": 117,
+        "symbol_name": "open",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    },
+    {
+      "thunk": "0xd14db0",
+      "first_slot": "0xd30b60",
+      "stub": "0x13d70ee",
+      "import_metadata": {
+        "slot": "0x184d380",
+        "raw_value": "0x151d279",
+        "relocation_type": 7,
+        "symbol_index": 118,
+        "symbol_name": "read",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    }
+  ],
+  "prior_receipts": [
+    {
+      "path": "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/geometry-packed-attachment-contract/evidence.json",
+      "sha256": "fb0ab933a1bad658dd715355d760b8378f546ca10d92746c752d46c5b5ce2be7"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/render-backends/receipt.json",
+      "sha256": "ba446181af93f4fe2f6392bc575f31b8e4d474c4c01a6c1c53e9b141d6c28f9f"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/decoder-material-contract/evidence.json",
+      "sha256": "260e2a854dff44ea339170e68f7a920cc028f9fb8b204c813834bc0c987a935d"
+    }
+  ],
+  "shuffle": {
+    "address": "0x39c80",
+    "sha256": "918a45b7bc9e9686f9629c6387b86cff4d3716f8804e52227fc7ae0391fb817d",
+    "authored_basis_checks": 66
+  },
+  "seed_path": {
+    "tls_accessor": "0xd14e80",
+    "tls_descriptor": "0xd2cf38",
+    "provider": "TLS+0x160",
+    "generator": "TLS+0x14e8",
+    "index": "TLS+0x1ea8",
+    "init_flag": "TLS+0x3c00",
+    "seed": "((uint64(first_u32)<<32)|second_u32) & 0xe7cae6049901fa65",
+    "provider_boundary": "0x2fa460 callback or read source, runtime choice/value unobserved"
+  },
+  "mask_formula": "((y >> 3) | uint32(uint32(y) << 29)) XOR 0xe7cae6049901fa65",
+  "consumer": {
+    "representative": "0x381f30 first collection path",
+    "begin": "LE64(V+0) XOR LE64(V+0x1d)",
+    "end": "LE64(V+8) XOR LE64(V+0x25)",
+    "state_byte_checked": false,
+    "capacity_decoded": false,
+    "initial_gate": "begin==end",
+    "walk_stride": "0x5c",
+    "batch_stride": "0x38",
+    "metadata": "uint32(V+0x18) used as emission quota on shown branch"
+  },
+  "limits": [
+    "Only representative immediate renderer path analyzed; no all-backend equivalence",
+    "No allocation-extent, address-membership, alignment, stride-divisibility, begin<=end or cryptographic authenticity check established in selected decode-to-first-read span",
+    "No target, CPU RNG, provider, initializer or native backend executed",
+    "TLS seed actual values and CPU/provider eligibility remain unresolved; no security-strength claim"
+  ],
+  "target_executed": false,
+  "assets_read": false,
+  "repository_modified": false
+}

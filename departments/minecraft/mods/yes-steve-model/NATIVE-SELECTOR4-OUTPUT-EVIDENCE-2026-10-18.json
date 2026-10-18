@@ -1,0 +1,360 @@
+{
+  "format": "ysm-selector4-output-contract-static-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "target_executed": false,
+  "emulation_performed": false,
+  "repository_modified": false,
+  "ranges": [
+    {
+      "name": "provider_output",
+      "start": "0x4d3ff0",
+      "end_exclusive": "0x4d4177",
+      "sha256": "537e1bb5b84e51d899d09d02512696773207d0382a29d068be8df0d0baafcdd5",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5062640
+      }
+    },
+    {
+      "name": "provider_callbacks",
+      "start": "0x4d4239",
+      "end_exclusive": "0x4d4276",
+      "sha256": "6691f59a1d3f20cd87540ea928348f0c67af4975985c2342a9a84d77980ff3cc",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5063225
+      }
+    },
+    {
+      "name": "provider_bounds_call",
+      "start": "0x4d44c6",
+      "end_exclusive": "0x4d44f3",
+      "sha256": "0ce6f43dfa8181c51d3e4250a032b54f98ee1217247bc0995cb6422748e1f471",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5063878
+      }
+    },
+    {
+      "name": "alternate_bounds_call",
+      "start": "0x4d4aad",
+      "end_exclusive": "0x4d4b48",
+      "sha256": "f164231f4804eb2f0fc15f8096118f505948c1bd0dce594b360db963b474493e",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5065389
+      }
+    },
+    {
+      "name": "container_signatures",
+      "start": "0x585430",
+      "end_exclusive": "0x5854e8",
+      "sha256": "343ac2a8b15e60a9c4673caf916f447608a3e62b8ad424d5d53636e646158967",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5788720
+      }
+    },
+    {
+      "name": "positive_dimensions",
+      "start": "0x585b80",
+      "end_exclusive": "0x585ba9",
+      "sha256": "f55b58558e68d5af7c72f0fba618461915a83951de11fdbd1b267cc5a5e4552c",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5790592
+      }
+    },
+    {
+      "name": "external_validation",
+      "start": "0x585cf3",
+      "end_exclusive": "0x585d54",
+      "sha256": "4d0e9f19c578e12efd6ac6109e08505eac378441e228c4758b7410762860ac25",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5790963
+      }
+    },
+    {
+      "name": "packed_bounds",
+      "start": "0x585e71",
+      "end_exclusive": "0x585ecd",
+      "sha256": "66be9ecdedfb27831300375e0fecd1d6a0ff402c91dcd46d8c94b2d9a40c7a79",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5791345
+      }
+    },
+    {
+      "name": "mode_bytes",
+      "start": "0x6db00",
+      "end_exclusive": "0x6db0d",
+      "sha256": "6e70dd5b9f675ee3dc4870b0724f463124aabf962888e16b39307ee7d3935030",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 449280
+      }
+    },
+    {
+      "name": "row_callback",
+      "start": "0x5937b0",
+      "end_exclusive": "0x5937f1",
+      "sha256": "1bb4c1f0fad0e54d49a433976ced2ce513836aa0e4de5f5deeb8d9f87a796b98",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5846960
+      }
+    },
+    {
+      "name": "row_setup_branch",
+      "start": "0x5939ec",
+      "end_exclusive": "0x593a58",
+      "sha256": "f874de74f0adf5a0a06b6a0967cad29c68e6b04b7edcaadc349775d2f422fe5d",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5847532
+      }
+    },
+    {
+      "name": "row_function_candidates",
+      "start": "0x593a86",
+      "end_exclusive": "0x593bc5",
+      "sha256": "acd50994adee4d3f6c3d2b22ab5ded7c3eace9cbc2691ad0b78ef1fdfee1c09c",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5847686
+      }
+    },
+    {
+      "name": "row_store_wrapper",
+      "start": "0x595fc0",
+      "end_exclusive": "0x596081",
+      "sha256": "0fcb27345937b3b1cb1234790e7c0085c1c51dbd66847c310162eae260810756",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5857216
+      }
+    },
+    {
+      "name": "scalar_output_candidate",
+      "start": "0x5a7470",
+      "end_exclusive": "0x5a771d",
+      "sha256": "28c6def3a2bbc087e7e23fff7f1e01fc9ecc720df650b8fdc27e1c5cea123f61",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5928048
+      }
+    }
+  ],
+  "relocations": [],
+  "exploratory_windows": [
+    {
+      "file": "4d3ff0.bin",
+      "start": "0x4d3ff0",
+      "size": 1040,
+      "sha256": "8f50ec3365ecf95f81839155446b5533fcb52c14c06ba74ac24d2de33c142bd8",
+      "status": "exploratory window; not a complete semantic trace"
+    },
+    {
+      "file": "4d4266.bin",
+      "start": "0x4d4266",
+      "size": 87,
+      "sha256": "0cfd00db1b32f37f8d948599cb14ed8bf8483d3fc85e55960b7560071bf80fa5",
+      "status": "exploratory window; not a complete semantic trace"
+    },
+    {
+      "file": "4d4400.bin",
+      "start": "0x4d4400",
+      "size": 3072,
+      "sha256": "267430ee65910b81d96855cab1fb07daa5b0af86cf0d2d3978dcda599482f492",
+      "status": "exploratory window; not a complete semantic trace"
+    },
+    {
+      "file": "5853e0.bin",
+      "start": "0x5853e0",
+      "size": 1056,
+      "sha256": "ba84973b0202f53f69f6c5a9a3755c340d3fa083ccb08ad7f0897ed1a4484143",
+      "status": "exploratory window; not a complete semantic trace"
+    },
+    {
+      "file": "585800.bin",
+      "start": "0x585800",
+      "size": 288,
+      "sha256": "924b8d86eb3f2021973f5d017f7d844dc74ada360e212a65a5ec15995bef53f1",
+      "status": "exploratory window; not a complete semantic trace"
+    },
+    {
+      "file": "585b80.bin",
+      "start": "0x585b80",
+      "size": 928,
+      "sha256": "8f4666fb8c5a0f0e12a9ac54b3c0ac7d80fd8da1446c94e42fbaa35efff870c1",
+      "status": "exploratory window; not a complete semantic trace"
+    },
+    {
+      "file": "5937b0.bin",
+      "start": "0x5937b0",
+      "size": 1072,
+      "sha256": "7478c729b32756508e6849eea398785f1cdb9a28b97111f018ddd06620d66b5a",
+      "status": "exploratory window; not a complete semantic trace"
+    },
+    {
+      "file": "593bc1.bin",
+      "start": "0x593bc1",
+      "size": 559,
+      "sha256": "2f18e632b3215e89eb0f4288e89fee4f437057822a096bb2ff56fc743f24e5fc",
+      "status": "exploratory window; not a complete semantic trace"
+    },
+    {
+      "file": "595fc0.bin",
+      "start": "0x595fc0",
+      "size": 752,
+      "sha256": "2f8cf3010cdb9d0a612dd41d7770e13de1e56f399139995eb17e61718bf23131",
+      "status": "exploratory window; not a complete semantic trace"
+    },
+    {
+      "file": "5a7470.bin",
+      "start": "0x5a7470",
+      "size": 912,
+      "sha256": "dbcf799aa7c802583a3b26488f1fb3e7865f409e62986aa40c7dfada88047419",
+      "status": "exploratory window; not a complete semantic trace"
+    },
+    {
+      "file": "6db00.bin",
+      "start": "0x6db00",
+      "size": 16,
+      "sha256": "265fd714dc7c184efba195ee6004b0e5076bf227e589a5c344771f58ae5db63e",
+      "status": "exploratory window; not a complete semantic trace"
+    }
+  ],
+  "init_array": {
+    "start": "0xd163d8",
+    "size": 360
+  },
+  "prior_receipt_sha256": "9806c955893b8f9f2ba7952c48e47443318dba4ebb554ad963c8d8123d226ab4"
+}

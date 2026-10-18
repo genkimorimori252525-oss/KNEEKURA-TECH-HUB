@@ -1,0 +1,120 @@
+{
+  "source": "ysm-local-inputs/native-static-20261017/libysm-core.so",
+  "sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "target_executed": false,
+  "scope": "Static setup and fourth-byte output store subtrace only. No codec execution, assets, JVM, repository modification or complete codec recovery.",
+  "ranges": [
+    {
+      "start_va": "0x593bba",
+      "end_va_exclusive": "0x594560",
+      "sha256": "0a25f59e039e5228cc54e5bb74524b5318dbd752ecb57c1c55d2f09bf079eb84",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5847994
+      }
+    },
+    {
+      "start_va": "0x594b90",
+      "end_va_exclusive": "0x594d00",
+      "sha256": "3558fe77a6944d5515d5ad436ecb33d6e3039ec496d3aec9d1ad16901ba76d83",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5852048
+      }
+    },
+    {
+      "start_va": "0x595250",
+      "end_va_exclusive": "0x5953f0",
+      "sha256": "d726cd380863027cf55b828fc30b68a9ff31df8d0d761bf964f00ae46dd37629",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5853776
+      }
+    },
+    {
+      "start_va": "0x596df0",
+      "end_va_exclusive": "0x5974a0",
+      "sha256": "f23e25f4482f43808f04e77b5e3800d9fe7cb49fad8addddfb037a7b65eb074a",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5860848
+      }
+    },
+    {
+      "start_va": "0x597610",
+      "end_va_exclusive": "0x5976f0",
+      "sha256": "e1317604f6465f8c7482fac205c81cd5c3cccff03882b5f669314383a908d742",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5862928
+      }
+    },
+    {
+      "start_va": "0x5b4c00",
+      "end_va_exclusive": "0x5b4fb0",
+      "sha256": "5e00b34d6e9e95ea3320da7276df7bbb10ff5fc53a44aa4f8850f1895f728cc1",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5983232
+      }
+    }
+  ],
+  "constant": {
+    "va": "0x3c5d0",
+    "bytes": "ff000000ff000000ff000000ff000000"
+  }
+}
