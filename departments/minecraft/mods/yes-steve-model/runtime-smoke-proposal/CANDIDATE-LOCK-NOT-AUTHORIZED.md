@@ -1,3 +1,5 @@
+> Historical pre-approval design record. For current authorization, file hashes and the HTTP 403 blocker, read [EXECUTION-RESULT-2026-10-18.md](EXECUTION-RESULT-2026-10-18.md). Earlier draft/candidate hashes below are historical.
+
 # Candidate execution lock: NOT AUTHORIZED TO EXECUTE
 
 The separate `ysm_runtime_smoke.candidate.lock.json` has `status: REVIEWED_COMPLETE` and `unresolved: []` after independent technical review. These fields express technical review completeness only. They do not accept the Minecraft EULA, grant publication or dispatch permission, or authorize YSM native execution or built-in asset use.

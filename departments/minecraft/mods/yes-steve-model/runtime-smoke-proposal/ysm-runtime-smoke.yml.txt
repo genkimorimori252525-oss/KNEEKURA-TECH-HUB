@@ -36,9 +36,10 @@ jobs:
       APPROVED_LOCK_SHA256: ${{ inputs.approved_lock_sha256 }}
       EXPECTED_COMMIT: ${{ inputs.expected_commit }}
       REPOSITORY_VISIBILITY: ${{ github.event.repository.visibility }}
-      RUNNER_ENVIRONMENT: ${{ runner.environment }}
     steps:
       - name: Reject unapproved context before checkout
+        env:
+          RUNNER_ENVIRONMENT: ${{ runner.environment }}
         shell: bash
         run: |
           python3 - <<'PY'
@@ -64,6 +65,8 @@ jobs:
           sparse-checkout-cone-mode: false
           fetch-depth: 1
       - name: Verify reviewed source and run bounded smoke
+        env:
+          RUNNER_ENVIRONMENT: ${{ runner.environment }}
         shell: bash
         run: |
           python3 - <<'PY'

@@ -4,6 +4,7 @@ import copy
 import io
 import os
 import zipfile
+import urllib.error
 import importlib.util
 import json
 from pathlib import Path
@@ -154,6 +155,61 @@ class RegressionTests(unittest.TestCase):
         for key,value in [('NetworkMode','bridge'),('Privileged',True),('ReadonlyRootfs',False),('PidMode','host'),('CapAdd',['SYS_ADMIN']),('PortBindings',{'25565/tcp':[{}]}),('PidsLimit',0),('Memory',0),('SecurityOpt',['seccomp=unconfined'])]:
             bad=copy.deepcopy(d);bad['HostConfig'][key]=value
             with self.subTest(key=key),self.assertRaises(m.Blocked):m.inspect_sandbox(Fake(bad),'fake',image,'none',[])
+
+    def test_fixed_diagnostics_preserve_early_blocker_without_raw_text(self):
+        for payload,code,reason in [(b'[]',0,'SECCOMP_UNAVAILABLE'),(b'private-token ::error::',0,'INVALID_JSON'),(b'private-token /home/secret',1,'COMMAND_FAILED')]:
+            calls=[]
+            class Fake:
+                def command(self,argv,**kw):calls.append(argv);return code,payload
+                def download(self,*a):self.fail('download must not occur')
+            lock=copy.deepcopy(m.EXPECTED_LOCK);lock['isolation']['uid']=os.getuid();report={}
+            with self.assertRaises(Exception):m.execute(lock,{},Fake(),report)
+            out=json.loads(m.summary(report))
+            self.assertEqual(out.get('stage'),'DOCKER_SECURITY')
+            self.assertEqual(out.get('error_code'),reason)
+            self.assertEqual(out.get('cleanup'),'PASS')
+            self.assertNotIn('private-token',json.dumps(out));self.assertNotIn('/home',json.dumps(out))
+            self.assertEqual(len(calls),1)
+
+    def test_unknown_diagnostic_strings_are_never_published(self):
+        self.assertTrue(hasattr(m,'error_code'))
+        self.assertEqual(m.error_code(m.Blocked('::error::secret /private')),'POLICY_REJECTED')
+        out=m.summary({'stage':'::error::secret','error_code':'/private'})
+        self.assertNotIn('::',out);self.assertNotIn('/private',out)
+
+    def test_http_status_is_numeric_only_and_preserved_before_cleanup(self):
+        for status in (403,404,429,503):
+            class Fake:
+                def command(self,argv,**kw):return 0,b'["name=seccomp,profile=builtin"]'
+                def download(self,*a):raise urllib.error.HTTPError('https://private.invalid/secret',status,'SECRET ::error::',{'Authorization':'SECRET'},None)
+            lock=copy.deepcopy(m.EXPECTED_LOCK);lock['isolation']['uid']=os.getuid();report={}
+            with self.assertRaises(urllib.error.HTTPError):m.execute(lock,{},Fake(),report)
+            out=json.loads(m.summary(report))
+            self.assertEqual(out.get('stage'),'ACQUIRE_INSTALLER')
+            self.assertEqual(out.get('error_code'),'HTTP_FAILURE')
+            self.assertEqual(out.get('http_status'),status)
+            self.assertEqual(out.get('cleanup'),'PASS')
+            for secret in ('private.invalid','SECRET','Authorization','::error::'):
+                self.assertNotIn(secret,json.dumps(out))
+        for status in (-1,600,'403',True,None):
+            self.assertNotIn('http_status',json.loads(m.summary({'http_status':status})))
+        self.assertNotIn('http_status',json.loads(m.summary({'error_code':'NETWORK_FAILURE'})))
+
+    def test_command_failure_diagnostics_are_fixed_and_bounded(self):
+        self.assertTrue(hasattr(m,'record_error'))
+        class Fake:
+            def command(self,*a,**kw):return 23,b'SECRET ::error:: /private'
+        report={}
+        try:m.checked(Fake(),['docker','image','inspect','secret-image'])
+        except m.Blocked as exc:m.record_error(report,exc)
+        out=json.loads(m.summary(report))
+        self.assertEqual(out.get('command_kind'),'DOCKER_IMAGE_INSPECT')
+        self.assertEqual(out.get('command_exit_code'),23)
+        self.assertNotIn('secret',json.dumps(out).lower())
+        for bad in ({'command_kind':'secret','command_exit_code':'secret'},
+                    {'command_kind':'DOCKER_INFO','command_exit_code':99999}):
+            out=json.loads(m.summary(bad));self.assertNotIn('command_exit_code',out)
+            self.assertNotIn('secret',json.dumps(out))
 
     def test_coordinate_extensions(self):
         self.assertEqual(m.coordinate('a.b:c:1:map@txt'),'a/b/c/1/c-1-map.txt')

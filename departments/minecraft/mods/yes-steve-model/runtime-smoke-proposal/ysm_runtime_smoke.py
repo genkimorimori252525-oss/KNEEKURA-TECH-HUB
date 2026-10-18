@@ -17,6 +17,7 @@ import sys
 import tempfile
 import time
 import urllib.request
+import urllib.error
 import uuid
 import zipfile
 
@@ -34,6 +35,64 @@ MAX_LOG = 8 * 1024 * 1024
 READY = re.compile(rb'Done \([0-9.]+s\)! For help, type "help"')
 # EXPECTED_LOCK is generated from the review schema below, not loaded from untrusted input.
 EXPECTED_LOCK = {'format': 'kneekura.ysm-runtime-lock.v1', 'status': 'REVIEWED_COMPLETE', 'unresolved': [], 'repository': 'genkimorimori252525-oss/KNEEKURA-TECH-HUB', 'visibility': 'public', 'harness_sha256': None, 'runner': 'ubuntu-24.04', 'platform': 'linux/amd64', 'runtime': {'vendor': 'Microsoft Build of OpenJDK', 'java_major': 17, 'image_repository': 'mcr.microsoft.com/openjdk/jdk', 'platform_manifest_sha256': 'b6507c825e40508fc9cbb5645c48396a77b71775620c6ce95dfe1c65da7e8549', 'config_sha256': '93c70e380d5945f4ad879fab2e195df2714ce3acb00cc70cbc0ec9b2f0513efc', 'publisher_metadata_url': 'https://learn.microsoft.com/en-us/java/openjdk/containers', 'preflight': {'launcher': '/usr/lib/jvm/msopenjdk-17/bin/java', 'require_major': 17, 'require_vendor_pattern': '.*Microsoft.*', 'require_nonempty_build': True, 'record_full_version_and_release_metadata': True, 'assert_control_and_ysm_identical': True, 'run_before_forge_or_ysm': True}}, 'versions': {'minecraft': '1.20.1', 'forge': '47.4.0', 'ysm': '2.6.5-forge+mc1.20.1'}, 'ysm_jar_sha256': '25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f', 'ysm_native_sha256': '15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22', 'actions': {'checkout_commit': '11d5960a326750d5838078e36cf38b85af677262'}, 'isolation': {'network': 'none', 'uid': 1001, 'read_only_root': True, 'drop_all_capabilities': True, 'no_new_privileges': True, 'memory_mib': 4096, 'cpus': 2, 'pids': 256, 'core_dumps': False}, 'output': {'mode': 'sanitized_job_logs_only', 'max_bytes': 65536, 'artifacts': False, 'cache': False}, 'limits': {'job_minutes': 25, 'startup_seconds': 180, 'steady_seconds': 20, 'shutdown_seconds': 30}, 'bootstrap': {'mode': 'trusted_official_installer_one_cohort_snapshot', 'forge_installer_sha256': 'f3f57465e2cbdc328193f77ba7f0c94cb64405f31ed556753d9275e8bdc06e2c', 'minecraft_version_manifest_sha256': 'e50169ba5c14ce07c82fb638118449c24f5eb5082e95005c480917aae3635be3', 'minecraft_server_publisher_sha1': '84194a2f286ef7c14ed7ce0090dba59902951553', 'minecraft_server_bytes': 47791053, 'installer_profile_sha256': 'f9d8985233e26cb1a6744176b1ff49e47d78e5f8d81c5027c967dcbcbfdaa9f4', 'reviewed_bootstrap_policy_sha256': 'becece2c6b95a0cefb14f60f3b4bff79d45566a151cdd6d55889bf15331e393a', 'verify_every_declared_checksum': True, 'reject_unknown_launch_inputs': True, 'installer_network': 'bridge_egress_trusted_official_installer', 'no_ysm_or_credentials_in_staging': True, 'requires_bundled_approval': True, 'frozen_snapshot_sha256_recorded_before_both_runs': True, 'same_snapshot_for_control_and_ysm': True, 'independent_hermetic_closure_claimed': False, 'bootstrap_egress_independently_enforced': False, 'reject_unexplained_installed_launch_files': True}}
+
+
+# Only these authored values may reach public diagnostics. Never publish exception text.
+STAGES = frozenset(('VALIDATE','HOST_PLATFORM','PREPARE','DOCKER_SECURITY',
+    'ACQUIRE_INSTALLER','ACQUIRE_GAME_METADATA','IMAGE_PULL','IMAGE_VERIFY',
+    'JVM_PREFLIGHT','INSTALLER','SNAPSHOT_VERIFY','ACQUIRE_YSM',
+    'CONTROL_SETUP','CONTROL_RUN','YSM_SETUP','YSM_RUN','COMPLETE'))
+BLOCKED_CODES = {
+    'default seccomp unavailable':'SECCOMP_UNAVAILABLE',
+    'command failed':'COMMAND_FAILED', 'command timeout':'COMMAND_TIMEOUT',
+    'command output limit':'COMMAND_OUTPUT_LIMIT',
+    'redirect not approved':'DOWNLOAD_REDIRECT', 'download size mismatch':'DOWNLOAD_SIZE',
+    'bootstrap digest mismatch':'BOOTSTRAP_DIGEST', 'image identity mismatch':'IMAGE_IDENTITY',
+    'JVM/network preflight failed':'JVM_PREFLIGHT_FAILED', 'JVM identity/build mismatch':'JVM_IDENTITY',
+    'actual isolation mismatch':'ISOLATION_MISMATCH', 'seccomp disabled':'SECCOMP_DISABLED',
+    'runner UID mismatch':'RUNNER_UID', 'host platform mismatch':'HOST_PLATFORM',
+    'runner cancellation':'CANCELLED', 'publisher checksum mismatch':'PUBLISHER_CHECKSUM',
+    'unknown installed launch file':'UNKNOWN_LAUNCH_FILE', 'missing launch dependency':'MISSING_LAUNCH_INPUT',
+    'missing declared processor output':'MISSING_PROCESSOR_OUTPUT',
+    'missing data-declared output':'MISSING_DECLARED_OUTPUT',
+    'missing published mappings':'MISSING_MAPPINGS', 'snapshot changed':'SNAPSHOT_CHANGED',
+    'YSM mismatch':'YSM_DIGEST', 'native mismatch':'NATIVE_DIGEST',
+    'private log byte budget exceeded':'PRIVATE_LOG_LIMIT'}
+ERROR_CODES = frozenset(BLOCKED_CODES.values()) | frozenset(('POLICY_REJECTED','INVALID_JSON',
+    'HTTP_FAILURE','NETWORK_FAILURE','TIMEOUT','MISSING_FILE','PERMISSION_DENIED',
+    'IO_FAILURE','MISSING_FIELD','DATA_SHAPE','INVALID_ARCHIVE','INTERNAL_ERROR'))
+
+
+def error_code(exc):
+    if isinstance(exc,Blocked):return BLOCKED_CODES.get(str(exc),'POLICY_REJECTED')
+    if isinstance(exc,json.JSONDecodeError):return 'INVALID_JSON'
+    if isinstance(exc,urllib.error.HTTPError):return 'HTTP_FAILURE'
+    if isinstance(exc,urllib.error.URLError):return 'NETWORK_FAILURE'
+    if isinstance(exc,(TimeoutError,subprocess.TimeoutExpired)):return 'TIMEOUT'
+    if isinstance(exc,FileNotFoundError):return 'MISSING_FILE'
+    if isinstance(exc,PermissionError):return 'PERMISSION_DENIED'
+    if isinstance(exc,OSError):return 'IO_FAILURE'
+    if isinstance(exc,KeyError):return 'MISSING_FIELD'
+    if isinstance(exc,(TypeError,ValueError,IndexError)):return 'DATA_SHAPE'
+    if isinstance(exc,zipfile.BadZipFile):return 'INVALID_ARCHIVE'
+    return 'INTERNAL_ERROR'
+
+
+COMMAND_KINDS = {('docker','info'):'DOCKER_INFO', ('docker','pull'):'DOCKER_PULL',
+    ('docker','create'):'DOCKER_CREATE', ('docker','start'):'DOCKER_START',
+    ('docker','inspect'):'DOCKER_INSPECT', ('docker','image','inspect'):'DOCKER_IMAGE_INSPECT',
+    ('docker','rm'):'DOCKER_REMOVE', ('docker','kill'):'DOCKER_KILL'}
+
+
+def record_error(report, exc):
+    # Preserve the first failure if cleanup subsequently fails. No URLs/headers/messages.
+    if 'error_code' in report:return
+    report['error_code']=error_code(exc)
+    if isinstance(exc,urllib.error.HTTPError) and type(exc.code) is int and 100<=exc.code<=599:
+        report['http_status']=exc.code
+    kind=getattr(exc,'command_kind',None);code=getattr(exc,'command_exit_code',None)
+    if isinstance(exc,Blocked) and kind in COMMAND_KINDS.values() and type(code) is int and -255<=code<=255:
+        report['command_kind']=kind;report['command_exit_code']=code
 
 
 def digest(data):
@@ -94,6 +153,13 @@ def summary(report):
     out = {'format':'ysm-server-smoke.v1', 'client_render':'NOT_RUN',
            'native_load':'NOT_OBSERVED','jni_registration':'NOT_OBSERVED',
            'worker_queue_execution':'NOT_OBSERVED','worker_drain':'NOT_OBSERVED'}
+    if report.get('stage') in STAGES:out['stage']=report['stage']
+    if report.get('error_code') in ERROR_CODES:out['error_code']=report['error_code']
+    status=report.get('http_status')
+    if report.get('error_code')=='HTTP_FAILURE' and type(status) is int and 100<=status<=599:out['http_status']=status
+    kind=report.get('command_kind');code=report.get('command_exit_code')
+    if kind in COMMAND_KINDS.values() and type(code) is int and -255<=code<=255:
+        out['command_kind']=kind;out['command_exit_code']=code
     for phase in ('control','ysm'):
         r = report.get(phase, {})
         allowed = ('PASS','NOT_RUN','NOT_READY','CRASH_137','TIMEOUT','OOM','NONZERO_EXIT','BLOCKED')
@@ -216,7 +282,11 @@ class IO:
 
 def checked(io, argv, timeout=60):
     code,data=io.command(argv,timeout=timeout)
-    if code:raise Blocked('command failed')
+    if code:
+        exc=Blocked('command failed')
+        exc.command_kind=COMMAND_KINDS.get(tuple(argv[:3]),COMMAND_KINDS.get(tuple(argv[:2])))
+        exc.command_exit_code=code
+        raise exc
     return data
 
 
@@ -254,10 +324,11 @@ def inspect_sandbox(io,name,image,network,mounts):
         raise Blocked('core limit missing')
 
 
-def acquire(io,root,lock):
+def acquire(io,root,lock,report=None):
     specs=[('installer.jar',INSTALLER_URL,6056587,lock['bootstrap']['forge_installer_sha256']),
            ('version.json',VERSION_URL,34974,lock['bootstrap']['minecraft_version_manifest_sha256'])]
     for name,url,size,sha in specs:
+        if report is not None:report['stage']='ACQUIRE_INSTALLER' if name=='installer.jar' else 'ACQUIRE_GAME_METADATA'
         data=io.download(url,size)
         if digest(data)!=sha:raise Blocked('bootstrap digest mismatch')
         (root/name).write_bytes(data)
@@ -359,6 +430,8 @@ def verify_install(stage,installer,metadata,lock):
 
 def execute(lock, env, io_adapter, report=None):
     """Called only after pure validate(); adapters are injected for offline tests."""
+    if report is None:report={}
+    report['stage']='PREPARE'
     if os.getuid()!=lock['isolation']['uid']:raise Blocked('runner UID mismatch')
     run_id=uuid.uuid4().hex
     root=Path(tempfile.gettempdir())/('ysm-smoke-'+run_id);root.mkdir(mode=0o700)
@@ -375,13 +448,17 @@ def execute(lock, env, io_adapter, report=None):
         inspect_sandbox(io_adapter,name,image,network,mounts)
         return name
     try:
+        report['stage']='DOCKER_SECURITY'
         security=json.loads(checked(io_adapter,['docker','info','--format','{{json .SecurityOptions}}']))
         if not any('name=seccomp' in x and 'profile=builtin' in x for x in security):raise Blocked('default seccomp unavailable')
-        acquire(io_adapter,root,lock)
+        acquire(io_adapter,root,lock,report)
+        report['stage']='IMAGE_PULL'
         checked(io_adapter,['docker','pull','--platform=linux/amd64',image],timeout=180)
+        report['stage']='IMAGE_VERIFY'
         identity=json.loads(checked(io_adapter,['docker','image','inspect',image]))[0]
         if identity['Id']!='sha256:'+lock['runtime']['config_sha256'] or identity['Architecture']!='amd64' or identity['Os']!='linux':raise Blocked('image identity mismatch')
         # Harmless JVM/proc preflight; no Forge/YSM. Same immutable image in all phases.
+        report['stage']='JVM_PREFLIGHT'
         probe=create('preflight','none',[],['/bin/sh','-c',
             'test "$(id -u)" != 0 && test "$(wc -l < /proc/net/route)" -eq 1 && cat /usr/lib/jvm/msopenjdk-17/release && exec '+JAVA+' -XshowSettings:properties -version'])
         # stdout + stderr are combined inside this fixed shell invocation only.
@@ -391,23 +468,27 @@ def execute(lock, env, io_adapter, report=None):
         if code:raise Blocked('JVM/network preflight failed')
         report['java_runtime_version']=jvm_identity(raw)
         (root/'jdk-private.txt').write_bytes(raw)
+        report['stage']='INSTALLER'
         stage=root/'stage';stage.mkdir()
         inst=create('install','bridge',[(str(root/'installer.jar'),'/bootstrap/installer.jar',False),(str(stage),'/stage',True)],
                     [JAVA,'-Djava.io.tmpdir=/tmp','-jar','/bootstrap/installer.jar','--installServer','/stage'])
         # Trusted installer output remains private. No YSM bytes are in its mounted tree.
         checked(io_adapter,['docker','start','--attach',inst],timeout=600)
+        report['stage']='SNAPSHOT_VERIFY'
         metadata=json.loads((root/'version.json').read_bytes())
         frozen=verify_install(stage,root/'installer.jar',metadata,lock)
         (root/'snapshot.sha256').write_text(frozen+'\n')
         # Make the shared verified dependency tree host-read-only before both runs.
         for p in (stage/'libraries').rglob('*'):p.chmod(0o555 if p.is_dir() else 0o444)
         (stage/'libraries').chmod(0o555)
+        report['stage']='ACQUIRE_YSM'
         ysm=io_adapter.download(YSM_URL,63269843)
         if digest(ysm)!=lock['ysm_jar_sha256']:raise Blocked('YSM mismatch')
         with zipfile.ZipFile(io.BytesIO(ysm)) as z:
             native=z.read('META-INF/native/libysm-core.so')
             if digest(native)!=lock['ysm_native_sha256']:raise Blocked('native mismatch')
         def run(phase):
+            report['stage']='CONTROL_SETUP' if phase=='control' else 'YSM_SETUP'
             if snapshot(stage/'libraries')!=frozen:raise Blocked('snapshot changed')
             game=root/phase;game.mkdir();(game/'mods').mkdir()
             (game/'eula.txt').write_text('eula=true\n')
@@ -419,13 +500,18 @@ def execute(lock, env, io_adapter, report=None):
             # Only /tmp is writable+executable; the game/world tmpfs is bounded+noexec.
             init='cp /seed/eula.txt /seed/server.properties /game/ && mkdir -p /game/mods && cp -a /seed/mods/. /game/mods/ && exec \"$@\"'
             name=create(phase,'none',mounts,['/bin/sh','-c',init,'ysm-init',*command],'/game',True)
+            report['stage']='CONTROL_RUN' if phase=='control' else 'YSM_RUN'
             report[phase]['started']=True
             result=io_adapter.stream(['docker','start','--attach','--interactive',name],name,root/(phase+'.private.log'))
             result['started']=True
             return result
         report['snapshot_sha256']=frozen
         run_pair(run,report)
+        report['stage']='COMPLETE'
         return report
+    except Exception as exc:
+        record_error(report,exc)
+        raise
     finally:
         # Restore permissions only in this run-owned tree to allow deletion.
         for p in root.rglob('*'):
@@ -437,18 +523,20 @@ def execute(lock, env, io_adapter, report=None):
 
 
 def main():
-    report={};success=False
+    report={'stage':'VALIDATE'};success=False
     def interrupted(signum,frame):raise Blocked('runner cancellation')
     signal.signal(signal.SIGTERM,interrupted);signal.signal(signal.SIGINT,interrupted)
     try:
         if len(sys.argv)!=3 or sys.argv[1]!='--lock':raise Blocked('usage')
         raw=Path(sys.argv[2]).read_bytes()
         lock=validate(raw,os.environ,Path(__file__).read_bytes())
+        report['stage']='HOST_PLATFORM'
         if os.uname().machine!='x86_64' or 'VERSION_ID="24.04"' not in Path('/etc/os-release').read_text():raise Blocked('host platform mismatch')
         report=execute(lock,os.environ,IO(),report)
         report.update(lock_sha256=digest(raw),harness_sha256=digest(Path(__file__).read_bytes()),commit=os.environ['GITHUB_SHA'])
         success=report['control']['result']=='PASS' and report['ysm']['result']=='PASS'
-    except Exception:
+    except Exception as exc:
+        record_error(report,exc)
         # Exceptions may contain target output or private paths; never emit their text.
         report.setdefault('control',{'result':'BLOCKED'});report.setdefault('ysm',{'result':'NOT_RUN'})
     print(summary(report))

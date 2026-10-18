@@ -1,3 +1,5 @@
+> Historical pre-approval design record. For current authorization, file hashes and the HTTP 403 blocker, read [EXECUTION-RESULT-2026-10-18.md](EXECUTION-RESULT-2026-10-18.md). Earlier draft/candidate hashes below are historical.
+
 # Final implementation proposal: YSM isolated server smoke
 
 Authoritative design, 2026-10-18. This replaces earlier demands for an independently audited full dependency closure, duplicate JVM tarball hashes, an advance exact JVM build label, or cross-run deterministic installer outputs. Status is IMPLEMENTATION_READY_DESIGN / NOT_EXECUTABLE, authored harness review now completed; explicit bounded approval remains absent. Nothing has been installed, executed, published or dispatched.

@@ -2,7 +2,7 @@
 
 日本語の最短入口：[Entity state → Molang → Controller → Bone → Renderer 再利用ハンドオフ](YSM-PIPELINE-REUSE-HANDOFF-2026-10-18.md)。必要な層だけを読み、静的証拠・隔離メタデータ解析・自作参照テスト・実行確認を区別する。
 
-次段階の [隔離サーバー実動作検証案](runtime-smoke-proposal/README.md)：自作テスト・独立レビュー済み。実物の起動・mainへのワークフロー公開は未実施で、承認待ち。
+次段階の [隔離サーバー実動作検証案](runtime-smoke-proposal/README.md)：main に限定ワークフローを公開済み。公式インストーラー取得時の HTTP 403 で停止し、Forge／YSM の起動は未実施。
 
 
 Need a known query/class quickly? Use the optional [evidence locator](EVIDENCE-LOCATOR-2026-10-17.md); no startup audit or tool installation.
