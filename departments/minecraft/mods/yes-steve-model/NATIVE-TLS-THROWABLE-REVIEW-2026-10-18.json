@@ -1,0 +1,169 @@
+{
+  "verdict": "CONDITIONAL_STATIC_ACCEPTANCE",
+  "so_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "windows": [
+    {
+      "start": "0x41a2c0",
+      "end_exclusive": "0x41a321",
+      "file_offset": "0x41a2c0",
+      "sha256": "5a0999cab3774889d2c69fea59bc926c76013e5a2e03ff3fc41814ea7bf7e923"
+    },
+    {
+      "start": "0x41a330",
+      "end_exclusive": "0x41a551",
+      "file_offset": "0x41a330",
+      "sha256": "ae676cd8ac4c9658a3699b061465018bba168baa8af5eb0f7c2a338e32862bde"
+    },
+    {
+      "start": "0x3451f0",
+      "end_exclusive": "0x345263",
+      "file_offset": "0x3451f0",
+      "sha256": "356fd0c15d6c8aa833eef1b19b60f1e563f408daad4a0e862d7619c684202651"
+    },
+    {
+      "start": "0x2aa2d0",
+      "end_exclusive": "0x2aa2de",
+      "file_offset": "0x2aa2d0",
+      "sha256": "6c3fa72c0b8c933b6edb65a131b65710adbcb4754081f225955eefc66f8e958e"
+    },
+    {
+      "start": "0x41c850",
+      "end_exclusive": "0x41c879",
+      "file_offset": "0x41c850",
+      "sha256": "ab35783f1171e839fb2afac2b353777390846b1f513a39c5c21888efed4f281f"
+    },
+    {
+      "start": "0x3cdb01",
+      "end_exclusive": "0x3cdba1",
+      "file_offset": "0x3cdb01",
+      "sha256": "301cc91340698df5223cb9bb10734313a0169f5cfb022505b4d0fcd87e831eee"
+    }
+  ],
+  "checks": {
+    "0x41a380": "ff91a8000000",
+    "0x41a3c4": "48899818010000",
+    "0x41a3e8": "41ff5618",
+    "0x41a40e": "4d897e18",
+    "0x41a2e5": "ff5318",
+    "0x41a2e8": "48c7432000000000",
+    "0x41a4fc": "488d3dbdfdffff",
+    "0x41a50a": "e8c1fde8ff",
+    "0x3451fc": "7564",
+    "0x345220": "e85b6b0d00",
+    "0x345243": "e8a8f69c00",
+    "0x41c873": "ff90b0000000",
+    "0x3cdb01": "6683fd3c",
+    "0x3cdb27": "488bb318010000",
+    "0x3cdb61": "e8caf9f9ff"
+  },
+  "imports": [
+    {
+      "symbol": "__cxa_thread_atexit_impl",
+      "chain": [
+        [
+          "0xd14e40",
+          "0xd30ba8",
+          8,
+          "0x13d7124"
+        ],
+        [
+          "0x13d7124",
+          "0x184d3c8",
+          7,
+          "0x0"
+        ]
+      ]
+    },
+    {
+      "symbol": "sem_post",
+      "chain": [
+        [
+          "0xd148f0",
+          "0xd30900",
+          8,
+          "0x13d6f26"
+        ],
+        [
+          "0x13d6f26",
+          "0x184d120",
+          7,
+          "0x0"
+        ]
+      ]
+    },
+    {
+      "symbol": "__tls_get_addr",
+      "chain": [
+        [
+          "0xd14e80",
+          "0xd30bc8",
+          8,
+          "0x13d713c"
+        ],
+        [
+          "0x13d713c",
+          "0x184d3e8",
+          7,
+          "0x0"
+        ]
+      ]
+    }
+  ],
+  "jni_header_sha256": "99e64ebbe749e6df284f852f11b3c73f6ea97baf15120428f40f887fe0616e61",
+  "jni_offsets": {
+    "NewGlobalRef": "0xa8",
+    "DeleteGlobalRef": "0xb0",
+    "CallObjectMethodV": "0x118",
+    "Throw": "0x68"
+  },
+  "limits": [
+    "Registration attempted; success status ignored",
+    "Queued deletion is conditional, asynchronous and guard-dependent",
+    "Diagnostic consumer is not proof of identical Throwable rethrow",
+    "No whole-program consumer census, leak claim or eventual release guarantee"
+  ],
+  "target_executed": false,
+  "worker_original_windows_crosschecked": 12,
+  "reused_metadata_source": {
+    "path": "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/NATIVE-JAVA-MEMBER-INDEX-2026-10-18.json",
+    "sha256": "cd0e1ed0c3ef19cfe849c0720d1dfeccf478da706b5c21ea8f988a61cf024bf7",
+    "slot": "0xd356e0+0x80",
+    "member": {
+      "kind": "method",
+      "static": false,
+      "access": null,
+      "access_status": "not recorded by source receipt",
+      "owner": "java/lang/Object",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "declaring_class": "java/lang/Object",
+      "class_sha256": "10cc90d16479279e1d6ee258fdaea4c5640ac6125acb5a7100a7b0a20237a9f2",
+      "source_artifact": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      },
+      "classfile_status": "recorded_checkpoint_metadata_proof",
+      "manager_global": "0xd356e0",
+      "manager_offset": "0x80",
+      "artifact_scope": "declared_JDK",
+      "evidence": [
+        {
+          "receipt_path": "NATIVE-CONFIGFORMS-ARRAY-CLASS-2026-10-18.json",
+          "receipt_sha256": "b67e2047cec0a2e8d181cedcc56fcb9210bbf9eb26b8ca70f14dc4a172f5b5f8",
+          "member_index": 1,
+          "checkpoint_sha256": "5910f1c5b52de7aeb2313ae9885bc22fd385a27815885516287cd319e4271d84",
+          "method": "zero_instruction_checkpoint_read",
+          "callback": null,
+          "callback_sha256": null,
+          "payload_sha256": null,
+          "descriptor_flags": null
+        }
+      ]
+    }
+  },
+  "wording_review": "CONDITIONAL_STATIC_ACCEPTANCE",
+  "reviewed_REPORT_md_sha256": "e44ca0d223688ac932372b2ce5c3eb5109646f68c84a32cf8fb82a639e72432a",
+  "reviewed_receipt_json_sha256": "c3cf3a71aef120e24bac02b0cf717800f38225bd587b3d69e50eee4afc24ca53"
+}

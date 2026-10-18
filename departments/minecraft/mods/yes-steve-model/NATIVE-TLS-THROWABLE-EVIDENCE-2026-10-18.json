@@ -1,0 +1,174 @@
+{
+  "classification": "BOUNDED_TLS_THROWABLE_DIAGNOSTIC_AND_DEFERRED_RELEASE",
+  "so_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "windows": [
+    {
+      "start": "0x41a330",
+      "end_exclusive": "0x41a526",
+      "file_offset": 4301616,
+      "sha256": "b3ac4da77e59abe748617d8b1c44e06ef575ea91a3553edef9d1aabe33a87f2d"
+    },
+    {
+      "start": "0x41a2c0",
+      "end_exclusive": "0x41a321",
+      "file_offset": 4301504,
+      "sha256": "5a0999cab3774889d2c69fea59bc926c76013e5a2e03ff3fc41814ea7bf7e923"
+    },
+    {
+      "start": "0x3451f0",
+      "end_exclusive": "0x345263",
+      "file_offset": 3428848,
+      "sha256": "356fd0c15d6c8aa833eef1b19b60f1e563f408daad4a0e862d7619c684202651"
+    },
+    {
+      "start": "0x41bd80",
+      "end_exclusive": "0x41bdc4",
+      "file_offset": 4308352,
+      "sha256": "7cf35dc56b89dc4d5524d1c6c6e867870da0d8b6d0f1163ea824e56d82545503"
+    },
+    {
+      "start": "0x41c850",
+      "end_exclusive": "0x41c88c",
+      "file_offset": 4311120,
+      "sha256": "5472026fff2d33dc829b00eb58202c25523a2436fe3c2c862e6b55e4b26b39b8"
+    },
+    {
+      "start": "0x2aa2d0",
+      "end_exclusive": "0x2aa2de",
+      "file_offset": 2794192,
+      "sha256": "6c3fa72c0b8c933b6edb65a131b65710adbcb4754081f225955eefc66f8e958e"
+    },
+    {
+      "start": "0x3cdb01",
+      "end_exclusive": "0x3cdbb3",
+      "file_offset": 3988225,
+      "sha256": "f2f5757ae7e8fb1d3b9ea730d1c1d6b3b0c8e5aea96c03699d80d790285d1225"
+    },
+    {
+      "start": "0x3ceab1",
+      "end_exclusive": "0x3ceb03",
+      "file_offset": 3992241,
+      "sha256": "59b15fecb06d624809d535662bde732f9d1756bfc60bff486d429700cc259f57"
+    },
+    {
+      "start": "0x3cef00",
+      "end_exclusive": "0x3cef98",
+      "file_offset": 3993344,
+      "sha256": "d8cd6c57ebe19cc2dfb2b9bf742fb3c1cb3ba9bc260488269f867c2524088e6d"
+    },
+    {
+      "start": "0x3c4c34",
+      "end_exclusive": "0x3c4c8d",
+      "file_offset": 3951668,
+      "sha256": "d3a0cc245ebffdcb61e6d1e18188fb32e923260f05f54563c020a333147b38c7"
+    },
+    {
+      "start": "0x36d530",
+      "end_exclusive": "0x36d5c0",
+      "file_offset": 3593520,
+      "sha256": "79ef2c1822bd494f21944fc446ad5839d4e0571d3c4dcc357dfd44ce6ea0e536"
+    },
+    {
+      "start": "0x326fc0",
+      "end_exclusive": "0x326fd1",
+      "file_offset": 3305408,
+      "sha256": "96f20a7701599cd08a7e30efdd07decdfa620b65b2ccd917b85e7b7151b827b6"
+    }
+  ],
+  "byte_assertions": {
+    "0x41a3c4": "48899818010000",
+    "0x41a3e8": "41ff5618",
+    "0x41a4fc": "488d3dbdfdffff",
+    "0x41a50a": "e8c1fde8ff",
+    "0x41a2e5": "ff5318",
+    "0x41a2e8": "48c7432000000000",
+    "0x3451fc": "7564",
+    "0x345220": "e85b6b0d00",
+    "0x41c873": "ff90b0000000",
+    "0x3cdb01": "6683fd3c",
+    "0x3cdb27": "488bb318010000",
+    "0x3cdb61": "e8caf9f9ff",
+    "0x3c4c5e": "e89da20000"
+  },
+  "import_chains": [
+    {
+      "symbol": "__cxa_thread_atexit_impl",
+      "chain": [
+        {
+          "instruction": "0xd14e40",
+          "got": "0xd30ba8",
+          "type": 8,
+          "addend": "0x13d7124"
+        },
+        {
+          "instruction": "0x13d7124",
+          "got": "0x184d3c8",
+          "type": 7,
+          "addend": "0x0"
+        }
+      ]
+    },
+    {
+      "symbol": "sem_post",
+      "chain": [
+        {
+          "instruction": "0xd148f0",
+          "got": "0xd30900",
+          "type": 8,
+          "addend": "0x13d6f26"
+        },
+        {
+          "instruction": "0x13d6f26",
+          "got": "0x184d120",
+          "type": 7,
+          "addend": "0x0"
+        }
+      ]
+    }
+  ],
+  "metadata_source": {
+    "path": "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/NATIVE-JAVA-MEMBER-INDEX-2026-10-18.json",
+    "sha256": "cd0e1ed0c3ef19cfe849c0720d1dfeccf478da706b5c21ea8f988a61cf024bf7",
+    "slot": "0xd356e0+0x80",
+    "member": {
+      "kind": "method",
+      "static": false,
+      "access": null,
+      "access_status": "not recorded by source receipt",
+      "owner": "java/lang/Object",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "declaring_class": "java/lang/Object",
+      "class_sha256": "10cc90d16479279e1d6ee258fdaea4c5640ac6125acb5a7100a7b0a20237a9f2",
+      "source_artifact": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      },
+      "classfile_status": "recorded_checkpoint_metadata_proof",
+      "manager_global": "0xd356e0",
+      "manager_offset": "0x80",
+      "artifact_scope": "declared_JDK",
+      "evidence": [
+        {
+          "receipt_path": "NATIVE-CONFIGFORMS-ARRAY-CLASS-2026-10-18.json",
+          "receipt_sha256": "b67e2047cec0a2e8d181cedcc56fcb9210bbf9eb26b8ca70f14dc4a172f5b5f8",
+          "member_index": 1,
+          "checkpoint_sha256": "5910f1c5b52de7aeb2313ae9885bc22fd385a27815885516287cd319e4271d84",
+          "method": "zero_instruction_checkpoint_read",
+          "callback": null,
+          "callback_sha256": null,
+          "payload_sha256": null,
+          "descriptor_flags": null
+        }
+      ]
+    }
+  },
+  "limits": [
+    "Attempted capture/registration/queueing only; no guaranteed allocation, queue drain or deletion",
+    "Consumer uses current same-thread TLS value; no binding to every native error object",
+    "No universal JNI entry exit clear or identical Java Throwable rethrow proven",
+    "No leak/all-thread lifetime or runtime execution claim"
+  ]
+}
