@@ -59,3 +59,7 @@ LOCK/UNLOCK are modeled only for paired XCHG atomicity markers in a single isola
 2. Restore missing tools/inputs from verified sources only as authorized; use persisted scripts, not a claim that a lost temporary trace still exists.
 3. Respect the approved simulation bounds and latest stopped-read frontier. Keep unsupported input state unknown; static diagnosis can proceed without treating a tool stop as the end of the research task.
 4. Publish derived evidence with explicit assumptions and verify the remote commit/tree. Keep batches scoped; no full-project CI, self-hosted runner, merge or deployment is part of this work.
+
+## Latest read-only validation
+
+NATIVE-SIMULATION-DECODER-CROSSCHECK-2026-10-18.json verifies the 10,000-step trace's 3,557 unique instruction addresses across 238 contiguous groups against GNU objdump and the original file-backed ELF bytes. Six parser/grouping tests pass. This is decoder-boundary/byte agreement, not semantic equivalence or completed native recovery. The instruction-budget expansion remains pending; do not infer approval from completed evidence saving.

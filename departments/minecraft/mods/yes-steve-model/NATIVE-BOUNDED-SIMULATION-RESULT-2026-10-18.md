@@ -64,3 +64,7 @@ The target trial completed two 328-byte copies (658 modeled steps including zero
 Only 3,557 unique instruction addresses appear among the 10,000 steps; much of this is repeated dispatch/copy work. These counts do not represent thousands of recovered functions or a completion percentage. Original file/program bytes remain unchanged and no non-stack write was applied.
 
 The owner has been asked whether the instruction limit may be increased to 100,000 while preserving first-non-stack-write and no-external-call guards. That larger run has NOT occurred. Static inspection and evidence preservation can continue while this decision is pending.
+
+## Independent decoder-boundary cross-check
+
+All 10,000 recorded instruction occurrences were reduced to 3,557 unique addresses and 238 contiguous groups, extracted from the pinned ELF PT_LOAD regions, and decoded with GNU objdump. Every instruction address, byte sequence and length matches the Ghidra trace. See NATIVE-SIMULATION-DECODER-CROSSCHECK-2026-10-18.json and tools/native_simulation_trace_crosscheck_ysm_265.py. Six parser/grouping tests pass, including repeated addresses, conflicting bytes, missing completion, invalid x86 length, counter mismatch and overlapping decode starts. This read-only check does not execute the target and does not independently certify p-code semantics or the opaque-copy model.
