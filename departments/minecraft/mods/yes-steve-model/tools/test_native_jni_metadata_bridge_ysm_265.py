@@ -52,4 +52,20 @@ class MetadataBridgeTests(unittest.TestCase):
    self.assertEqual(c.stop['reason'],'JNI_CALL_WITH_PENDING_EXCEPTION');self.assertEqual(c.jni_state,before)
  def test_pending_exception_permits_reference_cleanup(self):
   c=self.cpu();h=self.cls(c);g=self.call(c,21,h);c.jni_state['pending_exception']={'class':'java/lang/RuntimeException','message':'owned'};self.call(c,23,h);self.call(c,22,g);self.assertEqual(self.call(c,228),1)
+ def extended_metadata(self):
+  import hashlib
+  from native_java_metadata_ysm_265 import JavaMetadata
+  jar=fixtures.archive({'example/Root.class':fixtures.class_bytes('example/Root',methods=[(1,'<init>','()V'),(1,'run','(I)Z'),(9,'create','()I')]),'example/Child.class':fixtures.class_bytes('example/Child','example/Root')})
+  dep=fixtures.archive({'dependency/Pair.class':fixtures.class_bytes('dependency/Pair')})
+  return JavaMetadata.from_buffers(jar=jar,expected_jar_sha256=hashlib.sha256(jar).hexdigest(),dependency_buffers={'dependency':(dep,hashlib.sha256(dep).hexdigest())})
+ def test_source_extension_requires_opt_in_and_preserves_existing_proofs(self):
+  c=self.cpu();h=self.cls(c);self.call(c,33,h,self.string(c,'run'),self.string(c,'(I)Z'));new=self.extended_metadata()
+  with self.assertRaises(ValueError):c.configure_java_metadata(new)
+  c.configure_java_metadata(new,allow_source_extension=True);self.assertEqual(len(c.jni_state['java_source_extensions']),1);self.assertIn('dependency',c.jni_state['java_sources']);self.cls(c,'dependency/Pair')
+  c.stop={'reason':'TEST'};state=capture(c);d=JniGuardedCPU(io.StringIO(),'heap',limit=1);d.add_image(RET,b'\x90'*16);d.protect_image();restore(d,state);d.configure_java_metadata(self.extended_metadata());self.assertEqual(d.jni_state,c.jni_state)
+  with self.assertRaises(ValueError):d.configure_java_metadata(self.metadata(),allow_source_extension=True)
+ def test_source_extension_rejects_replaced_base_archive(self):
+  c=self.cpu();new=self.extended_metadata();new.sources['ysm']['sha256']='0'*64
+  with self.assertRaises(ValueError):c.configure_java_metadata(new,allow_source_extension=True)
+  self.assertEqual(c.jni_state['java_source_extensions'],[])
 if __name__=='__main__':unittest.main()

@@ -8,7 +8,7 @@ from native_initializer_sequence_ysm_265 import prepare_call
 ENTRY=0x418760
 
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--allow-stack-extension',action='store_true',help='Explicitly migrate a legacy small-stack snapshot into the bounded larger-stack scenario');p.add_argument('--batch-size',type=int,default=1,help='Optional guarded instruction batch size; 1 uses the legacy backend');p.add_argument('--java-base',type=Path);p.add_argument('--jar',type=Path);p.add_argument('--jvm-image',type=Path);p.add_argument('--image',type=Path,required=True);g=p.add_mutually_exclusive_group(required=True);g.add_argument('--initializer-checkpoint',type=Path);g.add_argument('--resume-jni-checkpoint',type=Path);p.add_argument('--out',type=Path,required=True);p.add_argument('--checkpoint-out',type=Path,required=True);p.add_argument('--steps',type=int,default=4000000);p.add_argument('--seconds',type=int,default=180);a=p.parse_args();data=a.image.read_bytes();before=hashlib.sha256(data).hexdigest()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--dependency',action='append',nargs=3,metavar=('ID','SHA256','JAR'),default=[]);p.add_argument('--allow-java-source-extension',action='store_true');p.add_argument('--allow-stack-extension',action='store_true',help='Explicitly migrate a legacy small-stack snapshot into the bounded larger-stack scenario');p.add_argument('--batch-size',type=int,default=1,help='Optional guarded instruction batch size; 1 uses the legacy backend');p.add_argument('--java-base',type=Path);p.add_argument('--jar',type=Path);p.add_argument('--jvm-image',type=Path);p.add_argument('--image',type=Path,required=True);g=p.add_mutually_exclusive_group(required=True);g.add_argument('--initializer-checkpoint',type=Path);g.add_argument('--resume-jni-checkpoint',type=Path);p.add_argument('--out',type=Path,required=True);p.add_argument('--checkpoint-out',type=Path,required=True);p.add_argument('--steps',type=int,default=4000000);p.add_argument('--seconds',type=int,default=180);a=p.parse_args();data=a.image.read_bytes();before=hashlib.sha256(data).hexdigest()
     with a.out.open('w') as out:
         cpu_type=JniGuardedCPU
         if a.batch_size!=1:
@@ -20,9 +20,10 @@ def main():
         elif c.jni_state is None or not c.call_in_progress:raise ValueError('Require unfinished JNI checkpoint')
         if a.jvm_image:c.configure_jvm_artifact(a.jvm_image.read_bytes(),initial=bool(a.initializer_checkpoint))
         elif c.jni_state['jvm_artifact'] is not None:raise ValueError('Resume requires the same read-only JVM artifact')
-        if a.java_base or a.jar:
+        if a.java_base or a.jar or a.dependency:
             from native_java_metadata_ysm_265 import JavaMetadata
-            c.configure_java_metadata(JavaMetadata(jar_path=a.jar,java_base_path=a.java_base))
+            if len({x[0] for x in a.dependency})!=len(a.dependency):raise ValueError('Duplicate dependency ID')
+            c.configure_java_metadata(JavaMetadata(jar_path=a.jar,java_base_path=a.java_base,dependency_paths={key:(Path(path),digest) for key,digest,path in a.dependency}),allow_source_extension=a.allow_java_source_extension)
         elif c.jni_state['java_sources'] is not None:raise ValueError('Resume requires the same Java metadata inputs')
         c.oracle_enabled=False;r=c.run(c.reg('RIP'))
         if r['reason']=='ENTRY_RETURN':

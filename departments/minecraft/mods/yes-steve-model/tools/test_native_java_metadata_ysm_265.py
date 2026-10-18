@@ -39,7 +39,7 @@ def archive(entries, jmod=False):
         out.write(b'JM\x01\x00')
     with zipfile.ZipFile(out, 'w') as z:
         for name, raw in entries.items():
-            z.writestr(name, raw)
+            z.writestr(zipfile.ZipInfo(name, date_time=(2026, 1, 1, 0, 0, 0)), raw)
     return out.getvalue()
 
 
@@ -143,6 +143,89 @@ class MetadataTests(unittest.TestCase):
             self.data.lookup_method('example/Child', 'run', '(I)Z')
         data = fixture({'a.class': class_bytes('a', 'b')})
         self.assertIsNone(data.lookup_method('a', 'missing', '()V'))
+
+
+class DependencyTests(unittest.TestCase):
+    def setUp(self):
+        self.raw = archive({'example/Root.class': class_bytes('example/Root',
+            methods=[(9, 'create', '()I')])})
+        self.pin = hashlib.sha256(self.raw).hexdigest()
+
+    def data(self, **kwargs):
+        return metadata.JavaMetadata.from_buffers(
+            dependency_buffers={'commons-lang3': (self.raw, self.pin)}, **kwargs)
+
+    def test_lookup_and_member_provenance(self):
+        data = self.data()
+        self.assertEqual(data.class_info('example/Root')['source']['id'], 'commons-lang3')
+        member = data.lookup_method('example/Root', 'create', '()I', True)
+        self.assertEqual(member['source']['sha256'], self.pin)
+        self.assertEqual(member['source']['archive_kind'], 'jar')
+        self.assertIsNone(data.lookup_method('example/Root', 'create', '()I'))
+        self.assertIsNone(data.class_info('missing/Class'))
+
+    def test_inherited_member_crosses_source_boundary(self):
+        jar = archive({'example/Child.class': class_bytes('example/Child', 'example/Root')})
+        data = self.data(jar=jar, expected_jar_sha256=hashlib.sha256(jar).hexdigest())
+        self.assertEqual(data.lookup_method('example/Child', 'create', '()I', True)
+                         ['source']['id'], 'commons-lang3')
+
+    def test_dependency_hash_required_and_verified(self):
+        for pin in (None, '', '0' * 64, self.pin.upper(), '../bad'):
+            with self.subTest(pin=pin), self.assertRaises(metadata.MetadataError):
+                metadata.JavaMetadata.from_buffers(dependency_buffers={'dep': (self.raw, pin)})
+
+    def test_source_ids_and_shapes_fail_closed(self):
+        for key in ('ysm', 'java.base', '', '../dep', '/dep', 'dep/name', 'a' * 65, 1):
+            with self.subTest(key=key), self.assertRaises(metadata.MetadataError):
+                metadata.JavaMetadata.from_buffers(dependency_buffers={key: (self.raw, self.pin)})
+        for value in (self.raw, (self.raw,), (self.raw, self.pin, 1), None):
+            with self.subTest(value=value), self.assertRaises(metadata.MetadataError):
+                metadata.JavaMetadata.from_buffers(dependency_buffers={'dep': value})
+        with self.assertRaises(metadata.MetadataError):
+            metadata.JavaMetadata.from_buffers(dependency_buffers=[])
+
+    def test_duplicate_classes_fail_without_order_guess(self):
+        with self.assertRaisesRegex(metadata.MetadataError, 'ambiguous'):
+            self.data(jar=self.raw, expected_jar_sha256=self.pin)
+        with self.assertRaisesRegex(metadata.MetadataError, 'ambiguous'):
+            metadata.JavaMetadata.from_buffers(dependency_buffers={
+                'dep1': (self.raw, self.pin), 'dep2': (self.raw, self.pin)})
+
+    def test_platform_shadowing_rejected(self):
+        raw = archive({'java/io/File.class': class_bytes('java/io/File')})
+        with self.assertRaisesRegex(metadata.MetadataError, 'platform'):
+            metadata.JavaMetadata.from_buffers(dependency_buffers={'dep':
+                (raw, hashlib.sha256(raw).hexdigest())})
+        base = archive({'classes/example/Root.class': class_bytes('example/Root')}, True)
+        with self.assertRaisesRegex(metadata.MetadataError, 'platform'):
+            self.data(java_base=base)
+
+    def test_dependency_budgets(self):
+        empty = archive({})
+        pair = (empty, hashlib.sha256(empty).hexdigest())
+        with self.assertRaisesRegex(metadata.MetadataError, 'count'):
+            metadata.JavaMetadata.from_buffers(dependency_buffers={str(i): pair for i in range(9)})
+        with patch.object(metadata, 'MAX_DEPENDENCY_BYTES', len(empty) * 2 - 1):
+            with self.assertRaisesRegex(metadata.MetadataError, 'byte budget'):
+                metadata.JavaMetadata.from_buffers(dependency_buffers={'one': pair, 'two': pair})
+        with patch.object(metadata, 'MAX_ARCHIVE_ENTRIES', 0):
+            with self.assertRaisesRegex(metadata.MetadataError, 'entry budget'):
+                self.data()
+
+    def test_paths_read_only_and_validated_before_open(self):
+        import tempfile
+        from pathlib import Path
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / 'dep.jar'
+            path.write_bytes(self.raw)
+            data = metadata.JavaMetadata(dependency_paths={'dep': (path, self.pin)})
+            self.assertEqual(data.class_info('example/Root')['source']['sha256'], self.pin)
+            self.assertEqual(path.read_bytes(), self.raw)
+            self.assertEqual(list(Path(tmp).iterdir()), [path])
+        with patch.object(metadata.Path, 'open', side_effect=AssertionError('unexpected read')):
+            with self.assertRaises(metadata.MetadataError):
+                metadata.JavaMetadata(dependency_paths={'../bad': ('bad.jar', self.pin)})
 
 
 if __name__ == '__main__':

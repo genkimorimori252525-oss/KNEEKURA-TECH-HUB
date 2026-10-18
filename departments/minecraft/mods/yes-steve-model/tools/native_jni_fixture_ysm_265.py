@@ -50,7 +50,7 @@ class JniGuardedCPU(SyncGuardedCPU):
                 if bytes(self.uc.mem_read(slot,8))!=bytes(8):raise ValueError('Unexpected unbound JVM import')
                 self.external_data_slots.append([slot,name])
         self.configure_jni_pages();vm=self.reserve_fixture(8);env=self.reserve_fixture(8);self.write_private(vm,struct.pack('<Q',VM_TABLE));self.write_private(env,struct.pack('<Q',ENV_TABLE));self.private_readonly.extend([(vm,vm+8),(env,env+8)])
-        self.jni_state={'table_slots':len(ENV_NAMES),'version':VERSION,'vm':vm,'env':env,'calls':[],'getenv_calls':0,'getversion_calls':0,'cpuid_basic_calls':0,'phdr_info':0,'phdr_callbacks':0,'pending_callbacks':[],'classes':{},'jvm_artifact':None,'pending_exception':None,'deleted_local_refs':[],'jvm_loader_calls':0,'jvm_open_refs':0,'jvm_phdr_info':0,'jvm_name':0,'jvm_interfaces':None,'java_sources':None,'class_proofs':{},'global_refs':[],'methods':{}};self.emit('JNI_SCENARIO','jni_version=0xa0000','virtual_thread=attached','synthetic_vm_and_env=true','host_jvm=false')
+        self.jni_state={'table_slots':len(ENV_NAMES),'version':VERSION,'vm':vm,'env':env,'calls':[],'getenv_calls':0,'getversion_calls':0,'cpuid_basic_calls':0,'phdr_info':0,'phdr_callbacks':0,'pending_callbacks':[],'classes':{},'jvm_artifact':None,'pending_exception':None,'deleted_local_refs':[],'jvm_loader_calls':0,'jvm_open_refs':0,'jvm_phdr_info':0,'jvm_name':0,'jvm_interfaces':None,'java_sources':None,'java_source_extensions':[],'class_proofs':{},'global_refs':[],'methods':{}};self.emit('JNI_SCENARIO','jni_version=0xa0000','virtual_thread=attached','synthetic_vm_and_env=true','host_jvm=false')
     def configure_jvm_artifact(self,data,initial=False):
         if self.jni_state is None or not 64<=len(data)<=64*1024*1024 or data[:6]!=b'\x7fELF\x02\x01':raise ValueError('Invalid read-only JVM artifact')
         metadata={'sha256':hashlib.sha256(data).hexdigest(),'size':len(data),'virtual_path':'/virtual/jdk/lib/server/libjvm.so'}
@@ -81,15 +81,20 @@ class JniGuardedCPU(SyncGuardedCPU):
             if self.read_known(self.jni_state['jvm_phdr_info'],48)!=expected:raise ValueError('Changed JVM program header fixture')
         self.jvm_interfaces_ready=True
         self.emit('JVM_ARTIFACT_INPUT',metadata['sha256'],f'bytes={len(data)}','host_library_loaded=false','artifact_bytes_mapped_readonly=true','jvm_code_execution=false','writable_runtime_data=unknown','file_bytes_only=true')
-    def configure_java_metadata(self,metadata):
-        previous=self.jni_state['java_sources']
-        if previous is not None and previous!=metadata.sources:raise ValueError('Java metadata artifacts changed')
+    def configure_java_metadata(self,metadata,*,allow_source_extension=False):
+        previous=self.jni_state['java_sources'];added={}
+        if previous is not None and previous!=metadata.sources:
+            if not allow_source_extension or not all(metadata.sources.get(k)==v for k,v in previous.items()) or not set(previous)<set(metadata.sources):raise ValueError('Java metadata artifacts changed; additive source extension requires explicit opt-in')
+            added={k:v for k,v in metadata.sources.items() if k not in previous}
+            if any(k in ('ysm','java.base') for k in added) or len(self.jni_state['java_source_extensions'])>=8:raise ValueError('Invalid Java dependency extension')
         for name,proof in self.jni_state['class_proofs'].items():
             info=metadata.class_info(name)
             if info is None or info['class_sha256']!=proof['sha256'] or info['source']!=proof['source']:raise ValueError('Java class proof changed')
         for item in self.jni_state['methods'].values():
             record=metadata.lookup_method(item['requested_class'],item['name'],item['descriptor'],item['static'])
             if record is None or any(record[k]!=item[k] for k in ['declaring_class','class_sha256','source']):raise ValueError('Java method metadata changed')
+        if added:
+            self.jni_state['java_source_extensions'].append({'added':copy.deepcopy(added)});self.emit('JAVA_METADATA_SOURCE_EXTENSION',str(added),'existing_proofs_revalidated=true','equivalent_scenario=false','host_java_execution=false')
         self.java_metadata=metadata;self.jni_state['java_sources']=copy.deepcopy(metadata.sources);self.emit('JAVA_METADATA_INPUTS',str(metadata.sources),'host_java_execution=false')
     def code_allowed(self,a,n=1):return (a in getattr(self,'jni_gateways',{}) and n<=15 and (TRAPS<=a<TRAPS+4096 or self.jvm_interfaces_ready)) or super().code_allowed(a,n)
     def unknown(self,a,n):
@@ -205,8 +210,8 @@ class JniGuardedCPU(SyncGuardedCPU):
     def restore_sparse(self,s):
         super().restore_sparse(s);state=s.get('jni')
         if state is None:return
-        state=copy.deepcopy(state);state.setdefault('cpuid_basic_calls',0);state.setdefault('phdr_info',0);state.setdefault('phdr_callbacks',0);state.setdefault('pending_callbacks',[]);state.setdefault('classes',{});state.setdefault('jvm_artifact',None);state.setdefault('pending_exception',None);state.setdefault('deleted_local_refs',[]);state.setdefault('jvm_loader_calls',0);state.setdefault('jvm_open_refs',0);state.setdefault('jvm_phdr_info',0);state.setdefault('jvm_name',0);state.setdefault('jvm_interfaces',None);state.setdefault('java_sources',None);state.setdefault('class_proofs',{});state.setdefault('global_refs',[]);state.setdefault('methods',{})
-        if set(state)!={'table_slots','version','vm','env','calls','getenv_calls','getversion_calls','cpuid_basic_calls','phdr_info','phdr_callbacks','pending_callbacks','classes','jvm_artifact','pending_exception','deleted_local_refs','jvm_loader_calls','jvm_open_refs','jvm_phdr_info','jvm_name','jvm_interfaces','java_sources','class_proofs','global_refs','methods'} or state['version']!=VERSION or state['table_slots']!=len(ENV_NAMES) or len(state['calls'])>4096:raise ValueError('Invalid JNI scenario')
+        state=copy.deepcopy(state);state.setdefault('cpuid_basic_calls',0);state.setdefault('phdr_info',0);state.setdefault('phdr_callbacks',0);state.setdefault('pending_callbacks',[]);state.setdefault('classes',{});state.setdefault('jvm_artifact',None);state.setdefault('pending_exception',None);state.setdefault('deleted_local_refs',[]);state.setdefault('jvm_loader_calls',0);state.setdefault('jvm_open_refs',0);state.setdefault('jvm_phdr_info',0);state.setdefault('jvm_name',0);state.setdefault('jvm_interfaces',None);state.setdefault('java_sources',None);state.setdefault('java_source_extensions',[]);state.setdefault('class_proofs',{});state.setdefault('global_refs',[]);state.setdefault('methods',{})
+        if set(state)!={'table_slots','version','vm','env','calls','getenv_calls','getversion_calls','cpuid_basic_calls','phdr_info','phdr_callbacks','pending_callbacks','classes','jvm_artifact','pending_exception','deleted_local_refs','jvm_loader_calls','jvm_open_refs','jvm_phdr_info','jvm_name','jvm_interfaces','java_sources','java_source_extensions','class_proofs','global_refs','methods'} or state['version']!=VERSION or state['table_slots']!=len(ENV_NAMES) or len(state['calls'])>4096:raise ValueError('Invalid JNI scenario')
         for key in ['getenv_calls','getversion_calls','cpuid_basic_calls']:
             if type(state[key]) is not int or not 0<=state[key]<=4096:raise ValueError('Invalid JNI counter')
         if any(call not in [['vm',6,'GetEnv'],['env',4,'GetVersion'],['env',6,'FindClass'],['env',14,'ThrowNew'],['env',23,'DeleteLocalRef'],['env',21,'NewGlobalRef'],['env',22,'DeleteGlobalRef'],['env',33,'GetMethodID'],['env',113,'GetStaticMethodID'],['env',228,'ExceptionCheck']] for call in state['calls']) or state['getenv_calls']!=state['calls'].count(['vm',6,'GetEnv']) or state['getversion_calls']!=state['calls'].count(['env',4,'GetVersion']):raise ValueError('Invalid JNI call ledger')
@@ -227,6 +232,14 @@ class JniGuardedCPU(SyncGuardedCPU):
         if not isinstance(state['classes'],dict) or len(state['classes'])>1024 or any(str(int(k))!=k or not 0x790000000000<=int(k)<0x790000040000 or int(k)%256 or not isinstance(v,str) or not 0<len(v)<=256 or not v.isascii() or '\0' in v for k,v in state['classes'].items()):raise ValueError('Invalid declared class handle')
         if not isinstance(state['class_proofs'],dict) or any(name not in state['classes'].values() or set(proof)!={'sha256','source'} or not isinstance(proof['sha256'],str) or len(proof['sha256'])!=64 for name,proof in state['class_proofs'].items()):raise ValueError('Invalid Java class proof')
         if (state['class_proofs'] or state['methods']) and state['java_sources'] is None:raise ValueError('Java metadata source missing')
+        extensions=state['java_source_extensions'];seen=set()
+        if not isinstance(extensions,list) or len(extensions)>8:raise ValueError('Invalid Java source extension history')
+        for item in extensions:
+            if not isinstance(item,dict) or set(item)!={'added'} or not isinstance(item['added'],dict) or not 0<len(item['added'])<=8 or state['java_sources'] is None:raise ValueError('Invalid Java source extension record')
+            for key,value in item['added'].items():
+                if key in seen or key in ('ysm','java.base') or state['java_sources'].get(key)!=value:raise ValueError('Java source extension provenance mismatch')
+                seen.add(key)
+
         if not isinstance(state['global_refs'],list) or len(state['global_refs'])>1024 or any(type(x) is not int or str(x) not in state['classes'] or x in state['deleted_local_refs'] for x in state['global_refs']) or len(set(state['global_refs']))!=len(state['global_refs']):raise ValueError('Invalid global reference ledger')
         if not isinstance(state['methods'],dict) or len(state['methods'])>4096:raise ValueError('Invalid method metadata budget')
         for key,item in state['methods'].items():

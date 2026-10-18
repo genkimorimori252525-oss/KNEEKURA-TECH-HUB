@@ -1,15 +1,17 @@
 """Read-only, bounded class/member evidence. Never loads a JVM or executes bytecode.
 
-Only the pinned YSM archive is accepted by the path constructor. JDK identity is
+The path constructor pins YSM and explicitly hashed dependency JARs. JDK identity is
 reported, not inferred from its filename. Missing classes/members return None;
 invalid or over-budget inputs raise MetadataError. Interfaces are not traversed.
 """
 from __future__ import annotations
 
+from collections.abc import Mapping
 import copy
 import hashlib
 import io
 from pathlib import Path
+import re
 import struct
 import zipfile
 
@@ -22,6 +24,8 @@ MAX_CLASS_BYTES = 4 * 1024 * 1024
 MAX_ARCHIVE_BYTES = 512 * 1024 * 1024
 MAX_ARCHIVE_ENTRIES = 100_000
 MAX_SUPER_DEPTH = 64
+MAX_DEPENDENCIES = 8
+MAX_DEPENDENCY_BYTES = 128 * 1024 * 1024
 
 
 class MetadataError(ValueError):
@@ -117,17 +121,20 @@ def _validate_class_bounds(raw):
 class JavaMetadata:
     """Explicit local sources, with no extraction and no filesystem writes.
 
-    sources maps 'ysm'/'java.base' to sha256, archive_kind and entry_count.
+    sources maps stable source IDs to sha256, archive_kind and entry_count.
+    dependency_paths maps IDs to (path, mandatory lowercase SHA-256).
+    Dependency archives are indexed only; manifest classpaths are never followed.
     class_info returns detached dictionaries. lookup_method includes access flags,
     declaring_class and source provenance. Static/instance mismatches fail closed.
     JNI method lookup does not enforce Java caller visibility; access flags are
     retained as evidence, and inherited private methods are excluded.
     """
 
-    def __init__(self, jar_path=None, java_base_path=None):
+    def __init__(self, jar_path=None, java_base_path=None, *, dependency_paths=None):
         self._archives = {}
         self._cache = {}
         self.sources = {}
+        dependencies = self._dependencies(dependency_paths)
         for key, path, kind, expected in (
             ("ysm", jar_path, "jar", YSM_SHA256),
             ("java.base", java_base_path, "jmod", None),
@@ -136,23 +143,77 @@ class JavaMetadata:
                 with Path(path).open("rb") as stream:
                     data = stream.read(MAX_ARCHIVE_BYTES + 1)
                 self._add(key, data, kind, expected)
+        self._add_dependencies(dependencies, paths=True)
 
     @classmethod
-    def from_buffers(cls, *, jar=None, java_base=None, expected_jar_sha256=YSM_SHA256):
+    def from_buffers(cls, *, jar=None, java_base=None, expected_jar_sha256=YSM_SHA256,
+                     dependency_buffers=None):
         """In-memory fixture seam; real path inputs always use pinned YSM hash."""
+        dependencies = cls._dependencies(dependency_buffers)
         result = cls()
         if jar is not None:
             result._add("ysm", jar, "jar", expected_jar_sha256)
         if java_base is not None:
             result._add("java.base", java_base, "jmod", None)
+        result._add_dependencies(dependencies, paths=False)
         return result
+
+    @staticmethod
+    def _dependencies(values):
+        if values is None:
+            return []
+        if not isinstance(values, Mapping):
+            raise MetadataError("dependency inputs must be a mapping")
+        if len(values) > MAX_DEPENDENCIES:
+            raise MetadataError("dependency count budget exceeded")
+        result = []
+        for key, pair in values.items():
+            if (not isinstance(key, str) or key in ("ysm", "java.base")
+                    or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,63}", key)):
+                raise MetadataError("invalid or reserved dependency source ID")
+            if not isinstance(pair, (tuple, list)) or len(pair) != 2:
+                raise MetadataError("dependency input requires data/path and SHA-256")
+            value, expected = pair
+            if not isinstance(expected, str) or not re.fullmatch(r"[0-9a-f]{64}", expected):
+                raise MetadataError("dependency requires lowercase SHA-256")
+            result.append((key, value, expected))
+        return sorted(result)
+
+    def _add_dependencies(self, dependencies, *, paths):
+        total = 0
+        for key, value, expected in dependencies:
+            if paths:
+                with Path(value).open("rb") as stream:
+                    data = stream.read(min(MAX_ARCHIVE_BYTES, MAX_DEPENDENCY_BYTES - total) + 1)
+            else:
+                if not isinstance(value, bytes):
+                    raise MetadataError("dependency buffer must be bytes")
+                data = value
+            total += len(data)
+            if total > MAX_DEPENDENCY_BYTES:
+                raise MetadataError("dependency byte budget exceeded")
+            self._add(key, data, "jar", expected)
+        if dependencies:
+            owners = {}
+            platform = self._archives.get("java.base", (None, {}))[1]
+            for key, (_, index) in self._archives.items():
+                if key == "java.base":
+                    continue
+                for entry in index:
+                    if not entry.endswith(".class"):
+                        continue
+                    if key != "ysm" and (entry.startswith("java/") or "classes/" + entry in platform):
+                        raise MetadataError("dependency platform class shadowing")
+                    if entry in owners:
+                        raise MetadataError("ambiguous class across archive sources: " + entry)
+                    owners[entry] = key
 
     def _add(self, key, data, kind, expected):
         if len(data) > MAX_ARCHIVE_BYTES:
             raise MetadataError("archive byte budget exceeded")
         digest = hashlib.sha256(data).hexdigest()
         if expected is not None and digest != expected:
-            raise MetadataError("YSM archive SHA-256 mismatch")
+            raise MetadataError(key + " archive SHA-256 mismatch")
         if kind == "jmod" and not data.startswith(b"JM\x01\x00"):
             raise MetadataError("missing JMOD header")
         try:
@@ -181,7 +242,9 @@ class JavaMetadata:
         if name in self._cache:
             return copy.deepcopy(self._cache[name])
         # Platform classes must not be shadowed by an application JAR.
-        order = ("java.base",) if name.startswith("java/") else ("java.base", "ysm")
+        order = (("java.base",) if name.startswith("java/") else
+                 ("java.base", "ysm", *sorted(k for k in self._archives
+                                               if k not in ("java.base", "ysm"))))
         for key in order:
             if key not in self._archives:
                 continue
