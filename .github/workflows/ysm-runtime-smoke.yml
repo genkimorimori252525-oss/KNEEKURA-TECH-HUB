@@ -1,0 +1,78 @@
+# REVIEW-ONLY PROPOSAL. Supplied lock is NOT_EXECUTABLE. Do not install/dispatch yet.
+name: YSM isolated server smoke
+on:
+  workflow_dispatch:
+    inputs:
+      accept_minecraft_eula:
+        description: Explicit acceptance of https://www.minecraft.net/en-us/eula
+        type: boolean
+        default: false
+        required: true
+      allow_original_ysm_execution:
+        description: Approve original YSM native execution and normal built-in asset use
+        type: boolean
+        default: false
+        required: true
+      approved_lock_sha256:
+        description: Reviewed exact lock SHA-256
+        type: string
+        required: true
+      expected_commit:
+        description: Approved full lowercase 40-hex main commit
+        type: string
+        required: true
+permissions:
+  contents: read
+concurrency:
+  group: ysm-isolated-server-smoke
+  cancel-in-progress: false
+jobs:
+  server-smoke:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      ACCEPT_MINECRAFT_EULA: ${{ inputs.accept_minecraft_eula }}
+      ALLOW_ORIGINAL_YSM_EXECUTION: ${{ inputs.allow_original_ysm_execution }}
+      APPROVED_LOCK_SHA256: ${{ inputs.approved_lock_sha256 }}
+      EXPECTED_COMMIT: ${{ inputs.expected_commit }}
+      REPOSITORY_VISIBILITY: ${{ github.event.repository.visibility }}
+      RUNNER_ENVIRONMENT: ${{ runner.environment }}
+    steps:
+      - name: Reject unapproved context before checkout
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import os, re
+          e=os.environ
+          required={'GITHUB_REPOSITORY':'genkimorimori252525-oss/KNEEKURA-TECH-HUB',
+                    'GITHUB_REF':'refs/heads/main','GITHUB_EVENT_NAME':'workflow_dispatch',
+                    'REPOSITORY_VISIBILITY':'public','RUNNER_ENVIRONMENT':'github-hosted',
+                    'RUNNER_OS':'Linux','RUNNER_ARCH':'X64','ImageOS':'ubuntu24',
+                    'ALLOW_ORIGINAL_YSM_EXECUTION':'true','ACCEPT_MINECRAFT_EULA':'true'}
+          assert all(e.get(k)==v for k,v in required.items()), 'Context or consent rejected'
+          assert re.fullmatch('[0-9a-f]{40}',e['EXPECTED_COMMIT'])
+          assert e['GITHUB_SHA']==e['EXPECTED_COMMIT'], 'Event commit mismatch'
+          assert re.fullmatch('[0-9a-f]{64}',e['APPROVED_LOCK_SHA256'])
+          PY
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            tools/ci/ysm_runtime_smoke.py
+            tools/ci/ysm_runtime_smoke.lock.json
+          sparse-checkout-cone-mode: false
+          fetch-depth: 1
+      - name: Verify reviewed source and run bounded smoke
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          lock=Path('tools/ci/ysm_runtime_smoke.lock.json').read_bytes()
+          assert hashlib.sha256(lock).hexdigest()==os.environ['APPROVED_LOCK_SHA256'], 'Lock digest mismatch'
+          m=json.loads(lock)
+          assert m['status']=='REVIEWED_COMPLETE' and not m['unresolved'], 'Draft lock cannot execute'
+          assert hashlib.sha256(Path('tools/ci/ysm_runtime_smoke.py').read_bytes()).hexdigest()==m['harness_sha256'], 'Harness digest mismatch'
+          PY
+          python3 tools/ci/ysm_runtime_smoke.py --lock tools/ci/ysm_runtime_smoke.lock.json
