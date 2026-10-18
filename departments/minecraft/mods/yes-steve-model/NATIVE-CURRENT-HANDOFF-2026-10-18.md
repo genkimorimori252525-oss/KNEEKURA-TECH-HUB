@@ -1,6 +1,6 @@
 # Current native-analysis handoff — October 18
 
-Read this before resuming native work. Latest entry: [verified CRC32 summary and dladdr frontier](NATIVE-CRC32-SUMMARY-RESULT-2026-10-18.md). Branch: `jolly/ysm-analysis-20261016`. Last verified analysis publication before this handoff: `02fc35cdbc7a0fef0206dc9e2b08c835e1983e79`. The project is unfinished.
+Read this before resuming native work. Latest entry: [virtual loader scenarios and mprotect frontier](NATIVE-VIRTUAL-LOADER-RESULT-2026-10-18.md). Branch: `jolly/ysm-analysis-20261016`. Last verified analysis publication before this handoff: `02fc35cdbc7a0fef0206dc9e2b08c835e1983e79`. The project is unfinished.
 
 ## Scope and confidence
 
@@ -85,3 +85,7 @@ Unicorn guarded backend is now implemented and24toy tests pass. Original pages a
 ## Latest checkpoint: verified CRC summary
 
 The optional CRC summary passes 30 full-state differential cases and reaches dladdr after nine summarized blocks. See the latest entry above; older frontiers and pending-optimization sections are historical. No target host execution or original-image mutation.
+
+## Latest checkpoint: loader/platform scenarios
+
+Both declared loader scenarios reach mprotect(0xec5000,0x510e52,7). No host or guest permission change applied; see latest entry and paired JSON. Older frontier statements remain historical.
