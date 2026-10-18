@@ -1,0 +1,79 @@
+{
+  "format": "kneekura.ysm-runtime-lock.v1",
+  "status": "REVIEWED_COMPLETE",
+  "unresolved": [],
+  "repository": "genkimorimori252525-oss/KNEEKURA-TECH-HUB",
+  "visibility": "public",
+  "harness_sha256": "f202acfe320d21b28b2143c23c8fdb929a5ce7fc8ab8947c61fb10c718323c7f",
+  "runner": "ubuntu-24.04",
+  "platform": "linux/amd64",
+  "runtime": {
+    "vendor": "Microsoft Build of OpenJDK",
+    "java_major": 17,
+    "image_repository": "mcr.microsoft.com/openjdk/jdk",
+    "platform_manifest_sha256": "b6507c825e40508fc9cbb5645c48396a77b71775620c6ce95dfe1c65da7e8549",
+    "config_sha256": "93c70e380d5945f4ad879fab2e195df2714ce3acb00cc70cbc0ec9b2f0513efc",
+    "publisher_metadata_url": "https://learn.microsoft.com/en-us/java/openjdk/containers",
+    "preflight": {
+      "launcher": "/usr/lib/jvm/msopenjdk-17/bin/java",
+      "require_major": 17,
+      "require_vendor_pattern": ".*Microsoft.*",
+      "require_nonempty_build": true,
+      "record_full_version_and_release_metadata": true,
+      "assert_control_and_ysm_identical": true,
+      "run_before_forge_or_ysm": true
+    }
+  },
+  "versions": {
+    "minecraft": "1.20.1",
+    "forge": "47.4.0",
+    "ysm": "2.6.5-forge+mc1.20.1"
+  },
+  "ysm_jar_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "ysm_native_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "actions": {
+    "checkout_commit": "11d5960a326750d5838078e36cf38b85af677262"
+  },
+  "isolation": {
+    "network": "none",
+    "uid": 1001,
+    "read_only_root": true,
+    "drop_all_capabilities": true,
+    "no_new_privileges": true,
+    "memory_mib": 4096,
+    "cpus": 2,
+    "pids": 256,
+    "core_dumps": false
+  },
+  "output": {
+    "mode": "sanitized_job_logs_only",
+    "max_bytes": 65536,
+    "artifacts": false,
+    "cache": false
+  },
+  "limits": {
+    "job_minutes": 25,
+    "startup_seconds": 180,
+    "steady_seconds": 20,
+    "shutdown_seconds": 30
+  },
+  "bootstrap": {
+    "mode": "trusted_official_installer_one_cohort_snapshot",
+    "forge_installer_sha256": "f3f57465e2cbdc328193f77ba7f0c94cb64405f31ed556753d9275e8bdc06e2c",
+    "minecraft_version_manifest_sha256": "e50169ba5c14ce07c82fb638118449c24f5eb5082e95005c480917aae3635be3",
+    "minecraft_server_publisher_sha1": "84194a2f286ef7c14ed7ce0090dba59902951553",
+    "minecraft_server_bytes": 47791053,
+    "installer_profile_sha256": "f9d8985233e26cb1a6744176b1ff49e47d78e5f8d81c5027c967dcbcbfdaa9f4",
+    "reviewed_bootstrap_policy_sha256": "becece2c6b95a0cefb14f60f3b4bff79d45566a151cdd6d55889bf15331e393a",
+    "verify_every_declared_checksum": true,
+    "reject_unknown_launch_inputs": true,
+    "installer_network": "bridge_egress_trusted_official_installer",
+    "no_ysm_or_credentials_in_staging": true,
+    "requires_bundled_approval": true,
+    "frozen_snapshot_sha256_recorded_before_both_runs": true,
+    "same_snapshot_for_control_and_ysm": true,
+    "independent_hermetic_closure_claimed": false,
+    "bootstrap_egress_independently_enforced": false,
+    "reject_unexplained_installed_launch_files": true
+  }
+}

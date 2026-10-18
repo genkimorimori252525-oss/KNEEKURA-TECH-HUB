@@ -1,0 +1,45 @@
+{
+  "status": "NOT_EXECUTABLE",
+  "test_command": "python -m unittest discover -s ysm-local-inputs/ghidra-static-20261018/output/runtime-harness-proposal -p 'test_*.py' -v",
+  "tests_passed": 17,
+  "test_execution": "authored fake data only; no real IO adapter invocations",
+  "original_execution": false,
+  "files": {
+    "ysm-runtime-smoke.yml": {
+      "sha256": "f70a2c8bae8b050ae83eac5cbaeec9ab11be283ba2cacda7431d2b6917416661",
+      "bytes": 3388
+    },
+    "ysm_runtime_smoke.py": {
+      "sha256": "f202acfe320d21b28b2143c23c8fdb929a5ce7fc8ab8947c61fb10c718323c7f",
+      "bytes": 28503
+    },
+    "ysm_runtime_smoke.lock.json": {
+      "sha256": "d50b0c434dc686d7e9363411c4e2d0cf9da61ea435a233abce7f5fa88168779d",
+      "bytes": 3382
+    },
+    "test_ysm_runtime_smoke.py": {
+      "sha256": "8f77f4564b3208484a4206c16e4c0f5036a40ee4d5662558e2b642d1b9cdd2be",
+      "bytes": 13619
+    },
+    "README.md": {
+      "sha256": "6302c96e018117a260055dc17f9aeaadd9c8a207bcac6b3df40eaa73e1c7c1db",
+      "bytes": 6799
+    },
+    "ysm_runtime_smoke.candidate.lock.json": {
+      "sha256": "78320878720286c2c495477e3910d1e40ca592e808f700d712c96542329762af",
+      "bytes": 3076
+    },
+    "CANDIDATE-LOCK-NOT-AUTHORIZED.md": {
+      "sha256": "e69138a3a86d37f3d14cc804f0a640e2eab26450745bd2a73474cb88ef11833e",
+      "bytes": 1591
+    }
+  },
+  "candidate": {
+    "file": "ysm_runtime_smoke.candidate.lock.json",
+    "status": "TECHNICALLY_REVIEWED_NOT_AUTHORIZED_TO_EXECUTE",
+    "sha256": "78320878720286c2c495477e3910d1e40ca592e808f700d712c96542329762af",
+    "bytes": 3076,
+    "validator_check": "PASS: pure validate() with synthetic consent/context only; no IO or execute()",
+    "execution_authorized": false
+  }
+}
