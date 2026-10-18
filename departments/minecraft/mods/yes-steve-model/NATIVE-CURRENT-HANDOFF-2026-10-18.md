@@ -1,6 +1,6 @@
 # Current native-analysis handoff — October 18
 
-Read this before resuming native work. Latest entry: [virtual loader scenarios and mprotect frontier](NATIVE-VIRTUAL-LOADER-RESULT-2026-10-18.md). Branch: `jolly/ysm-analysis-20261016`. Last verified analysis publication before this handoff: `02fc35cdbc7a0fef0206dc9e2b08c835e1983e79`. The project is unfinished.
+Read this before resuming native work. Latest entry: [second CRC summary and CPUID frontier](NATIVE-SECOND-CRC-FRONTIER-RESULT-2026-10-18.md). Branch: `jolly/ysm-analysis-20261016`. Last verified analysis publication before this handoff: `02fc35cdbc7a0fef0206dc9e2b08c835e1983e79`. The project is unfinished.
 
 ## Scope and confidence
 
@@ -89,3 +89,7 @@ The optional CRC summary passes 30 full-state differential cases and reaches dla
 ## Latest checkpoint: loader/platform scenarios
 
 Both declared loader scenarios reach mprotect(0xec5000,0x510e52,7). No host or guest permission change applied; see latest entry and paired JSON. Older frontier statements remain historical.
+
+## Latest checkpoint: second CRC and CPUID
+
+Two-profile validated summaries reach CPUID leaf1,0x16b44ff. Protection-return inputs never change permissions; all original-image writes still blocked. See latest entry; earlier frontiers are historical.

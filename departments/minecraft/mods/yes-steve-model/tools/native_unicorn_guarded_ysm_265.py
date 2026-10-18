@@ -27,7 +27,7 @@ class GuardedCPU:
         self.seed=seed&MASK;self.stride=stride&MASK;self.clock_reads=0;self.allocations=[];self.heap_used=0;self.malloc_calls=0
         self.fopen_calls=self.fgets_calls=self.fclose_calls=0;self.file_open=False;self.file_position=0
         self.fixture=f'Name:\tvirtual-ysm\nTracerPid:\t{pid}\n'.encode('ascii')
-        self.virtual_platform=False;self.platform_calls=0;self.virtual_loader='disabled';self.dladdr_calls=0;self.loader_name=0x730000000000;self.loader_ready=False
+        self.protection_result='disabled';self.protection_calls=0;self.virtual_platform=False;self.platform_calls=0;self.virtual_loader='disabled';self.dladdr_calls=0;self.loader_name=0x730000000000;self.loader_ready=False
         self.accelerate_crc=False;self.crc_profile_verified=None;self.crc_blocks=self.crc_iterations=self.crc_logical_steps=0
         self.attempted=self.completed=0;self.modeled_copies=self.opaque_copies=0;self.heap_writes=0;self.rollback_count=0
         self.known={STACK:bytearray(STACK_SIZE),HEAP:bytearray(HEAP_SIZE)};self.opaque={};self.image=[];self.exec_ranges=[];self.pages={}
@@ -125,7 +125,7 @@ class GuardedCPU:
         self.pc=address;raw=bytes(uc.mem_read(address,size));self.attempted+=1;self.emit('INS',f'{address:x}',raw.hex(),'Unicorn')
         self.check_oracle()
         if self.stop:return
-        if self.accelerate_crc and address==0x15f0d5e:
+        if self.accelerate_crc and address in (0x15f0d5e,0x1503f30):
             from native_crc32_loop_profile_ysm_265 import eligible
             if eligible(self):self.pending='crc';uc.emu_stop();return
         if raw==b'\xf3\xa4' and self.level>=1:self.pending='copy'
@@ -139,6 +139,7 @@ class GuardedCPU:
         elif address==0x13d8466 and self.virtual_loader!='disabled':
             if raw!=bytes.fromhex('ff25b4534700'):self.fail('LOADER_THUNK_MISMATCH',address);return
             self.pending='dladdr'
+        elif address==0x13d84d6 and self.protection_result!='disabled':self.pending='protection-result'
         elif self.virtual_platform and address in (0x13d84a7,0x13d84cf):
             self.pending='open-unavailable' if address==0x13d84a7 else 'page-size'
         else:
@@ -159,6 +160,7 @@ class GuardedCPU:
                 if self.physical(a+k) is not None:self.journal.append((a+k,bytes(uc.mem_read(a+k,1))))
         if not self.private_allowed(a,n):
             image=any(lo<a+n and a<hi for lo,hi,_ in self.image)
+            if image:self.emit('ATTEMPTED_IMAGE_WRITE',f'pc={self.pc:x}',f'address={a:x}',f'size={n}',f'hook_value={value & ((1<<(min(n,8)*8))-1):x}','applied=false')
             self.fail('ORIGINAL_IMAGE_WRITE_BLOCKED' if image else 'OUTSIDE_PRIVATE_WRITABLE_REGIONS',a,n);return
         self.writes.append((a,n))
     def _invalid(self,uc,access,a,n,value,user):
@@ -194,6 +196,14 @@ class GuardedCPU:
         if scenario=='image-only':
             self.add_image(self.loader_name,b'/virtual/libysm-core.so\0',False);self.uc.mem_protect(self.loader_name,4096,UC_PROT_READ);self.loader_ready=True
     def model(self,kind):
+        if kind=='protection-result':
+            self.demand(self.protection_result in ('success-input','failure-input'),'UNMODELED_PROTECTION_RESULT')
+            sp,target=self.frame(True);address=self.reg('RDI');size=self.reg('RSI');prot=self.reg('RDX')
+            self.demand(self.read_known(0x13d84d0,7)==bytes.fromhex('ff35ca534700c3') and self.read_known(0x184d8a0,8)==bytes(8),'PROTECTION_THUNK_MISMATCH')
+            self.demand(address%4096==0 and 0<size<=16*1024*1024 and 0<=prot<=7 and all(page in self.pages and page!=self.loader_name for page in range(address,(address+size+4095)&~4095,4096)),'UNMODELED_PROTECTION_REQUEST',address,size)
+            result=0 if self.protection_result=='success-input' else 0xffffffff
+            self.protection_calls+=1;self.emit('VIRTUAL_PROTECTION_RESULT',self.protection_result,f'address={address:x}',f'size={size:x}',f'prot={prot}',f'result={result:x}','permissions_applied=false','stop_before_original_image_write=true')
+            self.reg('RAX',result);self.reg('RSP',sp+16);self.reg('RIP',target);return
         if kind in ('open-unavailable','page-size'):
             pushed=kind=='page-size';sp,target=self.frame(pushed)
             if pushed:
@@ -280,7 +290,7 @@ class GuardedCPU:
                 if not self.stop:self.completed+=1
         finally:
             timer.cancel();timer.join(timeout=1)
-        self.emit('COUNTS',f'attempted={self.attempted}',f'completed={self.completed}',f'rollbacks={self.rollback_count}',f'modeled_copy_steps={self.modeled_copies}',f'opaque_byte_copies={self.opaque_copies}',f'virtual_clock_reads={self.clock_reads}',f'virtual_malloc_calls={self.malloc_calls}',f'heap_write_events={self.heap_writes}',f'virtual_fopen_calls={self.fopen_calls}',f'virtual_fgets_calls={self.fgets_calls}',f'virtual_fclose_calls={self.fclose_calls}',f'virtual_platform_calls={self.platform_calls}',f'virtual_dladdr_calls={self.dladdr_calls}',f'crc_blocks={self.crc_blocks}',f'crc_iterations={self.crc_iterations}',f'crc_logical_instructions={self.crc_logical_steps}')
+        self.emit('COUNTS',f'attempted={self.attempted}',f'completed={self.completed}',f'rollbacks={self.rollback_count}',f'modeled_copy_steps={self.modeled_copies}',f'opaque_byte_copies={self.opaque_copies}',f'virtual_clock_reads={self.clock_reads}',f'virtual_malloc_calls={self.malloc_calls}',f'heap_write_events={self.heap_writes}',f'virtual_fopen_calls={self.fopen_calls}',f'virtual_fgets_calls={self.fgets_calls}',f'virtual_fclose_calls={self.fclose_calls}',f'virtual_protection_result_calls={self.protection_calls}',f'virtual_platform_calls={self.platform_calls}',f'virtual_dladdr_calls={self.dladdr_calls}',f'crc_blocks={self.crc_blocks}',f'crc_iterations={self.crc_iterations}',f'crc_logical_instructions={self.crc_logical_steps}')
         for name in REGS:self.emit('STOP_REGISTER',name,f'{self.reg(name):x}')
         for name in FLAG_BITS:self.emit('STOP_REGISTER',name,f'{self.reg(name):x}')
         preserved=self.image_unchanged();self.emit('PRESERVATION',f'image_unchanged={preserved}')
@@ -289,11 +299,11 @@ class GuardedCPU:
         return self.stop
 
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--image',required=True,type=Path);p.add_argument('--out',required=True,type=Path);p.add_argument('--mode',choices=MODES,default='strict');p.add_argument('--steps',type=int,default=10000);p.add_argument('--seconds',type=int,default=60);p.add_argument('--seed',default='1122334455667788');p.add_argument('--stride',default='3e8');p.add_argument('--pid',type=int,default=0);p.add_argument('--accelerate-crc',action='store_true');p.add_argument('--virtual-platform',action='store_true',help='Explicit page-size 4096 and module-open failure scenario; no errno model');p.add_argument('--virtual-loader',choices=['disabled','unavailable','image-only'],default='disabled');a=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--image',required=True,type=Path);p.add_argument('--out',required=True,type=Path);p.add_argument('--mode',choices=MODES,default='strict');p.add_argument('--steps',type=int,default=10000);p.add_argument('--seconds',type=int,default=60);p.add_argument('--seed',default='1122334455667788');p.add_argument('--stride',default='3e8');p.add_argument('--pid',type=int,default=0);p.add_argument('--accelerate-crc',action='store_true');p.add_argument('--protection-result',choices=['disabled','success-input','failure-input'],default='disabled',help='Counterfactual return value only; never changes permissions, stops before image write');p.add_argument('--virtual-platform',action='store_true',help='Explicit page-size 4096 and module-open failure scenario; no errno model');p.add_argument('--virtual-loader',choices=['disabled','unavailable','image-only'],default='disabled');a=p.parse_args()
     if a.pid<0:raise ValueError('Negative fixture PID')
     data=a.image.read_bytes();before=hashlib.sha256(data).hexdigest()
     with a.out.open('w') as out:
-        cpu=GuardedCPU(out,a.mode,a.steps,a.seconds,int(a.seed,16),int(a.stride,16),a.pid);cpu.load_image(data);cpu.configure_loader(a.virtual_loader);cpu.virtual_platform=a.virtual_platform;cpu.accelerate_crc=a.accelerate_crc;cpu.emit('CONFIG','engine=Unicorn2.1.4',f'mode={a.mode}',f'max_steps={a.steps}','imagebase=0','relocations=false','synthetic_registers=true','bss_zero=true');result=cpu.run(0x152eb19)
+        cpu=GuardedCPU(out,a.mode,a.steps,a.seconds,int(a.seed,16),int(a.stride,16),a.pid);cpu.load_image(data);cpu.configure_loader(a.virtual_loader);cpu.virtual_platform=a.virtual_platform;cpu.protection_result=a.protection_result;cpu.accelerate_crc=a.accelerate_crc;cpu.emit('CONFIG','engine=Unicorn2.1.4',f'mode={a.mode}',f'max_steps={a.steps}','imagebase=0','relocations=false','synthetic_registers=true','bss_zero=true');result=cpu.run(0x152eb19)
     if hashlib.sha256(a.image.read_bytes()).hexdigest()!=before:raise AssertionError('Original file changed')
     print(json.dumps({'status':result,'attempted':cpu.attempted,'completed':cpu.completed,'oracles':cpu.oracle_checks,'image_unchanged':True}))
 if __name__=='__main__':main()
