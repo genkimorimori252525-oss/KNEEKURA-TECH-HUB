@@ -63,3 +63,9 @@ LOCK/UNLOCK are modeled only for paired XCHG atomicity markers in a single isola
 ## Latest read-only validation
 
 NATIVE-SIMULATION-DECODER-CROSSCHECK-2026-10-18.json verifies the 10,000-step trace's 3,557 unique instruction addresses across 238 contiguous groups against GNU objdump and the original file-backed ELF bytes. Six parser/grouping tests pass. This is decoder-boundary/byte agreement, not semantic equivalence or completed native recovery. The instruction-budget expansion remains pending; do not infer approval from completed evidence saving.
+
+## Newest frontier and scope (supersedes earlier pending-budget text)
+
+The 100,000-step increase was approved and used. Start with NATIVE-VIRTUAL-CLOCK-RESULT-2026-10-18.md and its receipt. Clock-disabled mode stops at RDTSC after 28,869 completed steps. Three explicit clock samples show input-sensitive paths: two hit 100,000 cap, the mixed seed reaches a malloc import boundary after 48,846 completed steps. Raw slot 0x184d828 is zero because relocations were disabled; ELF GLOB_DAT symbol277 names malloc. RDI requests424 bytes; caller return candidate0x13d91f2. No actual import was executed. Tests17+24+8pass, original hashes preserved.
+
+The owner approved the next virtual-heap/malloc stage: maximum1MiB, allow private-stack and virtual-heap writes, stop before original-image writes, retain100000-step bound and no actual external/OS calls. Not yet implemented/run. Avoid unnecessary confirmation for safe reversible changes within the requested isolated analysis. Existing absolute-RSP oracle at0x174d06f was proved for the original entry context; scope it to that entry before reusing the harness across later protected prologues, rather than forcing a later caller frame to match.

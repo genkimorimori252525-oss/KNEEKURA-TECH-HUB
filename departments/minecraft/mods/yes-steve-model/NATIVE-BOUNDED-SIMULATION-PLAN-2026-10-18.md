@@ -25,3 +25,5 @@ The current static frontier remains recorded by NATIVE-INIT-GUARD-CHAIN-RECOVERY
 ## Subsequent bounded extension within the original step cap
 
 The explicit opaque-copy mode adds a conservative unknown-byte copy model, tested against ordinary Ghidra execution on known data. Unknown bytes remain origin-tagged rather than receiving assumed values; ordinary consumers still halt. It completed the original 10,000-step budget without a non-stack write. See NATIVE-OPAQUE-COPY-TRIAL-2026-10-18.json. The requested 100,000-step budget is a pending new scope decision and has not been used.
+
+Latest scope update: the owner approved the100000-step run and subsequently the max1MiB virtual heap/malloc stage described in NATIVE-VIRTUAL-CLOCK-RESULT-2026-10-18.md. Earlier pending statements are historical. Actual host/native imports and OS calls remain prohibited; original-image writes must still stop before application.

@@ -1,0 +1,273 @@
+{
+  "format": "kneekura.ysm-virtual-clock-frontier.v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "clock_disabled_100k_trial": {
+    "trace_sha256": "01f8b1600dd4099c44e53995f2484561a11d25f321d0638ffc548afc6c7cf343",
+    "stop": [
+      "USEROP_NOT_ALLOWED",
+      "pcode:rdtsc",
+      "pc=146379a",
+      "address=146379a",
+      "size=0"
+    ],
+    "counts": {
+      "attempted": 28870,
+      "completed": 28869,
+      "pcode": 236074,
+      "atomic_pairs": 126,
+      "modeled_copy_steps": 4277,
+      "opaque_byte_copies": 776
+    },
+    "unique_instruction_addresses": 9673,
+    "oracles_matched": 47,
+    "clock_reads": [],
+    "registers": {
+      "RAX": "0x521a",
+      "RBX": "0x1580965",
+      "RCX": "0xab0e1d100000000a",
+      "RDX": "0x13d846c",
+      "RSI": "0x700000007db8",
+      "RDI": "0x1528935",
+      "RBP": "0x4b99ab8e",
+      "RSP": "0x700000007b58",
+      "R8": "0xae7aa0dc148c6caa",
+      "R9": "0xdc8e0236",
+      "R10": "0xffffffff2371003f",
+      "R11": "0xdc8e0236",
+      "R12": "0x0",
+      "R13": "0x0",
+      "R14": "0x0",
+      "R15": "0x0",
+      "CF": "0x0",
+      "ZF": "0x0",
+      "SF": "0x0",
+      "OF": "0x1",
+      "PF": "0x1",
+      "AF": "0x0",
+      "DF": "0x0"
+    },
+    "preservation_confirmed": true
+  },
+  "scenarios": [
+    {
+      "seed_hex": "0",
+      "stride_hex": "3e8",
+      "trace_sha256": "313f3d30bb936f9aa02e829e63d08a425cfcad9361bbd90424b573c320d816fb",
+      "stop": [
+        "INSTRUCTION_BUDGET",
+        "instruction",
+        "pc=14127df",
+        "address=14127df",
+        "size=0"
+      ],
+      "counts": {
+        "attempted": 100000,
+        "completed": 100000,
+        "pcode": 809642,
+        "atomic_pairs": 146,
+        "modeled_copy_steps": 4277,
+        "opaque_byte_copies": 776,
+        "virtual_clock_reads": 1
+      },
+      "unique_instruction_addresses": 11336,
+      "oracles_matched": 47,
+      "clock_reads": [
+        [
+          "0",
+          "0"
+        ]
+      ],
+      "registers": {
+        "RAX": "0x179e43d",
+        "RBX": "0x1580aed",
+        "RCX": "0x179e43d",
+        "RDX": "0xffff",
+        "RSI": "0x14319d8",
+        "RDI": "0x178baad",
+        "RBP": "0x28d8d79a",
+        "RSP": "0x700000007b60",
+        "R8": "0x8fbaf237",
+        "R9": "0x378",
+        "R10": "0x9cff3f37",
+        "R11": "0x179f02d",
+        "R12": "0x0",
+        "R13": "0x0",
+        "R14": "0x0",
+        "R15": "0x0",
+        "CF": "0x0",
+        "ZF": "0x0",
+        "SF": "0x0",
+        "OF": "0x0",
+        "PF": "0x1",
+        "AF": "0x0",
+        "DF": "0x0"
+      },
+      "preservation_confirmed": true
+    },
+    {
+      "seed_hex": "100000000",
+      "stride_hex": "3e8",
+      "trace_sha256": "9b662373f3bc0055be4d98a6c88a57f7b25335be94f056d1d54ab14ef5380388",
+      "stop": [
+        "INSTRUCTION_BUDGET",
+        "instruction",
+        "pc=14127df",
+        "address=14127df",
+        "size=0"
+      ],
+      "counts": {
+        "attempted": 100000,
+        "completed": 100000,
+        "pcode": 809642,
+        "atomic_pairs": 146,
+        "modeled_copy_steps": 4277,
+        "opaque_byte_copies": 776,
+        "virtual_clock_reads": 1
+      },
+      "unique_instruction_addresses": 11336,
+      "oracles_matched": 47,
+      "clock_reads": [
+        [
+          "0",
+          "100000000"
+        ]
+      ],
+      "registers": {
+        "RAX": "0x14d33c8",
+        "RBX": "0x1580aed",
+        "RCX": "0x14d33c8",
+        "RDX": "0xffff",
+        "RSI": "0x14319d8",
+        "RDI": "0x178baad",
+        "RBP": "0x3bb08c32",
+        "RSP": "0x700000007b60",
+        "R8": "0x9cd66a61",
+        "R9": "0x309",
+        "R10": "0x9cff3f37",
+        "R11": "0x14d3fb8",
+        "R12": "0x0",
+        "R13": "0x0",
+        "R14": "0x0",
+        "R15": "0x0",
+        "CF": "0x0",
+        "ZF": "0x0",
+        "SF": "0x0",
+        "OF": "0x0",
+        "PF": "0x1",
+        "AF": "0x0",
+        "DF": "0x0"
+      },
+      "preservation_confirmed": true
+    },
+    {
+      "seed_hex": "1122334455667788",
+      "stride_hex": "3e8",
+      "trace_sha256": "3fcdce30bc5f2c62420cc65c5bade3a2ce4cf381d1512815cc040b773377d544",
+      "stop": [
+        "EXTERNAL_OR_NULL_TARGET",
+        "computed_transfer",
+        "pc=13d8472",
+        "address=0",
+        "size=0"
+      ],
+      "counts": {
+        "attempted": 48847,
+        "completed": 48846,
+        "pcode": 403724,
+        "atomic_pairs": 147,
+        "modeled_copy_steps": 4277,
+        "opaque_byte_copies": 776,
+        "virtual_clock_reads": 1
+      },
+      "unique_instruction_addresses": 11699,
+      "oracles_matched": 47,
+      "clock_reads": [
+        [
+          "0",
+          "1122334455667788"
+        ]
+      ],
+      "registers": {
+        "RAX": "0xedf060",
+        "RBX": "0x0",
+        "RCX": "0x0",
+        "RDX": "0x0",
+        "RSI": "0x0",
+        "RDI": "0x1a8",
+        "RBP": "0x700000007fe8",
+        "RSP": "0x700000007dc8",
+        "R8": "0x0",
+        "R9": "0x0",
+        "R10": "0x0",
+        "R11": "0x0",
+        "R12": "0x0",
+        "R13": "0x0",
+        "R14": "0x0",
+        "R15": "0x0",
+        "CF": "0x0",
+        "ZF": "0x1",
+        "SF": "0x0",
+        "OF": "0x0",
+        "PF": "0x0",
+        "AF": "0x0",
+        "DF": "0x0"
+      },
+      "preservation_confirmed": true
+    }
+  ],
+  "low_seed_paths_identical": true,
+  "first_mixed_seed_instruction_difference_step": 47663,
+  "divergence_branch": "0x1534739",
+  "low_successor": "0x14127df",
+  "mixed_successor": "0x153473f",
+  "blocked_import": {
+    "slot": "0x184d828",
+    "raw_value": "0x0",
+    "relocation_type": 6,
+    "symbol_index": 277,
+    "symbol_name": "malloc",
+    "addend": 0,
+    "actual_runtime_binding_verified": false
+  },
+  "sysv_malloc_size_argument": 424,
+  "caller_return_candidate": "0x13d91f2",
+  "clock_is_explicit_synthetic_input": true,
+  "host_clock_used_as_target_input": false,
+  "host_native_or_import_execution": false,
+  "heap_allocation_or_nonstack_write_performed": false,
+  "proof_scope": "Three synthetic clock samples only, not all clocks or actual runtime. ELF name resolves metadata, not a live loader binding.",
+  "independent_semantic_review": "NOT_RUN",
+  "target_executed_by_this_summary_tool": false,
+  "self_tests": {
+    "baseline_and_budget": 17,
+    "opaque_copy": 24,
+    "virtual_clock": 8
+  },
+  "source_sha256": "98efb297b5d62d190a0ce0aca8c5d5281ea5dc7a5e49e6d3737704b3209e3fc5",
+  "decoder_crosschecks": [
+    {
+      "format": "kneekura.ysm-simulation-decoder-crosscheck.v1",
+      "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+      "trace_sha256": "313f3d30bb936f9aa02e829e63d08a425cfcad9361bbd90424b573c320d816fb",
+      "instruction_occurrences": 100000,
+      "unique_addresses": 11336,
+      "range_count": 738,
+      "all_address_length_bytes_match": true,
+      "gnu_version": "GNU objdump (GNU Binutils for Debian) 2.44",
+      "target_executed_by_this_tool": false,
+      "scope": "Decoder boundaries and original bytes only. Not p-code equivalence, whole native recovery, all caller-state proof, or emulator model semantic certification."
+    },
+    {
+      "format": "kneekura.ysm-simulation-decoder-crosscheck.v1",
+      "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+      "trace_sha256": "3fcdce30bc5f2c62420cc65c5bade3a2ce4cf381d1512815cc040b773377d544",
+      "instruction_occurrences": 48847,
+      "unique_addresses": 11699,
+      "range_count": 768,
+      "all_address_length_bytes_match": true,
+      "gnu_version": "GNU objdump (GNU Binutils for Debian) 2.44",
+      "target_executed_by_this_tool": false,
+      "scope": "Decoder boundaries and original bytes only. Not p-code equivalence, whole native recovery, all caller-state proof, or emulator model semantic certification."
+    }
+  ]
+}

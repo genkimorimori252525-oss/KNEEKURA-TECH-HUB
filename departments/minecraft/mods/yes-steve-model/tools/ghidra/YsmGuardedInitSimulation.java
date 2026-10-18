@@ -24,6 +24,13 @@ public class YsmGuardedInitSimulation extends GhidraScript {
  // Single-thread, no asynchronous observers: these markers have no memory side effects.
  // Guard validates their identity, shape and pairing. All other userops remain blocked.
  public static class AtomicMarkers extends AnnotatedPcodeUseropLibrary<byte[]> {
+  final Guard guard; AtomicMarkers(Guard g){guard=g;}
+  @PcodeUserop public byte[] rdtsc(){
+   if(!guard.virtualClock)throw new Halt("Virtual clock disabled");
+   long value=guard.clockSeed+guard.clockReads*guard.clockStride;
+   guard.out.println("VIRTUAL_TSC\t"+guard.clockReads+"\t"+Long.toUnsignedString(value,16));guard.clockReads++;
+   return ByteBuffer.allocate(8).order(ByteOrder.LITTLE_ENDIAN).putLong(value).array();
+  }
   @PcodeUserop public void LOCK() {}
   @PcodeUserop public void UNLOCK() {}
  }
@@ -31,6 +38,7 @@ public class YsmGuardedInitSimulation extends GhidraScript {
  static class Halt extends RuntimeException { Halt(String s){super(s);} }
  class Guard implements PcodeEmulationCallbacks<byte[]> {
   final AddressSet code; final PrintWriter out; final int limit; final long opLimit;
+  boolean virtualClock=false;long clockSeed=0,clockStride=0,clockReads=0;
   boolean opaqueCopy=false; int modeledCopies=0,opaqueCopies=0; final Map<Long,Long> opaque=new HashMap<>();
   boolean inspecting=false,inspectMissing=false; boolean active=false,locked=false; String mnemonic=""; int atomicPairs=0; int attempted=0,completed=0;long ops=0,deadline,pc=0,stopAddress=-1,timeBudgetNanos=60_000_000_000L;int stopSize=0;String stop=null,via=null;
   Guard(AddressSet c,PrintWriter o,int n,long opN){code=c;out=o;limit=n;opLimit=opN;}
@@ -94,6 +102,7 @@ public class YsmGuardedInitSimulation extends GhidraScript {
    if(!active)return;checkTime();if(ops>=opLimit)halt("PCODE_BUDGET","pcode",pc,0);ops++;
    if(op.getOpcode()==PcodeOp.CALLOTHER){
     int id=(int)op.getInput(0).getOffset();String name=currentProgram.getLanguage().getUserDefinedOpName(id);
+    if(name.equals("rdtsc")&&virtualClock&&mnemonic.equals("RDTSC")&&op.getNumInputs()==1&&op.getOutput()!=null&&op.getOutput().getSize()==8)return;
     if(!Set.of("LOCK","UNLOCK").contains(name)||!mnemonic.startsWith("XCHG")||op.getNumInputs()!=1||op.getOutput()!=null)halt("USEROP_NOT_ALLOWED", "pcode:"+name,pc,0);
     if(name.equals("LOCK")){if(locked)halt("UNPAIRED_ATOMIC_MARKER","nested",pc,0);locked=true;}
     else {if(!locked)halt("UNPAIRED_ATOMIC_MARKER","unlock",pc,0);locked=false;atomicPairs++;}
@@ -114,7 +123,7 @@ public class YsmGuardedInitSimulation extends GhidraScript {
  }
  class Trial {
   PcodeEmulator emu;PcodeThread<byte[]> thread;Guard guard;
-  Trial(AddressSet code,PrintWriter out,int n,long opN){guard=new Guard(code,out,n,opN);emu=new PcodeEmulator(currentProgram.getLanguage(),guard){ protected PcodeUseropLibrary<byte[]> createUseropLibrary(){return new AtomicMarkers();} };thread=emu.newThread();}
+  Trial(AddressSet code,PrintWriter out,int n,long opN){guard=new Guard(code,out,n,opN);emu=new PcodeEmulator(currentProgram.getLanguage(),guard){ protected PcodeUseropLibrary<byte[]> createUseropLibrary(){return new AtomicMarkers(guard);} };thread=emu.newThread();}
   void initialize(long start){
    for(Register r:currentProgram.getLanguage().getRegisters())if(r.isBaseRegister()&&!r.isProcessorContext())thread.getState().setRegisterValue(new RegisterValue(r,BigInteger.ZERO));
    EmulatorUtilities.initializeRegisters(thread,currentProgram,toAddr(start));
@@ -133,10 +142,15 @@ public class YsmGuardedInitSimulation extends GhidraScript {
    guard.active=true;guard.deadline=System.nanoTime()+guard.timeBudgetNanos;
    try{while(true){monitor.checkCancelled();try{thread.stepInstruction();}catch(ModeledStep e){/* Exact copy semantics completed; no engine frame was entered. */}}}
    catch(Throwable e){if(guard.stop==null){guard.stop="UNEXPECTED_ENGINE_ERROR";guard.via=e.getClass().getName();guard.out.println("ENGINE_ERROR\t"+e);}}
-   finally{guard.active=false;for(String name:List.of("RAX","RBX","RCX","RDX","RSI","RDI","RBP","RSP","R8","R9","R10","R11","R12","R13","R14","R15","CF","ZF","SF","OF","PF","AF","DF")){Register r=currentProgram.getRegister(name);guard.out.println("STOP_REGISTER\t"+name+"\t"+thread.getState().inspectRegisterValue(r).getUnsignedValue().toString(16));}guard.out.println("COUNTS\tattempted="+guard.attempted+"\tcompleted="+guard.completed+"\tpcode="+guard.ops+"\tatomic_pairs="+guard.atomicPairs+"\tmodeled_copy_steps="+guard.modeledCopies+"\topaque_byte_copies="+guard.opaqueCopies);}
+   finally{guard.active=false;for(String name:List.of("RAX","RBX","RCX","RDX","RSI","RDI","RBP","RSP","R8","R9","R10","R11","R12","R13","R14","R15","CF","ZF","SF","OF","PF","AF","DF")){Register r=currentProgram.getRegister(name);guard.out.println("STOP_REGISTER\t"+name+"\t"+thread.getState().inspectRegisterValue(r).getUnsignedValue().toString(16));}guard.out.println("COUNTS\tattempted="+guard.attempted+"\tcompleted="+guard.completed+"\tpcode="+guard.ops+"\tatomic_pairs="+guard.atomicPairs+"\tmodeled_copy_steps="+guard.modeledCopies+"\topaque_byte_copies="+guard.opaqueCopies+"\tvirtual_clock_reads="+guard.clockReads);}
   }
  }
  byte[] hex(String s){return HexFormat.of().parseHex(s);}
+ int approvedInstructionLimit(String mode){
+  if(mode.equals("run-approved-ysm-init")||mode.equals("run-approved-opaque-copy-init"))return 10000;
+  if(mode.equals("run-approved-opaque-copy-init-100k")||mode.equals("run-approved-virtual-tsc-init-100k"))return 100000;
+  throw new IllegalArgumentException("Unknown bounded mode");
+ }
  void require(boolean b,String s){if(!b)throw new IllegalStateException(s);}
  Trial toy(PrintWriter out,String name,byte[] bytes,int limit,long opLimit){
   out.println("CASE\t"+name);AddressSet code=new AddressSet(toAddr(TOY),toAddr(TOY+bytes.length-1));Trial t=new Trial(code,out,limit,opLimit);
@@ -162,6 +176,7 @@ public class YsmGuardedInitSimulation extends GhidraScript {
   Trial atomicBad=toy(out,"nonstack_atomic_exchange",hex("48c7c300200000488703"),20,1000);atomicBad.run();require(atomicBad.guard.stop.equals("NON_STACK_WRITE"),"atomic write guard");require(Arrays.equals(atomicBad.emu.getSharedState().getVar(toAddr(0x2000),8,false,Reason.INSPECT),new byte[8]),"atomic nonstack applied");passed++;
   String stopBefore=a.guard.stop;byte[] known=a.inspectMemory(SP-8,8);require(known!=null&&HexFormat.of().formatHex(known).equals("8877665544332211"),"known inspection");passed++;
   require(a.inspectMemory(SP+32,1)==null&&a.guard.stop.equals(stopBefore),"unknown inspection preserves stop");passed++;
+  require(approvedInstructionLimit("run-approved-ysm-init")==10000&&approvedInstructionLimit("run-approved-opaque-copy-init")==10000&&approvedInstructionLimit("run-approved-opaque-copy-init-100k")==100000,"mode limits");boolean badMode=false;try{approvedInstructionLimit("unbounded");}catch(IllegalArgumentException badModeException){badMode=true;}require(badMode,"invalid mode accepted");passed++;
   out.println("SELF_TEST_PASS\t"+passed+"\tysm_target_simulated=false");println("GUARDED_SIMULATION_SELF_TEST_PASS "+passed);
  }
  void configureCopy(Trial t,long src,long dst,long count,int df){t.guard.opaqueCopy=true;t.guard.reg(t.thread,"RSI",src);t.guard.reg(t.thread,"RDI",dst);t.guard.reg(t.thread,"RCX",count);t.guard.reg(t.thread,"DF",df);t.guard.reg(t.thread,"RDX",dst);}
@@ -191,6 +206,18 @@ public class YsmGuardedInitSimulation extends GhidraScript {
   }
   out.println("OPAQUE_COPY_SELF_TEST_PASS\t"+passed+"\tysm_target_simulated=false");println("OPAQUE_COPY_SELF_TEST_PASS "+passed);
  }
+ void clockTests(PrintWriter out){
+  int passed=0;
+  for(long seed:new long[]{0L,1L,0xffffffffL,0x100000000L,0x1122334455667788L,-1L}){
+   Trial t=toy(out,"virtual_clock_"+Long.toUnsignedString(seed,16),hex("0f31"),20,1000);t.guard.virtualClock=true;t.guard.clockSeed=seed;
+   for(String flag:List.of("CF","ZF","SF","OF","PF","AF"))t.guard.reg(t.thread,flag,1);
+   t.run();require(t.guard.stop.equals("EXTERNAL_OR_NULL_TARGET")&&t.guard.reg(t.thread,"RAX")==Integer.toUnsignedLong((int)seed)&&t.guard.reg(t.thread,"RDX")==Integer.toUnsignedLong((int)(seed>>>32)),"virtual clock halves");
+   for(String flag:List.of("CF","ZF","SF","OF","PF","AF"))require(t.guard.reg(t.thread,flag)==1,"clock changed flag");passed++;
+  }
+  Trial twice=toy(out,"virtual_clock_sequence",hex("0f310f31"),20,1000);twice.guard.virtualClock=true;twice.guard.clockSeed=0xffffffffL;twice.guard.clockStride=2;twice.run();require(twice.guard.clockReads==2&&twice.guard.reg(twice.thread,"RAX")==1&&twice.guard.reg(twice.thread,"RDX")==1,"clock sequence carry");passed++;
+  Trial disabled=toy(out,"virtual_clock_disabled",hex("0f31"),20,1000);disabled.run();require(disabled.guard.stop.equals("USEROP_NOT_ALLOWED")&&disabled.guard.clockReads==0,"clock silently enabled");passed++;
+  out.println("VIRTUAL_CLOCK_SELF_TEST_PASS\t"+passed+"\tysm_target_simulated=false");println("VIRTUAL_CLOCK_SELF_TEST_PASS "+passed);
+ }
  void verifyMemory(String manifest) throws Exception {
   java.util.List<String> rows=Files.readAllLines(Path.of(manifest));require(rows.size()==7,"Expected seven load segments");
   for(String line:rows){String[] f=line.split("\t");long a=Long.parseUnsignedLong(f[0],16);int n=Integer.parseInt(f[1]);require(n>0&&n<26000000,"Invalid segment size");byte[] bytes=new byte[n];require(currentProgram.getMemory().getBytes(toAddr(a),bytes)==n,"Short memory read");require(HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(bytes)).equals(f[2]),"Memory hash mismatch");}
@@ -201,14 +228,19 @@ public class YsmGuardedInitSimulation extends GhidraScript {
   try(PrintWriter out=new PrintWriter(Files.newBufferedWriter(Path.of(args[1])))){
    if(args[0].equals("self-test")){selfTest(out);return;}
    if(args[0].equals("self-test-opaque-copy")){selfTest(out);opaqueTests(out);return;}
-   require((args[0].equals("run-approved-ysm-init")||args[0].equals("run-approved-opaque-copy-init"))&&args.length==4,"Explicit bounded YSM mode required");
+   if(args[0].equals("self-test-virtual-clock")){selfTest(out);opaqueTests(out);clockTests(out);return;}
+   boolean clockMode=args[0].equals("run-approved-virtual-tsc-init-100k");
+   require((clockMode&&args.length==6)||(!clockMode&&args.length==4),"Explicit bounded mode arguments required");
+   approvedInstructionLimit(args[0]);
    String fileHash=HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(Files.readAllBytes(Path.of(args[3]))));require(fileHash.equals(IMAGE_SHA),"Wrong native image");
    require(currentProgram.getImageBase().getOffset()==0,"Expected analysis base zero");
    verifyMemory(args[2]);
    AddressSet code=new AddressSet();for(MemoryBlock b:currentProgram.getMemory().getBlocks())if(b.isInitialized()&&b.isExecute())code.addRange(b.getStart(),b.getEnd());
-   Trial t=new Trial(code,out,10000,1000000);t.guard.opaqueCopy=args[0].equals("run-approved-opaque-copy-init");EmulatorUtilities.loadProgram(t.emu,currentProgram);t.initialize(0x152eb19);
+   int instructionLimit=approvedInstructionLimit(args[0]);Trial t=new Trial(code,out,instructionLimit,1000000);t.guard.opaqueCopy=!args[0].equals("run-approved-ysm-init");
+   if(clockMode){t.guard.virtualClock=true;t.guard.clockSeed=Long.parseUnsignedLong(args[4],16);t.guard.clockStride=Long.parseUnsignedLong(args[5],16);out.println("CLOCK_SCENARIO\tseed="+args[4]+"\tstride="+args[5]+"\thost_clock_used=false");}
+   EmulatorUtilities.loadProgram(t.emu,currentProgram);t.initialize(0x152eb19);
    out.println("MODEL\topaque_stack_copy="+t.guard.opaqueCopy);
-   out.println("CONFIG\tDT_INIT=152eb19\timagebase=0\tregister_inputs=synthetic_zero_except_rsp_pc_if\tstack_uninitialized_except_return\tmax_instructions=10000\tmax_pcode=1000000\tmax_seconds=60\thost_native_execution=false");
+   out.println("CONFIG\tDT_INIT=152eb19\timagebase=0\tregister_inputs=synthetic_zero_except_rsp_pc_if\tstack_uninitialized_except_return\tmax_instructions="+instructionLimit+"\tmax_pcode=1000000\tmax_seconds=60\thost_native_execution=false");
    t.run();require(!t.guard.stop.equals("UNEXPECTED_ENGINE_ERROR"),"Unexpected engine error; do not claim a valid target result");
    verifyMemory(args[2]);require(HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(Files.readAllBytes(Path.of(args[3])))).equals(fileHash),"Original file changed");
    if(t.guard.pc==0x143beaeL&&t.guard.stop.equals("UNINITIALIZED_READ")){
@@ -216,6 +248,8 @@ public class YsmGuardedInitSimulation extends GhidraScript {
     require(t.guard.stack(src,328),"Diagnostic range must remain inside private stack");
     for(int k=0;k<328;k++){byte[] v=t.inspectMemory(src+k,1);out.println("SOURCE_BYTE\t"+Long.toHexString(src+k)+"\t"+(v==null?"UNKNOWN":HexFormat.of().formatHex(v)));}
    }
+   long stoppedSp=t.guard.reg(t.thread,"RSP");
+   if(t.guard.stack(stoppedSp,64))for(int k=0;k<64;k++){byte[] v=t.inspectMemory(stoppedSp+k,1);out.println("STOP_STACK_BYTE\t"+Long.toHexString(stoppedSp+k)+"\t"+(v==null?"UNKNOWN":HexFormat.of().formatHex(v)));}
    out.println("PRESERVATION\tfile_and_seven_program_segments_unchanged=true");
    out.println("BOUNDED_RESULT\t"+t.guard.stop+"\toriginal_image_sha256="+fileHash+"\thost_native_execution=false\tnon_stack_write_applied=false");println("BOUNDED_DT_INIT_STOP "+t.guard.stop);
   }
