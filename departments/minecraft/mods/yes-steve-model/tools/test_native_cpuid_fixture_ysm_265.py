@@ -13,8 +13,9 @@ class CpuidTests(unittest.TestCase):
   c=self.cpu(None);c.run(ENTRY);self.assertEqual(c.stop['reason'],'UNMODELED_ENVIRONMENT_INSTRUCTION');self.assertEqual(c.cpuid_calls,0)
  def test_other_leaf(self):
   c=self.cpu();c.reg('RAX',7);c.run(ENTRY);self.assertEqual(c.stop['reason'],'UNMODELED_CPUID_LEAF');self.assertEqual(c.reg('RAX'),7)
- def test_other_subleaf(self):
-  c=self.cpu();c.reg('RCX',1);c.run(ENTRY);self.assertEqual(c.stop['reason'],'UNMODELED_CPUID_LEAF')
+ def test_leaf1_ignores_input_ecx(self):
+  for value in (1,0xec8150,0xffffffff):
+   c=self.cpu();c.reg('RCX',value);c.run(ENTRY);self.assertEqual(c.cpuid_calls,1);self.assertEqual(c.reg('RCX'),0);self.assertEqual(c.completed,1)
  def test_invalid_values(self):
   for values in ((0,0,0),(-1,0,0,0),(0,0,0,1<<32)):
    c=self.cpu(values);c.run(ENTRY);self.assertEqual(c.stop['reason'],'INVALID_CPUID_FIXTURE');self.assertEqual(c.cpuid_calls,0)

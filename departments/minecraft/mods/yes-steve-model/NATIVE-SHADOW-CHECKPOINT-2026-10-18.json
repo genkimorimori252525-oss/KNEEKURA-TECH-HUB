@@ -1,0 +1,143 @@
+{
+  "schema": 1,
+  "scope": "Opt-in working-image copy with immutable reference/file, explicit synthetic environment, no host target/import execution",
+  "tests": {
+    "scoped_methods_pass": 102,
+    "crc_full_state_cases": 60
+  },
+  "equivalence": {
+    "all_checks_pass": true,
+    "checks": {
+      "format_and_engine_equal": true,
+      "cpu_context_equal_excluding_unused_memory_snapshot_header": true,
+      "model_state_equal_excluding_diagnostic_rollbacks": true,
+      "cumulative_completed_equal": true,
+      "images_equal": true,
+      "opaque_equal": true,
+      "fixture_equal": true,
+      "cpuid_leaf1_equal": true,
+      "oracle_seen_equal": true,
+      "shadow_ranges_equal": true,
+      "patches_equal": true,
+      "origin_stop_equal": true,
+      "700000000000_bytes_equal": true,
+      "700000000000_known_equal": true,
+      "710000000000_bytes_equal": true,
+      "710000000000_known_equal": true
+    },
+    "cumulative_completed": 2918592,
+    "diagnostic_rollback_counts": [
+      0,
+      1
+    ],
+    "cpu_context_payload_sha256": "e96747db657f676dc9b5a50e641aaf8c40cc6e53f986924ff7171329c580e2a4",
+    "normalization": "Unicorn2.1.4 CPU-only context; unused memory-snapshot header fields zeroed. All CPU payload bytes compared.",
+    "host_target_execution": false,
+    "full_checkpoint_sha256": "3347913344d13387669d3a18b5c6dc026fe28cfa525f0da9f2cb8e44ddbf1f73",
+    "resumed_checkpoint_sha256": "ce7e620d0189e8c82e66acf7d1e369a1f9ff92cbd91e17ddecc13aee791132da"
+  },
+  "runs": [
+    {
+      "name": "unicorn-shadow-lowcode",
+      "trace_sha256": "5ab06fbc4f62a417db7d38199f54e264132edd419b8f075164b0db6265c03968",
+      "receipt": [
+        "SHADOW_IMAGE_COMMITTED_WRITE\tpc=14a66e9\taddress=edf060\tsize=8\tbefore=0000000000000000\tafter=0000000000710000\treference_bytes_unchanged=true",
+        "STOP\tEXTERNAL_OR_NULL_TARGET\tpc=14f9c20\taddress=0\tsize=0",
+        "COUNTS\tattempted=2627380\tcompleted=2627379\trollbacks=1\tmodeled_copy_steps=4277\topaque_byte_copies=776\tvirtual_clock_reads=17\tvirtual_malloc_calls=1\theap_write_events=13\tvirtual_fopen_calls=1\tvirtual_fgets_calls=2\tvirtual_fclose_calls=1\tvirtual_cpuid_calls=2\tvirtual_protection_result_calls=5\tvirtual_platform_calls=2\tvirtual_dladdr_calls=1\tcrc_blocks=15\tcrc_iterations=23591981\tcrc_logical_instructions=528156776",
+        "SHADOW_PRESERVATION\timmutable_reference_unchanged=True\tworking_image_matches_committed_ledger=True\tworking_image_equals_reference=False\tcommitted_events=1\tcommitted_bytes=8",
+        "BOUNDED_RESULT\tEXTERNAL_OR_NULL_TARGET\ttarget_host_library_execution=false\thost_file_access=false\thost_permissions_changed=false\tworking_copy_image_writes=1\ttransactional_fault_state=true",
+        "CHECKPOINT_SAVED_SHA256\t920238ab75aed50ae0e9caec6d67ece012807657fb2f6675677cb02b1ce1d23b"
+      ]
+    },
+    {
+      "name": "unicorn-shadow-after-new",
+      "trace_sha256": "31f0988a29e2e513e2246f6a7ac7dcdd170c669cfaf1b524c0c9cde92e8bddb1",
+      "receipt": [
+        "CHECKPOINT_RESUME\torigin_completed=2627379\tpc=14f9c20\tcurrent_run_instruction_counts_reset=true\tother_model_counters_inherited=true\thost_target_execution=false",
+        "CHECKPOINT_SOURCE_SHA256\t920238ab75aed50ae0e9caec6d67ece012807657fb2f6675677cb02b1ce1d23b",
+        "LAZY_IMPORT_FRONTIER\trelocation_index=250\tcaller_return=ee159c",
+        "VIRTUAL_OPERATOR_NEW\t7100000001b0\tsize=24\treserved=32",
+        "VIRTUAL_LAZY_IMPORT\tsymbol=_Znwm\trelocation_index=250\tresult=7100000001b0\thost_import_called=false",
+        "SHADOW_IMAGE_COMMITTED_WRITE\tpc=f8eb2d\taddress=edf068\tsize=8\tbefore=0000000000000000\tafter=b001000000710000\treference_bytes_unchanged=true",
+        "LAZY_IMPORT_FRONTIER\trelocation_index=250\tcaller_return=ee16db",
+        "VIRTUAL_OPERATOR_NEW\t7100000001d0\tsize=48\treserved=48",
+        "VIRTUAL_LAZY_IMPORT\tsymbol=_Znwm\trelocation_index=250\tresult=7100000001d0\thost_import_called=false",
+        "LAZY_IMPORT_FRONTIER\trelocation_index=205\tcaller_return=107f7f2",
+        "STOP\tUNMODELED_LAZY_IMPORT\tpc=14f9c20\taddress=cd\tsize=0",
+        "COUNTS\tattempted=162320\tcompleted=162319\trollbacks=1\tmodeled_copy_steps=4277\topaque_byte_copies=776\tvirtual_clock_reads=19\tvirtual_malloc_calls=1\theap_write_events=21\tvirtual_fopen_calls=1\tvirtual_fgets_calls=2\tvirtual_fclose_calls=1\tvirtual_cpuid_calls=2\tvirtual_protection_result_calls=5\tvirtual_platform_calls=2\tvirtual_dladdr_calls=1\tcrc_blocks=0\tcrc_iterations=0\tcrc_logical_instructions=0",
+        "SHADOW_PRESERVATION\timmutable_reference_unchanged=True\tworking_image_matches_committed_ledger=True\tworking_image_equals_reference=False\tcommitted_events=2\tcommitted_bytes=16\tvirtual_operator_new_calls=2",
+        "BOUNDED_RESULT\tUNMODELED_LAZY_IMPORT\ttarget_host_library_execution=false\thost_file_access=false\thost_permissions_changed=false\tworking_copy_image_writes=2\ttransactional_fault_state=true",
+        "CHECKPOINT_SAVED_SHA256\t5fcecf615f4c80fa5bdf3e3ca21e5f9edd7c21f52d0e64be89f16ad6c0fcceca"
+      ]
+    },
+    {
+      "name": "unicorn-shadow-after-array-new",
+      "trace_sha256": "06bb90e3397d6144b6d26ef28a06f6d14864849b6fb565d6baaa0621dcd4af3d",
+      "receipt": [
+        "CHECKPOINT_RESUME\torigin_completed=2789698\tpc=14f9c20\tcurrent_run_instruction_counts_reset=true\tother_model_counters_inherited=true\thost_target_execution=false",
+        "CHECKPOINT_SOURCE_SHA256\t5fcecf615f4c80fa5bdf3e3ca21e5f9edd7c21f52d0e64be89f16ad6c0fcceca",
+        "LAZY_IMPORT_FRONTIER\trelocation_index=205\tcaller_return=107f7f2",
+        "VIRTUAL_OPERATOR_NEW\t710000000200\tsize=2080\treserved=2080",
+        "VIRTUAL_LAZY_IMPORT\tsymbol=_Znam\trelocation_index=205\tresult=710000000200\thost_import_called=false",
+        "LAZY_IMPORT_FRONTIER\trelocation_index=197\tcaller_return=ee16e1",
+        "STOP\tUNMODELED_LAZY_IMPORT\tpc=14f9c20\taddress=c5\tsize=0",
+        "COUNTS\tattempted=128895\tcompleted=128894\trollbacks=1\tmodeled_copy_steps=4277\topaque_byte_copies=776\tvirtual_clock_reads=20\tvirtual_malloc_calls=1\theap_write_events=22\tvirtual_fopen_calls=1\tvirtual_fgets_calls=2\tvirtual_fclose_calls=1\tvirtual_cpuid_calls=2\tvirtual_protection_result_calls=5\tvirtual_platform_calls=2\tvirtual_dladdr_calls=1\tcrc_blocks=0\tcrc_iterations=0\tcrc_logical_instructions=0",
+        "SHADOW_PRESERVATION\timmutable_reference_unchanged=True\tworking_image_matches_committed_ledger=True\tworking_image_equals_reference=False\tcommitted_events=2\tcommitted_bytes=16\tvirtual_operator_new_calls=3",
+        "BOUNDED_RESULT\tUNMODELED_LAZY_IMPORT\ttarget_host_library_execution=false\thost_file_access=false\thost_permissions_changed=false\tworking_copy_image_writes=2\ttransactional_fault_state=true",
+        "CHECKPOINT_SAVED_SHA256\tce7e620d0189e8c82e66acf7d1e369a1f9ff92cbd91e17ddecc13aee791132da"
+      ]
+    },
+    {
+      "name": "unicorn-shadow-batch-equivalence",
+      "trace_sha256": "b24aea6e419f6641658acb8242068a29c30b56e73aa213a8119fc49809c3b780",
+      "receipt": [
+        "SHADOW_IMAGE_COMMITTED_WRITE\tpc=14a66e9\taddress=edf060\tsize=8\tbefore=0000000000000000\tafter=0000000000710000\treference_bytes_unchanged=true",
+        "LAZY_IMPORT_FRONTIER\trelocation_index=250\tcaller_return=ee159c",
+        "VIRTUAL_OPERATOR_NEW\t7100000001b0\tsize=24\treserved=32",
+        "VIRTUAL_LAZY_IMPORT\tsymbol=_Znwm\trelocation_index=250\tresult=7100000001b0\thost_import_called=false",
+        "SHADOW_IMAGE_COMMITTED_WRITE\tpc=f8eb2d\taddress=edf068\tsize=8\tbefore=0000000000000000\tafter=b001000000710000\treference_bytes_unchanged=true",
+        "LAZY_IMPORT_FRONTIER\trelocation_index=250\tcaller_return=ee16db",
+        "VIRTUAL_OPERATOR_NEW\t7100000001d0\tsize=48\treserved=48",
+        "VIRTUAL_LAZY_IMPORT\tsymbol=_Znwm\trelocation_index=250\tresult=7100000001d0\thost_import_called=false",
+        "LAZY_IMPORT_FRONTIER\trelocation_index=205\tcaller_return=107f7f2",
+        "VIRTUAL_OPERATOR_NEW\t710000000200\tsize=2080\treserved=2080",
+        "VIRTUAL_LAZY_IMPORT\tsymbol=_Znam\trelocation_index=205\tresult=710000000200\thost_import_called=false",
+        "LAZY_IMPORT_FRONTIER\trelocation_index=197\tcaller_return=ee16e1",
+        "STOP\tUNMODELED_LAZY_IMPORT\tpc=14f9c20\taddress=c5\tsize=0",
+        "COUNTS\tattempted=2918593\tcompleted=2918592\trollbacks=0\tmodeled_copy_steps=4277\topaque_byte_copies=776\tvirtual_clock_reads=20\tvirtual_malloc_calls=1\theap_write_events=22\tvirtual_fopen_calls=1\tvirtual_fgets_calls=2\tvirtual_fclose_calls=1\tvirtual_cpuid_calls=2\tvirtual_protection_result_calls=5\tvirtual_platform_calls=2\tvirtual_dladdr_calls=1\tcrc_blocks=15\tcrc_iterations=23591981\tcrc_logical_instructions=528156776",
+        "SHADOW_PRESERVATION\timmutable_reference_unchanged=True\tworking_image_matches_committed_ledger=True\tworking_image_equals_reference=False\tcommitted_events=2\tcommitted_bytes=16\tvirtual_operator_new_calls=3",
+        "BOUNDED_RESULT\tUNMODELED_LAZY_IMPORT\ttarget_host_library_execution=false\thost_file_access=false\thost_permissions_changed=false\tworking_copy_image_writes=2\ttransactional_fault_state=true",
+        "CHECKPOINT_SAVED_SHA256\t3347913344d13387669d3a18b5c6dc026fe28cfa525f0da9f2cb8e44ddbf1f73"
+      ]
+    },
+    {
+      "name": "unicorn-shadow-sanitized-resume",
+      "trace_sha256": "2414047672c4319fb18d327d00ebc0c9ec11035fbf219841166fb753369f7dfd",
+      "receipt": [
+        "CHECKPOINT_RESUME\torigin_completed=2918592\tpc=14f9c20\tcurrent_run_instruction_counts_reset=true\tother_model_counters_inherited=true\thost_target_execution=false",
+        "CHECKPOINT_SOURCE_SHA256\t3347913344d13387669d3a18b5c6dc026fe28cfa525f0da9f2cb8e44ddbf1f73",
+        "LAZY_IMPORT_FRONTIER\trelocation_index=197\tcaller_return=ee16e1",
+        "STOP\tUNMODELED_LAZY_IMPORT\tpc=14f9c20\taddress=c5\tsize=0",
+        "COUNTS\tattempted=1\tcompleted=0\trollbacks=0\tmodeled_copy_steps=4277\topaque_byte_copies=776\tvirtual_clock_reads=20\tvirtual_malloc_calls=1\theap_write_events=22\tvirtual_fopen_calls=1\tvirtual_fgets_calls=2\tvirtual_fclose_calls=1\tvirtual_cpuid_calls=2\tvirtual_protection_result_calls=5\tvirtual_platform_calls=2\tvirtual_dladdr_calls=1\tcrc_blocks=0\tcrc_iterations=0\tcrc_logical_instructions=0",
+        "SHADOW_PRESERVATION\timmutable_reference_unchanged=True\tworking_image_matches_committed_ledger=True\tworking_image_equals_reference=False\tcommitted_events=2\tcommitted_bytes=16\tvirtual_operator_new_calls=3",
+        "BOUNDED_RESULT\tUNMODELED_LAZY_IMPORT\ttarget_host_library_execution=false\thost_file_access=false\thost_permissions_changed=false\tworking_copy_image_writes=2\ttransactional_fault_state=true",
+        "CHECKPOINT_SAVED_SHA256\ta3febb44089154a2f2d9fee66a1a13709c585cd60e207ca84ef4c2f2529a6435"
+      ]
+    }
+  ],
+  "mapping_promotions": 0,
+  "independent_semantic_review": "NOT_RUN",
+  "current_validated_source_sha256": {
+    "native_shadow_image_ysm_265.py": "efcdd9f1c1b2fc9d9a17ec2a12e104e9bc5a61c7fdfaf218dfc32532a59b1bea",
+    "test_native_unicorn_guarded_ysm_265.py": "32974abc902a274704ffebe85ce2c02f53c27daddb9dadd58570b6d92366a664",
+    "test_native_cpuid_fixture_ysm_265.py": "eb54ab50fa8c5590a23f2f669ad4ef66e5629ce6d77c39ed7b6b61ac14152298",
+    "test_native_shadow_image_ysm_265.py": "dc986716abeac782bd0a363304508dfc25bffa8face817daf33ad67f813d650c",
+    "native_guarded_checkpoint_ysm_265.py": "25037e301a0f26c7d368c481c350690a291fabe50bdd8e4ee5eb250c77a86de7",
+    "test_native_lazy_import_ysm_265.py": "e965b7e44db7ba355e42113c1d55ea29ea4936fbf630718b586176b2d257f37b",
+    "compare_native_guarded_checkpoints_ysm_265.py": "54af122b3a194f6a0be366e18b7c9cfc971697162367e08250d779a29c670ee1",
+    "native_unicorn_guarded_ysm_265.py": "2132ff4d5e02f0841b27b8931c12a83f1a72a54498070682ea75f59b5106a3b8",
+    "native_crc32_loop_profile_ysm_265.py": "7f63b14812bb93822c55153a5aa568ef72b044b4393589a03d75140e8318485d",
+    "test_native_guarded_checkpoint_ysm_265.py": "3dccbff0329759a614326f8d35a6eefd89a3e2b092f484afb4337234a9ffd745"
+  },
+  "latest_sanitized_checkpoint_sha256": "a3febb44089154a2f2d9fee66a1a13709c585cd60e207ca84ef4c2f2529a6435"
+}

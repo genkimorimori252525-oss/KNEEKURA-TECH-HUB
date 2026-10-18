@@ -48,6 +48,8 @@ def profile_matches(cpu,p=P1):
 
 def eligible(cpu):
     from native_unicorn_guarded_ysm_265 import STACK,STACK_SIZE
+    # Conservative: no summary once a working-image mutation has committed.
+    if getattr(cpu,'shadow_events',0):return False
     p=PROFILES.get(cpu.pc)
     if p is None:return False
     n=cpu.reg('RCX');source=cpu.reg(p['source_reg']);sp=cpu.reg('RSP')

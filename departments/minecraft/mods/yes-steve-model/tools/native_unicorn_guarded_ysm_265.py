@@ -77,7 +77,7 @@ class GuardedCPU:
         for a,b,perm in runs:self.uc.mem_protect(a,b-a,perm)
         self.oracle_enabled=True
     def image_unchanged(self):return all(bytes(self.uc.mem_read(a,b-a))==v for a,b,v in self.image)
-    def code_allowed(self,a,n=1):return a>=0x1000 and any(lo<=a and a+n<=hi for lo,hi in self.exec_ranges)
+    def code_allowed(self,a,n=1):return a>0 and any(lo<=a and a+n<=hi for lo,hi in self.exec_ranges)
     def physical(self,a,n=1):
         for base,size in [(STACK,STACK_SIZE),(HEAP,HEAP_SIZE)]:
             if base<=a and a+n<=base+size:return base
@@ -174,10 +174,10 @@ class GuardedCPU:
         for name,expected in cases[self.pc].items():
             value=self.reg(name);self.oracle_checks+=1;self.emit('ORACLE',f'{self.pc:x}',name,f'actual={value:x}',f'expected={expected:x}')
             if value!=expected:self.fail('ORACLE_DISAGREEMENT',self.pc);return
-    def allocate(self,n):
+    def allocate(self,n,kind='malloc'):
         reserve=(max(n,1)+15)&~15
         self.demand(0<=n<=HEAP_SIZE and reserve<=HEAP_SIZE-self.heap_used,'VIRTUAL_HEAP_EXHAUSTED',n)
-        a=HEAP+self.heap_used;self.heap_used+=reserve;self.allocations.append((a,n));self.malloc_calls+=1;self.emit('VIRTUAL_MALLOC',f'{a:x}',f'size={n}',f'reserved={reserve}');return a
+        a=HEAP+self.heap_used;self.heap_used+=reserve;self.allocations.append((a,n));self.malloc_calls+=int(kind=='malloc');self.emit('VIRTUAL_MALLOC' if kind=='malloc' else 'VIRTUAL_OPERATOR_NEW',f'{a:x}',f'size={n}',f'reserved={reserve}');return a
     def frame(self,push=True):
         sp=self.reg('RSP');self.demand(STACK<=sp and sp+(16 if push else 8)<=STACK+STACK_SIZE,'INVALID_IMPORT_FRAME',sp)
         if push:self.demand(int.from_bytes(self.read_known(sp,8),'little')==0,'UNEXPECTED_IMPORT_SLOT_VALUE',sp)
@@ -198,10 +198,11 @@ class GuardedCPU:
             self.add_image(self.loader_name,b'/virtual/libysm-core.so\0',False);self.uc.mem_protect(self.loader_name,4096,UC_PROT_READ);self.loader_ready=True
     def model(self,kind):
         if kind=='cpuid-leaf1':
-            self.demand((self.reg('RAX')&0xffffffff)==1 and (self.reg('RCX')&0xffffffff)==0,'UNMODELED_CPUID_LEAF')
+            self.demand((self.reg('RAX')&0xffffffff)==1,'UNMODELED_CPUID_LEAF')
+            input_ecx=self.reg('RCX')&0xffffffff
             values=self.cpuid_leaf1;self.demand(isinstance(values,tuple) and len(values)==4 and all(isinstance(v,int) and 0<=v<=0xffffffff for v in values),'INVALID_CPUID_FIXTURE')
             for name,value in zip(('RAX','RBX','RCX','RDX'),values):self.reg(name,value)
-            self.cpuid_calls+=1;self.emit('VIRTUAL_CPUID','leaf=1','subleaf=0',*(f'{v:08x}' for v in values),'host_cpu_queried=false');self.reg('RIP',self.pc+2);return
+            self.cpuid_calls+=1;self.emit('VIRTUAL_CPUID','leaf=1',f'input_ecx={input_ecx:x}','input_ecx_ignored_for_leaf1=true',*(f'{v:08x}' for v in values),'host_cpu_queried=false');self.reg('RIP',self.pc+2);return
         if kind=='protection-result':
             self.demand(self.protection_result in ('success-input','failure-input'),'UNMODELED_PROTECTION_RESULT')
             sp,target=self.frame(True);address=self.reg('RDI');size=self.reg('RSI');prot=self.reg('RDX')
@@ -263,6 +264,12 @@ class GuardedCPU:
         elif kind=='fclose':self.demand(self.file_open and self.reg('RDI')==FILE_HANDLE,'UNKNOWN_FILE_HANDLE');self.file_open=False;self.fclose_calls+=1;self.emit('VIRTUAL_FCLOSE','host_file_access=false')
         else:raise ValueError('Unknown model')
         self.reg('RAX',result);self.reg('RSP',sp+(8 if kind=='fclose' else 16));self.reg('RIP',target)
+    def commit_write(self,a,n):
+        self.mark_known(a,n);self.log_heap_write(a,n)
+    def report_preservation(self):
+        preserved=self.image_unchanged();self.emit('PRESERVATION',f'image_unchanged={preserved}')
+        if not preserved:raise AssertionError('Original image memory changed')
+        self.emit('BOUNDED_RESULT',self.stop['reason'],'target_host_library_execution=false','host_file_access=false','original_image_write_applied=false','transactional_fault_state=true')
     def rollback(self,context):
         for a,data in reversed(self.journal):self.uc.mem_write(a,data)
         self.uc.context_restore(context);self.rollback_count+=1
@@ -289,19 +296,17 @@ class GuardedCPU:
                 else:
                     nxt=self.reg('RIP')
                     if nxt==RETURN and self.reg('RSP')==SP+8:
-                        for a,n in self.writes:self.mark_known(a,n);self.log_heap_write(a,n)
+                        for a,n in self.writes:self.commit_write(a,n)
                         self.completed+=1;self.fail('ENTRY_RETURN',nxt);break
                     if not self.code_allowed(nxt):self.fail('EXTERNAL_OR_NULL_TARGET',nxt);self.rollback(context);break
-                    for a,n in self.writes:self.mark_known(a,n);self.log_heap_write(a,n)
+                    for a,n in self.writes:self.commit_write(a,n)
                 if not self.stop:self.completed+=1
         finally:
             timer.cancel();timer.join(timeout=1)
         self.emit('COUNTS',f'attempted={self.attempted}',f'completed={self.completed}',f'rollbacks={self.rollback_count}',f'modeled_copy_steps={self.modeled_copies}',f'opaque_byte_copies={self.opaque_copies}',f'virtual_clock_reads={self.clock_reads}',f'virtual_malloc_calls={self.malloc_calls}',f'heap_write_events={self.heap_writes}',f'virtual_fopen_calls={self.fopen_calls}',f'virtual_fgets_calls={self.fgets_calls}',f'virtual_fclose_calls={self.fclose_calls}',f'virtual_cpuid_calls={self.cpuid_calls}',f'virtual_protection_result_calls={self.protection_calls}',f'virtual_platform_calls={self.platform_calls}',f'virtual_dladdr_calls={self.dladdr_calls}',f'crc_blocks={self.crc_blocks}',f'crc_iterations={self.crc_iterations}',f'crc_logical_instructions={self.crc_logical_steps}')
         for name in REGS:self.emit('STOP_REGISTER',name,f'{self.reg(name):x}')
         for name in FLAG_BITS:self.emit('STOP_REGISTER',name,f'{self.reg(name):x}')
-        preserved=self.image_unchanged();self.emit('PRESERVATION',f'image_unchanged={preserved}')
-        if not preserved:raise AssertionError('Original image memory changed')
-        self.emit('BOUNDED_RESULT',self.stop['reason'],'target_host_library_execution=false','host_file_access=false','original_image_write_applied=false','transactional_fault_state=true')
+        self.report_preservation()
         return self.stop
 
 def main():

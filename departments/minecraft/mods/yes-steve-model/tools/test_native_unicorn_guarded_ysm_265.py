@@ -6,6 +6,8 @@ TOY=0x100000;DATA=0x200000
 class GuardTests(unittest.TestCase):
     def cpu(self,code,mode='strict',limit=1):
         c=GuardedCPU(io.StringIO(),mode,limit);c.add_image(TOY,bytes.fromhex(code)+b'\x90'*32);c.add_image(DATA,b'\0'*4096,False);c.protect_image();return c
+    def test_low_nonzero_executable_image_is_valid(self):
+        c=GuardedCPU(io.StringIO(),limit=1);c.add_image(0xf38,b'\x90'*4096);c.protect_image();c.run(0xf38);self.assertEqual(c.completed,1);self.assertFalse(c.code_allowed(0));self.assertFalse(c.code_allowed(SP))
     def test_private_push_pop(self):
         c=self.cpu('505b','strict',2);c.reg('RAX',0x1122334455667788);c.run(TOY);self.assertEqual(c.reg('RBX'),0x1122334455667788);self.assertEqual(c.completed,2)
     def test_original_write_blocked(self):
