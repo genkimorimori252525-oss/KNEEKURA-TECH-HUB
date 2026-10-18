@@ -1,0 +1,32 @@
+# Bounded DT_INIT simulation result
+
+## Outcome and limits
+
+A concrete isolated trial completed 9,203 instruction steps (9,204 attempted; 3,550 unique attempted addresses), then stopped BEFORE reading an uninitialized stack byte at 0x700000007d90 in REP MOVSB at 0x143beae. Repeated instruction steps are not unique native instructions or recovered functions. No non-stack write was applied, no MOD/JNI/native image was loaded for host execution, and original-file plus seven program-segment hashes were unchanged. This is a synthetic input trial, not real-process runtime validation or proof for all caller states.
+
+All 47 reached static-oracle checks matched, including the known rewritten-return value and JB/JNS/JA predicates. The former RET 0x18 frontier at 0x1539420 returned to 0x1499584 seven times, then to 0x15ced58 once in this trial. These are observed synthetic-state successors, not an exhaustive CFG. REP MOVSB accounts for 97 attempted steps at the final address. Unknown caller/stack bytes were not filled with zero and the stopped read was not bypassed.
+
+See the [derived machine-readable receipt](NATIVE-BOUNDED-SIMULATION-2026-10-18.json). Central map remains 669, no promotions; independent semantic review NOT_RUN. Do not turn step counts into completion percentages or claim the watched decoder words are immutable.
+
+## Why the first trial stopped and what changed
+
+The initial all-userop-denied harness passed 12 synthetic guard tests, completed 67 target instructions and stopped at the first CALLOTHER of XCHG at 0x1666896. Static lift shows CALLOTHER 0x11 before the exchange and 0x12 afterward. The pinned Ghidra x86 language sources ia.sinc (LOCK/UNLOCK declarations and alwaysLock constructors) and lockable.sinc (memory XCHG) identify these as atomicity markers, not external native imports.
+
+After the owner requested continuing with lock support, the harness gained a narrowly scoped single-thread atomic-marker model. LOCK/UNLOCK have no data-memory effect in this isolated one-thread model with no asynchronous observers. The guard allows only those two names, zero arguments/output, XCHG instructions, and correctly paired non-nested markers. It does not claim to model concurrent threads, hardware lock timing or shared memory. All other userops, including CPUID, remain blocked. No target bytes, flags, branches or caller stack values are patched.
+
+The revised harness passed 14 toy tests: private stack exchange/value preservation; computed and direct non-stack writes blocked before application; uninitialized reads; syscall; other userop; instruction, p-code and time budgets; direct and computed external calls; straddling stack write; paired XCHG stack exchange and XCHG non-stack write refusal. The target trial recorded 52 completed marker pairs. The non-stack guard remains active inside an exchange.
+
+## Reproduce with existing verified tools
+
+Use tools/ghidra/YsmGuardedInitSimulation.java with the existing read-only libysm-core.so Ghidra program, x86:LE:64:default, analysis base zero and relocations/libraries disabled as in the static handoff. Keep output outside Git. Modes:
+
+- self-test OUTPUT.tsv: toy bytes only, must report SELF_TEST_PASS 14.
+- run-approved-ysm-init OUTPUT.tsv NATIVE-GHIDRA-MEMORY-2026-10-18.tsv ORIGINAL-LINUX-IMAGE: exact image hash and seven file-backed program segments verified before and after. This mode requires the applicable owner authorization; its name is not authorization.
+
+Run via analyzeHeadless with -process libysm-core.so -readOnly -noanalysis -scriptPath tools/ghidra -postScript and the selected mode/arguments. Use the verified full JDK and scoped HOME/XDG paths from the current handoff. There is no host API/syscall model. Private stack is [0x700000000000, 0x700000010000), initial RSP=0x700000008008; only the synthetic return sentinel is initially present. Limits: 10,000 instruction steps, 1,000,000 p-code operations, 60 seconds. Program decode context is retained; other base registers initially zero except PC/RSP/IF. The instruction interrupted at a guard may have performed earlier private-stack/register micro-operations; counts distinguish attempted and completed.
+
+Raw traces and original harness snapshot remain external; their hashes are in the receipt. The initial 67-step trace used the earlier all-userops-blocked source, not the revised source. Do not overwrite that distinction.
+
+## Next useful work
+
+Statically inspect the REP MOVSB source interval and its producer to determine why the first unavailable byte is needed. Keep unknown bytes unknown. Do not extend the private stack initialization, skip the copy, execute imports, or run beyond the agreed non-stack-write/instruction boundary merely to obtain a longer trace. The present trial ended normally at its guard; analysis itself can continue statically.

@@ -1,0 +1,51 @@
+{
+  "status": "BOUNDED_SYNTHETIC_TRIAL_NOT_RUNTIME_VALIDATION",
+  "native_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "entry": "0x152eb19",
+  "initial_trial": {
+    "stop": "USEROP_NOT_ALLOWED",
+    "pc": "0x1666896",
+    "completed": 67,
+    "attempted": 68,
+    "pcode": 404,
+    "self_tests": 12
+  },
+  "atomic_marker_trial": {
+    "stop": "UNINITIALIZED_READ",
+    "pc": "0x143beae",
+    "address": "0x700000007d90",
+    "size": 1,
+    "attempted": 9204,
+    "completed": 9203,
+    "unique_attempted_addresses": 3550,
+    "pcode": 87104,
+    "paired_atomic_markers": 52,
+    "oracle_checks": 47,
+    "all_oracles_matched": true,
+    "self_tests": 14,
+    "rep_movsb_attempts": 97
+  },
+  "ret_1539420_observed_successors": {
+    "1499584": 7,
+    "15ced58": 1
+  },
+  "host_native_execution": false,
+  "non_stack_write_applied": false,
+  "file_and_seven_program_segments_unchanged": true,
+  "input_state": "synthetic zero base registers, RSP=0x700000008008, IF=1, PC=DT_INIT; only return sentinel initialized in stack; program decode context retained",
+  "limits": {
+    "instructions": 10000,
+    "pcode": 1000000,
+    "seconds": 60
+  },
+  "hashes": {
+    "bounded-init-trial.tsv": "63c92eec77a7ff0cd695b153dcc099d38e1a87b258a2ca2f254607e1680185ae",
+    "bounded-init-atomic-trial.tsv": "9dc069d7466da2a19f4b2fecdf31d4e4981207600b28e86ec92b45053afd4e83",
+    "guarded-self-test.tsv": "df9b4bcf2bd7476c4ddbffa815410a6b385b5ce5fc17d951d00282ba51e046c2",
+    "guarded-atomic-self-test.tsv": "5dc3cd24e7b31f66f2d76a0d91bfbf528611a9c45844e77bb72468042cf1ecf5",
+    "guarded-initial-source.java": "cb157b2dbc03c86eda8b01f1fec964321ef75684ef9f80f118662a1d9cb4f461",
+    "YsmGuardedInitSimulation.java": "eca31c89d3614aa13ccca6f811f80d17e982fa4c5dc1a1acbb806fa65aac298a"
+  },
+  "independent_semantic_review": "NOT_RUN",
+  "mapping_promotions": 0
+}

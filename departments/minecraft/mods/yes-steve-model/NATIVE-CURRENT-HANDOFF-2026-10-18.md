@@ -45,17 +45,17 @@ Fixed manifests/receipts are retained separately: 73 ranges / 673 instruction oc
 
 Import logs include 47 zero-slot function-creation warnings and 233 unresolved external symbols under the deliberately non-relocated/no-library configuration. The byte-verified lift is usable; this is not a fully analyzed runtime program.
 
-## Automatic propagation trial and pending decision
+## Automatic propagation and bounded simulation
 
 The [static propagation probe](NATIVE-STATIC-PROPAGATION-PROBE-RECOVERY-2026-10-18.md) is INCOMPLETE. It matches ZF=0 at the first DT_INIT predicate, then stops with unknown CF at 0x16668ff (87 before-instruction records, 400 visited bytes). It does not replace the explicit byte-interval proof. Unknown values were not filled with zero.
 
-A new bounded-simulation request is pending owner approval. **No YSM CPU simulation/emulation has been run.** Existing static-analysis approval does not imply approval for this new scope. The [simulation plan](NATIVE-BOUNDED-SIMULATION-PLAN-2026-10-18.md) specifies DT_INIT only, isolated state, no host MOD/JNI execution, no external/OS calls, and stopping at the first non-stack write or 10,000 instructions. Before acting, check the owner's actual response; this handoff is not permission.
+The owner approved isolated DT_INIT simulation, then explicitly requested continuing with lock-marker support. The [bounded result](NATIVE-BOUNDED-SIMULATION-RESULT-2026-10-18.md) and receipt supersede the previous pending status. The current harness passes 14 toy guard tests. Latest target trial completed 9,203 steps, matched all 47 reached oracle checks, and stopped at uninitialized stack read 0x700000007d90 in REP MOVSB at 0x143beae. No non-stack write applied; original file and seven program segments preserved. This is one synthetic initial-state path, not actual MOD/JNI runtime validation.
 
-API preflight only: Ghidra's current PcodeEmulator/PcodeEmulationCallbacks expose beforeStore and beforeStepOp, suitable for stopping computed STORE and direct RAM-output writes before application. Reject unknown reads and unsupported/user operations; use no syscall/host-call library. Older EmulatorHelper/MemoryAccessFilter is deprecated and filters writes after application. No harness or simulation result is implied by this preflight.
+LOCK/UNLOCK are modeled only for paired XCHG atomicity markers in a single isolated emulator thread; all other userops remain forbidden. Preserve unknown stack bytes. The old static RET frontier 0x1539420 has observed synthetic successors 0x1499584 (seven times) and 0x15ced58 (once); exhaustive/static proof remains separate. Next investigate the stopped copy statically; do not bypass unknown data to extend the trace.
 
 ## Resume discipline
 
 1. Check actual environment files, branch/diffs and remote head; preserve other work.
 2. Restore missing tools/inputs from verified sources only as authorized; use persisted scripts, not a claim that a lost temporary trace still exists.
-3. Check the pending owner decision before simulation. If granted, implement/validate the bounded safety harness and compare its early path to retained static oracles. If not granted, keep the simulation blocked.
+3. Respect the approved simulation bounds and latest stopped-read frontier. Keep unsupported input state unknown; static diagnosis can proceed without treating a tool stop as the end of the research task.
 4. Publish derived evidence with explicit assumptions and verify the remote commit/tree. Keep batches scoped; no full-project CI, self-hosted runner, merge or deployment is part of this work.

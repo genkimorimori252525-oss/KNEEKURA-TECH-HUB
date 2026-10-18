@@ -1,6 +1,6 @@
 # Proposed bounded initialization simulation
 
-Status: USER APPROVAL PENDING. This is preparation only; no YSM simulation has been run. It is a new scope beyond the previously approved static-only Ghidra use.
+Status: Owner approved the bounded simulation on October 18, then explicitly requested continuing with narrowly scoped lock-marker support. Two trials have now run; see [result](NATIVE-BOUNDED-SIMULATION-RESULT-2026-10-18.md). The latest stopped at an uninitialized stack read, without a non-stack write. The original constraints below still apply.
 
 The requested scope is the Linux DT_INIT path in the pinned native image, in isolated emulator memory, with no host MOD/JNI execution or external/OS calls. Stop at the first non-stack write or 10,000 instructions. Do not start on the basis of this document alone; require the owner's response to that request.
 
@@ -8,7 +8,7 @@ The requested scope is the Linux DT_INIT path in the pinned native image, in iso
 
 The installed Ghidra 12.1.4 includes PcodeEmulator and PcodeEmulationCallbacks. Source inspection confirms beforeStore and beforeStepOp callbacks, plus uninitialized-read callbacks. The older EmulatorHelper/MemoryAccessFilter APIs are deprecated and their write filter is after-write, so prefer the current API and pre-write guards.
 
-After approval, prepare and validate a bounded harness with these constraints:
+The implemented harness follows a bounded harness with these constraints:
 
 - Only the exact Linux image SHA-256 15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22, DT_INIT entry 0x152eb19, analysis image base zero.
 - Load bytes into disposable emulator state; do not load the library into the host process. Keep the original JAR/native file and read-only Ghidra program unchanged.
