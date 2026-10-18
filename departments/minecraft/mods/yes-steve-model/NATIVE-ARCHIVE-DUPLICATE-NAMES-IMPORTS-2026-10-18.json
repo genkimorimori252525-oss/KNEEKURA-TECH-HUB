@@ -1,0 +1,20 @@
+{
+  "original_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "imports": [
+    {
+      "plt": "0xd14750",
+      "relative_slot": "0xd30830",
+      "trampoline": "0x13d6e8a",
+      "import_slot": "0x184d050",
+      "elf_relocation": "000000000184d050  0000000b00000007 R_X86_64_JUMP_SLOT     0000000000000000 strlen@GLIBC_2.2.5 + 0"
+    },
+    {
+      "plt": "0xd14770",
+      "relative_slot": "0xd30840",
+      "trampoline": "0x13d6e96",
+      "import_slot": "0x184d060",
+      "elf_relocation": "000000000184d060  0000000d00000007 R_X86_64_JUMP_SLOT     0000000000000000 memcmp@GLIBC_2.2.5 + 0"
+    }
+  ],
+  "runtime_binding_verified": false
+}

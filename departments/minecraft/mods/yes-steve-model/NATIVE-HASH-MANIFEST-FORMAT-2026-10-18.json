@@ -1,0 +1,68 @@
+{
+  "schema": 1,
+  "scope": "static archive aggregate manifest formatting",
+  "native_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "sequence": [
+    "name byte range (node +0x28 pointer,+0x20 length)",
+    "literal LF (0x0a)",
+    "num_put unsigned-long output of 64-bit node +0x30",
+    "literal LF (0x0a)"
+  ],
+  "integer": {
+    "bits": 64,
+    "signed": false,
+    "virtual_slot": "0x20",
+    "insert": "0x2f9640",
+    "checkpoint_standard_target": "0x2ea5c0 -> 0x2ea3b0",
+    "standard_decimal_conversion": "0x2e9e00",
+    "default_base": 10
+  },
+  "defaults": {
+    "flags": "0x1002",
+    "flag_names": [
+      "dec",
+      "skipws"
+    ],
+    "width": 0,
+    "precision": 6,
+    "exceptions": 0,
+    "tie": null,
+    "unitbuf": false,
+    "locale": "then-current C++ global locale; actual original runtime unknown"
+  },
+  "conditional_classic_success_format": {
+    "digits": "ASCII decimal",
+    "sign": false,
+    "base_prefix": false,
+    "padding": false,
+    "grouping": false,
+    "zero": "0",
+    "maximum": "18446744073709551615"
+  },
+  "locale_sensitive": [
+    "digit atoms",
+    "grouping/separator",
+    "custom num_put facet behavior"
+  ],
+  "failure_bounds": {
+    "caller_rdstate_check_before_hash": false,
+    "ordinary_badbit_may_return": true,
+    "partial_output_possible": true,
+    "later_insertions_require_good_state": true,
+    "allocation_and_unwind_may_escape": true,
+    "actual_success": null
+  },
+  "hash_input": {
+    "retrieval": "0x31ee10 at 0x3d8d09",
+    "length": "returned explicit string length",
+    "terminator_included": false,
+    "seed": "0x94d2ba004e0ef9dd",
+    "comparison": "0x048417704ddff4de",
+    "comparison_site": "0x3d8de5",
+    "mismatch": "0x3daa88",
+    "actual_bytes_or_hash": null
+  },
+  "reference_release": "gcc-mirror/gcc releases/gcc-14.2.0; not original compiler provenance",
+  "next_unresolved": "duplicate-name policy; not investigated here",
+  "prohibited_actions_performed": []
+}

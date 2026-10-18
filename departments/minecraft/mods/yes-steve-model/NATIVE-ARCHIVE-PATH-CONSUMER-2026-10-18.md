@@ -36,3 +36,7 @@ Later 0x48-byte record iteration at 3d97f0 tests the first 31 name bytes against
 ## Evidence
 
 NATIVE-ARCHIVE-PATH-CONSUMER-2026-10-18.json summarizes the exact PCs, literals, unresolved boundaries and provenance. NATIVE-ARCHIVE-PATH-CONSUMER-EVIDENCE-2026-10-18.json hashes copied native windows. NATIVE-ARCHIVE-READER-IMPORTS-2026-10-18.json records PLT → relative slot → trampoline → dynamic relocation/import; NATIVE-ARCHIVE-INTEGRITY-PREFIXES-2026-10-18.json and NATIVE-ARCHIVE-READER-VTABLE-2026-10-18.json record immutable metadata source hash. Disassembly endpoints or initial fragments can split instructions; claims use complete instructions and explicit target boundaries. Underlying raw byte windows and extraction receipts remain outside Git; pinned input bytes and checkpoints are unchanged.
+
+## Subsequent manifest closure
+
+[Numeric formatting](NATIVE-HASH-MANIFEST-FORMAT-2026-10-18.md) proves unsigned64 decimal defaults with locale-dependent facets and ordinary partial-output failure bounds. [Duplicate-name collection](NATIVE-ARCHIVE-DUPLICATE-NAMES-2026-10-18.md) proves first-wins for equal produced name bytes/length and separates the unique-name tree from the later original-vector resource loop. These supersede the earlier missing format/duplicate details, without establishing actual archive contents or integrity success.

@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "native_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "integrity_tree": {
+    "duplicate_policy": "first-wins",
+    "key": "produced name bytes and length",
+    "hash_before_duplicate_detection": true,
+    "later_candidate_discarded": "0x3d8b64 -> 0x3d8940",
+    "existing_hash_overwritten": false,
+    "multiple_equal_nodes": false,
+    "duplicate_specific_error": false,
+    "later_read_or_hash_failure_still_possible": true,
+    "insert": "0x3d8bf2 -> 0x2ba6d0",
+    "unique_count_increment": "0x3d8bf7",
+    "order": "memcmp unsigned bytes over minimum length, then length difference clamped to signed int",
+    "case_sensitive": true,
+    "locale_collation": false,
+    "normalization_before_comparison": false
+  },
+  "reader_layer": {
+    "mode": 0,
+    "mode1_conversion_selected": false,
+    "name_length": "strlen(parser name pointer)",
+    "append_only_if": "signed parser field +0x30 > 0",
+    "record_stride": "0x48",
+    "append_deduplication": false,
+    "append_duplicate_rejection": false,
+    "lower_parser_all_paths_duplicate_rejection": "unresolved; not whole-parser audited",
+    "order": "directory cursor enumeration; existing vector order retained during reallocation"
+  },
+  "later_builtin": {
+    "source": "same original reader vector, not tree",
+    "ordered_each_record": true,
+    "read": "0x3d98d9 -> 0x4dad30",
+    "read_selection": "record +0x08 cursor, not name lookup",
+    "write_call": "0x3d99ce -> 0x4dfb30",
+    "deduplication_in_loop": false,
+    "duplicate_read_write_calls": "conditional on supplied duplicates, filters and successful preceding stages",
+    "filesystem_last_wins": "not established"
+  },
+  "unknown": [
+    "actual installed graph",
+    "archive path and contents",
+    "names and duplicates",
+    "all lower parser acceptance rules",
+    "runtime locale",
+    "read/hash/comparison success",
+    "writer and filesystem outcome"
+  ],
+  "scope": "bounded source-only integrity-manifest collection contract; no execution, assets, bypass or synthetic archive"
+}
