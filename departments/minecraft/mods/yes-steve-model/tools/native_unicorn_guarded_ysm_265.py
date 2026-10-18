@@ -188,8 +188,9 @@ class GuardedCPU:
         if not self.stop:self.fail('EXTERNAL_OR_NULL_TARGET' if access in (UC_MEM_FETCH_UNMAPPED,UC_MEM_FETCH_PROT) else 'UNMAPPED_OR_PROTECTED_ACCESS',a,n)
         return False
     def check_oracle(self):
+        if not self.oracle_enabled:return
         cases={0x174d06f:{'ZF':0,'RSP':SP-128},0x16668ff:{'CF':0,'RCX':1,'R11D':0xd99b4c01},0x16b05fe:{'CF':0},0x171695b:{'RSI':0x1499584},0x14995c7:{'CF':1,'SF':0},0x1603de3:{'SF':0},0x1444517:{'CF':0,'ZF':0}}
-        if not self.oracle_enabled or self.pc not in cases or self.pc in self.oracle_seen:return
+        if self.pc not in cases or self.pc in self.oracle_seen:return
         self.oracle_seen.add(self.pc)
         for name,expected in cases[self.pc].items():
             value=self.reg(name);self.oracle_checks+=1;self.emit('ORACLE',f'{self.pc:x}',name,f'actual={value:x}',f'expected={expected:x}')

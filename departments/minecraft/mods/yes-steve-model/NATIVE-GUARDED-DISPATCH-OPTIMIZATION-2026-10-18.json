@@ -1,0 +1,57 @@
+{
+  "scope": "bounded guarded-dispatch optimization; source state unchanged",
+  "actual_steps_each": 100000,
+  "replays": 6,
+  "checkpoint_sha256": "56355b0fb10e61dd31e1ff3a2409b6ccf449d1012e9a2fa99f836c94302286a1",
+  "all_full_serialized_checkpoints_equal": true,
+  "source_checkpoint_sha256": "1dd1a2aa37b04abd526bef3825602241125390955605994280046302ca749c11",
+  "baseline_tests": 126,
+  "variant_tests": 126,
+  "measurements": [
+    {
+      "mode": "baseline",
+      "repeat": 1,
+      "wall_seconds": 3.6920801460000803,
+      "run_seconds": 1.8053261969980667
+    },
+    {
+      "mode": "variant",
+      "repeat": 1,
+      "wall_seconds": 3.361541385995224,
+      "run_seconds": 1.5780134160013404
+    },
+    {
+      "mode": "variant",
+      "repeat": 2,
+      "wall_seconds": 3.1343587829978787,
+      "run_seconds": 1.649932815998909
+    },
+    {
+      "mode": "baseline",
+      "repeat": 2,
+      "wall_seconds": 3.199423833997571,
+      "run_seconds": 1.7669103689986514
+    },
+    {
+      "mode": "baseline",
+      "repeat": 3,
+      "wall_seconds": 2.9635112680043676,
+      "run_seconds": 1.6360127070001909
+    },
+    {
+      "mode": "variant",
+      "repeat": 3,
+      "wall_seconds": 2.7104384819976985,
+      "run_seconds": 1.387780337005097
+    }
+  ],
+  "shared_host_timing_caveat": true,
+  "middle_pair_overlapped_tests": true,
+  "median_run_reduction_percent": 10.69,
+  "median_end_to_end_reduction_percent": 2.03,
+  "target_host_execution": false,
+  "adopted_source_sha256": {
+    "native_batched_cpu_ysm_265.py": "9eee088b2aaa397ba3cf344a9a567bb8fa05f6b54af46636764d3c678cc89a16",
+    "native_unicorn_guarded_ysm_265.py": "c5816a789e322a673c88f03e2eebe9a9065161bce2bed223f4a0b408f0c3d74d"
+  }
+}

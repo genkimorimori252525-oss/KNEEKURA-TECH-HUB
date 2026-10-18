@@ -14,3 +14,18 @@ The declared metadata classpath is extended explicitly, preserving all earlier h
 The generic metadata scanner had incorrectly treated module-info.class as an ordinary duplicate/platform class. Module descriptors are now excluded from that ordinary-class collision check and are rejected as class_info targets. Actual application/platform class shadowing checks remain intact. The two affected metadata/bridge modules pass 42 tests, including two independent modular archives plus java.base module metadata. No full-project verification was needed.
 
 [Receipt](NATIVE-JNI-FORGE-LOADER-2026-10-18.json) records the frontier, pending workers, released mutex, completed once state and dependency provenance. Keep original JARs and raw snapshots outside Git. There are still no recovered RegisterNatives bindings; Java mapping remains669 entries. The new continuation is active, with worker execution and actual object/classloader semantics still separate unfinished work.
+
+## Forge ConfigValue and loader paths
+
+The next exact references are ForgeConfigSpec$ConfigValue and FMLPaths. The declared fixture adds Forge universal and fmlloader from the same 1.20.1-47.4.0 profile; this is not a claim about the user's installed version.
+
+The primary Forge download index publishes installer SHA-1 b73203963ea70aee0c38dc58de1f6d16a766605b. An independently public SJTUG mirror copy matches it. The installer is treated only as a ZIP data source; it is never run. Its original install_profile.json supplies each library's size and SHA-1, which were checked before metadata parsing:
+
+- Forge universal: 2,776,081 bytes; SHA-256 2b0e97b22fd4d043dbbcc8e0a44ef0d58915689ed9224e4cd28d5c4976a16bcc.
+- fmlloader: 267,079 bytes; SHA-256 d17c218af5c62fa4928019614aa8a5075279f8545efe21325baf46b80f4a5ac9.
+
+The source-backed continuation verifies ForgeConfigSpec$ConfigValue.get():Object and FMLPaths.CONFIGDIR and absolutePath field descriptors. It retains the same two unexecuted detached workers and no pending Java exception. This required only explicit additive artifact inputs, not a successful-class stub, installer execution or another whole-project test run. Exact official checksum page, public mirror URLs, extracted library records and class/member proofs are in the receipt.
+
+Sources: [Forge official download checksums](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.20.1.html), [SJTUG public artifact index](https://mirror.sjtu.edu.cn/bmclapi/net/minecraftforge/forge/1.20.1-47.4.0/). The SHA-256 pins are locally calculated after validating the original distribution's SHA-1 chain. The mirror itself is not treated as the authority for version compatibility or the expected hashes.
+
+The same verified installer profile also pins fmlcore (118,914 bytes, SHA-256 483f2d764a3a426f09a51cb37eb552830ffac8132da6bb3afbd7d825e6a34fd2). Adding it resolves the observed ModList.INSTANCE and fileById field descriptors. These private implementation references make the declared Forge profile material; do not generalize them to arbitrary Forge versions.

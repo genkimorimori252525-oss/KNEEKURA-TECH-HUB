@@ -29,8 +29,8 @@ class BatchedMixin:
         self.return_fetch = False
         self.current_raw = b''
 
-    def _commit_native(self):
-        nxt = self.reg('RIP')
+    def _commit_native(self, next_pc=None):
+        nxt = self.reg('RIP') if next_pc is None else next_pc
         if self.returned_to_sentinel():
             for a, n in self.writes:
                 self.commit_write(a, n)
@@ -61,7 +61,7 @@ class BatchedMixin:
             code_write = bool(self.writes) and any(self.pages.get(page, 0) & UC_PROT_EXEC
                              for a, n in self.writes
                              for page in range(a & ~4095, (a+n+4095) & ~4095, 4096))
-            self._commit_native()
+            self._commit_native(address)
             if self.stop:
                 return
             if code_write:

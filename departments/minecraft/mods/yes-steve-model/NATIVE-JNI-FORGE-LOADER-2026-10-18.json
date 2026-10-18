@@ -111,5 +111,147 @@
         }
       }
     ]
+  },
+  "forge_runtime_artifact_extension": {
+    "declared_profile": "1.20.1-47.4.0",
+    "installed_user_version_not_asserted": true,
+    "universal": {
+      "official_checksum_page": "https://files.minecraftforge.net/net/minecraftforge/forge/index_1.20.1.html",
+      "mirror_installer_url": "https://mirror.sjtu.edu.cn/bmclapi/net/minecraftforge/forge/1.20.1-47.4.0/forge-1.20.1-47.4.0-installer.jar",
+      "installer_sha1": "b73203963ea70aee0c38dc58de1f6d16a766605b",
+      "installer_sha256": "f3f57465e2cbdc328193f77ba7f0c94cb64405f31ed556753d9275e8bdc06e2c",
+      "profile_entry": "install_profile.json",
+      "library": {
+        "name": "net.minecraftforge:forge:1.20.1-47.4.0:universal",
+        "downloads": {
+          "artifact": {
+            "path": "net/minecraftforge/forge/1.20.1-47.4.0/forge-1.20.1-47.4.0-universal.jar",
+            "url": "https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.4.0/forge-1.20.1-47.4.0-universal.jar",
+            "sha1": "45e8b14d52cc0cb555c6340dcd631ef1edf68596",
+            "size": 2776081
+          }
+        }
+      },
+      "universal_sha256": "2b0e97b22fd4d043dbbcc8e0a44ef0d58915689ed9224e4cd28d5c4976a16bcc",
+      "embedded_in_verified_installer": false
+    },
+    "fmlloader": {
+      "mirror_url": "https://mirror.sjtu.edu.cn/bmclapi/net/minecraftforge/fmlloader/1.20.1-47.4.0/fmlloader-1.20.1-47.4.0.jar",
+      "installer_sha1": "b73203963ea70aee0c38dc58de1f6d16a766605b",
+      "library": {
+        "name": "net.minecraftforge:fmlloader:1.20.1-47.4.0",
+        "downloads": {
+          "artifact": {
+            "path": "net/minecraftforge/fmlloader/1.20.1-47.4.0/fmlloader-1.20.1-47.4.0.jar",
+            "url": "https://maven.minecraftforge.net/net/minecraftforge/fmlloader/1.20.1-47.4.0/fmlloader-1.20.1-47.4.0.jar",
+            "sha1": "350292a3c597f65d130e48b6e419a2b21cba2ac1",
+            "size": 267079
+          }
+        }
+      },
+      "sha256": "d17c218af5c62fa4928019614aa8a5075279f8545efe21325baf46b80f4a5ac9"
+    },
+    "installer_executed": false,
+    "matching_class_method_proofs": [
+      {
+        "requested_class": "net/minecraftforge/common/ForgeConfigSpec$ConfigValue",
+        "name": "get",
+        "descriptor": "()Ljava/lang/Object;",
+        "static": false,
+        "declaring_class": "net/minecraftforge/common/ForgeConfigSpec$ConfigValue",
+        "class_sha256": "9f12ae8dc0f6c264c680e2e7e80f2bfe756d25f11fd2d1f36ea6fc19ad96fae4",
+        "source": {
+          "id": "forge-1.20.1-47.4.0",
+          "sha256": "2b0e97b22fd4d043dbbcc8e0a44ef0d58915689ed9224e4cd28d5c4976a16bcc",
+          "archive_kind": "jar",
+          "entry_count": 1956
+        }
+      }
+    ],
+    "checkpoint_basename": "unicorn-jni-fmlloader-next3.checkpoint.json",
+    "checkpoint_sha256": "e4e23b501c9b1ac88646afb93931c8832b15643da5e2ab117a459f430bd813d4",
+    "stop": {
+      "reason": "UNMODELED_JAVA_CLASS",
+      "pc": 135239940439776,
+      "address": 0,
+      "size": 0
+    },
+    "matching_field_proofs": [
+      {
+        "requested_class": "net/minecraftforge/fml/loading/FMLPaths",
+        "name": "CONFIGDIR",
+        "descriptor": "Lnet/minecraftforge/fml/loading/FMLPaths;",
+        "static": true,
+        "declaring_class": "net/minecraftforge/fml/loading/FMLPaths",
+        "class_sha256": "c8fc0d33845a5aa3c285115f320cf23dc016fe0cdab183dd2cd3e8d8257675c5",
+        "source": {
+          "id": "fmlloader-1.20.1-47.4.0",
+          "sha256": "d17c218af5c62fa4928019614aa8a5075279f8545efe21325baf46b80f4a5ac9",
+          "archive_kind": "jar",
+          "entry_count": 158
+        }
+      },
+      {
+        "requested_class": "net/minecraftforge/fml/loading/FMLPaths",
+        "name": "absolutePath",
+        "descriptor": "Ljava/nio/file/Path;",
+        "static": false,
+        "declaring_class": "net/minecraftforge/fml/loading/FMLPaths",
+        "class_sha256": "c8fc0d33845a5aa3c285115f320cf23dc016fe0cdab183dd2cd3e8d8257675c5",
+        "source": {
+          "id": "fmlloader-1.20.1-47.4.0",
+          "sha256": "d17c218af5c62fa4928019614aa8a5075279f8545efe21325baf46b80f4a5ac9",
+          "archive_kind": "jar",
+          "entry_count": 158
+        }
+      }
+    ],
+    "next_missing_class": "net/minecraftforge/fml/ModList",
+    "fmlcore": {
+      "mirror_url": "https://mirror.sjtu.edu.cn/bmclapi/net/minecraftforge/fmlcore/1.20.1-47.4.0/fmlcore-1.20.1-47.4.0.jar",
+      "installer_sha1": "b73203963ea70aee0c38dc58de1f6d16a766605b",
+      "library": {
+        "name": "net.minecraftforge:fmlcore:1.20.1-47.4.0",
+        "downloads": {
+          "artifact": {
+            "path": "net/minecraftforge/fmlcore/1.20.1-47.4.0/fmlcore-1.20.1-47.4.0.jar",
+            "url": "https://maven.minecraftforge.net/net/minecraftforge/fmlcore/1.20.1-47.4.0/fmlcore-1.20.1-47.4.0.jar",
+            "sha1": "235975dafa4309945b59c56b53f31dc5b65a6051",
+            "size": 118914
+          }
+        }
+      },
+      "sha256": "483f2d764a3a426f09a51cb37eb552830ffac8132da6bb3afbd7d825e6a34fd2"
+    },
+    "ModList_field_proofs": [
+      {
+        "requested_class": "net/minecraftforge/fml/ModList",
+        "name": "INSTANCE",
+        "descriptor": "Lnet/minecraftforge/fml/ModList;",
+        "static": true,
+        "declaring_class": "net/minecraftforge/fml/ModList",
+        "class_sha256": "fdd3e0015416c2aba2e94dfff38008ae295d24e4c46eacad6b5dc88214d43baa",
+        "source": {
+          "id": "fmlcore-1.20.1-47.4.0",
+          "sha256": "483f2d764a3a426f09a51cb37eb552830ffac8132da6bb3afbd7d825e6a34fd2",
+          "archive_kind": "jar",
+          "entry_count": 86
+        }
+      },
+      {
+        "requested_class": "net/minecraftforge/fml/ModList",
+        "name": "fileById",
+        "descriptor": "Ljava/util/Map;",
+        "static": false,
+        "declaring_class": "net/minecraftforge/fml/ModList",
+        "class_sha256": "fdd3e0015416c2aba2e94dfff38008ae295d24e4c46eacad6b5dc88214d43baa",
+        "source": {
+          "id": "fmlcore-1.20.1-47.4.0",
+          "sha256": "483f2d764a3a426f09a51cb37eb552830ffac8132da6bb3afbd7d825e6a34fd2",
+          "archive_kind": "jar",
+          "entry_count": 86
+        }
+      }
+    ]
   }
 }

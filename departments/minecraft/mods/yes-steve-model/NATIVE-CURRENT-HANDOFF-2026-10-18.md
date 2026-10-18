@@ -68,3 +68,7 @@ These reports retain exact previous scopes, source hashes and limitations. Do no
 - [TLS/sparse allocator and PSHUFB correction](NATIVE-TLS-SPARSE-INITIALIZERS-RESULT-2026-10-18.md)
 
 Latest positive continuation: unicorn-jni-thread-next33.checkpoint.json reaches SecureJar after two virtual detached pending workers and a main mutex lock/unlock. Both workers remain unexecuted. Pinned securejarhandler-2.1.10 is now an explicit metadata input; SecureJar.getPrimaryPath resolves. See current receipt for original artifact hashes and exact frontier.
+
+The declared metadata classpath now also includes original Forge universal and fmlloader 1.20.1-47.4.0, checked through the official installer checksum and its original library profile without running it. ConfigValue.get and the FMLPaths.CONFIGDIR/absolutePath fields resolve; active continuation uses continue-jni-fmlloader-chain.py with four pinned dependency archives. See Forge-loader receipt for exact hashes.
+
+Guarded dispatch now reuses the existing code-hook address only on hook commit paths and skips disabled oracle setup. Baseline/variant126 tests each and six byte-identical100k-step checkpoints establish the bounded comparison; see NATIVE-GUARDED-DISPATCH-OPTIMIZATION-RESULT-2026-10-18.md. Fresh JNI continuation additionally uses fmlcore1.20.1-47.4.0 for ModList fields (five pinned dependencies total).
