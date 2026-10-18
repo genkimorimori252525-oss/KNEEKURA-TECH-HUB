@@ -1,0 +1,110 @@
+{
+  "scope": "fresh explicit deferred-thread scenario through all initializers; JNI continuation pending",
+  "checkpoint_basename": "unicorn-thread-init-once.checkpoint.json",
+  "checkpoint_sha256": "1f47db0b29da6e5f64c69d9ed8a8c1a1cbb6bc963a3dfd8fa4f175c6da1c1990",
+  "completed_invocations": 3465313,
+  "phase": "done",
+  "completed_callbacks": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44
+  ],
+  "weak_binding": {
+    "slot": "0xd2cf70",
+    "symbol": "__pthread_key_create",
+    "gateway": "0x770000000000",
+    "bound_before_initializers": true
+  },
+  "thread_state": {
+    "enabled": true,
+    "entries": [
+      3132592
+    ],
+    "records": {},
+    "keys": {},
+    "calls": 0,
+    "boundary": false,
+    "schedule": "defer-all-workers-through-main-jni-boundary"
+  },
+  "once_state": {
+    "objects": {
+      "13834696": {
+        "state": "done",
+        "callback": 3112016
+      },
+      "13834684": {
+        "state": "done",
+        "callback": 2854640
+      }
+    },
+    "pending": [],
+    "calls": 44
+  },
+  "tests": {
+    "affected_methods": 208,
+    "result": "PASS"
+  },
+  "workers_executed": 0,
+  "jni_success_established": false,
+  "runtime_complete": false,
+  "target_host_execution": false,
+  "native_registrations_recovered": 0,
+  "focused_review": {
+    "findings": 2,
+    "fixed": true,
+    "independently_reproduced_after_fix": true,
+    "scope": [
+      "page-rounded opaque control guards",
+      "pending callback completion guards"
+    ],
+    "overall_semantic_review_not_run": true
+  },
+  "first_fresh_jni_checkpoint": {
+    "basename": "unicorn-jni-thread-first.checkpoint.json",
+    "sha256": "1c186f64ed9d924b2fc5714fd5df8934bb4a1168af8feb4d3428ea4ee14dd23a",
+    "stop": "INSTRUCTION_BUDGET",
+    "pending_exception": null
+  }
+}

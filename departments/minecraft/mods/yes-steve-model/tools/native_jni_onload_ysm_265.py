@@ -4,7 +4,7 @@ import argparse,hashlib,json
 from pathlib import Path
 from native_jni_fixture_ysm_265 import JniGuardedCPU
 from native_guarded_checkpoint_ysm_265 import read_checkpoint,write_checkpoint
-from native_initializer_sequence_ysm_265 import prepare_call
+from native_initializer_sequence_ysm_265 import prepare_call,callback_frames_complete
 ENTRY=0x418760
 
 def main():
@@ -26,10 +26,11 @@ def main():
             c.configure_java_metadata(JavaMetadata(jar_path=a.jar,java_base_path=a.java_base,dependency_paths={key:(Path(path),digest) for key,digest,path in a.dependency}),allow_source_extension=a.allow_java_source_extension)
         elif c.jni_state['java_sources'] is not None:raise ValueError('Resume requires the same Java metadata inputs')
         c.oracle_enabled=False;r=c.run(c.reg('RIP'))
-        if r['reason']=='ENTRY_RETURN':
+        if r['reason']=='ENTRY_RETURN' and callback_frames_complete(c):
             if any(c.reg(k)!=v for k,v in c.call_saved.items()):raise ValueError('JNI_OnLoad callee-saved mismatch')
             c.call_in_progress=False
-        digest=write_checkpoint(c,a.checkpoint_out)
+            if c.threads_enabled:c.thread_boundary()
+        r=c.stop;digest=write_checkpoint(c,a.checkpoint_out)
     if hashlib.sha256(a.image.read_bytes()).hexdigest()!=before:raise AssertionError('Original file changed')
     print(json.dumps({'stop':r,'attempted':c.attempted,'completed':c.completed,'jni_calls':c.jni_state['calls'],'checkpoint_sha256':digest,'host_jvm_called':False,'pending_exception':c.jni_state['pending_exception'],'return_value':c.reg('RAX') if r['reason']=='ENTRY_RETURN' else None,'batch_size':a.batch_size}))
 if __name__=='__main__':main()

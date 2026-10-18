@@ -59,14 +59,18 @@ class ShadowGuardedCPU(GuardedCPU):
             from native_heap_imports_ysm_265 import IMPORTS as HEAP_IMPORTS,SYMBOLS as HEAP_SYMBOLS,model as heap_model
             from native_tls_fixture_ysm_265 import IMPORTS as TLS_IMPORTS,model as tls_model
             from native_jvm_loader_fixture_ysm_265 import IMPORTS as JVM_IMPORTS,SYMBOLS as JVM_SYMBOLS,model as jvm_model
+            from native_pthread_once_fixture_ysm_265 import IMPORTS as ONCE_IMPORTS
+            from native_pthread_fixture_ysm_265 import IMPORTS as THREAD_IMPORTS,SYMBOLS as THREAD_SYMBOLS,model as thread_model
             from native_sync_fixture_ysm_265 import IMPORTS as SYNC_IMPORTS,SYMBOLS as SYNC_SYMBOLS,model as sync_model
             from native_allocator_os_fixture_ysm_265 import IMPORTS as OS_IMPORTS,SYMBOLS as OS_SYMBOLS,model as os_model
-            allocators={**JVM_IMPORTS,50:('dl_iterate_phdr',0x184d1a8,0x15eda1c),**SYNC_IMPORTS,**OS_IMPORTS,**TLS_IMPORTS,**LOCALE_IMPORTS,**MEMORY_IMPORTS,**HEAP_IMPORTS,118:('__cxa_thread_atexit_impl',0x184d3c8,0x153b3eb),6:('__cxa_atexit',0x184d048,0x15044c7),121:('secure_getenv',0x184d3e0,0x14bdbd9),250:('_Znwm',0x184d7e8,0x13fe69d),205:('_Znam',0x184d680,0x1478e57),197:('memset',0x184d640,0x14c39b7)}
+            allocators={**ONCE_IMPORTS,**THREAD_IMPORTS,**JVM_IMPORTS,50:('dl_iterate_phdr',0x184d1a8,0x15eda1c),**SYNC_IMPORTS,**OS_IMPORTS,**TLS_IMPORTS,**LOCALE_IMPORTS,**MEMORY_IMPORTS,**HEAP_IMPORTS,118:('__cxa_thread_atexit_impl',0x184d3c8,0x153b3eb),6:('__cxa_atexit',0x184d048,0x15044c7),121:('secure_getenv',0x184d3e0,0x14bdbd9),250:('_Znwm',0x184d7e8,0x13fe69d),205:('_Znam',0x184d680,0x1478e57),197:('memset',0x184d640,0x14c39b7)}
             self.demand(index in allocators,'UNMODELED_LAZY_IMPORT',index)
             symbol,slot,stub=allocators[index]
             self.demand(self.read_known(slot,8)==struct.pack('<Q',stub) and self.read_known(stub,5)==b'\x68'+struct.pack('<I',index),'LAZY_IMPORT_IDENTITY_MISMATCH')
             self.demand(self.return_target_allowed(target,sp+32),'EXTERNAL_OR_NULL_TARGET',target)
-            if symbol=='dl_iterate_phdr':
+            if symbol=='pthread_once':
+                self.demand(hasattr(self,'begin_once'),'ONCE_BACKEND_REQUIRED');self.begin_once(sp,target);return
+            elif symbol=='dl_iterate_phdr':
                 self.demand(hasattr(self,'begin_phdr_callback'),'GUEST_CALLBACK_BACKEND_REQUIRED');self.begin_phdr_callback(sp,target);return
             elif symbol=='__cxa_thread_atexit_impl':
                 function,arg,dso=self.reg('RDI'),self.reg('RSI'),self.reg('RDX')
@@ -81,6 +85,7 @@ class ShadowGuardedCPU(GuardedCPU):
             elif symbol=='__tls_get_addr':result=tls_model(self)
             elif symbol in LOCALE_SYMBOLS:result=locale_model(self,symbol)
             elif symbol in JVM_SYMBOLS:result=jvm_model(self,symbol)
+            elif symbol in THREAD_SYMBOLS:result=thread_model(self,symbol)
             elif symbol in SYNC_SYMBOLS:result=sync_model(self,symbol)
             elif symbol in OS_SYMBOLS:result=os_model(self,symbol)
             elif symbol in HEAP_SYMBOLS:result=heap_model(self,symbol)

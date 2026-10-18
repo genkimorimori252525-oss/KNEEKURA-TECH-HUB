@@ -262,5 +262,13 @@ class SemaphoreTests(unittest.TestCase):
                     self.cpu().restore_sparse(state)
 
 
+    def test_short_page_operation_cannot_hit_opaque_control_indirectly(self):
+        for operation in ('unmap','protect','discard'):
+            c,a=self.initialized('sparse',2);page=a&~4095;before=bytes(c.uc.mem_read(page,PAGE));regions=copy.deepcopy(c.vm_regions)
+            with self.assertRaises(ModelHalt):
+                if operation=='discard':c.vm_advice(page,1,4)
+                else:c.vm_change(page,1,prot=0,remove=operation=='unmap')
+            self.assertEqual(c.vm_regions,regions);self.assertEqual(bytes(c.uc.mem_read(page,PAGE)),before);self.assertEqual(c.sync_objects[str(a)]['value'],2)
+
 if __name__ == '__main__':
     unittest.main()

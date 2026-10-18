@@ -16,8 +16,15 @@ def prepare_call(cpu,target):
     cpu.reg('RSP',SP);cpu.write_private(SP,struct.pack('<Q',RETURN),log=False);cpu.uc.reg_write(X.UC_X86_REG_EFLAGS,0x202);cpu.call_saved={name:cpu.reg(name) for name in CALLEE};cpu.call_in_progress=True;cpu.reg('RIP',target)
     cpu.emit('INITIALIZER_CALL',f'phase={cpu.init_phase}',f'index={cpu.init_array_index}',f'entry={target:x}','argc_argv_envp=synthetic-zero','caller_saved_registers=synthetic-zero','flags=202')
 
+def callback_frames_complete(cpu):
+    if getattr(cpu,'once_pending',[]) or (getattr(cpu,'jni_state',None) or {}).get('pending_callbacks',[]):
+        cpu.emit('REJECTED_TOP_LEVEL_RETURN','pending_guest_callback=true','completion=false')
+        cpu.stop=None;cpu.fail('UNFINISHED_GUEST_CALLBACK_AT_ENTRY_RETURN',cpu.reg('RIP'));return False
+    return True
+
 def advance_after_return(cpu):
     if cpu.stop['reason']!='ENTRY_RETURN':return False
+    if not callback_frames_complete(cpu):return False
     if any(cpu.reg(name)!=value for name,value in cpu.call_saved.items()):raise ValueError('Initializer callee-saved register mismatch')
     cpu.call_in_progress=False
     if cpu.init_phase=='dt-init':cpu.init_phase='init-array';cpu.oracle_enabled=False
@@ -43,15 +50,27 @@ def run_sequence(cpu,m,max_steps,seconds):
     return {'phase':cpu.init_phase,'completed_callbacks':len(cpu.init_array_completed),'active_callback':cpu.init_array_index,'stop':cpu.stop,'current_process_attempted':used}
 
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--image',type=Path,required=True);p.add_argument('--out',type=Path,required=True);p.add_argument('--checkpoint-out',type=Path,required=True);p.add_argument('--resume-checkpoint',type=Path);p.add_argument('--steps',type=int,default=4000000);p.add_argument('--seconds',type=int,default=180);a=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--batch-size',type=int,default=1);p.add_argument('--deferred-threads',action='store_true');p.add_argument('--image',type=Path,required=True);p.add_argument('--out',type=Path,required=True);p.add_argument('--checkpoint-out',type=Path,required=True);p.add_argument('--resume-checkpoint',type=Path);p.add_argument('--steps',type=int,default=4000000);p.add_argument('--seconds',type=int,default=180);a=p.parse_args()
     data=a.image.read_bytes();before=hashlib.sha256(data).hexdigest();m=manifest(data)
     with a.out.open('w') as out:
-        c=SyncGuardedCPU(out,'proc-fixture',a.steps,a.seconds);c.load_image(data);c.configure_loader('image-only');c.virtual_platform=True;c.protection_result='success-input';c.cpuid_leaf1=(0,0,0,0);c.accelerate_crc=True
+        cpu_type=SyncGuardedCPU
+        if a.deferred_threads:
+            from native_pthread_once_fixture_ysm_265 import OnceThreadCPU
+            cpu_type=OnceThreadCPU
+        if a.batch_size!=1:
+            from native_batched_cpu_ysm_265 import BatchedMixin
+            cpu_type=type('BatchedInitializerCPU',(BatchedMixin,cpu_type),{})
+        c=cpu_type(out,'proc-fixture',a.steps,a.seconds);c.batch_size=a.batch_size;c.load_image(data);c.configure_loader('image-only');c.virtual_platform=True;c.protection_result='success-input';c.cpuid_leaf1=(0,0,0,0);c.accelerate_crc=True
         if a.resume_checkpoint:
             c.emit('CHECKPOINT_SOURCE_SHA256',read_checkpoint(c,a.resume_checkpoint))
+            if a.deferred_threads and not c.threads_enabled:raise ValueError('Cannot add thread capability to an old initializer checkpoint; replay fresh')
             if not c.loader_view_applied:raise ValueError('Cannot use an unrelocated scenario snapshot for this sequence')
             if not c.external_data_guard_applied:raise ValueError('Checkpoint predates external-data guards; replay fresh before making stronger claims')
-        else:apply_loader_view(c,data)
+        else:
+            apply_loader_view(c,data)
+            if a.deferred_threads:
+                from native_thread_support_gate_ysm_265 import configure_thread_support
+                configure_thread_support(c,data,[0x2fccb0])
         from native_stdio_fixture_ysm_265 import ensure_stdio_bindings
         ensure_stdio_bindings(c)
         from native_tls_fixture_ysm_265 import configure

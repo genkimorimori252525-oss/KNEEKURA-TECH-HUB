@@ -2,7 +2,7 @@
 import io,struct,unittest
 from native_shadow_image_ysm_265 import ShadowGuardedCPU
 from native_elf_loader_view_ysm_265 import apply_fixups
-from native_initializer_sequence_ysm_265 import prepare_call,run_sequence
+from native_initializer_sequence_ysm_265 import prepare_call,run_sequence,advance_after_return
 from native_unicorn_guarded_ysm_265 import SP,RETURN
 CODE=0x100000;DATA=0x200000
 class InitSequenceTests(unittest.TestCase):
@@ -30,4 +30,10 @@ class InitSequenceTests(unittest.TestCase):
   with self.assertRaises(ValueError):prepare_call(c,0)
  def test_resource_boundary_retains_next_callback(self):
   c=self.cpu();r=run_sequence(c,{'dt_init':CODE,'initializers':[CODE+1]},1,5);self.assertEqual(c.init_phase,'init-array');self.assertFalse(c.call_in_progress);self.assertEqual(c.init_array_completed,[]);r=run_sequence(c,{'dt_init':CODE,'initializers':[CODE+1]},1,5);self.assertEqual(c.init_array_completed,[0]);self.assertEqual(r['phase'],'done')
+ def test_top_level_return_with_pending_callback_does_not_advance(self):
+  for kind in ('once','phdr'):
+   c=self.cpu();prepare_call(c,CODE);c.stop={'reason':'ENTRY_RETURN'}
+   if kind=='once':c.once_pending=[{'pending':True}]
+   else:c.jni_state={'pending_callbacks':[{'pending':True}]}
+   self.assertFalse(advance_after_return(c));self.assertTrue(c.call_in_progress);self.assertEqual(c.init_phase,'dt-init');self.assertEqual(c.stop['reason'],'UNFINISHED_GUEST_CALLBACK_AT_ENTRY_RETURN')
 if __name__=='__main__':unittest.main()

@@ -31,9 +31,9 @@ class SyncGuardedCPU(SparseGuardedCPU):
     def write_model_memory(self,a,data):
         self.demand(self.sync_hit(a,len(data)) is None,'OPAQUE_SYNC_OBJECT_WRITE',a,len(data));return super().write_model_memory(a,data)
     def vm_change(self,a,n,prot=None,remove=False):
-        self.demand(self.sync_hit(a,n) is None,'SYNC_STORAGE_MAPPING_CHANGE',a,n);return super().vm_change(a,n,prot,remove)
+        self.demand(self.sync_hit(a,((a+n+4095)&~4095)-a) is None,'SYNC_STORAGE_MAPPING_CHANGE',a,n);return super().vm_change(a,n,prot,remove)
     def vm_advice(self,a,n,advice):
-        self.demand(self.sync_hit(a,n) is None,'SYNC_STORAGE_ADVICE',a,n);return super().vm_advice(a,n,advice)
+        self.demand(self.sync_hit(a,((a+n+4095)&~4095)-a) is None,'SYNC_STORAGE_ADVICE',a,n);return super().vm_advice(a,n,advice)
     def capture_sparse(self):
         s=super().capture_sparse();s['sync']={'objects':copy.deepcopy(self.sync_objects),'calls':self.sync_calls};return s
     def restore_sparse(self,s):

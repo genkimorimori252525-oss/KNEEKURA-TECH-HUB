@@ -6,7 +6,7 @@ objects; artifact-derived function addresses are intercepted before execution.
 """
 import copy,hashlib,struct,time
 from unicorn import UC_PROT_READ,UC_PROT_EXEC
-from native_sync_fixture_ysm_265 import SyncGuardedCPU
+from native_pthread_once_fixture_ysm_265 import OnceThreadCPU
 from native_unicorn_guarded_ysm_265 import ModelHalt
 TRAPS=0x780000000000;ENV_TABLE=TRAPS+0x1000;VM_TABLE=TRAPS+0x2000;VERSION=0x000a0000
 # Official JDK21 jni.h SHA256 99e64ebbe749e6df284f852f11b3c73f6ea97baf15120428f40f887fe0616e61
@@ -18,7 +18,7 @@ CALLEE=('RBX','RBP','R12','R13','R14','R15')
 VM_NAMES=['reserved0','reserved1','reserved2','DestroyJavaVM','AttachCurrentThread','DetachCurrentThread','GetEnv','AttachCurrentThreadAsDaemon']
 
 def table(names,base):return b''.join(struct.pack('<Q',0 if n.startswith('reserved') else TRAPS+16*(base+i)) for i,n in enumerate(names))
-class JniGuardedCPU(SyncGuardedCPU):
+class JniGuardedCPU(OnceThreadCPU):
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs);self.jni_state=None;self.jni_expected={};self.jni_gateways={};self.jvm_artifact_bytes=None;self.jvm_view=None;self.jvm_interfaces_ready=False;self.java_metadata=None
     def jni_hit(self,a,n):return any(lo<a+n and a<lo+len(v) for lo,v in getattr(self,'jni_expected',{}).items())
