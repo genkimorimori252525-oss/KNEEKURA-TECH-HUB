@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "scenario": "synthetic clock/proc0/loader/open failure/page4096/protection success/CPUID zero; opt-in bounded working image",
+  "trace_sha256": "f47f6a42362584b9d85cb2af5a041c5627e03e5ac69188dccfbb9f3329b43a58",
+  "checkpoint_sha256": "6ccdd23c986e7a895a0ede3e4f23ce5f11417f0e075c802637694b21e6a98c87",
+  "completed_native_instruction_or_model_invocations": 3290734,
+  "scope": "DT_INIT only; init-array callbacks and JNI lifecycle not yet executed",
+  "tests_methods_pass": 111,
+  "crc_differential_cases": 60,
+  "receipt": [
+    "VIRTUAL_CPUID\tleaf=1\tinput_ecx=0\tinput_ecx_ignored_for_leaf1=true\t00000000\t00000000\t00000000\t00000000\thost_cpu_queried=false",
+    "SHADOW_IMAGE_COMMITTED_WRITE\tpc=14a66e9\taddress=edf060\tsize=8\tbefore=0000000000000000\tafter=0000000000710000\treference_bytes_unchanged=true",
+    "VIRTUAL_CPUID\tleaf=1\tinput_ecx=ec8150\tinput_ecx_ignored_for_leaf1=true\t00000000\t00000000\t00000000\t00000000\thost_cpu_queried=false",
+    "VIRTUAL_OPERATOR_NEW\t7100000001b0\tsize=24\treserved=32",
+    "VIRTUAL_LAZY_IMPORT\tsymbol=_Znwm\trelocation_index=250\tresult=7100000001b0\thost_import_called=false",
+    "SHADOW_IMAGE_COMMITTED_WRITE\tpc=f8eb2d\taddress=edf068\tsize=8\tbefore=0000000000000000\tafter=b001000000710000\treference_bytes_unchanged=true",
+    "VIRTUAL_OPERATOR_NEW\t7100000001d0\tsize=48\treserved=48",
+    "VIRTUAL_LAZY_IMPORT\tsymbol=_Znwm\trelocation_index=250\tresult=7100000001d0\thost_import_called=false",
+    "VIRTUAL_OPERATOR_NEW\t710000000200\tsize=2080\treserved=2080",
+    "VIRTUAL_LAZY_IMPORT\tsymbol=_Znam\trelocation_index=205\tresult=710000000200\thost_import_called=false",
+    "VIRTUAL_LAZY_IMPORT\tsymbol=memset\trelocation_index=197\tresult=710000000200\thost_import_called=false",
+    "STOP\tENTRY_RETURN\tpc=1d963d\taddress=7fff00000000\tsize=0",
+    "COUNTS\tattempted=3290734\tcompleted=3290734\trollbacks=0\tmodeled_copy_steps=8225\topaque_byte_copies=776\tvirtual_clock_reads=23\tvirtual_malloc_calls=1\theap_write_events=25\tvirtual_fopen_calls=1\tvirtual_fgets_calls=2\tvirtual_fclose_calls=1\tvirtual_cpuid_calls=2\tvirtual_protection_result_calls=5\tvirtual_platform_calls=2\tvirtual_dladdr_calls=1\tcrc_blocks=15\tcrc_iterations=23591981\tcrc_logical_instructions=528156776",
+    "STOP_REGISTER\tRSP\t700000008010",
+    "STOP_REGISTER\tRIP\t7fff00000000",
+    "SHADOW_PRESERVATION\timmutable_reference_unchanged=True\tworking_image_matches_committed_ledger=True\tworking_image_equals_reference=False\tcommitted_events=2\tcommitted_bytes=16\tvirtual_operator_new_calls=3\tvirtual_memset_calls=1\tcrc_counter_history_complete=True",
+    "BOUNDED_RESULT\tENTRY_RETURN\ttarget_host_library_execution=false\thost_file_access=false\thost_permissions_changed=false\tworking_copy_image_writes=2\ttransactional_fault_state=true",
+    "CHECKPOINT_SAVED_SHA256\t6ccdd23c986e7a895a0ede3e4f23ce5f11417f0e075c802637694b21e6a98c87"
+  ],
+  "mapping_promotions": 0,
+  "independent_semantic_review": "NOT_RUN",
+  "validated_source_sha256": {
+    "native_unicorn_guarded_ysm_265.py": "fcee5704794731b69b247e3e60e7ab281f15fc94f9f4ad3b53f1413a3727ba51",
+    "native_shadow_image_ysm_265.py": "55ca123fdefcc9b2da6f804d95eb6487b98551d35705d406eca28b2bc301b500",
+    "native_guarded_checkpoint_ysm_265.py": "7d37636bc6787455fe7f4829be1c5cd355a2bd0092fd911ea755a1bd9ad1b1fb",
+    "test_native_unicorn_guarded_ysm_265.py": "abc2e682b1300c5a53dadffbaab7b8ae21a6cefc78ce5e9d2b71f1aa707440a8",
+    "test_native_lazy_import_ysm_265.py": "e8fbe2207b634e3ea46f21cf3d7d96727afbf3781b7aecf6fbec83c02a63c913",
+    "test_native_guarded_checkpoint_ysm_265.py": "6a04afdfe51a2370f51f31e442fbe5b9a51e1fd22fb500f880b49a4abe799db8"
+  }
+}

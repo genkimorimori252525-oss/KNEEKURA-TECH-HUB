@@ -31,7 +31,7 @@ class GuardedCPU:
         self.accelerate_crc=False;self.crc_profile_verified=None;self.crc_blocks=self.crc_iterations=self.crc_logical_steps=0
         self.attempted=self.completed=0;self.modeled_copies=self.opaque_copies=0;self.heap_writes=0;self.rollback_count=0
         self.known={STACK:bytearray(STACK_SIZE),HEAP:bytearray(HEAP_SIZE)};self.opaque={};self.image=[];self.exec_ranges=[];self.pages={}
-        self.stop=None;self.pending=None;self.journal=[];self.writes=[];self.pc=0;self.oracle_seen=set();self.oracle_checks=0;self.oracle_enabled=False
+        self.current_raw=b'';self.return_fetch=False;self.stop=None;self.pending=None;self.journal=[];self.writes=[];self.pc=0;self.oracle_seen=set();self.oracle_checks=0;self.oracle_enabled=False
         self.uc.mem_map(STACK,STACK_SIZE,UC_PROT_READ|UC_PROT_WRITE);self.uc.mem_map(HEAP,HEAP_SIZE,UC_PROT_READ|UC_PROT_WRITE)
         for reg in REGS.values():self.uc.reg_write(reg,0)
         self.reg('RSP',SP);self.uc.reg_write(X.UC_X86_REG_EFLAGS,0x202)
@@ -122,7 +122,7 @@ class GuardedCPU:
         if self.stop:return
         if time.monotonic()>self.deadline:self.fail('TIME_BUDGET',address);return
         if not self.code_allowed(address,size):self.fail('EXTERNAL_OR_NULL_TARGET',address,size);return
-        self.pc=address;raw=bytes(uc.mem_read(address,size));self.attempted+=1;self.emit('INS',f'{address:x}',raw.hex(),'Unicorn')
+        self.pc=address;raw=bytes(uc.mem_read(address,size));self.current_raw=raw;self.attempted+=1;self.emit('INS',f'{address:x}',raw.hex(),'Unicorn')
         self.check_oracle()
         if self.stop:return
         if self.accelerate_crc and address in (0x15f0d5e,0x1503f30):
@@ -164,7 +164,12 @@ class GuardedCPU:
             if image:self.emit('ATTEMPTED_IMAGE_WRITE',f'pc={self.pc:x}',f'address={a:x}',f'size={n}',f'hook_value={value & ((1<<(min(n,8)*8))-1):x}','applied=false')
             self.fail('ORIGINAL_IMAGE_WRITE_BLOCKED' if image else 'OUTSIDE_PRIVATE_WRITABLE_REGIONS',a,n);return
         self.writes.append((a,n))
+    def returned_to_sentinel(self):
+        return self.current_raw==b'\xc3' and self.reg('RIP')==RETURN and self.reg('RSP')==SP+8
     def _invalid(self,uc,access,a,n,value,user):
+        if access in (UC_MEM_FETCH_UNMAPPED,UC_MEM_FETCH_PROT) and a==RETURN and self.returned_to_sentinel():
+            self.return_fetch=True;uc.emu_stop();return False
+
         if not self.stop:self.fail('EXTERNAL_OR_NULL_TARGET' if access in (UC_MEM_FETCH_UNMAPPED,UC_MEM_FETCH_PROT) else 'UNMAPPED_OR_PROTECTED_ACCESS',a,n)
         return False
     def check_oracle(self):
@@ -284,10 +289,10 @@ class GuardedCPU:
                 if self.attempted>=self.limit:self.fail('INSTRUCTION_BUDGET',self.pc);break
                 if time.monotonic()>self.deadline:self.fail('TIME_BUDGET',self.pc);break
                 if not self.code_allowed(self.pc):self.fail('EXTERNAL_OR_NULL_TARGET',self.pc);break
-                context=self.uc.context_save();self.journal=[];self.writes=[];self.pending=None
+                context=self.uc.context_save();self.journal=[];self.writes=[];self.pending=None;self.return_fetch=False;self.current_raw=b''
                 try:self.uc.emu_start(self.pc,0,count=1)
                 except UcError as e:
-                    if not self.stop:self.fail('ENGINE_EXCEPTION:'+str(e),self.pc)
+                    if not self.stop and not self.return_fetch:self.fail('ENGINE_EXCEPTION:'+str(e),self.pc)
                 if not self.stop and self.timed_out:self.fail("ENGINE_TIMEOUT",self.pc)
                 if self.stop:self.rollback(context);break
                 if self.pending:
@@ -295,7 +300,7 @@ class GuardedCPU:
                     except ModelHalt:break
                 else:
                     nxt=self.reg('RIP')
-                    if nxt==RETURN and self.reg('RSP')==SP+8:
+                    if self.returned_to_sentinel():
                         for a,n in self.writes:self.commit_write(a,n)
                         self.completed+=1;self.fail('ENTRY_RETURN',nxt);break
                     if not self.code_allowed(nxt):self.fail('EXTERNAL_OR_NULL_TARGET',nxt);self.rollback(context);break

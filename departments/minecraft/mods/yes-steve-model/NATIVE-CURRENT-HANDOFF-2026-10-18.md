@@ -1,6 +1,6 @@
 # Current YSM native-analysis handoff — October 18
 
-Read this entry first. Current report: [bounded working image and checkpoints](NATIVE-SHADOW-CHECKPOINT-RESULT-2026-10-18.md). Branch: jolly/ysm-analysis-20261016. The project remains unfinished. Older linked reports describe historical states, not today's frontier.
+Read this entry first. Current report: [DT_INIT return](NATIVE-DT-INIT-RETURN-RESULT-2026-10-18.md). Branch: jolly/ysm-analysis-20261016. The project remains unfinished. Older linked reports describe historical states, not today's frontier.
 
 ## Goal and unchanged confidence
 
@@ -19,15 +19,15 @@ Entry0x152eb19 is simulated with a protected Unicorn2.1.4 backend and explicit s
 
 Two masked CRC32 loops have pinned code/table contracts and60 full-state differential cases. Fifteen summaries cover528,156,776 logical loop-instruction effects; these are not actually interpreted instruction counts. CRC acceleration turns off conservatively after any working-image mutation.
 
-Current working-image ledger contains two eight-byte context/object pointers at0xedf060 and0xedf068. The next unresolved call is lazy JMPREL index197, symbol memset, via resolver RET0x14f9c20. Arguments: destination0x710000000200, byte0, size2080. Only bounded private memset behavior is the next implementation target; no unknown imports should receive guessed returns.
+Current working-image ledger contains two eight-byte context/object pointers at0xedf060 and0xedf068. A fresh full run now completes DT_INIT:3,290,734 native instruction/model invocations, final RET0x1d963d, declared return sentinel and exact post-return stack. This is conditional DT_INIT completion only;45 init-array callbacks and JNI lifecycle remain.
 
-A fresh full-prefix run and the chain of two compatible checkpoint continuations agree at2,918,592 completed instruction/model invocations, with exact CPU payload/private/image/model state equivalence. Checkpoint resumes reset instruction counters but inherit other model counters. See the current report/paired receipt for exact chain hashes and state comparison. Initialization has not returned yet.
+The latest completed-DT_INIT checkpoint preserves full CPU/private/image/model state and CRC diagnostics. Prepare the next callback frame rather than resuming its sentinel RIP. Early snapshots omitted CRC diagnostic counts; their prior CRC history is now explicitly marked incomplete. Architectural/private-state restart equivalence was independently checked against a fresh full-prefix run; see the checkpoint report for exact scope.
 
 ## Reuse and runtime contracts
 
 - tools/native_unicorn_guarded_ysm_265.py: default read-only image, known/opaque bytes, private heap, virtual clock/proc/file/loader/platform inputs; unsupported operations stop.
 - tools/native_crc32_loop_profile_ysm_265.py: two exact masked-CRC profiles; full architectural/scratch-state summary, not unchecked loop skipping.
-- tools/native_shadow_image_ysm_265.py: opt-in separate simulated working-image state, protection restoration, bounded lazy C++ allocations.
+- tools/native_shadow_image_ysm_265.py: opt-in separate simulated working-image state, protection restoration, bounded lazy C++ allocations and private memset.
 - tools/native_guarded_checkpoint_ysm_265.py: trusted local JSON checkpoint and bounded restore; no pickle.
 - CLI shadow run requires --image ORIGINAL_SO --out EXTERNAL_TRACE; optional --checkpoint-out EXTERNAL_JSON or --resume-checkpoint EXTERNAL_JSON. Model inputs are explicitly synthetic; no claim of real OS/CPU metadata.
 - Official Unicorn2.1.4 wheel SHA-256 9d6e6dea140560de4ebd8446661f7ef84a357d428c14a3ef09dacd306ec8c239. Use an external venv, not a committed installation.
@@ -52,3 +52,5 @@ These reports retain exact previous scopes, source hashes and limitations. Do no
 - [cross-check recovery](NATIVE-GHIDRA-CROSSCHECK-RECOVERY-2026-10-18.md)
 - [static propagation probe](NATIVE-STATIC-PROPAGATION-PROBE-RECOVERY-2026-10-18.md)
 - [bounded result](NATIVE-BOUNDED-SIMULATION-RESULT-2026-10-18.md)
+
+- [working-image/checkpoint evidence](NATIVE-SHADOW-CHECKPOINT-RESULT-2026-10-18.md)

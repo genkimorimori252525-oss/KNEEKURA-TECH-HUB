@@ -1,13 +1,19 @@
 """Own-byte guard/CPU fixtures. No target image is loaded by this suite."""
 import io,struct,unittest
 from unicorn import x86_const as X
-from native_unicorn_guarded_ysm_265 import GuardedCPU,ModelHalt,STACK,STACK_SIZE,SP,HEAP,HEAP_SIZE,FILE_HANDLE
+from native_unicorn_guarded_ysm_265 import GuardedCPU,ModelHalt,STACK,STACK_SIZE,SP,HEAP,HEAP_SIZE,FILE_HANDLE,RETURN
 TOY=0x100000;DATA=0x200000
 class GuardTests(unittest.TestCase):
     def cpu(self,code,mode='strict',limit=1):
         c=GuardedCPU(io.StringIO(),mode,limit);c.add_image(TOY,bytes.fromhex(code)+b'\x90'*32);c.add_image(DATA,b'\0'*4096,False);c.protect_image();return c
     def test_low_nonzero_executable_image_is_valid(self):
         c=GuardedCPU(io.StringIO(),limit=1);c.add_image(0xf38,b'\x90'*4096);c.protect_image();c.run(0xf38);self.assertEqual(c.completed,1);self.assertFalse(c.code_allowed(0));self.assertFalse(c.code_allowed(SP))
+    def test_entry_return_is_completed_not_external_fetch(self):
+        c=self.cpu('c3');c.run(TOY);self.assertEqual(c.stop['reason'],'ENTRY_RETURN');self.assertEqual(c.completed,1);self.assertEqual(c.reg('RSP'),SP+8);self.assertEqual(c.reg('RIP'),RETURN);self.assertEqual(c.rollback_count,0)
+    def test_return_sentinel_with_wrong_stack_still_blocked(self):
+        c=self.cpu('c3');c.write_private(SP+8,struct.pack('<Q',RETURN));c.reg('RSP',SP+8);c.run(TOY);self.assertEqual(c.stop['reason'],'EXTERNAL_OR_NULL_TARGET');self.assertEqual(c.completed,0)
+    def test_jump_to_sentinel_is_not_entry_return(self):
+        c=self.cpu('ffe0');c.reg('RAX',RETURN);c.reg('RSP',SP+8);c.run(TOY);self.assertEqual(c.stop['reason'],'EXTERNAL_OR_NULL_TARGET');self.assertEqual(c.completed,0)
     def test_private_push_pop(self):
         c=self.cpu('505b','strict',2);c.reg('RAX',0x1122334455667788);c.run(TOY);self.assertEqual(c.reg('RBX'),0x1122334455667788);self.assertEqual(c.completed,2)
     def test_original_write_blocked(self):

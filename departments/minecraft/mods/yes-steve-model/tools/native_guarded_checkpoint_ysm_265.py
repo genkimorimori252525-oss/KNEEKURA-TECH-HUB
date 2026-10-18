@@ -7,7 +7,7 @@ import base64,hashlib,json,zlib,ctypes
 import unicorn
 from unicorn.unicorn_py3.unicorn import UcContext
 from native_unicorn_guarded_ysm_265 import STACK,STACK_SIZE,HEAP,HEAP_SIZE
-FIELDS=('level seed stride clock_reads allocations heap_used malloc_calls fopen_calls fgets_calls fclose_calls file_open file_position accelerate_crc modeled_copies opaque_copies heap_writes rollback_count oracle_checks oracle_enabled virtual_loader dladdr_calls loader_ready virtual_platform platform_calls protection_result protection_calls cpuid_calls shadow_events shadow_bytes lazy_new_calls').split()
+FIELDS=('level seed stride clock_reads allocations heap_used malloc_calls fopen_calls fgets_calls fclose_calls file_open file_position accelerate_crc modeled_copies opaque_copies heap_writes rollback_count oracle_checks oracle_enabled virtual_loader dladdr_calls loader_ready virtual_platform platform_calls protection_result protection_calls cpuid_calls shadow_events shadow_bytes lazy_new_calls lazy_memset_calls crc_blocks crc_iterations crc_logical_steps crc_counters_complete').split()
 class ContextHeader(ctypes.Structure):
     # Pinned Unicorn2.1.4 uc_priv.h. Memory snapshot pointers are not CPU state.
     _fields_=[('context_size',ctypes.c_size_t),('mode',ctypes.c_int),('arch',ctypes.c_int),('snapshot_level',ctypes.c_int),('ramblock_freed',ctypes.c_bool),('last_block',ctypes.c_void_p),('fv',ctypes.c_void_p)]
@@ -45,7 +45,10 @@ def restore(cpu,state):
         record=state['private'][str(a)];data=unpack(record['bytes'],n);known=unpack(record['known'],n)
         if any(v not in (0,1) for v in known):raise ValueError('Invalid initialized mask')
         private[a]=(data,known)
-    fields=dict(state['fields']);fields.setdefault('lazy_new_calls',0)
+    fields=dict(state['fields']);fields.setdefault('lazy_new_calls',0);fields.setdefault('lazy_memset_calls',0)
+    old_crc=any(name not in fields for name in ('crc_blocks','crc_iterations','crc_logical_steps'))
+    for name in ('crc_blocks','crc_iterations','crc_logical_steps'):fields.setdefault(name,0)
+    fields.setdefault('crc_counters_complete',not old_crc)
     if set(fields)!=set(FIELDS) or not 0<=fields['level']<=5 or not 0<=fields['heap_used']<=HEAP_SIZE:raise ValueError('Invalid checkpoint fields')
     if not 0<=fields['shadow_bytes']<=cpu.MAX_IMAGE_BYTES or not 0<=fields['shadow_events']<=cpu.MAX_IMAGE_EVENTS:raise ValueError('Invalid checkpoint quota')
     for a,n in fields['allocations']:
@@ -70,7 +73,7 @@ def restore(cpu,state):
     restored=UcContext.__new__(UcContext);restored.__setstate__((raw,probe.size,probe.arch,probe.mode));cpu.uc.context_restore(restored)
     cpu.stop=None;cpu.pending=None;cpu.journal=[];cpu.writes=[];cpu.attempted=cpu.completed=0;cpu.pc=cpu.reg('RIP');cpu.origin_completed=state['origin_completed']+state.get('prior_origin_completed',0)
     if not cpu.expected_image_matches():raise ValueError('Checkpoint image verification failed')
-    cpu.emit('CHECKPOINT_RESUME',f'origin_completed={cpu.origin_completed}',f'pc={cpu.pc:x}','current_run_instruction_counts_reset=true','other_model_counters_inherited=true','host_target_execution=false')
+    cpu.emit('CHECKPOINT_RESUME',f'origin_completed={cpu.origin_completed}',f'pc={cpu.pc:x}','current_run_instruction_counts_reset=true','stored_model_counters_inherited=true',f'prior_crc_counter_history_complete={cpu.crc_counters_complete}','host_target_execution=false')
 def write_checkpoint(cpu,path):
     state=capture(cpu);payload=json.dumps(state,separators=(',',':')).encode();path.write_bytes(payload);return hashlib.sha256(payload).hexdigest()
 def read_checkpoint(cpu,path):

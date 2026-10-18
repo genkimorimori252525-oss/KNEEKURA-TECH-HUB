@@ -40,6 +40,12 @@ class CheckpointTests(unittest.TestCase):
  def test_bad_cpu_header_rejected(self):
   state=capture(self.stopped());m=state['context'];raw=bytearray(unpack(m['bytes'],m['size']));raw[0]^=1;m['bytes']=pack(raw)
   with self.assertRaises(ValueError):restore(self.cpu(),state)
+ def test_crc_diagnostic_counters_roundtrip(self):
+  c=self.stopped();c.crc_blocks=15;c.crc_iterations=23591981;c.crc_logical_steps=528156776;r=self.cpu();restore(r,capture(c));self.assertEqual((r.crc_blocks,r.crc_iterations,r.crc_logical_steps),(15,23591981,528156776));self.assertTrue(r.crc_counters_complete)
+ def test_legacy_missing_crc_diagnostics_are_marked_incomplete(self):
+  state=capture(self.stopped())
+  for key in ('crc_blocks','crc_iterations','crc_logical_steps','crc_counters_complete'):state['fields'].pop(key)
+  r=self.cpu();restore(r,state);self.assertFalse(r.crc_counters_complete);self.assertEqual(r.crc_blocks,0)
  def test_capture_requires_stopped_state(self):
   with self.assertRaises(ValueError):capture(self.cpu())
 if __name__=='__main__':unittest.main()

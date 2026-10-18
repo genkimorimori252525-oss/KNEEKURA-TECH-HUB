@@ -13,7 +13,7 @@ class ShadowGuardedCPU(GuardedCPU):
     MAX_IMAGE_BYTES=8*1024*1024
     MAX_IMAGE_EVENTS=1000000
     def __init__(self,*args,**kwargs):
-        super().__init__(*args,**kwargs);self.shadow_ranges=[];self.shadow_expected={};self.shadow_events=0;self.shadow_bytes=0;self.reference_digests=None;self.lazy_new_calls=0
+        super().__init__(*args,**kwargs);self.shadow_ranges=[];self.shadow_expected={};self.shadow_events=0;self.shadow_bytes=0;self.reference_digests=None;self.lazy_new_calls=0;self.lazy_memset_calls=0;self.crc_counters_complete=True
     def reference_hashes(self):return [hashlib.sha256(v).hexdigest() for a,b,v in self.image]
     def shadow_region(self,a,n):
         return next((i for i,(lo,hi,_) in enumerate(self.image) if lo<=a and a+n<=hi and lo!=self.loader_name),None)
@@ -34,12 +34,17 @@ class ShadowGuardedCPU(GuardedCPU):
             resolver,link_map,index,target=struct.unpack('<QQQQ',self.read_known(sp,32))
             self.demand(resolver==0 and link_map==0,'UNEXPECTED_LAZY_BINDER_STATE',sp)
             self.emit('LAZY_IMPORT_FRONTIER',f'relocation_index={index}',f'caller_return={target:x}')
-            allocators={250:('_Znwm',0x184d7e8,0x13fe69d),205:('_Znam',0x184d680,0x1478e57)}
+            allocators={250:('_Znwm',0x184d7e8,0x13fe69d),205:('_Znam',0x184d680,0x1478e57),197:('memset',0x184d640,0x14c39b7)}
             self.demand(index in allocators,'UNMODELED_LAZY_IMPORT',index)
             symbol,slot,stub=allocators[index]
             self.demand(self.read_known(slot,8)==struct.pack('<Q',stub) and self.read_known(stub,5)==b'\x68'+struct.pack('<I',index),'LAZY_IMPORT_IDENTITY_MISMATCH')
             self.demand(self.code_allowed(target),'EXTERNAL_OR_NULL_TARGET',target)
-            result=self.allocate(self.reg('RDI'),kind='operator-new');self.lazy_new_calls+=1
+            if symbol=='memset':
+                result=self.reg('RDI');n=self.reg('RDX');value=self.reg('RSI')&255
+                self.demand(0<=n<=0x100000,'UNMODELED_MEMSET_SIZE',n)
+                if n:self.write_private(result,bytes([value])*n)
+                self.lazy_memset_calls+=1
+            else:result=self.allocate(self.reg('RDI'),kind='operator-new');self.lazy_new_calls+=1
             self.reg('RAX',result);self.reg('RSP',sp+32);self.reg('RIP',target);self.emit('VIRTUAL_LAZY_IMPORT',f'symbol={symbol}',f'relocation_index={index}',f'result={result:x}','host_import_called=false');return
 
         if kind=='protection-result' and self.protection_result=='success-input':
@@ -77,7 +82,7 @@ class ShadowGuardedCPU(GuardedCPU):
     def report_preservation(self):
         reference_ok=self.reference_digests is None or self.reference_hashes()==self.reference_digests
         expected_ok=self.expected_image_matches();unchanged=self.image_unchanged()
-        self.emit('SHADOW_PRESERVATION',f'immutable_reference_unchanged={reference_ok}',f'working_image_matches_committed_ledger={expected_ok}',f'working_image_equals_reference={unchanged}',f'committed_events={self.shadow_events}',f'committed_bytes={self.shadow_bytes}',f'virtual_operator_new_calls={self.lazy_new_calls}')
+        self.emit('SHADOW_PRESERVATION',f'immutable_reference_unchanged={reference_ok}',f'working_image_matches_committed_ledger={expected_ok}',f'working_image_equals_reference={unchanged}',f'committed_events={self.shadow_events}',f'committed_bytes={self.shadow_bytes}',f'virtual_operator_new_calls={self.lazy_new_calls}',f'virtual_memset_calls={self.lazy_memset_calls}',f'crc_counter_history_complete={self.crc_counters_complete}')
         if not reference_ok or not expected_ok:raise AssertionError('Unaccounted image mutation')
         self.emit('BOUNDED_RESULT',self.stop['reason'],'target_host_library_execution=false','host_file_access=false','host_permissions_changed=false',f'working_copy_image_writes={self.shadow_events}','transactional_fault_state=true')
 
