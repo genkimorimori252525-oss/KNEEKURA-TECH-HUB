@@ -1,6 +1,6 @@
 # Current YSM native-analysis handoff — October 18
 
-Read this entry first. Current report: [seventeen callbacks, TLS/sparse allocator and SIMD correction](NATIVE-TLS-SPARSE-INITIALIZERS-RESULT-2026-10-18.md). Branch: jolly/ysm-analysis-20261016. The project remains unfinished. Older linked reports describe historical states, not today's frontier.
+Read this entry first. Current report: [all45 initializers complete in the isolated scenario](NATIVE-INITIALIZER-SEQUENCE-COMPLETE-RESULT-2026-10-18.md). Branch: jolly/ysm-analysis-20261016. The project remains unfinished. Older linked reports describe historical states, not today's frontier.
 
 ## Goal and unchanged confidence
 
@@ -19,9 +19,11 @@ Entry0x152eb19 is simulated with a protected Unicorn2.1.4 backend and explicit s
 
 Two masked CRC32 loops have pinned code/table contracts and60 full-state differential cases. Fifteen summaries cover528,156,776 logical loop-instruction effects; these are not actually interpreted instruction counts. CRC acceleration turns off conservatively after any working-image mutation.
 
-A fresh DT_INIT run returns after3,290,734 native instruction/model invocations. The deterministic8812 RELATIVE-fixup scenario also returns in the same count. The current authoritative sequence adds unresolved-external-data guards and explicit opaque stdio/C-locale/environment/heap fixtures. Callbacks0..16 have returned in order; callback17(entry0x33b3e0) is paused at sem_init, lazy index34, caller-return0x33b778. Seventeen of45 callbacks are complete.224 scoped test methods pass. No overall completion percentage follows from this.
+A fresh DT_INIT run returns after3,290,734 native instruction/model invocations. The deterministic8812 RELATIVE-fixup scenario also returns in the same count. The current authoritative sequence adds unresolved-external-data guards and explicit opaque stdio/C-locale/environment/heap fixtures. Callbacks0..44 now return in order; phase=done, no in-progress call.244 scoped test methods pass.45/45 is initializer-array progress only, not overall recovery or real runtime completion.
 
-Resume the latest guarded sequence checkpoint with native_initializer_sequence_ysm_265.py; preserve its in-progress callback frame. Older raw-slot snapshots are rejected because unresolved external data must never be treated as zero pointers into the mapped ELF header. PT_TLS is modeled as one virtual thread/module. Sparse anonymous reservations back only touched pages; current139264 bytes for274894684160 virtual bytes. Resume corrected unicorn-init-pshufb-heap-pool checkpoint(SHA ed4375dcbf24407d44e22b88a637cc6c928b4d21d8449288e8f49b8c30a10e4b), or rebuild from the verified eight-callback checkpoint. Uncorrected exploratory snapshots contain a Unicorn PSHUFB upper-vector defect and are superseded. Two corrected continuations match complete state. JNI lifecycle remains separate.
+The latest completed-initializer checkpoint is unicorn-init-sync-batch.checkpoint.json, SHA-256 a63e08364467e41d0bfa61cbb80b44f63baf5c32b431d5c770dc8c40a31f267d, cumulative3464756 completed invocations. Batched and split continuations match all state. The driver uses SyncGuardedCPU with four opaque semaphores, known-byte memory search, virtual TLS and bounded sparse anonymous memory. Final sparse backing89pages/364544bytes; no256GiB host reservation.
+
+Uncorrected exploratory pre-PSHUFB-fix snapshots remain superseded. Keep the final initializer checkpoint separate from JNI lifecycle experiments. Preliminary JNI_OnLoad reachesPC0x4120f6 while copying an opaque64-byte JavaVM invoke table; static follow-up calls GetEnv at offset0x30 with version0x000a0000. Next build an explicit invocation/JNI table scenario, then validate any observed registrations against exact original JAR descriptors. No Java/native binding recovery is yet claimed.
 
 ## Reuse and runtime contracts
 
@@ -62,3 +64,5 @@ These reports retain exact previous scopes, source hashes and limitations. Do no
 - [relocated initializer sequence](NATIVE-RELOCATED-INITIALIZER-SEQUENCE-RESULT-2026-10-18.md)
 
 - [eight-callback C-library stage](NATIVE-C-LIBRARY-INITIALIZERS-RESULT-2026-10-18.md)
+
+- [TLS/sparse allocator and PSHUFB correction](NATIVE-TLS-SPARSE-INITIALIZERS-RESULT-2026-10-18.md)

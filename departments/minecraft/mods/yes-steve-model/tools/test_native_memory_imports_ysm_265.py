@@ -31,4 +31,15 @@ class MemoryTests(unittest.TestCase):
   c=self.cpu();c.grant_shadow_range(DATA,4096,3);c.grant_shadow_range(DATA,8,1)
   with self.assertRaises(ModelHalt):c.write_model_memory(DATA+16,b'x')
   self.assertTrue(c.image_unchanged())
+ def test_memchr_first_match_and_unsigned_character(self):
+  c=self.cpu();c.reg('RDI',SP+32);c.reg('RSI',0x162);c.reg('RDX',8);self.assertEqual(model(c,'memchr'),SP+33)
+ def test_memchr_zero_limit_does_not_read(self):
+  c=self.cpu();c.reg('RDI',0xdead);c.reg('RDX',0);self.assertEqual(model(c,'memchr'),0)
+ def test_memchr_unknown_after_match_is_not_read(self):
+  c=self.cpu();c.reg('RDI',SP+39);c.reg('RSI',0);c.reg('RDX',8);self.assertEqual(model(c,'memchr'),SP+39)
+ def test_memchr_unknown_before_match_stops(self):
+  c=self.cpu();c.reg('RDI',SP+40);c.reg('RSI',0);c.reg('RDX',8)
+  with self.assertRaises(ModelHalt):model(c,'memchr')
+ def test_strchr_match_nul_and_absent(self):
+  c=self.cpu();c.reg('RDI',DATA);c.reg('RSI',99);self.assertEqual(model(c,'strchr'),DATA+2);c.reg('RSI',0);self.assertEqual(model(c,'strchr'),DATA+3);c.reg('RSI',100);self.assertEqual(model(c,'strchr'),0)
 if __name__=='__main__':unittest.main()
