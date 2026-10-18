@@ -30,7 +30,7 @@ public class YsmGuardedInitSimulation extends GhidraScript {
  static class Halt extends RuntimeException { Halt(String s){super(s);} }
  class Guard implements PcodeEmulationCallbacks<byte[]> {
   final AddressSet code; final PrintWriter out; final int limit; final long opLimit;
-  boolean active=false,locked=false; String mnemonic=""; int atomicPairs=0; int attempted=0,completed=0;long ops=0,deadline,pc=0,stopAddress=-1,timeBudgetNanos=60_000_000_000L;int stopSize=0;String stop=null,via=null;
+  boolean inspecting=false,inspectMissing=false; boolean active=false,locked=false; String mnemonic=""; int atomicPairs=0; int attempted=0,completed=0;long ops=0,deadline,pc=0,stopAddress=-1,timeBudgetNanos=60_000_000_000L;int stopSize=0;String stop=null,via=null;
   Guard(AddressSet c,PrintWriter o,int n,long opN){code=c;out=o;limit=n;opLimit=opN;}
   void halt(String why,String route,long addr,int size){if(stop==null){stop=why;via=route;stopAddress=addr;stopSize=size;out.println("STOP\t"+why+"\t"+route+"\tpc="+Long.toHexString(pc)+"\taddress="+Long.toHexString(addr)+"\tsize="+size);}throw new Halt(why);}
   void oracle(PcodeThread<byte[]> t,String name,long expected){
@@ -78,8 +78,8 @@ public class YsmGuardedInitSimulation extends GhidraScript {
    }
   }
   public void beforeStore(PcodeThread<byte[]> t,PcodeOp op,AddressSpace space,byte[] offset,int n,byte[] value){if(active)writeGuard(space,t.getArithmetic().toLong(offset,Purpose.STORE),n,"store");}
-  public <A,U> AddressSetView readUninitialized(PcodeThread<byte[]> t,PcodeExecutorStatePiece<A,U> p,AddressSetView set,Reason reason){if(active)halt("UNINITIALIZED_READ","state",set.getMinAddress().getOffset(),(int)Math.min(set.getNumAddresses(),Integer.MAX_VALUE));return set;}
-  public <A,U> int readUninitialized(PcodeThread<byte[]> t,PcodeExecutorStatePiece<A,U> p,AddressSpace space,A offset,int n,Reason reason){if(active)halt("UNINITIALIZED_READ","state",p.getAddressArithmetic().toLong(offset,Purpose.LOAD),n);return 0;}
+  public <A,U> AddressSetView readUninitialized(PcodeThread<byte[]> t,PcodeExecutorStatePiece<A,U> p,AddressSetView set,Reason reason){if(inspecting){inspectMissing=true;throw new Halt("UNKNOWN_INSPECTION");}if(active)halt("UNINITIALIZED_READ","state",set.getMinAddress().getOffset(),(int)Math.min(set.getNumAddresses(),Integer.MAX_VALUE));return set;}
+  public <A,U> int readUninitialized(PcodeThread<byte[]> t,PcodeExecutorStatePiece<A,U> p,AddressSpace space,A offset,int n,Reason reason){if(inspecting){inspectMissing=true;throw new Halt("UNKNOWN_INSPECTION");}if(active)halt("UNINITIALIZED_READ","state",p.getAddressArithmetic().toLong(offset,Purpose.LOAD),n);return 0;}
  }
  class Trial {
   PcodeEmulator emu;PcodeThread<byte[]> thread;Guard guard;
@@ -91,11 +91,17 @@ public class YsmGuardedInitSimulation extends GhidraScript {
    Register iff=currentProgram.getRegister("IF");if(iff!=null)thread.getState().setRegisterValue(new RegisterValue(iff,BigInteger.ONE));
    thread.getState().setVar(toAddr(SP),8,false,thread.getArithmetic().fromConst(0x7fff00000000L,8));
   }
+  byte[] inspectMemory(long address,int size){
+   guard.inspecting=true;guard.inspectMissing=false;
+   try{return thread.getState().getVar(toAddr(address),size,false,Reason.INSPECT);}
+   catch(RuntimeException e){if(guard.inspectMissing)return null;throw e;}
+   finally{guard.inspecting=false;}
+  }
   void run(){
    guard.active=true;guard.deadline=System.nanoTime()+guard.timeBudgetNanos;
    try{while(true){monitor.checkCancelled();thread.stepInstruction();}}
    catch(Throwable e){if(guard.stop==null){guard.stop="UNEXPECTED_ENGINE_ERROR";guard.via=e.getClass().getName();guard.out.println("ENGINE_ERROR\t"+e);}}
-   finally{guard.active=false;for(String name:List.of("RSP","RBP","RSI","RDI","RCX","R10","DF")){Register r=currentProgram.getRegister(name);guard.out.println("STOP_REGISTER\t"+name+"\t"+thread.getState().inspectRegisterValue(r).getUnsignedValue().toString(16));}guard.out.println("COUNTS\tattempted="+guard.attempted+"\tcompleted="+guard.completed+"\tpcode="+guard.ops+"\tatomic_pairs="+guard.atomicPairs);}
+   finally{guard.active=false;for(String name:List.of("RAX","RBX","RCX","RDX","RSI","RDI","RBP","RSP","R8","R9","R10","R11","R12","R13","R14","R15","CF","ZF","SF","OF","PF","AF","DF")){Register r=currentProgram.getRegister(name);guard.out.println("STOP_REGISTER\t"+name+"\t"+thread.getState().inspectRegisterValue(r).getUnsignedValue().toString(16));}guard.out.println("COUNTS\tattempted="+guard.attempted+"\tcompleted="+guard.completed+"\tpcode="+guard.ops+"\tatomic_pairs="+guard.atomicPairs);}
   }
  }
  byte[] hex(String s){return HexFormat.of().parseHex(s);}
@@ -122,6 +128,8 @@ public class YsmGuardedInitSimulation extends GhidraScript {
   Trial q=toy(out,"time_limit",hex("90"),20,1000);q.guard.timeBudgetNanos=0;q.run();require(q.guard.stop.equals("TIME_BUDGET")&&q.guard.completed==0,"time guard");passed++;
   Trial atomic=toy(out,"stack_atomic_exchange",hex("6a1148c7c32200000048871c2458"),20,1000);atomic.run();require(atomic.guard.stop.equals("EXTERNAL_OR_NULL_TARGET")&&atomic.guard.atomicPairs==1,"atomic pairing");require(atomic.thread.getState().inspectRegisterValue(currentProgram.getRegister("RBX")).getUnsignedValue().longValue()==0x11&&atomic.thread.getState().inspectRegisterValue(currentProgram.getRegister("RAX")).getUnsignedValue().longValue()==0x22,"atomic exchange values");passed++;
   Trial atomicBad=toy(out,"nonstack_atomic_exchange",hex("48c7c300200000488703"),20,1000);atomicBad.run();require(atomicBad.guard.stop.equals("NON_STACK_WRITE"),"atomic write guard");require(Arrays.equals(atomicBad.emu.getSharedState().getVar(toAddr(0x2000),8,false,Reason.INSPECT),new byte[8]),"atomic nonstack applied");passed++;
+  String stopBefore=a.guard.stop;byte[] known=a.inspectMemory(SP-8,8);require(known!=null&&HexFormat.of().formatHex(known).equals("8877665544332211"),"known inspection");passed++;
+  require(a.inspectMemory(SP+32,1)==null&&a.guard.stop.equals(stopBefore),"unknown inspection preserves stop");passed++;
   out.println("SELF_TEST_PASS\t"+passed+"\tysm_target_simulated=false");println("GUARDED_SIMULATION_SELF_TEST_PASS "+passed);
  }
  void verifyMemory(String manifest) throws Exception {
@@ -142,6 +150,11 @@ public class YsmGuardedInitSimulation extends GhidraScript {
    out.println("CONFIG\tDT_INIT=152eb19\timagebase=0\tregister_inputs=synthetic_zero_except_rsp_pc_if\tstack_uninitialized_except_return\tmax_instructions=10000\tmax_pcode=1000000\tmax_seconds=60\thost_native_execution=false");
    t.run();require(!t.guard.stop.equals("UNEXPECTED_ENGINE_ERROR"),"Unexpected engine error; do not claim a valid target result");
    verifyMemory(args[2]);require(HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(Files.readAllBytes(Path.of(args[3])))).equals(fileHash),"Original file changed");
+   if(t.guard.pc==0x143beaeL&&t.guard.stop.equals("UNINITIALIZED_READ")){
+    long src=t.thread.getState().inspectRegisterValue(currentProgram.getRegister("R10")).getUnsignedValue().longValue();
+    require(t.guard.stack(src,328),"Diagnostic range must remain inside private stack");
+    for(int k=0;k<328;k++){byte[] v=t.inspectMemory(src+k,1);out.println("SOURCE_BYTE\t"+Long.toHexString(src+k)+"\t"+(v==null?"UNKNOWN":HexFormat.of().formatHex(v)));}
+   }
    out.println("PRESERVATION\tfile_and_seven_program_segments_unchanged=true");
    out.println("BOUNDED_RESULT\t"+t.guard.stop+"\toriginal_image_sha256="+fileHash+"\thost_native_execution=false\tnon_stack_write_applied=false");println("BOUNDED_DT_INIT_STOP "+t.guard.stop);
   }

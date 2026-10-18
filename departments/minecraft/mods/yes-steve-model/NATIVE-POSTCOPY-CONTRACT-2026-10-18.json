@@ -1,0 +1,165 @@
+{
+  "format": "kneekura.ysm-conditional-postcopy.v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "target_execution_beyond_stopped_read": false,
+  "snapshot_trace_preserved": true,
+  "source_bytes": 328,
+  "source_known_bytes": 248,
+  "source_unknown_bytes": 80,
+  "source_knownness_intervals": [
+    {
+      "offset_start": 0,
+      "offset_end": 96,
+      "known": true
+    },
+    {
+      "offset_start": 96,
+      "offset_end": 112,
+      "known": false
+    },
+    {
+      "offset_start": 112,
+      "offset_end": 120,
+      "known": true
+    },
+    {
+      "offset_start": 120,
+      "offset_end": 128,
+      "known": false
+    },
+    {
+      "offset_start": 128,
+      "offset_end": 160,
+      "known": true
+    },
+    {
+      "offset_start": 160,
+      "offset_end": 168,
+      "known": false
+    },
+    {
+      "offset_start": 168,
+      "offset_end": 184,
+      "known": true
+    },
+    {
+      "offset_start": 184,
+      "offset_end": 200,
+      "known": false
+    },
+    {
+      "offset_start": 200,
+      "offset_end": 216,
+      "known": true
+    },
+    {
+      "offset_start": 216,
+      "offset_end": 224,
+      "known": false
+    },
+    {
+      "offset_start": 224,
+      "offset_end": 256,
+      "known": true
+    },
+    {
+      "offset_start": 256,
+      "offset_end": 264,
+      "known": false
+    },
+    {
+      "offset_start": 264,
+      "offset_end": 312,
+      "known": true
+    },
+    {
+      "offset_start": 312,
+      "offset_end": 328,
+      "known": false
+    }
+  ],
+  "conditional_edges": [
+    {
+      "at": "0x143bec8",
+      "to": "0x173afdb",
+      "kind": "direct JMP"
+    },
+    {
+      "at": "0x173afdb",
+      "to": "0x160cc74",
+      "kind": "unchanged stopped R11, conditional on completed copy"
+    },
+    {
+      "at": "0x160cc8e",
+      "to": "0x160cc94",
+      "kind": "JS untaken"
+    },
+    {
+      "at": "0x160ccb6",
+      "to": "0x14fcf64",
+      "kind": "JAE taken"
+    },
+    {
+      "at": "0x14fcfaa",
+      "to": "0x14cb406",
+      "kind": "JL taken"
+    }
+  ],
+  "flags": {
+    "js_all_65536_dx_sign_flags": [
+      0
+    ],
+    "js_taken": false,
+    "jae_bit": 3,
+    "jae_old_bit": 0,
+    "jae_taken": true,
+    "cx_after_shift": 312,
+    "adc_r11_carry": 0,
+    "sil_shift_carry": 0,
+    "sbb_dl_result": 234,
+    "sbb_sf": 1,
+    "sbb_of": 0,
+    "jl_taken": true
+  },
+  "word_address": "0x15441fd",
+  "file_word": "0xe1aab868",
+  "ebp": "0xb564a469",
+  "decoded_delta": "0xffe3312a",
+  "candidate_r11": "0x143fd9e",
+  "segments": [
+    {
+      "address": "0x143beb0",
+      "size": 29,
+      "sha256": "4c40774599086bede808e476a9c283755509561f5dce17f1fc059650f0255a25"
+    },
+    {
+      "address": "0x173afdb",
+      "size": 3,
+      "sha256": "3535843ef758d9d9f9198f4f01222dc4490cb55b0012af3205f76a93620f925c"
+    },
+    {
+      "address": "0x160cc74",
+      "size": 32,
+      "sha256": "1edd099de57636f1a808589fee1d22478c5e89f2ae0db7322fff62bc8c879825"
+    },
+    {
+      "address": "0x160cc94",
+      "size": 40,
+      "sha256": "ca92ccc4208f8eddfd5899a2326b2f34603ce2c3f7aad1b1e6b1c3361598074e"
+    },
+    {
+      "address": "0x14fcf64",
+      "size": 76,
+      "sha256": "b1ae6e60418b34592d3db2012d9459a5c8bbc1f43c6b1d3cfea80cf9389f89ec"
+    }
+  ],
+  "snapshot_sha256": "48c185ca81949f111466e9974ec3a3f7ed9df74cf71e5a17cc25692efcd82722",
+  "assumptions": [
+    "Copy completes with opaque unknown bytes preserved; this is not claimed to have executed",
+    "Stopped R8/RBP/R11 retained and image bytes unchanged",
+    "Normal instruction completion; no external interference",
+    "Copied unknown bytes may be used later; no harmless-padding claim",
+    "Only listed scalar predicates and candidate are derived, not whole continuation or initializer effects"
+  ],
+  "independent_semantic_review": "NOT_RUN"
+}

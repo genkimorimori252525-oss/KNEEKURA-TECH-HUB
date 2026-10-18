@@ -45,7 +45,8 @@
     "guarded-atomic-self-test.tsv": "5dc3cd24e7b31f66f2d76a0d91bfbf528611a9c45844e77bb72468042cf1ecf5",
     "guarded-initial-source.java": "cb157b2dbc03c86eda8b01f1fec964321ef75684ef9f80f118662a1d9cb4f461",
     "atomic_trial_harness.java": "eca31c89d3614aa13ccca6f811f80d17e982fa4c5dc1a1acbb806fa65aac298a",
-    "YsmGuardedInitSimulation.java": "feddd09321418fd17be1de77548d4c4fc8afa9b8f7d428faadafbec51adf22c8"
+    "YsmGuardedInitSimulation.java": "64ab9b653e6341486392cf69d5f0fab111f58280eee30b3d52aa7115603c13e2",
+    "register_observer_harness.java": "feddd09321418fd17be1de77548d4c4fc8afa9b8f7d428faadafbec51adf22c8"
   },
   "independent_semantic_review": "NOT_RUN",
   "mapping_promotions": 0,
@@ -55,5 +56,14 @@
     "self_tests": 14,
     "copy_frontier_tests": 6,
     "evidence": "NATIVE-SIMULATION-COPY-FRONTIER-2026-10-18.json"
+  },
+  "snapshot_observer": {
+    "self_tests": 16,
+    "executed_rows_unchanged": true,
+    "unknown_source_bytes": 80,
+    "known_source_bytes": 248,
+    "unknown_bytes_materialized": false,
+    "postcopy_static_tests": 6,
+    "evidence": "NATIVE-POSTCOPY-CONTRACT-2026-10-18.json"
   }
 }

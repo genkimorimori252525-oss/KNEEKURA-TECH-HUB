@@ -20,7 +20,7 @@ The revised harness passed 14 toy tests: private stack exchange/value preservati
 
 Use tools/ghidra/YsmGuardedInitSimulation.java with the existing read-only libysm-core.so Ghidra program, x86:LE:64:default, analysis base zero and relocations/libraries disabled as in the static handoff. Keep output outside Git. Modes:
 
-- self-test OUTPUT.tsv: toy bytes only, must report SELF_TEST_PASS 14.
+- self-test OUTPUT.tsv: toy bytes only, must report SELF_TEST_PASS 16 (14 execution guards plus two read-only known/unknown inspection checks).
 - run-approved-ysm-init OUTPUT.tsv NATIVE-GHIDRA-MEMORY-2026-10-18.tsv ORIGINAL-LINUX-IMAGE: exact image hash and seven file-backed program segments verified before and after. This mode requires the applicable owner authorization; its name is not authorization.
 
 Run via analyzeHeadless with -process libysm-core.so -readOnly -noanalysis -scriptPath tools/ghidra -postScript and the selected mode/arguments. Use the verified full JDK and scoped HOME/XDG paths from the current handoff. There is no host API/syscall model. Private stack is [0x700000000000, 0x700000010000), initial RSP=0x700000008008; only the synthetic return sentinel is initially present. Limits: 10,000 instruction steps, 1,000,000 p-code operations, 60 seconds. Program decode context is retained; other base registers initially zero except PC/RSP/IF. The instruction interrupted at a guard may have performed earlier private-stack/register micro-operations; counts distinguish attempted and completed.
@@ -40,3 +40,13 @@ The producer at 0x15ebcb3..0x15ebd10 sets the count to 0x148 (328) and copies th
 Ninety-six byte copies completed. The next source byte, 0x700000007d90 (initial RSP minus 0x278), was never initialized in this synthetic state. Its corresponding destination 0x700000007c60 was not written. Why the original caller's stack supplies that byte, and whether it is subsequently semantically used, remain unresolved; do not label it harmless padding without proof.
 
 Important micro-op detail: Ghidra ia.sinc rep decrements RCX and eseDI1/dseSI1 increment RDI/RSI before the LOAD. Thus stopped RCX=0xe7, RSI=0x700000007d91, RDI=0x700000007c61 are partial emulator micro-op state, not an x86 architectural exception snapshot. Reconstructing the attempted byte uses the preceding addresses. No unknown bytes were zero-filled and no execution continued beyond the read.
+
+## Complete stopped-state observation and conditional post-copy contract
+
+The final observer captures all general registers/flags and the 328 source bytes' knownness after the guard has stopped. Inspection throws on an unknown byte and records UNKNOWN; it never initializes that byte. Two extra tests check known-byte inspection and preservation of the original stop when inspecting unknown memory. Sixteen toy tests pass. Removing all read-only STOP_REGISTER/SOURCE_BYTE rows again reproduces the earlier executed trace exactly.
+
+There are 248 known and 80 unknown source bytes, distributed across multiple intervals. This disproves any assumption that the entire remaining tail is known or that only a single byte is missing. The intervals are in [conditional post-copy evidence](NATIVE-POSTCOPY-CONTRACT-2026-10-18.json). No copy completion or target execution past the stopped read is claimed.
+
+Static analysis can still describe the following conditional contract: if the copy completes while preserving opaque bytes, its epilogue restores the saved flags/RDI and reaches the unchanged R11 target 0x160cc74 via 0x173afdb. That block's SHR DX,12 makes SF zero for all 65,536 DX values, so JS is untaken. BTC CX,0x83 selects bit 3 of fixed 0x9c26, old bit zero, so JAE is taken. A later fixed carry/subtraction chain gives DL=0xea, SF=1, OF=0, hence JL to 0x14cb406. None of these three scalar predicates consumes copied unknown bytes.
+
+Using the observed R8=0x1544201, EBP=0xb564a469 and file word 0xe1aab868 at R8-4, the specified rotate/negate/byte-swap chain yields signed delta 0xffe3312a and candidate R11=0x143fd9e. This is a conditional register candidate, NOT an observed jump or recovered whole function. Later memory effects and consumers remain unresolved. The exact byte segments are hash-pinned; the helper never executes the target. Six scalar proof tests pass, including an independent bit-string rotate reference at boundary values.
