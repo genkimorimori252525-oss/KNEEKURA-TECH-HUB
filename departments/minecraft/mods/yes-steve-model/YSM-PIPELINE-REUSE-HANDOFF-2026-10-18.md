@@ -89,3 +89,5 @@ controller例外経路も追加確定：[controller failure transform](NATIVE-CO
 最終公開への接続：[native staging → Java model map](NATIVE-COLLECTOR-PUBLICATION-JOIN-2026-10-18.md)。2つのcallbackを隔離メタデータ解析で解読し原本classfileへ一致。+58はモデル構築成功時だけqueueへ追加し、後のtickがvolatile mapを更新する。構築Exceptionを捕捉して通常returnしても追加されない経路がある。+60の既存map変更は別処理なので失敗時の旧model保持も保証しない。選択member索引は54件へ拡張、中心669map・実起動未確認は変更なし。
 
 collector待機の追加確定：[wait / guard skip / capture lifetime](NATIVE-COLLECTOR-WAIT-LIFETIME-2026-10-18.md)。実際の固定引数では時間切れfalse返却経路へ入らず、通常returnはready=1観測後。選択した通常consumerではbody終了後にreadyを公開する。guard時はbodyを実行せず完了状態にするためready≠callback成功。異常unwindや全queue drain、保存例外の消費は別の未確定境界。
+
+保存された完了例外：[completion error release](NATIVE-COMPLETION-ERROR-RELEASE-2026-10-18.md)。調べたworker／collectorの呼出元はreadyを待って所有権を解放するだけで、保存例外を取り出して再送出・記録する処理ではない。最後の所有者になった場合は例外参照の解放へ進む。以前のbody内ログ・モデル単位catchは別であり、無条件の正常終了／成功／即時破棄は保証しない。

@@ -1,0 +1,103 @@
+{
+  "verdict": "BOUNDED_RELEASE_WITHOUT_STORED_PAYLOAD_RETHROW",
+  "so_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "slots": {
+    "0xd1c090": "0x345ef0",
+    "0xd1c098": "0x345ee0",
+    "0xd1c0b8": "0x345e70",
+    "0xd1c0c8": "0x2aade0",
+    "0xd1c0e8": "0x2bf7c0",
+    "0xd1c0f8": "0x345e50"
+  },
+  "checks": {
+    "0x360653": "49894708",
+    "0x36066d": "48c7401000000000",
+    "0x35a483": "31c9",
+    "0x35a48b": "e8309af8ff",
+    "0x35a4a9": "e842400000",
+    "0x35a45b": "ff5010",
+    "0x345ef8": "ff20",
+    "0x345e8a": "ff10",
+    "0x2bf7c3": "ff6010",
+    "0x345e54": "e8f7e5f9ff",
+    "0x2e4469": "e96277fcff",
+    "0x2abbb8": "f083408001",
+    "0x2abbd8": "f083688001",
+    "0x2abbef": "ffd0",
+    "0x2abbf4": "e827eeffff",
+    "0x41cfba": "ff5010",
+    "0x41cfcc": "ff6018"
+  },
+  "windows": [
+    {
+      "start": "0x360570",
+      "end_exclusive": "0x360685",
+      "file_offset": "0x360570",
+      "sha256": "517acd241bffaca98556523ee22a858c7f9666232e3ecc1278df298afaab9eca"
+    },
+    {
+      "start": "0x35cfb0",
+      "end_exclusive": "0x35d07d",
+      "file_offset": "0x35cfb0",
+      "sha256": "b4dbac6a8a2ee176a9941fd35e0617e30b387955abba4fd2cc0bb7f423a31c45"
+    },
+    {
+      "start": "0x35a432",
+      "end_exclusive": "0x35a4ae",
+      "file_offset": "0x35a432",
+      "sha256": "adcd9990d32dc62fff50bb305654a7b9004b18b11935e5f5af8517c411a0dfc6"
+    },
+    {
+      "start": "0x35e4f0",
+      "end_exclusive": "0x35e5f5",
+      "file_offset": "0x35e4f0",
+      "sha256": "347ebec21add5fd3f4453bed9041faa949e1f5556dee3cc241bca624b50e47f0"
+    },
+    {
+      "start": "0x41ce80",
+      "end_exclusive": "0x41d021",
+      "file_offset": "0x41ce80",
+      "sha256": "324e5dbe3813e125f6f28347b09b166efdf642d532908747b4afe72dceec0255"
+    },
+    {
+      "start": "0x329bd0",
+      "end_exclusive": "0x329c0d",
+      "file_offset": "0x329bd0",
+      "sha256": "9d73dc833c43effe8a73722d3821798280d5939d5794fde097b13f7c96e8330b"
+    },
+    {
+      "start": "0x345e50",
+      "end_exclusive": "0x345efa",
+      "file_offset": "0x345e50",
+      "sha256": "0f93fd5f33873fa622d80206edde6167c7da25c9acb161edb77621c01b737710"
+    },
+    {
+      "start": "0x2bf7c0",
+      "end_exclusive": "0x2bf7c6",
+      "file_offset": "0x2bf7c0",
+      "sha256": "e0073e0bce6d8979f99b8f03830082d29bd8e31360dc22fdf384271c9739487b"
+    },
+    {
+      "start": "0x2e4450",
+      "end_exclusive": "0x2e4471",
+      "file_offset": "0x2e4450",
+      "sha256": "33a0785f24fc9853f2b54ed1085281a1e894ce50b0cb7eb9feb6dce7f4692cfe"
+    },
+    {
+      "start": "0x2abbb0",
+      "end_exclusive": "0x2abc09",
+      "file_offset": "0x2abbb0",
+      "sha256": "3dac60151e7d83308edebbb1529195e706ccd5e04fa251220e04f34b00f04cc7"
+    }
+  ],
+  "limits": [
+    "Ordinary inspected continuations and specified original vtables only",
+    "Last exception release calls its stored destructor indirectly; cleanup success is not guaranteed",
+    "No claim that all possible owners discard errors or that no other logging/throwing occurs"
+  ],
+  "target_executed": false,
+  "worker_original_windows_crosschecked": 18,
+  "wording_review": "CONDITIONAL_STATIC_ACCEPTANCE",
+  "reviewed_REPORT_md_sha256": "058faa6a34b359612053aadc95dafeb52b4a73baf1e056f0be5befde51a4f466",
+  "reviewed_receipt_json_sha256": "46feffd3f6014c44d790f36d490f7ab478084dd2311cebdd4959165e45ad1980"
+}
