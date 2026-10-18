@@ -1,6 +1,6 @@
 # Current native-analysis handoff — October 18
 
-Read this before resuming native work. Latest entry: [second CRC summary and CPUID frontier](NATIVE-SECOND-CRC-FRONTIER-RESULT-2026-10-18.md). Branch: `jolly/ysm-analysis-20261016`. Last verified analysis publication before this handoff: `02fc35cdbc7a0fef0206dc9e2b08c835e1983e79`. The project is unfinished.
+Read this before resuming native work. Latest entry: [first guarded image-state store](NATIVE-FIRST-IMAGE-STATE-WRITE-RESULT-2026-10-18.md). Branch: `jolly/ysm-analysis-20261016`. Last verified analysis publication before this handoff: `02fc35cdbc7a0fef0206dc9e2b08c835e1983e79`. The project is unfinished.
 
 ## Scope and confidence
 
@@ -93,3 +93,7 @@ Both declared loader scenarios reach mprotect(0xec5000,0x510e52,7). No host or g
 ## Latest checkpoint: second CRC and CPUID
 
 Two-profile validated summaries reach CPUID leaf1,0x16b44ff. Protection-return inputs never change permissions; all original-image writes still blocked. See latest entry; earlier frontiers are historical.
+
+## Latest checkpoint: first context-pointer store
+
+Two CPUID fixtures reach MOV [0xedf060],0x710000000000 at0x14a66e9. Store blocked, original/reference unchanged. A separate bounded working-image design is the next investigation; it is not enabled by this checkpoint.

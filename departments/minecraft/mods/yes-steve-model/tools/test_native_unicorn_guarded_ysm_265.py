@@ -63,6 +63,6 @@ class GuardTests(unittest.TestCase):
         for code in ('0f32','0f30','0f01d0','0fc7f8'):
             c=self.cpu(code);c.run(TOY);self.assertEqual(c.stop['reason'],'UNMODELED_ENVIRONMENT_INSTRUCTION');self.assertEqual(c.completed,0)
     def test_resource_configuration_rejected(self):
-        for kwargs in ({'limit':0},{'limit':2000001},{'seconds':0},{'seconds':121}):
+        for kwargs in ({'limit':0},{'limit':4000001},{'seconds':0},{'seconds':181}):
             with self.assertRaises(ValueError):GuardedCPU(io.StringIO(),**kwargs)
 if __name__=='__main__':unittest.main()

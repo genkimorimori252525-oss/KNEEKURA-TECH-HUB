@@ -22,12 +22,12 @@ class ModelHalt(Exception): pass
 
 class GuardedCPU:
     def __init__(self,out,mode='strict',limit=10000,seconds=60,seed=0x1122334455667788,stride=1000,pid=0):
-        if mode not in MODES or not 0<limit<=2000000 or not 0<seconds<=120:raise ValueError('Invalid bounded configuration')
+        if mode not in MODES or not 0<limit<=4000000 or not 0<seconds<=180:raise ValueError('Invalid bounded configuration')
         self.uc=Uc(UC_ARCH_X86,UC_MODE_64);self.out=out;self.level=MODES[mode];self.limit=limit;self.seconds=seconds
         self.seed=seed&MASK;self.stride=stride&MASK;self.clock_reads=0;self.allocations=[];self.heap_used=0;self.malloc_calls=0
         self.fopen_calls=self.fgets_calls=self.fclose_calls=0;self.file_open=False;self.file_position=0
         self.fixture=f'Name:\tvirtual-ysm\nTracerPid:\t{pid}\n'.encode('ascii')
-        self.protection_result='disabled';self.protection_calls=0;self.virtual_platform=False;self.platform_calls=0;self.virtual_loader='disabled';self.dladdr_calls=0;self.loader_name=0x730000000000;self.loader_ready=False
+        self.cpuid_leaf1=None;self.cpuid_calls=0;self.protection_result='disabled';self.protection_calls=0;self.virtual_platform=False;self.platform_calls=0;self.virtual_loader='disabled';self.dladdr_calls=0;self.loader_name=0x730000000000;self.loader_ready=False
         self.accelerate_crc=False;self.crc_profile_verified=None;self.crc_blocks=self.crc_iterations=self.crc_logical_steps=0
         self.attempted=self.completed=0;self.modeled_copies=self.opaque_copies=0;self.heap_writes=0;self.rollback_count=0
         self.known={STACK:bytearray(STACK_SIZE),HEAP:bytearray(HEAP_SIZE)};self.opaque={};self.image=[];self.exec_ranges=[];self.pages={}
@@ -132,6 +132,7 @@ class GuardedCPU:
         elif raw==b'\x0f\x31':
             if self.level>=2:self.pending='clock'
             else:self.fail('UNMODELED_RDTSC',address);return
+        elif raw==bytes.fromhex('0fa2') and self.cpuid_leaf1 is not None:self.pending='cpuid-leaf1'
         elif address==0x13d8472 and self.level>=3:self.pending='malloc'
         elif address==0x13d8499 and self.level>=4:self.pending='fopen'
         elif address==0x13d84a0 and self.level>=5:self.pending='fgets'
@@ -196,6 +197,11 @@ class GuardedCPU:
         if scenario=='image-only':
             self.add_image(self.loader_name,b'/virtual/libysm-core.so\0',False);self.uc.mem_protect(self.loader_name,4096,UC_PROT_READ);self.loader_ready=True
     def model(self,kind):
+        if kind=='cpuid-leaf1':
+            self.demand((self.reg('RAX')&0xffffffff)==1 and (self.reg('RCX')&0xffffffff)==0,'UNMODELED_CPUID_LEAF')
+            values=self.cpuid_leaf1;self.demand(isinstance(values,tuple) and len(values)==4 and all(isinstance(v,int) and 0<=v<=0xffffffff for v in values),'INVALID_CPUID_FIXTURE')
+            for name,value in zip(('RAX','RBX','RCX','RDX'),values):self.reg(name,value)
+            self.cpuid_calls+=1;self.emit('VIRTUAL_CPUID','leaf=1','subleaf=0',*(f'{v:08x}' for v in values),'host_cpu_queried=false');self.reg('RIP',self.pc+2);return
         if kind=='protection-result':
             self.demand(self.protection_result in ('success-input','failure-input'),'UNMODELED_PROTECTION_RESULT')
             sp,target=self.frame(True);address=self.reg('RDI');size=self.reg('RSI');prot=self.reg('RDX')
@@ -290,7 +296,7 @@ class GuardedCPU:
                 if not self.stop:self.completed+=1
         finally:
             timer.cancel();timer.join(timeout=1)
-        self.emit('COUNTS',f'attempted={self.attempted}',f'completed={self.completed}',f'rollbacks={self.rollback_count}',f'modeled_copy_steps={self.modeled_copies}',f'opaque_byte_copies={self.opaque_copies}',f'virtual_clock_reads={self.clock_reads}',f'virtual_malloc_calls={self.malloc_calls}',f'heap_write_events={self.heap_writes}',f'virtual_fopen_calls={self.fopen_calls}',f'virtual_fgets_calls={self.fgets_calls}',f'virtual_fclose_calls={self.fclose_calls}',f'virtual_protection_result_calls={self.protection_calls}',f'virtual_platform_calls={self.platform_calls}',f'virtual_dladdr_calls={self.dladdr_calls}',f'crc_blocks={self.crc_blocks}',f'crc_iterations={self.crc_iterations}',f'crc_logical_instructions={self.crc_logical_steps}')
+        self.emit('COUNTS',f'attempted={self.attempted}',f'completed={self.completed}',f'rollbacks={self.rollback_count}',f'modeled_copy_steps={self.modeled_copies}',f'opaque_byte_copies={self.opaque_copies}',f'virtual_clock_reads={self.clock_reads}',f'virtual_malloc_calls={self.malloc_calls}',f'heap_write_events={self.heap_writes}',f'virtual_fopen_calls={self.fopen_calls}',f'virtual_fgets_calls={self.fgets_calls}',f'virtual_fclose_calls={self.fclose_calls}',f'virtual_cpuid_calls={self.cpuid_calls}',f'virtual_protection_result_calls={self.protection_calls}',f'virtual_platform_calls={self.platform_calls}',f'virtual_dladdr_calls={self.dladdr_calls}',f'crc_blocks={self.crc_blocks}',f'crc_iterations={self.crc_iterations}',f'crc_logical_instructions={self.crc_logical_steps}')
         for name in REGS:self.emit('STOP_REGISTER',name,f'{self.reg(name):x}')
         for name in FLAG_BITS:self.emit('STOP_REGISTER',name,f'{self.reg(name):x}')
         preserved=self.image_unchanged();self.emit('PRESERVATION',f'image_unchanged={preserved}')
@@ -299,11 +305,13 @@ class GuardedCPU:
         return self.stop
 
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--image',required=True,type=Path);p.add_argument('--out',required=True,type=Path);p.add_argument('--mode',choices=MODES,default='strict');p.add_argument('--steps',type=int,default=10000);p.add_argument('--seconds',type=int,default=60);p.add_argument('--seed',default='1122334455667788');p.add_argument('--stride',default='3e8');p.add_argument('--pid',type=int,default=0);p.add_argument('--accelerate-crc',action='store_true');p.add_argument('--protection-result',choices=['disabled','success-input','failure-input'],default='disabled',help='Counterfactual return value only; never changes permissions, stops before image write');p.add_argument('--virtual-platform',action='store_true',help='Explicit page-size 4096 and module-open failure scenario; no errno model');p.add_argument('--virtual-loader',choices=['disabled','unavailable','image-only'],default='disabled');a=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--image',required=True,type=Path);p.add_argument('--out',required=True,type=Path);p.add_argument('--mode',choices=MODES,default='strict');p.add_argument('--steps',type=int,default=10000);p.add_argument('--seconds',type=int,default=60);p.add_argument('--seed',default='1122334455667788');p.add_argument('--stride',default='3e8');p.add_argument('--pid',type=int,default=0);p.add_argument('--accelerate-crc',action='store_true');p.add_argument('--cpuid-leaf1',help='Explicit hexadecimal EAX,EBX,ECX,EDX fixture; no host query');p.add_argument('--protection-result',choices=['disabled','success-input','failure-input'],default='disabled',help='Counterfactual return value only; never changes permissions, stops before image write');p.add_argument('--virtual-platform',action='store_true',help='Explicit page-size 4096 and module-open failure scenario; no errno model');p.add_argument('--virtual-loader',choices=['disabled','unavailable','image-only'],default='disabled');a=p.parse_args()
     if a.pid<0:raise ValueError('Negative fixture PID')
+    cpuid=tuple(int(v,16) for v in a.cpuid_leaf1.split(',')) if a.cpuid_leaf1 else None
+    if cpuid is not None and (len(cpuid)!=4 or any(not 0<=v<=0xffffffff for v in cpuid)):raise ValueError('Invalid CPUID fixture')
     data=a.image.read_bytes();before=hashlib.sha256(data).hexdigest()
     with a.out.open('w') as out:
-        cpu=GuardedCPU(out,a.mode,a.steps,a.seconds,int(a.seed,16),int(a.stride,16),a.pid);cpu.load_image(data);cpu.configure_loader(a.virtual_loader);cpu.virtual_platform=a.virtual_platform;cpu.protection_result=a.protection_result;cpu.accelerate_crc=a.accelerate_crc;cpu.emit('CONFIG','engine=Unicorn2.1.4',f'mode={a.mode}',f'max_steps={a.steps}','imagebase=0','relocations=false','synthetic_registers=true','bss_zero=true');result=cpu.run(0x152eb19)
+        cpu=GuardedCPU(out,a.mode,a.steps,a.seconds,int(a.seed,16),int(a.stride,16),a.pid);cpu.load_image(data);cpu.configure_loader(a.virtual_loader);cpu.virtual_platform=a.virtual_platform;cpu.protection_result=a.protection_result;cpu.cpuid_leaf1=cpuid;cpu.accelerate_crc=a.accelerate_crc;cpu.emit('CONFIG','engine=Unicorn2.1.4',f'mode={a.mode}',f'max_steps={a.steps}','imagebase=0','relocations=false','synthetic_registers=true','bss_zero=true');result=cpu.run(0x152eb19)
     if hashlib.sha256(a.image.read_bytes()).hexdigest()!=before:raise AssertionError('Original file changed')
     print(json.dumps({'status':result,'attempted':cpu.attempted,'completed':cpu.completed,'oracles':cpu.oracle_checks,'image_unchanged':True}))
 if __name__=='__main__':main()
