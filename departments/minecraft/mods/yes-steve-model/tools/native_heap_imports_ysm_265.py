@@ -10,7 +10,7 @@ def model(cpu,symbol):
     if address:
         allocation=next(((i,n) for i,(a,n) in enumerate(cpu.allocations) if a==address),None)
         cpu.demand(allocation is not None,'UNKNOWN_FREE_POINTER',address)
-        i,n=allocation;cpu.demand(not any(lo<=address<hi for lo,hi in cpu.private_readonly),'READONLY_FIXTURE_FREE',address)
+        i,n=allocation;cpu.demand(not any(lo<=address<lo+size for lo,size in cpu.fixture_regions),'PRIVATE_FIXTURE_FREE',address);cpu.demand(not any(lo<=address<hi for lo,hi in cpu.private_readonly),'READONLY_FIXTURE_FREE',address)
         cpu.allocations.pop(i);cpu.known[HEAP][address-HEAP:address-HEAP+n]=bytes(n)
         for at in range(address,address+n):cpu.opaque.pop(at,None)
     cpu.heap_free_calls+=1;cpu.emit('VIRTUAL_FREE',symbol,f'address={address:x}','host_allocator_called=false','storage_reuse=false');return cpu.reg('RAX')

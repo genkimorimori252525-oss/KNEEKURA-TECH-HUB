@@ -2,7 +2,7 @@
 """Bounded DT_INIT + ordered init-array sequence in an explicitly synthetic isolated loader view."""
 import argparse,hashlib,json,struct,time
 from pathlib import Path
-from native_shadow_image_ysm_265 import ShadowGuardedCPU
+from native_sparse_vm_ysm_265 import SparseGuardedCPU
 from native_unicorn_guarded_ysm_265 import SP,RETURN,X
 from native_guarded_checkpoint_ysm_265 import read_checkpoint,write_checkpoint
 from native_elf_loader_view_ysm_265 import manifest,apply_loader_view
@@ -46,7 +46,7 @@ def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--image',type=Path,required=True);p.add_argument('--out',type=Path,required=True);p.add_argument('--checkpoint-out',type=Path,required=True);p.add_argument('--resume-checkpoint',type=Path);p.add_argument('--steps',type=int,default=4000000);p.add_argument('--seconds',type=int,default=180);a=p.parse_args()
     data=a.image.read_bytes();before=hashlib.sha256(data).hexdigest();m=manifest(data)
     with a.out.open('w') as out:
-        c=ShadowGuardedCPU(out,'proc-fixture',a.steps,a.seconds);c.load_image(data);c.configure_loader('image-only');c.virtual_platform=True;c.protection_result='success-input';c.cpuid_leaf1=(0,0,0,0);c.accelerate_crc=True
+        c=SparseGuardedCPU(out,'proc-fixture',a.steps,a.seconds);c.load_image(data);c.configure_loader('image-only');c.virtual_platform=True;c.protection_result='success-input';c.cpuid_leaf1=(0,0,0,0);c.accelerate_crc=True
         if a.resume_checkpoint:
             c.emit('CHECKPOINT_SOURCE_SHA256',read_checkpoint(c,a.resume_checkpoint))
             if not c.loader_view_applied:raise ValueError('Cannot use an unrelocated scenario snapshot for this sequence')
@@ -54,6 +54,8 @@ def main():
         else:apply_loader_view(c,data)
         from native_stdio_fixture_ysm_265 import ensure_stdio_bindings
         ensure_stdio_bindings(c)
+        from native_tls_fixture_ysm_265 import configure
+        configure(c,m['tls'])
         r=run_sequence(c,m,a.steps,a.seconds);c.emit('CHECKPOINT_SAVED_SHA256',write_checkpoint(c,a.checkpoint_out))
     if hashlib.sha256(a.image.read_bytes()).hexdigest()!=before:raise AssertionError('Original file changed')
     print(json.dumps(r))

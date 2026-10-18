@@ -10,6 +10,7 @@ def compare(a,b):
         m=s['context'];return sanitize_context(unpack(m['bytes'],m['size']),m['size'],m['arch'],m['mode'])
     def fields(s):return {k:v for k,v in s['fields'].items() if k!='rollback_count'}
     checks={'format_and_engine_equal':(a['format'],a['engine'])==(b['format'],b['engine']),'cpu_context_equal_excluding_unused_memory_snapshot_header':context(a)==context(b),'model_state_equal_excluding_diagnostic_rollbacks':fields(a)==fields(b),'cumulative_completed_equal':a['origin_completed']+a.get('prior_origin_completed',0)==b['origin_completed']+b.get('prior_origin_completed',0)}
+    checks['sparse_state_equal']=a.get('sparse')==b.get('sparse')
     for key in ('images','opaque','fixture','cpuid_leaf1','oracle_seen','shadow_ranges','patches','origin_stop'):checks[key+'_equal']=a[key]==b[key]
     for base,n in ((STACK,STACK_SIZE),(HEAP,HEAP_SIZE)):
         for field in ('bytes','known'):checks[f'{base:x}_{field}_equal']=unpack(a['private'][str(base)][field],n)==unpack(b['private'][str(base)][field],n)

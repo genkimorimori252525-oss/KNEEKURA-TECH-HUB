@@ -24,7 +24,7 @@ class GuardedCPU:
     def __init__(self,out,mode='strict',limit=10000,seconds=60,seed=0x1122334455667788,stride=1000,pid=0):
         if mode not in MODES or not 0<limit<=4000000 or not 0<seconds<=180:raise ValueError('Invalid bounded configuration')
         self.uc=Uc(UC_ARCH_X86,UC_MODE_64);self.out=out;self.level=MODES[mode];self.limit=limit;self.seconds=seconds
-        self.seed=seed&MASK;self.stride=stride&MASK;self.clock_reads=0;self.fixture_reserved=0;self.private_readonly=[];self.allocations=[];self.heap_used=0;self.malloc_calls=0
+        self.seed=seed&MASK;self.stride=stride&MASK;self.clock_reads=0;self.pshufb_model_calls=0;self.fixture_reserved=0;self.fixture_regions=[];self.private_readonly=[];self.allocations=[];self.heap_used=0;self.malloc_calls=0
         self.fopen_calls=self.fgets_calls=self.fclose_calls=0;self.file_open=False;self.file_position=0
         self.fixture=f'Name:\tvirtual-ysm\nTracerPid:\t{pid}\n'.encode('ascii')
         self.cpuid_leaf1=None;self.cpuid_calls=0;self.protection_result='disabled';self.protection_calls=0;self.virtual_platform=False;self.platform_calls=0;self.virtual_loader='disabled';self.dladdr_calls=0;self.loader_name=0x730000000000;self.loader_ready=False
@@ -91,7 +91,7 @@ class GuardedCPU:
     def reserve_fixture(self,n):
         reserve=(n+15)&~15
         self.demand(0<n<=0x10000 and reserve<=HEAP_SIZE-self.heap_used-self.fixture_reserved,'PRIVATE_FIXTURE_BUDGET',n)
-        a=HEAP+HEAP_SIZE-self.fixture_reserved-reserve;self.fixture_reserved+=reserve;self.allocations.append((a,n));self.emit('VIRTUAL_FIXTURE_STORAGE',f'address={a:x}',f'size={n}','within_existing_private_budget=true');return a
+        a=HEAP+HEAP_SIZE-self.fixture_reserved-reserve;self.fixture_reserved+=reserve;self.allocations.append((a,n));self.fixture_regions.append([a,n]);self.emit('VIRTUAL_FIXTURE_STORAGE',f'address={a:x}',f'size={n}','within_existing_private_budget=true');return a
     def unknown(self,a,n):
         base=self.physical(a,n)
         if base is not None:
@@ -134,7 +134,9 @@ class GuardedCPU:
         if self.accelerate_crc and address in (0x15f0d5e,0x1503f30):
             from native_crc32_loop_profile_ysm_265 import eligible
             if eligible(self):self.pending='crc';uc.emu_stop();return
-        if raw==b'\xf3\xa4' and self.level>=1:self.pending='copy'
+        from native_pshufb_semantics_ysm_265 import decode as decode_pshufb
+        if decode_pshufb(raw) is not None:self.pending='legacy-pshufb'
+        elif raw==b'\xf3\xa4' and self.level>=1:self.pending='copy'
         elif raw==b'\x0f\x31':
             if self.level>=2:self.pending='clock'
             else:self.fail('UNMODELED_RDTSC',address);return
@@ -210,6 +212,9 @@ class GuardedCPU:
         if scenario=='image-only':
             self.add_image(self.loader_name,b'/virtual/libysm-core.so\0',False);self.uc.mem_protect(self.loader_name,4096,UC_PROT_READ);self.loader_ready=True
     def model(self,kind):
+        if kind=='legacy-pshufb':
+            from native_pshufb_semantics_ysm_265 import apply
+            apply(self);return
         if kind=='cpuid-leaf1':
             self.demand((self.reg('RAX')&0xffffffff)==1,'UNMODELED_CPUID_LEAF')
             input_ecx=self.reg('RCX')&0xffffffff

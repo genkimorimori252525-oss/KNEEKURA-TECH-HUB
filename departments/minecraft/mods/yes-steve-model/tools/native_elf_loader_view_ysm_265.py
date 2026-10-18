@@ -28,8 +28,12 @@ def manifest(data):
         if section==0 and kind&15 in (1,6):external_data.append([address,strings[name:].split(b'\0')[0].decode('ascii')])
     init=array_targets(one(25),data_at(data,rs,one(25),one(27)),rels+plt)
     if len(fixups)!=8812 or len(init)!=45 or one(12)!=0x152eb19:raise ValueError('Pinned initializer inventory changed')
+    tls_headers=[p for p in ph if p[0]==7]
+    if len(tls_headers)!=1:raise ValueError('Missing unique TLS template')
+    t=tls_headers[0];tls={'address':t[3],'file_size':t[5],'memory_size':t[6],'alignment':t[7],'descriptors':[[a,int.from_bytes(data_at(data,rs,a+8,8),'little')] for a,i,v in unresolved if i==16 and v==0]}
+    if (tls['file_size'],tls['memory_size'],tls['alignment'])!=(216,15408,16) or len(tls['descriptors'])!=3:raise ValueError('Pinned TLS contract changed')
     writable=[(r['address']&~4095,r['address']+r['memory_size']-(r['address']&~4095),((r['flags']&4)>>2)|(r['flags']&2)|((r['flags']&1)<<2)) for r in rs if r['flags']&2]
-    return {'dt_init':one(12),'initializers':[e['relative_target'] for e in init],'init_slots':[e['slot'] for e in init],'fixups':fixups,'writable':writable,'unresolved':unresolved,'external_data_slots':external_data}
+    return {'dt_init':one(12),'initializers':[e['relative_target'] for e in init],'init_slots':[e['slot'] for e in init],'fixups':fixups,'writable':writable,'unresolved':unresolved,'external_data_slots':external_data,'tls':tls}
 
 def apply_fixups(cpu,writable,fixups):
     if cpu.attempted or cpu.shadow_events or cpu.loader_view_applied:raise ValueError('Loader view must precede all target execution and image stores')

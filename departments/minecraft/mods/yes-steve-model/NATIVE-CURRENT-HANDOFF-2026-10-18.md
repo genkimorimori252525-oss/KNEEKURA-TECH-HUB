@@ -1,6 +1,6 @@
 # Current YSM native-analysis handoff — October 18
 
-Read this entry first. Current report: [eight callbacks and TLS frontier](NATIVE-C-LIBRARY-INITIALIZERS-RESULT-2026-10-18.md). Branch: jolly/ysm-analysis-20261016. The project remains unfinished. Older linked reports describe historical states, not today's frontier.
+Read this entry first. Current report: [seventeen callbacks, TLS/sparse allocator and SIMD correction](NATIVE-TLS-SPARSE-INITIALIZERS-RESULT-2026-10-18.md). Branch: jolly/ysm-analysis-20261016. The project remains unfinished. Older linked reports describe historical states, not today's frontier.
 
 ## Goal and unchanged confidence
 
@@ -19,9 +19,9 @@ Entry0x152eb19 is simulated with a protected Unicorn2.1.4 backend and explicit s
 
 Two masked CRC32 loops have pinned code/table contracts and60 full-state differential cases. Fifteen summaries cover528,156,776 logical loop-instruction effects; these are not actually interpreted instruction counts. CRC acceleration turns off conservatively after any working-image mutation.
 
-A fresh DT_INIT run returns after3,290,734 native instruction/model invocations. The deterministic8812 RELATIVE-fixup scenario also returns in the same count. The current authoritative sequence adds unresolved-external-data guards and explicit opaque stdio/C-locale/environment/heap fixtures. Callbacks0..7 have returned in order; callback8(entry0x326630) is paused at __tls_get_addr, lazy index122, descriptor0xd2cf38. Eight of45 callbacks are complete.
+A fresh DT_INIT run returns after3,290,734 native instruction/model invocations. The deterministic8812 RELATIVE-fixup scenario also returns in the same count. The current authoritative sequence adds unresolved-external-data guards and explicit opaque stdio/C-locale/environment/heap fixtures. Callbacks0..16 have returned in order; callback17(entry0x33b3e0) is paused at sem_init, lazy index34, caller-return0x33b778. Seventeen of45 callbacks are complete.224 scoped test methods pass. No overall completion percentage follows from this.
 
-Resume the latest guarded sequence checkpoint with native_initializer_sequence_ysm_265.py; preserve its in-progress callback frame. Older raw-slot snapshots are rejected because unresolved external data must never be treated as zero pointers into the mapped ELF header. PT_TLS is216 initialized/15408 total bytes, alignment16; its three DTPMOD64 descriptors still need an explicit single-thread model. JNI lifecycle remains separate.
+Resume the latest guarded sequence checkpoint with native_initializer_sequence_ysm_265.py; preserve its in-progress callback frame. Older raw-slot snapshots are rejected because unresolved external data must never be treated as zero pointers into the mapped ELF header. PT_TLS is modeled as one virtual thread/module. Sparse anonymous reservations back only touched pages; current139264 bytes for274894684160 virtual bytes. Resume corrected unicorn-init-pshufb-heap-pool checkpoint(SHA ed4375dcbf24407d44e22b88a637cc6c928b4d21d8449288e8f49b8c30a10e4b), or rebuild from the verified eight-callback checkpoint. Uncorrected exploratory snapshots contain a Unicorn PSHUFB upper-vector defect and are superseded. Two corrected continuations match complete state. JNI lifecycle remains separate.
 
 ## Reuse and runtime contracts
 
@@ -39,6 +39,8 @@ Ghidra12.1.4 memory XCHG32 upper-register clearing and SHR overflow-flag behavio
 CPUID leaf1 ignores incoming ECX. File-backed executable addresses below0x1000 are valid in this ELF;0xf38 is protected code. Address0 still stops. These corrected harness assumptions must not be reported as target bugs.
 
 JNI_OnLoad's conditional candidate continuations still depend on file-state words0xd2cd48..0xd2cd5a. DT_INIT progress is not proof that those words retain their file values in real runtime. JNI_OnUnload,45 init-array callbacks, Android bodies and Windows virtual-only export regions remain separate unresolved work. Windows RVAs are not file offsets.
+
+Legacy register PSHUFB is modeled to correct Unicorn2.1.4 copying uninitialized upper384 vector bits. Preserve those bits; never just exclude them from checkpoint comparison. Own-byte/hardware permutation fixtures establish the correction. No YSM code ran natively.
 
 ## Historical evidence index
 
@@ -58,3 +60,5 @@ These reports retain exact previous scopes, source hashes and limitations. Do no
 - [DT_INIT return evidence](NATIVE-DT-INIT-RETURN-RESULT-2026-10-18.md)
 
 - [relocated initializer sequence](NATIVE-RELOCATED-INITIALIZER-SEQUENCE-RESULT-2026-10-18.md)
+
+- [eight-callback C-library stage](NATIVE-C-LIBRARY-INITIALIZERS-RESULT-2026-10-18.md)
