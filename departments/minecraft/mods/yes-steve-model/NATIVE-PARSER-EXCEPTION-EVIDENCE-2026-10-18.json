@@ -1,0 +1,201 @@
+{
+  "classification": "PRIMARY_STATIC_BYTE_BACKED_HELPER_BOUNDARY",
+  "original_so_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "original_jar_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "embedded_so_equal": true,
+  "windows": [
+    {
+      "start": "0x3742d0",
+      "end_exclusive": "0x3744f0",
+      "file_offset": 3621584,
+      "sha256": "89f2984e0781a2f170bac24b88df19870e45b7c8de9f93bac97df34843507b5c",
+      "asm_sha256": "353f62eb0c53b82d126c7284e6bb232d4f88928ca8ce5b684a101abedbbc3adc"
+    },
+    {
+      "start": "0x36d530",
+      "end_exclusive": "0x36d5ba",
+      "file_offset": 3593520,
+      "sha256": "57f59e18f8eb24713de80ae0897f16139a8823a95a3b6d9116a87de2ad3e9388",
+      "asm_sha256": "a85960452ff1e08b7c7a4919defbe9880fbbd183591ae1f0de7908888a744f75"
+    },
+    {
+      "start": "0x41a560",
+      "end_exclusive": "0x41a614",
+      "file_offset": 4302176,
+      "sha256": "d7508ccd62170eb7c65a45a4b85b4de81de152e4fee5e49a85755c5a875f77c6",
+      "asm_sha256": "a1a3c5413ab5e79988b5915843db9e80fac744758b331c8d280ecd5c85959be1"
+    },
+    {
+      "start": "0x41a330",
+      "end_exclusive": "0x41a560",
+      "file_offset": 4301616,
+      "sha256": "5c422caa141099a344a7a4e1816b2e63d9cf31e3ebb514a1a6fd528878206a0e",
+      "asm_sha256": "a3aa53bd7ef648b2a3bddd2d5c04d15df447ee222412509422fd0d1ceb11e783"
+    },
+    {
+      "start": "0x2abe00",
+      "end_exclusive": "0x2abe43",
+      "file_offset": 2801152,
+      "sha256": "8b2ae5806cfc84b6336b122adcb701f0f3b6467965855edd560952df878187c7",
+      "asm_sha256": "6ce66c51ccfd7643cbdf18d9a06c115693590765cbff32f3b81ae92cc9a21337"
+    },
+    {
+      "start": "0x360270",
+      "end_exclusive": "0x360282",
+      "file_offset": 3539568,
+      "sha256": "7aac2141c75e2517b89b92774581e7697acded009e8aad66dad2cec6258b092f",
+      "asm_sha256": "2b8bf573f7f2bd5ee212ee5caf5b51a5db178147de6b8db71fd6f33a4621e1cd"
+    },
+    {
+      "start": "0x2aade0",
+      "end_exclusive": "0x2aae00",
+      "file_offset": 2797024,
+      "sha256": "8199a55c47c0914584a9f1d1656b444a5a24bc45fb22ed09a1fde3e8f37d7afb",
+      "asm_sha256": "bc10d72485f1e5534bb2156020049038a08269464bfbd94165bdbd06d55315f5"
+    },
+    {
+      "start": "0x366330",
+      "end_exclusive": "0x3663d0",
+      "file_offset": 3564336,
+      "sha256": "f9127cfb81b1740946a6334e760975ce4b584a463bfe16aef48e7d3f70a4b670",
+      "asm_sha256": "07acd764bf00464edfdf91c7e3873c98b25dd7e3a78b6fb4f268d2204abe8ff1"
+    },
+    {
+      "start": "0x366670",
+      "end_exclusive": "0x3666e0",
+      "file_offset": 3565168,
+      "sha256": "cad364fbf6eb66237da184081dd48714624772008861c962b1597036e9f61d9c",
+      "asm_sha256": "d620ad80e3b588493139fa45648a11c7632b9a85b1c25decdebdd60f00da6851"
+    },
+    {
+      "start": "0x366aa0",
+      "end_exclusive": "0x366ae0",
+      "file_offset": 3566240,
+      "sha256": "b81204e51ac067959cedd9858bc3927bf8bc7f13f4c36415d3a16caa572fb337",
+      "asm_sha256": "a05ba8578ae8039230a168402d8140b550b35364396ce27258af562e6ebd4cb4"
+    },
+    {
+      "start": "0x366bc0",
+      "end_exclusive": "0x366c00",
+      "file_offset": 3566528,
+      "sha256": "13a6af108c9819e17eabf381b453862db7003feb2205a0b9f677475611b59291",
+      "asm_sha256": "f1c724fac62947db5f540f63dedf3cb9f1ddffc473fd54e13bcea65b7e345a54"
+    },
+    {
+      "start": "0x3709ea",
+      "end_exclusive": "0x370a50",
+      "file_offset": 3607018,
+      "sha256": "d0cd29a39b408823ba2b4e3b366b8c605819ab91cb317c9c4599856a62420213",
+      "asm_sha256": "c37ee27b99e78a243ec2f93702b3a180e497e49309649c2330f80469a2e47f0a"
+    }
+  ],
+  "checks": [
+    {
+      "name": "null_result_branches_to_null_wrapper",
+      "offset": "0x374364",
+      "bytes": "0f8408010000",
+      "passed": true
+    },
+    {
+      "name": "null_wrapper_rejoins_before_exception_check",
+      "offset": "0x374486",
+      "bytes": "e9f8feffff",
+      "passed": true
+    },
+    {
+      "name": "shared_exception_check_call",
+      "offset": "0x374392",
+      "bytes": "e8c9610a00",
+      "passed": true
+    },
+    {
+      "name": "jni_call_object_method_v",
+      "offset": "0x36d5ac",
+      "bytes": "ff9018010000",
+      "passed": true
+    },
+    {
+      "name": "jni_exception_check",
+      "offset": "0x41a56a",
+      "bytes": "ff9020070000",
+      "passed": true
+    },
+    {
+      "name": "pending_branch",
+      "offset": "0x41a572",
+      "bytes": "7508",
+      "passed": true
+    },
+    {
+      "name": "capture_before_clear",
+      "offset": "0x41a57f",
+      "bytes": "e8acfdffff",
+      "passed": true
+    },
+    {
+      "name": "jni_exception_clear",
+      "offset": "0x41a58a",
+      "bytes": "ff9088000000",
+      "passed": true
+    },
+    {
+      "name": "native_error_code_3c",
+      "offset": "0x41a5a7",
+      "bytes": "66c7003c00",
+      "passed": true
+    },
+    {
+      "name": "throw_like_call",
+      "offset": "0x41a5fa",
+      "bytes": "e80118e9ff",
+      "passed": true
+    },
+    {
+      "name": "throwable_global_ref",
+      "offset": "0x41a380",
+      "bytes": "ff91a8000000",
+      "passed": true
+    },
+    {
+      "name": "throwable_storage",
+      "offset": "0x41a3c4",
+      "bytes": "48899818010000",
+      "passed": true
+    },
+    {
+      "name": "temporary_delete_local_ref",
+      "offset": "0x360279",
+      "bytes": "488b80b8000000",
+      "passed": true
+    }
+  ],
+  "prior_contracts": [
+    {
+      "path": "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/NATIVE-CONTROLLER-JAVA-BRIDGE-2026-10-18.md",
+      "sha256": "dfd8b9d1678ae095c90553260348feeb3f577d418307e70b6c0a8d9b281c456e"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/NATIVE-CONTROLLER-CONSTRUCTION-RECOVERY-2026-10-18.md",
+      "sha256": "fbd0ef0a685454be91b1ab967b1d361bafc495fc54e860b474e8e4aaafe23e52"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/NATIVE-RESOURCE-JAVA-BRIDGE-2026-10-18.md",
+      "sha256": "f45880b0977b1ecce6cc3fd3820b9b9e12ed51325e0d64ed9d08ba9748de12c1"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/NATIVE-MODEL-RESOURCE-SECTION-RECOVERY-2026-10-18.md",
+      "sha256": "1fda5fa50f0a4b01226b1b78e7fc57f42fdeed227b889010c8826cd44b5d1920"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/NATIVE-ARCHIVE-PATH-CONSUMER-2026-10-18.md",
+      "sha256": "fb980c8bafeb24a8afad2626f245276b9054cbcdcb57d5baf87d9c3d3c4566d4"
+    }
+  ],
+  "limitations": [
+    "No target execution or assets",
+    "No complete native unwind/rollback proof",
+    "No parse-success inference from normal fallback return",
+    "No claim that null with no pending exception is rejected",
+    "Throwable capture itself may fail; exact restoration/rethrow to Java not established"
+  ]
+}

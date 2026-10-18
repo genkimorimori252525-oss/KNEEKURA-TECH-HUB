@@ -1,0 +1,201 @@
+{
+  "classification": "BOUNDED_WORKER_LSDA_AND_CONTROL_FLOW",
+  "so_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "fde": "0x187d128",
+  "cie": "0x1867a70",
+  "lsda": "0x1450ac",
+  "action_table": "0x1451cc",
+  "type_table": "0x1451d8",
+  "materializer_callsite": {
+    "start": "0x35d53d",
+    "end_exclusive": "0x35d550",
+    "landing": "0x35de5e",
+    "action": 3
+  },
+  "action_chain": "filter2 -> filter1; filter1 encoded null catch-all",
+  "windows": [
+    {
+      "start": "0x35d250",
+      "end_exclusive": "0x35e210",
+      "file_offset": 3527248,
+      "sha256": "367695d50e6056d682e4d6f5b33b1bf805fa4abd8b356a7a287cca6be343de80"
+    },
+    {
+      "start": "0x360430",
+      "end_exclusive": "0x360700",
+      "file_offset": 3540016,
+      "sha256": "a3aad925f002be678673384f0d3e2a37dc0ff807dfad4b3a11964466456c6c7d"
+    },
+    {
+      "start": "0x311020",
+      "end_exclusive": "0x311110",
+      "file_offset": 3215392,
+      "sha256": "4db5f15e26e6e87b76754c8ecce65aea1167a2f0c7188434962e701124c89806"
+    },
+    {
+      "start": "0x2abc20",
+      "end_exclusive": "0x2abc80",
+      "file_offset": 2800672,
+      "sha256": "36690552fe9b4e33b92e18ee29f66be1eb46b91d8106d3e385483d1483381ee3"
+    },
+    {
+      "start": "0x2aacc0",
+      "end_exclusive": "0x2aad70",
+      "file_offset": 2796736,
+      "sha256": "009b1ddaefb5ae333a4b05d7f1b5d340a39e94a5abd7caaf3626f1a1f1ff58e9"
+    },
+    {
+      "start": "0x187d128",
+      "end_exclusive": "0x187d2dc",
+      "file_offset": 24002856,
+      "sha256": "1d6d251a542535aab47e6bb2afb14111c8ec22de219c542d9c46ae9816a4b649"
+    },
+    {
+      "start": "0x1867a70",
+      "end_exclusive": "0x1867a90",
+      "file_offset": 23915120,
+      "sha256": "9ac598cb0a5410fc83f1a9981962b9b12a6e1eb0ef243ef9331a110efe99f768"
+    },
+    {
+      "start": "0x1450ac",
+      "end_exclusive": "0x1451d8",
+      "file_offset": 1331372,
+      "sha256": "42c227d1fd3e48aa626c58abe71dfd3a661dd76b1a2d80dc205098baf529fce6"
+    },
+    {
+      "start": "0x187fd30",
+      "end_exclusive": "0x187fd70",
+      "file_offset": 24014128,
+      "sha256": "0e38095ba77129b03058390413a263d690189bbacf937f4de69ea9f922153849"
+    },
+    {
+      "start": "0x1473d8",
+      "end_exclusive": "0x14741c",
+      "file_offset": 1340376,
+      "sha256": "840b13168823e5759c35f6db68bee9814363f359a156b9f4bf6fc6d77bbefeba"
+    },
+    {
+      "start": "0x187f184",
+      "end_exclusive": "0x187fbd8",
+      "file_offset": 24011140,
+      "sha256": "2d85d9e318cbcf645b538709fd7f0c88c1d3edf323ba984ff5abfc294df1a2c6"
+    },
+    {
+      "start": "0x146720",
+      "end_exclusive": "0x147364",
+      "file_offset": 1337120,
+      "sha256": "92e643b6206196053b21078d8fbf211eb9740b12ecbc74ddbc674f90b33a4c76"
+    },
+    {
+      "start": "0x372eea",
+      "end_exclusive": "0x372ef2",
+      "file_offset": 3616490,
+      "sha256": "4f09600e009d0d7046102264506519ae1ac49b029288da529d2783f21c44488b"
+    },
+    {
+      "start": "0x3733f1",
+      "end_exclusive": "0x37354d",
+      "file_offset": 3617777,
+      "sha256": "13028d598eb783112b771ca63eb41a0f518ba0b90d2ed60d4ec2359a6ce7913f"
+    }
+  ],
+  "byte_assertions": [
+    {
+      "name": "materializer_call",
+      "offset": "0x35d54b",
+      "bytes": "e870030100",
+      "passed": true
+    },
+    {
+      "name": "landing_jump",
+      "offset": "0x35de64",
+      "bytes": "e988000000",
+      "passed": true
+    },
+    {
+      "name": "destroy_model",
+      "offset": "0x35df13",
+      "bytes": "e81871feff",
+      "passed": true
+    },
+    {
+      "name": "free_model",
+      "offset": "0x35df20",
+      "bytes": "e87b959600",
+      "passed": true
+    },
+    {
+      "name": "status4_first",
+      "offset": "0x35df40",
+      "bytes": "bb04000000",
+      "passed": true
+    },
+    {
+      "name": "status4_second",
+      "offset": "0x35df5c",
+      "bytes": "bb04000000",
+      "passed": true
+    },
+    {
+      "name": "mask_status",
+      "offset": "0x35dd1d",
+      "bytes": "f6c303",
+      "passed": true
+    },
+    {
+      "name": "advance_item",
+      "offset": "0x35dd2e",
+      "bytes": "49ffc5",
+      "passed": true
+    },
+    {
+      "name": "globalref_after_return",
+      "offset": "0x35d569",
+      "bytes": "ff90a8000000",
+      "passed": true
+    },
+    {
+      "name": "vector_end_fast",
+      "offset": "0x35d943",
+      "bytes": "4881400888000000",
+      "passed": true
+    },
+    {
+      "name": "vector_end_grow",
+      "offset": "0x35dbf9",
+      "bytes": "49895e08",
+      "passed": true
+    }
+  ],
+  "callsite_count": 48,
+  "limits": [
+    "Conditional ordinary exception unwinding and normal cleanup; no target execution",
+    "Only worker35d250; no universal entry or whole-batch transaction guarantee",
+    "Earlier records remain; constructor/native side effects are not rolled back",
+    "Type2 exact name and diagnostics311020 interpretation not required or claimed",
+    "Controller365a10 inner catch is excluded from the resource-only conclusion"
+  ],
+  "resource_unwind_chain": [
+    {
+      "function": "0x3742d0",
+      "call": "0x374392",
+      "fde": "0x187fd30",
+      "lsda": "0x1473d8",
+      "start": "0x37438f",
+      "end_exclusive": "0x374397",
+      "landing": "0x374498",
+      "action": 0
+    },
+    {
+      "function": "0x36d8c0",
+      "call": "0x370a03",
+      "fde": "0x187f184",
+      "lsda": "0x146720",
+      "start": "0x3709f3",
+      "end_exclusive": "0x370a08",
+      "landing": "0x372eea",
+      "action": 0
+    }
+  ],
+  "resource_resume_call": "0x373548 -> 0x322a00"
+}

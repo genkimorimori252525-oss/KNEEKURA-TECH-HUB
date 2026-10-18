@@ -59,7 +59,7 @@ Existing STORAGE-CALLERS evidence already establishes processor-owned memory per
 
 ## Limits and reuse decision
 
-No effect is claimed if failure occurs before any temp binding, the next rental gets another parser, an intervening successful parse resets the binding, runtime frames are freshly empty, or every relevant variable is assigned before reading. Repeated-failure overflow/resource-exhaustion scenarios are not analyzed. Arbitrary native parser lifecycle, external setters, concurrency and whole-model behavior remain outside scope.
+This illustrative read difference is absent or masked if failure occurs before any temp binding, the next rental gets another parser, an intervening successful parse resets the binding, runtime frames are freshly empty, or every relevant variable is assigned before reading. Masking the fixture does not establish semantic equivalence or erase a previously shifted layout. Repeated-failure overflow/resource-exhaustion scenarios are not analyzed. Arbitrary native parser lifecycle, external setters, concurrency and whole-model behavior remain outside scope.
 
 For faithful reconstruction, do not assume parser return/reset or a fallback value restores a clean temp-address namespace. For a new design, failure cleanup could be made explicit, but that would be a deliberate behavior change rather than an evidenced original guarantee. No upstream patch is proposed or applied.
 

@@ -1,0 +1,482 @@
+{
+  "verdict": "EXACT_LSDA_LOCAL_CONTINUATION_CONFIRMED",
+  "so_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "eh_header": "0x185656c",
+  "fde": "0x187d128",
+  "cie": "0x1867a70",
+  "function_start": "0x35d250",
+  "function_end": "0x35e20e",
+  "lsda": "0x1450ac",
+  "action_table": "0x1451cc",
+  "type_table_base": "0x1451d8",
+  "selected_callsite": {
+    "table_address": "0x1450d6",
+    "start": "0x35d53d",
+    "end_exclusive": "0x35d550",
+    "landing_pad": "0x35de5e",
+    "action": 3
+  },
+  "callsite_rows": [
+    {
+      "table_address": "0x1450b3",
+      "start": "0x35d341",
+      "end_exclusive": "0x35d349",
+      "landing_pad": "0x35de7f",
+      "action": 3
+    },
+    {
+      "table_address": "0x1450b9",
+      "start": "0x35d349",
+      "end_exclusive": "0x35d35c",
+      "landing_pad": "0x35de74",
+      "action": 3
+    },
+    {
+      "table_address": "0x1450bf",
+      "start": "0x35d395",
+      "end_exclusive": "0x35d3aa",
+      "landing_pad": "0x35df81",
+      "action": 3
+    },
+    {
+      "table_address": "0x1450c5",
+      "start": "0x35d3aa",
+      "end_exclusive": "0x35d3e2",
+      "landing_pad": null,
+      "action": 0
+    },
+    {
+      "table_address": "0x1450ca",
+      "start": "0x35d3e2",
+      "end_exclusive": "0x35d3ff",
+      "landing_pad": "0x35de69",
+      "action": 3
+    },
+    {
+      "table_address": "0x1450d0",
+      "start": "0x35d4b2",
+      "end_exclusive": "0x35d4be",
+      "landing_pad": "0x35defd",
+      "action": 3
+    },
+    {
+      "table_address": "0x1450d6",
+      "start": "0x35d53d",
+      "end_exclusive": "0x35d550",
+      "landing_pad": "0x35de5e",
+      "action": 3
+    },
+    {
+      "table_address": "0x1450dc",
+      "start": "0x35d569",
+      "end_exclusive": "0x35d56f",
+      "landing_pad": "0x35de50",
+      "action": 3
+    },
+    {
+      "table_address": "0x1450e2",
+      "start": "0x35d5b5",
+      "end_exclusive": "0x35d5c4",
+      "landing_pad": "0x35e1e6",
+      "action": 1
+    },
+    {
+      "table_address": "0x1450e8",
+      "start": "0x35d5d7",
+      "end_exclusive": "0x35d5e4",
+      "landing_pad": "0x35e1f6",
+      "action": 1
+    },
+    {
+      "table_address": "0x1450ee",
+      "start": "0x35d639",
+      "end_exclusive": "0x35d641",
+      "landing_pad": "0x35de32",
+      "action": 3
+    },
+    {
+      "table_address": "0x1450f4",
+      "start": "0x35d641",
+      "end_exclusive": "0x35d690",
+      "landing_pad": null,
+      "action": 0
+    },
+    {
+      "table_address": "0x1450f9",
+      "start": "0x35d690",
+      "end_exclusive": "0x35d698",
+      "landing_pad": "0x35de07",
+      "action": 3
+    },
+    {
+      "table_address": "0x1450ff",
+      "start": "0x35d698",
+      "end_exclusive": "0x35d77e",
+      "landing_pad": null,
+      "action": 0
+    },
+    {
+      "table_address": "0x145105",
+      "start": "0x35d77e",
+      "end_exclusive": "0x35d786",
+      "landing_pad": "0x35ddf4",
+      "action": 3
+    },
+    {
+      "table_address": "0x14510b",
+      "start": "0x35d7f4",
+      "end_exclusive": "0x35d801",
+      "landing_pad": "0x35de48",
+      "action": 3
+    },
+    {
+      "table_address": "0x145111",
+      "start": "0x35d877",
+      "end_exclusive": "0x35d87f",
+      "landing_pad": "0x35dddc",
+      "action": 3
+    },
+    {
+      "table_address": "0x145117",
+      "start": "0x35d87f",
+      "end_exclusive": "0x35db2a",
+      "landing_pad": null,
+      "action": 0
+    },
+    {
+      "table_address": "0x14511d",
+      "start": "0x35db2a",
+      "end_exclusive": "0x35db32",
+      "landing_pad": "0x35de87",
+      "action": 3
+    },
+    {
+      "table_address": "0x145123",
+      "start": "0x35db32",
+      "end_exclusive": "0x35dbc3",
+      "landing_pad": null,
+      "action": 0
+    },
+    {
+      "table_address": "0x145129",
+      "start": "0x35dbc3",
+      "end_exclusive": "0x35dbd3",
+      "landing_pad": "0x35e1d6",
+      "action": 1
+    },
+    {
+      "table_address": "0x14512f",
+      "start": "0x35dc7d",
+      "end_exclusive": "0x35dc89",
+      "landing_pad": "0x35e206",
+      "action": 1
+    },
+    {
+      "table_address": "0x145135",
+      "start": "0x35dc9f",
+      "end_exclusive": "0x35dcae",
+      "landing_pad": "0x35e1ee",
+      "action": 1
+    },
+    {
+      "table_address": "0x14513b",
+      "start": "0x35ddbf",
+      "end_exclusive": "0x35ddc6",
+      "landing_pad": "0x35de3d",
+      "action": 3
+    },
+    {
+      "table_address": "0x145141",
+      "start": "0x35ddcb",
+      "end_exclusive": "0x35ddd7",
+      "landing_pad": "0x35de48",
+      "action": 3
+    },
+    {
+      "table_address": "0x145147",
+      "start": "0x35de9a",
+      "end_exclusive": "0x35dea5",
+      "landing_pad": "0x35e10a",
+      "action": 1
+    },
+    {
+      "table_address": "0x14514d",
+      "start": "0x35dea5",
+      "end_exclusive": "0x35deb6",
+      "landing_pad": "0x35e102",
+      "action": 1
+    },
+    {
+      "table_address": "0x145153",
+      "start": "0x35deb6",
+      "end_exclusive": "0x35df33",
+      "landing_pad": null,
+      "action": 0
+    },
+    {
+      "table_address": "0x145158",
+      "start": "0x35df33",
+      "end_exclusive": "0x35df40",
+      "landing_pad": "0x35df77",
+      "action": 3
+    },
+    {
+      "table_address": "0x14515e",
+      "start": "0x35df45",
+      "end_exclusive": "0x35df4a",
+      "landing_pad": "0x35df6b",
+      "action": 3
+    },
+    {
+      "table_address": "0x145164",
+      "start": "0x35df4f",
+      "end_exclusive": "0x35df5c",
+      "landing_pad": "0x35df6d",
+      "action": 3
+    },
+    {
+      "table_address": "0x14516a",
+      "start": "0x35df61",
+      "end_exclusive": "0x35df66",
+      "landing_pad": "0x35df81",
+      "action": 3
+    },
+    {
+      "table_address": "0x145170",
+      "start": "0x35df70",
+      "end_exclusive": "0x35df7f",
+      "landing_pad": "0x35e0fa",
+      "action": 1
+    },
+    {
+      "table_address": "0x145176",
+      "start": "0x35df7f",
+      "end_exclusive": "0x35df99",
+      "landing_pad": null,
+      "action": 0
+    },
+    {
+      "table_address": "0x14517b",
+      "start": "0x35df99",
+      "end_exclusive": "0x35df9e",
+      "landing_pad": "0x35e0f8",
+      "action": 1
+    },
+    {
+      "table_address": "0x145181",
+      "start": "0x35dfdb",
+      "end_exclusive": "0x35dfe5",
+      "landing_pad": "0x35e140",
+      "action": 1
+    },
+    {
+      "table_address": "0x145187",
+      "start": "0x35e0af",
+      "end_exclusive": "0x35e0b9",
+      "landing_pad": "0x35e11a",
+      "action": 1
+    },
+    {
+      "table_address": "0x14518d",
+      "start": "0x35e0c3",
+      "end_exclusive": "0x35e0d2",
+      "landing_pad": "0x35e112",
+      "action": 1
+    },
+    {
+      "table_address": "0x145193",
+      "start": "0x35e0e4",
+      "end_exclusive": "0x35e0e9",
+      "landing_pad": "0x35e1fe",
+      "action": 1
+    },
+    {
+      "table_address": "0x145199",
+      "start": "0x35e0e9",
+      "end_exclusive": "0x35e0ee",
+      "landing_pad": "0x35e1de",
+      "action": 1
+    },
+    {
+      "table_address": "0x14519f",
+      "start": "0x35e0ee",
+      "end_exclusive": "0x35e0f8",
+      "landing_pad": "0x35e140",
+      "action": 1
+    },
+    {
+      "table_address": "0x1451a5",
+      "start": "0x35e127",
+      "end_exclusive": "0x35e136",
+      "landing_pad": "0x35e138",
+      "action": 1
+    },
+    {
+      "table_address": "0x1451ab",
+      "start": "0x35e136",
+      "end_exclusive": "0x35e167",
+      "landing_pad": null,
+      "action": 0
+    },
+    {
+      "table_address": "0x1451b0",
+      "start": "0x35e167",
+      "end_exclusive": "0x35e172",
+      "landing_pad": "0x35e194",
+      "action": 1
+    },
+    {
+      "table_address": "0x1451b6",
+      "start": "0x35e172",
+      "end_exclusive": "0x35e1b7",
+      "landing_pad": null,
+      "action": 0
+    },
+    {
+      "table_address": "0x1451bb",
+      "start": "0x35e1b7",
+      "end_exclusive": "0x35e1bc",
+      "landing_pad": "0x35e1be",
+      "action": 0
+    },
+    {
+      "table_address": "0x1451c1",
+      "start": "0x35e1c1",
+      "end_exclusive": "0x35e1c6",
+      "landing_pad": "0x35e1ce",
+      "action": 1
+    },
+    {
+      "table_address": "0x1451c7",
+      "start": "0x35e1c6",
+      "end_exclusive": "0x35e20e",
+      "landing_pad": null,
+      "action": 0
+    }
+  ],
+  "action_chain": [
+    {
+      "filter": 2,
+      "next": -3
+    },
+    {
+      "filter": 1,
+      "next": 0
+    }
+  ],
+  "type2": "St9exception (original relocated typeinfo name)",
+  "type1": "zero catch-all entry",
+  "checks": {
+    "0x35d54b": "e870030100",
+    "0x35de64": "e988000000",
+    "0x35defb": "eb06",
+    "0x35df2d": "4183fe02",
+    "0x35df40": "bb04000000",
+    "0x35df4a": "e983fdffff",
+    "0x35df5c": "bb04000000",
+    "0x35df66": "e967fdffff",
+    "0x35dd1d": "f6c303",
+    "0x35dd28": "0f8547030000",
+    "0x35dd2e": "49ffc5",
+    "0x35dd39": "0f85d1f5ffff"
+  },
+  "windows": [
+    {
+      "start": "0x35d250",
+      "end_exclusive": "0x35e210",
+      "file_offset": "0x35d250",
+      "sha256": "367695d50e6056d682e4d6f5b33b1bf805fa4abd8b356a7a287cca6be343de80"
+    },
+    {
+      "start": "0x360570",
+      "end_exclusive": "0x360800",
+      "file_offset": "0x360570",
+      "sha256": "601578a7f01c6678cba04e406a08edb23e880e8d3f692044fbf63e537c200556"
+    },
+    {
+      "start": "0x1867a70",
+      "end_exclusive": "0x1867a90",
+      "file_offset": "0x16cea70",
+      "sha256": "9ac598cb0a5410fc83f1a9981962b9b12a6e1eb0ef243ef9331a110efe99f768"
+    },
+    {
+      "start": "0x187d128",
+      "end_exclusive": "0x187d2dc",
+      "file_offset": "0x16e4128",
+      "sha256": "1d6d251a542535aab47e6bb2afb14111c8ec22de219c542d9c46ae9816a4b649"
+    },
+    {
+      "start": "0x1450ac",
+      "end_exclusive": "0x1451d8",
+      "file_offset": "0x1450ac",
+      "sha256": "42c227d1fd3e48aa626c58abe71dfd3a661dd76b1a2d80dc205098baf529fce6"
+    },
+    {
+      "start": "0x187fd30",
+      "end_exclusive": "0x187fd70",
+      "file_offset": "0x16e6d30",
+      "sha256": "0e38095ba77129b03058390413a263d690189bbacf937f4de69ea9f922153849"
+    },
+    {
+      "start": "0x1473d8",
+      "end_exclusive": "0x147424",
+      "file_offset": "0x1473d8",
+      "sha256": "57932a2697fbb1aab80089e67eed7407be6c2ff18d5bd93eb481d685b5b27c8a"
+    },
+    {
+      "start": "0x187f184",
+      "end_exclusive": "0x187fbd8",
+      "file_offset": "0x16e6184",
+      "sha256": "2d85d9e318cbcf645b538709fd7f0c88c1d3edf323ba984ff5abfc294df1a2c6"
+    },
+    {
+      "start": "0x146720",
+      "end_exclusive": "0x14736c",
+      "file_offset": "0x146720",
+      "sha256": "41414cff5ee1847af171fa2b03cd030a408e02d8159fb64dc32818f6ca6aed5a"
+    },
+    {
+      "start": "0x372eea",
+      "end_exclusive": "0x372ef2",
+      "file_offset": "0x372eea",
+      "sha256": "4f09600e009d0d7046102264506519ae1ac49b029288da529d2783f21c44488b"
+    },
+    {
+      "start": "0x3733f1",
+      "end_exclusive": "0x373477",
+      "file_offset": "0x3733f1",
+      "sha256": "0437323e6a1b28fc23c46be04eb31d8387a9dfaf2af1f6fd9b2b1d8cbd4a0ef7"
+    },
+    {
+      "start": "0x373504",
+      "end_exclusive": "0x37354d",
+      "file_offset": "0x373504",
+      "sha256": "e7aca2f48df456014ceaffb682f658bc0af8a1004402ea0d44fb55eb8fbaf5ba"
+    }
+  ],
+  "target_executed": false,
+  "resource_chain": [
+    {
+      "function": "0x3742d0",
+      "fde": "0x187fd30",
+      "lsda": "0x1473d8",
+      "call": "0x374392",
+      "start": "0x37438f",
+      "end_exclusive": "0x374397",
+      "landing_pad": "0x374498",
+      "action": 0
+    },
+    {
+      "function": "0x36d8c0",
+      "fde": "0x187f184",
+      "lsda": "0x146720",
+      "call": "0x370a03",
+      "start": "0x3709f3",
+      "end_exclusive": "0x370a08",
+      "landing_pad": "0x372eea",
+      "action": 0
+    }
+  ],
+  "resource_cleanup_resume_call": "0x373548 -> 0x322a00",
+  "condition": "Normal cleanup and handler completion; no all-controller or whole-batch success guarantee"
+}

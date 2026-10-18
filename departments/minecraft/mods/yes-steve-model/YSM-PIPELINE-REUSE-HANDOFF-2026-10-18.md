@@ -81,3 +81,5 @@ Entity input の再利用なら最上段、Molang 実装なら evaluator と必�
 制御命令の有効期間：[coded control capability](CODED-CONTROL-CAPABILITY-LIFETIME-2026-10-18.md)。通常は predicate 中だけイベントに制御先を設定し、その後の点計算前に消去する。子contextは同じイベントを共有。例外・再入は別扱い。[非同期イベントの受渡し](ASYNC-EVENT-CAPABILITY-PUBLICATION-2026-10-18.md)では、正常結果を描画側が新たなMolang contextへ入れ直す経路は見つからず、描画補助は主にメタデータ・脚の数値を利用する。Futureの消去やnull結果を、共有配列の安全・処理完了の証拠にしない。両節は限定独立レビュー済み。
 
 パーサー再利用時の注意：[failed parse → temp address](PARSER-FAILURE-TEMP-ADDRESS-2026-10-18.md)。一時変数の割当後に失敗し、同じparserを次に再利用すると、成功した次の式にもずれた番地が残り得る。成功後のresetは既存ASTを再採番しない。観測差には現在frameの論理サイズ・offset・残存値などの条件が必要で、実物の不具合再現ではない。限定独立レビュー済み。
+
+例外の境界：[Java parser → native](NATIVE-PARSER-EXCEPTION-BOUNDARY-2026-10-18.md)では、Javaが捕捉したfallbackと、捕捉されずnative例外へ移る失敗を区別する。nullでもpending例外の確認は通る。[resource user-function → worker](NATIVE-RESOURCE-FAILURE-WORKER-SKIP-2026-10-18.md)は後片付けが正常なら当該モデルをskipし次へ進める経路で、batch全体の失敗・原状復帰を意味しない。以前のnative staging recordsはこのcatchでは消去されないが、最終Java公開成功は未証明。controller経路は途中catchが異なるので一般化しない。限定独立レビュー済み。
