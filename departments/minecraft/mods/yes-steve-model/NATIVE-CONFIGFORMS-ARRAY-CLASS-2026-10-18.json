@@ -1,0 +1,52 @@
+{
+  "checkpoint": "unicorn-jni-fmlcore-next6.checkpoint.json",
+  "checkpoint_sha256": "5910f1c5b52de7aeb2313ae9885bc22fd385a27815885516287cd319e4271d84",
+  "manager_global": "0xd356e0",
+  "manager": "0x40400109d040",
+  "members": [
+    {
+      "manager_offset": "0x78",
+      "descriptor_pointer": "0x404001011400",
+      "class_handle": "0x790000000700",
+      "class": "java/lang/String",
+      "method_handle": "0x7c0000000080",
+      "method_proof": {
+        "requested_class": "java/lang/String",
+        "name": "<init>",
+        "descriptor": "()V",
+        "static": false,
+        "declaring_class": "java/lang/String",
+        "class_sha256": "831a11d5c76c84b8777a7813440b4570d49934dee05c285c9068a0ec43158412",
+        "source": {
+          "id": "java.base",
+          "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+          "archive_kind": "jmod",
+          "entry_count": 7622
+        }
+      }
+    },
+    {
+      "manager_offset": "0x80",
+      "descriptor_pointer": "0x404001011440",
+      "class_handle": "0x790000000900",
+      "class": "java/lang/Object",
+      "method_handle": "0x7c0000000090",
+      "method_proof": {
+        "requested_class": "java/lang/Object",
+        "name": "toString",
+        "descriptor": "()Ljava/lang/String;",
+        "static": false,
+        "declaring_class": "java/lang/Object",
+        "class_sha256": "10cc90d16479279e1d6ee258fdaea4c5640ac6125acb5a7100a7b0a20237a9f2",
+        "source": {
+          "id": "java.base",
+          "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+          "archive_kind": "jmod",
+          "entry_count": 7622
+        }
+      }
+    }
+  ],
+  "guest_instructions_run": 0,
+  "scope": "Read immutable checkpoint JSON, changed image-byte records and decompressed sparse data pages only; no CPU construction, callback or checkpoint resume."
+}

@@ -4,7 +4,7 @@ Scope: exact YSM2.6.5 Forge1.20.1 release, original Linux x86-64 library. [Exact
 
 [Machine-readable entry routing](NATIVE-ENTRY-CONTRACT-INDEX-2026-10-18.json) links all17 original-YSM declarations to bounded entry contracts, plus the5 separately discovered LWJGL wrappers. These coverage counts do not mean all transitive implementations or runtime behavior are recovered.
 
-[Exact manager-slot lookup](NATIVE-JAVA-MEMBER-INDEX-2026-10-18.md) covers46 selected Java-member slots with source receipts; it is separate from the17 original native-entry declarations. Query the required manager+offset rather than rereading every metadata cohort.
+[Exact manager-slot lookup](NATIVE-JAVA-MEMBER-INDEX-2026-10-18.md) covers52 selected Java-member slots with source receipts; it is separate from the17 original native-entry declarations. Query the required manager+offset rather than rereading every metadata cohort.
 
 ## Choose the smallest entry point
 
@@ -91,3 +91,7 @@ Use [owned config/temp paths](NATIVE-INIT-PATH-CONSUMERS-2026-10-18.md), [builti
 [Blacklist line filtering and destination selection](NATIVE-BUILTIN-SELECTION-2026-10-18.md) distinguishes untrimmed patterns, CR→LF processing, exact prefix gating and lexical suffix normalization. [Regex semantics](NATIVE-BLACKLIST-REGEX-2026-10-18.md) proves full-range matching and native-supported option mapping. Path containment remains unproved, not demonstrated unsafe or safe.
 
 [Manifest numeric formatting](NATIVE-HASH-MANIFEST-FORMAT-2026-10-18.md) and [first-wins duplicate-name collection](NATIVE-ARCHIVE-DUPLICATE-NAMES-2026-10-18.md) complete the bounded ordered-serialization contract. Runtime locale, parser-wide duplicate acceptance, actual records and successful aggregate equality remain unknown.
+
+## Model configuration → renderer/Molang inputs
+
+[Main geometry flags](NATIVE-MAIN-GEOMETRY-FLAGS-2026-10-18.md) gives exact byte flow and a bounded truth table for build routing versus renderer bypass. [ConfigForms→Java](NATIVE-CONFIGFORMS-JAVA-JOIN-2026-10-18.md) joins model field order and native default selection to original Checkbox/Range/Radio constructors, completing the seam into existing Java form/expression/UI research. [Selected member index](NATIVE-JAVA-MEMBER-INDEX-2026-10-18.md) now contains52 slots; no central-map promotion.

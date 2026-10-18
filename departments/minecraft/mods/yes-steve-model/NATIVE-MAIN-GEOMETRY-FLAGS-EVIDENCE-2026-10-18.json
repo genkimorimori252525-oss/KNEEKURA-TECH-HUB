@@ -1,0 +1,394 @@
+{
+  "format": "ysm-main-geometry-two-flags-static-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "target_executed": false,
+  "assets_read": false,
+  "repo_modified": false,
+  "ranges": [
+    {
+      "start": "0x36deee",
+      "end_exclusive": "0x36df2c",
+      "sha256": "868cb51ba6fba7ad720f813fe3ed6dcf0f241742474b771469c4a8d47ea5bc9d",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3596014
+      },
+      "scope": "source flags and call"
+    },
+    {
+      "start": "0x36a6e0",
+      "end_exclusive": "0x36a712",
+      "sha256": "1171ae07cba74ff811ba2203e58f8e5c0ba0b967b36cce2d38d8e65e11723828",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3581664
+      },
+      "scope": "bridge prologue stack displacement"
+    },
+    {
+      "start": "0x36b0e6",
+      "end_exclusive": "0x36b197",
+      "sha256": "3a2619789c2c9a5b55646ff8a7b687a5ea7060841d30f23fabcc209260af764e",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3584230
+      },
+      "scope": "bridge argument loads and native call"
+    },
+    {
+      "start": "0x375e30",
+      "end_exclusive": "0x375eb5",
+      "sha256": "0461926963716637cb80b6a132bd7a3309191e668592dbd872ade6d59fd9c476",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3628592
+      },
+      "scope": "native prologue and argument stores"
+    },
+    {
+      "start": "0x376570",
+      "end_exclusive": "0x3765ae",
+      "sha256": "9537ce809a80e073088562dcfebf02d93d32f0500fc897d232523fe8721f3eb8",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3630448
+      },
+      "scope": "record+0 collection header"
+    },
+    {
+      "start": "0x376690",
+      "end_exclusive": "0x3766d1",
+      "sha256": "92cc5ca044dfa4099b826cbcb6fda8c7a0ba2b7aaf2b3106b3aacd53e9cf9989",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3630736
+      },
+      "scope": "record+18 collection header"
+    },
+    {
+      "start": "0x3768d0",
+      "end_exclusive": "0x376911",
+      "sha256": "260e2995c5729e3dfd604bb80036d455076f1a543b03f9bf31471109b420db23",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3631312
+      },
+      "scope": "record+48 collection header"
+    },
+    {
+      "start": "0x376c0d",
+      "end_exclusive": "0x3774c7",
+      "sha256": "43cd66c89fc85ce23b3041d15429ec49385720106724f240265be98cc9fd30c9",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3632141
+      },
+      "scope": "subvector span and classification; only stated control flow reviewed"
+    },
+    {
+      "start": "0x378430",
+      "end_exclusive": "0x37879d",
+      "sha256": "94105a994e607e1b1504027bc9bde8af0f8143c7d484360aece4a94781c05d02",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3638320
+      },
+      "scope": "A consumer and immediate batch destinations"
+    },
+    {
+      "start": "0x378b31",
+      "end_exclusive": "0x378b73",
+      "sha256": "397a1d10fdc8c328bbfd72efa58b0f03eceba619836d9bb30850558cc4d08052",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3640113
+      },
+      "scope": "classification-dependent quota paths"
+    },
+    {
+      "start": "0x378b73",
+      "end_exclusive": "0x378caf",
+      "sha256": "e52a0195700ccdecb738f22ba059cb285d4be11c9aa05a3c4455a6eed4b9dc32",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3640179
+      },
+      "scope": "B copy to allocation+64 and payload identity"
+    },
+    {
+      "start": "0x378deb",
+      "end_exclusive": "0x378e00",
+      "sha256": "e95d5fdad95a40d38a17445949a0596bcfad061323d37580afe3de96fbcbad80",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3640811
+      },
+      "scope": "registry payload pair store"
+    },
+    {
+      "start": "0x3bf750",
+      "end_exclusive": "0x3bf837",
+      "sha256": "029ac5b2bb91059f5229422e92b5ce41f669cb3200dc5402d1cf04a83e69ab60",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3929936
+      },
+      "scope": "renderer argument frame byte"
+    },
+    {
+      "start": "0x3bf952",
+      "end_exclusive": "0x3bf9c4",
+      "sha256": "9d29e133bd515d056c9019f2883cc9d5692741b35e83cbcffae83e4636661580",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3930450
+      },
+      "scope": "registry lookup payload identity"
+    },
+    {
+      "start": "0x3bffcf",
+      "end_exclusive": "0x3c0063",
+      "sha256": "9d2991465068bac72f7527d070e839c19bd37a668c63b02f526f4a2a284e3175",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3932111
+      },
+      "scope": "renderer preceding gate and B consumer"
+    },
+    {
+      "start": "0x3c0f80",
+      "end_exclusive": "0x3c0fa8",
+      "sha256": "01c09f0850cf4927217856dea9982663c9811e0093b08ba875062105c1a8b135",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3936128
+      },
+      "scope": "nonzero mode bypass"
+    },
+    {
+      "start": "0x3c0fcb",
+      "end_exclusive": "0x3c0fed",
+      "sha256": "099ea60223af06fe4f5da4fc144b226a1aa0768316ddb4b6718d79113a8e5b2b",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3936203
+      },
+      "scope": "zero mode bypass"
+    }
+  ],
+  "prior_receipts": [
+    {
+      "path": "../geometry-build-contract/evidence.json",
+      "sha256": "d911035f40312c4fcd495f0446d73686b73f60963d0f22f9821478efc6432504"
+    },
+    {
+      "path": "../model-geometry-selection-contract/evidence.json",
+      "sha256": "daa9c885ea4de174aead618c037d49fef9baed5c112aad1040036feaf829af6a"
+    },
+    {
+      "path": "../gui-bypass-contract/evidence.json",
+      "sha256": "112373ef9f3a3d850cd7d826bdc51cb6b7a65cc645b124e9499ed5c023f11ce0"
+    }
+  ],
+  "flags": {
+    "A": {
+      "source": "M+0x49a = S+0x10a",
+      "bridge_arg": 8,
+      "native_arg": 6,
+      "native_local": "rsp+0x129",
+      "consumer": "0x37843f",
+      "branch": "(((Q ? 1 : 0) & A_byte) | C_byte) != 0",
+      "canonical_domain": "A and B in {0,1} from inherited wire boolean validation; C low byte0/1 on reviewed producer paths",
+      "Q": "source subvector byte span == 0x480",
+      "C": "low byte of native frame+0xc; computed classification"
+    },
+    "B": {
+      "source": "M+0x49c = S+0x10c",
+      "bridge_arg": 9,
+      "native_arg": 7,
+      "native_local": "rsp+0x12a",
+      "stored": "registry payload+0x54",
+      "consumer": "0x3c0041",
+      "branch": "renderer frame+0x89 != 0 && B != 0, after prior renderer gates"
+    }
+  },
+  "truth_table": [
+    {
+      "A": 0,
+      "B": 0,
+      "build_branch": "C",
+      "bypass_after_prior_gates": "false"
+    },
+    {
+      "A": 0,
+      "B": 1,
+      "build_branch": "C",
+      "bypass_after_prior_gates": "renderer frame+0x89 != 0"
+    },
+    {
+      "A": 1,
+      "B": 0,
+      "build_branch": "Q || C",
+      "bypass_after_prior_gates": "false"
+    },
+    {
+      "A": 1,
+      "B": 1,
+      "build_branch": "Q || C",
+      "bypass_after_prior_gates": "renderer frame+0x89 != 0"
+    }
+  ]
+}

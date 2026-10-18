@@ -1,10 +1,10 @@
 # Exact native manager → Java member lookup
 
-[member index](NATIVE-JAVA-MEMBER-INDEX-2026-10-18.json) is an authored lookup keyed by `manager-global+offset`, for example `0xd355b0+0x128`. It contains **46 unique slots from 11 specified continuation receipts**, with zero duplicate slots and zero contradictions:
+[member index](NATIVE-JAVA-MEMBER-INDEX-2026-10-18.json) is an authored lookup keyed by `manager-global+offset`, for example `0xd355b0+0x128`. It contains **52 unique slots from 13 specified continuation receipts**, with zero duplicate slots and zero contradictions:
 
-- 42 original-YSM declarations
+- 47 original-YSM declarations
 - 1 declared Minecraft dependency declaration: commons-lang3 Pair.of
-- 3 declared JDK java.base declarations read from existing modeled checkpoint metadata
+- 4 declared JDK java.base declarations read from existing modeled checkpoint metadata
 
 This is a deliberately bounded index of the selected receipts, not complete manager coverage, the central semantic-name map, or the original17 native-entry registration table. Readable semantic aliases are intentionally absent.
 
@@ -14,8 +14,12 @@ The java-collection-checkpoint-proof schema does not record access flags, origin
 
 ## Evidence boundaries
 
-The 43 callback-derived identities came from bounded, isolated metadata decoding in cloned state, with fresh callback frames; the index does not replay them. The other3 entries are a read-only existing modeled metadata/pointer proof with zero guest instructions. Neither category establishes runtime invocation, full JNI initialization, successful object construction, live installed dependencies, enum initialization or asset processing. Existing declaration/source confidence is not promoted.
+The 48 callback-derived identities came from bounded, isolated metadata decoding in cloned state, with fresh callback frames; the index does not replay them. The other4 entries are read-only existing modeled metadata/pointer proofs with zero guest instructions. Neither category establishes runtime invocation, full JNI initialization, successful object construction, live installed dependencies, enum initialization or asset processing. Existing declaration/source confidence is not promoted.
 
 ## Validation
 
-The external builder validated source hashes, recorded payload identities/digests, static/access agreement and duplicate rejection. Repository integration rechecks all11 source receipt hashes and46 unique slot entries. Source instruction records remain in the linked receipts; no automatic whole-repository audit or callback replay is needed for a lookup.
+The external builder validated source hashes, recorded payload identities/digests, static/access agreement and duplicate rejection. Repository integration rechecks all13 source receipt hashes and52 unique slot entries. Source instruction records remain in the linked receipts; no automatic whole-repository audit or callback replay is needed for a lookup.
+
+## ConfigForms extension
+
+Five exact original-YSM constructors and one read-only JDK Object.toString descriptor/class slot were added. The latter supplies the Object array class without invoking that method. Its access flags remain unrecorded, bringing access-unknown count to4. The array proof also contains already-indexed String+78; only its member_index1 (Object+80) is selected, so no duplicate source identity is promoted. [Extension validation](NATIVE-JAVA-MEMBER-INDEX-EXTENSION-2026-10-18.json) preserves all46 earlier entries and11 source records. Index construction itself runs zero guest instructions; the five new source callbacks retain their separate guarded execution evidence.

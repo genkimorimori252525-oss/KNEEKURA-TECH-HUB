@@ -1,0 +1,349 @@
+{
+  "format": "ysm-configforms-five-members-verified-v1",
+  "members": [
+    {
+      "callback": "0x40faa0",
+      "manager_global": "0xd355a0",
+      "manager_offset": "0x70",
+      "kind": "method",
+      "descriptor_flags": 8,
+      "source": "0x46d02",
+      "source_length": 134,
+      "callback_sha256": "54f5e36d1799a7b4fa6f8c9ce0ca8577dfec018dad2da67d7ed10885d2f5c113",
+      "source_sha256": "1126bf92b3dfa1629a75ae200fe3b47739759ec5589bcbb5d850f499ab464e6d",
+      "instruction_evidence": [
+        {
+          "role": "callback_lea",
+          "address": "0x409351",
+          "bytes": "488d0548670000",
+          "sha256": "8c5495687ef99b034aee826701f68d7fd728b42dc2777d7782572243f0c0841e"
+        },
+        {
+          "role": "callback_store",
+          "address": "0x409358",
+          "bytes": "48898424b8010000",
+          "sha256": "3f0edea7cd7b2c089bb8fdd1ffe65cd0621eec6a9c9d071295f528a4d109b305"
+        },
+        {
+          "role": "manager_descriptor_store",
+          "address": "0x4093a1",
+          "bytes": "49895e70",
+          "sha256": "4973f016a97d386cfc49aafeb22776e11bd785d1909826bee36a30950f22aac4"
+        }
+      ],
+      "stop": {
+        "reason": "ENTRY_RETURN",
+        "pc": 4258495,
+        "address": 140733193388032,
+        "size": 0
+      },
+      "segments": [
+        {
+          "stop": {
+            "reason": "ENTRY_RETURN",
+            "pc": 4258495,
+            "address": 140733193388032,
+            "size": 0
+          },
+          "attempted": 2332776,
+          "completed": 2332776
+        }
+      ],
+      "payload": "Lcom/elfmcys/yesstevemodel/O000OO0OoOoo0ooO0o000000;<init>(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V",
+      "payload_sha256": "d5f0934a90e34afef5c850517d95892c664e9da75d9000d78eb8f96a7e86826b",
+      "owner": "com/elfmcys/yesstevemodel/O000OO0OoOoo0ooO0o000000",
+      "name": "<init>",
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V",
+      "static": false,
+      "classfile_status": "exact_match",
+      "declaring_class": "com/elfmcys/yesstevemodel/O000OO0OoOoo0ooO0o000000",
+      "access": 1,
+      "class_sha256": "52281002a5c564ecf275ed23d0929727d6c96238e6a82582a87b7ac771b62cf9",
+      "source_artifact": {
+        "id": "ysm",
+        "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+        "archive_kind": "jar",
+        "entry_count": 1853
+      }
+    },
+    {
+      "callback": "0x40fac0",
+      "manager_global": "0xd355a0",
+      "manager_offset": "0x78",
+      "kind": "method",
+      "descriptor_flags": 8,
+      "source": "0x4682e",
+      "source_length": 116,
+      "callback_sha256": "dc88dadaa5970321dc2ada424daca5afe4d77c082a0622ffb5cff43c8a5cc255",
+      "source_sha256": "cf518bfc766abccd5e4a5af267b1151225b802703b2cd79c26c730a383bf57fa",
+      "instruction_evidence": [
+        {
+          "role": "callback_lea",
+          "address": "0x4093b0",
+          "bytes": "488d0509670000",
+          "sha256": "140415f1bafb25f1fd49834343228a6d125e8e14e61ac5f2338ae933e7a6ff97"
+        },
+        {
+          "role": "callback_store",
+          "address": "0x4093b7",
+          "bytes": "4889842498010000",
+          "sha256": "e40a4a690b75cc4a121d6b12c2fcd572bf4b02f9a55bf653dff2e90fade289de"
+        },
+        {
+          "role": "manager_descriptor_store",
+          "address": "0x409400",
+          "bytes": "49895e78",
+          "sha256": "719182c843146773f99739c3fa71dea3405d4058654ef6535f0bafb9e68a96c7"
+        }
+      ],
+      "stop": {
+        "reason": "ENTRY_RETURN",
+        "pc": 4258527,
+        "address": 140733193388032,
+        "size": 0
+      },
+      "segments": [
+        {
+          "stop": {
+            "reason": "ENTRY_RETURN",
+            "pc": 4258527,
+            "address": 140733193388032,
+            "size": 0
+          },
+          "attempted": 1917106,
+          "completed": 1917106
+        }
+      ],
+      "payload": "Lcom/elfmcys/yesstevemodel/oOOoOO0ooOoOoo0oOoOo000o;<init>(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V",
+      "payload_sha256": "837038d097086fc3427c9492738b5f1b20518bfa7793ea109b99dcfe164ce933",
+      "owner": "com/elfmcys/yesstevemodel/oOOoOO0ooOoOoo0oOoOo000o",
+      "name": "<init>",
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V",
+      "static": false,
+      "classfile_status": "exact_match",
+      "declaring_class": "com/elfmcys/yesstevemodel/oOOoOO0ooOoOoo0oOoOo000o",
+      "access": 1,
+      "class_sha256": "d71601cca14ade69174a7aebd13fe18c9072a676dab6bae4554be1529d11028b",
+      "source_artifact": {
+        "id": "ysm",
+        "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+        "archive_kind": "jar",
+        "entry_count": 1853
+      }
+    },
+    {
+      "callback": "0x40fae0",
+      "manager_global": "0xd355a0",
+      "manager_offset": "0x80",
+      "kind": "method",
+      "descriptor_flags": 8,
+      "source": "0x4776a",
+      "source_length": 119,
+      "callback_sha256": "0068500ab6d8733102bf91d482e23b7b54b14fa20b25299a98e223edfb10d238",
+      "source_sha256": "cbc9207b2d8a2745f05b55e08958805d17489541ffe112a9f446463a15548ac0",
+      "instruction_evidence": [
+        {
+          "role": "callback_lea",
+          "address": "0x40940f",
+          "bytes": "488d1dca660000",
+          "sha256": "9512ec53ceca3fb65ef1b8a684b7eaebe1ebffdbb2fe076d943e614b75df918a"
+        },
+        {
+          "role": "callback_store",
+          "address": "0x409455",
+          "bytes": "49895f28",
+          "sha256": "6cd07fc0da245753dce0a70e35406553e606f4340cbaf3ea3b35934f87151b2a"
+        },
+        {
+          "role": "manager_descriptor_store",
+          "address": "0x40947b",
+          "bytes": "498d9e800000004c893b",
+          "sha256": "d7a84be743e87b593454850f9801c4aaeda1c57db2804b5e00ee6be07fc4762c"
+        }
+      ],
+      "stop": {
+        "reason": "ENTRY_RETURN",
+        "pc": 4258559,
+        "address": 140733193388032,
+        "size": 0
+      },
+      "segments": [
+        {
+          "stop": {
+            "reason": "ENTRY_RETURN",
+            "pc": 4258559,
+            "address": 140733193388032,
+            "size": 0
+          },
+          "attempted": 2033621,
+          "completed": 2033621
+        }
+      ],
+      "payload": "Lcom/elfmcys/yesstevemodel/oOooooooo00OO0OOO0oO00o0;<init>(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;DDD)V",
+      "payload_sha256": "8687fc168ce91ba24a424c72df3fccb103fb20055b32e840b19de8a086f28d56",
+      "owner": "com/elfmcys/yesstevemodel/oOooooooo00OO0OOO0oO00o0",
+      "name": "<init>",
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;DDD)V",
+      "static": false,
+      "classfile_status": "exact_match",
+      "declaring_class": "com/elfmcys/yesstevemodel/oOooooooo00OO0OOO0oO00o0",
+      "access": 1,
+      "class_sha256": "169c1e5f986132d2453dcbc9005a41a551dcb11e986f4513f19211dfe9bedd68",
+      "source_artifact": {
+        "id": "ysm",
+        "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+        "archive_kind": "jar",
+        "entry_count": 1853
+      }
+    },
+    {
+      "callback": "0x40fb00",
+      "manager_global": "0xd355a0",
+      "manager_offset": "0x88",
+      "kind": "method",
+      "descriptor_flags": 8,
+      "source": "0x42f55",
+      "source_length": 168,
+      "callback_sha256": "06dcf9e8b64dbec072f5af4f3cdec747f86b2b653f89f698ec46f9fbfba302ee",
+      "source_sha256": "19e6220c2a13f1eaecba2a77613e5deeabbb0f5c01e9967819467b28447801b1",
+      "instruction_evidence": [
+        {
+          "role": "callback_lea",
+          "address": "0x409490",
+          "bytes": "488d1d69660000",
+          "sha256": "a05bf2c5cb34b7d747606f1f79f2be7767e338e3470035dd7a41836659a587f8"
+        },
+        {
+          "role": "callback_store",
+          "address": "0x4094d6",
+          "bytes": "49895f28",
+          "sha256": "6cd07fc0da245753dce0a70e35406553e606f4340cbaf3ea3b35934f87151b2a"
+        },
+        {
+          "role": "manager_descriptor_store",
+          "address": "0x4094fc",
+          "bytes": "4c89f34881c3880000004c893b",
+          "sha256": "13f59b2c3ae67254eae15919c79377fca12f326b9095836fb43ae151ef8c4831"
+        }
+      ],
+      "stop": {
+        "reason": "ENTRY_RETURN",
+        "pc": 4258591,
+        "address": 140733193388032,
+        "size": 0
+      },
+      "segments": [
+        {
+          "stop": {
+            "reason": "ENTRY_RETURN",
+            "pc": 4258591,
+            "address": 140733193388032,
+            "size": 0
+          },
+          "attempted": 2732328,
+          "completed": 2732328
+        }
+      ],
+      "payload": "Lcom/elfmcys/yesstevemodel/oO0oOOoO0ooo0O0OO0oo0oo0;<init>(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/elfmcys/yesstevemodel/O0OO0oooo0oO0oOOo0OOooO0;)V",
+      "payload_sha256": "d55680614018f18b62e9fc2e5b2a2a837a8c7a2ce6556e6d51167a038659f2a0",
+      "owner": "com/elfmcys/yesstevemodel/oO0oOOoO0ooo0O0OO0oo0oo0",
+      "name": "<init>",
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/elfmcys/yesstevemodel/O0OO0oooo0oO0oOOo0OOooO0;)V",
+      "static": false,
+      "classfile_status": "exact_match",
+      "declaring_class": "com/elfmcys/yesstevemodel/oO0oOOoO0ooo0O0OO0oo0oo0",
+      "access": 1,
+      "class_sha256": "500999a24bb092a3083231a5b594edeb1d933d8b97ed3a2f235f760f20d92f22",
+      "source_artifact": {
+        "id": "ysm",
+        "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+        "archive_kind": "jar",
+        "entry_count": 1853
+      }
+    },
+    {
+      "callback": "0x40fda0",
+      "manager_global": "0xd355e8",
+      "manager_offset": "0x50",
+      "kind": "method",
+      "descriptor_flags": 8,
+      "source": "0x418a0",
+      "source_length": 100,
+      "callback_sha256": "7365798df431526361ece13e63108fb6d6f93b5745c2965480842d2ca123ed79",
+      "source_sha256": "2cc8e4f88bd31c89ad5cae8a090ce20132179076b444a5bbb934fb30923c555e",
+      "instruction_evidence": [
+        {
+          "role": "callback_lea",
+          "address": "0x408c7c",
+          "bytes": "488d1d1d710000",
+          "sha256": "bf3e7faa46cf74803819e7054fc211ca39b803ee158c50fc2be04adc9a759e14"
+        },
+        {
+          "role": "callback_store",
+          "address": "0x408cc2",
+          "bytes": "49895f28",
+          "sha256": "6cd07fc0da245753dce0a70e35406553e606f4340cbaf3ea3b35934f87151b2a"
+        },
+        {
+          "role": "manager_descriptor_store",
+          "address": "0x408ce8",
+          "bytes": "498d5e504c893b",
+          "sha256": "b7f2b9729f1989d2b499f0695794ca06daba641026279f1467a69eca9cdff1a8"
+        }
+      ],
+      "stop": {
+        "reason": "ENTRY_RETURN",
+        "pc": 4259263,
+        "address": 140733193388032,
+        "size": 0
+      },
+      "segments": [
+        {
+          "stop": {
+            "reason": "ENTRY_RETURN",
+            "pc": 4259263,
+            "address": 140733193388032,
+            "size": 0
+          },
+          "attempted": 1802522,
+          "completed": 1802522
+        }
+      ],
+      "payload": "Lcom/elfmcys/yesstevemodel/O0OO0oooo0oO0oOOo0OOooO0;<init>([Ljava/lang/Object;[Ljava/lang/Object;)V",
+      "payload_sha256": "407ad6ecadc8838c3444562bdf0edc809e03cc822f844cc0fe70b367ba6c062f",
+      "owner": "com/elfmcys/yesstevemodel/O0OO0oooo0oO0oOOo0OOooO0",
+      "name": "<init>",
+      "descriptor": "([Ljava/lang/Object;[Ljava/lang/Object;)V",
+      "static": false,
+      "classfile_status": "exact_match",
+      "declaring_class": "com/elfmcys/yesstevemodel/O0OO0oooo0oO0oOOo0OOooO0",
+      "access": 1,
+      "class_sha256": "642eac83cd324b02325f7a287a3ff2a0f271923fc42ad7175fb452bea06f0757",
+      "source_artifact": {
+        "id": "ysm",
+        "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+        "archive_kind": "jar",
+        "entry_count": 1853
+      }
+    }
+  ],
+  "input_pins": {
+    "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+    "jar_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+    "checkpoint_sha256": "5910f1c5b52de7aeb2313ae9885bc22fd385a27815885516287cd319e4271d84",
+    "java_base_sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1"
+  },
+  "original_inputs_unchanged": true,
+  "tool_pins_unchanged": true,
+  "dependency_archives_loaded": [],
+  "limits": {
+    "max_segments_per_callback": 2,
+    "instructions_per_segment": 4000000,
+    "seconds_per_segment": 180,
+    "all_five_entry_return": true,
+    "all_five_one_segment": true,
+    "jni_calls_unchanged": true,
+    "runtime_initialization_proven": false,
+    "runtime_resource_consumption_proven": false
+  }
+}

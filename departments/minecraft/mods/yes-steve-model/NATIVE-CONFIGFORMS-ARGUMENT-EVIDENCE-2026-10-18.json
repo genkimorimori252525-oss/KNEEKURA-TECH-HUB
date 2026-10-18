@@ -1,0 +1,227 @@
+{
+  "format": "configforms-static-native-java-join-v1",
+  "scope": "Static original SO bytes and original JAR classfiles only; no guest/native/JVM execution, callbacks, assets, filesystem callbacks, checkpoint resume or protected string decoding.",
+  "so_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "jar_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "exact_identity_join_complete": false,
+  "ranges": [
+    {
+      "address": "0x409346",
+      "end_exclusive": "0x409509",
+      "file": "409346-409509.bin",
+      "sha256": "19798492659fa4fdb97b6ce30747c82ffe1c59d8c411018e9b115212c0df7d6d"
+    },
+    {
+      "address": "0x408c74",
+      "end_exclusive": "0x408cef",
+      "file": "408c74-408cef.bin",
+      "sha256": "4db9975d0e2e41947163c4eb0e4ca334e29432eefa2dae0b0387698bd4834a5e"
+    },
+    {
+      "address": "0x408e65",
+      "end_exclusive": "0x408e70",
+      "file": "408e65-408e70.bin",
+      "sha256": "71495133f3a47268151f1b75c77a83137de16e7ff0f40ab905d357de904644ed"
+    },
+    {
+      "address": "0x40964b",
+      "end_exclusive": "0x409652",
+      "file": "40964b-409652.bin",
+      "sha256": "8d201706d37a079262d99c37c2f242b0c18e55cfd2be12c6d7b5bb90c82afe19"
+    },
+    {
+      "address": "0x3a85c9",
+      "end_exclusive": "0x3a879a",
+      "file": "3a85c9-3a879a.bin",
+      "sha256": "e9e6268cf2e1dcfce27a9ed945df1afab3079d21ddeb1812d296ad8699fc11e7"
+    },
+    {
+      "address": "0x3a87f6",
+      "end_exclusive": "0x3a88a5",
+      "file": "3a87f6-3a88a5.bin",
+      "sha256": "9f6af256236011908a95b354fe7bae6b273f595b9adf5f8e10ab1b6e88be0267"
+    },
+    {
+      "address": "0x3a88a5",
+      "end_exclusive": "0x3a8c44",
+      "file": "3a88a5-3a8c44.bin",
+      "sha256": "6a303e28d253da84ff8bc12d4a5c9e94002cdb613d326b578e44277e088d19b1"
+    },
+    {
+      "address": "0x3a8d55",
+      "end_exclusive": "0x3a8daa",
+      "file": "3a8d55-3a8daa.bin",
+      "sha256": "0e1d3c2f8b6e60bf602680e5a0e91bb2345a0fbdfcb819688e1ea18ebbe5c1d5"
+    },
+    {
+      "address": "0x3a8fc0",
+      "end_exclusive": "0x3a8fe4",
+      "file": "3a8fc0-3a8fe4.bin",
+      "sha256": "86ef742091105f9d3be7be0377acc3638f8942bce6acde020ba3bd561cdbadf8"
+    },
+    {
+      "address": "0x3a91e1",
+      "end_exclusive": "0x3a9236",
+      "file": "3a91e1-3a9236.bin",
+      "sha256": "3e25be96b66a81c6dd40db39c74f34683816f275f67d28a3f13e70cba5e57dee"
+    }
+  ],
+  "callbacks": [
+    {
+      "manager": "0xd355a0",
+      "slot": "0x70",
+      "callback": "0x40faa0",
+      "callback_bytes": "534889fb488d3d5772c3ffe8804c900048c70386000000488943084889d85bc3",
+      "callback_sha256": "54f5e36d1799a7b4fa6f8c9ce0ca8577dfec018dad2da67d7ed10885d2f5c113",
+      "source": "0x46d02",
+      "source_length": 134,
+      "source_sha256": "1126bf92b3dfa1629a75ae200fe3b47739759ec5589bcbb5d850f499ab464e6d",
+      "callback_lea": "0x409351",
+      "slot_store": "0x4093a1",
+      "descriptor_flags": 8,
+      "kind": "method",
+      "decoded": false
+    },
+    {
+      "manager": "0xd355a0",
+      "slot": "0x78",
+      "callback": "0x40fac0",
+      "callback_bytes": "534889fb488d3d636dc3ffe8604c900048c70374000000488943084889d85bc3",
+      "callback_sha256": "dc88dadaa5970321dc2ada424daca5afe4d77c082a0622ffb5cff43c8a5cc255",
+      "source": "0x4682e",
+      "source_length": 116,
+      "source_sha256": "cf518bfc766abccd5e4a5af267b1151225b802703b2cd79c26c730a383bf57fa",
+      "callback_lea": "0x4093b0",
+      "slot_store": "0x409400",
+      "descriptor_flags": 8,
+      "kind": "method",
+      "decoded": false
+    },
+    {
+      "manager": "0xd355a0",
+      "slot": "0x80",
+      "callback": "0x40fae0",
+      "callback_bytes": "534889fb488d3d7f7cc3ffe8404c900048c70377000000488943084889d85bc3",
+      "callback_sha256": "0068500ab6d8733102bf91d482e23b7b54b14fa20b25299a98e223edfb10d238",
+      "source": "0x4776a",
+      "source_length": 119,
+      "source_sha256": "cbc9207b2d8a2745f05b55e08958805d17489541ffe112a9f446463a15548ac0",
+      "callback_lea": "0x40940f",
+      "slot_store": "0x409482",
+      "descriptor_flags": 8,
+      "kind": "method",
+      "decoded": false
+    },
+    {
+      "manager": "0xd355a0",
+      "slot": "0x88",
+      "callback": "0x40fb00",
+      "callback_bytes": "534889fb488d3d4a34c3ffe8204c900048c703a8000000488943084889d85bc3",
+      "callback_sha256": "06dcf9e8b64dbec072f5af4f3cdec747f86b2b653f89f698ec46f9fbfba302ee",
+      "source": "0x42f55",
+      "source_length": 168,
+      "source_sha256": "19e6220c2a13f1eaecba2a77613e5deeabbb0f5c01e9967819467b28447801b1",
+      "callback_lea": "0x409490",
+      "slot_store": "0x409506",
+      "descriptor_flags": 8,
+      "kind": "method",
+      "decoded": false
+    },
+    {
+      "manager": "0xd355e8",
+      "slot": "0x50",
+      "callback": "0x40fda0",
+      "callback_bytes": "534889fb488d3df51ac3ffe88049900048c70364000000488943084889d85bc3",
+      "callback_sha256": "7365798df431526361ece13e63108fb6d6f93b5745c2965480842d2ca123ed79",
+      "source": "0x418a0",
+      "source_length": 100,
+      "source_sha256": "2cc8e4f88bd31c89ad5cae8a090ce20132179076b444a5bbb934fb30923c555e",
+      "callback_lea": "0x408c7c",
+      "slot_store": "0x408cec",
+      "descriptor_flags": 8,
+      "kind": "method",
+      "decoded": false
+    }
+  ],
+  "java_constructors": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/O000OO0OoOoo0ooO0o000000",
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V",
+      "class_sha256": "52281002a5c564ecf275ed23d0929727d6c96238e6a82582a87b7ac771b62cf9",
+      "code_sha256": "764361c25f35dc30b61dee2fe2c9313c134c993d63d044fd55dfc89807a44e59",
+      "snapshot_matches_original_classfile": true
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOOoOO0ooOoOoo0oOoOo000o",
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V",
+      "class_sha256": "d71601cca14ade69174a7aebd13fe18c9072a676dab6bae4554be1529d11028b",
+      "code_sha256": "e85c42f79f8e9ba3a23e0696d238864245b35e5a7511c630da9345564199d2ee",
+      "snapshot_matches_original_classfile": true
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOooooooo00OO0OOO0oO00o0",
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;DDD)V",
+      "class_sha256": "169c1e5f986132d2453dcbc9005a41a551dcb11e986f4513f19211dfe9bedd68",
+      "code_sha256": "fe6af36ca538435d4e90501a74457936473d9ffd7568983bea0efcbe890bf041",
+      "snapshot_matches_original_classfile": true
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oO0oOOoO0ooo0O0OO0oo0oo0",
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/elfmcys/yesstevemodel/O0OO0oooo0oO0oOOo0OOooO0;)V",
+      "class_sha256": "500999a24bb092a3083231a5b594edeb1d933d8b97ed3a2f235f760f20d92f22",
+      "code_sha256": "d93b07648653876d7d4e763daea6b879a3cd01f2aa487d8d370d4d8d3aa3be31",
+      "snapshot_matches_original_classfile": true
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0OO0oooo0oO0oOOo0OOooO0",
+      "descriptor": "([Ljava/lang/Object;[Ljava/lang/Object;)V",
+      "class_sha256": "642eac83cd324b02325f7a287a3ff2a0f271923fc42ad7175fb452bea06f0757",
+      "code_sha256": "35097410a95fefe05a58a8463ac10703415a57e778b36ecb5ebc8e861c9d615d",
+      "snapshot_matches_original_classfile": true
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0OO0oooo0oO0oOOo0OOooO0",
+      "descriptor": "(Lit/unimi/dsi/fastutil/objects/Object2ObjectArrayMap;)V",
+      "class_sha256": "642eac83cd324b02325f7a287a3ff2a0f271923fc42ad7175fb452bea06f0757",
+      "code_sha256": "b999d7e396e7dcf1e012aa1f137767ce6ed6eca1d187f393da504c7bde7e176a",
+      "snapshot_matches_original_classfile": true
+    }
+  ],
+  "native_argument_join": {
+    "common": {
+      "F+0x08": "branch discriminator; converted Java string is not passed to any selected constructor",
+      "F+0x28": "constructor reference argument 1",
+      "F+0x48": "constructor reference argument 2",
+      "F+0x68": "constructor reference argument 3"
+    },
+    "range": {
+      "F+0x88": "xmm0: first double",
+      "F+0x90": "xmm1: second double",
+      "F+0x98": "xmm2: third double"
+    },
+    "radio": {
+      "F+0xa0": "segmented pair collection",
+      "record+0x00": "parallel array A[index]",
+      "record+0x20": "parallel array B[index]",
+      "map_constructor": "d355e8+0x50 receives A,B at 0x3a8c3f",
+      "radio_constructor": "d355a0+0x88 receives three common strings plus map reference at 0x3a8da1"
+    },
+    "typed_array": "result inserted using JNI+0x570 at 0x3a8fde into array created using d355a0+0x70; same array passed to already identified ExtraAnimationButton constructor at 0x3a922d"
+  },
+  "conditional_java_join": {
+    "requires": "Exact metadata identities for the five recorded callbacks; signatures/control-flow/length corroboration alone are not identity proof",
+    "F+0x28": "ConfigForms.title = o0OOooo0o0OO00OoOOOo0o0O",
+    "F+0x48": "ConfigForms.description = O00OOOooOoooOoo0o0o0oO0O",
+    "F+0x68": "ConfigForms.value = oOOOo0OOO0ooooo0O00OO0o0",
+    "F+0x88": "RangeForms.step = o0OOooo0o0OO00OoOOOo0o0O",
+    "F+0x90": "RangeForms.min = O00OOOooOoooOoo0o0o0oO0O",
+    "F+0x98": "RangeForms.max = oOOOo0OOO0ooooo0O00OO0o0",
+    "F+0xa0": "RadioForms.labels map: first string = label name; second string = expression",
+    "F+0x08": "Not directly copied to ConfigForms.type; candidate subclasses install fixed literals. Unknown/non-range/non-radio native discriminator follows default constructor candidate CheckboxForms."
+  },
+  "remaining_limits": [
+    "d356e0+0x80 array-element descriptor identity not decoded in this work",
+    "No native duplicate-key policy or conversion overflow guarantee proven",
+    "No successful object construction, expression evaluation, model load or runtime initialization claimed"
+  ]
+}
