@@ -36,8 +36,9 @@ public final class ManualRequestSelfTest {
   if(ManualGridGeometry.RED!=90||ManualGridGeometry.GREEN!=102||ManualGridGeometry.BLUE!=118||ManualGridGeometry.ALPHA!=255)throw new AssertionError("ORIGINAL_GRID_COLOR_CHANGED");checks++;
   try{var bytes=new java.io.ByteArrayOutputStream();var stream=new java.io.DataOutputStream(bytes);int lines=ManualGridGeometry.emit(new int[]{0,224,0},new int[]{52,248,52},(x,y,z,a,b,d)->{try{for(double v:new double[]{x,y,z,a,b,d})stream.writeDouble(v);}catch(java.io.IOException e){throw new RuntimeException(e);}});String hash=java.util.HexFormat.of().formatHex(java.security.MessageDigest.getInstance("SHA-256").digest(bytes.toByteArray()));if(lines!=524||!hash.equals("4af9d3c93025cd883d9d8c9df33223c71866c2bb6f30c9d936f624ba77b5dc93"))throw new AssertionError("ORIGINAL_GRID_VERTEX_LAYOUT_CHANGED");checks++;}catch(Exception e){throw new AssertionError(e);}
   var diagnostic=visual.deepCopy();diagnostic.addProperty("v",3);diagnostic.getAsJsonArray("grants").add("FINITE_MOTION_DIAGNOSTICS");
-  var settings=new JsonObject();settings.addProperty("schemaHash",ManualDiagnosticsLimits.SCHEMA_HASH);settings.addProperty("maxWallMs",2000);settings.addProperty("maxServerSamples",400);settings.addProperty("maxClientSamples",400);settings.addProperty("maxFrameSamples",1200);settings.addProperty("maxBytes",1048576);settings.addProperty("maxQueue",64);diagnostic.add("diagnostics",settings);ManualRequest.validate(diagnostic);checks++;
+  var settings=new JsonObject();settings.addProperty("schemaHash",ManualDiagnosticsLimits.SCHEMA_HASH);settings.addProperty("startTrigger","SUBJECT_MOTION");settings.addProperty("maxWallMs",2000);settings.addProperty("maxServerSamples",400);settings.addProperty("maxClientSamples",400);settings.addProperty("maxFrameSamples",1200);settings.addProperty("maxBytes",1048576);settings.addProperty("maxQueue",64);diagnostic.add("diagnostics",settings);ManualRequest.validate(diagnostic);checks++;
   for(String key:new String[]{"maxWallMs","maxServerSamples","maxClientSamples","maxFrameSamples","maxBytes","maxQueue"}){for(double n:new double[]{0,-1,1.5,Double.NaN,2000000}){var x=diagnostic.deepCopy();x.getAsJsonObject("diagnostics").addProperty(key,n);reject(x);checks++;}}
+  var badTrigger=diagnostic.deepCopy();badTrigger.getAsJsonObject("diagnostics").addProperty("startTrigger","ALWAYS");reject(badTrigger);checks++;
   var noDiagnosticGrant=diagnostic.deepCopy();noDiagnosticGrant.getAsJsonArray("grants").remove(2);reject(noDiagnosticGrant);checks++;
   var foreignSchema=diagnostic.deepCopy();foreignSchema.getAsJsonObject("diagnostics").addProperty("schemaHash","b".repeat(64));reject(foreignSchema);checks++;
   var parentLimit=diagnostic.deepCopy();parentLimit.getAsJsonObject("diagnostics").addProperty("maxWallMs",2001);reject(parentLimit);checks++;
@@ -47,6 +48,11 @@ public final class ManualRequestSelfTest {
   if(!ManualDiagnosticsLimits.admission(settings,"SERVER",0,0,1,11,11).equals("SUBLEASE_EXPIRED"))throw new AssertionError("EXPIRED_TRACE_ACCEPTED");checks++;
   if(!ManualDiagnosticsLimits.admission(settings,"SERVER",0,1048575,2,10,11).equals("BYTE_LIMIT"))throw new AssertionError("BYTE_OVERFLOW_ACCEPTED");checks++;
   if(!ManualDiagnosticsLimits.admission(settings,"SERVER",0,Long.MAX_VALUE,1,10,11).equals("BYTE_LIMIT"))throw new AssertionError("LONG_BUDGET_OVERFLOW_ACCEPTED");checks++;
+  if(ManualDiagnosticsLimits.displacement(null,new double[]{1,2,3})>=.02)throw new AssertionError("FIRST_SAMPLE_TRIGGERED");checks++;
+  if(ManualDiagnosticsLimits.displacement(new double[]{1,2,3},new double[]{1,2,3})>=.02)throw new AssertionError("STATIONARY_BODY_WITH_NONZERO_VELOCITY_TRIGGERED");checks++;
+  if(ManualDiagnosticsLimits.displacement(new double[]{0,0,0},new double[]{.02,0,0})<.02)throw new AssertionError("ACTUAL_MOTION_NOT_TRIGGERED");checks++;
+  if(ManualDiagnosticsLimits.deadline(1000000000L,990000000L,20000)!=1000000000L)throw new AssertionError("PARENT_LEASE_RENEWED");checks++;
+  if(ManualDiagnosticsLimits.deadline(1000000000L,100000000L,20)!=120000000L)throw new AssertionError("SUBLEASE_NOT_BOUNDED");checks++;
   System.out.println("PASS "+checks+" Java manual request/STOP/grid boundary checks");
  }
  private static void reject(JsonObject x){try{ManualRequest.validate(x);}catch(RuntimeException expected){return;}throw new AssertionError("INVALID_MANUAL_REQUEST_ACCEPTED");}
