@@ -1,0 +1,20 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="Private verification"
+[[mods]]
+modId="kneekura_tank_host"
+version="1"
+displayName="KNEEKURA TechHub Tank Host"
+description="Persistent generic native host; target MODs are explicit profile inputs."
+[[dependencies.kneekura_tank_host]]
+modId="forge"
+mandatory=true
+versionRange="[47.4.10]"
+ordering="NONE"
+side="CLIENT"
+[[dependencies.kneekura_tank_host]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1]"
+ordering="NONE"
+side="CLIENT"

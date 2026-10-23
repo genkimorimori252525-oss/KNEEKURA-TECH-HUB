@@ -2,6 +2,8 @@
 
 2026-10-08. Read with [Project Guide](PROJECT-GUIDE.md) and [AI Feedback](AI-FEEDBACK.md). Use the integrated `departments/minecraft/lab`; the standalone LAB is historical. Minecraft supplies actual runtime/render evidence; browser diagrams interpret retained samples.
 
+2026-10-23 launch routing: [Persistent TechHub native host](../departments/minecraft/lab/native-host/README.md), [design/plan](agent-decisions/2026-10-23-persistent-tank-host.md) and [actual results](agent-decisions/2026-10-23-persistent-tank-results.md). TechHub owns the reusable installation; target MODs/dependencies are hashed profile inputs. Install/warm/prepare do not launch; start is explicit, finite and offline. Temporary Reimu hosts and historical OBSERVE_GRID manual-launch instructions are superseded. This new observation-only route does not acquire existing Arena, roster, camera, input or mutation authority. Preserve those features' original source/owner contracts and acceptance limits below. A genuine native Natural lifecycle is verified; broader profile compatibility/manual gameplay must follow their own actual receipts.
+
 Reconciled the user-provided [older guide](https://chatgpt.com/space/page_83f4ca35a65c81919f1b0b9eca36ff76) and its MD export (SHA256 `e42296a4295260bc1eefa85fe68d3a9f46ad78f8f7befc1561df87bb12580c43`) against local camera-branch source `97a130f`. Older source pins `c369953`/PR96 `6b745627` remain historical, not reset instructions. Select matching Python/LAB/MOD source and repin materials before execution; the original dirty checkout lacks these runtime tools. Documentation availability is not installation or runtime acceptance.
 
 ## Choose the observation

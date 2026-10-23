@@ -1,0 +1,78 @@
+import groovy.json.JsonSlurper
+import groovy.json.JsonOutput
+
+plugins { id 'net.minecraftforge.gradle' version '6.0.54' }
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+def profileFile = System.getenv('KNEEKURA_TANK_PROFILE')
+def profile = profileFile ? new JsonSlurper().parse(new File(profileFile)) : null
+
+minecraft {
+    mappings channel: 'official', version: '1.20.1'
+    runs {
+        client {
+            workingDirectory profile ? file(profile.gameDir) : file('build/unused-game')
+            property 'forge.logging.console.level', 'info'
+            if (profile) {
+                property 'kneekura.tank.requestSha256', System.getenv('KNEEKURA_MANUAL_REQUEST_SHA256') ?: 'PREPARATION_ONLY'
+                property 'kneekura.tank.installSha256', System.getenv('KNEEKURA_TANK_INSTALL_SHA256') ?: 'PREPARATION_ONLY'
+                property 'kneekura.tank.world', profile.worldDir
+            }
+            jvmArgs '-Xmx2G', '-XX:ActiveProcessorCount=8'
+            mods { kneekura_tank_host { source sourceSets.main } }
+            if (profile) args '--quickPlaySingleplayer', 'KNEEKURA_DEBUG_WORLD', '--uuid', profile.playerUuid, '--username', 'TankAgent'
+        }
+    }
+}
+repositories {
+    if (profile) flatDir { dirs file(profile.materialDir) }
+}
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.20.1-47.4.10'
+    if (profile) {
+        runtimeOnly files(profile.adapter)
+        profile.mods.each { entry ->
+            if (entry.kind == 'mapped-dev') runtimeOnly files(entry.file)
+            else if (entry.kind == 'forge-distribution') runtimeOnly fg.deobf("kneekura.tank:${entry.id}:${entry.sha256}")
+            else throw new GradleException('Unsupported Tank artifact kind')
+        }
+    }
+}
+tasks.register('writeTankClasspath') {
+    doLast {
+        def output = new File(System.getenv('KNEEKURA_TANK_CLASSPATH'))
+        output.parentFile.mkdirs()
+        output.text = configurations.compileClasspath.asPath + '\n'
+        new File(output.parentFile, 'runtime-classpath.txt').text = configurations.runtimeClasspath.asPath + '\n'
+    }
+}
+tasks.register('writeTankResolved') {
+    doLast {
+        if (!profile) throw new GradleException('An explicit Tank profile is required')
+        def artifacts = configurations.runtimeClasspath.resolvedConfiguration.resolvedArtifacts
+        def rows = profile.mods.collect { entry ->
+            def material = entry.kind == 'mapped-dev' ? file(entry.file) :
+                artifacts.find { it.moduleVersion.id.name == entry.id }?.file
+            if (!material?.isFile()) throw new GradleException('Resolved Tank material missing: ' + entry.id)
+            [id: entry.id, file: material.canonicalPath, sha256:
+                java.security.MessageDigest.getInstance('SHA-256').digest(material.bytes).encodeHex().toString()]
+        }
+        java.nio.file.Files.writeString(new File(System.getenv('KNEEKURA_TANK_RESOLVED')).toPath(),
+            JsonOutput.toJson(rows) + '\n', java.nio.file.StandardOpenOption.CREATE_NEW)
+    }
+}
+tasks.matching { it.name == 'runClient' }.configureEach {
+    environment System.getenv().findAll { key, value -> key.startsWith('KNEEKURA_') }
+    doFirst {
+        if (!profile) throw new GradleException('An explicit prepared Tank profile is required')
+        def e = System.getenv()
+        def marker = new File(e.KNEEKURA_DEBUG_BUILD_MARKER)
+        marker.parentFile.mkdirs()
+        java.nio.file.Files.writeString(marker.toPath(), JsonOutput.toJson([
+            debugSessionId: e.KNEEKURA_DEBUG_SESSION_ID,
+            runId: e.KNEEKURA_DEBUG_RUN_ID,
+            handshakeNonce: e.KNEEKURA_DEBUG_HANDSHAKE_NONCE,
+            builtAt: java.time.Instant.now().toString()
+        ]) + '\n', java.nio.file.StandardOpenOption.CREATE_NEW)
+    }
+}
