@@ -42,7 +42,7 @@ public final class ManualNativeAdapter {
  private static volatile String forgeAt;
  public ManualNativeAdapter(){
   FMLJavaModLoadingContext.get().getModEventBus().addListener((FMLClientSetupEvent e)->forgeAt=Instant.now().toString());
-  MinecraftForge.EVENT_BUS.register(new Client());MinecraftForge.EVENT_BUS.register(new Server());MinecraftForge.EVENT_BUS.register(new ManualGrid());
+  MinecraftForge.EVENT_BUS.register(new Client());MinecraftForge.EVENT_BUS.register(new Server());MinecraftForge.EVENT_BUS.register(new ManualGrid());MinecraftForge.EVENT_BUS.register(new ManualMotionDiagnostics());
  }
  private static KneekuraDebugEnv.Config env;
  private static JsonObject request;
@@ -113,7 +113,7 @@ public final class ManualNativeAdapter {
   String line=GSON.toJson(row)+"\n";try{writer.execute(()->{try{stream.write(line);stream.flush();}catch(IOException e){errors.add(e.toString());}});}catch(RejectedExecutionException e){dropped++;}
  }
  private static JsonObject shotState(Projectile shot){var x=new JsonObject();x.addProperty("uuid",shot.getUUID().toString());x.addProperty("owner",shot.getOwner()==null?null:shot.getOwner().getUUID().toString());x.addProperty("removed",shot.isRemoved());x.addProperty("x",shot.getX());x.addProperty("y",shot.getY());x.addProperty("z",shot.getZ());x.addProperty("scope","VANILLA_PROJECTILE_OWNER_NOT_TARGET_SPECIFIC_RALLY_STATE");return x;}
- private static synchronized void end(String why){if(!ended){reason=why;ended=true;ManualGrid.clear(why);observation("SESSION_END",bound(),new JsonObject());try{var x=new JsonObject();x.addProperty("reason",reason);x.addProperty("requestHash",requestHash);exclusive(output.resolve("window-end.json"),x);}catch(IOException e){errors.add(e.toString());}}}
+ private static synchronized void end(String why){if(!ended){reason=why;ended=true;ManualGrid.clear(why);ManualMotionDiagnostics.clear(why);observation("SESSION_END",bound(),new JsonObject());try{var x=new JsonObject();x.addProperty("reason",reason);x.addProperty("requestHash",requestHash);exclusive(output.resolve("window-end.json"),x);}catch(IOException e){errors.add(e.toString());}}}
  public static final class Client {
   @SubscribeEvent public void tick(TickEvent.ClientTickEvent event){
    if(event.phase!=TickEvent.Phase.END||!initialize()||disabled)return;
@@ -133,7 +133,7 @@ public final class ManualNativeAdapter {
      var runtime=new KneekuraDebugReadyWriter.RuntimeInfo(net.minecraft.SharedConstants.getCurrentVersion().getName(),net.minecraftforge.versions.forge.ForgeVersion.getVersion(),System.getProperty("java.version"),"integrated-singleplayer",probe,ProcessHandle.current().info().command().orElseThrow(),mods);
      var milestones=new KneekuraDebugReadyWriter.Milestones(JVM,forgeAt,now,now,now,now);
      var binding=new JsonObject();binding.addProperty("playerUuid",bound().getUUID().toString());binding.addProperty("worldDir",request.get("worldDir").getAsString());binding.addProperty("requestHash",requestHash);binding.addProperty("pid",PID);binding.addProperty("runSnapshotId",env.runSnapshotId());exclusive(output.resolve("binding.json"),binding);
-     beganNanos=System.nanoTime();ManualGrid.arm(mc.getSingleplayerServer(),request,requestHash,output,beganNanos,()->ready&&!ended&&!closing&&!disabled);ready=true;observation("NATIVE_PLAYER_BOUND",bound(),binding.deepCopy());
+     beganNanos=System.nanoTime();ManualMotionDiagnostics.arm(mc.getSingleplayerServer(),request,requestHash,output,beganNanos,()->ready&&!ended&&!closing&&!disabled);ManualGrid.arm(mc.getSingleplayerServer(),request,requestHash,output,beganNanos,()->ready&&!ended&&!closing&&!disabled);ready=true;ManualMotionDiagnostics.activate();observation("NATIVE_PLAYER_BOUND",bound(),binding.deepCopy());
      KneekuraDebugReadyWriter.write(env,new KneekuraDebugReadyWriter.ReadyState(PID,milestones,runtime));
     }catch(Exception e){errors.add(e.toString());disabled=true;System.err.println("MANUAL_READY_FAILED "+e);}
    }
@@ -154,7 +154,7 @@ public final class ManualNativeAdapter {
   }
   @SubscribeEvent public void stopping(ServerStoppingEvent e){if(ready)end("USER_OR_NATIVE_STOP");}
   @SubscribeEvent public void stopped(ServerStoppedEvent e){ManualGrid.clear("SERVER_STOPPED");if(env==null||disabled)return;worldStopped=true;closing=true;writer.shutdown();boolean clean=false;try{clean=writer.awaitTermination(3,TimeUnit.SECONDS);stream.flush();stream.close();try(var f=FileChannel.open(raw,StandardOpenOption.WRITE)){f.force(true);}clean&=errors.isEmpty()&&dropped==0;}catch(Exception failure){errors.add(failure.toString());}
-   try{var result=new JsonObject();result.addProperty("scope","FINITE_MANUAL_EVENTS_NOT_COMPLETE_RALLY");result.addProperty("requestHash",requestHash);result.addProperty("reason",reason);result.addProperty("ticks",ticks);result.addProperty("pid",PID);result.addProperty("worldStopped",worldStopped);result.addProperty("events",sequence);result.addProperty("dropped",dropped);result.add("errors",GSON.toJsonTree(errors));result.add("presentation",ManualGrid.finish());exclusive(output.resolve("result.json"),result);
+   try{var result=new JsonObject();result.addProperty("scope","FINITE_MANUAL_EVENTS_NOT_COMPLETE_RALLY");result.addProperty("requestHash",requestHash);result.addProperty("reason",reason);result.addProperty("ticks",ticks);result.addProperty("pid",PID);result.addProperty("worldStopped",worldStopped);result.addProperty("events",sequence);result.addProperty("dropped",dropped);result.add("errors",GSON.toJsonTree(errors));result.add("presentation",ManualGrid.finish());result.add("diagnostics",ManualMotionDiagnostics.finish());exclusive(output.resolve("result.json"),result);
     var ack=new JsonObject();ack.addProperty("v",1);ack.addProperty("debugSessionId",env.debugSessionId());ack.addProperty("runId",env.runId());ack.addProperty("runSnapshotId",env.runSnapshotId());ack.addProperty("processEpoch",env.processEpoch());ack.addProperty("clean",clean);ack.addProperty("status",clean?"CLEAN_EVIDENCE_SHUTDOWN":"MANUAL_EVIDENCE_UNCLEAN");ack.addProperty("ackedAt",Instant.now().toString());ack.addProperty("finalWriterSeq",sequence);ack.addProperty("writerDroppedTotal",dropped);ack.addProperty("remainingQueue",writer.getQueue().size());ack.addProperty("worldStopped",true);exclusive(env.shutdownAckFile(),ack);
    }catch(IOException failure){System.err.println("MANUAL_CLOSE_FAILED "+failure);}
   }

@@ -24,7 +24,7 @@ public final class ManualGrid {
  private static Context active,last;
  private static void write(Context c,String name,JsonObject data)throws Exception{Files.writeString(c.output.resolve(name),data+"\n",StandardOpenOption.CREATE_NEW);}
  public static synchronized void arm(MinecraftServer server,JsonObject request,String requestHash,Path output,long began,BooleanSupplier live)throws Exception{
-  if(request.get("v").getAsInt()!=2)return;
+  if(request.get("v").getAsInt()<2)return;
   if(active!=null||last!=null)throw new IllegalStateException("MANUAL_GRID_ALREADY_ARMED");
   var p=request.getAsJsonObject("presentation");ManualPresentation.verifyWorld(p,Path.of(request.get("worldDir").getAsString()));
   var c=new Context(server,p,requestHash,output,began+request.get("maxWallMs").getAsLong()*1_000_000L,live);write(c,"grid-armed.json",facts(c));active=c;last=c;
