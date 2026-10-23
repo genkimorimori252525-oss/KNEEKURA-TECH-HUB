@@ -2,8 +2,10 @@ import test from 'node:test';import assert from 'node:assert/strict';
 import {validateManualClosure} from './manual-closure.mjs';
 import fs from 'node:fs/promises';import path from 'node:path';import os from 'node:os';
 import {EvidenceStore} from '../debug-workspace/evidence/store.mjs';
+import {normalizeCompleteness} from '../debug-workspace/evidence/schema.mjs';
 function sample(){const raw=[1,2].map(n=>({writerId:'manual-25',writerSeq:n,observationId:'event-'+n,producerDeltaApplied:true,payload:{requestHash:'hash',healthAtEnd:20}}));return {raw,canonical:structuredClone(raw),ack:{finalWriterSeq:2},native:{pid:25,events:2,requestHash:'hash'},runtimePid:25,requestHash:'hash'};}
 test('identical discrete native events each reconcile to their canonical ID',()=>assert.equal(validateManualClosure(sample()).canonicalEvents,2));
+test('canonical completeness normalization retains meaning and must not cause a false closure failure',()=>{const x=sample();for(const r of x.raw)r.completeness={status:'PARTIAL',complete:false};for(const c of x.canonical)c.completeness=normalizeCompleteness({status:'PARTIAL',complete:false});assert.equal(validateManualClosure(x).canonicalEvents,2);x.canonical[0].completeness=normalizeCompleteness({status:'COMPLETE',complete:true});assert.throws(()=>validateManualClosure(x));});
 for(const [name,mutate] of [
  ['coalesced repeated event',x=>x.canonical.pop()],['unprocessed ACK tail',x=>x.ack.finalWriterSeq=3],['raw gap',x=>x.raw[1].writerSeq=3],['changed payload',x=>x.canonical[1].payload.healthAtEnd=0],['wrong runtime',x=>x.runtimePid=26],['missing event semantics',x=>delete x.raw[0].producerDeltaApplied],['rewritten identity',x=>x.canonical[0].observationId='other']
 ])test('reject '+name,()=>{const x=sample();mutate(x);assert.throws(()=>validateManualClosure(x));});
