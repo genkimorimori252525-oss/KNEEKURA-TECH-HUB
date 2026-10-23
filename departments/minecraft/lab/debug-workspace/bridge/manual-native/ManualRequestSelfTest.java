@@ -24,7 +24,16 @@ public final class ManualRequestSelfTest {
   ManualShutdown.request(()->{throw new java.io.IOException("INJECTED_RECEIPT_WRITE_FAILURE");},()->stopped.set(true),e->failed.set(e instanceof java.io.IOException));
   if(!stopped.get()||!failed.get())throw new AssertionError("RECEIPT_FAILURE_SUPPRESSED_STOP");checks++;
   stopped.set(false);ManualShutdown.request(()->{},()->stopped.set(true),e->{throw new AssertionError("UNEXPECTED_RECEIPT_FAILURE",e);});if(!stopped.get())throw new AssertionError("NORMAL_STOP_SUPPRESSED");checks++;
-  System.out.println("PASS "+checks+" Java manual request/STOP boundary checks");
+  var visual=r.deepCopy();visual.addProperty("v",2);visual.getAsJsonArray("grants").add("CLIENT_TANK_GRID_PRESENTATION");
+  var p=JsonParser.parseString("{\"renderer\":\"tank-grid-v1\",\"grid\":true,\"brightness\":\"NATIVE\",\"recipeHash\":\"1e2ebacaf6dd1a3589fdfac681adccc28f91a5f77addabe54269fb269ad52aef\",\"min\":[0,224,0],\"max\":[52,248,52]}").getAsJsonObject();visual.add("presentation",p);ManualRequest.validate(visual);checks++;
+  var saved=JsonParser.parseString("{\"status\":\"GEOMETRY_VERIFIED\",\"recipeHash\":\"sha256:1e2ebacaf6dd1a3589fdfac681adccc28f91a5f77addabe54269fb269ad52aef\",\"recipe\":{\"v\":1,\"kind\":\"tank_recipe\",\"dimension\":\"minecraft:overworld\",\"origin\":{\"x\":0,\"y\":224,\"z\":0},\"dimensions\":{\"width\":52,\"height\":24,\"depth\":52}}}").getAsJsonObject();
+  try{ManualPresentation.matchesSaved(p,saved);}catch(Exception e){throw new AssertionError("MATCHED_GRID_RECIPE_REJECTED",e);}checks++;
+  for(String key:new String[]{"renderer","brightness","recipeHash"}){var x=visual.deepCopy();x.getAsJsonObject("presentation").addProperty(key,"foreign");reject(x);checks++;}
+  var missingGrant=visual.deepCopy();missingGrant.getAsJsonArray("grants").remove(1);reject(missingGrant);checks++;
+  var implicit=r.deepCopy();implicit.add("presentation",p);reject(implicit);checks++;
+  for(var change:new String[]{"fractional","tooLarge","wrongBoolean","camera"}){var x=visual.deepCopy();var q=x.getAsJsonObject("presentation");switch(change){case "fractional" -> q.getAsJsonArray("min").set(0,new JsonPrimitive(.5));case "tooLarge" -> q.getAsJsonArray("max").set(0,new JsonPrimitive(100));case "wrongBoolean" -> q.addProperty("grid","true");default -> q.addProperty("camera",true);}reject(x);checks++;}
+  var mismatch=saved.deepCopy();mismatch.getAsJsonObject("recipe").getAsJsonObject("origin").addProperty("x",1);boolean rejected=false;try{ManualPresentation.matchesSaved(p,mismatch);}catch(Exception expected){rejected=true;}if(!rejected)throw new AssertionError("CHANGED_WORLD_RECIPE_ACCEPTED");checks++;
+  System.out.println("PASS "+checks+" Java manual request/STOP/grid boundary checks");
  }
  private static void reject(JsonObject x){try{ManualRequest.validate(x);}catch(RuntimeException expected){return;}throw new AssertionError("INVALID_MANUAL_REQUEST_ACCEPTED");}
 }

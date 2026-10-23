@@ -1,17 +1,18 @@
 import assert from 'node:assert/strict';
 import path from 'node:path';
+import {validatePresentation} from '../../native-host/presentation.mjs';
 
 const fields=['v','purpose','mode','nonce','playerUuid','subjectUuid','trialDir','worldDir','maxTicks','maxWallMs','maxEvents','captures','grants','sourceRevisions','productHash','adapterHash','installHash','materials'].sort();
 const uuid=/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i;
 export function validateManualSession(value){
  assert(value&&typeof value==='object'&&!Array.isArray(value),'MANUAL_REQUEST_REQUIRED');
- assert.deepEqual(Object.keys(value).sort(),fields,'MANUAL_EXACT_FIELDS');
- assert.equal(value.v,1);assert.equal(value.purpose,'MANUAL_INTERACTION');
+ const visual=value.v===2;assert.deepEqual(Object.keys(value).sort(),[...fields,...(visual?['presentation']:[])].sort(),'MANUAL_EXACT_FIELDS');
+ assert([1,2].includes(value.v));assert.equal(value.purpose,'MANUAL_INTERACTION');if(visual)validatePresentation(value.presentation);
  assert(['LIFECYCLE','MANUAL_RALLY','MANUAL_OBSERVE'].includes(value.mode),'MANUAL_MODE');
  for(const name of ['nonce','playerUuid','subjectUuid'])assert(typeof value[name]==='string'&&uuid.test(value[name]),'MANUAL_UUID_'+name);
  assert.notEqual(value.playerUuid,value.subjectUuid);
  for(const [name,max] of [['maxTicks',2400],['maxWallMs',120000],['maxEvents',512]])assert(Number.isInteger(value[name])&&value[name]>0&&value[name]<=max,'MANUAL_BOUND_'+name);
- assert.equal(value.captures,0);assert.deepEqual(value.grants,['MANUAL_EVENT_OBSERVATION']);
+ assert.equal(value.captures,0);assert.deepEqual(value.grants,['MANUAL_EVENT_OBSERVATION',...(visual?['CLIENT_TANK_GRID_PRESENTATION']:[])]);
  assert.deepEqual(Object.keys(value.sourceRevisions).sort(),['target','techHub']);
  for(const [name,hash] of Object.entries(value.sourceRevisions))assert(name==='target'&&hash==='ARTIFACT_ONLY'||typeof hash==='string'&&/^[a-f0-9]{40}$/.test(hash),'MANUAL_SOURCE_PIN');
  for(const name of ['productHash','adapterHash','installHash'])assert(typeof value[name]==='string'&&/^[a-f0-9]{64}$/.test(value[name]),'MANUAL_MATERIAL_PIN');

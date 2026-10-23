@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import path from 'node:path';
 import fs from 'node:fs/promises';
 import {createHash} from 'node:crypto';
+import {validatePresentationSettings} from './presentation.mjs';
 
 export const versions=Object.freeze({minecraft:'1.20.1',forge:'47.4.10',java:17,gradle:'8.8',forgeGradle:'6.0.54'});
 export const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
@@ -11,8 +12,8 @@ const uuid=value=>typeof value==='string'&&/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}
 
 /** Data only: never resolves commands, executes builds, changes a world or launches. */
 export function validateProfile(p){
- exact(p,['schema','id','runtime','mods','world','playerUuid','subjectUuid','sourceRevision','mode','maxTicks','maxWallMs','maxEvents']);
- assert.equal(p.schema,'kneekura.tank-profile/v1');assert(typeof p.id==='string'&&/^[a-z][a-z0-9-]{1,63}$/.test(p.id),'TANK_PROFILE_ID');
+ const visual=p?.schema==='kneekura.tank-profile/v2';exact(p,['schema','id','runtime','mods','world','playerUuid','subjectUuid','sourceRevision','mode','maxTicks','maxWallMs','maxEvents',...(visual?['presentation']:[])]);
+ assert(['kneekura.tank-profile/v1','kneekura.tank-profile/v2'].includes(p.schema));if(visual)validatePresentationSettings(p.presentation);assert(typeof p.id==='string'&&/^[a-z][a-z0-9-]{1,63}$/.test(p.id),'TANK_PROFILE_ID');
  exact(p.runtime,['minecraft','forge','java']);for(const name of ['minecraft','forge','java'])assert.equal(p.runtime[name],versions[name],'TANK_COMPATIBILITY_'+name);
  assert(Array.isArray(p.mods)&&p.mods.length<=32,'TANK_MOD_LIMIT');
  const ids=new Set();for(const m of p.mods){exact(m,['id','file','sha256','kind']);assert(typeof m.id==='string'&&/^[a-z][a-z0-9_]{1,63}$/.test(m.id),'TANK_MOD_ID');assert(!ids.has(m.id)&&!['kneekura_manual_adapter','kneekura_tank_host'].includes(m.id),'TANK_DUPLICATE_MOD');ids.add(m.id);assert(path.isAbsolute(m.file)&&m.file.endsWith('.jar'),'TANK_MOD_PATH');assert(hex(m.sha256,64),'TANK_MOD_HASH');assert(['mapped-dev','forge-distribution'].includes(m.kind),'TANK_ARTIFACT_KIND');}

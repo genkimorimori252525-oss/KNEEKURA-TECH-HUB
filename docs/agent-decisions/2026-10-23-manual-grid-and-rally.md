@@ -1,0 +1,25 @@
+# Manual grid restoration, event closure and Rally correction
+
+2026-10-23. Human inspection confirmed that the protected room is useful and initial Night Vision makes the whole Tank readable. They then requested larger **individual fireball visuals**, restoration of the mesh grid, and more accurately aimed boss returns. Grand Danmaku remains excluded. Existing delegation authorizes scoped fixes and recording decisions without repeated approval; no merge/deploy/force push or change to accepted swimming is authorized here.
+
+## Evidence and causes
+
+The third manual case ffa41702 genuinely reached READY in26.610s and closed cleanly. Its60raw/native/canonical events include12actual AttackEntityEvents and10ownership changes. Human testimony confirms visibility and reports small fireballs/poor return aim. This is genuine input evidence, not complete Rally/cue/balance acceptance. All original85files, the accepted swimming JAR and original verified product JAR remain byte-identical.
+
+The second case7f55704d has10raw/native events but9canonical observations. A narrower earlier reconciliation checked raw/native counts and preservation only; its machine PASS must not be promoted to exact canonical completeness. Actual ingest reports parsed10/written9/suppressed1. Raw POST_HURT_END sequence6 repeats sequence5's same Player/health/direct-shot/tick payload; the existing L1 DeltaGate deliberately suppresses it. ACK/canonical tail sequence10 is present. This is established delta aggregation, not an established shutdown race. Preserve its original finalization and raw files; correct documentation saying9events to9canonical/10raw. New manual discrete/change-only events use the existing producerDeltaApplied contract and a strict raw/canonical ID/content/sequence/ACK closure guard; global delta/store policy remains unchanged.
+
+The generic persistent manual host does not load the old TankView presentation module. Source audit confirms conditional leased OBSERVATION_BRIGHT in the separate registered camera route, not automatic camera availability in this host. The restored grid must be generic client rendering, with no TLM/legacy-runtime dependency.
+
+Natural currently freezes a direction from the boss eye, then applies it to a return projectile at another physical position. That systematically offsets the return ray. Freeze the observed target body-center endpoint plus bounded observed-velocity lead at the tell, then derive the ray from the actual ball at return. Retain six-tick tell, finite reach/LOS, fallible admission, one return and no post-launch homing. Abort on lost target LOS or blocked actual return ray. Increase shared Standard-family visual scale1.5→4.0 without changing collision/pick radius, damage or explosion radius. This supersedes only the earlier presentation1.5 tuning and fixes endpoint geometry; preserve those earlier design records.
+
+## Scoped implementation and checks
+
+- [ ] TechHub strict profile/request v2 explicitly opts into CLIENT_TANK_GRID_PRESENTATION; unchanged v1 rejects presentation fields. Seal renderer, grid setting, NATIVE brightness, bounded geometry and saved-recipe hash. Validate actual matching world/server/recipe at native binding. Grid does not implicitly grant brightness; initial Player Night Vision is separate. No camera/input/capture/server-effect/block/AI authority.
+- [ ] Client-only bounded lines obey the original finite deadline, STOP, disconnect and failures. Emit bounded actual render-execution and cleared-context receipts. Readability is a human/native-frame claim, not an armed flag. No continuous images or evidence store.
+- [ ] Native discrete events retain individual identity; enforce exact canonical closure after real ACK/owned exit. Preserve prior suppression evidence rather than rewriting finalized runs.
+- [ ] Natural endpoint-origin regression, unchanged broad swimming/tell/fallibility tests, mapped projectile tests and real Forge compile. Build a distinct uninstrumented mapped JAR with actual new source/hash; retain original accepted/verified JARs.
+- [ ] Group relevant Node/Java checks, install a new immutable reviewed host, warm from persistent caches, and prepare one fresh safety/Night-Vision/grid profile. Audit before one real native manual window; verify rendered execution, actual input/return observations, cleanup and preservation. Do not force selection or relabel unobserved cases.
+
+Compact Astra design review recommended explicit versioned opt-in, separately bounded grid/brightness, request/world/recipe binding, original lease, client-only restoration and actual native render/cleanup proof. Adopt a smaller grid-only v2 with brightness fixed NATIVE; do not add a new dimension renderer. Existing separate cardinal camera contracts remain intact.
+
+Recovery: use installed normal STOP and verified owned exit, retain every failed case/UNKNOWN, select the preceding immutable host/profile if necessary. Never open original or finalized NBT, alter old finalizations, renew finite budgets, inject input or change the accepted movement controller.
