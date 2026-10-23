@@ -20,6 +20,8 @@ Reconciled the user-provided [older guide](https://chatgpt.com/space/page_83f4ca
 
 Use structured evidence first, then requested diagrams/images. Physical room, presentation grid, action Arena and combat region can have different bounds. An image, selected UUID trace or action-AABB occupant guard cannot establish every room resident. The whole-room on-demand live roster remains AF-0017's recorded gap. Legacy `/api/entities` lists summonable entity types from `entities.json`, not living occupants and their coordinates.
 
+Manual inspection preflight must include survival until the human notices the window and reachable in-room respawn. A correct initial pose alone is insufficient. Use a protected ordinary manual-entry fixture; strong initial Resistance must survive the actual version's save/load, and effects clear on death. Safety-enabled cases cannot establish damage/difficulty or unmodified survival acceptance. Keep the declared finite window; waiting consumes it. See [the observed failure and scoped correction](agent-decisions/2026-10-23-manual-tank-safety.md).
+
 ## Prepare one coherent experiment
 
 1. State intended change, protected behavior and acceptance scope. Implement a coherent work unit, then group relevant checks; add earlier checks when failure would compromise safety or invalidate the unit. NaturalGhast is also a Tank usability trial: record friction and useful missing capabilities even when the MOD succeeds. Prioritize observed defects before further tactics/danmaku.
