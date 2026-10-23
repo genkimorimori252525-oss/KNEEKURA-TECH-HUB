@@ -18,12 +18,13 @@ Preserve canonical genuine native READY, exact Player/world/request/material/pro
 
 ## Implementation and verification
 
-- [ ] Add strict profile/install validation and tests for missing/tampered materials, wrong versions, path/reparse escapes, duplicate IDs, executable fields and non-launching prepare.
-- [ ] Add pinned minimal host and immutable install with persistent caches, readiness metadata and exclusive lock against simultaneous shared-host builds/runs. Retain failures; never steal stale locks merely because time passed.
-- [ ] Generalize the private native adapter and manifest; compile against current Forge classes, run Java/Node guards and original fixture assertions.
-- [ ] Prepare Natural inputs independently, then use the same common launcher as another profile. Verify installed code still works without the source path; exercise a second profile without modifying the launcher.
-- [ ] Run a short genuine native lifecycle, verifying READY/STOP/ACK/owned exit/original hashes. Only after that explicitly start the separate voluntary manual Rally window. Mark unexercised outcomes NOT_RUN.
-- [ ] Update guides, feedback and CCG with actual results and limitations; record this scoped decision on the existing work branch. No merge or deployment is authorized.
+- [x] Add strict profile/install validation and tests for missing/tampered materials, wrong versions, path/reparse escapes, duplicate IDs, executable fields and non-launching prepare.
+- [x] Add pinned minimal host and immutable install with persistent caches, readiness metadata and exclusive lock against simultaneous shared-host builds/runs. Retain failures; never steal stale locks merely because time passed.
+- [x] Generalize the private native adapter and manifest; current mapped compilation,26Java/70Node guards and18original fixture assertions pass.
+- [x] Prepare Natural independently; installed source closure has no runtime worktree dependency. Actually replace Natural with an independent MOD, then prepare/remap/run a Forge distribution JAR without changing the launcher.
+- [x] Genuine finite native lifecycle, READY/explicit STOP/ACK/owned exit and original raw hashes verified. Actual pre-READY failure recovery is separately verified and remains FAILED/unclean.
+- [x] Update guides, feedback and CCG; retain source decisions on the existing work branch. No merge or deployment is authorized.
+- [ ] Separately launch the prepared voluntary manual Rally case when the human is available. Real input/readability/Rally acceptance remains NOT_RUN; the platform unit does not complete the original non-danmaku goal.
 
 Recovery: disable the new opt-in launcher, stop only its owned run, retain its immutable install and failed run evidence. Existing dispatcher/observer contracts and prior installations remain untouched. A missing cache is an actionable preparation error, never synthetic readiness.
 
