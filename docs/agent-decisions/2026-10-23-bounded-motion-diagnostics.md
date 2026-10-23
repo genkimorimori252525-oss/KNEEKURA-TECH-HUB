@@ -20,3 +20,10 @@ Improve evidence before guessing: optional v3 diagnostic schema v2 adds explicit
 Separate implementation defect: engaged-attack tactical variation0 also leaked into ordinary swimming. Natural separates ambient randomness from tactical admission; shot lock and retained region/course remain. Human's further pace request raises ordinary target0.24–0.4 while absolute1.625ceiling stays fixed. This source correction is not a proven explanation for the earlier jitter.
 
 CompactAstra identified an Important false-motion trigger when using velocity; adopted actual consecutive END positions instead, with first-sample/stationary/nonzero-velocity negative coverage and triggering displacement. Diagnostic schema hash changes explicitly; old immutable bundles retain their exact schema and outcomes.
+
+
+## Final source/package preparation (2026-10-24JST)
+
+Natural source68c7866, genuine Forge compile/resources c9dbc557c5b64d30860bdb7d2d416d23 PASS; grouped flight suite PASS (12,037region checks with original containment/smoothness plus attack/Rally/relocation/Dodge/Ground). Distinct mapped productSHA2568c0885c54272a0b394bbc7457ccd5950809af5b2667c2f944ca2ba44c99d816d,178classes. Two intentional classes changed: AnchorGoal and MovementPlanner. Strict packaging initially rejected an additional generated AnchorGoal$1 difference (retained FAIL2e36e088); actual javap instructions/signatures match exactly, permitting that metadata-only difference.175previousclasses remain byte-identical. Package9465ac37 PASS; accepted/verified artifacts preserved.
+
+New TechHub sourcef468cd8/immutablebundlebe6ef8e8,98Node47044b53 and88mappedJava checks; warmd6eee8ea and freshprofilea30700f5 PASS. Prepared case7b27a7cd has finite motion-triggered diagnostics and unchanged safety/originalgrid contracts. PREPARED_NOT_RUN: new source behavior, diagnostic trigger and subjective course remain native-unaccepted. All previous runtimes exited cleanly; no automatic replay or lease extension. Choose actual stable next-manual profile at the human's next available inspection. This is source/model/build/material verification, not full goal completion.
