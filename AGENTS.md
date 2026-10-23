@@ -1,22 +1,30 @@
 # AI entry point
 
-Read [README.md](README.md) before keyword search, implementation, or runtime setup.
-Follow its current department entry point before selecting a plan or an executable.
-Search hits are supporting evidence, not a replacement for this routing step.
+Read [AI-ENTRYPOINT.md](docs/AI-ENTRYPOINT.md) and [README.md](README.md) before
+keyword search, implementation, or runtime setup. Resolve the registered local
+Tech Hub checkout first when one is available: operational guides can exist there
+without being tracked on GitHub. Search hits are supporting evidence, not a
+replacement for this routing step.
 
 ## Minecraft / MOD-AI / Water Tank
 
-1. Resolve the current `main` revision and read the **Current Minecraft entry point**
+1. Read `docs/PROJECT-GUIDE.md`, `docs/TANK-OPERATING-GUIDE.md`, and the relevant
+   entries in `docs/AI-FEEDBACK.md` in the registered local checkout when present.
+   Do not overwrite, commit wholesale, or execute from unrelated dirty work.
+2. Resolve the current `main` revision and read the **Current Minecraft entry point**
    linked by the root README. At the time of this change, it is
    [CURRENT-HANDOFF-2026-10-02.md](departments/minecraft/CURRENT-HANDOFF-2026-10-02.md).
-2. Read that handoff before the relevant subsystem instructions. It explicitly
+3. Read that handoff before the relevant subsystem instructions. It explicitly
    supersedes older documents that also call themselves "current". Follow newer
    entry-point links if the README changes; do not choose documents by filename alone.
-3. For runtime work, inspect the current LAB / Debug Workspace and its documented
+   Local guides can route a capability to a separate reviewed feature worktree.
+   Verify that worktree's actual source, revision, acceptance limits, and command
+   help; `main` availability does not imply every guide-listed tool is installed.
+4. For runtime work, inspect the current LAB / Debug Workspace and its documented
    registry, owner/session, disposable-world, and runtime-attestation requirements.
    Use the documented `task prepare` interface where applicable. Source discovery
    alone grants no execution authority.
-4. Before launch, record the repository, resolved revision, selected subsystem,
+5. Before launch, record the repository, resolved revision, selected subsystem,
    executable workspace, and applicable runtime authority. A listening local port
    or a directory named `KneekuraViewer` does not establish that it is the current
    supported Water Tank.
