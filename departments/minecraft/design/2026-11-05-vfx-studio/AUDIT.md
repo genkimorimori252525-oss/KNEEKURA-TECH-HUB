@@ -66,3 +66,54 @@
 次の作業は PLAN.md の P0 から始める。P0の権利・API・実機確認結果により Photon との接続方式は修正できるが、ここに記載した根本原則、既存水槽の再利用、真偽と証拠の区分は変更しない。
 
 レビューはこの branch に書類だけを提案する。merge/公開範囲/Actions/runner/設定/秘密の変更は行わない。
+
+## F. 2026-11-11 統合改訂の追加監査 — 制作方式・アニメ・検証選択・人間協業
+
+**対象:** [VFX PLAN §8](PLAN.md) のModel/Animation Production lane、および [共通デバッグ計画 §8–14](../2026-10-09-shared-mod-debug-roadmap.md) のVerification Router/Decision Observatory/Human Review。従来A01–A12と停止条件を保存し、以下は追加の問題・受入条件である。コード、外部プラグイン、CI、実機、設定を変更したという記述ではない。
+
+### F1. 真偽分類の追加
+
+| 主張 | 判定 | 論点 |
+| --- | --- | --- |
+| 既存Blockbenchで静的杖モデルを作成・パーツ/UV/texture/displayを修正 | SCOPED_LIVE_EDITOR_VERIFIED | 2026-09-30のstaff、2026-10-01の部分修復受入に限定。完全なanimated mobは未証明 |
+| 既存の水槽/Forgeは実描画・UUID・時刻・限定的な動作証拠を扱える | IMPLEMENTED_SCOPED | source/owner/world/epoch/renderer identityは個別に照合。4方向は逐次 |
+| img2blockbenchの3ルート、Mosaicary GLB/glTF→GeckoLib、BlockSmith text-to-3D | UPSTREAM_ADVERTISED_OR_BENCHMARKED | KNEEKURA連携/Windows/Forge 1.20.1互換/品質はNOT_RUN |
+| sosadly上流と他のMCPにGeckoLib/clip生成機能が存在 | UPSTREAM_ADVERTISED | 現在のTECH HUBのguardと同一ではない。新MCPの安全な共存はNOT_RUN |
+| Animation Method Registry、動的な制作方式切替、最終bundle | PROPOSED_NOT_IMPLEMENTED | manifest、互換性無効化、clip別route、immutable CAS連鎖の実装と負例が必要 |
+| Verification Routerの省略理由・最小手段選択、Debug Wand、人間のワンクリック確認 | PROPOSED_NOT_IMPLEMENTED | 既存TaskContext/Owner権限の読み替え禁止 |
+| GeckoLib 4を使用した既存Kirbyのgeometry/animation | EXISTING_PRODUCT_ASSETS | 汎用制作・汎用controller/animation品質の受入ではない |
+| 新案で人間作業が短縮し、水槽起動が減る | HYPOTHESIS_NOT_MEASURED | 同じ課題をbaseline比較するまで効果を断言しない |
+
+### F2. 敵対監査（A13–A29）
+
+| ID | 重要度 | 危険・失敗例 | 防御・実装ゲート |
+| --- | --- | --- | --- |
+| A13 | HIGH | 「検証最小化」が、必要な実ゲーム判定の省略と偽PASSにつながる | assertion domainと未証明の残件を保存。実機依存のclaimはlive未実行ならNOT_RUN。source testだけで合格としない |
+| A14 | HIGH | agentが水槽実行を繰り返し、時間・CPU・diskを消費する | 起動前に主張/既存証拠不足/新取得ログと対象を記述。等価実行の再利用・skip理由。確率的検証だけ有限試行契約 |
+| A15 | HIGH | img2blockbenchの1枚画像から不明な背面・深度・正確なboneを推定し「再現成功」と偽る | multi-view/不明領域記録、人間の好みと形状構造の結論を分離、未知箇所をUNKNOWN |
+| A16 | HIGH | MosaicaryのURL pluginが再起動時に自動更新され再現性がなくなる | 固定commitからローカルpluginをハッシュ検証して使用、更新は別々にレビュー |
+| A17 | HIGH | 外部3D/画像providerへ第三者の素材/ローカル秘密・契約のない有料API呼び出し | 送信先/対象/license/budgetを可視化して明示opt-in。providerを選んでも権限を取得しない |
+| A18 | HIGH | 新しいMCPを複数接続し、別AI/別pluginが同じBlockbench projectへ同時編集 | 中核sosadlyの現行guardを保持し、排他的なeditable session・project identityを強制。新MCPはまずoffline参照 |
+| A19 | HIGH | bone名が同じでpivot・階層・bind poseが違うのに旧アニメを無検証流用 | rig layout hash、coordinate mapping、clip参照、expected generationでinvalidate。retarget実証までUNKNOWN |
+| A20 | HIGH | glTF→cubesで材質・UV/透明度・easing・effect keyframe・IK constraintが失われる | 損失項目を明示した LOSSY_CONVERSION、各format出力とsourceからの意味保存を独立検査 |
+| A21 | HIGH | animation clipの一括replaceにより、人間の手修正や他clipが消える | expected-old readback、指定clip/part単位、pre/post diff、無関係ファイルのhash不変、未知完了のblind retry禁止 |
+| A22 | HIGH | Mob AIのfailure reasonを時間的な並びから創作してしまう | Decision ObservatoryのDIRECT/INSTRUMENTED/DERIVED/UNKNOWNと因果分類を維持。Goal selected≠実行成功 |
+| A23 | HIGH | 実クライアントで取得したVFXだけでserver HITや同期が成立したと断言 | server authoritative eventとclient animation/FXを別clock・side・packetで観測。未確定の因果はUNKNOWN |
+| A24 | MEDIUM | Animation previewだけで実ゲームのcontroller/Molang/rendererの成功と誤認 | clip structure / editor screenshot / runtime renderを別判定列にして各証拠を要求 |
+| A25 | MEDIUM | 解決済みの静的問題も毎回水槽へ持ち込み、human reviewも毎度求める | VerificationDecisionに低コスト選択/skip理由、予算と重複抑制、短いまとめレビュー |
+| A26 | MEDIUM | Debug Wandで任意のモブや本番worldを変更・操作できる | debug-only、既存owner+lease+allowedArena、定義済み有限scenarioだけ。通常モードでは機能なし |
+| A27 | MEDIUM | 確率的モブ挙動の1成功だけで動作保証、または省略ポリシーで再現性調査を禁止 | seed/試行分布/試行予算/停止基準を定義。ログ欠損/observer負荷を報告 |
+| A28 | MEDIUM | human reviewが未回答なのにAIが審美品質を自分でPASSへ昇格 | 省略/未回答/人間選択を別状態保存、好みの判定は本人、AIは根拠付きの補助推定のみ |
+| A29 | MEDIUM | 複数planが正本化し、既存VFX・shared debug/Entity Decision Observatory/モデル設計の権限とAPIが矛盾 | 本PRで既存3文書のみ増補。横断的検証はshared、制作方法はVFX、監査はAUDIT、意思決定の観測契約は既存Decision Observatoryを引用 |
+
+### F3. 受入と停止条件（追加）
+
+**静的・低コスト試験**: (1) 規則で水槽不要と判定したUV/json修正がコード/Editorのみで完結し、未実機領域がNOT_RUNのまま残る (2) 実機が必要なMobAI/Controller/同期は誤って省略しない (3) stale evidence/誤ったasset・bone/UUID/runが再利用不可 (4) 人間の審美確認を未回答のまま完了扱いにしない。
+
+**route/animation試験**: (1) 2方式以上を比較、意図的な切替と旧候補保全 (2) model/rig/animation/FXの参照が一本のfinal manifestで追える (3) 同名bone別pivot、欠損texture、古いclipの混入、変換で失われたeffect、任意上書き、未知完了を必ず負例で拒否 (4) export構造/Editor外観/実ゲーム結果を独立保持。
+
+**ゲーム内実証**: (1) 1体のUUID/一定のarenaでAI行動とclip/FXを限定観測 (2) 戦闘のserver stateとclient render/timeの対応を分けて記録 (3) 異時刻Cardinal-4を同一瞬間と誤記しない (4) camera、input、world、session、FX全ての停止と復元を確認 (5) 人間レビューを必要時だけ最少操作で実施し、実際の手数を計測。
+
+**停止条件**: plugin権限の拡大、無断課金/外部送信、競合MCPのeditor乗っ取り、旧候補/人の編集の破壊、既存本番worldへの副作用、ライセンス不明のコード取り込み、再試行不能なUNKNOWN状態、実ゲーム検証が不可なのにPASSが必要なとき。無理にPASSにせずBLOCKED/NOT_RUNとして終了する。
+
+**今回の監査判定**: DESIGN EXPANSION READY FOR REVIEW WITH GATES / IMPLEMENTATION NOT_RUN / PROVIDER INTEGRATION NOT_RUN / WINDOWS RUNTIME NOT_RUN / QUALITY IMPROVEMENT NOT_MEASURED。旧A01–A12の結論・既存の権利ゲート・製品本番制限・未マージ境界は変更しない。
