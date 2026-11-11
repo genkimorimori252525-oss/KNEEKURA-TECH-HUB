@@ -205,13 +205,13 @@ AI の判断は VISUAL_INFERRED、数値は DIRECT_OBSERVED / SAMPLED_OBSERVED�
 
 この計画の採用は、既存のWater Tank/Blockbench/MOD-AIの成功した実装を破棄・置換・書き直すことを意味しない。
 
-## 8. 2026-11-11 統合拡張：モデル・アニメーション・VFXの制作方式と検証
+## 10. 2026-11-11 統合拡張：モデル・アニメーション・VFXの制作方式と検証
 
 **方針:** v1.1のP0–P6、現行の技術調査・安全境界・受入条件は削除も縮小もしない。この章は新たにモデル生成/変換・リグ・アニメーション制作のレーンを追加する。共通の Verification Router・Human Review・Mob AI観測の規則は [共通デバッグ計画](../2026-10-09-shared-mod-debug-roadmap.md) §8–14 が正本であり、ここは各制作ルートの技術仕様と既存VFXへの接続を詳述する。実Minecraftが描画正本。Blockbench previewは実ゲーム画面の代替証拠にはならない。既存MOD-AI、統合LAB、Evidence/CAS、Blockbench guard、BCTを再利用。第二DB、第二runner、別Editor制御系は作らない。
 
 **現在の真偽:** 静的Celestial Staffの生成・部分修正・書出しと限定されたLinux/X11実機試験には証拠がある。一方、任意のモブの画像→制作、アニメーション自動生成、GLBからの汎用変換、Windows実機、Photonの連続描画は今回未実証。ここに書く新しい手段はすべて提案であり、外部ソフト導入・実機起動の許可ではない。
 
-### 8.1 外部OSSの比較と導入判定
+### 10.1 外部OSSの比較と導入判定
 
 | 技術・出典 | 提供する独自価値 | 採否・優先度 | 実装前に確認すること |
 | --- | --- | --- | --- |
@@ -229,7 +229,7 @@ AI の判断は VISUAL_INFERRED、数値は DIRECT_OBSERVED / SAMPLED_OBSERVED�
 
 **採否の共通尺度:** Minecraftらしさ、editable cuboids/part identity、rig/pivot、UV/atlas、animationの保持・移植、部分修復、Forge 1.20.1互換、安全性、ライセンス・送信先・課金、ベンチマークでの品質/人間工数。READMEやスター数はPASSの根拠にしない。プラグインやMCPを複数同時常駐させるより、既存sosadlyの安全な編集経路へ必要な機能だけを接続する。
 
-### 8.2 モデル生成方法のAI選択・途中変更
+### 10.2 モデル生成方法のAI選択・途中変更
 
 - 明瞭なMinecraft風の参照画像なら img2blockbench.direct をまず候補にする。
 - 有機的な形状・複雑な奥行きなら img2blockbench.mesh または img2blockbench.img2threejs を比較。外部3D生成サービスの費用・外部送信は別の明示許可が必要。
@@ -241,7 +241,7 @@ AI の判断は VISUAL_INFERRED、数値は DIRECT_OBSERVED / SAMPLED_OBSERVED�
 
 **未知の側面:** 画像一枚では背面・内部・寸法の正確さは保証できない。推測した形状は推定として記録。元の絵を勝手に原画像と異なる「正解3D」として認定しない。
 
-### 8.3 Asset Method Manifest v1（設計契約、未実装）
+### 10.3 Asset Method Manifest v1（設計契約、未実装）
 
 最終成果物を model + texture/atlas + rig + animation clips + VFX cues + target profile + validation として一つのmanifestにまとめ、参照だけを保存する。各フェーズの方法・変更・差し替えを追えるようにする。新しいDBは作らず、既存CASのblob hash・Evidence/SourceSnapshotを利用する。
 
@@ -275,7 +275,7 @@ AI の判断は VISUAL_INFERRED、数値は DIRECT_OBSERVED / SAMPLED_OBSERVED�
 
 **差し替えの依存無効化:** 名前が同じでもbone親子関係、pivot、bind pose、座標・単位、左右反転、UVの割当が変われば古いclipは無条件流用しない。bone emitterもモデルlayout hashに結ぶ。glTFから移植不能なmaterial/IK/曲線/effect keyframe等は LOSSY_CONVERSION を記録し、変換成功を意味保存のPASSとしない。
 
-### 8.4 Animation Production Contract（アニメーションを独立した制作物にする）
+### 10.4 Animation Production Contract（アニメーションを独立した制作物にする）
 
 方式を **clip単位** で選ぶ。
 1. keyframes_direct：idle/walk/attack等をAIが時刻・rotation/translation/scaleで生成。
@@ -292,7 +292,7 @@ AI の判断は VISUAL_INFERRED、数値は DIRECT_OBSERVED / SAMPLED_OBSERVED�
 
 **更新安全:** clip一括replaceが既存の人手修正を消す可能性がある。対象clipのexpected old hash・project/generation・対象boneを固定し、editor readbackと不変部分比較を実施。未知完了の後に盲目retryしない。無制限のJS/任意ファイル読込を制作のために許さない。
 
-### 8.5 VFX連携・水槽の位置づけ
+### 10.5 VFX連携・水槽の位置づけ
 
 - モデルの構造/UV/texture/clip syntax/骨格参照は、まずオフライン/Blockbenchで検証。毎回のMinecraft起動は禁止ではないが、必要性を説明できない繰返しは抑制。
 - 水槽の重点を、Mob AI・経路探索の結果、実ゲームの物理/衝突、GeckoLib Controllerとserver/client時刻、bone/FX emitter、実際の表示、同期、実性能の計測に置く。
@@ -300,7 +300,7 @@ AI の判断は VISUAL_INFERRED、数値は DIRECT_OBSERVED / SAMPLED_OBSERVED�
 - 実ゲームでの演出は、AIがデータとログを検査。自然さ・迫力など人間の方が判断しやすい事項だけ比較画像/短い映像・必要なら一操作Debug Wandへ渡す。AIが対象配置、装備、背景/明るさ、録画、復元まで準備し、人にはコマンドを打たせない。
 - VFXのRECORD_REPLAY/P2、時刻差があるCardinal-4、server authoritative HITとclient FXの分離、原画像不変、終了時復元など従来のP0–P6の条件を緩めない。
 
-### 8.6 元のP0–P6と併走する新A0–A6実装レーン
+### 10.6 元のP0–P6と併走する新A0–A6実装レーン
 
 | 段階 | 具体的作業 | 受入 |
 | --- | --- | --- |
@@ -314,7 +314,7 @@ AI の判断は VISUAL_INFERRED、数値は DIRECT_OBSERVED / SAMPLED_OBSERVED�
 
 **依存関係:** A1–A3はPhotonのlicense gateを待たずに独立できるが、A5のbone/FX実機同期は元P4以降の正当な条件を満たすこと。元のFX実装P0–P6はそのまま残す。
 
-### 8.7 統合実証と敵対的受入
+### 10.7 統合実証と敵対的受入
 
 1. **静的アイテム**: UVやパーツ修正だけでEditor/static/export checkを完了し、実機未実行と「不要につき実機省略」を正直に記録。
 2. **画像→四足モブ**: img2blockbench/Mosaicaryの適性を比較し、意図的な方式変更1回を行う。失敗候補も保存、rig/texture/idle/walk/attackの方法・clip・assetセットを検証。
@@ -328,11 +328,11 @@ AI の判断は VISUAL_INFERRED、数値は DIRECT_OBSERVED / SAMPLED_OBSERVED�
 
 **状態:** DESIGN ONLY / EXTERNAL PROVIDER PROOF NOT_RUN / ANIMATION AUTOMATION NOT_RUN。元P0–P6の目標、安全・ライセンス・実験ワールド・履歴・復元・監査の全条件を維持する。
 
-## 9. 2026-11-11 Animation Provider Selection — 小さく導入し、実装AIに改善余地を残す
+## 11. 2026-11-11 Animation Provider Selection — 小さく導入し、実装AIに改善余地を残す
 
 **ユーザー判断:** Kimodo および video2mocap は不採用。依存関係、実装候補、MVP、将来の自動選択いずれにも入れない。暗黙のfallbackにも用いない。前節のモデル生成・VFX・検証・人間レビュー計画はそのまま保持し、本章はアニメーション制作の不足を補う段階導入・機能重複抑制・AIの改善権限を具体化する。
 
-### 9.1 最終目的・既存コードの正本
+### 11.1 最終目的・既存コードの正本
 
 1. AIが1体の rigged mob に対して idle/walk/attack（必要なら fly/cast/death）を制作し、途中でclipの制作・変換手段を変更できる。変換と実Minecraft上の再生はそれぞれ独立判定。アニメーション/clipごとの選択理由、変更・失敗、構造と動画証拠を既存Asset Method Manifestで参照する。
 2. 第一制作手段は現在のTECH HUBのBlockbench編集ガードを通した sosadly。**上流 README に機能が載っていても、テックハブのピン止めしたアダプターから使用できると推測しない**。source-based capability inventoryを最初に作る。
@@ -340,7 +340,7 @@ AI の判断は VISUAL_INFERRED、数値は DIRECT_OBSERVED / SAMPLED_OBSERVED�
 4. Forge 1.20.1 / Java 17 / exact target Forge patch / GeckoLib 4 ANCHOR。GeckoLib/Bedrock/glTFと一般Blockbench formatの座標・軸・単位・補間・effect keyframeの意味差を固定。モデルのscene/editor、ゲーム内GeoModel、server AI制御・HIT、client animation controller/visual、Photon VFX のauthorityを混同しない。
 5. Owner/editor/live attest、使い捨てworkspace、無上書き、expected generation/hash、UNKNOWN後blind retry禁止、source/asset provenance、既存Evidence CASというハードゲートは継続。汎用JS実行・plugin install/uninstall・任意外部パスやネット接続は標準AIルートに出さない。新機能はこれらを迂回せず延長する。
 
-### 9.2 repoの優先順位と「どこまで取り込むか」
+### 11.2 repoの優先順位と「どこまで取り込むか」
 
 | 順位 | upstream・調査対象 | 既存基盤との重複 | 導入の判断・範囲 |
 | --- | --- | --- | --- |
@@ -349,12 +349,12 @@ AI の判断は VISUAL_INFERRED、数値は DIRECT_OBSERVED / SAMPLED_OBSERVED�
 | **S2 精密編集・知識** | [jasonjgardner/blockbench-mcp-plugin](https://github.com/jasonjgardner/blockbench-mcp-plugin) と [blockbench-animation skill](https://github.com/jasonjgardner/blockbench-mcp-project/blob/main/skills/blockbench-animation/SKILL.md) | create/keyframesは重複。animation timeline、range mirror/offset、GeckoLib専用easing、部分的なcurve編集・保存手順に特徴 | **Animation Skillは読み取り専用の参考知識として選択導入**。未対応の編集操作だけ source/format tests後に現行adapterへ追加。一般BezierをGeckoLibで再現可能と主張しない |
 | **S3 手続き動作・IK** | [RenasDemirbas/BlockBenchMCP](https://github.com/RenasDemirbas/BlockBenchMCP) | rig, walk animation, analysis, screenshotの大部分が重複。足の接地、IK、モーションプリセット、干渉検査に差分候補 | **不足が実測された場合のみ、アルゴリズム/fixtureを研究**。GPL-3.0等の権利と不確かな任意コード経路を先に監査。無条件でコードをコピーしない |
 | **S4 特殊制作のfallback** | [EL4CTEO/blender-skills](https://github.com/EL4CTEO/blender-skills) 中の blender-animation、blender-character-rigging、export/bake | 通常のkeyframeは重複。IK constraints、NLA、bake、特殊なリグ/変換などで差分 | **特定の要件がBlockbenchで不可能/非効率と証明された時だけ** headless・隔離 Blender adapterを検討。Blenderの完成をGeckoLib対応と扱わない。全スキル一括導入なし |
-| **再利用** | img2blockbench、Mosaicary、BlockSmith、Minecraft Agent Skills、既存GeckoLib 4 | 直前§8で既に責務・導入ゲートを定義済み | 別のanimation systemとして複製しない。Mosaicaryは変換経路、img2blockbenchは主にモデル制作、BlockSmithは候補、Agent Skillsは選択的な知識、GeckoLibは実ランタイム |
+| **再利用** | img2blockbench、Mosaicary、BlockSmith、Minecraft Agent Skills、既存GeckoLib 4 | 直前§10で既に責務・導入ゲートを定義済み | 別のanimation systemとして複製しない。Mosaicaryは変換経路、img2blockbenchは主にモデル制作、BlockSmithは候補、Agent Skillsは選択的な知識、GeckoLibは実ランタイム |
 | **不採用** | NVIDIA Kimodo、video2mocap | 生成規模と依存が今回の目的と不一致 | **対象外**。PoC、provider登録、隠れたfallback、調査前提にしない。ユーザー判断なしに復活させない |
 
 先に比較すべき能力一覧は **①基本clip生成 ②既存clipの一部分だけ修正 ③骨格/回転中心/左右識別 ④GeckoLib4 exportとeffect easing ⑤基準フレーム取得 ⑥滑り・貫通・loop seam診断 ⑦状態遷移とserver eventとの整合 ⑧変更前後のreadbackと復元**。同じ機能を2つのtoolへ宣伝するのではなく、1機能につき **primary implementation 一つ**、必要なら独立validatorを一つにする。
 
-### 9.3 単一の編集経路 — Adapter Capability Map
+### 11.3 単一の編集経路 — Adapter Capability Map
 
 - **唯一の編集authority:** 現存のBlockbench owner/editor guard内の編集窓口だけ。AIや外部repoがsosadlyへMCPで直結して第二の書込能力を得る経路は提供しない。Blockbenchのproject UUID、instance identity、model format、plugin/adapter pinned hashes、generationを操作前後に確認。
 - **Adapter registry:** capability_id → primary_provider + status(AVAILABLE/NEEDS_IMPLEMENTATION/RESEARCH_ONLY/BLOCKED)、supported format and exact versions、argument schema、expected output、failure/rollback semantics、provenance、required budgetを保存。単純なファイル参照/validatorにはMCP不要。上流が機能宣伝していても、capabilityに昇格できるのは実ソースと限定実行が通ったものだけ。
@@ -363,7 +363,7 @@ AI の判断は VISUAL_INFERRED、数値は DIRECT_OBSERVED / SAMPLED_OBSERVED�
 - **二重書込検出:** 別プラグインからの非授権変更、手編集、format switch、bone UUID再生成、競合transactionによりexpected stateが変われば編集を中断、readbackで差を示し、勝手に重ねてapplyしない。
 - **結果の独立性:** geometry/clip static、editor pose screenshot、export JSON、runtime controller/render、human aestheticはそれぞれ別のassertion domain。人間レビューは同一視点の短い比較が最優先で、BLOCKING request_reviewの無制限待機を標準の自律制作に組み込まない。
 
-### 9.4 アニメーション制作と転送を別々のrouteとして記録
+### 11.4 アニメーション制作と転送を別々のrouteとして記録
 
 モデル生成手法とは独立に、各 clip は少なくとも下記を別々に選択する。必要に応じて一部だけ変更可能にする。
 
@@ -380,7 +380,7 @@ AI の判断は VISUAL_INFERRED、数値は DIRECT_OBSERVED / SAMPLED_OBSERVED�
 
 **フォーマットの落とし穴:** jasonjgardnerの一般Bezier/easingはGeckoLibでは同等に書出せない場合がある。GeckoLib専用easing指定・実exportのreadbackで確認する。adhiのclip upsertはreplace時に既存の手動調整を失うため、まず差分・期待hash・復旧点を作る。glTFからのmotion transferはRotation Euler/Quaternion、軸反転、単位、global/local transform、sampling、root motion、動作時間とeffect keyframeを区別する。
 
-### 9.5 AI自己改善の自由度（自己改善は品質改善であり権限拡大ではない）
+### 11.5 AI自己改善の自由度（自己改善は品質改善であり権限拡大ではない）
 
 実装AIへ **手法/アルゴリズム・選択と比較の自由**を与える。ただしユーザーの判断・本番保護・ライセンス・予算・証拠を勝手に変更しない。
 
@@ -403,7 +403,7 @@ AI の判断は VISUAL_INFERRED、数値は DIRECT_OBSERVED / SAMPLED_OBSERVED�
 
 **改善の権限区分:** オフラインでの生成・局所編集・検査/方法切替は既存の明示された許可範囲ならAI主体。新しい provider のインストール、外部ネット送信、破壊的書換、権限/課金・CI/本番変更は人間による別の明示的承認に留める。実機試験の反復はVerification Routerの三要件・owner・コスト予算を守れば根拠付きで行える。固定回数の一律禁止はしない。
 
-### 9.6 具体的な段階実装 — 既存A0–A6と重複しない
+### 11.6 具体的な段階実装 — 既存A0–A6と重複しない
 
 | substep | 必要な最小実装・手順 | 独立した受入基準 |
 | --- | --- | --- |
@@ -419,7 +419,7 @@ AI の判断は VISUAL_INFERRED、数値は DIRECT_OBSERVED / SAMPLED_OBSERVED�
 
 **初期実証モデル:** 一つは四足の歩行（接地と前後の脚）、もう一つは腕/武器のattack（ボーン回転・命中とVFX同期）を優先。単純な動作が通っていないのに膨大なモブ/多数のclipへ広げない。Windowsなど未検証プラットフォームの実機成功を先取りしない。
 
-### 9.7 移行/非採用ルールと完了条件
+### 11.7 移行/非採用ルールと完了条件
 
 1. SOSADLYを大幅更新する前に固定旧版・新候補を同じパイロットで比較し、既存杖/rig/animation/editor repair機能の回帰と権限の差分を確認。単に新API数が多いだけでは更新しない。
 2. adhi/jason/Renasの機能が現在のsosadly+自作minimal validatorと同等なら外部実装を採用せず、調査参考としてのみ残す。選んだcapabilityにはprimary_providerを必ず一つにし、代替fallbackは異常時だけ明示選択する。
