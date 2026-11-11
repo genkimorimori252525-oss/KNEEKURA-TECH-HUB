@@ -69,7 +69,7 @@
 
 ## F. 2026-11-11 統合改訂の追加監査 — 制作方式・アニメ・検証選択・人間協業
 
-**対象:** [VFX PLAN §8](PLAN.md) のModel/Animation Production lane、および [共通デバッグ計画 §8–14](../2026-10-09-shared-mod-debug-roadmap.md) のVerification Router/Decision Observatory/Human Review。従来A01–A12と停止条件を保存し、以下は追加の問題・受入条件である。コード、外部プラグイン、CI、実機、設定を変更したという記述ではない。
+**対象:** [VFX PLAN §10](PLAN.md) のModel/Animation Production lane、および [共通デバッグ計画 §8–14](../2026-10-09-shared-mod-debug-roadmap.md) のVerification Router/Decision Observatory/Human Review。従来A01–A12と停止条件を保存し、以下は追加の問題・受入条件である。コード、外部プラグイン、CI、実機、設定を変更したという記述ではない。
 
 ### F1. 真偽分類の追加
 
@@ -120,7 +120,7 @@
 
 ## G. 2026-11-11 Animation Provider 計画の追加監査
 
-**監査対象:** VFX PLAN §9. 元の A01–A29 を削除しない追加の不具合・安全・品質チェック。不採用の Kimodo、video2mocap は導入候補/自動fallback/依存の全てから除外する。今回の計画更新ではコードやプラグインは実行していない。
+**監査対象:** VFX PLAN §11. 元の A01–A29 を削除しない追加の不具合・安全・品質チェック。不採用の Kimodo、video2mocap は導入候補/自動fallback/依存の全てから除外する。今回の計画更新ではコードやプラグインは実行していない。
 
 ### G1. 実装/宣伝/実機を混同しない
 
