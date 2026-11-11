@@ -204,3 +204,126 @@ AI の判断は VISUAL_INFERRED、数値は DIRECT_OBSERVED / SAMPLED_OBSERVED�
 同ディレクトリ AUDIT.md に軽い敵対監査・現時点の未解決ゲートを記録する。判定は **PLAN READY WITH TECHNICAL GATES / CODE NOT IMPLEMENTED**。
 
 この計画の採用は、既存のWater Tank/Blockbench/MOD-AIの成功した実装を破棄・置換・書き直すことを意味しない。
+
+## 8. 2026-11-11 統合拡張：モデル・アニメーション・VFXの制作方式と検証
+
+**方針:** v1.1のP0–P6、現行の技術調査・安全境界・受入条件は削除も縮小もしない。この章は新たにモデル生成/変換・リグ・アニメーション制作のレーンを追加する。共通の Verification Router・Human Review・Mob AI観測の規則は [共通デバッグ計画](../2026-10-09-shared-mod-debug-roadmap.md) §8–14 が正本であり、ここは各制作ルートの技術仕様と既存VFXへの接続を詳述する。実Minecraftが描画正本。Blockbench previewは実ゲーム画面の代替証拠にはならない。既存MOD-AI、統合LAB、Evidence/CAS、Blockbench guard、BCTを再利用。第二DB、第二runner、別Editor制御系は作らない。
+
+**現在の真偽:** 静的Celestial Staffの生成・部分修正・書出しと限定されたLinux/X11実機試験には証拠がある。一方、任意のモブの画像→制作、アニメーション自動生成、GLBからの汎用変換、Windows実機、Photonの連続描画は今回未実証。ここに書く新しい手段はすべて提案であり、外部ソフト導入・実機起動の許可ではない。
+
+### 8.1 外部OSSの比較と導入判定
+
+| 技術・出典 | 提供する独自価値 | 採否・優先度 | 実装前に確認すること |
+| --- | --- | --- | --- |
+| [orca-gamedev/img2blockbench](https://github.com/orca-gamedev/img2blockbench) | 画像から直方体・テクスチャを組み立て、編集可能な.bbmodel/geo等を作る。direct/mesh/Three.jsの3系統 | **優先PoC**。現行のBlockbenchを代替せず、生成候補として接続 | MIT、commit固定、画像の不明側面、provider送信先・費用、構造・アトラスの検査 |
+| [MopicMP/mosaicary](https://github.com/MopicMP/mosaicary) | 既存GLB/glTF/Sketchfab→cuboid、GeckoLib/Bedrock/Java。条件により骨格とアニメも引継ぎ | **優先PoC**。外部3Dとanimationを持つ入力向け | MIT、ローカルplugin hash固定（URLロード自動更新禁止）、元モデルのライセンス/作者、token・アカウント初期OFF |
+| [sosadly/blockbench-mcp](https://github.com/sosadly/blockbench-mcp) | 既存採用済みBlockbench操作。上流のbone/animation機能を選択して利用できる余地 | **中核維持・最小拡張** | 既存固定revとのAPI差分、bounded repair/UV/restore、安全guard、無制限execute_scriptは禁止 |
+| [bernie-g/geckolib](https://github.com/bernie-g/geckolib) | Forge 1.20.1でbone・clip・controller・renderを実行 | **既存GeckoLib 4を適用**。静的itemへ強制依存させない | exact Forge・GeckoLib版、実クライアント側controller/描画の独立試験 |
+| [gbusto/blocksmith](https://github.com/gbusto/blocksmith) | 文章→block model、bbmodel/GLB変換、animate/link。別の生成経路 | **研究・補欠PoC** | alpha 0.0.1、Python 3.12、Gemini等のAPI料金/秘密管理、Blenderが必要な出力と不要な出力を分離 |
+| [Jahrome907/minecraft-agent-skills](https://github.com/Jahrome907/minecraft-agent-skills) | modding/resource-pack/testingなどの専門手順、validator | **選択的な知識・検査ルール導入** | MIT、Forge 1.20.1の対象範囲、既存AGENTS/TaskContextとの重複、13種を一括導入しない |
+| [adhi-jp/minecraft-blockbench-mcp](https://github.com/adhi-jp/minecraft-blockbench-mcp) | GeckoLibアニメーション操作、特定時刻の静止画像、scope/認証/上書きの参考実装 | **隔離でコード研究**。標準の第二MCPは追加しない | editがclip全体を上書きする問題、effect-keyframeの欠落、session・ファイル権限と既存guardの整合 |
+| [RenasDemirbas/BlockBenchMCP](https://github.com/RenasDemirbas/BlockBenchMCP) | IK、motion presets、接地・intersections、multi-viewなど制作検査 | **必要機能だけ研究** | GPL-3.0、eval系機能や旧版セキュリティ、現行editorに二重接続しない |
+| [img2threejs/img2threejs](https://github.com/img2threejs/img2threejs) | 画像→手続き的Three.js立体 | **img2blockbench route3を介して評価** | Apache-2.0、コードの隔離実行、アップストリーム版固定 |
+| [ahujasid/mcp-for-blender](https://github.com/ahujasid/mcp-for-blender)・[Nusiq/mcblend](https://github.com/Nusiq/mcblend) | 特殊なメッシュ、IK、Bedrock向けモデル/アニメ出力 | **特殊案件のみ** | Minecraft cuboidへの変換損失、bone/UV/GeckoLib互換、別アプリ起動の負担 |
+| [Photon](https://github.com/Low-Drag-MC/Photon)、[LDLib](https://github.com/Low-Drag-MC/LDLib-MultiLoader)、[Lodestone](https://github.com/LodestarMC/Lodestone) | VFX・particle・trail・shader | **従来P0–P6を維持**。モデル作成ツールではない | ANCHORのAPI、ライセンス、依存、描画時計、停止、性能と復元 |
+
+**採否の共通尺度:** Minecraftらしさ、editable cuboids/part identity、rig/pivot、UV/atlas、animationの保持・移植、部分修復、Forge 1.20.1互換、安全性、ライセンス・送信先・課金、ベンチマークでの品質/人間工数。READMEやスター数はPASSの根拠にしない。プラグインやMCPを複数同時常駐させるより、既存sosadlyの安全な編集経路へ必要な機能だけを接続する。
+
+### 8.2 モデル生成方法のAI選択・途中変更
+
+- 明瞭なMinecraft風の参照画像なら img2blockbench.direct をまず候補にする。
+- 有機的な形状・複雑な奥行きなら img2blockbench.mesh または img2blockbench.img2threejs を比較。外部3D生成サービスの費用・外部送信は別の明示許可が必要。
+- 既存のGLB/glTFとrig、clipがあるなら mosaicary.gltf を候補にする。
+- 正確な杖/静的アイテム、特定パーツの修正なら blockbench.direct（現行guard）を優先する。
+- 文章からcuboidモデルを作るなら blocksmith.experimental は検証用。アルファ版を既定にしない。
+
+**途中切替はAIができる**。ただし①旧候補の入力/出力hashと品質状態を保存 ②変更理由と代替案を記録 ③新しいproviderのversion/権利/料金/権限を照合 ④別の出力candidateとして生成 ⑤骨格・アニメ・FXへの依存を再検証、という順番を守る。途中の失敗したモデルを削除せず、比較とrollbackのため既存CASに残す。人間への通知は「制作開始」「重要な方法変更」「完成時」のみ。細かなpart編集の通知は不要。
+
+**未知の側面:** 画像一枚では背面・内部・寸法の正確さは保証できない。推測した形状は推定として記録。元の絵を勝手に原画像と異なる「正解3D」として認定しない。
+
+### 8.3 Asset Method Manifest v1（設計契約、未実装）
+
+最終成果物を model + texture/atlas + rig + animation clips + VFX cues + target profile + validation として一つのmanifestにまとめ、参照だけを保存する。各フェーズの方法・変更・差し替えを追えるようにする。新しいDBは作らず、既存CASのblob hash・Evidence/SourceSnapshotを利用する。
+
+~~~json
+{
+  "schema_version": 1,
+  "asset_id": "kneekura:dragon_boss",
+  "profile_ref": "sha256:<profile>",
+  "model": {
+    "method": "mosaicary.gltf",
+    "candidate": "B",
+    "source_ref": "sha256:<licensed-input>",
+    "bbmodel_ref": "sha256:<native-project>",
+    "geo_ref": "sha256:<geckolib-geo>",
+    "texture_refs": ["sha256:<atlas>"],
+    "rig_ref": "sha256:<bone-layout>"
+  },
+  "animations": {
+    "idle": {"method": "import_retarget", "clip_ref": "sha256:<idle>"},
+    "walk": {"method": "generated_keyframes", "clip_ref": "sha256:<walk>"},
+    "attack": {"method": "procedural_baked", "clip_ref": "sha256:<attack>"}
+  },
+  "vfx": [{"method": "photon_candidate", "cue_ref": "sha256:<cue>"}],
+  "method_history_refs": ["sha256:<choice>", "sha256:<switch-a-to-b>"],
+  "verification_refs": ["sha256:<structure>"],
+  "human_review": "NOT_REQUESTED"
+}
+~~~
+
+このJSONは説明用サンプル。実装時はschema_id、required/optional fields、source/profile/format version、hashの厳格検査、未定義key・パスや実行権限の注入・循環や欠損refの拒否を加える。山括弧付きplaceholderは実成果物として禁止。制作方法の選択イベントには、候補リスト、選択理由、対象条件、provider/版/commit、入力と出力hash、license、費用・送信先、計測した品質、切替前後・棄却理由・残る未検証領域を必須とする。
+
+**差し替えの依存無効化:** 名前が同じでもbone親子関係、pivot、bind pose、座標・単位、左右反転、UVの割当が変われば古いclipは無条件流用しない。bone emitterもモデルlayout hashに結ぶ。glTFから移植不能なmaterial/IK/曲線/effect keyframe等は LOSSY_CONVERSION を記録し、変換成功を意味保存のPASSとしない。
+
+### 8.4 Animation Production Contract（アニメーションを独立した制作物にする）
+
+方式を **clip単位** で選ぶ。
+1. keyframes_direct：idle/walk/attack等をAIが時刻・rotation/translation/scaleで生成。
+2. import_retarget：GLB/glTFや既存素材の動作をbone対応・軸・ピボット・clip時間へ変換。
+3. procedural_baked：IK、歩行、翼/尻尾などをルールから生成して固定keyframe化。
+4. runtime_procedural：視線追従、反動、移動速度との同期などゲーム中に動的更新。
+5. 必要に応じて同じclipの方式変更を許し、変更理由と修正前後を記録。idleだけ移植、walkはkeyframes、attackはproceduralなどを自由に組み合わせる。
+
+**機械の検査:** 骨格参照・親子cycle・pivot/bind・clip loop/once/hold・時刻順/重複/異常値・補間/easing・Molang構文・静的poseの連続性・足の床貫通/接地滑りの有限sample・骨/武器の限定intersections・attack window・state transitionsを明示。これらはBlockbench previewと構造チェックで先に検査する。メッシュ衝突の厳密性やゲーム中のMolang評価までは証明しない。
+
+**実機の確認が必要:** GeckoLib controllerの実状態遷移・実描画のpose・client/server同期・attack hit/animation/VFXのタイミング・実World collision/FX停止・描画負荷。モブAIの実際の意思決定理由についてはEntity Decision Observatoryの取得済み内部stateと結果だけを証拠にする。
+
+**人間が判断する内容:** 動きの自然さ、迫力、キャラクター性、操作感、演出の好み。AIが骨格不一致や欠損テクスチャを人に発見させるのは非効率。画像/短い動画で判断できるものは水槽を起動せず提示する。
+
+**更新安全:** clip一括replaceが既存の人手修正を消す可能性がある。対象clipのexpected old hash・project/generation・対象boneを固定し、editor readbackと不変部分比較を実施。未知完了の後に盲目retryしない。無制限のJS/任意ファイル読込を制作のために許さない。
+
+### 8.5 VFX連携・水槽の位置づけ
+
+- モデルの構造/UV/texture/clip syntax/骨格参照は、まずオフライン/Blockbenchで検証。毎回のMinecraft起動は禁止ではないが、必要性を説明できない繰返しは抑制。
+- 水槽の重点を、Mob AI・経路探索の結果、実ゲームの物理/衝突、GeckoLib Controllerとserver/client時刻、bone/FX emitter、実際の表示、同期、実性能の計測に置く。
+- 実機開始前に検証主張、既存証拠が不足する理由、新たに採るログ/対象UUID/時間窓・停止条件を記録。source/build/asset/scenarioが同等で追加証拠の無い反復はSKIPPED_WITH_REASONを残す。確率/再現性試験は目的と試行予算を明示して反復可。skipはPASSではない。
+- 実ゲームでの演出は、AIがデータとログを検査。自然さ・迫力など人間の方が判断しやすい事項だけ比較画像/短い映像・必要なら一操作Debug Wandへ渡す。AIが対象配置、装備、背景/明るさ、録画、復元まで準備し、人にはコマンドを打たせない。
+- VFXのRECORD_REPLAY/P2、時刻差があるCardinal-4、server authoritative HITとclient FXの分離、原画像不変、終了時復元など従来のP0–P6の条件を緩めない。
+
+### 8.6 元のP0–P6と併走する新A0–A6実装レーン
+
+| 段階 | 具体的作業 | 受入 |
+| --- | --- | --- |
+| A0: 現状棚卸し | main/PRの現行実装、モデルguard・GeckoLib・Provider API・権利/依存・Windows差を確認 | 機能をIMPLEMENTED/PLANNED/UNVERIFIEDで区別し、外部API/新プラグインの無断導入無し |
+| A1: 生成・変換PoC | img2blockbench三ルート、Mosaicary GLB、既存direct editorの少数課題を比較 | 編集可能bbmodel、texture/UV/rig、未確定面の状態、版・入力hash |
+| A2: Method Registry | 選択・方式変更・旧候補保全・最終manifest・差し替え互換性チェック | 旧アニメ流用の失敗/骨格変更/重複hash・欠損refを検出 |
+| A3: Animation | 一体のモブでidle/walk/attack、keyframe/import/proceduralを必要に応じ選択 | clip/骨格・静的pose・loopと遷移の負例PASS。runtimeは別結果 |
+| A4: Verification Router | source/offline/build/GameTest/Tank/humanの主張別ルーティング | 静的修正では不要水槽を使わず、Mob AI・実同期などlive必須の見落としも避ける |
+| A5: runtime×VFX | 既存P1–P5を活用しbone追従演出とMob AIの観測を必要なrunで実施 | Source/build/run/UUID/tick、server HIT/client FXの時間差、復元/stopの実証 |
+| A6: Human Review | 画像/録画による簡易確認。必要なら有限のdebug-only Wandシナリオ | 1操作・短い判断、不要な起動や人間による準備無し、未回答はPENDING |
+
+**依存関係:** A1–A3はPhotonのlicense gateを待たずに独立できるが、A5のbone/FX実機同期は元P4以降の正当な条件を満たすこと。元のFX実装P0–P6はそのまま残す。
+
+### 8.7 統合実証と敵対的受入
+
+1. **静的アイテム**: UVやパーツ修正だけでEditor/static/export checkを完了し、実機未実行と「不要につき実機省略」を正直に記録。
+2. **画像→四足モブ**: img2blockbench/Mosaicaryの適性を比較し、意図的な方式変更1回を行う。失敗候補も保存、rig/texture/idle/walk/attackの方法・clip・assetセットを検証。
+3. **モブAI+攻撃+演出**: goal→実移動→攻撃→server HITとclient clip/FX→cancel/unloadを限定runで観測する。人間へは演出の自然さのみを短く示す。
+
+**独立結果列:** model_structure、texture_uv、rig_layout、clip_structure、editor_preview、GeckoLib_runtime、mob_ai_runtime、VFX_runtime、performance、human_preference。それぞれsource/asset/runの証拠とPASS/FAIL/NOT_RUN/UNKNOWN/INCONCLUSIVEを保持し、単一スコアに合算しない。
+
+**敵対的負例:** 画像正面だけ似る、背面UNKNOWNを正解とする、missing texture、同名でpivotが違うbone、animation effect/補間のロス、古いclipの無検証流用、上書き後の人手修正消失、無関係な変更で何度も水槽再起動、偽のdecision reason、異時刻4視点を同時映像と説明、未回答の人間レビューをPASSとする、許可のないAPI課金/素材ダウンロード。
+
+**測定:** 同じ課題のbaselineに対し制作時間、失敗・方式変更数、clip修正数、必要証拠の欠損、実機起動時間・回数、人間操作回数、false-PASS率、LLM/API costを測定。改善数値を先に捏造しない。改訂による実装と実クライアント受入は未実施。
+
+**状態:** DESIGN ONLY / EXTERNAL PROVIDER PROOF NOT_RUN / ANIMATION AUTOMATION NOT_RUN。元P0–P6の目標、安全・ライセンス・実験ワールド・履歴・復元・監査の全条件を維持する。
