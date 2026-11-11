@@ -158,7 +158,7 @@ Exclude by default: full-world scans every tick, unlimited entity/per-tick log s
 
 ### 12. Asset/Animation Method Registry（既存 CAS の参照レコード）
 
-モデル生成・モデル変換・テクスチャ作成・リグ生成・アニメーション作成・VFX作成は **別のroute selection**。主な候補・権利・能力の詳細は [VFX Studio PLAN §8–9](2026-11-05-vfx-studio/PLAN.md) に保持する。
+モデル生成・モデル変換・テクスチャ作成・リグ生成・アニメーション作成・VFX作成は **別のroute selection**。主な候補・権利・能力の詳細は [VFX Studio PLAN §10–11](2026-11-05-vfx-studio/PLAN.md) に保持する。
 
 - **候補のID**: `img2blockbench.direct`, `img2blockbench.mesh`, `img2blockbench.img2threejs`, `mosaicary.gltf`, `blockbench.direct`, `blocksmith.experimental`, `animation.keyframes`, `animation.import_retarget`, `animation.procedural`, `vfx.photon_candidate` など。IDは将来契約案であり実装名ではない。
 - **各選択を記録**: `asset_family`, `stage`, `method_id`, `reason`, `alternatives_considered`, `input/output SHA-256`, `provider revision/license`, `format+version`, `quality checks`, `runtime constraints`, `human review`, `switch_from`, `switch_reason`。
@@ -193,7 +193,7 @@ Exclude by default: full-world scans every tick, unlimited entity/per-tick log s
 
 ### 15. 制作AIの改善余地とAnimation Providerの統合（2026-11-11）
 
-**本章は既存のD0–D6の置換ではなくD2/D3/D6の具体化。** VFX PLANの [§9 Animation Provider Selection](2026-11-05-vfx-studio/PLAN.md) が導入候補、機能の選別、実装手順S0–S6を定義し、同じディレクトリのAUDIT Gが負例を引き受ける。仕様を3つの別計画書に増殖させず既存3文書の役割を維持。
+**本章は既存のD0–D6の置換ではなくD2/D3/D6の具体化。** VFX PLANの [§11 Animation Provider Selection](2026-11-05-vfx-studio/PLAN.md) が導入候補、機能の選別、実装手順S0–S6を定義し、同じディレクトリのAUDIT Gが負例を引き受ける。仕様を3つの別計画書に増殖させず既存3文書の役割を維持。
 
 1. **編集経路の重複を禁止:** sosadly + TECH HUBの現行Blockbench guardのみをデフォルトのwriterにする。adhiは第一にGeckoLibの独立read-only validator、jasonはanimation skill/補間API調査、Renasは実測で不足した手続きIK/接地アルゴリズム、Blender Skillsは特殊ケースのbake。既存の同等機能を再実装したりMCPを複数常駐させない。
 2. **AIの改善権利:** clip制作・補間・部分修正・方法選択・検証fixtureは、同じ規定の範囲内でAIが理由付きで変更できる。上流の新候補や改善案を研究・提案でき、実証で優れていれば選択候補に昇格できる。ただしprovider導入/権限/課金/外部送信/公開/本番影響、明示不採用の復活を勝手に承認しない。
