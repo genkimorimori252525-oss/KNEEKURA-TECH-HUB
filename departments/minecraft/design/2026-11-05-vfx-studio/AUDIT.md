@@ -117,3 +117,46 @@
 **停止条件**: plugin権限の拡大、無断課金/外部送信、競合MCPのeditor乗っ取り、旧候補/人の編集の破壊、既存本番worldへの副作用、ライセンス不明のコード取り込み、再試行不能なUNKNOWN状態、実ゲーム検証が不可なのにPASSが必要なとき。無理にPASSにせずBLOCKED/NOT_RUNとして終了する。
 
 **今回の監査判定**: DESIGN EXPANSION READY FOR REVIEW WITH GATES / IMPLEMENTATION NOT_RUN / PROVIDER INTEGRATION NOT_RUN / WINDOWS RUNTIME NOT_RUN / QUALITY IMPROVEMENT NOT_MEASURED。旧A01–A12の結論・既存の権利ゲート・製品本番制限・未マージ境界は変更しない。
+
+## G. 2026-11-11 Animation Provider 計画の追加監査
+
+**監査対象:** VFX PLAN §9. 元の A01–A29 を削除しない追加の不具合・安全・品質チェック。不採用の Kimodo、video2mocap は導入候補/自動fallback/依存の全てから除外する。今回の計画更新ではコードやプラグインは実行していない。
+
+### G1. 実装/宣伝/実機を混同しない
+
+| 対象 | 現時点の証拠区分 | 実装時に確かめること |
+| --- | --- | --- |
+| sosadlyのcreate_rig / generate_animation / add_keyframe(s) / analyze_animation / preview_animation | UPSTREAM_DOCUMENTED; KNEEKURAの現在のbounded adapter内はPARTIAL/NOT_ESTABLISHED | 固定sourceに実在するか、読み書き/戻り値/失敗時権限、before/after roundtrip |
+| adhi-jp GeckoLib validator / animation upsert / still frame | UPSTREAM_DOCUMENTED; KNEEKURA統合NOT_RUN | 4.2.5等のテスト対象版と現行形式差、手修正消失、easing/effects/pose readback |
+| jasonjgardner animation skill / timeline / graph editor / GeckoLib easing | UPSTREAM_DOCUMENTED; KNEEKURA統合NOT_RUN | Bezier等のGeckoLib変換不可、export後の意味保存、bounded edit |
+| RenasDemirbas rig/IK/動作検査 | UPSTREAM_DOCUMENTED; KNEEKURA統合NOT_RUN | 実アルゴリズム/API、GPLと再配布、sosadlyとの機能の重複/衝突 |
+| EL4CTEO Blender animation skill | UPSTREAM_DOCUMENTED; KNEEKURA統合NOT_RUN | Blender依存、bakeとglTFのloss report、GeckoLib形式との独立受入 |
+| AI自己改善・routeの自動選択・失敗の知識化 | DESIGN ONLY | モデルの提案と実験結果・永続正本の区分、誤改善のrollback、human oversight |
+
+### G2. 追加の敵対監査 A30–A42
+
+| ID | 危険 | 最小防御・反例試験 |
+| --- | --- | --- |
+| A30 | 新しいMCPを無条件で増やし、同一Blockbench projectへ2つのwriterが同時変更 | editor ownerは1つ。二重writer要求/別plugin変更を拒否し既存保存状態が維持される |
+| A31 | sosadly上流のREADME機能を現在のTECH HUBで実行可能と仮定 | 固定版APIと現在のguardに対するcapability probe。READ-ONLY/NOT_CONFIGURED/NOT_IMPLEMENTEDを分ける |
+| A32 | 任意execute_scriptやplugin installを「animation作成に必要」として開放 | hard deny、proxy clientから迂回不能なplugin側拒否、明示的なバージョン・権限・所有地の検査 |
+| A33 | 人が修正したclipをreplace:true等のwhole clip updateで消してしまう | expected old clip/full project hash、target bone/time span限定、非対象部の不変性、rollback snapshot |
+| A34 | Bezier/step/easingがGeckoLibへ無変換で反映されると仮定 | target GeckoLib4のeasing/restrictions・export→readback。lossはLOSSY_CONVERSION/UNKNOWN、未証明PASSなし |
+| A35 | 同名bone、異なるUUID/pivot/親子で旧アニメ/FXだけ持越し | rig hash/transform tree/clip bindingsとdependency invalidate。古い材を許可なく使わない |
+| A36 | IK/Procedural/Blender motionをエクスポートでそのまま再現できると仮定 | finite keyframe bake、sampling、root motion、Euler/Quaternion、axis、floor contactの変換検証 |
+| A37 | アニメ生成数を増やすため、同じモデルを毎回実機起動 | offline schema/editor優先、Verification Routerのclaim単位決定、source/conditions同一の理由なき反復はskip理由 |
+| A38 | 「実機起動しない」が硬直し、ランダムAI/ネットワーク/rendererの必要な反復まで禁止 | 合理的な新しい証拠とscope/予算がある試行は複数回許可。固定回数上限を品質の代わりにしない |
+| A39 | AI自己改善が要求や安全境界・不採用の変更を勝手に行う | 最適化可能なのは方法/アルゴリズム/局所fixtureのみ。権限・課金・出版・不採用解除にはuserの別同意 |
+| A40 | AIが1回の成功例を根拠に、推奨アルゴリズムを普遍的な正解として固定 | 版本・モデルtype・動作type・試験datasetと失敗例を保持。baseline比較の効果とconfidenceを分離 |
+| A41 | Auto review/request_reviewが応答を待ち続け、ユーザーに頻繁な操作を要求 | AIが必要な比較を準備。人間の嗜好判断のみ必要時にまとめて提示。未回答=NOT_REVIEWED、他領域の合格と混同しない |
+| A42 | Specialist repoを取り込んだ後に、その機能が既存sosadlyへ追加され重複したまま残る | capability inventoryの定期的な差分検査、同等なら重複実装を廃止候補として比較。削除/切替はreplay試験と移行条件でのみ実施 |
+
+### G3. AIの改善余地を保証する監査基準
+
+**自律性の確認:** あらかじめ指定した正解の方法を単純実行するだけでなく、(1) アニメーションの不自然さを検出 (2) 分かっている構造/予算下でclip編集または別routeを選択 (3) 旧candidateを保存 (4) before/after static/pose比較 (5) 必要な場合のみ実機/人間へ問い合わせ (6) 妥当な範囲で方法を改良して記録できるか評価。実装AIがどのルートを選んだかを人間に簡潔に知らせる一方、内部の全試行を都度承認させない。
+
+**自己改善は科学的な仮説の比較:** 新規repo、何らかのIK手法、モデル変換ルート、独自validatorの提案は許す。採用には同じ課題の前後比較、費用/遅延/劣化・権利/依存の記録、旧環境へのrollback性が必要。ライセンス/安全ゲートを破った最短経路や幻覚的な改善は棄却する。
+
+**検証する失敗例:** lossのあるクリップ変換、boneピボット不整合、変換済みと見せかけて再生しないcontroller、古いrouteのCAS参照混入、権限外書込、editor二重起動、実機の必要性を明示できない反復、限定実機/静的/人間審美の混同。テストで改善不能だった場合は例外を隠さず、未達として止める。
+
+**最終監査判定:** 設計としての採否・実装順序は明確だが、S0–S6の実装、GeckoLib/Blockbenchの増設権限、Windows実機、改善効果は全てNOT_RUN。未検証の外部repoはライブラリを丸ごと導入しない。既存 VFX/A0–A6、共通デバッグ・人間レビュー計画を維持する。
