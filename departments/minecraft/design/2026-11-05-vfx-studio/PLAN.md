@@ -327,3 +327,104 @@ AI の判断は VISUAL_INFERRED、数値は DIRECT_OBSERVED / SAMPLED_OBSERVED�
 **測定:** 同じ課題のbaselineに対し制作時間、失敗・方式変更数、clip修正数、必要証拠の欠損、実機起動時間・回数、人間操作回数、false-PASS率、LLM/API costを測定。改善数値を先に捏造しない。改訂による実装と実クライアント受入は未実施。
 
 **状態:** DESIGN ONLY / EXTERNAL PROVIDER PROOF NOT_RUN / ANIMATION AUTOMATION NOT_RUN。元P0–P6の目標、安全・ライセンス・実験ワールド・履歴・復元・監査の全条件を維持する。
+
+## 9. 2026-11-11 Animation Provider Selection — 小さく導入し、実装AIに改善余地を残す
+
+**ユーザー判断:** Kimodo および video2mocap は不採用。依存関係、実装候補、MVP、将来の自動選択いずれにも入れない。暗黙のfallbackにも用いない。前節のモデル生成・VFX・検証・人間レビュー計画はそのまま保持し、本章はアニメーション制作の不足を補う段階導入・機能重複抑制・AIの改善権限を具体化する。
+
+### 9.1 最終目的・既存コードの正本
+
+1. AIが1体の rigged mob に対して idle/walk/attack（必要なら fly/cast/death）を制作し、途中でclipの制作・変換手段を変更できる。変換と実Minecraft上の再生はそれぞれ独立判定。アニメーション/clipごとの選択理由、変更・失敗、構造と動画証拠を既存Asset Method Manifestで参照する。
+2. 第一制作手段は現在のTECH HUBのBlockbench編集ガードを通した sosadly。**上流 README に機能が載っていても、テックハブのピン止めしたアダプターから使用できると推測しない**。source-based capability inventoryを最初に作る。
+3. 二番手以降のrepoは、sosadly+既存自作validatorと比べて不足する **具体的な機能** が確認できた場合にだけ薄いadapter/独立validator/スキル資料として採用する。別MCP server/別Blockbench pluginを常駐させない。
+4. Forge 1.20.1 / Java 17 / exact target Forge patch / GeckoLib 4 ANCHOR。GeckoLib/Bedrock/glTFと一般Blockbench formatの座標・軸・単位・補間・effect keyframeの意味差を固定。モデルのscene/editor、ゲーム内GeoModel、server AI制御・HIT、client animation controller/visual、Photon VFX のauthorityを混同しない。
+5. Owner/editor/live attest、使い捨てworkspace、無上書き、expected generation/hash、UNKNOWN後blind retry禁止、source/asset provenance、既存Evidence CASというハードゲートは継続。汎用JS実行・plugin install/uninstall・任意外部パスやネット接続は標準AIルートに出さない。新機能はこれらを迂回せず延長する。
+
+### 9.2 repoの優先順位と「どこまで取り込むか」
+
+| 順位 | upstream・調査対象 | 既存基盤との重複 | 導入の判断・範囲 |
+| --- | --- | --- | --- |
+| **S0 中核の機能開放** | [sosadly/blockbench-mcp](https://github.com/sosadly/blockbench-mcp) | 現在の選定済みprovider。create_rig, check_rig, get_rig, generate_animation, create_animation, add_keyframe(s), analyze_animation, preview_animation, export_project, request_review が上流にある | **最優先**。既存固定revのAPI/実態を調べ、未公開で価値があるtyped操作のみ現在のexclusive editor guardへ増設。丸ごと最新版に切替しない |
+| **S1 静的な検証部品** | [adhi-jp/minecraft-blockbench-mcp](https://github.com/adhi-jp/minecraft-blockbench-mcp) | 作成・クリップ編集はsosadlyと重複。GeckoLib4向けfile checker・readback・still frame/format checksに差分 | **独立したread-only file validatorを第一候補**。export済みgeometry/animationsのschema、orphan bone、easingArgs、effect-keyframe検証を自作の最小検査へ移植/参考。全MCP常駐はしない |
+| **S2 精密編集・知識** | [jasonjgardner/blockbench-mcp-plugin](https://github.com/jasonjgardner/blockbench-mcp-plugin) と [blockbench-animation skill](https://github.com/jasonjgardner/blockbench-mcp-project/blob/main/skills/blockbench-animation/SKILL.md) | create/keyframesは重複。animation timeline、range mirror/offset、GeckoLib専用easing、部分的なcurve編集・保存手順に特徴 | **Animation Skillは読み取り専用の参考知識として選択導入**。未対応の編集操作だけ source/format tests後に現行adapterへ追加。一般BezierをGeckoLibで再現可能と主張しない |
+| **S3 手続き動作・IK** | [RenasDemirbas/BlockBenchMCP](https://github.com/RenasDemirbas/BlockBenchMCP) | rig, walk animation, analysis, screenshotの大部分が重複。足の接地、IK、モーションプリセット、干渉検査に差分候補 | **不足が実測された場合のみ、アルゴリズム/fixtureを研究**。GPL-3.0等の権利と不確かな任意コード経路を先に監査。無条件でコードをコピーしない |
+| **S4 特殊制作のfallback** | [EL4CTEO/blender-skills](https://github.com/EL4CTEO/blender-skills) 中の blender-animation、blender-character-rigging、export/bake | 通常のkeyframeは重複。IK constraints、NLA、bake、特殊なリグ/変換などで差分 | **特定の要件がBlockbenchで不可能/非効率と証明された時だけ** headless・隔離 Blender adapterを検討。Blenderの完成をGeckoLib対応と扱わない。全スキル一括導入なし |
+| **再利用** | img2blockbench、Mosaicary、BlockSmith、Minecraft Agent Skills、既存GeckoLib 4 | 直前§8で既に責務・導入ゲートを定義済み | 別のanimation systemとして複製しない。Mosaicaryは変換経路、img2blockbenchは主にモデル制作、BlockSmithは候補、Agent Skillsは選択的な知識、GeckoLibは実ランタイム |
+| **不採用** | NVIDIA Kimodo、video2mocap | 生成規模と依存が今回の目的と不一致 | **対象外**。PoC、provider登録、隠れたfallback、調査前提にしない。ユーザー判断なしに復活させない |
+
+先に比較すべき能力一覧は **①基本clip生成 ②既存clipの一部分だけ修正 ③骨格/回転中心/左右識別 ④GeckoLib4 exportとeffect easing ⑤基準フレーム取得 ⑥滑り・貫通・loop seam診断 ⑦状態遷移とserver eventとの整合 ⑧変更前後のreadbackと復元**。同じ機能を2つのtoolへ宣伝するのではなく、1機能につき **primary implementation 一つ**、必要なら独立validatorを一つにする。
+
+### 9.3 単一の編集経路 — Adapter Capability Map
+
+- **唯一の編集authority:** 現存のBlockbench owner/editor guard内の編集窓口だけ。AIや外部repoがsosadlyへMCPで直結して第二の書込能力を得る経路は提供しない。Blockbenchのproject UUID、instance identity、model format、plugin/adapter pinned hashes、generationを操作前後に確認。
+- **Adapter registry:** capability_id → primary_provider + status(AVAILABLE/NEEDS_IMPLEMENTATION/RESEARCH_ONLY/BLOCKED)、supported format and exact versions、argument schema、expected output、failure/rollback semantics、provenance、required budgetを保存。単純なファイル参照/validatorにはMCP不要。上流が機能宣伝していても、capabilityに昇格できるのは実ソースと限定実行が通ったものだけ。
+- **固定の高水準操作候補:** rig.inspect/validate、animation.create_baseline、animation.edit_keyframes、animation.edit_easing、animation.inspect/compare、animation.preview_frame、animation.export、animation.validate_file、animation.prepare_review。操作名は設計案で、既存CLIの実装済みAPIではない。AIが使うtoolの名前は1セットに整理し、外部provider固有名は記録・adapter内へ閉じる。
+- **新規実装の要件:** typed finite input、対象clip/bone/channel/time range、expected old generation/hash、relative output in owned staging、bounded readback、editor/project identityを要求。新機能の該当箇所だけを許可リストへ加え、script-eval一般許可の解禁は不可。Undo履歴の存在は書込成功の証明やCAS snapshotの代わりではない。
+- **二重書込検出:** 別プラグインからの非授権変更、手編集、format switch、bone UUID再生成、競合transactionによりexpected stateが変われば編集を中断、readbackで差を示し、勝手に重ねてapplyしない。
+- **結果の独立性:** geometry/clip static、editor pose screenshot、export JSON、runtime controller/render、human aestheticはそれぞれ別のassertion domain。人間レビューは同一視点の短い比較が最優先で、BLOCKING request_reviewの無制限待機を標準の自律制作に組み込まない。
+
+### 9.4 アニメーション制作と転送を別々のrouteとして記録
+
+モデル生成手法とは独立に、各 clip は少なくとも下記を別々に選択する。必要に応じて一部だけ変更可能にする。
+
+| stage | route候補 | 目的 |
+| --- | --- | --- |
+| skeleton | sosadly_rig / existing_rig / validated_retarget | bone tree、joint/pivot、自然な関節の配置 |
+| motion authoring | sosadly_generated / direct_keyframes / procedural_baked / imported_existing_animation / specialist_blender | idle/walk/attackなどの実際の姿勢と時間変化 |
+| motion repair | targeted_keyframes / interpolation_easing / retime_mirror / retarget / regenerate_clip | 部分変更。再生成したことを隠さず旧候補を保存 |
+| format transfer | native_geckolib_export / validated_converter / mosaicary_from_gltf | json・geometry・textureのフォーマットと意味の変換 |
+| runtime playback | geckolib4_controller / appropriate_mod_adapter | AI状態・attack event・server/clientとアニメ開始・終了の関係 |
+| verification | offline_schema / editor_frame / event_trace / necessary_real_client / human_comparison | 何の性質を証明したかと未検証を分ける |
+
+**Method Registry追加項目:** method_stage、provider_id + revision + license、input/output hash、source_format/target_format/format_version、bone_map hash、coordinate transform spec、pivot/bind layout hash、sampling policy、interpolation/easing/effect loss report、authoring methodとtransfer methodを独立したrefsとしてfinal asset bundleに記載。clipが同名でもbone UUID/階層/ピボット/アニメ効果の互換判定が通るまでは古い成果を使わない。
+
+**フォーマットの落とし穴:** jasonjgardnerの一般Bezier/easingはGeckoLibでは同等に書出せない場合がある。GeckoLib専用easing指定・実exportのreadbackで確認する。adhiのclip upsertはreplace時に既存の手動調整を失うため、まず差分・期待hash・復旧点を作る。glTFからのmotion transferはRotation Euler/Quaternion、軸反転、単位、global/local transform、sampling、root motion、動作時間とeffect keyframeを区別する。
+
+### 9.5 AI自己改善の自由度（自己改善は品質改善であり権限拡大ではない）
+
+実装AIへ **手法/アルゴリズム・選択と比較の自由**を与える。ただしユーザーの判断・本番保護・ライセンス・予算・証拠を勝手に変更しない。
+
+**変更してよいもの（通常の管理範囲内）**:
+1. 動画/画像/数値の問題から clipごとに生成方式、補間、keyframe密度、IK/接地モデル、部分編集範囲、preview角度、テストfixtureを変える。
+2. 不十分な結果から別の許可済みprovider/routeへ切替し、旧候補・理由・比較を保全する。不要な分岐を作らず、改善したものだけ採用する。
+3. 未知の不具合に対して追加の **安価な静的validator・fixture・回帰テスト** やログprobeを提案/実装する。既存実装と重複するなら拡張または置換を試験・比較し、二重実装を放置しない。
+4. 既存のSourceSnapshotや失敗修復履歴、上流Issue/README/ソースから、次に調べるべき候補を仮説として追加する。ただし自動install・外部への素材送信・新料金発生・unsafe actionを許可するものではない。
+5. 本計画のphase順は、明示された依存関係と受入ゲートを満たす限り実装AIが合理的な順序へ変更してよい。方針変更時には plan delta・効果/理由・検証の変更点を短く残す。
+
+**変更できないもの:** 利用者が不採用にした技術の黙った復活、実験対象外の製品改変、秘密/課金/公開範囲変更、無制限script、verified scope未満のPASS認定、外部ライセンス違反、既存run/asset/evidence破棄、無意味なMinecraft連続起動、無確認の破壊的置換、未回答の人間レビューを自動で承認すること。
+
+**改善ループ（小さく閉じる）:**
+- B0: 欲しい動作とacceptanceを固定し、現状のsource/capability/未確認を参照する。
+- B1: 最小の既存routeを選んで1回作る。構造/previewで失敗原因を独立検証。
+- B2: 失敗・変換損失・source不足があれば、対応する最小scopeのrepairか別routeを選ぶ。新規ツールを増やす前に現行の能力で解決可能か確認。
+- B3: 同じclipと同じ確認観点でbefore/afterを比較し、効果がない編集・検証を反復しない。必要なら条件を変えて追加の証拠を採る。
+- B4: 成功/失敗/未検証と時間・人の操作回数・実機必要性を履歴へ保存。上手くいった工夫は固定ルールでなく version付き推奨として蓄積。将来の作業で異なる結果なら再検討できる。
+- B5: 複数の候補に有利な特徴がある場合は、人の好みで決める部分だけコンパクトな比較レビューを求める。途中で毎回確認を求めない。
+
+**改善の権限区分:** オフラインでの生成・局所編集・検査/方法切替は既存の明示された許可範囲ならAI主体。新しい provider のインストール、外部ネット送信、破壊的書換、権限/課金・CI/本番変更は人間による別の明示的承認に留める。実機試験の反復はVerification Routerの三要件・owner・コスト予算を守れば根拠付きで行える。固定回数の一律禁止はしない。
+
+### 9.6 具体的な段階実装 — 既存A0–A6と重複しない
+
+| substep | 必要な最小実装・手順 | 独立した受入基準 |
+| --- | --- | --- |
+| S0 既存の能力棚卸し | pinned sosadly/現行asset guard、target Blockbench/GeckoLib4、Minecraft Forgeソースを調査。上流機能と利用可能scopeの対応表、依存/ライセンスを保存 | 何が使える/使えない/未検証かを区別。現在のCelestial Staff生成・repair・exportの回帰が壊れない |
+| S1 中核のrig/clip制作 | sosadlyのcreate_rig/check_rig、generate_animation/add_keyframes、analyze/previewを最低限のtyped guardへ接続。まず自作・単純な四足or二足のモデルを用い、idle/walk/attackを制作 | bone tree/pivot、loop seams、位置/姿勢、before-after、失敗・partial/UNKNOWNを区別。実ゲーム未実行ならNOT_RUN |
+| S2 読取検査と精密修復 | adhi由来のGeckoLib JSON validator、jasonjgardnerのskill/部分keyframe/easing手法を既存機能と比較。**不足のあった** 操作・validatorだけ新規採用 | export-readbackが一致。GeckoLib easingやeffect JSONの誤用を拒否。clip以外の不変を立証、二重MCP常駐0 |
+| S3 手続き生成の追加 | 歩行/攻撃に接地・IK等が実際に必要なら、Renasのアルゴリズムを参考にオフラインfixtureを追加。必要に応じ許可済みBlenderでbake/retargetを別routeで試す | 生成した動作と同じ入力で従来routeを比較し、改善幅・conversion loss・CPU/IO/human負担を記録。権利/依存が不明ならBLOCKED |
+| S4 方式・変換履歴の保存 | 既存Asset Method Manifestへclipごとのauthoring/transfer/repair/playback参照、旧候補、切替理由、rig layout・loss reportを接続 | 同名でpivotが違うrigへの古いclip混入、費用/外部権限の勝手な拡張、成果物改竄を負例で拒否 |
+| S5 実ランタイムとHuman Review | Geckolib Controller、Mob AI、HIT→clip→VFXの因果が実機を必要とするケースだけWater Tankへ。原則Log first。美的判断は同一camera画像/短いclipでまとめて人間に依頼 | Editor/構造/RUNTIME/人間を別結論。不要Tank起動を防ぎつつ、必要なreal runを省かない。人間の操作数と未回答を記録 |
+| S6 実装AIの改善受入 | 意図的なclip生成失敗・method change、sourceの変化、未知のeasing、接地不良を注入し、AIが最小scope修復/方法変更/結果記録できるか試す | 最小変更・失敗原因・再試行合理性・旧成果保全を証拠化、ガード破り0、人手操作を安易に増やさない |
+
+**重複排除:** S0–S6は A0–A6 のうち A3（Animation）の詳細タスクであり、P0–P6（VFX）と並行可能。phaseを二重カウントせず、共通CI/Store/実験管理を再利用する。「別の新しい計画書」は作らない。
+
+**初期実証モデル:** 一つは四足の歩行（接地と前後の脚）、もう一つは腕/武器のattack（ボーン回転・命中とVFX同期）を優先。単純な動作が通っていないのに膨大なモブ/多数のclipへ広げない。Windowsなど未検証プラットフォームの実機成功を先取りしない。
+
+### 9.7 移行/非採用ルールと完了条件
+
+1. SOSADLYを大幅更新する前に固定旧版・新候補を同じパイロットで比較し、既存杖/rig/animation/editor repair機能の回帰と権限の差分を確認。単に新API数が多いだけでは更新しない。
+2. adhi/jason/Renasの機能が現在のsosadly+自作minimal validatorと同等なら外部実装を採用せず、調査参考としてのみ残す。選んだcapabilityにはprimary_providerを必ず一つにし、代替fallbackは異常時だけ明示選択する。
+3. 成果が人の好み次第ならAIは決め打ちせず、1つの短いレビューにまとめる。一方、形式エラーや挙動ログの原因は人間へ手作業で探させない。
+4. 今回の成功判定は「3clipが作れた」だけではない。method/format/playbackの証拠、構造/Editor/実ゲーム/Humanの独立状態、過剰起動なし、旧成果と人の編集保護、どのrouteを選び変更したか、を一緒に報告する。
+5. 外部OSSの固定commit・出典・ライセンス・依存/安全条件を満たさない場合は、代替の安全な小実装またはNOT_RUN/BLOCKEDを選択し、すべての機能を無理に採用しない。
+
+**章の状態:** IMPLEMENTATION PLAN ONLY。新規 animation adapter、provider導入、検証実行、外部課金・インストール・main mergeは未実施。
