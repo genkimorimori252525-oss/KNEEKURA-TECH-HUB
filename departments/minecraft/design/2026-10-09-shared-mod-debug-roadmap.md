@@ -158,7 +158,7 @@ Exclude by default: full-world scans every tick, unlimited entity/per-tick log s
 
 ### 12. Asset/Animation Method Registry（既存 CAS の参照レコード）
 
-モデル生成・モデル変換・テクスチャ作成・リグ生成・アニメーション作成・VFX作成は **別のroute selection**。主な候補・権利・能力の詳細は [VFX Studio PLAN §8–11](2026-11-05-vfx-studio/PLAN.md) に保持する。
+モデル生成・モデル変換・テクスチャ作成・リグ生成・アニメーション作成・VFX作成は **別のroute selection**。主な候補・権利・能力の詳細は [VFX Studio PLAN §8–9](2026-11-05-vfx-studio/PLAN.md) に保持する。
 
 - **候補のID**: `img2blockbench.direct`, `img2blockbench.mesh`, `img2blockbench.img2threejs`, `mosaicary.gltf`, `blockbench.direct`, `blocksmith.experimental`, `animation.keyframes`, `animation.import_retarget`, `animation.procedural`, `vfx.photon_candidate` など。IDは将来契約案であり実装名ではない。
 - **各選択を記録**: `asset_family`, `stage`, `method_id`, `reason`, `alternatives_considered`, `input/output SHA-256`, `provider revision/license`, `format+version`, `quality checks`, `runtime constraints`, `human review`, `switch_from`, `switch_reason`。
@@ -190,3 +190,17 @@ Exclude by default: full-world scans every tick, unlimited entity/per-tick log s
 - 既存履歴や検証証拠を削除/上書きしない。レコード追加はすべて source/build/run/assetのidentityに紐付け、未検証は未検証のまま残す。
 
 **改訂の状態:** DESIGN PROPOSED / IMPLEMENTATION NOT STARTED。既存の限定的なBlockbench+staffと実水槽の試験成果はその範囲のまま保持する。Code・CI・本番ワールド・登録権限はこの文書更新だけでは変わらない。
+
+### 15. 制作AIの改善余地とAnimation Providerの統合（2026-11-11）
+
+**本章は既存のD0–D6の置換ではなくD2/D3/D6の具体化。** VFX PLANの [§9 Animation Provider Selection](2026-11-05-vfx-studio/PLAN.md) が導入候補、機能の選別、実装手順S0–S6を定義し、同じディレクトリのAUDIT Gが負例を引き受ける。仕様を3つの別計画書に増殖させず既存3文書の役割を維持。
+
+1. **編集経路の重複を禁止:** sosadly + TECH HUBの現行Blockbench guardのみをデフォルトのwriterにする。adhiは第一にGeckoLibの独立read-only validator、jasonはanimation skill/補間API調査、Renasは実測で不足した手続きIK/接地アルゴリズム、Blender Skillsは特殊ケースのbake。既存の同等機能を再実装したりMCPを複数常駐させない。
+2. **AIの改善権利:** clip制作・補間・部分修正・方法選択・検証fixtureは、同じ規定の範囲内でAIが理由付きで変更できる。上流の新候補や改善案を研究・提案でき、実証で優れていれば選択候補に昇格できる。ただしprovider導入/権限/課金/外部送信/公開/本番影響、明示不採用の復活を勝手に承認しない。
+3. **不採用の固定:** Kimodo と video2mocap は今回の制作パイプライン、PoC、隠れたfallbackから除外。既存モデル生成・Mosaicary変換・GeckoLib・VFXの確定した候補は勝手に消さない。
+4. **再実験の合理性:** Verification Routerは起動回数を数える門番ではない。モデル/animation/JSONは静的/Editorで確認し、controller/Mob AIの実動作は必要な実機で証明。実機を何回実施するかは「残る主張・新しい証拠・試験設計」に従う。一律の固定起動上限を追加せず、現行の安全なrun権限/時間・CPU/保存予算と停止条件を遵守する。現実に確率試験が複数回必要なら、実験ごとに有限予算を宣言する。
+5. **Human Review:** AIがコマンド/ワールド/装備/動画/復元を準備する。人は自然さ、好み、ゲームとしての感触だけを短い画像比較/任意のDebug Wand等で判断する。人が不在のときは「未評価」であり、AIが勝手に最終承認しない。
+6. **記録:** animation authoring と format transfer と runtime playback を別方法としてMethod Registryに結ぶ。clip単位の途中切替、旧候補、bone/pivot/coordinate conversion、easing/effect loss、GeckoLib version、source/asset/run、人手評価を最終Asset Method Manifestに参照する。すでにあるStore/CAS/Historyを拡張するので別台帳・別DBを作らない。
+7. **自己改善の実証:** 人工的なbone不一致やclip loop不連続を与えたとき、AIが自ら最小の修正手段を選択し、before/after比較で改善を証明し、変更理由・失敗・未知を記録できるか確認。人間が途中で全作業を逐一指示しなくてもよいことを受入に含める。
+
+**状態**: 既存ソースにない機能はDESIGN ONLY、製品級の実装/Windows/新provider接続/自己改善成功はNOT_RUN。既存の限定的な静的モデル受入を一般化していない。
