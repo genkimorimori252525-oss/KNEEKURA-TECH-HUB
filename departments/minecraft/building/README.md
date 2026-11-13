@@ -6,6 +6,12 @@
 
 - [mcbuild](mcbuild/README.md) — **OPTIONAL LOCAL BRIDGE / 実機未検証**。LLM → Blueprint DSL → Voxel Grid → 複数視点レンダリング → 視覚モデルによる見直し → `.schem`。ソースは固定コミットでオンデマンド取得。直接的なゲーム内配置は現段階では対象外。
 
+## バージョン非依存の建築成果物
+
+建築エンジン本体は現行版のまま利用し、完成した構造を **ブロックID/状態 + 相対XYZ座標 + 寸法・基準点** として保持する。ターゲットごとにブロック互換性を検査し、必要なら置換ルールを明示してSchematicを生成する。Minecraft 1.20.1 + Forgeは最初の出力先であり、**建築を計算するエンジンのバージョンを1.20.1に固定する理由ではない**。
+
+現行mcbuildはMinecraft 1.21.1のDataVersionを持つSponge Schematic **v3** を出力する。一方1.20.1向けのWorldEdit 7.2.15では通常 **v2** 形式が必要。したがって **v3をそのまま1.20.1に読み込めるとはしない**。将来の対象別エクスポータには形式変換と実ブロック定義の適合検査を設ける（現PRでは未実装）。
+
 ## 運用原則
 
 - **FRONTIER と ANCHOR の区別**：mcbuild upstream のゲーム内MODは NeoForge 1.21.1。Tech Hub の適応基準は Forge 1.20.1。混同・自動移植・動作済みの扱いは禁止。
