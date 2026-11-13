@@ -32,7 +32,9 @@ def test_source_and_output_paths_are_ignored_local_artifacts():
 
 def test_offline_demo_must_use_fake_llm():
     cmd = bridge.run_command("demo", "a tiny stone hut", 3, "", 0)
-    assert cmd[:5] == ["uv", "run", "--frozen", "--no-sync", "mcbuild"]
+    assert cmd[:5] == ["uv", "run", "--offline", "--frozen", "--no-sync"]
+    assert "mcbuild" in cmd
+    assert "--offline" in cmd
     assert "--fake-llm" in cmd
     assert "--model" not in cmd
     assert cmd[cmd.index("--out") + 1] == str(bridge.RUNS)
