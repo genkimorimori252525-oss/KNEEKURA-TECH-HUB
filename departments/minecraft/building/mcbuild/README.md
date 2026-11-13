@@ -1,6 +1,8 @@
 # mcbuild — 建築ジャンルへの導入
 
-**状態：OPTIONAL LOCAL BRIDGE / 実機未検証（2026-11-14監査反映）**
+**状態：OPTIONAL LOCAL BRIDGE / v2変換器はファイルレベルで実装済み・実機未検証（2026-11-14）**
+
+変換器: [`../portable/`](../portable/README.md)／実測記録: [IMPLEMENTATION-STATUS-2026-11-14.md](IMPLEMENTATION-STATUS-2026-11-14.md)
 
 実装前に読む資料：**[軽量監査](AUDIT-2026-11-14.md)** / **[クロスバージョン移植計画](PLAN-2026-11-14-CROSS-VERSION.md)**。
 
@@ -62,7 +64,7 @@ python departments/minecraft/building/mcbuild/runner.py build --prompt "a small 
 4. 元のブロック総数・寸法・座標・方向と変換後の差分をレポートし、不要な空気置換を検知。
 5. 読み込み確認はワールドへ書き込まないクリップボード検証から始め、別途バックアップ済みテストワールドへ配置する。
 
-**本PRは生成アダプタまでで、v3→v2変換と1.20.1取り込みは未実装・未検証。** ここは次の具体的な実装作業であり、「バージョンの違いを理由に建築の移植が不可能」という意味ではない。
+**v3/疎配置→v2変換は [`../portable/`](../portable/README.md) にファイルレベルで実装済み（公式1.20.1レジストリ照合・読戻しZERO_DIFF）。1.20.1 WorldEditへの取り込みは未検証（NOT_RUN）。** ここは次の具体的な実装作業であり、「バージョンの違いを理由に建築の移植が不可能」という意味ではない。
 
 ## Minecraftへの反映とバージョン境界
 
