@@ -48,7 +48,11 @@ export function validateRawFrame(input) {
   integer(f.imageBytes, 1, 4 * 1024 * 1024); finite(f.partialTick, 0, 1);
   require(f.artifactRole === 'RAW_SCENE_RGB' && f.captureStage === 'AFTER_LEVEL_BEFORE_HAND_HUD' &&
     f.imagePath === `evidence/raw/visual/${f.imageHash}.png`, 'RAW_ARTIFACT_BINDING_MISMATCH');
-  const c = f.camera;
+  validateCamera(f.camera);
+  return f;
+}
+/** Shared by Cardinal-4 raw frames and VFX frame sequences; one camera contract, not two. */
+export function validateCamera(c) {
   exactKeys(c, ['position', 'quaternion', 'yaw', 'pitch', 'fov', 'projection', 'projectionMatrix', 'viewMatrix', 'matrixConvention', 'viewport'], 'CAMERA');
   vector(c.position, 3); vector(c.quaternion, 4); vector(c.projectionMatrix, 16); vector(c.viewMatrix, 16);
   finite(c.yaw, -360, 360); finite(c.pitch, -90, 90); finite(c.fov, 29.999, 100.001);
@@ -56,7 +60,7 @@ export function validateRawFrame(input) {
   require(c.projection === 'PERSPECTIVE', 'UNSUPPORTED_PROJECTION');
   require(Array.isArray(c.viewport) && c.viewport.length === 2, 'INVALID_VIEWPORT');
   c.viewport.forEach(n => integer(n, 64, 2048));
-  return f;
+  return c;
 }
 export function validateVisualManifest(input) {
   const m = structuredClone(input);
