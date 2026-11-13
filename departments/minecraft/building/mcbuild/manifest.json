@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "id": "minecraft-building-mcbuild",
+  "genre": "建築",
+  "label": "mcbuild — prompt-to-Minecraft schematic",
+  "integration_status": "OPTIONAL_LOCAL_BRIDGE / RUNTIME_NOT_VERIFIED",
+  "upstream": {
+    "repository": "https://github.com/harrynull/mcbuild",
+    "clone_url": "https://github.com/harrynull/mcbuild.git",
+    "reference": "main",
+    "commit": "34ce86372d4c23f4d83d4e24fc256cb399d6c3e3",
+    "license": "MIT",
+    "copyright_notice": "Copyright (c) 2026 Harry",
+    "asset_notice": "src/mcbuild/assets/NOTICE.md"
+  },
+  "tracks": {
+    "anchor": {
+      "minecraft": "1.20.1",
+      "loader": "Forge",
+      "mode": "offline .schem export + separate import",
+      "status": "IMPORT_NOT_VERIFIED"
+    },
+    "frontier": {
+      "minecraft": "1.21.1",
+      "loader": "NeoForge",
+      "mode": "upstream mod and WebSocket server",
+      "status": "DOCUMENTED_ONLY_NOT_PORTED"
+    }
+  },
+  "execution": {
+    "activation": "explicit_on_demand",
+    "source_checkout": "departments/minecraft/local-artifacts/mcbuild/upstream",
+    "run_outputs": "departments/minecraft/local-artifacts/mcbuild/runs",
+    "networking": "none_for_status; git_for_prepare; package_registry_for_install; OpenRouter_only_on_explicit_online_build",
+    "run_into_world_automatically": false,
+    "secrets_in_git": false
+  }
+}

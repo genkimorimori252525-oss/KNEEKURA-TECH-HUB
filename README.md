@@ -22,6 +22,8 @@ Internal-purpose technology research infrastructure for discovering large amount
 
 A dedicated private research lane for Minecraft mod engineering has been established under `departments/minecraft/`.
 
+**建築ジャンル：** [Minecraft Building](departments/minecraft/building/README.md) は mcbuild の固定ソース、反復設計・可視化、オンデマンドの `.schem` 生成を扱う。現時点では実機未検証・ワールド自動変更なし。
+
 Minecraft **1.20.1 + Forge remains the adaptation anchor, not the ceiling**. Each target should preserve a 1.20.1/Forge track when one exists while also acquiring and analyzing the latest useful upstream implementation. Version/loader tracks remain separate SourceSnapshots and are compared explicitly so newer techniques can be reconstructed for the 1.20.1 Forge environment without pretending that code is directly interchangeable.
 
 The department is designed for whole-target analysis: code architecture, entity/boss AI, pathfinding, state machines, registries/events, networking, dimensions/world generation, rendering, models, animations, textures, particles, sounds, data assets, compatibility, version portability, loader translation, and performance. Full upstream source trees may be checked out locally for complete analysis; raw JARs, decompiled trees, and full third-party asset copies remain local-only by default while the repository stores pinned provenance, inventories, hashes, mappings, cross-version deltas, and derived analysis.

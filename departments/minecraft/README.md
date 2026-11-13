@@ -2,6 +2,11 @@
 
 KNEEKURA TECH HUB の Minecraft MOD 開発専用部門。
 
+## 建築（Minecraft Building）
+
+[建築ジャンル](building/README.md)を独立登録。第一候補 [mcbuild](building/mcbuild/README.md) の自然言語→DSL→3Dプレビュー→自己見直し→`.schem` 出力を、**必要時だけ**使う固定リビジョンのローカルアダプターとして接続。Forge 1.20.1へのワールド反映は未検証で、NeoForge 1.21.1のupstream直接建築とは区別する。
+
+
 ## 独立AI部門との連携（2026-10-11）
 
 [AI専門研究部門](../ai/README.md) は指揮階層・群体知能・学習・AI評価の一般化を担当し、Minecraft部門はMob実装、Forge API、JAR/Bytecode、LAB/GameTestでの検証を担当する。`mod-ai/`（MOD制作AI基盤）を改名・移動しない。
