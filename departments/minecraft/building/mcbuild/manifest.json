@@ -18,7 +18,7 @@
       "minecraft": "1.20.1",
       "loader": "Forge",
       "mode": "version-targeted schematic v2 export from completed block data (planned)",
-      "status": "PORTABILITY_CONVERTER_NOT_IMPLEMENTED",
+      "status": "SCHEM_V2_CONVERTER_NOT_IMPLEMENTED; STATIC_AUDIT_COMPLETE",
       "data_version": 3465,
       "schematic_version": 2
     },
@@ -28,7 +28,9 @@
       "mode": "upstream mod and WebSocket server",
       "status": "DOCUMENTED_ONLY_NOT_PORTED",
       "upstream_export_schematic_version": 3,
-      "upstream_export_data_version": 3953
+      "upstream_export_data_version": 3953,
+      "upstream_export_data_version_minecraft": "1.21",
+      "minecraft_1_21_1_data_version": 3955
     }
   },
   "execution": {
@@ -38,5 +40,7 @@
     "networking": "none_for_status; git_for_prepare; package_registry_for_install; OpenRouter_only_on_explicit_online_build",
     "run_into_world_automatically": false,
     "secrets_in_git": false
-  }
+  },
+  "audit_document": "departments/minecraft/building/mcbuild/AUDIT-2026-11-14.md",
+  "implementation_plan": "departments/minecraft/building/mcbuild/PLAN-2026-11-14-CROSS-VERSION.md"
 }

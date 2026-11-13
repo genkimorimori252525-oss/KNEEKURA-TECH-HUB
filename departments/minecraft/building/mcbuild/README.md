@@ -1,6 +1,8 @@
 # mcbuild — 建築ジャンルへの導入
 
-**状態：OPTIONAL LOCAL BRIDGE / 実機未検証（2026-11-13）**
+**状態：OPTIONAL LOCAL BRIDGE / 実機未検証（2026-11-14監査反映）**
+
+実装前に読む資料：**[軽量監査](AUDIT-2026-11-14.md)** / **[クロスバージョン移植計画](PLAN-2026-11-14-CROSS-VERSION.md)**。
 
 [upstream: harrynull/mcbuild](https://github.com/harrynull/mcbuild) の Python CLI を、KNEEKURA TECH HUB の建築ジャンルに**必要なときだけ**接続する。upstream 本体・Minecraft由来の画像やブロック状態データはリポにコピーしない。参照するソースは [manifest.json](manifest.json) の exact commit に固定する。
 
@@ -50,11 +52,11 @@ python departments/minecraft/building/mcbuild/runner.py build --prompt "a small 
 
 建築の設計・生成を担当するmcbuildと、完成したブロック配置データは分離できる。**建築エンジンをForge 1.20.1へ移植する必要はない**。保管すべき中心情報は、各ブロックのIDと状態・XYZ相対座標、建物の寸法、ペースト基準点、必要に応じてブロックエンティティ情報（mcbuild現行エクスポータでは空配列）である。生成した完成データを同一の規則で新旧ゲームへ書き出せる。
 
-ただし、上流の `src/mcbuild/export/schem.py` はSponge Schematic **v3**、`DataVersion=3953`（Minecraft 1.21.1）を固定して出力する。1.20.1の `DataVersion=3465` で使用するWorldEdit 7.2系はSchematic **v2** が通常の対象となる。**1.20.1へ直接ロードする前に、適切な形式（v2）への変換が必要**。DataVersionの数字だけ書き換える行為は、フォーマット構造や未対応ブロックを変換しないため不十分。
+ただし、上流の `src/mcbuild/export/schem.py` はSponge Schematic **v3**、`DataVersion=3953`（**Minecraft 1.21 の値**。実行MOD対象の Minecraft 1.21.1 は **3955**）を固定して出力する。1.20.1の `DataVersion=3465` で使用するWorldEdit 7.2系はSchematic **v2** が通常の対象となる。**1.20.1へ直接ロードする前に、適切な形式（v2）への変換が必要**。DataVersionの数字だけ書き換える行為は、フォーマット構造や未対応ブロックを変換しないため不十分。
 
 実装すべきターゲット別変換の流れ：
 
-1. 建築元データ（ブロック種/状態と座標）を保存し、入力側の `.schem` v3 も消さない。
+1. 建築元データ（ブロック種/状態と座標、明示airと未配置の区別）を可能なら保存し、入力側の `.schem` v3 も消さない。v3だけではairの意図を復元できない。
 2. 出力先バージョンのブロックレジストリと状態定義で照合。存在するものは原則そのまま維持。ないものは**明示的な置換表**を適用し、候補がなければ失敗として報告。
 3. `1.20.1/Forge` にはSponge v2、`DataVersion=3465` など、対象のWorldEditが受理する形式で出力。
 4. 元のブロック総数・寸法・座標・方向と変換後の差分をレポートし、不要な空気置換を検知。
