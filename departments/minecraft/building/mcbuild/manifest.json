@@ -3,7 +3,7 @@
   "id": "minecraft-building-mcbuild",
   "genre": "建築",
   "label": "mcbuild — prompt-to-Minecraft schematic",
-  "integration_status": "OPTIONAL_LOCAL_BRIDGE / RUNTIME_NOT_VERIFIED",
+  "integration_status": "OPTIONAL_LOCAL_BRIDGE / SCHEM_V2_CONVERSION_NOT_IMPLEMENTED / RUNTIME_NOT_VERIFIED",
   "upstream": {
     "repository": "https://github.com/harrynull/mcbuild",
     "clone_url": "https://github.com/harrynull/mcbuild.git",
@@ -17,14 +17,18 @@
     "anchor": {
       "minecraft": "1.20.1",
       "loader": "Forge",
-      "mode": "offline .schem export + separate import",
-      "status": "IMPORT_NOT_VERIFIED"
+      "mode": "version-targeted schematic v2 export from completed block data (planned)",
+      "status": "PORTABILITY_CONVERTER_NOT_IMPLEMENTED",
+      "data_version": 3465,
+      "schematic_version": 2
     },
     "frontier": {
       "minecraft": "1.21.1",
       "loader": "NeoForge",
       "mode": "upstream mod and WebSocket server",
-      "status": "DOCUMENTED_ONLY_NOT_PORTED"
+      "status": "DOCUMENTED_ONLY_NOT_PORTED",
+      "upstream_export_schematic_version": 3,
+      "upstream_export_data_version": 3953
     }
   },
   "execution": {
