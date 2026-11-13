@@ -57,7 +57,7 @@ def run_command(action: str, prompt: str, max_iters: int, model: str, cost_ceili
     if not 1 <= max_iters <= 20:
         raise ValueError("--max-iters must be between 1 and 20")
     cmd = [
-        "uv", "run", "--frozen", "--no-sync", "mcbuild", prompt,
+        "uv", "run", "--offline", "--frozen", "--no-sync", "mcbuild", prompt,
         "--max-iters", str(max_iters), "--out", str(RUNS), "--display", "off",
     ]
     if action == "demo":
