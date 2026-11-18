@@ -87,3 +87,6 @@ Resource-file counts:
 ## Evidence boundary
 
 This record is based on the exact user-supplied V8.1 JAR, class/resource inspection and targeted public release metadata. Raw copyrighted assets and decompiled source are not committed.
+## Additional snapshot: V9.0 / 2026-11-18
+
+The [V9.0 selected static audit](versions/9.0/README.md) is preserved **separately** from this V8.1 historical snapshot. It includes a corrected [8.1↔9.0 comparison](versions/9.0/FINAL-TECH-AUDIT-2026-11-18.md) (the previous draft erroneously mixed up the Jujutsu Craft SHA), 38 individually hashed evidence paths, renderer/domain/compatibility findings and an explicitly unreviewed failure/repair facet. The exact V8.1 JAR was not reacquired, so this does not claim a class-level binary diff or runtime compatibility. No existing V8.1 evidence/status is superseded.
