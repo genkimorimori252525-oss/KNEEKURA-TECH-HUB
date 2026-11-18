@@ -32,6 +32,9 @@ ISO ──isols.py──▶ ファイル表（位置・サイズ）
 | `obj2schem.py` | OBJ+MTL+PNG → **Minecraft 1.20.1 の Sponge Schematic v2（`.schem`）**。表面だけの殻にするボクセライザ（中空）。1.20.1 標準ブロックの代表色（CIELAB 最近傍）に置換 |
 | `hybrid2bbmodel.py` | **最終形の立方体モデル**。なめらかな面（ドレス・顔）は、元メッシュの面に沿った**斜めの板**（回転キューブ、厚み0・1面・テクスチャ両面表示）にし、元テクスチャを 1 ブロック = 1 ピクセルのドット絵にして貼る。抜き絵の飾りや歯車はブロック。顔など一部だけ絵を細かくできる |
 | `bb_verify_hybrid.py` | 上を Blockbench 実機で検証（板の 4 隅の位置・板の全画素・ブロックの全露出面・geo.json の一致） |
+| `hybrid2bbmodel.py --rig --motion …` | 同じ立方体モデルに**骨とアニメ**を付ける。骨はグループ、重みが混ざる面は「混ぜ方」ごとの補助の骨、面の中で伸び縮みする所は面を切ってから乗せる（`--blend-budget`）。`--seam-report` で継ぎ目の開きを元のスキニングと比べて測る |
+| `bb_verify_rig.py` | 上を Blockbench 実機で検証（キューブの所属・各アニメ時刻の全頂点・geo.json の骨の一致） |
+| `bb_load_pose.py` | 指定アニメ・時刻・カメラで `.bbmodel` を開く JS を作る（見た目の比較撮影用。`bb_cdp.mjs --screenshot` と組む） |
 | `voxel2bbmodel.py` | `.schem` → **Blockbench の立方体モデル**（Bedrock Entity 形式の `.bbmodel` + `.geo.json` + 色アトラス PNG）。ボクセルを直方体に統合し、1 ブロック = 1 ピクセルのテクスチャで色を持たせる（色が違っても 1 つの箱にまとめられる） |
 | `bb_verify_cubes.py` | 上の立方体モデルを Blockbench 実機で検証（全露出面の色・自作 geo.json と Blockbench 書き出しの一致・読み込み時間・描画面数） |
 | `schem_check.py` | `.schem` の独立検査（NBT 構造・パレット・varint 復号・セル数・材料表との一致。書き出し側のコードは使わない） |

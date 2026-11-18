@@ -1,7 +1,7 @@
 """ブロック構成(.schem) -> Blockbench の立方体モデル（Bedrock Entity 形式: .bbmodel + .geo.json + テクスチャPNG）。
 
 使い方:
-  python voxel2bbmodel.py <in.schem> <出力フォルダ> [--name walpurgis] [--unit 16] [--keep-front]
+  python voxel2bbmodel.py <in.schem> <出力フォルダ> [--name model] [--unit 16] [--keep-front]
                           [--legacy] [--pretty] [--dump-expected expected.json]
 
 仕組み:

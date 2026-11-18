@@ -406,6 +406,102 @@ def test_plate_coverage_threshold_controls_edge_pixels():
     assert 0 < n_strict < n_loose < len(loose['pix'])  # 三角形の外は透明、しきい値を下げるほど縁まで塗る
 
 
+# ---- rig: 補助の骨・伸び縮みする面の分割・継ぎ目の測定
+
+def _translate(x, y, z):
+    return [[1, 0, 0, x], [0, 1, 0, y], [0, 0, 1, z], [0, 0, 0, 1]]
+
+
+def _rot_z(deg):
+    c, s = math.cos(math.radians(deg)), math.sin(math.radians(deg))
+    return [[c, -s, 0], [s, c, 0], [0, 0, 1]]
+
+
+def _area(P):
+    a = [P[1][k] - P[0][k] for k in range(3)]
+    b = [P[2][k] - P[0][k] for k in range(3)]
+    c = hybrid2bbmodel.cross(a, b)
+    return 0.5 * math.sqrt(hybrid2bbmodel.dot(c, c))
+
+
+def test_blend_rotation_is_a_quaternion_average():
+    R = hybrid2bbmodel._blend_rotation([(0.5, _rot_z(0)), (0.5, _rot_z(90))])
+    assert abs(math.degrees(math.atan2(R[1][0], R[0][0])) - 45) < 1e-6
+    # 符号違いのクォータニオン（同じ回転）を混ぜても潰れない
+    R = hybrid2bbmodel._blend_rotation([(0.5, _rot_z(170)), (0.5, _rot_z(-170))])
+    assert abs(abs(math.degrees(math.atan2(R[1][0], R[0][0]))) - 180) < 1e-6
+
+
+def test_continuous_euler_has_no_jumps_through_a_full_turn():
+    mats = [_rot_z(d) for d in range(0, 721, 10)]
+    eu = hybrid2bbmodel._continuous_euler(mats)
+    for a, b in zip(eu, eu[1:]):
+        assert sum(abs(b[k] - a[k]) for k in range(3)) < 11  # 1 コマ 10° 回すだけで、±180/360 の飛びがない
+    assert abs(eu[-1][2] - 720) < 1e-6
+
+
+def test_subdivide_for_skin_splits_only_where_weights_change():
+    # 骨1 は骨0 に対して 10 ブロック動く。重みが一様な面は切らず、重みが変わる面は見積もりが予算以下になるまで切る
+    Ds = [[_translate(0, 0, 0), _translate(10, 0, 0)]]
+    tri = [(0, 0, 0), (16, 0, 0), (0, 0, 16)]
+    flat = dict(part='skirt', pos=tri, uv=None, tex=None, vw=[{0: 1.0}] * 3, wts={0: 1.0}, bone=0)
+    ramp = dict(part='skirt', pos=tri, uv=[(0, 0), (1, 0), (0, 1)], tex=None,
+                vw=[{0: 1.0}, {1: 1.0}, {0: 1.0}], wts={0: 2 / 3, 1: 1 / 3}, bone=0)
+    other = dict(part='head', pos=tri, uv=None, tex=None, vw=[{0: 1.0}, {1: 1.0}, {0: 1.0}], wts={0: 1.0}, bone=0)
+    out = hybrid2bbmodel.subdivide_for_skin([flat, ramp, other], Ds, 1.0, 2.0, lambda q: q['part'] == 'skirt')
+    flats = [q for q in out if q['vw'] == [{0: 1.0}] * 3 and q['part'] == 'skirt']
+    ramps = [q for q in out if q['part'] == 'skirt' and q not in flats]
+    assert len(flats) == 1 and flats[0]['pos'] == tri          # 一様な面はそのまま
+    assert [q for q in out if q['part'] == 'head'] == [other]  # 対象外のパーツもそのまま
+    assert len(ramps) > 4                                       # 伸びる面は切られた
+    assert abs(sum(_area(q['pos']) for q in ramps) - _area(tri)) < 1e-6  # 隙間も重なりもなく元の面を覆う
+    for q in ramps:
+        w1 = [v.get(1, 0.0) for v in q['vw']]
+        # 見積もり = 頂点の重みと重心の重みの差 × 骨どうしの動きの差(10) が予算 2 以下（または辺が 1 ブロック以下）
+        assert max(abs(w - sum(w1) / 3) for w in w1) * 10 <= 2.0 + 1e-9 or \
+            max(math.dist(q['pos'][i], q['pos'][(i + 1) % 3]) for i in range(3)) <= 1.0
+        assert abs(q['wts'][1] - sum(w1) / 3) < 1e-9 and q['bone'] == max(q['wts'], key=q['wts'].get)
+        # UV も位置と同じ比率で補間されている（この面では u = x/16, v = z/16）
+        for p, uv in zip(q['pos'], q['uv']):
+            assert abs(uv[0] - p[0] / 16) < 1e-9 and abs(uv[1] - p[2] / 16) < 1e-9
+
+
+def test_expand_triangle_moves_every_edge_out_by_the_margin_and_keeps_uv_affine():
+    P = [(0.0, 0.0, 0.0), (6.0, 0.0, 0.0), (0.0, 0.0, 8.0)]   # 3-4-5 の倍、内接円の半径 2
+    UV = [(0.0, 0.0), (0.6, 0.0), (0.0, 0.8)]                 # u = x/10, v = z/10
+    P2, UV2 = hybrid2bbmodel.expand_triangle(P, UV, 0.5)
+
+    def dist_to_line(p, a, b):
+        ab = [b[k] - a[k] for k in range(3)]
+        ap = [p[k] - a[k] for k in range(3)]
+        c = hybrid2bbmodel.cross(ab, ap)
+        return math.sqrt(hybrid2bbmodel.dot(c, c)) / math.dist(a, b)
+    inc = (2.0, 0.0, 2.0)
+    for i in range(3):  # 内心から各辺までの距離が 2 → 2.5
+        assert abs(dist_to_line(inc, P2[i], P2[(i + 1) % 3]) - 2.5) < 1e-9
+    for p, uv in zip(P2, UV2):  # UV は位置と同じ一次の関係のまま（絵がそのまま外へ続く）
+        assert abs(uv[0] - p[0] / 10) < 1e-9 and abs(uv[1] - p[2] / 10) < 1e-9
+    # 細すぎる三角形でも広げすぎない（上限 2 倍）
+    thin = [(0.0, 0.0, 0.0), (100.0, 0.0, 0.0), (50.0, 0.0, 0.01)]
+    T2, _ = hybrid2bbmodel.expand_triangle(thin, None, 0.5)
+    assert math.dist(T2[0], T2[1]) <= 2 * 100 + 1e-6
+
+
+def test_seam_report_is_zero_when_neighbours_share_a_bone_and_opens_when_they_do_not():
+    Ds = [[_translate(0, 0, 0), _translate(3, 0, 0)]]
+    a = dict(pos=[(0, 0, 0), (4, 0, 0), (0, 0, 4)], vw=[{0: 1.0}] * 3, key=0)
+    b = dict(pos=[(4, 0, 0), (4, 0, 4), (0, 0, 4)], vw=[{0: 1.0}] * 3, key=0)
+    assert hybrid2bbmodel.seam_report([a, b], Ds, 1.0, 2, [])['max'] == 0
+    # 元のスキニングでも動く頂点（重みが同じ）だけを数える。片方を別の骨に乗せると、共有頂点が 3 ブロック離れる
+    b2 = dict(b, key=1)
+    rep = hybrid2bbmodel.seam_report([a, b2], Ds, 1.0, 2, [])
+    assert rep['samples'] == 2 and abs(rep['max'] - 3) < 1e-9
+    # 重みが半々の補助の骨（平行移動だけなので M·c - c = 1.5）なら、半分の 1.5 ブロック
+    hp = dict(wts={0: 0.5, 1: 0.5}, pts=list(b['pos']))
+    rep = hybrid2bbmodel.seam_report([a, dict(b, key=2)], Ds, 1.0, 2, [hp])
+    assert abs(rep['max'] - 1.5) < 1e-9
+
+
 if __name__ == '__main__':  # pytest なしでも直接実行できる
     failed = 0
     for name, fn in sorted(globals().items()):
