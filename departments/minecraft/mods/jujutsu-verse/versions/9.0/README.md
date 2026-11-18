@@ -41,4 +41,4 @@
 
 ## Process
 
-Scoped to [ANALYSIS-WORKFLOW](../../../ANALYSIS-WORKFLOW.md) and [ANALYSIS-SPEC-v1](../../../ANALYSIS-SPEC-v1.md); selected facets only. The parent directory's V8.1 record is historical and remains unchanged except for a version-link note.
+Scoped to [ANALYSIS-WORKFLOW](../../../../ANALYSIS-WORKFLOW.md) and [ANALYSIS-SPEC-v1](../../../../ANALYSIS-SPEC-v1.md); selected facets only. The parent directory's V8.1 record is historical and remains unchanged except for a version-link note.
