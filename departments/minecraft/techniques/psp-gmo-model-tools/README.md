@@ -28,6 +28,8 @@ ISO ──isols.py──▶ ファイル表（位置・サイズ）
 | `bb_cdp.mjs` / `bb_verify_build.py` | Blockbench を実際に起動して `.bbmodel` を読み込み、全骨の位置を検証（Node 22 以上） |
 | `gmo_tree.py` | GMO チャンク木のダンプ（解析用） |
 | `obj2schem.py` | OBJ+MTL+PNG → **Minecraft 1.20.1 の Sponge Schematic v2（`.schem`）**。表面だけの殻にするボクセライザ（中空）。1.20.1 標準ブロックの代表色（CIELAB 最近傍）に置換 |
+| `voxel2bbmodel.py` | `.schem` → **Blockbench の立方体モデル**（Bedrock Entity 形式の `.bbmodel` + `.geo.json` + 色アトラス PNG）。ボクセルを直方体に統合し、1 ブロック = 1 ピクセルのテクスチャで色を持たせる（色が違っても 1 つの箱にまとめられる） |
+| `bb_verify_cubes.py` | 上の立方体モデルを Blockbench 実機で検証（全露出面の色・自作 geo.json と Blockbench 書き出しの一致・読み込み時間・描画面数） |
 | `schem_check.py` | `.schem` の独立検査（NBT 構造・パレット・varint 復号・セル数・材料表との一致。書き出し側のコードは使わない） |
 
 使い方の例:
@@ -51,6 +53,29 @@ python tools/schem_check.py out/<name>_128.schem --materials out/<name>_128.mate
 - `--gain` / `--sat` は、色をブロックに置き換える前の明るさ・彩度の倍率。ゲームのテクスチャは暗めなので 1.3 前後が見た目に近かった（1 体での目視判断）。
 - 向きは元データのまま（OBJ の +Y が上、+Z が南）。出力は `.schem` と、ブロック別の個数 `.materials.tsv`、確認用の `--preview` 画像。
 - このリポジトリの建築ジャンル（`departments/minecraft/building/`）の 1.20.1 / Sponge v2 検証に渡せる形式。
+
+立方体（ブロック）だけの Blockbench モデルにする場合（マイクラ本体や GeckoLib はメッシュを持てないが、立方体なら載る）:
+
+```bash
+python tools/voxel2bbmodel.py out/<name>_128.schem out/cubes --name <name>_128   # 最適化つき（既定）
+python tools/voxel2bbmodel.py out/<name>_128.schem out/cubes_legacy --legacy      # 最適化なし（比較用）
+```
+
+最適化（見た目は変えない）:
+1. 外から見えない閉じた空洞を埋める（外から見える面は不変）。
+2. 幾何だけで直方体に統合（色は無視。色はテクスチャが持つので、違う色のブロックを 1 つの箱にまとめられる）。伸ばす軸と走査順の 36 通りから、見える箱が最少のものを選ぶ。
+3. 外から 1 ピクセルも見えない箱は捨て、箱の中の隠れた面は書かない（Blockbench / Bedrock は `texture: null` の面を描画せず書き出さない）。
+4. `.geo.json` は圧縮して書く（`--pretty` でインデント付き）。
+
+1 体（128 ブロック版・74,395 ブロック）での実測（Blockbench 5.2.1、毎回クリーン起動）:
+
+| | キューブ | 描画する面 | 頂点 | `.bbmodel` | `.geo.json` | 読み込み |
+| --- | --- | --- | --- | --- | --- | --- |
+| 旧（`--legacy` 相当） | 8,259 | 49,554 | 198,216 | 5.0MB | 9.0MB | 5.6 秒 |
+| 最適化後 | 5,851（−29%） | 29,871（−40%） | 140,424（−29%） | 2.8MB | 1.5MB（−84%） | 3.8 秒（−33%） |
+
+どちらも、露出する全ボクセル面（旧 136,834 / 新 85,754）でテクスチャ色が期待色と一致（不一致 0）。旧新の画面比較で差のある画素は 0.3%（目視では同一）。
+**GeckoLib / マイクラ実機で「書かれていない面」が描画されないことは未確認**（Bedrock の仕様と Blockbench の挙動は確認済み）。
 
 形式の詳細は [FORMATS.md](FORMATS.md)。
 

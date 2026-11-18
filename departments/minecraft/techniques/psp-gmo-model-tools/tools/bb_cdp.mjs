@@ -30,7 +30,7 @@ ws.onmessage = ev => {
 };
 const send = (method, params = {}) => new Promise((res, rej) => {
   const id = ++seq;
-  const t = setTimeout(() => { pending.delete(id); rej(new Error('timeout ' + method)); }, 120000);
+  const t = setTimeout(() => { pending.delete(id); rej(new Error('timeout ' + method)); }, Number(process.env.BB_TIMEOUT_MS || 120000));
   pending.set(id, m => { clearTimeout(t); m.error ? rej(new Error(JSON.stringify(m.error))) : res(m.result); });
   ws.send(JSON.stringify({ id, method, params }));
 });

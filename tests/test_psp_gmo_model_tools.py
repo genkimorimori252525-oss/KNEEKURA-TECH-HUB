@@ -18,6 +18,7 @@ import gmo2gltf  # noqa: E402
 import gmo2obj  # noqa: E402
 import obj2schem  # noqa: E402
 import schem_check  # noqa: E402
+import voxel2bbmodel  # noqa: E402
 
 
 # ---------------------------------------------------------------- 合成GMOの組み立て
@@ -262,6 +263,102 @@ def test_schem_check_detects_tampering():
     except ValueError:
         return  # 構造が壊れていれば例外で止まってよい
     assert problems
+
+
+# ---------------------------------------------------------------- 立方体モデル（ボクセル → Blockbench）
+
+
+def _l_shape():
+    return {(x, y, z) for x in range(4) for y in range(2) for z in range(3)} | {(0, 2, 0), (0, 3, 0), (1, 2, 0)}
+
+
+def test_partition_covers_cells_exactly_once():
+    cells = _l_shape()
+    for seed in ((0, 1, 2), (2, 1, 0)):
+        for axes in ((0, 1, 2), (1, 2, 0)):
+            boxes = voxel2bbmodel.partition(cells, seed, axes)
+            seen = []
+            for lo, hi in boxes:
+                seen += [(x, y, z) for x in range(lo[0], hi[0]) for y in range(lo[1], hi[1]) for z in range(lo[2], hi[2])]
+            assert len(seen) == len(set(seen)) and set(seen) == cells  # 重なりなし・過不足なし
+
+
+def test_fill_cavities_fills_closed_but_not_open_shells():
+    dims = (5, 5, 5)
+    shell = {(x, y, z) for x in range(5) for y in range(5) for z in range(5)
+             if x in (0, 4) or y in (0, 4) or z in (0, 4)}
+    assert len(voxel2bbmodel.fill_cavities(shell, dims)) == 125  # 内側 3x3x3 = 27 が埋まる
+    holed = shell - {(2, 4, 2)}  # 上に穴 -> 外とつながるので埋めない
+    assert voxel2bbmodel.fill_cavities(holed, dims) == holed
+
+
+def test_face_cell_mapping_follows_blockbench_uv_directions():
+    box = ((0, 0, 0), (2, 1, 3))  # dx=2, dy=1, dz=3
+    w, h, n, cell = voxel2bbmodel.face_cells('east', box)
+    assert (w, h, n) == (3, 1, (1, 0, 0)) and cell(0, 0) == (1, 0, 2) and cell(2, 0) == (1, 0, 0)  # u→-Z
+    assert voxel2bbmodel.face_cells('west', box)[3](0, 0) == (0, 0, 0)                               # u→+Z
+    assert voxel2bbmodel.face_cells('north', box)[3](0, 0) == (1, 0, 0)                              # u→-X
+    assert voxel2bbmodel.face_cells('south', box)[3](0, 0) == (0, 0, 2)                              # u→+X
+    assert voxel2bbmodel.face_cells('up', box)[3](1, 2) == (1, 0, 2)                                 # u→+X, v→+Z
+    assert voxel2bbmodel.face_cells('down', box)[3](0, 0) == (0, 0, 2)                               # v→-Z
+
+
+def test_hidden_faces_and_boxes_are_detected():
+    grid = {(x, y, z) for x in range(3) for y in range(3) for z in range(3)}
+    center = ((1, 1, 1), (2, 2, 2))
+    assert not voxel2bbmodel.visible_box(center, grid)  # 完全に埋もれた箱は捨てられる
+    corner = ((0, 0, 0), (1, 1, 1))
+    exposed = [f for f in voxel2bbmodel.FACES if voxel2bbmodel.face_exposed(corner, f, grid)]
+    assert sorted(exposed) == ['down', 'north', 'west']  # 角のセルは 3 面だけ露出
+
+
+def test_pack_regions_do_not_overlap_and_fit():
+    regions = [(5, 3), (1, 1), (7, 2), (4, 4), (3, 3), (1, 1)]
+    size, pos = voxel2bbmodel.pack(regions)
+    taken = set()
+    for (w, h), (x, y) in zip(regions, pos):
+        assert x + w <= size and y + h <= size
+        cells = {(x + i, y + j) for i in range(w) for j in range(h)}
+        assert not (cells & taken)
+        taken |= cells
+
+
+def test_build_cube_model_end_to_end_with_hidden_face_culling():
+    try:
+        import PIL  # noqa: F401
+    except ImportError:
+        return  # PNG の書き出しに Pillow が要る。無ければこのテストは省く
+    import json
+    import tempfile
+    d = Path(tempfile.mkdtemp())
+    dims = (6, 6, 6)
+    # 上に穴のある殻（外とつながるので空洞は埋まらない）
+    shell = {(x, y, z): 'minecraft:stone' for x in range(6) for y in range(6) for z in range(6)
+             if (x in (0, 5) or y in (0, 5) or z in (0, 5)) and not (y == 5 and 2 <= x <= 3 and 2 <= z <= 3)}
+    schem = d / 's.schem'
+    obj2schem.write_schem(str(schem), dims, shell, 's')
+    stats = voxel2bbmodel.build(str(schem), str(d), name='t', keep_front=True)
+    legacy = voxel2bbmodel.build(str(schem), str(d / 'legacy'), name='t', keep_front=True, legacy=True)
+    assert stats['cubes'] <= legacy['cubes']
+    assert legacy['quads'] == 6 * legacy['cubes']    # legacy は全6面
+    assert stats['quads'] < 6 * stats['cubes']       # 最適化版は見えない面を出さない
+    # 独立に数えた「外に露出するボクセル面」の数。書いた面のピクセル数はこれ以上でなければ足りない
+    exposed = sum(1 for (x, y, z) in shell for dx, dy, dz in voxel2bbmodel.N6
+                  if (x + dx, y + dy, z + dz) not in shell)
+    geo = json.loads((d / 't.geo.json').read_text(encoding='utf-8'))
+    cubes = geo['minecraft:geometry'][0]['bones'][0]['cubes']
+    assert len(cubes) == stats['cubes']
+    for c in cubes:
+        assert set(c['uv']) <= set(voxel2bbmodel.FACES) and c['uv']  # 書かれた面だけ（0 面の箱は無い）
+        for f in ('up', 'down'):
+            if f in c['uv']:
+                assert c['uv'][f]['uv_size'][0] < 0 and c['uv'][f]['uv_size'][1] < 0  # 上下面は符号反転
+    bb = json.loads((d / 't.bbmodel').read_text(encoding='utf-8'))
+    disabled = [f for e in bb['elements'] for f in e['faces'].values() if f['texture'] is None]
+    assert disabled  # 無効化した面は texture=null（Blockbench は描画も書き出しもしない）
+    area = sum((f['uv'][2] - f['uv'][0]) * (f['uv'][3] - f['uv'][1]) for e in bb['elements']
+               for f in e['faces'].values() if f['texture'] is not None)
+    assert area >= exposed
 
 
 if __name__ == '__main__':  # pytest なしでも直接実行できる
