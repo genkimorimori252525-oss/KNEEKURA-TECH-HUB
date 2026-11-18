@@ -16,6 +16,8 @@ import gmo  # noqa: E402
 import gmo2bbmodel  # noqa: E402
 import gmo2gltf  # noqa: E402
 import gmo2obj  # noqa: E402
+import obj2schem  # noqa: E402
+import schem_check  # noqa: E402
 
 
 # ---------------------------------------------------------------- 合成GMOの組み立て
@@ -192,6 +194,74 @@ def test_gim_decode_rejects_non_gim():
     except ValueError:
         return
     raise AssertionError('ValueError が出るはず')
+
+
+# ---------------------------------------------------------------- ボクセル化 / .schem
+
+
+def test_varint_known_values():
+    assert obj2schem.varint(0) == b'\x00'
+    assert obj2schem.varint(127) == b'\x7f'
+    assert obj2schem.varint(128) == b'\x80\x01'
+    assert obj2schem.varint(300) == b'\xac\x02'
+    assert schem_check.decode_varints(b'\x00\x7f\x80\x01\xac\x02') == [0, 127, 128, 300]
+
+
+def test_palette_roundtrips_through_nearest_color():
+    pal = obj2schem.build_palette()
+    assert len(pal) >= 50 and all(n.startswith('minecraft:') for n in pal)
+    exact = obj2schem.to_blocks({(i, 0, 0): rgb for i, rgb in enumerate(pal.values())}, pal)
+    assert [exact[(i, 0, 0)] for i in range(len(pal))] == list(pal)
+
+
+def test_adjust_is_identity_at_one_and_brightens():
+    c = (40.0, 50.0, 90.0)
+    assert obj2schem.adjust(c, 1.0, 1.0) == c
+    b = obj2schem.adjust(c, 1.3, 1.0)
+    assert all(b[i] > c[i] for i in range(3))
+    assert max(obj2schem.adjust((250.0, 250.0, 250.0), 2.0, 1.0)) == 255.0
+
+
+def test_voxelize_makes_a_hollow_shell_inside_bounds():
+    # 立方体の 1 面だけ（2 三角形）。テクスチャなし → 灰色。中は塗られない。
+    V = [(0, 0, 0), (10, 0, 0), (10, 10, 0), (0, 10, 0), (0, 0, 10), (10, 0, 10)]
+    tris = [((1,), (2,), (3,), None, 'g'), ((1,), (3,), (4,), None, 'g')]
+    dims, cell, colors = obj2schem.voxelize(V, [], tris, {}, 10)
+    assert cell == 1.0 and dims[2] == 1  # 面は z=0 の 1 層だけ
+    assert all(0 <= k[a] < dims[a] for k in colors for a in range(3))
+    assert len(colors) >= 90  # 10x10 の面をほぼ埋める
+
+
+def test_schem_write_then_independent_check(tmp_path=None):
+    import tempfile
+    d = Path(tmp_path) if tmp_path else Path(tempfile.mkdtemp())
+    blocks = {(0, 0, 0): 'minecraft:blue_concrete', (2, 1, 3): 'minecraft:white_concrete',
+              (1, 3, 2): 'minecraft:blue_concrete'}
+    path = d / 't.schem'
+    obj2schem.write_schem(str(path), (3, 4, 4), blocks, 't')
+    mats = d / 't.materials.tsv'
+    mats.write_text('block\tcount\nminecraft:blue_concrete\t2\nminecraft:white_concrete\t1\n', encoding='utf-8')
+    info, problems = schem_check.check(str(path), str(mats), allow=list(obj2schem.build_palette()))
+    assert problems == [] and info['dims'] == (3, 4, 4) and info['solid'] == 3
+    assert info['data_version'] == 3465 and info['version'] == 2
+
+
+def test_schem_check_detects_tampering():
+    import gzip
+    import tempfile
+    d = Path(tempfile.mkdtemp())
+    path = d / 'bad.schem'
+    obj2schem.write_schem(str(path), (2, 2, 2), {(0, 0, 0): 'minecraft:stone'}, 'bad')
+    raw = bytearray(gzip.open(path, 'rb').read())
+    raw = raw[:-3]  # 末尾を切って壊す
+    bad = d / 'bad2.schem'
+    with gzip.open(bad, 'wb') as f:
+        f.write(bytes(raw))
+    try:
+        info, problems = schem_check.check(str(bad))
+    except ValueError:
+        return  # 構造が壊れていれば例外で止まってよい
+    assert problems
 
 
 if __name__ == '__main__':  # pytest なしでも直接実行できる

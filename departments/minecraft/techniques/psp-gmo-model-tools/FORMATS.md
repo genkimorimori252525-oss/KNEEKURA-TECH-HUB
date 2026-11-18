@@ -22,6 +22,11 @@
 - format: 0 RGB565 / 1 RGBA5551 / 2 RGBA4444 / 3 RGBA8888 / 4 INDEX4 / 5 INDEX8 / 6 INDEX16 / 7 INDEX32。
 - スウィズル: 16 バイト幅 × 8 行のブロックを横に並べて順に格納。
 
+## Sponge Schematic v2（`.schem`, Minecraft 1.20.1 = DataVersion 3465）
+- gzip された NBT。ルートは Compound（名前 `Schematic`）で、`Version`(int 2) / `DataVersion`(int) / `Metadata`(compound) / `Width` `Height` `Length`(short) / `Offset`(int[3]) / `PaletteMax`(int) / `Palette`(compound: ブロック状態文字列 → int) / `BlockData`(byte[])。
+- `BlockData` は varint の列。並びは `index = x + z*Width + y*Width*Length`。パレットは 0 番を `minecraft:air` にして 0..N-1 で連続させる。
+- ブロック色の選び方（`obj2schem.py`）: 三角形を 0.45 ボクセル間隔でサンプルしてテクスチャ色を平均（α<128 は除外）→ 明るさ・彩度の倍率 → CIELAB 最近傍で標準ブロックの代表色に置換。代表色は近似値。
+
 ## Blockbench 5.x（`.bbmodel`, Generic Model）
 5.2.1 を実機で確認。
 - 構成: `armature` の下に `armature_bone`（入れ子）と `mesh`。メッシュは骨の**現在の姿勢を束縛姿勢**として扱う。**編集モードで骨を動かすと束縛姿勢が更新される**ので、変形の検証はアニメ再生で行う。
