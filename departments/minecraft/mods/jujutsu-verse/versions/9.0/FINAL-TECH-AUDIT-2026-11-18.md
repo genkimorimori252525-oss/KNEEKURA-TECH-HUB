@@ -168,4 +168,4 @@ Attackhit1Procedure (LivingHurtEvent)
 - TECH-HUB手順: https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/blob/main/departments/minecraft/ANALYSIS-WORKFLOW.md
 - TECH-HUB仕様: https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/blob/main/departments/minecraft/ANALYSIS-SPEC-v1.md
 
-**結論**: この回で選定範囲の静的技術回収は一区切り。JARだけで「全96技の8.1との差分」「複数領域勝敗の完全な証明」「実機性能」まで解析済みと称さない。
+**結論**: この回で選定範囲の静的技術回収は一区切り。JARだけで「8.1から9.0までの全技の差分」「複数領域勝敗の完全な証明」「実機性能」まで解析済みと称さない。
