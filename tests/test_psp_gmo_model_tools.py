@@ -19,6 +19,7 @@ import gmo2obj  # noqa: E402
 import obj2schem  # noqa: E402
 import schem_check  # noqa: E402
 import voxel2bbmodel  # noqa: E402
+import hybrid2bbmodel  # noqa: E402
 
 
 # ---------------------------------------------------------------- 合成GMOの組み立て
@@ -359,6 +360,50 @@ def test_build_cube_model_end_to_end_with_hidden_face_culling():
     area = sum((f['uv'][2] - f['uv'][0]) * (f['uv'][3] - f['uv'][1]) for e in bb['elements']
                for f in e['faces'].values() if f['texture'] is not None)
     assert area >= exposed
+
+
+# ---------------------------------------------------------------- 斜めの板（ハイブリッド）
+
+
+def _zyx_matrix(deg):
+    x, y, z = (math.radians(v) for v in deg)
+    cx, cy, cz, sx, sy, sz = math.cos(x), math.cos(y), math.cos(z), math.sin(x), math.sin(y), math.sin(z)
+    return [[cz * cy, cz * sy * sx - sz * cx, cz * sy * cx + sz * sx],
+            [sz * cy, sz * sy * sx + cz * cx, sz * sy * cx - cz * sx],
+            [-sy, cy * sx, cy * cx]]
+
+
+def test_euler_from_columns_rebuilds_the_frame():
+    X = hybrid2bbmodel.norm([1.0, 0.4, -0.3])
+    N = hybrid2bbmodel.norm(hybrid2bbmodel.cross([0.2, 0.1, 1.0], X))
+    Z = hybrid2bbmodel.cross(X, N)
+    m = _zyx_matrix(hybrid2bbmodel.euler_zyx_from_columns(X, N, Z))
+    for r in range(3):
+        for c, axis in enumerate((X, N, Z)):
+            assert abs(m[r][c] - axis[r]) < 1e-9  # Blockbench の ZYX 回転で板の軸が元に戻る
+
+
+def _ident(rgb):
+    return tuple(int(c) for c in rgb)
+
+
+def test_plate_for_square_is_flat_centered_and_fully_painted():
+    sq = dict(pos=[(0, 0, 0), (32, 0, 0), (32, 0, 32), (0, 0, 32)], uv=None, tex=None)
+    pl = hybrid2bbmodel.make_plate(sq, [], _ident, 16, 0.0, 1.0)
+    assert (pl['pw'], pl['ph']) == (2, 2) and all(pl['pix'])              # 1ブロック=1ピクセル、全部塗る
+    assert all(abs(a - b) < 1e-9 for a, b in zip(pl['C'], (16, 0, 16)))   # 中心
+    assert abs(pl['frm'][1] - pl['to'][1]) < 1e-9                         # 厚み0
+    assert abs(abs(pl['N'][1]) - 1) < 1e-9                                # 法線は面に垂直
+
+
+def test_plate_coverage_threshold_controls_edge_pixels():
+    # 辺がピクセルを斜めに切る不規則な三角形（直角二等辺だと辺がちょうど角を通り、しきい値で差が出ない）
+    tri = dict(pos=[(0, 0, 0), (70, 0, 0), (13, 0, 47)], uv=None, tex=None)
+    strict = hybrid2bbmodel.make_plate(tri, [], _ident, 16, 0.0, 1.0, coverage=0.5)
+    loose = hybrid2bbmodel.make_plate(tri, [], _ident, 16, 0.0, 1.0, coverage=0.12)
+    n_strict = sum(1 for p in strict['pix'] if p)
+    n_loose = sum(1 for p in loose['pix'] if p)
+    assert 0 < n_strict < n_loose < len(loose['pix'])  # 三角形の外は透明、しきい値を下げるほど縁まで塗る
 
 
 if __name__ == '__main__':  # pytest なしでも直接実行できる

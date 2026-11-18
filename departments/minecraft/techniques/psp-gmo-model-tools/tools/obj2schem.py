@@ -117,12 +117,19 @@ def load_obj(path, exclude):
 # ---------------------------------------------------------------- ボクセル化
 
 
-def voxelize(V, VT, tris, tex, size):
-    pts = [V[i[0] - 1] for t in tris for i in t[:3]]
-    mn = [min(p[a] for p in pts) for a in range(3)]
-    mx = [max(p[a] for p in pts) for a in range(3)]
+def bbox_frame(points, size):
+    """点群の外接箱から、最長辺が size ブロックになる枠 (最小角, 1ブロックの大きさ, 寸法) を作る。"""
+    mn = [min(p[a] for p in points) for a in range(3)]
+    mx = [max(p[a] for p in points) for a in range(3)]
     cell = max(mx[a] - mn[a] for a in range(3)) / size
-    dims = [int((mx[a] - mn[a]) / cell) + 1 for a in range(3)]
+    return mn, cell, [int((mx[a] - mn[a]) / cell) + 1 for a in range(3)]
+
+
+def voxelize(V, VT, tris, tex, size, frame=None):
+    """frame を渡すと、その枠（別の部位と共有する座標系）でボクセル化する。"""
+    if frame is None:
+        frame = bbox_frame([V[i[0] - 1] for t in tris for i in t[:3]], size)
+    mn, cell, dims = frame
     acc = collections.defaultdict(lambda: [0, 0, 0, 0])
     for a, b, c, mat, _grp in tris:
         pa, pb, pc = (tuple((V[i[0] - 1][k] - mn[k]) / cell for k in range(3)) for i in (a, b, c))
