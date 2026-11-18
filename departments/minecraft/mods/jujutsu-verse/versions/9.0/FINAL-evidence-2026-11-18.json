@@ -1,0 +1,360 @@
+{
+  "artifact": "jujutsu_kaisen-9.0-forge-1.20.1(1).jar",
+  "artifact_sha256": "fdf1f8a6c28833c093dc778764b5a6147fc0552ec34e172f918fa4be8dccc065",
+  "artifact_size_bytes": 40621200,
+  "analysis_date": "2026-11-18",
+  "track": "ANCHOR",
+  "minecraft": "1.20.1",
+  "loader": "Forge 47+",
+  "zip_testzip": "pass",
+  "inventory": {
+    "jar_entries": 6436,
+    "classes": 3818,
+    "shaders_core": 36,
+    "animations": 155,
+    "geo": 156,
+    "particles": 40,
+    "data": 452
+  },
+  "mixin_configs": [
+    {
+      "config": "mixins.jujutsu_kaisen.json",
+      "entries": 17,
+      "missing_class_paths": [],
+      "mixins": 14,
+      "client": 3,
+      "server": 0
+    },
+    {
+      "config": "mixins.jujutsu_kaisen.first_person.json",
+      "entries": 169,
+      "missing_class_paths": [],
+      "mixins": 92,
+      "client": 77,
+      "server": 0
+    }
+  ],
+  "simple_domain_animation_states": [
+    {
+      "name": "expansion ",
+      "length": 0.25,
+      "loop": null
+    },
+    {
+      "name": "loop",
+      "length": 0.25,
+      "loop": true
+    },
+    {
+      "name": "from4.to3",
+      "length": 0.25,
+      "loop": "hold_on_last_frame"
+    },
+    {
+      "name": "from3.to2",
+      "length": 0.25,
+      "loop": "hold_on_last_frame"
+    },
+    {
+      "name": "from2.to1",
+      "length": 0.25,
+      "loop": "hold_on_last_frame"
+    },
+    {
+      "name": "expansion 2",
+      "length": 0.25,
+      "loop": null
+    },
+    {
+      "name": "expansion 3",
+      "length": 0.25,
+      "loop": null
+    },
+    {
+      "name": "expansion 4",
+      "length": 0.25,
+      "loop": null
+    },
+    {
+      "name": "loop.size1",
+      "length": 0.25,
+      "loop": true
+    },
+    {
+      "name": "loop.size2",
+      "length": 0.25,
+      "loop": true
+    },
+    {
+      "name": "loop.size3",
+      "length": 0.25,
+      "loop": true
+    },
+    {
+      "name": "loop.size4",
+      "length": 0.25,
+      "loop": true
+    },
+    {
+      "name": "broke.type4",
+      "length": 7.5,
+      "loop": "hold_on_last_frame"
+    },
+    {
+      "name": "broke.type3",
+      "length": 6,
+      "loop": "hold_on_last_frame"
+    },
+    {
+      "name": "broke.type2",
+      "length": 5,
+      "loop": "hold_on_last_frame"
+    },
+    {
+      "name": "broke.type1",
+      "length": 4,
+      "loop": "hold_on_last_frame"
+    },
+    {
+      "name": "idle",
+      "length": null,
+      "loop": true
+    }
+  ],
+  "beam_volume_uniform_names": [
+    "InverseProjection",
+    "InverseView",
+    "Viewport",
+    "Origin",
+    "BasisX",
+    "BasisY",
+    "BasisZ",
+    "Bounds",
+    "Tint",
+    "OtherTint",
+    "VfxTime",
+    "Radius",
+    "BeamLength",
+    "PathOffset",
+    "PathLength",
+    "EffectMode",
+    "Age",
+    "Strength",
+    "Seed",
+    "Opacity",
+    "Style",
+    "ChargeRate"
+  ],
+  "evidence": [
+    {
+      "path": "META-INF/mods.toml",
+      "sha256": "a0d7176d6b87fc36f6a9224e26639be0fa1c59bd21036e90d8cf9235b840bdf8",
+      "size": 1548
+    },
+    {
+      "path": "mixins.jujutsu_kaisen.json",
+      "sha256": "c8197aaa0dbd19f5d05d5bfad1a45247fe52e77e036c0cc9c60927cd0e961339",
+      "size": 793
+    },
+    {
+      "path": "mixins.jujutsu_kaisen.first_person.json",
+      "sha256": "93012ac1b117ded02833bb9841b6fb81523ee56440139e0753b044c62f68e0c8",
+      "size": 6008
+    },
+    {
+      "path": "net/mcreator/jujutsukaisen/BlackFlashRenderer.class",
+      "sha256": "2c8249a6b75656c8d5de89555f3dbf8f4e73436af02fc508cb5db6dee4b5ef23",
+      "size": 43035
+    },
+    {
+      "path": "net/mcreator/jujutsukaisen/BeamRenderer.class",
+      "sha256": "6295a21c3d5c9601da4a16698f3ba5654ab9b6fd50702636c63954178e0942d3",
+      "size": 60443
+    },
+    {
+      "path": "net/mcreator/jujutsukaisen/BeamServerHitBox.class",
+      "sha256": "10f325492cc089bb1856e4d398114a3102d31d2cde39b1f6869130adafc35773",
+      "size": 5188
+    },
+    {
+      "path": "net/mcreator/jujutsukaisen/DomainCutinOverlay.class",
+      "sha256": "e1dec6a4c57273f85b935e17cd0d858c81168208cd8516af0e7de5606e67ed8a",
+      "size": 18865
+    },
+    {
+      "path": "net/mcreator/jujutsukaisen/procedures/DomainbattleProcedure.class",
+      "sha256": "e993fc5b2b63e79bcec1557be4b27be2c302b6b04fb1b895ace75d659b450eda",
+      "size": 1751
+    },
+    {
+      "path": "net/mcreator/jujutsukaisen/procedures/Attackhit1Procedure.class",
+      "sha256": "779952a10b30cef9c2ff4498d1154cf035071df983fd591fc16c87791f780069",
+      "size": 51920
+    },
+    {
+      "path": "net/mcreator/jujutsukaisen/procedures/Domain_expansion_startProcedure.class",
+      "sha256": "7289d3acf6f8aa10d0605b5d095de3ef2914a6eacbd8b32f5607755978fcff86",
+      "size": 14718
+    },
+    {
+      "path": "net/mcreator/jujutsukaisen/potion/DomainexpantionMobEffect.class",
+      "sha256": "1f7503a97728ec6a71ad33c19fcca10a2af7df701761375fd09a6baa89a6541b",
+      "size": 1853
+    },
+    {
+      "path": "net/mcreator/jujutsukaisen/procedures/DomainexpansiontickupdateProcedure.class",
+      "sha256": "a6f4c6d31f48d378aef232609a0f95d6129b7f4f3e6c4a6993247178f88d45a1",
+      "size": 40009
+    },
+    {
+      "path": "net/mcreator/jujutsukaisen/procedures/SetdomainblockProcedure.class",
+      "sha256": "25d5ae63b26a69116415d1d4e1a32cd3c44c4469c3448852a70382900a26e87a",
+      "size": 15344
+    },
+    {
+      "path": "net/mcreator/jujutsukaisen/UnlimitedVoidSync.class",
+      "sha256": "83e687c8f312d3124ac9a5e0bad4d187d069ca72555c0dd1a0b75e804f9217ca",
+      "size": 9347
+    },
+    {
+      "path": "jujutsuverse_custom/DomainTerrain.class",
+      "sha256": "7afc1e87ed5bd8ae8afdd5c28609c7bbfae4860403e431ffd5e03261478e4bfb",
+      "size": 19126
+    },
+    {
+      "path": "jujutsuverse_custom/DomainTerrain$Data.class",
+      "sha256": "a00d9141f5e50f2d752e862eaa9b302192b445aec9747a3b24b5cb736ae0293c",
+      "size": 7339
+    },
+    {
+      "path": "jujutsuverse_custom/DomainTerrain$Snapshot.class",
+      "sha256": "6c4acafd4c5c01aea3d8ec6c79e0880414ec4fe197a01169d4ff552949549b87",
+      "size": 2080
+    },
+    {
+      "path": "jujutsuverse_custom/MalevolentShrineTerrain.class",
+      "sha256": "dfddbbbf0a96995a50eaf788baeb6b2e49849ca922b4734204fb9bd7d278d8e0",
+      "size": 14524
+    },
+    {
+      "path": "jujutsuverse_custom/MalevolentShrineTerrain$Budget.class",
+      "sha256": "5121c7e50e0ffce7c0284a9b269f740662ae85ca2037b646d27cedbad7cc206d",
+      "size": 796
+    },
+    {
+      "path": "net/mcreator/jujutsukaisen/SimpleDomainVFXRenderer.class",
+      "sha256": "fe9616b6e9026f46a025d6eb79095f80b0329939961ec08295971f3bda834f74",
+      "size": 26479
+    },
+    {
+      "path": "net/mcreator/jujutsukaisen/LimitlessVFXRenderer$LimitlessVFXClientEvents.class",
+      "sha256": "20e6f79c0537a1a33dea54f3031e14b45cd904ef9a2c60e70e0f49b976336c82",
+      "size": 35162
+    },
+    {
+      "path": "net/mcreator/jujutsukaisen/TerrainBreakManager.class",
+      "sha256": "93b40cbc89d650298118b8e1cd9d9eb0fe6940450f7a52ef1f69622ae9c93bec",
+      "size": 9250
+    },
+    {
+      "path": "net/mcreator/jujutsukaisen/TerrainBreakVFXRenderer.class",
+      "sha256": "cd9719544a5a32a0b90977cc755ded8fe13205a61649b4cf92c2edeb8ff78d7b",
+      "size": 28287
+    },
+    {
+      "path": "net/mcreator/jujutsukaisen/FugaArrowVFXRenderer.class",
+      "sha256": "8771d65ee2374127792c4c12be0e6be3545db2393080756708ee4aa01630364b",
+      "size": 15289
+    },
+    {
+      "path": "net/mcreator/jujutsukaisen/ShaderVfxProtection.class",
+      "sha256": "2c12ad4344c232498e08ba7cf4b16b58d4b0806760659ed9e7be648ebdf980d5",
+      "size": 14381
+    },
+    {
+      "path": "net/mcreator/jujutsukaisen/mixins/RenderCompatibilityPlugin.class",
+      "sha256": "decfcaf913938671bdd748c341f19f77254a953848f5d3941db3a61a008e8ccc",
+      "size": 2419
+    },
+    {
+      "path": "net/mcreator/jujutsukaisen/CutsceneManager.class",
+      "sha256": "15796f9ea7565ce24d0a3a9b9c7f5238b42b5118cd0cb7a3feb0de61aedeb18b",
+      "size": 29069
+    },
+    {
+      "path": "assets/jujutsu_kaisen/animations/simple_domain.animation.json",
+      "sha256": "200dde27833aa0150cd58f58dfad25ae56574fb28c48a83735fb052fa4446aea",
+      "size": 4646
+    },
+    {
+      "path": "assets/jujutsu_kaisen/animations/chimera_shadow_garden.animation.json",
+      "sha256": "264077ced2b31f826109382221a63a8281e36407614c7f9587439917b9cb9cf8",
+      "size": 6883
+    },
+    {
+      "path": "assets/jujutsu_kaisen/shaders/core/black_flash.json",
+      "sha256": "ff8fbb9198f06895b39cd0ddc80bbc7d048a0220a88de131d645491a026ab1c6",
+      "size": 573
+    },
+    {
+      "path": "assets/jujutsu_kaisen/shaders/core/black_flash.fsh",
+      "sha256": "a9a9ee9dbce5f78b409ca949a5a7187a2fe69a2216a1288bd94868436e3d28ea",
+      "size": 2944
+    },
+    {
+      "path": "assets/jujutsu_kaisen/shaders/core/beam_volume.json",
+      "sha256": "e4ba9ac27085aca85c11fa47b6d45bebf5eb6b2836f3a46fc04422be50de2828",
+      "size": 3650
+    },
+    {
+      "path": "assets/jujutsu_kaisen/shaders/core/beam_volume.fsh",
+      "sha256": "5dedf36163cf81b7044db5196ad94e774e9fe4b42fbb566c8ef06d28548e0062",
+      "size": 14043
+    },
+    {
+      "path": "assets/jujutsu_kaisen/shaders/core/beam_post.json",
+      "sha256": "4cc0a986e4dfc52a356dc1c380d234d7727d9183a15fad2eeaf414c6b4a2ff80",
+      "size": 1249
+    },
+    {
+      "path": "assets/jujutsu_kaisen/shaders/core/beam_post.fsh",
+      "sha256": "48baf911cdc99876ad7ae58dc224eb050f6ba6f02b6494293ce947ab1f62fe3b",
+      "size": 3901
+    },
+    {
+      "path": "assets/jujutsu_kaisen/shaders/core/energy_volume.fsh",
+      "sha256": "9de9c1d10c104cf3d6a612a1c49ec3191fe3ed3ace263b88b2d4a429a268da35",
+      "size": 7331
+    },
+    {
+      "path": "assets/jujutsu_kaisen/shaders/core/fuga_arrow.json",
+      "sha256": "18a139b9f5523556c7a2a78727d813fa72596b219695736da36c6cee29b4b575",
+      "size": 721
+    },
+    {
+      "path": "assets/jujutsu_kaisen/shaders/core/fuga_arrow.fsh",
+      "sha256": "dbc7634b9e32ff8cfad363614f732813b344d0b01fdc4d4dcfc791d8a63064b7",
+      "size": 1550
+    }
+  ],
+  "missing_evidence_paths": [],
+  "comparative": {
+    "version": "8.1",
+    "source": "KNEEKURA-TECH-HUB PR #100 / departments/minecraft/mods/jujutsu-verse/JAR-PROVENANCE.md",
+    "sha256_from_versioned_repo_record": "d0f2f4e427ae3db92432cfac186a7db137ab8960807ed13ebfa64c7971cb8217",
+    "class_count_from_versioned_repo_record": 2619,
+    "entry_count_from_versioned_repo_record": 4860,
+    "size_bytes_from_versioned_repo_record": 28285565,
+    "jar_currently_accessible": false,
+    "direct_binary_diff": "NOT_ANALYZED",
+    "counts_are_not_added_or_removed_class_counts": true,
+    "correction": "Previous generated report's 094247a3... hash belonged to Jujutsu Craft, not Jujutsu Verse V8.1; corrected before GitHub publication."
+  },
+  "runtime_tested": false,
+  "source_available_to_analysis": false,
+  "code_or_assets_embedded_in_report": false,
+  "reference_links": {
+    "version_8_1_draft_pr": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/pull/100",
+    "version_8_1_provenance": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/blob/jolly/jujutsu-verse-8.1-analysis-2026-10-06/departments/minecraft/mods/jujutsu-verse/JAR-PROVENANCE.md"
+  }
+}
