@@ -1,0 +1,2068 @@
+{
+  "schema_version": 1,
+  "minecraft": "1.20.1",
+  "loader": "forge",
+  "loader_version": "47.2.0",
+  "namespace": "mojmap",
+  "foundation_map_id": "522cbb565d187f8e1e7b97140206f5ac11e8ca90719528bd661f875f184e34fd",
+  "source_index_snapshot_id": "55a63559b62697c11e8ece0cd2fcb97d2db4730684789a31240b2c515f08ba06",
+  "minecraft_artifact_sha256": "1b6e6a166fbc06c6d2422cd5cf515a508977479045095363d5b4c8b89cc7b4eb",
+  "provider": {
+    "name": "jdk-javap-v1",
+    "options": [
+      "-private",
+      "-s",
+      "-c",
+      "-l",
+      "-verbose"
+    ],
+    "executable_hash": "bd5a9f99365fd432f79162f4ed9ca9b956c78cc81dfb6962adb6d207075711fb",
+    "jdk_components": {
+      "release": "00d3211a59bc9f2577f93962e9210de8578c49fd2625022cb38606817d3a71f9",
+      "lib/modules": "81f0e1bb87cd303ddcce2b216e27da416bd20799d9a9811ea1b070123cefff0f"
+    },
+    "jdk_image_status": "HASHED"
+  },
+  "scope": "SELECTED_CORE_AI_AND_EIGHT_REPRESENTATIVE_FAMILIES_NOT_ALL_MOB_SEMANTICS",
+  "not_a_claim_of": [
+    "runtime-loaded transformed bytes",
+    "native behavior acceptance",
+    "full source equivalence",
+    "FRONTIER compatibility"
+  ],
+  "local_only_artifacts": [
+    "JAR bytes",
+    "class bytes",
+    "whole javap outputs",
+    "machine paths"
+  ],
+  "classes": [
+    {
+      "owner": "net/minecraft/world/entity/Mob",
+      "class_hash": "81e6715b2f1a722c868e89984b64088932143f2164f40009ea128323dd6a0a8d",
+      "disassembly_hash": "6f7e262f6a26092d06cdbc9da26401209be0fd18b688d6e21f91a5218f9a5149",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/LivingEntity",
+      "member_count": 185,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "registerGoals",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 2494,
+          "line_end": 2505
+        },
+        {
+          "name": "createNavigation",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/level/Level;)Lnet/minecraft/world/entity/ai/navigation/PathNavigation;",
+          "line_start": 2521,
+          "line_end": 2538
+        },
+        {
+          "name": "getPathfindingMalus",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/BlockPathTypes;)F",
+          "line_start": 2552,
+          "line_end": 2619
+        },
+        {
+          "name": "getTarget",
+          "kind": "method",
+          "descriptor": "()Lnet/minecraft/world/entity/LivingEntity;",
+          "line_start": 2829,
+          "line_end": 2845
+        },
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 3336,
+          "line_end": 3369
+        },
+        {
+          "name": "serverAiStep",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 5200,
+          "line_end": 5399
+        },
+        {
+          "name": "customServerAiStep",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 5419,
+          "line_end": 5430
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/goal/Goal",
+      "class_hash": "ac4e31853768b9b4fa931d12158038e177f310b6596fc5e764e1a0f77b00276d",
+      "disassembly_hash": "322884b77965f356892b0eb2ad7eecea8a9dbc8935bfc3c7138df120adef738a",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "java/lang/Object",
+      "member_count": 14,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "canUse",
+          "kind": "method",
+          "descriptor": "()Z",
+          "line_start": 122,
+          "line_end": 125
+        },
+        {
+          "name": "canContinueToUse",
+          "kind": "method",
+          "descriptor": "()Z",
+          "line_start": 126,
+          "line_end": 139
+        },
+        {
+          "name": "start",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 153,
+          "line_end": 164
+        },
+        {
+          "name": "stop",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 165,
+          "line_end": 176
+        },
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 190,
+          "line_end": 201
+        },
+        {
+          "name": "getFlags",
+          "kind": "method",
+          "descriptor": "()Ljava/util/EnumSet;",
+          "line_start": 244,
+          "line_end": 258
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/goal/WrappedGoal",
+      "class_hash": "3ecb3ba3f369809589cc5e0f560dc15b003aa83bffde744a0870c06e77cab0a3",
+      "disassembly_hash": "a2a164853e80dad3e5506d2c39d53482380d248ccda54cfdeb6dd7423a3fd76b",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/ai/goal/Goal",
+      "member_count": 20,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "isRunning",
+          "kind": "field",
+          "descriptor": "Z",
+          "line_start": 124,
+          "line_end": 127
+        },
+        {
+          "name": "canBeReplacedBy",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/goal/WrappedGoal;)Z",
+          "line_start": 153,
+          "line_end": 181
+        },
+        {
+          "name": "canUse",
+          "kind": "method",
+          "descriptor": "()Z",
+          "line_start": 182,
+          "line_end": 196
+        },
+        {
+          "name": "canContinueToUse",
+          "kind": "method",
+          "descriptor": "()Z",
+          "line_start": 197,
+          "line_end": 211
+        },
+        {
+          "name": "start",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 227,
+          "line_end": 254
+        },
+        {
+          "name": "stop",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 255,
+          "line_end": 282
+        },
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 315,
+          "line_end": 330
+        },
+        {
+          "name": "getFlags",
+          "kind": "method",
+          "descriptor": "()Ljava/util/EnumSet;",
+          "line_start": 353,
+          "line_end": 368
+        },
+        {
+          "name": "isRunning",
+          "kind": "method",
+          "descriptor": "()Z",
+          "line_start": 369,
+          "line_end": 382
+        },
+        {
+          "name": "getPriority",
+          "kind": "method",
+          "descriptor": "()I",
+          "line_start": 383,
+          "line_end": 396
+        },
+        {
+          "name": "getGoal",
+          "kind": "method",
+          "descriptor": "()Lnet/minecraft/world/entity/ai/goal/Goal;",
+          "line_start": 397,
+          "line_end": 410
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/goal/GoalSelector",
+      "class_hash": "2455d75eb56bfed726051b6bdb44f7c227c9e032fc798f93f5718379d8a26fb7",
+      "disassembly_hash": "b8a49822a45e8d34effa08e88372b77e49cbe743e2b821aa68de5aa4914bef15",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "java/lang/Object",
+      "member_count": 26,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 614,
+          "line_end": 812
+        },
+        {
+          "name": "tickRunningGoals",
+          "kind": "method",
+          "descriptor": "(Z)V",
+          "line_start": 813,
+          "line_end": 880
+        },
+        {
+          "name": "getAvailableGoals",
+          "kind": "method",
+          "descriptor": "()Ljava/util/Set;",
+          "line_start": 881,
+          "line_end": 895
+        },
+        {
+          "name": "getRunningGoals",
+          "kind": "method",
+          "descriptor": "()Ljava/util/stream/Stream;",
+          "line_start": 896,
+          "line_end": 913
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/Brain",
+      "class_hash": "441ee6715fb13f271943a9a462c5ff64e491a993ff28d724df06885d83012a3d",
+      "disassembly_hash": "ea1e8017d5b0f5c5366274744ffd17b0914b5fb68b45790ae8538d96ad4bc5a7",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "java/lang/Object",
+      "member_count": 69,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "getMemory",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;)Ljava/util/Optional;",
+          "line_start": 1436,
+          "line_end": 1479
+        },
+        {
+          "name": "getMemoryInternal",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;)Ljava/util/Optional;",
+          "line_start": 1480,
+          "line_end": 1522
+        },
+        {
+          "name": "getTimeUntilExpiry",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;)J",
+          "line_start": 1523,
+          "line_end": 1557
+        },
+        {
+          "name": "getMemories",
+          "kind": "method",
+          "descriptor": "()Ljava/util/Map;",
+          "line_start": 1558,
+          "line_end": 1582
+        },
+        {
+          "name": "checkMemory",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;Lnet/minecraft/world/entity/ai/memory/MemoryStatus;)Z",
+          "line_start": 1624,
+          "line_end": 1684
+        },
+        {
+          "name": "getActiveActivities",
+          "kind": "method",
+          "descriptor": "()Ljava/util/Set;",
+          "line_start": 1744,
+          "line_end": 1768
+        },
+        {
+          "name": "getRunningBehaviors",
+          "kind": "method",
+          "descriptor": "()Ljava/util/List;",
+          "line_start": 1769,
+          "line_end": 1874
+        },
+        {
+          "name": "getActiveNonCoreActivity",
+          "kind": "method",
+          "descriptor": "()Ljava/util/Optional;",
+          "line_start": 1895,
+          "line_end": 1943
+        },
+        {
+          "name": "updateActivityFromSchedule",
+          "kind": "method",
+          "descriptor": "(JJ)V",
+          "line_start": 2097,
+          "line_end": 2147
+        },
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)V",
+          "line_start": 2551,
+          "line_end": 2587
+        },
+        {
+          "name": "tickSensors",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)V",
+          "line_start": 2588,
+          "line_end": 2634
+        },
+        {
+          "name": "forgetOutdatedMemories",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 2635,
+          "line_end": 2705
+        },
+        {
+          "name": "startEachNonRunningBehavior",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)V",
+          "line_start": 2759,
+          "line_end": 2873
+        },
+        {
+          "name": "tickEachRunningBehavior",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)V",
+          "line_start": 2874,
+          "line_end": 2925
+        },
+        {
+          "name": "activityRequirementsAreMet",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/entity/schedule/Activity;)Z",
+          "line_start": 2926,
+          "line_end": 3000
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/sensing/Sensor",
+      "class_hash": "1c85530961b5b577dfef338544ef21cbcc4636ef999864b3ab4d343e3ef275bf",
+      "disassembly_hash": "7ae0d67707dcb061b2e493da62a8a3010a50bf413d01cdad8c081c287b10699b",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "java/lang/Object",
+      "member_count": 20,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)V",
+          "line_start": 241,
+          "line_end": 284
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/memory/ExpirableValue",
+      "class_hash": "91de5e1f31fc1408333a0110b2564d17c37ff458b8ea6688a7bfb9fd4ac6e6f8",
+      "disassembly_hash": "854d7726ef47d9f86fb77aa8f130ed5b5f2498f9b0e0ebf79951f24b4d50035a",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "java/lang/Object",
+      "member_count": 16,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 263,
+          "line_end": 291
+        },
+        {
+          "name": "getTimeToLive",
+          "kind": "method",
+          "descriptor": "()J",
+          "line_start": 335,
+          "line_end": 351
+        },
+        {
+          "name": "getValue",
+          "kind": "method",
+          "descriptor": "()Ljava/lang/Object;",
+          "line_start": 352,
+          "line_end": 369
+        },
+        {
+          "name": "hasExpired",
+          "kind": "method",
+          "descriptor": "()Z",
+          "line_start": 370,
+          "line_end": 397
+        },
+        {
+          "name": "canExpire",
+          "kind": "method",
+          "descriptor": "()Z",
+          "line_start": 433,
+          "line_end": 463
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/Behavior",
+      "class_hash": "bb73feb84c79565213f7a6001c47d0e1cc2fc7d947a89d99ae5c70b5e058e7dd",
+      "disassembly_hash": "a14ed1bb37e1bbba57916781421c53353d6bff2b8346758b240b0a2d3968f6d0",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "java/lang/Object",
+      "member_count": 21,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "start",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "line_start": 407,
+          "line_end": 426
+        },
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "line_start": 477,
+          "line_end": 496
+        },
+        {
+          "name": "stop",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "line_start": 527,
+          "line_end": 546
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/BehaviorControl",
+      "class_hash": "bf5d1010d11a963210827ad30c53faa51540309b4d47add7f6fbe6b567d41de4",
+      "disassembly_hash": "d95dbb893b88eb592790cacb8e5e3f45bea5bcbef18af5e2a5adc0c66c8859fd",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "java/lang/Object",
+      "member_count": 5,
+      "origin_count": 2,
+      "selected_members": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/navigation/PathNavigation",
+      "class_hash": "78346d21ea9ba13ddbc7211666f3a80b54d773a864203922bb71d336b4dac2ac",
+      "disassembly_hash": "10a99a7e067bfae8e7bc060f84055bbb5bc1fffa042983008be7d2419e134ff0",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "java/lang/Object",
+      "member_count": 66,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "tick",
+          "kind": "field",
+          "descriptor": "I",
+          "line_start": 688,
+          "line_end": 691
+        },
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 1459,
+          "line_end": 1589
+        },
+        {
+          "name": "stop",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 2240,
+          "line_end": 2255
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/navigation/GroundPathNavigation",
+      "class_hash": "3098776edeebcc6cd59e28d9431ec66766f3ae0aafebbc58a1b03e3de8e9be7e",
+      "disassembly_hash": "5f828779170246f2742742a515d5609ce11e83b3a1b77555eedc8b068798aa32",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/ai/navigation/PathNavigation",
+      "member_count": 16,
+      "origin_count": 2,
+      "selected_members": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/navigation/FlyingPathNavigation",
+      "class_hash": "f94f918b65a3af5fe7442acc5794242014afdcdb884c34104a4470653ebff430",
+      "disassembly_hash": "4c6441bc2f93e1f311c25a35dbb97f3a8f0575e68c1d82825540d1015b7f2f16",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/ai/navigation/PathNavigation",
+      "member_count": 12,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 349,
+          "line_end": 474
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/navigation/WaterBoundPathNavigation",
+      "class_hash": "aa5b9a3d0fffd33dd8df478c89af88e00d9af0f90809520c9632133fc490dd83",
+      "disassembly_hash": "e0d4924492c79688fe08a50522d4c6280ca8187bbe19693176e7880060f414d5",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/ai/navigation/PathNavigation",
+      "member_count": 9,
+      "origin_count": 2,
+      "selected_members": []
+    },
+    {
+      "owner": "net/minecraft/world/level/pathfinder/PathFinder",
+      "class_hash": "5d308818c953fcba2353de06b03fb4a80a0f12370c7f92f1baad7f7d574cae3b",
+      "disassembly_hash": "d929f5154b88c5c977b99d47a7e0d8003a4d45373e08989b2b04711e8dc4f4aa",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "java/lang/Object",
+      "member_count": 15,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "findPath",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/level/PathNavigationRegion;Lnet/minecraft/world/entity/Mob;Ljava/util/Set;FIF)Lnet/minecraft/world/level/pathfinder/Path;",
+          "line_start": 505,
+          "line_end": 586
+        },
+        {
+          "name": "findPath",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/util/profiling/ProfilerFiller;Lnet/minecraft/world/level/pathfinder/Node;Ljava/util/Map;FIF)Lnet/minecraft/world/level/pathfinder/Path;",
+          "line_start": 587,
+          "line_end": 944
+        },
+        {
+          "name": "getBestH",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/Node;Ljava/util/Set;)F",
+          "line_start": 962,
+          "line_end": 1023
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/level/pathfinder/NodeEvaluator",
+      "class_hash": "739b9ff3b79bf79c3fc59df868b78f2744384ce1e7433ece38f423b69ee3563b",
+      "disassembly_hash": "dfc2f9bcb1d4d1711bcad3ffdbd0111865e6a2bf756a54e3aa4333ec4aecb591",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "java/lang/Object",
+      "member_count": 30,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "prepare",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/level/PathNavigationRegion;Lnet/minecraft/world/entity/Mob;)V",
+          "line_start": 249,
+          "line_end": 298
+        },
+        {
+          "name": "done",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 299,
+          "line_end": 318
+        },
+        {
+          "name": "getNode",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/pathfinder/Node;",
+          "line_start": 319,
+          "line_end": 339
+        },
+        {
+          "name": "getNode",
+          "kind": "method",
+          "descriptor": "(III)Lnet/minecraft/world/level/pathfinder/Node;",
+          "line_start": 340,
+          "line_end": 366
+        },
+        {
+          "name": "getStart",
+          "kind": "method",
+          "descriptor": "()Lnet/minecraft/world/level/pathfinder/Node;",
+          "line_start": 367,
+          "line_end": 370
+        },
+        {
+          "name": "getGoal",
+          "kind": "method",
+          "descriptor": "(DDD)Lnet/minecraft/world/level/pathfinder/Target;",
+          "line_start": 371,
+          "line_end": 374
+        },
+        {
+          "name": "getNeighbors",
+          "kind": "method",
+          "descriptor": "([Lnet/minecraft/world/level/pathfinder/Node;Lnet/minecraft/world/level/pathfinder/Node;)I",
+          "line_start": 392,
+          "line_end": 395
+        },
+        {
+          "name": "getBlockPathType",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/level/BlockGetter;IIILnet/minecraft/world/entity/Mob;)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "line_start": 396,
+          "line_end": 399
+        },
+        {
+          "name": "getBlockPathType",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/level/BlockGetter;III)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "line_start": 400,
+          "line_end": 403
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/level/pathfinder/WalkNodeEvaluator",
+      "class_hash": "c5ac3d3dde5d9cc01ef09e9e13c6cf5cea8c73183bd396a13785d3068b8b2f0c",
+      "disassembly_hash": "b8d2ed7c169abbe55d2a70dca6486abe360ae8d396878ad5025d25eca2f07623",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/level/pathfinder/NodeEvaluator",
+      "member_count": 36,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "prepare",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/level/PathNavigationRegion;Lnet/minecraft/world/entity/Mob;)V",
+          "line_start": 901,
+          "line_end": 922
+        },
+        {
+          "name": "done",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 923,
+          "line_end": 949
+        },
+        {
+          "name": "getStart",
+          "kind": "method",
+          "descriptor": "()Lnet/minecraft/world/level/pathfinder/Node;",
+          "line_start": 950,
+          "line_end": 1222
+        },
+        {
+          "name": "getGoal",
+          "kind": "method",
+          "descriptor": "(DDD)Lnet/minecraft/world/level/pathfinder/Target;",
+          "line_start": 1300,
+          "line_end": 1324
+        },
+        {
+          "name": "getNeighbors",
+          "kind": "method",
+          "descriptor": "([Lnet/minecraft/world/level/pathfinder/Node;Lnet/minecraft/world/level/pathfinder/Node;)I",
+          "line_start": 1325,
+          "line_end": 1685
+        },
+        {
+          "name": "findAcceptedNode",
+          "kind": "method",
+          "descriptor": "(IIIIDLnet/minecraft/core/Direction;Lnet/minecraft/world/level/pathfinder/BlockPathTypes;)Lnet/minecraft/world/level/pathfinder/Node;",
+          "line_start": 2114,
+          "line_end": 2582
+        },
+        {
+          "name": "getBlockPathType",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/level/BlockGetter;IIILnet/minecraft/world/entity/Mob;)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "line_start": 2690,
+          "line_end": 2820
+        },
+        {
+          "name": "getBlockPathTypes",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/level/BlockGetter;IIILjava/util/EnumSet;Lnet/minecraft/world/level/pathfinder/BlockPathTypes;Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "line_start": 2821,
+          "line_end": 2948
+        },
+        {
+          "name": "evaluateBlockPathType",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/pathfinder/BlockPathTypes;)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "line_start": 2949,
+          "line_end": 3016
+        },
+        {
+          "name": "getBlockPathType",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/entity/Mob;Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "line_start": 3017,
+          "line_end": 3039
+        },
+        {
+          "name": "getBlockPathType",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/level/BlockGetter;III)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "line_start": 3070,
+          "line_end": 3093
+        },
+        {
+          "name": "getBlockPathTypeStatic",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos$MutableBlockPos;)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "line_start": 3094,
+          "line_end": 3230
+        },
+        {
+          "name": "checkNeighbourBlocks",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos$MutableBlockPos;Lnet/minecraft/world/level/pathfinder/BlockPathTypes;)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "line_start": 3231,
+          "line_end": 3421
+        },
+        {
+          "name": "getBlockPathTypeRaw",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "line_start": 3422,
+          "line_end": 3697
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/level/pathfinder/FlyNodeEvaluator",
+      "class_hash": "81d110874d7fcd28fa574909a03c4745b11b6c40afe6325430e5ab2975dce05b",
+      "disassembly_hash": "3174f81638b03d1af1ef1d681636164a56d10d4030740d6fa1c48c77dcbaae1a",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/level/pathfinder/WalkNodeEvaluator",
+      "member_count": 18,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "prepare",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/level/PathNavigationRegion;Lnet/minecraft/world/entity/Mob;)V",
+          "line_start": 484,
+          "line_end": 509
+        },
+        {
+          "name": "done",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 510,
+          "line_end": 532
+        },
+        {
+          "name": "getStart",
+          "kind": "method",
+          "descriptor": "()Lnet/minecraft/world/level/pathfinder/Node;",
+          "line_start": 533,
+          "line_end": 681
+        },
+        {
+          "name": "getGoal",
+          "kind": "method",
+          "descriptor": "(DDD)Lnet/minecraft/world/level/pathfinder/Target;",
+          "line_start": 718,
+          "line_end": 742
+        },
+        {
+          "name": "getNeighbors",
+          "kind": "method",
+          "descriptor": "([Lnet/minecraft/world/level/pathfinder/Node;Lnet/minecraft/world/level/pathfinder/Node;)I",
+          "line_start": 743,
+          "line_end": 1814
+        },
+        {
+          "name": "findAcceptedNode",
+          "kind": "method",
+          "descriptor": "(III)Lnet/minecraft/world/level/pathfinder/Node;",
+          "line_start": 1877,
+          "line_end": 1953
+        },
+        {
+          "name": "getBlockPathType",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/level/BlockGetter;IIILnet/minecraft/world/entity/Mob;)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "line_start": 1982,
+          "line_end": 2108
+        },
+        {
+          "name": "getBlockPathType",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/level/BlockGetter;III)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "line_start": 2109,
+          "line_end": 2265
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/level/pathfinder/SwimNodeEvaluator",
+      "class_hash": "772063a83c01af95d09d6f068d07785c0d230d6fddec57233d39a75106f21e43",
+      "disassembly_hash": "57ddc47c5ab685217a56d1848cf3d9535b0b09c5fab7b87894b0c276c5b453a1",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/level/pathfinder/NodeEvaluator",
+      "member_count": 15,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "prepare",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/level/PathNavigationRegion;Lnet/minecraft/world/entity/Mob;)V",
+          "line_start": 406,
+          "line_end": 428
+        },
+        {
+          "name": "done",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 429,
+          "line_end": 447
+        },
+        {
+          "name": "getStart",
+          "kind": "method",
+          "descriptor": "()Lnet/minecraft/world/level/pathfinder/Node;",
+          "line_start": 448,
+          "line_end": 478
+        },
+        {
+          "name": "getGoal",
+          "kind": "method",
+          "descriptor": "(DDD)Lnet/minecraft/world/level/pathfinder/Target;",
+          "line_start": 479,
+          "line_end": 503
+        },
+        {
+          "name": "getNeighbors",
+          "kind": "method",
+          "descriptor": "([Lnet/minecraft/world/level/pathfinder/Node;Lnet/minecraft/world/level/pathfinder/Node;)I",
+          "line_start": 504,
+          "line_end": 665
+        },
+        {
+          "name": "findAcceptedNode",
+          "kind": "method",
+          "descriptor": "(III)Lnet/minecraft/world/level/pathfinder/Node;",
+          "line_start": 749,
+          "line_end": 847
+        },
+        {
+          "name": "getBlockPathType",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/level/BlockGetter;III)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "line_start": 876,
+          "line_end": 899
+        },
+        {
+          "name": "getBlockPathType",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/level/BlockGetter;IIILnet/minecraft/world/entity/Mob;)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "line_start": 900,
+          "line_end": 1051
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/level/pathfinder/AmphibiousNodeEvaluator",
+      "class_hash": "22e42766e85405ead3e4857f7ffbbff03b03c2bcc507741ea79bc18565d52e03",
+      "disassembly_hash": "c081f3273e31a2ee499416c016b98a727a1ffbdd7f4fb94ddddb66ef259c25b9",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/level/pathfinder/WalkNodeEvaluator",
+      "member_count": 12,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "prepare",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/level/PathNavigationRegion;Lnet/minecraft/world/entity/Mob;)V",
+          "line_start": 302,
+          "line_end": 347
+        },
+        {
+          "name": "done",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 348,
+          "line_end": 376
+        },
+        {
+          "name": "getStart",
+          "kind": "method",
+          "descriptor": "()Lnet/minecraft/world/level/pathfinder/Node;",
+          "line_start": 377,
+          "line_end": 421
+        },
+        {
+          "name": "getGoal",
+          "kind": "method",
+          "descriptor": "(DDD)Lnet/minecraft/world/level/pathfinder/Target;",
+          "line_start": 422,
+          "line_end": 448
+        },
+        {
+          "name": "getNeighbors",
+          "kind": "method",
+          "descriptor": "([Lnet/minecraft/world/level/pathfinder/Node;Lnet/minecraft/world/level/pathfinder/Node;)I",
+          "line_start": 449,
+          "line_end": 659
+        },
+        {
+          "name": "getBlockPathType",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/level/BlockGetter;III)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "line_start": 708,
+          "line_end": 799
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/level/pathfinder/Path",
+      "class_hash": "94bfcd6f1aa220bce972201fc2f109f2bff3abc45c39b502fa2807da4cd65c93",
+      "disassembly_hash": "dd1540b07207eab558c5462623ee7b323a05957beacf8348068e6a8067996e63",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "java/lang/Object",
+      "member_count": 36,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "getNode",
+          "kind": "method",
+          "descriptor": "(I)Lnet/minecraft/world/level/pathfinder/Node;",
+          "line_start": 543,
+          "line_end": 560
+        },
+        {
+          "name": "getNodeCount",
+          "kind": "method",
+          "descriptor": "()I",
+          "line_start": 613,
+          "line_end": 627
+        },
+        {
+          "name": "getNextNodeIndex",
+          "kind": "method",
+          "descriptor": "()I",
+          "line_start": 628,
+          "line_end": 641
+        },
+        {
+          "name": "canReach",
+          "kind": "method",
+          "descriptor": "()Z",
+          "line_start": 925,
+          "line_end": 938
+        },
+        {
+          "name": "setDebug",
+          "kind": "method",
+          "descriptor": "([Lnet/minecraft/world/level/pathfinder/Node;[Lnet/minecraft/world/level/pathfinder/Node;Ljava/util/Set;)V",
+          "line_start": 939,
+          "line_end": 972
+        },
+        {
+          "name": "getOpenSet",
+          "kind": "method",
+          "descriptor": "()[Lnet/minecraft/world/level/pathfinder/Node;",
+          "line_start": 973,
+          "line_end": 989
+        },
+        {
+          "name": "getClosedSet",
+          "kind": "method",
+          "descriptor": "()[Lnet/minecraft/world/level/pathfinder/Node;",
+          "line_start": 990,
+          "line_end": 1006
+        },
+        {
+          "name": "getTarget",
+          "kind": "method",
+          "descriptor": "()Lnet/minecraft/core/BlockPos;",
+          "line_start": 1391,
+          "line_end": 1404
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/level/pathfinder/Node",
+      "class_hash": "ea0bcbf7e19a3b628b607ffd94336e925bd65d07fc9503036480ede3599a71c4",
+      "disassembly_hash": "31fff4c7f961990353ecce16a51508b3f14e4cf2c248506e356492aef332aa9f",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "java/lang/Object",
+      "member_count": 32,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "inOpenSet",
+          "kind": "method",
+          "descriptor": "()Z",
+          "line_start": 892,
+          "line_end": 914
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/level/pathfinder/Target",
+      "class_hash": "fd6afbb4b4317c1b4a640cd854a13d70a8901c4f2a3cc6b028614b306c32df81",
+      "disassembly_hash": "9a2feb63a9586bf2965da8a187eb5b0a765e9521e1f47c549fe084648681f396",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/level/pathfinder/Node",
+      "member_count": 10,
+      "origin_count": 2,
+      "selected_members": []
+    },
+    {
+      "owner": "net/minecraft/world/level/pathfinder/BinaryHeap",
+      "class_hash": "05af3f22ca50b795799311c528044598e9e05974b56050929b4c5bcd8d808ff0",
+      "disassembly_hash": "8648cc10e9147a1e58456630d4fb07e092f37445fce36cbd0f703f8d7218c8c3",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "java/lang/Object",
+      "member_count": 14,
+      "origin_count": 2,
+      "selected_members": []
+    },
+    {
+      "owner": "net/minecraft/world/level/pathfinder/BlockPathTypes",
+      "class_hash": "14a3ece198a30f25b6e652050190f837fa0bd4806ff377b0d511f36e280a114a",
+      "disassembly_hash": "0a044db30a632988ec95c7e842b245b1d7115b3d96984221908d861151b34e2f",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "java/lang/Enum",
+      "member_count": 35,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "getMalus",
+          "kind": "method",
+          "descriptor": "()F",
+          "line_start": 345,
+          "line_end": 358
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/control/MoveControl",
+      "class_hash": "775d151ddb409265ea7b71df0bb4b36c52a9de2cca4fbf299f704ddfd34082b1",
+      "disassembly_hash": "c51d98fc9fbd4afeee5fa6d2226a714cba29e3bb91af9ea47cab82addefb2e03",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "java/lang/Object",
+      "member_count": 22,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "hasWanted",
+          "kind": "method",
+          "descriptor": "()Z",
+          "line_start": 383,
+          "line_end": 405
+        },
+        {
+          "name": "getSpeedModifier",
+          "kind": "method",
+          "descriptor": "()D",
+          "line_start": 406,
+          "line_end": 419
+        },
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 493,
+          "line_end": 879
+        },
+        {
+          "name": "getWantedX",
+          "kind": "method",
+          "descriptor": "()D",
+          "line_start": 1020,
+          "line_end": 1033
+        },
+        {
+          "name": "getWantedY",
+          "kind": "method",
+          "descriptor": "()D",
+          "line_start": 1034,
+          "line_end": 1047
+        },
+        {
+          "name": "getWantedZ",
+          "kind": "method",
+          "descriptor": "()D",
+          "line_start": 1048,
+          "line_end": 1067
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/control/FlyingMoveControl",
+      "class_hash": "af6845a950d3a66bea9a015b57728911b860afc34ca06cf2f22c889960b6efbf",
+      "disassembly_hash": "5cf5e93ba0b13d3c9ab8b5fcd17d80c2c00a5354e0203ccecc3721fa236afcfd",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/ai/control/MoveControl",
+      "member_count": 4,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 198,
+          "line_end": 446
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/control/SmoothSwimmingMoveControl",
+      "class_hash": "7a35963939a3d7972565f74b9b8610bbfd8e2b888eab8f83b8f6993b3b363e6b",
+      "disassembly_hash": "a959678911723e00e0d0145364908f74cf28729997f2be0799b8ac2430b96533",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/ai/control/MoveControl",
+      "member_count": 10,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 306,
+          "line_end": 621
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/control/LookControl",
+      "class_hash": "ca2152abdf65524b3782a85969b19657235e68850fe21a01e5c407a94cb27d6f",
+      "disassembly_hash": "7fc997ee3f3e513f4e382f58e928c46cec576a1e5210f549c6addb5e23d0b9d3",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "java/lang/Object",
+      "member_count": 26,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 462,
+          "line_end": 526
+        },
+        {
+          "name": "isLookingAtTarget",
+          "kind": "method",
+          "descriptor": "()Z",
+          "line_start": 576,
+          "line_end": 598
+        },
+        {
+          "name": "getWantedX",
+          "kind": "method",
+          "descriptor": "()D",
+          "line_start": 599,
+          "line_end": 612
+        },
+        {
+          "name": "getWantedY",
+          "kind": "method",
+          "descriptor": "()D",
+          "line_start": 613,
+          "line_end": 626
+        },
+        {
+          "name": "getWantedZ",
+          "kind": "method",
+          "descriptor": "()D",
+          "line_start": 627,
+          "line_end": 640
+        },
+        {
+          "name": "getWantedY",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/entity/Entity;)D",
+          "line_start": 818,
+          "line_end": 848
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/control/JumpControl",
+      "class_hash": "5964bd74bce3bb11da4ccd9352f0edbd08465cd3275f81ce80b5668dce59b42a",
+      "disassembly_hash": "0eeff6cb04b5d11964b52396434edf72ee07181762b2181dd25a2c5abacdfb97",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "java/lang/Object",
+      "member_count": 5,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 91,
+          "line_end": 113
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/control/BodyRotationControl",
+      "class_hash": "e2a9d2f2ecf8335e283392cd2c28fa2da68776443b8c062b925ddb6cff583f52",
+      "disassembly_hash": "918e27bb16e7a2f0da6b4bc877ca1e731708425124459bb6d6648707fe12e8be",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "java/lang/Object",
+      "member_count": 13,
+      "origin_count": 2,
+      "selected_members": []
+    },
+    {
+      "owner": "net/minecraft/network/protocol/game/DebugPackets",
+      "class_hash": "4f9a9cd119f9f2ce0b167398ef0c94f68fa8a8947813c1788aeae389893c78d5",
+      "disassembly_hash": "ffa15470477218557d191f44f07b7118b06103d5dfb8a1ba180e41147db4a5c0",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "java/lang/Object",
+      "member_count": 35,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "sendPathFindingPacket",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/Mob;Lnet/minecraft/world/level/pathfinder/Path;F)V",
+          "line_start": 954,
+          "line_end": 975
+        },
+        {
+          "name": "sendGoalSelector",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/Mob;Lnet/minecraft/world/entity/ai/goal/GoalSelector;)V",
+          "line_start": 1002,
+          "line_end": 1024
+        },
+        {
+          "name": "sendEntityBrain",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;)V",
+          "line_start": 1042,
+          "line_end": 1053
+        },
+        {
+          "name": "writeBrain",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/network/FriendlyByteBuf;)V",
+          "line_start": 1108,
+          "line_end": 1414
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/client/renderer/debug/PathfindingRenderer",
+      "class_hash": "4bb647d9ff51dd6504cd1276738e650df6769b6ee18c6f5de07fd59161ed9e65",
+      "disassembly_hash": "ea61ff0c35314bb094d47e016b05e658691410b94ebf06b11b834ebcf67604c5",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "java/lang/Object",
+      "member_count": 17,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "render",
+          "kind": "method",
+          "descriptor": "(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;DDD)V",
+          "line_start": 479,
+          "line_end": 617
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/client/renderer/debug/GoalSelectorDebugRenderer",
+      "class_hash": "bdd6898520c23697b16fea7daf1e09fd8368a1c281dea535ec878739d3f93415",
+      "disassembly_hash": "c925c59c3d7400d404cc3b26a340a5d8ea72009dd301a548bd32e9716143e4f4",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "java/lang/Object",
+      "member_count": 9,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "render",
+          "kind": "method",
+          "descriptor": "(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;DDD)V",
+          "line_start": 330,
+          "line_end": 372
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/client/renderer/debug/BrainDebugRenderer",
+      "class_hash": "f270598ceb90cba72a371e9b27854cc04ac303c896cf3246902fbea70761a8cf",
+      "disassembly_hash": "56a0907b49ba9aed565b2fd886b2a1bb4cca841f248f974dac0f27f3aa2d7278",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "java/lang/Object",
+      "member_count": 75,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "render",
+          "kind": "method",
+          "descriptor": "(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;DDD)V",
+          "line_start": 1166,
+          "line_end": 1207
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/monster/Zombie",
+      "class_hash": "0bec0512ec13bf0e1938ce5e63722e65bceeb6ad71058aa94ea279466c4b29e0",
+      "disassembly_hash": "c7e39f31e855cde7981f6e45a2fdd0be945e84d5d9da978cd35487d4b507c7bc",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/monster/Monster",
+      "member_count": 64,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "registerGoals",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 1377,
+          "line_end": 1423
+        },
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 1850,
+          "line_end": 1935
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/monster/AbstractSkeleton",
+      "class_hash": "c4acbf62ba16703480262fff6c979e46c526d6ed6063e13110eedd937573e441",
+      "disassembly_hash": "b31584abb358aef857ab8c70bc39575479daccb2f38f4559341db08ee980d933",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/monster/Monster",
+      "member_count": 23,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "registerGoals",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 610,
+          "line_end": 730
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/npc/Villager",
+      "class_hash": "81de732fa9dca114773d785844f6e3f4d5b7a5e05762c79e86ee9e7ada191d63",
+      "disassembly_hash": "01654c4875ad2b5275162dbde238f80fcdf1d984ab326a41079dbd554981042e",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/npc/AbstractVillager",
+      "member_count": 125,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "customServerAiStep",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 2625,
+          "line_end": 2784
+        },
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 2785,
+          "line_end": 2815
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/monster/Ghast",
+      "class_hash": "4f0dd147478e1bff754bee8a01bea4a9ce54e873ad218f9796a1e8c8879b3a39",
+      "disassembly_hash": "ef94fe07c773fac52637adc55a7f4549869a8cc76ac32ff7ed7ca5e46f215ae2",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/FlyingMob",
+      "member_count": 25,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "registerGoals",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 384,
+          "line_end": 437
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/monster/Phantom",
+      "class_hash": "13b2e3931ac337cb59f950de66671ab355641886da026001f1fc7a55ce06be29",
+      "disassembly_hash": "e37fb215f4c40bd82e684059bc64f4bfca507f10a2f5e0d71bf6c4821aad2697",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/FlyingMob",
+      "member_count": 47,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "registerGoals",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 628,
+          "line_end": 675
+        },
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 842,
+          "line_end": 1034
+        },
+        {
+          "name": "customServerAiStep",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 1063,
+          "line_end": 1077
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/monster/Slime",
+      "class_hash": "110ed533eb3d0a3a861a389f1acd6ed9976a9382879de3931455fd436b95c715",
+      "disassembly_hash": "92f7e5343b00264e2ddb2f16944581cf0500fe192731623befe8f7c951cd59c7",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/Mob",
+      "member_count": 45,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "registerGoals",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 798,
+          "line_end": 871
+        },
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 1114,
+          "line_end": 1290
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/animal/Dolphin",
+      "class_hash": "9dc2c0a963d38618201fa248faa86c3ab160378446dfd62cd0cad64ead737af8",
+      "disassembly_hash": "0d25cc75d4524b363b803cbad55ed2b29115638977b7c458b8123611d5d730dd",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/animal/WaterAnimal",
+      "member_count": 49,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "registerGoals",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 1231,
+          "line_end": 1380
+        },
+        {
+          "name": "createNavigation",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/level/Level;)Lnet/minecraft/world/entity/ai/navigation/PathNavigation;",
+          "line_start": 1404,
+          "line_end": 1421
+        },
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 1651,
+          "line_end": 1898
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/monster/EnderMan",
+      "class_hash": "816ad5449aefe2f441eb1f135350254d4ff899da2a432e41482b3a4a263b6937",
+      "disassembly_hash": "aa775398b5ef03e8738952d1acb144cbd6a0342614177f83c459bdb2197021de",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/monster/Monster",
+      "member_count": 47,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "registerGoals",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 1060,
+          "line_end": 1193
+        },
+        {
+          "name": "customServerAiStep",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 1812,
+          "line_end": 1878
+        },
+        {
+          "name": "teleport",
+          "kind": "method",
+          "descriptor": "()Z",
+          "line_start": 1879,
+          "line_end": 1948
+        },
+        {
+          "name": "teleportTowards",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/entity/Entity;)Z",
+          "line_start": 1949,
+          "line_end": 2050
+        },
+        {
+          "name": "teleport",
+          "kind": "method",
+          "descriptor": "(DDD)Z",
+          "line_start": 2051,
+          "line_end": 2204
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/monster/Ghast$GhastLookGoal",
+      "class_hash": "d6457ccfe76f875785342ffab1d52bed46c2b8682cf6495eb5258783ac27e237",
+      "disassembly_hash": "16038afdce538b86b819c65d96d127a93b2a249b7751c311f47c52e2efe68dd3",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/ai/goal/Goal",
+      "member_count": 5,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "canUse",
+          "kind": "method",
+          "descriptor": "()Z",
+          "line_start": 150,
+          "line_end": 162
+        },
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 176,
+          "line_end": 283
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/monster/Ghast$GhastMoveControl",
+      "class_hash": "9cf70e9f2224e83c26b76de3ed734789c44e6e61d016550e443bea8b1de8934d",
+      "disassembly_hash": "5602ddf2ea35d4692483668446b2d2b235611b8b3437dfa198f406a86893ec3d",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/ai/control/MoveControl",
+      "member_count": 5,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 184,
+          "line_end": 289
+        },
+        {
+          "name": "canReach",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/world/phys/Vec3;I)Z",
+          "line_start": 290,
+          "line_end": 351
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/monster/Ghast$GhastShootFireballGoal",
+      "class_hash": "eb3e289569b0bb7ff15d60b60d83479be61ccac4cdba3895028c51a1c50e6c67",
+      "disassembly_hash": "b5ab894cb15aa1c609b45c71818bbf65d38a1b097aad9db8212aa4be64caa957",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/ai/goal/Goal",
+      "member_count": 8,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "canUse",
+          "kind": "method",
+          "descriptor": "()Z",
+          "line_start": 174,
+          "line_end": 197
+        },
+        {
+          "name": "start",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 198,
+          "line_end": 213
+        },
+        {
+          "name": "stop",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 214,
+          "line_end": 230
+        },
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 244,
+          "line_end": 485
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/monster/Ghast$RandomFloatAroundGoal",
+      "class_hash": "1f9a719589f909791a32ead40c2f1ae141cf27b8bf25efea46e18839bfefe63e",
+      "disassembly_hash": "5c6445084364a01da249c1373708532f3b3ae510491a6d3df4332aa90cf7eea3",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/ai/goal/Goal",
+      "member_count": 5,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "canUse",
+          "kind": "method",
+          "descriptor": "()Z",
+          "line_start": 142,
+          "line_end": 227
+        },
+        {
+          "name": "canContinueToUse",
+          "kind": "method",
+          "descriptor": "()Z",
+          "line_start": 228,
+          "line_end": 240
+        },
+        {
+          "name": "start",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 241,
+          "line_end": 320
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/monster/Phantom$AttackPhase",
+      "class_hash": "1e46cfd605233ecbd3cdbae89b90f33cf05bab2ae085aa37b4ff59040dd174ea",
+      "disassembly_hash": "79eb042732466ee987a62e920649bfdf35366493991d0a6d18fd424159a1cea0",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "java/lang/Enum",
+      "member_count": 8,
+      "origin_count": 2,
+      "selected_members": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/monster/Phantom$PhantomAttackPlayerTargetGoal",
+      "class_hash": "44da7a1f4eb6f5338a5de623c759951b61dbf185d562d7b1087a4591159e95b7",
+      "disassembly_hash": "cd82aff4965f82d469987feff78d2b21def2cdd5946cb313dc08d4fe25f2891e",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/ai/goal/Goal",
+      "member_count": 6,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "canUse",
+          "kind": "method",
+          "descriptor": "()Z",
+          "line_start": 210,
+          "line_end": 309
+        },
+        {
+          "name": "canContinueToUse",
+          "kind": "method",
+          "descriptor": "()Z",
+          "line_start": 310,
+          "line_end": 352
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/monster/Phantom$PhantomAttackStrategyGoal",
+      "class_hash": "158e05df31980761fdf9fc8cb277368f6e04ad7464238f42c1bbb6bc90b03fab",
+      "disassembly_hash": "da793fa4ce24d3252b84a23b197483a07bc8beb5ee274c8c6e85b379fd71d837",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/ai/goal/Goal",
+      "member_count": 8,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "canUse",
+          "kind": "method",
+          "descriptor": "()Z",
+          "line_start": 195,
+          "line_end": 226
+        },
+        {
+          "name": "start",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 227,
+          "line_end": 252
+        },
+        {
+          "name": "stop",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 253,
+          "line_end": 284
+        },
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 285,
+          "line_end": 352
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/monster/Phantom$PhantomBodyRotationControl",
+      "class_hash": "7ebb6b041a71c5757f56beb7e7ea55a56562896212ec453fb31260b9e1da77ae",
+      "disassembly_hash": "476f2b85a1cdfb795379fcaebc4ce111f385fcb9c34ec790a28307a156fa0f1e",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/ai/control/BodyRotationControl",
+      "member_count": 3,
+      "origin_count": 2,
+      "selected_members": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/monster/Phantom$PhantomCircleAroundAnchorGoal",
+      "class_hash": "62dcee6eeb6475266984d9919bdbc6c96941c32a56b308a1ad354a6b4b2e8075",
+      "disassembly_hash": "8562e3f43b7d7952e2f685da5928af727ce1790b0590628b5488c099b2a132ca",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/monster/Phantom$PhantomMoveTargetGoal",
+      "member_count": 10,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "canUse",
+          "kind": "method",
+          "descriptor": "()Z",
+          "line_start": 238,
+          "line_end": 267
+        },
+        {
+          "name": "start",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 268,
+          "line_end": 323
+        },
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 324,
+          "line_end": 485
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/monster/Phantom$PhantomLookControl",
+      "class_hash": "b1f13f36a1fe202571600fcfb0c9e511ae9258f58ec58df8d5093890adaef9ec",
+      "disassembly_hash": "b21168ba5990d13ccbf2f14a5f353a14c6fdf480377e81b0e342be3c4132ef1b",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/ai/control/LookControl",
+      "member_count": 3,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 67,
+          "line_end": 82
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/monster/Phantom$PhantomMoveControl",
+      "class_hash": "46619a5abbe40756eacb7a334c21b472599249c8dd7bc88b52b8a1564ce857b4",
+      "disassembly_hash": "79a2834420123b09511395b901f7f3ecaa6954fcafdce34f7b8c8046500bb135",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/ai/control/MoveControl",
+      "member_count": 4,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 213,
+          "line_end": 524
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/monster/Phantom$PhantomMoveTargetGoal",
+      "class_hash": "f5f94f5c8b3b45056df62df54717a744da7182bc3aa8ef2822b4c05f34ea1a26",
+      "disassembly_hash": "13389622fb19d166332639224ed8ba2e9b4cd3670b80ddf0d876c19ec5210656",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/ai/goal/Goal",
+      "member_count": 3,
+      "origin_count": 2,
+      "selected_members": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/monster/Phantom$PhantomSweepAttackGoal",
+      "class_hash": "d009cd206f0fddc8c37f80c7dba769c2f51ed7b43d8ae8c24cd8265c965d7a75",
+      "disassembly_hash": "b6ce402ab7d2a74bbe64fb1e12c36bfbf30d1c723591a4949fef35956540634e",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/monster/Phantom$PhantomMoveTargetGoal",
+      "member_count": 10,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "canUse",
+          "kind": "method",
+          "descriptor": "()Z",
+          "line_start": 239,
+          "line_end": 267
+        },
+        {
+          "name": "canContinueToUse",
+          "kind": "method",
+          "descriptor": "()Z",
+          "line_start": 268,
+          "line_end": 415
+        },
+        {
+          "name": "start",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 416,
+          "line_end": 427
+        },
+        {
+          "name": "stop",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 428,
+          "line_end": 449
+        },
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 450,
+          "line_end": 552
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/monster/Slime$SlimeAttackGoal",
+      "class_hash": "deb065e02e64381c09848a352e86747c09138e6f36d262667a0b9743f528567c",
+      "disassembly_hash": "f5bc2a22294207bb0c512a1ef1bd1bd47815f72a2daa33a728582af8596b6146",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/ai/goal/Goal",
+      "member_count": 8,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "canUse",
+          "kind": "method",
+          "descriptor": "()Z",
+          "line_start": 147,
+          "line_end": 188
+        },
+        {
+          "name": "start",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 189,
+          "line_end": 208
+        },
+        {
+          "name": "canContinueToUse",
+          "kind": "method",
+          "descriptor": "()Z",
+          "line_start": 209,
+          "line_end": 260
+        },
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 274,
+          "line_end": 337
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/monster/Slime$SlimeFloatGoal",
+      "class_hash": "1395dcb7c7919edafc3be130803f068d2fb9df54e0c66ab5cdcddc28e8496066",
+      "disassembly_hash": "7cbe8be56bb2948e5b2af3caaa7e686ae8f1ff299c732e9727f5e1c428d530c8",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/ai/goal/Goal",
+      "member_count": 5,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "canUse",
+          "kind": "method",
+          "descriptor": "()Z",
+          "line_start": 153,
+          "line_end": 185
+        },
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 199,
+          "line_end": 252
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/monster/Slime$SlimeKeepOnJumpingGoal",
+      "class_hash": "77777bb0ccf5ad4f45a7500820dbab8ab694f09ded1d9e1dc205c2d2c4e79459",
+      "disassembly_hash": "7a5719218f3a2b00643baa8a192a361ede172789fb774faa2a35a2cd072e4d90",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/ai/goal/Goal",
+      "member_count": 4,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "canUse",
+          "kind": "method",
+          "descriptor": "()Z",
+          "line_start": 113,
+          "line_end": 135
+        },
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 136,
+          "line_end": 175
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/monster/Slime$SlimeMoveControl",
+      "class_hash": "041abf2ff8a61e49cd7f6661f21a17bd6eaa3cc122e211ec6b4c160a1b48b373",
+      "disassembly_hash": "d9cdae011e76c78185f42fbce72f2f4278f2a55eb7f5e9e03ffc6024caf598e1",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/ai/control/MoveControl",
+      "member_count": 8,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 251,
+          "line_end": 411
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/monster/Slime$SlimeRandomDirectionGoal",
+      "class_hash": "94f12bd8ce1b6daa6c3e7429836fdcacb1214258b52eb937b527a1d521b65e4e",
+      "disassembly_hash": "6de31aabbc5289781ce5bd992f7fb8995fb9074b9e36b4b6b2876ff95a734916",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/ai/goal/Goal",
+      "member_count": 6,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "canUse",
+          "kind": "method",
+          "descriptor": "()Z",
+          "line_start": 158,
+          "line_end": 203
+        },
+        {
+          "name": "tick",
+          "kind": "method",
+          "descriptor": "()V",
+          "line_start": 204,
+          "line_end": 276
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/LivingEntity",
+      "class_hash": "914d4b6d230e1d1dd5159eb242108851be02ec636d703ac6aa15d7cda179ac11",
+      "disassembly_hash": "b996b48a0e54502b3c1131507e6867340084226200f0ae3e01c28fad792215e6",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/Entity",
+      "member_count": 417,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "brain",
+          "kind": "field",
+          "descriptor": "Lnet/minecraft/world/entity/ai/Brain;",
+          "line_start": 4942,
+          "line_end": 4946
+        },
+        {
+          "name": "getBrain",
+          "kind": "method",
+          "descriptor": "()Lnet/minecraft/world/entity/ai/Brain;",
+          "line_start": 5116,
+          "line_end": 5130
+        }
+      ]
+    }
+  ]
+}
