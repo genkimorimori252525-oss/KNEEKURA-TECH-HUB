@@ -66,6 +66,12 @@ public final class X1Danmaku {
         return getVecFromAngle(rand.nextFloat() * 360F, rand.nextFloat() * 180F - 90F);
     }
 
+    /** THShotLib.pos_Random: X1 ignores {@code range} and offsets by a random unit vector (fresh Random). */
+    public static Vec3d pos_Random(Vec3d pos, double range) {
+        Vec3d r = angle_Random(new Random());
+        return new Vec3d(pos.x() + r.x(), pos.y() + r.y(), pos.z() + r.z());
+    }
+
     /** THShotLib.rotate_Random (same distribution as angle_Random). */
     public static Vec3d rotate_Random(Random rand) {
         return angle_Random(rand);

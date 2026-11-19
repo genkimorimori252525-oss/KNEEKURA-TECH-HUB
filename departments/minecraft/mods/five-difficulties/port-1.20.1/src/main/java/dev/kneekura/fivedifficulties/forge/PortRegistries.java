@@ -315,6 +315,15 @@ public final class PortRegistries {
     public static final RegistryObject<Item> WRIGGLE_SPAWN_EGG = ITEMS.register("wriggle_spawn_egg",
             () -> new net.minecraftforge.common.ForgeSpawnEggItem(WRIGGLE, 0x15224F, 0x83C826, new Item.Properties()));
 
+    // ---- P17f mobs ----
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.mob.TozikoEntity>> TOZIKO =
+            ENTITIES.register("toziko", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.mob.TozikoEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.mob.TozikoEntity::new, MobCategory.MONSTER)
+                    .sized(1.0F, 1.8F).clientTrackingRange(10)
+                    .build(FiveDifficultiesPort.MOD_ID + ":toziko"));
+    public static final RegistryObject<Item> TOZIKO_SPAWN_EGG = ITEMS.register("toziko_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(TOZIKO, 0x60D683, 0x376E91, new Item.Properties()));
+
     // ---- P13 danmaku-weapon items ----
     public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity>> DRAGON_NECK_JEWEL =
             ENTITIES.register("dragon_neck_jewel", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity>of(

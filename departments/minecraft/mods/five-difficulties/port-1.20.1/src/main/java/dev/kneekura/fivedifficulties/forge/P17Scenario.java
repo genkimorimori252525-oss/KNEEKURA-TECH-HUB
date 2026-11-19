@@ -247,6 +247,39 @@ public final class P17Scenario {
                 s -> s.getOwner() == wriggle).forEach(Entity::discard);
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P17_WRIGGLE_PASS fan={}", wFired);
 
+        // Toziko: 1 + level blue Toziko-special arrows for 20 of 80 ticks; card 40 at 44 HP; spawns only in thunder.
+        var toziko = spawn(PortRegistries.TOZIKO.get(), 14, 2);
+        require(toziko.getMaxHealth() == 40.0F && toziko.getUsingSpellCardNo() == -1, "toziko phase 1");
+        toziko.attackCounter = 5;
+        toziko.patternForTest(2);
+        var arrows = level.getEntitiesOfClass(THShotEntity.class, toziko.getBoundingBox().inflate(8), s -> s.getOwner() == toziko);
+        require(arrows.size() == 3 && arrows.stream().allMatch(a -> a.motion().special == SpecialCards.GagoujiCyclone.SPECIAL_TOZIKO01),
+                "3 Toziko arrows at level 2, saw " + arrows.size());
+        toziko.attackCounter = 30;
+        toziko.patternForTest(2);
+        require(level.getEntitiesOfClass(THShotEntity.class, toziko.getBoundingBox().inflate(8), s -> s.getOwner() == toziko).size() == 3,
+                "quiet after tick 20");
+        toziko.invulnerableTime = 0;
+        toziko.hurt(level.damageSources().generic(), 200F);
+        require(toziko.getHealth() <= 0.0F && toziko.deadFlag(), "toziko phase 1 down");
+        toziko.tickCount++;
+        toziko.deathStepForTest();
+        require(toziko.getUsingSpellCardNo() == 40 && toziko.getHealth() == 44.0F && toziko.attackInterval == 60, "toziko card 40 at 44");
+        toziko.attackInterval = 0;
+        toziko.invulnerableTime = 0;
+        toziko.hurt(level.damageSources().generic(), 200F);
+        require(toziko.getHealth() <= 0.0F && toziko.deadFlag(), "toziko phase 2 down");
+        toziko.tickCount++;
+        toziko.deathStepForTest();
+        require(toziko.getDanmakuPattern() == DanmakuMobEntity.ATTACK_END, "toziko's second death is final");
+        require(level.isThundering() || !dev.kneekura.fivedifficulties.forge.entity.mob.TozikoEntity.checkTozikoSpawnRules(
+                PortRegistries.TOZIKO.get(), level, MobSpawnType.NATURAL, BlockPos.containing(bx, by, bz), level.random),
+                "no natural Toziko without thunder");
+        toziko.discard();
+        level.getEntitiesOfClass(THShotEntity.class, new net.minecraft.world.phys.AABB(bx - 30, by - 30, bz - 30, bx + 30, by + 30, bz + 30),
+                s -> s.getOwner() == toziko).forEach(Entity::discard);
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P17_TOZIKO_PASS arrows={}", arrows.size());
+
         // Spawn rules accept egg spawns.
         require(THFairyEntity.checkFairySpawnRules(PortRegistries.TH_FAIRY.get(), level, MobSpawnType.SPAWN_EGG,
                 BlockPos.containing(bx, by, bz), level.random), "egg spawns allowed");

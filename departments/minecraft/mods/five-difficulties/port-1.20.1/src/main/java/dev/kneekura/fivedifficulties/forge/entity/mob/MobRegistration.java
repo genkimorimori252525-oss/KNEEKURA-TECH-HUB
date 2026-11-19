@@ -23,6 +23,7 @@ public final class MobRegistration {
         event.put(PortRegistries.RUMIA.get(), DanmakuMobEntity.createDanmakuAttributes().build());
         event.put(PortRegistries.CIRNO.get(), DanmakuMobEntity.createDanmakuAttributes().build());
         event.put(PortRegistries.WRIGGLE.get(), DanmakuMobEntity.createDanmakuAttributes().build());
+        event.put(PortRegistries.TOZIKO.get(), DanmakuMobEntity.createDanmakuAttributes().build());
     }
 
     @SubscribeEvent
@@ -39,5 +40,7 @@ public final class MobRegistration {
                 CirnoEntity::checkCirnoSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(PortRegistries.WRIGGLE.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 WriggleEntity::checkWriggleSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
+        event.register(PortRegistries.TOZIKO.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                TozikoEntity::checkTozikoSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
     }
 }

@@ -504,11 +504,12 @@ public final class ClientWorldVisualSmoke {
                 dev.kneekura.fivedifficulties.forge.PortRegistries.SUNFLOWER_FAIRY.get(),
                 dev.kneekura.fivedifficulties.forge.PortRegistries.TH_PHANTOM.get(),
                 dev.kneekura.fivedifficulties.forge.PortRegistries.CIRNO.get(),
-                dev.kneekura.fivedifficulties.forge.PortRegistries.WRIGGLE.get()};
+                dev.kneekura.fivedifficulties.forge.PortRegistries.WRIGGLE.get(),
+                dev.kneekura.fivedifficulties.forge.PortRegistries.TOZIKO.get()};
         for (int i = 0; i < types.length; i++) {
             var e = types[i].create(level);
             if (!(e instanceof net.minecraft.world.entity.Mob mob)) continue;
-            mob.moveTo(-3.5D + i * 2.0D, -59.0D, 7.0D, 180.0F, 0.0F);
+            mob.moveTo(-5.5D + i * 2.0D, -59.0D, 8.0D, 180.0F, 0.0F);
             mob.setYHeadRot(180.0F);
             mob.yBodyRot = 180.0F;
             mob.setNoAi(true);
