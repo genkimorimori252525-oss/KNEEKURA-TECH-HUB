@@ -1,0 +1,178 @@
+{
+  "schema": "kneekura.original-brain-stop-call-source/v1",
+  "scope": "EXACT_KNOWN_SINK_STOP_NAVIGATION_ERASE_AND_CACHED_STATE_LOCATORS_NOT_STOP_REASON_OR_ARRIVAL",
+  "minecraft": "1.20.1",
+  "forge": "47.2.0",
+  "namespace": "Mojmap",
+  "minecraft_artifact_sha256": "1b6e6a166fbc06c6d2422cd5cf515a508977479045095363d5b4c8b89cc7b4eb",
+  "disassembly_provider": {
+    "name": "jdk-javap-v1",
+    "options": [
+      "-private",
+      "-s",
+      "-c",
+      "-l",
+      "-verbose"
+    ],
+    "executable_hash": "bd5a9f99365fd432f79162f4ed9ca9b956c78cc81dfb6962adb6d207075711fb",
+    "jdk_components": {
+      "release": "00d3211a59bc9f2577f93962e9210de8578c49fd2625022cb38606817d3a71f9",
+      "lib/modules": "81f0e1bb87cd303ddcce2b216e27da416bd20799d9a9811ea1b070123cefff0f"
+    },
+    "jdk_image_status": "HASHED"
+  },
+  "classes": [
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/MoveToTargetSink",
+      "class_hash": "e2b60638bb381a1d96702bea9701e594c001ae7138b8134b3ecbdee8f0771dae",
+      "disassembly_hash": "7cd6e7de45969754ab5ec0163cd39f89887b25b27a9d061dad8ee46386c4e846",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/brain-result-r50-source/MoveToTargetSink.javap.txt",
+      "selected_members": [
+        {
+          "kind": "FIELD",
+          "name": "remainingCooldown",
+          "descriptor": "I",
+          "line_start": 353,
+          "line_end": 356,
+          "slice_sha256": "fb1537c955be7c4e6f007634c8585cfec3b6ca0ffe24a441ebe3d63598ac3e06"
+        },
+        {
+          "kind": "FIELD",
+          "name": "path",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/Path;",
+          "line_start": 357,
+          "line_end": 363,
+          "slice_sha256": "59ab47b0d9bffaa14b08a83f6c7128a657e500c1e6c0a3aa544b85198d31eca1"
+        },
+        {
+          "kind": "METHOD",
+          "name": "stop",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/Mob;J)V",
+          "line_start": 593,
+          "line_end": 657,
+          "slice_sha256": "dc2a12ecd7047d68f018110809222e5bc8cee009309bfe35e0dd251f594b4fea"
+        },
+        {
+          "kind": "METHOD",
+          "name": "stop",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "line_start": 1044,
+          "line_end": 1061,
+          "slice_sha256": "dfdc710ff5f2905df6c436f9c07dd551b7089aa86933307f52b428e40b05a787"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/Brain",
+      "class_hash": "441ee6715fb13f271943a9a462c5ff64e491a993ff28d724df06885d83012a3d",
+      "disassembly_hash": "d25d42a41b31c1bb5d24cac87573c1616e163df34980e362d124ca77e8e7b146",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/brain-result-r50-source/Brain.javap.txt",
+      "selected_members": [
+        {
+          "kind": "FIELD",
+          "name": "memories",
+          "descriptor": "Ljava/util/Map;",
+          "line_start": 870,
+          "line_end": 874,
+          "slice_sha256": "728f43ecabdfbc83fad1d2862620820593a306c4d666378f7bfdca7f80a2ed0a"
+        },
+        {
+          "kind": "METHOD",
+          "name": "eraseMemory",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;)V",
+          "line_start": 1275,
+          "line_end": 1297,
+          "slice_sha256": "632623b7d7ea559e39d463c918e8ea6ed848ee8459b9506ab161a16a906d6c67"
+        },
+        {
+          "kind": "METHOD",
+          "name": "setMemory",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;Ljava/lang/Object;)V",
+          "line_start": 1298,
+          "line_end": 1328,
+          "slice_sha256": "3a65b39f8e58c42c6d74cb9ea82c523d1167c89ad5896dbaeeaca9ab14e9eed2"
+        },
+        {
+          "kind": "METHOD",
+          "name": "setMemory",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;Ljava/util/Optional;)V",
+          "line_start": 1358,
+          "line_end": 1384,
+          "slice_sha256": "b329689705bf087b396086147dffa8f431601370b76ecb8f9462b5f37b12bdb1"
+        },
+        {
+          "kind": "METHOD",
+          "name": "setMemoryInternal",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;Ljava/util/Optional;)V",
+          "line_start": 1385,
+          "line_end": 1436,
+          "slice_sha256": "1269f49a2c58e16e7f3711f4883928b263eaf01b0e323b19a0e76e580685f35d"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/navigation/PathNavigation",
+      "class_hash": "78346d21ea9ba13ddbc7211666f3a80b54d773a864203922bb71d336b4dac2ac",
+      "disassembly_hash": "0322906326eaa641c89f534b772402fb67057e573b1e70c6f5bd2b0636793b58",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/brain-result-r50-source/PathNavigation.javap.txt",
+      "selected_members": [
+        {
+          "kind": "FIELD",
+          "name": "mob",
+          "descriptor": "Lnet/minecraft/world/entity/Mob;",
+          "line_start": 670,
+          "line_end": 673,
+          "slice_sha256": "593f8585dde30248bb603016407a5cf0f7d396a54bba7610406e422abcd48cfd"
+        },
+        {
+          "kind": "FIELD",
+          "name": "path",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/Path;",
+          "line_start": 678,
+          "line_end": 684,
+          "slice_sha256": "1c4f22575aacf668af1edeaeab26fabf787b95fb68e7ad1dfa9363f43e651c70"
+        },
+        {
+          "kind": "METHOD",
+          "name": "stop",
+          "descriptor": "()V",
+          "line_start": 2241,
+          "line_end": 2256,
+          "slice_sha256": "939a49aeca8a3f916e0dadb07e192122ba2a163ac6d2054835015c618784129a"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/Behavior",
+      "class_hash": "bb73feb84c79565213f7a6001c47d0e1cc2fc7d947a89d99ae5c70b5e058e7dd",
+      "disassembly_hash": "a14ed1bb37e1bbba57916781421c53353d6bff2b8346758b240b0a2d3968f6d0",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/goal-brain-research-r47-r3/Behavior.javap.txt",
+      "selected_members": [
+        {
+          "kind": "FIELD",
+          "name": "status",
+          "descriptor": "Lnet/minecraft/world/entity/ai/behavior/Behavior$Status;",
+          "line_start": 215,
+          "line_end": 218,
+          "slice_sha256": "63d51254e44d38bdd974eae17f54718e0440f5e125e45f7994123dcf3e35cad5"
+        },
+        {
+          "kind": "METHOD",
+          "name": "doStop",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "line_start": 497,
+          "line_end": 526,
+          "slice_sha256": "957f486aeadbcdc8e3681226a4c03b85d239c29964f7a3f45be4639d51281300"
+        },
+        {
+          "kind": "METHOD",
+          "name": "stop",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "line_start": 527,
+          "line_end": 546,
+          "slice_sha256": "597855f7518146a1799f038cfd503898b82fdfae8934c515a559d503111585d8"
+        }
+      ]
+    }
+  ]
+}
