@@ -199,6 +199,16 @@ public final class PortRegistries {
     public static final RegistryObject<Item> DRAGON_NECK_JEWEL_ITEM = ITEMS.register("dragon_neck_jewel",
             () -> new dev.kneekura.fivedifficulties.forge.item.DragonNeckJewelItem(new Item.Properties()));
 
+    // ---- P13b ----
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.OnmyoudamaEntity>> ONMYOUDAMA =
+            ENTITIES.register("onmyoudama", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.OnmyoudamaEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.OnmyoudamaEntity::new, MobCategory.MISC)
+                    .sized(0.3F, 0.3F).clientTrackingRange(8).updateInterval(1).setShouldReceiveVelocityUpdates(true)
+                    .build(FiveDifficultiesPort.MOD_ID + ":onmyoudama")); // X1 "Onmyoudama"
+
+    public static final RegistryObject<Item> HAKUREI_MIKO_STICK = ITEMS.register("hakurei_miko_stick",
+            () -> new dev.kneekura.fivedifficulties.forge.item.OharaibouRItem(new Item.Properties()));
+
     public static final RegistryObject<Item> SHOT_MATERIAL = ITEMS.register("shot_material",
             () -> new dev.kneekura.fivedifficulties.forge.item.ShotMaterialItem(new Item.Properties()));
 
@@ -230,6 +240,7 @@ public final class PortRegistries {
     public static void register(IEventBus modBus) {
         ITEMS.register(modBus);
         ENTITIES.register(modBus);
+        dev.kneekura.fivedifficulties.forge.entity.OnmyoudamaEntity.mikoStick = () -> HAKUREI_MIKO_STICK.get();
         dev.kneekura.fivedifficulties.forge.entity.NuclearShotEntity.controlRod = () -> NUCLEAR_CONTROL_ROD.get();
         modBus.addListener((net.minecraftforge.event.entity.EntityAttributeCreationEvent event) ->
                 event.put(DANMAKU_CREEPER.get(), net.minecraft.world.entity.monster.Creeper.createAttributes().build()));

@@ -381,6 +381,11 @@ public final class ClientWorldVisualSmoke {
         jewel.motion().acceleration = 0.0D;
         jewel.motion().setSpeed(0.0001D);
         level.addFreshEntity(jewel);
+        // P13b: a Yin-Yang Orb held still (not charged by a player: thrown by an armor stand owner)
+        var orb = new dev.kneekura.fivedifficulties.forge.entity.OnmyoudamaEntity(level, stand,
+                new Vec3d(-0.5D, -55.5D, 6.0D), new Vec3d(0, 0, 1), 0F, new Vec3d(0, 1, 0), 0F, 9999, 0.0001D, 0.0D,
+                0.0D, Vec3d.ZERO, X1ShotTables.ORANGE, 1.2F, 10.0F, 0, 2000, 0);
+        level.addFreshEntity(orb);
     }
 
     // Source is an armor stand in front of the camera, so the Watch controller and its

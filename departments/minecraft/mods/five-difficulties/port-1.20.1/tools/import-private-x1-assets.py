@@ -122,6 +122,15 @@ ASSETS = {
         "assets/five_difficulties_port/textures/item/diffusion_amulet.png",
         "48a04fbb8993b87cce4abc2b175f006d8bdaef3254c323b86b023b749f152927",
     ),
+    # P13b gohei and Yin-Yang Orb.
+    "assets/thkaguyamod/textures/items/HakureiOharaibou.png": (
+        "assets/five_difficulties_port/textures/item/hakurei_miko_stick.png",
+        "1f44155965c25208532b5e0f3fa56a6f2d2287ceb07088139542cf5f2188daf2",
+    ),
+    "assets/thkaguyamod/textures/shot/Onmyoudama2.png": (
+        "assets/five_difficulties_port/textures/entity/shot/onmyoudama.png",
+        "00698744f4f2040fa43c6d7663795072dc7f5fa750fe84665fc2856ace7d7c70",
+    ),
     # P13 danmaku-weapon items.
     "assets/thkaguyamod/textures/items/miniHakkero.png": (
         "assets/five_difficulties_port/textures/item/mini_hakkero.png",

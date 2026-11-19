@@ -67,3 +67,22 @@ first frame in one local run.
 - The recoil and durability are applied as X1 does, but no client-side check of the recoil was made.
 - `EntityTHHenyoriLaser` is dead code in X1 (its registration and its only use in ItemHoutou are commented
   out) and is not ported.
+
+## P13b — Hakurei gohei and the Yin-Yang Orb
+
+Oracle: X1 `ItemOharaibouR`, `EntityOnmyoudama`, `RenderOnmyoudama`.
+
+- `OharaibouRItem` (durability 89, block pose): holding right-click charges an orange Yin-Yang Orb two
+  0.6-steps ahead of the eyes, +0.06 size per tick up to 3; it vanishes if the gohei leaves the hand.
+  Release throws it (one tick of acceleration 1.0, limit 1.8, default gravity, BOUND04: it bounces until
+  its end time 180) and costs 1 durability.
+- `OnmyoudamaEntity`: damage size × 6; it hits nothing until it has been off its user's path for two ticks,
+  then everything including its user (`userHitCheck` / `isUserHit`, now hooks on `THShotEntity` with the
+  old behaviour as default). A block within its size above it reflects it downward. Its entity-hit
+  special turns it round but returns false, so it is removed after a hit, as in X1.
+- `OnmyoudamaRenderer`: spinning ball and the 1.4-block light (X1 never applies the light's size
+  argument); the unused `renderLaser` sphere is not ported.
+
+Receipts: `FIVE_DIFFICULTIES_P13_GOHEI_PASS size=0.88 maxDistance=57.54` (10 ticks of charge, release costs
+1 durability, still bouncing after 60 ticks, a second charge vanishes when the gohei leaves the hand);
+`FIVE_DIFFICULTIES_P13_CLIENT_RESOURCES_PASS items=4`; the P12 in-world frame shows an orb.

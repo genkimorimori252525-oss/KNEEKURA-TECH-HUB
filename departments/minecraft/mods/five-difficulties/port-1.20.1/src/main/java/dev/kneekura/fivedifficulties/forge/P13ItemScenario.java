@@ -34,7 +34,7 @@ import static dev.kneekura.fivedifficulties.core.x1.X1ShotTables.FORM_LIGHT;
 public final class P13ItemScenario {
     public static final String ENV = "FIVE_DIFFICULTIES_P13_RUNTIME_SCENARIO";
 
-    private enum Phase { IDLE, HAKKERO, ROD, JEWEL, DONE }
+    private enum Phase { IDLE, HAKKERO, ROD, JEWEL, GOHEI, DONE }
 
     private static Phase phase = Phase.IDLE;
     private static ServerLevel level;
@@ -45,6 +45,9 @@ public final class P13ItemScenario {
     private static MiniHakkeroEntity hakkero;
     private static NuclearShotEntity nuclear;
     private static double nuclearStartDistance;
+    private static dev.kneekura.fivedifficulties.forge.entity.OnmyoudamaEntity orb;
+    private static int goheiStep;
+    private static double orbMaxDistance;
 
     private P13ItemScenario() {}
 
@@ -69,6 +72,10 @@ public final class P13ItemScenario {
             key = "nuclear";
             nuclear = n;
         } else if (e instanceof DragonNeckJewelEntity) key = "jewel";
+        else if (e instanceof dev.kneekura.fivedifficulties.forge.entity.OnmyoudamaEntity o) {
+            key = "orb";
+            orb = o;
+        }
         else if (e instanceof THSetLaserEntity s && s.getShotId() == 24 && s.motion() != null && s.motion().special == EXPLOSION01) key = "spark";
         else if (e instanceof THLaserEntity) key = "laser";
         else if (e instanceof THShotEntity s && s.getShotForm() == FORM_LIGHT) key = "light";
@@ -104,6 +111,7 @@ public final class P13ItemScenario {
                 case HAKKERO -> tickHakkero();
                 case ROD -> tickRod();
                 case JEWEL -> tickJewel();
+                case GOHEI -> tickGohei();
                 default -> {}
             }
         } catch (Throwable failure) {
@@ -225,9 +233,56 @@ public final class P13ItemScenario {
         require(lasers >= 30 && lasers % 5 == 0, "each landing fires five lasers (twice on a forward block hit), got " + lasers);
         require(lights == lasers * 2, "ten light shots per five lasers, got " + lights + " / " + lasers);
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P13_JEWEL_PASS jewels=6 lasers={} lights={}", lasers, lights);
-        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P13_RUNTIME_SCENARIO_PASS");
-        phase = Phase.DONE;
-        ScenarioShutdown.finished(level.getServer(), ENV);
+        startGohei();
+    }
+
+    // ---- 4. Hakurei gohei: charge a Yin-Yang Orb, throw it; it bounces (BOUND04) ----
+
+    private static void startGohei() {
+        SEEN.clear();
+        player.moveTo(bx, by, bz, -90F, -20F); // a little upward, away from everything
+        hold(new ItemStack(PortRegistries.HAKUREI_MIKO_STICK.get()));
+        player.getMainHandItem().use(level, player, InteractionHand.MAIN_HAND);
+        require(count("orb") == 1, "charging makes a Yin-Yang Orb");
+        goheiStep = 0;
+        orbMaxDistance = 0;
+        phase = Phase.GOHEI;
+        ticks = 0;
+    }
+
+    private static void tickGohei() {
+        if (goheiStep == 0 && ticks == 10) {
+            require(!orb.isRemoved() && orb.getShotSize() > 0.8F, "charged orb size " + orb.getShotSize());
+            require(orb.position().distanceTo(player.getEyePosition()) < 2.5D, "the charge stays in front of the player");
+            player.releaseUsingItem();
+            require(player.getMainHandItem().getDamageValue() == 1, "a throw costs 1 durability");
+            goheiStep = 1;
+            ticks = 0;
+        } else if (goheiStep == 1) {
+            if (!orb.isRemoved()) orbMaxDistance = Math.max(orbMaxDistance, orb.position().distanceTo(player.position()));
+            if (ticks == 60) {
+                require(!orb.isRemoved(), "the orb keeps bouncing (BOUND04)");
+                require(orbMaxDistance > 8.0D, "the orb flew off, max distance " + orbMaxDistance);
+                require(orb.getY() > by - 0.5D, "the orb stays above the ground, y " + (orb.getY() - by));
+                FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P13_GOHEI_PASS size={} maxDistance={}",
+                        String.format("%.2f", orb.getShotSize()), String.format("%.2f", orbMaxDistance));
+                orb.discard();
+                SEEN.clear();
+                player.getMainHandItem().use(level, player, InteractionHand.MAIN_HAND);
+                goheiStep = 2;
+                ticks = 0;
+            }
+        } else if (goheiStep == 2 && ticks == 3) {
+            player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+            goheiStep = 3;
+            ticks = 0;
+        } else if (goheiStep == 3 && ticks == 3) {
+            require(orb.isRemoved(), "without the gohei in hand the charge vanishes");
+            player.stopUsingItem();
+            FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P13_RUNTIME_SCENARIO_PASS");
+            phase = Phase.DONE;
+            ScenarioShutdown.finished(level.getServer(), ENV);
+        }
     }
 
     private static void require(boolean ok, String what) {

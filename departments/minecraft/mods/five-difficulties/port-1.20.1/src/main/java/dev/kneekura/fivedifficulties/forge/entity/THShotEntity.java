@@ -405,10 +405,20 @@ public class THShotEntity extends Projectile {
     private boolean isCandidate(Entity e) {
         Entity owner = this.getOwner();
         if (!e.isPickable()) return false;
-        if (e == owner && (motion == null || !USER_HITTABLE_SPECIALS.contains(motion.special))) return false;
+        if (!userHitCheck(e)) return false;
         if (e instanceof Animal || e instanceof Villager) return false;
         if (e instanceof THShotEntity other) return other.getOwner() != owner;
         return e instanceof LivingEntity || e instanceof EnderDragonPart;
+    }
+
+    /** EntityTHShot.userHitCheck: may this entity be hit at all (the user only by the Spoiler shots). */
+    protected boolean userHitCheck(Entity e) {
+        return e != this.getOwner() || (motion != null && USER_HITTABLE_SPECIALS.contains(motion.special));
+    }
+
+    /** EntityTHShot.isUserHit: does a hit on the user also hurt them. */
+    protected boolean isUserHit() {
+        return false;
     }
 
     /** onImpact for an entity. Returns true when this shot was consumed. */
@@ -429,7 +439,7 @@ public class THShotEntity extends Projectile {
         }
         damageRate = 1.0F;
         boolean keep = entityHitSpecialProcess(hitEntity, m);
-        if (hitEntity != owner) {
+        if (isUserHit() || hitEntity != owner) {
             DamageSource source = this.damageSources().indirectMagic(this, owner == null ? this : owner);
             // The danmaku-mob x2 multiplier (youkai / fairy / phantom) arrives with the X1 mobs.
             hitEntity.hurt(source, getShotDamageWithDifficulty() * damageRate);
