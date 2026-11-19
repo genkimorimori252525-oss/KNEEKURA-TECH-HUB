@@ -1,0 +1,236 @@
+{
+  "schema": "kneekura.cached-brain-memory-source/v1",
+  "scope": "EXACT_SOURCE_FIELDS_NOT_POST_MIXIN_RUNTIME_OR_CAUSAL_PROOF",
+  "minecraft": "1.20.1",
+  "forge": "47.2.0",
+  "namespace": "Mojmap",
+  "minecraft_artifact_sha256": "1b6e6a166fbc06c6d2422cd5cf515a508977479045095363d5b4c8b89cc7b4eb",
+  "disassembly_provider": {
+    "name": "jdk-javap-v1",
+    "options": [
+      "-private",
+      "-s",
+      "-c",
+      "-l",
+      "-verbose"
+    ],
+    "executable_hash": "bd5a9f99365fd432f79162f4ed9ca9b956c78cc81dfb6962adb6d207075711fb",
+    "jdk_components": {
+      "release": "00d3211a59bc9f2577f93962e9210de8578c49fd2625022cb38606817d3a71f9",
+      "lib/modules": "81f0e1bb87cd303ddcce2b216e27da416bd20799d9a9811ea1b070123cefff0f"
+    },
+    "jdk_image_status": "HASHED"
+  },
+  "classes": [
+    {
+      "owner": "net/minecraft/world/entity/Entity",
+      "class_hash": "fb4f0380181adf05db421a154e67eaf30674956d7404ba794c0f8e0ab33935a4",
+      "disassembly_hash": "7ec99248accbe6543ed1fd2762a7fce567ea826bb75a873f20000d367f092316",
+      "selected_members": [
+        {
+          "kind": "FIELD",
+          "name": "uuid",
+          "descriptor": "Ljava/util/UUID;",
+          "line_start": 4805,
+          "line_end": 4808,
+          "slice_sha256": "7a08eb3c7f3dc322ca26d815e8f29efe6bae3e26a34b990a9be96e7559eceda6"
+        },
+        {
+          "kind": "FIELD",
+          "name": "position",
+          "descriptor": "Lnet/minecraft/world/phys/Vec3;",
+          "line_start": 4519,
+          "line_end": 4522,
+          "slice_sha256": "b4dc09e54a47bcd8f3b6b93e865fee76db669500f4dbc65fe5c54eeb8db73c6f"
+        },
+        {
+          "kind": "FIELD",
+          "name": "blockPosition",
+          "descriptor": "Lnet/minecraft/core/BlockPos;",
+          "line_start": 4523,
+          "line_end": 4526,
+          "slice_sha256": "3bc5b8433ac8d496357eef2ed92943f31dd74e803c0360fcd74a38947dbd8580"
+        },
+        {
+          "kind": "FIELD",
+          "name": "eyeHeight",
+          "descriptor": "F",
+          "line_start": 4834,
+          "line_end": 4837,
+          "slice_sha256": "a0c771497e058823c95f9f78d9ef87a51a46e0a82f39c600ee644e18e8e5e482"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/level/pathfinder/Path",
+      "class_hash": "94bfcd6f1aa220bce972201fc2f109f2bff3abc45c39b502fa2807da4cd65c93",
+      "disassembly_hash": "c9eb0e70ac383dfa7823c1e197e1b2abfab2f550926862345f4653d7e8165a28",
+      "selected_members": [
+        {
+          "kind": "FIELD",
+          "name": "nodes",
+          "descriptor": "Ljava/util/List;",
+          "line_start": 331,
+          "line_end": 335,
+          "slice_sha256": "b96c237febd30a2a8b2ede5418f3f7e0454c36aed0f4fb3fbdf6231511cc0e8b"
+        },
+        {
+          "kind": "FIELD",
+          "name": "nextNodeIndex",
+          "descriptor": "I",
+          "line_start": 352,
+          "line_end": 355,
+          "slice_sha256": "567da165867a7a4754f721ca49e99b89be2d672d9333c5095d16848ef63d0854"
+        },
+        {
+          "kind": "FIELD",
+          "name": "target",
+          "descriptor": "Lnet/minecraft/core/BlockPos;",
+          "line_start": 356,
+          "line_end": 359,
+          "slice_sha256": "b867d1c597a07765d30caf02eb5241b25f7f5217aeb32dc08a77416c04f17397"
+        },
+        {
+          "kind": "FIELD",
+          "name": "distToTarget",
+          "descriptor": "F",
+          "line_start": 360,
+          "line_end": 363,
+          "slice_sha256": "290e973bd1a07745ada44f0793222e8db1b3378dc5b016435588eb6a8546e2b3"
+        },
+        {
+          "kind": "FIELD",
+          "name": "reached",
+          "descriptor": "Z",
+          "line_start": 364,
+          "line_end": 367,
+          "slice_sha256": "8166a0eec429122265136025e617264750cb8fc62999eb06fbf3eb607dc94fb7"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/memory/WalkTarget",
+      "class_hash": "576c496d41aaeb253a68874c060abe763b1f81d43844536b4fe375f4d40f7455",
+      "disassembly_hash": "9ebb68392b75246372d27da32a5e4fc3e988bee5956cedb67d700f7ea3ecde16",
+      "selected_members": [
+        {
+          "kind": "FIELD",
+          "name": "target",
+          "descriptor": "Lnet/minecraft/world/entity/ai/behavior/PositionTracker;",
+          "line_start": 78,
+          "line_end": 81,
+          "slice_sha256": "0521c2f0ebe1c7265b085944d452117f03c9d2de16da48daf5b12d1305d89423"
+        },
+        {
+          "kind": "FIELD",
+          "name": "speedModifier",
+          "descriptor": "F",
+          "line_start": 82,
+          "line_end": 85,
+          "slice_sha256": "2c589481a5c529650b045ce26836d5206a47a0907b65b061d54563acdd1eb4fa"
+        },
+        {
+          "kind": "FIELD",
+          "name": "closeEnoughDist",
+          "descriptor": "I",
+          "line_start": 86,
+          "line_end": 89,
+          "slice_sha256": "67ed983e558fdcfe665ae0e615d9a2396444f8ffcdcb96f0949499b1e5a64985"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/BlockPosTracker",
+      "class_hash": "e96aab9f8677dc076d20591fc4eed73da65570c02a65653912222d18d598a90d",
+      "disassembly_hash": "670da9599d18af1ccfa744166a0aaa117e0e6074fe754fbfb2e9aad8935ee9c5",
+      "selected_members": [
+        {
+          "kind": "FIELD",
+          "name": "blockPos",
+          "descriptor": "Lnet/minecraft/core/BlockPos;",
+          "line_start": 87,
+          "line_end": 90,
+          "slice_sha256": "9934fc036495230d55d05d082d29098eb3443b9f0a7e42b35db20763b5a0f128"
+        },
+        {
+          "kind": "FIELD",
+          "name": "centerPosition",
+          "descriptor": "Lnet/minecraft/world/phys/Vec3;",
+          "line_start": 91,
+          "line_end": 94,
+          "slice_sha256": "653ffe66886a90e87b6c067fc5106da0fc823723f1bbc10ed506c0613432d08c"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/EntityTracker",
+      "class_hash": "e156b8b2374f6aed1bae2d8e08a56e273a009de3f09f5658c8c080c8d50c2d17",
+      "disassembly_hash": "68e5f677c23df9c167393aacadcc48f7526f46e33c7cc96d48293759e2f90b95",
+      "selected_members": [
+        {
+          "kind": "FIELD",
+          "name": "entity",
+          "descriptor": "Lnet/minecraft/world/entity/Entity;",
+          "line_start": 133,
+          "line_end": 136,
+          "slice_sha256": "0a4e3cca6c53cc66c7896bcd59b8b92df1c27abb595fbd730821fb7cadc3aa14"
+        },
+        {
+          "kind": "FIELD",
+          "name": "trackEyeHeight",
+          "descriptor": "Z",
+          "line_start": 137,
+          "line_end": 140,
+          "slice_sha256": "7eefb63c375679fab266fe7cf132deb45de4ebfa54e1cc43d70243f2d8cb5587"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/level/pathfinder/Node",
+      "class_hash": "ea0bcbf7e19a3b628b607ffd94336e925bd65d07fc9503036480ede3599a71c4",
+      "disassembly_hash": "8fe70854ad259a1d28fdd53523bf7f9bdb47b84cf948728fd1efacfbd89d58a0",
+      "selected_members": [
+        {
+          "kind": "FIELD",
+          "name": "x",
+          "descriptor": "I",
+          "line_start": 211,
+          "line_end": 214,
+          "slice_sha256": "616e6784bec7b21877b952d3c1aaa890efad5279d90638990ce6ecb5b07df51e"
+        },
+        {
+          "kind": "FIELD",
+          "name": "y",
+          "descriptor": "I",
+          "line_start": 215,
+          "line_end": 218,
+          "slice_sha256": "65205add5c8591e52e844f79b7ac1b72664d063ac716758e6b0fd968e59d3806"
+        },
+        {
+          "kind": "FIELD",
+          "name": "z",
+          "descriptor": "I",
+          "line_start": 219,
+          "line_end": 222,
+          "slice_sha256": "c46607c41033c2cb5218a6ded95ba3fa3c2ecd4bf9cc7a679b768eef0b4186f3"
+        },
+        {
+          "kind": "FIELD",
+          "name": "type",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "line_start": 262,
+          "line_end": 265,
+          "slice_sha256": "b102d1510910ae5a0662d8490d466556217cb2d73e262690bf0f6429ee192efe"
+        },
+        {
+          "kind": "FIELD",
+          "name": "costMalus",
+          "descriptor": "F",
+          "line_start": 258,
+          "line_end": 261,
+          "slice_sha256": "ee5ed4b3af4ddfa83e59303618a2c89a177b3d76278766bbbb500351ecf78638"
+        }
+      ]
+    }
+  ]
+}

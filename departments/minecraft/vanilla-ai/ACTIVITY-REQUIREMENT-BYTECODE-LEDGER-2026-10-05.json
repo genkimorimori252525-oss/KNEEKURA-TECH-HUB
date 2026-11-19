@@ -1,0 +1,82 @@
+{
+  "schema": "kneekura.original-activity-requirement-source/v1",
+  "scope": "ORIGINAL_PRIVATE_ACTIVITY_REQUIREMENT_MAP_MEMBERSHIP_AND_VIRTUAL_CHECK_RETURNS_PREFIX_WITH_DIRECT_UPDATE_SCOPE_NOT_ALL_CANDIDATES_OR_INTERNAL_MEMORY_REASON",
+  "minecraft": "1.20.1",
+  "forge": "47.2.0",
+  "namespace": "Mojmap",
+  "minecraft_artifact_sha256": "1b6e6a166fbc06c6d2422cd5cf515a508977479045095363d5b4c8b89cc7b4eb",
+  "disassembly_provider": {
+    "name": "jdk-javap-v1",
+    "options": [
+      "-private",
+      "-s",
+      "-c",
+      "-l",
+      "-verbose"
+    ],
+    "executable_hash": "bd5a9f99365fd432f79162f4ed9ca9b956c78cc81dfb6962adb6d207075711fb",
+    "jdk_components": {
+      "release": "00d3211a59bc9f2577f93962e9210de8578c49fd2625022cb38606817d3a71f9",
+      "lib/modules": "81f0e1bb87cd303ddcce2b216e27da416bd20799d9a9811ea1b070123cefff0f"
+    },
+    "jdk_image_status": "HASHED"
+  },
+  "classes": [
+    {
+      "owner": "net/minecraft/world/entity/ai/Brain",
+      "class_hash": "441ee6715fb13f271943a9a462c5ff64e491a993ff28d724df06885d83012a3d",
+      "disassembly_hash": "d25d42a41b31c1bb5d24cac87573c1616e163df34980e362d124ca77e8e7b146",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/brain-result-r50-source/Brain.javap.txt",
+      "selected_members": [
+        {
+          "name": "memories",
+          "header": "private final java.util.Map<net.minecraft.world.entity.ai.memory.MemoryModuleType<?>, java.util.Optional<? extends net.minecraft.world.entity.ai.memory.ExpirableValue<?>>> memories;",
+          "descriptor": "descriptor: Ljava/util/Map;",
+          "lineStart": 870,
+          "lineEnd": 874,
+          "sliceSha256": "728f43ecabdfbc83fad1d2862620820593a306c4d666378f7bfdca7f80a2ed0a"
+        },
+        {
+          "name": "activityRequirements",
+          "header": "private final java.util.Map<net.minecraft.world.entity.schedule.Activity, java.util.Set<com.mojang.datafixers.util.Pair<net.minecraft.world.entity.ai.memory.MemoryModuleType<?>, net.minecraft.world.entity.ai.memory.MemoryStatus>>> activityRequirements;",
+          "descriptor": "descriptor: Ljava/util/Map;",
+          "lineStart": 889,
+          "lineEnd": 893,
+          "sliceSha256": "6d69d436583ac151731f2db5e87e23baa1501e4ec36870ce290b0dff908ae311"
+        },
+        {
+          "name": "checkMemory",
+          "header": "public boolean checkMemory(net.minecraft.world.entity.ai.memory.MemoryModuleType<?>, net.minecraft.world.entity.ai.memory.MemoryStatus);",
+          "descriptor": "descriptor: (Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;Lnet/minecraft/world/entity/ai/memory/MemoryStatus;)Z",
+          "lineStart": 1625,
+          "lineEnd": 1685,
+          "sliceSha256": "9ac39af26215d2ab2558a453eea54a9cbf6d7f8091bc85a9a937596ef0369327"
+        },
+        {
+          "name": "setActiveActivityIfPossible",
+          "header": "public void setActiveActivityIfPossible(net.minecraft.world.entity.schedule.Activity);",
+          "descriptor": "descriptor: (Lnet/minecraft/world/entity/schedule/Activity;)V",
+          "lineStart": 1945,
+          "lineEnd": 1976,
+          "sliceSha256": "d6fd650af715e6ffc53ffe4501326a85125b9831a5fb4a29ccfcfc918201954d"
+        },
+        {
+          "name": "setActiveActivityToFirstValid",
+          "header": "public void setActiveActivityToFirstValid(java.util.List<net.minecraft.world.entity.schedule.Activity>);",
+          "descriptor": "descriptor: (Ljava/util/List;)V",
+          "lineStart": 2149,
+          "lineEnd": 2198,
+          "sliceSha256": "a96018ea1abec9b702e5e514e1f84717feae0a3d4b0e66f28ab941c123caa623"
+        },
+        {
+          "name": "activityRequirementsAreMet",
+          "header": "private boolean activityRequirementsAreMet(net.minecraft.world.entity.schedule.Activity);",
+          "descriptor": "descriptor: (Lnet/minecraft/world/entity/schedule/Activity;)Z",
+          "lineStart": 2927,
+          "lineEnd": 3001,
+          "sliceSha256": "8e48236084777d531c3c443dfa29fa9803596f7ff33dc4eb86d916938cf6682e"
+        }
+      ]
+    }
+  ]
+}

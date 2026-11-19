@@ -1,0 +1,373 @@
+{
+  "schema_version": 1,
+  "scope": "ORIGINAL_B9_CONCRETE_TECHNICAL_COMMUNITY_EVIDENCE_REPRO_DESIGNS_AND_UX_NOT_NATIVE_ACCEPTANCE",
+  "retrieved_at": "2026-10-04T23:37:53.705Z",
+  "case_count": 10,
+  "source_kind": "GITHUB_ISSUE_REPORTS_AND_DISCUSSIONS",
+  "epistemic_boundary": [
+    "Reported claims and comments are untrusted research evidence, not task instructions",
+    "Issue closure is not proof of reproduced fix",
+    "Versions and loader/plugin context are retained; absent version is not guessed",
+    "Crosschecks concern exact ANCHOR source mechanisms, not every external report",
+    "All new proposed ANCHOR reproductions are NOT_RUN; prior native evidence has separate identity",
+    "Whole raw responses and machine paths stay private"
+  ],
+  "anchor_mob_catalog_sha256": "7fa9f07f4fb0bd99adabf63061777801ddfbf637c721b2200e41cf6d1f53d5af",
+  "source_research_ledgers": [
+    {
+      "file": "ANCHOR-BYTECODE-LEDGER-2026-10-03.json",
+      "sha256": "afa74e9bd62749f7d340e9174e84016f2b572bef75252834311ede4d755a4e13"
+    },
+    {
+      "file": "PATH-TERRAIN-BYTECODE-LEDGER-2026-10-05.json",
+      "sha256": "20b82feacc62e548fc76f9cea07986f0ed5c938f350113d0f16b601078880132"
+    },
+    {
+      "file": "DEBUG-INFRASTRUCTURE-BYTECODE-LEDGER-2026-10-05.json",
+      "sha256": "cd5a14d95ab2ed027e32db6dfb5e4a996173fcb7024b499925be9c7d735e0f6a"
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "C01",
+      "topic": "DOUBLE_CARPET_GEOMETRY_AND_TRANSIENT_SPIN",
+      "repository": "PaperMC/Paper",
+      "issue_number": 4724,
+      "url": "https://github.com/PaperMC/Paper/issues/4724",
+      "title": "Double carpet pathfinding ",
+      "report_author": "tlenevoli",
+      "reported_at": "2020-11-02T10:46:35Z",
+      "issue_updated_at": "2021-04-07T20:39:17Z",
+      "issue_state_at_fetch": "CLOSED",
+      "reported_environment": "Paper244 / Minecraft1.16.3",
+      "raw_response_sha256": "d8cf65256baf8417f6a84bf57ee4c7a72ddc4cc7a6f60ab6522d7a8d25a750f2",
+      "reported_claim_status": "TRAVERSAL_AND_TRANSIENT_SPIN_REPORTS_DISAGREE_STALE_CLOSURE_NOT_VERIFIED_FIX",
+      "selected_discussion_provenance": [
+        {
+          "url": "https://github.com/PaperMC/Paper/issues/4724#issuecomment-753328621",
+          "createdAt": "2021-01-01T15:18:44Z",
+          "author": "MiniDigger",
+          "updated_at_status": "NOT_EXPOSED_BY_GH_ISSUE_VIEW"
+        },
+        {
+          "url": "https://github.com/PaperMC/Paper/issues/4724#issuecomment-770226231",
+          "createdAt": "2021-01-30T15:11:39Z",
+          "author": "OpticFusion1",
+          "updated_at_status": "NOT_EXPOSED_BY_GH_ISSUE_VIEW"
+        }
+      ],
+      "reproduction_design": "COMMUNITY-EVIDENCE-2026-10-05.md#cases-qualifications-and-useful-tests",
+      "anchor_source_crosschecks": [
+        "PATH-TERRAIN-RESEARCH-2026-10-05.md",
+        "TERRAIN-MALUS-SEMANTICS-2026-10-05.md"
+      ],
+      "anchor_native_reproduction_status": "NOT_RUN",
+      "uninspected_external_material": [
+        "linked images/videos/profiles/crash logs/Mojang tickets",
+        "moving branch patch URLs"
+      ]
+    },
+    {
+      "case_id": "C02",
+      "topic": "NEGATIVE_X_POI_TARGET_MISMATCH",
+      "repository": "PaperMC/Paper",
+      "issue_number": 4037,
+      "url": "https://github.com/PaperMC/Paper/issues/4037",
+      "title": "Villager not pathfinding correctly",
+      "report_author": "StarryWorm",
+      "reported_at": "2020-07-31T14:50:10Z",
+      "issue_updated_at": "2024-11-13T08:26:40Z",
+      "issue_state_at_fetch": "CLOSED",
+      "reported_environment": "Paperb111 reported; discussion refers to Minecraft1.16; exact mapping unstated",
+      "raw_response_sha256": "e9909b9cc9404b092abd63f5ba56bd63ede53344986f1327e041a2dcff9755d2",
+      "reported_claim_status": "REPORTER_MEMORY_OFFSET_AND_SPACING_DIFFERENCE_MAINTAINER_SUSPECTED_1_16_2_FIX",
+      "selected_discussion_provenance": [
+        {
+          "url": "https://github.com/PaperMC/Paper/issues/4037#issuecomment-667251266",
+          "createdAt": "2020-07-31T17:47:50Z",
+          "author": "StarryWorm",
+          "updated_at_status": "NOT_EXPOSED_BY_GH_ISSUE_VIEW"
+        },
+        {
+          "url": "https://github.com/PaperMC/Paper/issues/4037#issuecomment-667622647",
+          "createdAt": "2020-08-02T03:50:55Z",
+          "author": "aikar",
+          "updated_at_status": "NOT_EXPOSED_BY_GH_ISSUE_VIEW"
+        }
+      ],
+      "reproduction_design": "COMMUNITY-EVIDENCE-2026-10-05.md#cases-qualifications-and-useful-tests",
+      "anchor_source_crosschecks": [
+        "TYPED-BRAIN-MEMORY-2026-10-04.md",
+        "PATH-TERRAIN-RESEARCH-2026-10-05.md"
+      ],
+      "anchor_native_reproduction_status": "NOT_RUN",
+      "uninspected_external_material": [
+        "linked images/videos/profiles/crash logs/Mojang tickets",
+        "moving branch patch URLs"
+      ]
+    },
+    {
+      "case_id": "C03",
+      "topic": "FOX_CHUNK_LOAD_STALL",
+      "repository": "PaperMC/Paper",
+      "issue_number": 6045,
+      "url": "https://github.com/PaperMC/Paper/issues/6045",
+      "title": "Fox pathfinding loads chunks",
+      "report_author": "Oscaz",
+      "reported_at": "2021-06-30T01:20:03Z",
+      "issue_updated_at": "2024-11-13T08:23:25Z",
+      "issue_state_at_fetch": "CLOSED",
+      "reported_environment": "Paper56 / Minecraft1.17; multiple plugins",
+      "raw_response_sha256": "fc29f463c22b32a2044f88f81f6ffd063e4356c816fdf788d3a4ebc4085b1bdd",
+      "reported_claim_status": "STALLED_MAIN_THREAD_REPORTED_LATER_0_0_TARGET_FIX_SUGGESTED_NOT_INDEPENDENTLY_CONFIRMED",
+      "selected_discussion_provenance": [
+        {
+          "url": "https://github.com/PaperMC/Paper/issues/6045#issuecomment-1207325522",
+          "createdAt": "2022-08-07T03:52:37Z",
+          "author": "Owen1212055",
+          "updated_at_status": "NOT_EXPOSED_BY_GH_ISSUE_VIEW"
+        }
+      ],
+      "reproduction_design": "COMMUNITY-EVIDENCE-2026-10-05.md#cases-qualifications-and-useful-tests",
+      "anchor_source_crosschecks": [
+        "PATH-TERRAIN-RESEARCH-2026-10-05.md"
+      ],
+      "anchor_native_reproduction_status": "NOT_RUN",
+      "uninspected_external_material": [
+        "linked images/videos/profiles/crash logs/Mojang tickets",
+        "moving branch patch URLs"
+      ]
+    },
+    {
+      "case_id": "C04",
+      "topic": "SLIME_MOVEMENT_WITHOUT_PATH_EVENT",
+      "repository": "PaperMC/Paper",
+      "issue_number": 930,
+      "url": "https://github.com/PaperMC/Paper/issues/930",
+      "title": "EntityPathfindEvent does not fire for all mobs (Slime)",
+      "report_author": "zedwick",
+      "reported_at": "2017-11-09T01:52:42Z",
+      "issue_updated_at": "2024-11-13T08:28:56Z",
+      "issue_state_at_fetch": "CLOSED",
+      "reported_environment": "Paper1249 / Minecraft1.12.2; test plugin",
+      "raw_response_sha256": "9468e17745cc016e5acbfa4d184f18bcefbc324c1b7d342a540479518a3a91d8",
+      "reported_claim_status": "MAINTAINER_DISTINGUISHES_DIRECT_HOPPING_FROM_NAVIGATION_EVENT",
+      "selected_discussion_provenance": [
+        {
+          "url": "https://github.com/PaperMC/Paper/issues/930#issuecomment-343036007",
+          "createdAt": "2017-11-09T03:22:11Z",
+          "author": "zachbr",
+          "updated_at_status": "NOT_EXPOSED_BY_GH_ISSUE_VIEW"
+        },
+        {
+          "url": "https://github.com/PaperMC/Paper/issues/930#issuecomment-398007336",
+          "createdAt": "2018-06-18T10:13:00Z",
+          "author": "BillyGalbreath",
+          "updated_at_status": "NOT_EXPOSED_BY_GH_ISSUE_VIEW"
+        }
+      ],
+      "reproduction_design": "COMMUNITY-EVIDENCE-2026-10-05.md#cases-qualifications-and-useful-tests",
+      "anchor_source_crosschecks": [
+        "MOVEMENT-CONTROLS.md",
+        "REPRESENTATIVE-DECISION-CATALOG-2026-10-04.md"
+      ],
+      "anchor_native_reproduction_status": "NOT_RUN",
+      "uninspected_external_material": [
+        "linked images/videos/profiles/crash logs/Mojang tickets",
+        "moving branch patch URLs"
+      ]
+    },
+    {
+      "case_id": "C05",
+      "topic": "GUARDIAN_IMPULSE_OUTSIDE_GOALS",
+      "repository": "PaperMC/Paper",
+      "issue_number": 10174,
+      "url": "https://github.com/PaperMC/Paper/issues/10174",
+      "title": "Guardian's still have Pathfinding/Self Movement without MobGoals",
+      "report_author": "DapperManatee64",
+      "reported_at": "2024-01-18T02:48:53Z",
+      "issue_updated_at": "2024-11-13T08:13:25Z",
+      "issue_state_at_fetch": "CLOSED",
+      "reported_environment": "Paper382 / Minecraft1.20.4; plugin removes Goals",
+      "raw_response_sha256": "c42442b1024868919e8b212205b7a95b83fbaad735c77223c91b090babc77c06",
+      "reported_claim_status": "REPORTER_OBSERVES_LAND_FLOP_MAINTAINER_DISTINGUISHES_HARDCODED_LOGIC",
+      "selected_discussion_provenance": [
+        {
+          "url": "https://github.com/PaperMC/Paper/issues/10174#issuecomment-1898227510",
+          "createdAt": "2024-01-18T10:41:24Z",
+          "author": "electronicboy",
+          "updated_at_status": "NOT_EXPOSED_BY_GH_ISSUE_VIEW"
+        }
+      ],
+      "reproduction_design": "COMMUNITY-EVIDENCE-2026-10-05.md#cases-qualifications-and-useful-tests",
+      "anchor_source_crosschecks": [
+        "MOB-AI-CATALOG-RESEARCH-2026-10-05.md"
+      ],
+      "anchor_native_reproduction_status": "NOT_RUN",
+      "uninspected_external_material": [
+        "linked images/videos/profiles/crash logs/Mojang tickets",
+        "moving branch patch URLs"
+      ]
+    },
+    {
+      "case_id": "C06",
+      "topic": "SNIFFER_INITIALIZATION_OR_BRAIN_NAVIGATION_OVERRIDE",
+      "repository": "PaperMC/Paper",
+      "issue_number": 10442,
+      "url": "https://github.com/PaperMC/Paper/issues/10442",
+      "title": "A Sniffer's `Pathfinder` does not respond to any commands",
+      "report_author": "sowelipililimute",
+      "reported_at": "2024-04-20T22:19:53Z",
+      "issue_updated_at": "2025-01-09T19:17:40Z",
+      "issue_state_at_fetch": "CLOSED",
+      "reported_environment": "Paper master a6b6ecdd221b6ae7687561c84c1850aaa62473b4; Minecraft version unstated",
+      "raw_response_sha256": "d85f4942b942622958c2e7673e3699509e1b5b31b86e9278dd889950a5aabc3c",
+      "reported_claim_status": "TWO_SEPARATE_COMMENT_HYPOTHESES_NOT_A_PROVEN_SINGLE_CAUSE",
+      "selected_discussion_provenance": [
+        {
+          "url": "https://github.com/PaperMC/Paper/issues/10442#issuecomment-2067804668",
+          "createdAt": "2024-04-20T22:34:03Z",
+          "author": "electronicboy",
+          "updated_at_status": "NOT_EXPOSED_BY_GH_ISSUE_VIEW"
+        },
+        {
+          "url": "https://github.com/PaperMC/Paper/issues/10442#issuecomment-2581073110",
+          "createdAt": "2025-01-09T19:16:55Z",
+          "author": "Malfrador",
+          "updated_at_status": "NOT_EXPOSED_BY_GH_ISSUE_VIEW"
+        }
+      ],
+      "reproduction_design": "COMMUNITY-EVIDENCE-2026-10-05.md#cases-qualifications-and-useful-tests",
+      "anchor_source_crosschecks": [
+        "MOB-AI-CATALOG-RESEARCH-2026-10-05.md",
+        "ORIGINAL-NAVIGATION-RESULT-2026-10-04.md"
+      ],
+      "anchor_native_reproduction_status": "NOT_RUN",
+      "uninspected_external_material": [
+        "linked images/videos/profiles/crash logs/Mojang tickets",
+        "moving branch patch URLs"
+      ]
+    },
+    {
+      "case_id": "C07",
+      "topic": "MODERN_DEBUG_FLAG_WITHOUT_PATH_RENDER",
+      "repository": "PaperMC/Paper",
+      "issue_number": 13144,
+      "url": "https://github.com/PaperMC/Paper/issues/13144",
+      "title": "Entity pathfinding paths do not appear with 1.21.9 debug flag enabled",
+      "report_author": "joshuaprince",
+      "reported_at": "2025-10-06T04:47:21Z",
+      "issue_updated_at": "2025-11-10T17:55:44Z",
+      "issue_state_at_fetch": "CLOSED",
+      "reported_environment": "Paper1.21.9-53-main@4dcd837; client flags as reported",
+      "raw_response_sha256": "03e6c72d547db992c4291af3fc18a7ac5c22e99f1c1d20816c2e8f3607de1079",
+      "reported_claim_status": "MODERN_REPORT_AND_MOVING_PATCH_ATTRIBUTION_NOT_ANCHOR_FLAG_OR_FIX_PROOF",
+      "selected_discussion_provenance": [
+        {
+          "url": "https://github.com/PaperMC/Paper/issues/13144#issuecomment-3372705107",
+          "createdAt": "2025-10-06T16:34:12Z",
+          "author": "Lulu13022002",
+          "updated_at_status": "NOT_EXPOSED_BY_GH_ISSUE_VIEW"
+        }
+      ],
+      "reproduction_design": "COMMUNITY-EVIDENCE-2026-10-05.md#cases-qualifications-and-useful-tests",
+      "anchor_source_crosschecks": [
+        "DEBUG-INFRASTRUCTURE-RESEARCH-2026-10-05.md"
+      ],
+      "anchor_native_reproduction_status": "NOT_RUN",
+      "uninspected_external_material": [
+        "linked images/videos/profiles/crash logs/Mojang tickets",
+        "moving branch patch URLs"
+      ]
+    },
+    {
+      "case_id": "C08",
+      "topic": "WANDER_TARGET_AND_PROBABILITY_UX",
+      "repository": "gnembon/fabric-carpet",
+      "issue_number": 1851,
+      "url": "https://github.com/gnembon/fabric-carpet/issues/1851",
+      "title": "Add render gizmo for wander targets, wander probaiblity for a given block",
+      "report_author": "kaylendog",
+      "reported_at": "2023-12-23T18:51:44Z",
+      "issue_updated_at": "2023-12-23T18:51:44Z",
+      "issue_state_at_fetch": "OPEN",
+      "reported_environment": "Fabric Carpet context; exact version unstated",
+      "raw_response_sha256": "4b744b2861c5113df82a17ac8ffae4ec5534c08248b1ccf887eb2cdc38d079d0",
+      "reported_claim_status": "FEATURE_REQUEST_PATH_ENDPOINT_DOES_NOT_EXPOSE_ORIGINAL_WANDER_TARGET",
+      "selected_discussion_provenance": [],
+      "reproduction_design": "COMMUNITY-EVIDENCE-2026-10-05.md#cases-qualifications-and-useful-tests",
+      "anchor_source_crosschecks": [
+        "DECISION-VIEW-REQUIREMENTS.md",
+        "PATHFINDING.md"
+      ],
+      "anchor_native_reproduction_status": "NOT_RUN",
+      "uninspected_external_material": [
+        "linked images/videos/profiles/crash logs/Mojang tickets",
+        "moving branch patch URLs"
+      ]
+    },
+    {
+      "case_id": "C09",
+      "topic": "TRAPDOOR_REACHABILITY_AND_PATH_QUERY_UX",
+      "repository": "gnembon/fabric-carpet",
+      "issue_number": 245,
+      "url": "https://github.com/gnembon/fabric-carpet/issues/245",
+      "title": "[suggestion] Add valid_path(pos1,pos2)",
+      "report_author": "Ghoulboy78",
+      "reported_at": "2020-03-07T21:29:16Z",
+      "issue_updated_at": "2021-04-20T16:10:51Z",
+      "issue_state_at_fetch": "CLOSED",
+      "reported_environment": "Fabric Carpet context; exact version unstated",
+      "raw_response_sha256": "b54c1c62c8cba5443e120b1f7e1595d2e18596a5001732d04782301845a1911f",
+      "reported_claim_status": "FEATURE_REQUEST_AUTHOR_LATER_SAYS_AI_TRACKER_EXISTS_NOT_REPRO_PROOF",
+      "selected_discussion_provenance": [
+        {
+          "url": "https://github.com/gnembon/fabric-carpet/issues/245#issuecomment-617554733",
+          "createdAt": "2020-04-22T05:13:04Z",
+          "author": "gnembon",
+          "updated_at_status": "NOT_EXPOSED_BY_GH_ISSUE_VIEW"
+        },
+        {
+          "url": "https://github.com/gnembon/fabric-carpet/issues/245#issuecomment-823408070",
+          "createdAt": "2021-04-20T16:10:48Z",
+          "author": "Ghoulboy78",
+          "updated_at_status": "NOT_EXPOSED_BY_GH_ISSUE_VIEW"
+        }
+      ],
+      "reproduction_design": "COMMUNITY-EVIDENCE-2026-10-05.md#cases-qualifications-and-useful-tests",
+      "anchor_source_crosschecks": [
+        "TERRAIN-MALUS-SEMANTICS-2026-10-05.md"
+      ],
+      "anchor_native_reproduction_status": "NOT_RUN",
+      "uninspected_external_material": [
+        "linked images/videos/profiles/crash logs/Mojang tickets",
+        "moving branch patch URLs"
+      ]
+    },
+    {
+      "case_id": "C10",
+      "topic": "MALFORMED_DEBUG_COMMAND_UX",
+      "repository": "gnembon/fabric-carpet",
+      "issue_number": 361,
+      "url": "https://github.com/gnembon/fabric-carpet/issues/361",
+      "title": "Crash when using invalid entry for log pathfinding  ",
+      "report_author": "UnRealDinnerbone",
+      "reported_at": "2020-07-01T15:55:01Z",
+      "issue_updated_at": "2020-07-22T04:37:29Z",
+      "issue_state_at_fetch": "CLOSED",
+      "reported_environment": "Minecraft1.16.1 / fabric-carpet1.4.0+v200623",
+      "raw_response_sha256": "26117627e5161237adda0f8e0f6ea77d57f245d76b1c90ef7d44e926237aaedb",
+      "reported_claim_status": "REPORTED_CRASH_LINKED_LOG_UNINSPECTED_ROOT_CAUSE_UNKNOWN",
+      "selected_discussion_provenance": [],
+      "reproduction_design": "COMMUNITY-EVIDENCE-2026-10-05.md#cases-qualifications-and-useful-tests",
+      "anchor_source_crosschecks": [
+        "DECISION-VIEW-REQUIREMENTS.md"
+      ],
+      "anchor_native_reproduction_status": "NOT_RUN",
+      "uninspected_external_material": [
+        "linked images/videos/profiles/crash logs/Mojang tickets",
+        "moving branch patch URLs"
+      ]
+    }
+  ]
+}

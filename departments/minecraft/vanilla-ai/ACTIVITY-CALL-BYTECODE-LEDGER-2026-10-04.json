@@ -1,0 +1,170 @@
+{
+  "schema": "kneekura.original-activity-call-source/v1",
+  "scope": "EXACT_ORIGINAL_SCHEDULE_ACTIVITY_CALL_AND_CACHED_STATE_LOCATORS_NOT_COMPLETE_CAUSAL_OR_MOVEMENT_RESULT",
+  "minecraft": "1.20.1",
+  "forge": "47.2.0",
+  "namespace": "Mojmap",
+  "minecraft_artifact_sha256": "1b6e6a166fbc06c6d2422cd5cf515a508977479045095363d5b4c8b89cc7b4eb",
+  "disassembly_provider": {
+    "name": "jdk-javap-v1",
+    "options": [
+      "-private",
+      "-s",
+      "-c",
+      "-l",
+      "-verbose"
+    ],
+    "executable_hash": "bd5a9f99365fd432f79162f4ed9ca9b956c78cc81dfb6962adb6d207075711fb",
+    "jdk_components": {
+      "release": "00d3211a59bc9f2577f93962e9210de8578c49fd2625022cb38606817d3a71f9",
+      "lib/modules": "81f0e1bb87cd303ddcce2b216e27da416bd20799d9a9811ea1b070123cefff0f"
+    },
+    "jdk_image_status": "HASHED"
+  },
+  "classes": [
+    {
+      "owner": "net/minecraft/world/entity/ai/Brain",
+      "class_hash": "441ee6715fb13f271943a9a462c5ff64e491a993ff28d724df06885d83012a3d",
+      "disassembly_hash": "d25d42a41b31c1bb5d24cac87573c1616e163df34980e362d124ca77e8e7b146",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/brain-result-r50-source/Brain.javap.txt",
+      "selected_members": [
+        {
+          "kind": "FIELD",
+          "name": "schedule",
+          "descriptor": "Lnet/minecraft/world/entity/schedule/Schedule;",
+          "line_start": 885,
+          "line_end": 888,
+          "slice_sha256": "e87d83b2f5137882b5045faa6af6342a1cb3361ed39a65a2ade2120016b86329"
+        },
+        {
+          "kind": "FIELD",
+          "name": "coreActivities",
+          "descriptor": "Ljava/util/Set;",
+          "line_start": 899,
+          "line_end": 903,
+          "slice_sha256": "eb9db768b0f264120954c75021d3cd25453db8d34905bd3b96ac7def91918a8d"
+        },
+        {
+          "kind": "FIELD",
+          "name": "activeActivities",
+          "descriptor": "Ljava/util/Set;",
+          "line_start": 904,
+          "line_end": 908,
+          "slice_sha256": "7d9923515869d7a6353e1c81f7d7541c6b227f2ba915bc7e5c5be276d3a9f0fe"
+        },
+        {
+          "kind": "FIELD",
+          "name": "defaultActivity",
+          "descriptor": "Lnet/minecraft/world/entity/schedule/Activity;",
+          "line_start": 909,
+          "line_end": 912,
+          "slice_sha256": "297434503b9466f93d685dbd6d54996fa43d2afff27d9e5224902ed3223504a6"
+        },
+        {
+          "kind": "FIELD",
+          "name": "lastScheduleUpdate",
+          "descriptor": "J",
+          "line_start": 913,
+          "line_end": 916,
+          "slice_sha256": "ed554bf71cbda19a6e395547df4a4a96fdd52901346a0588b86004ba0afce5ac"
+        },
+        {
+          "kind": "METHOD",
+          "name": "getSchedule",
+          "descriptor": "()Lnet/minecraft/world/entity/schedule/Schedule;",
+          "line_start": 1686,
+          "line_end": 1702,
+          "slice_sha256": "27047a0d9fcf72f0ba3124f6f410a21c5e849d48c822fbf6f421be343857b5b8"
+        },
+        {
+          "kind": "METHOD",
+          "name": "useDefaultActivity",
+          "descriptor": "()V",
+          "line_start": 1876,
+          "line_end": 1895,
+          "slice_sha256": "6cd8fee29d8216903104e6f187ef2a097fab8fa4a9f4a0e43d0a71f02c94d129"
+        },
+        {
+          "kind": "METHOD",
+          "name": "setActiveActivityIfPossible",
+          "descriptor": "(Lnet/minecraft/world/entity/schedule/Activity;)V",
+          "line_start": 1945,
+          "line_end": 1976,
+          "slice_sha256": "d6fd650af715e6ffc53ffe4501326a85125b9831a5fb4a29ccfcfc918201954d"
+        },
+        {
+          "kind": "METHOD",
+          "name": "setActiveActivity",
+          "descriptor": "(Lnet/minecraft/world/entity/schedule/Activity;)V",
+          "line_start": 1977,
+          "line_end": 2020,
+          "slice_sha256": "9ed3437b21d786e02d7a9b96ea56630aac168a4eada1d2290e55537b1990575b"
+        },
+        {
+          "kind": "METHOD",
+          "name": "eraseMemoriesForOtherActivitesThan",
+          "descriptor": "(Lnet/minecraft/world/entity/schedule/Activity;)V",
+          "line_start": 2021,
+          "line_end": 2097,
+          "slice_sha256": "9ea4d0cf45f3063cc33fc8763dbe72959382548d5e33881bfbdb4ca7867eed0e"
+        },
+        {
+          "kind": "METHOD",
+          "name": "updateActivityFromSchedule",
+          "descriptor": "(JJ)V",
+          "line_start": 2098,
+          "line_end": 2148,
+          "slice_sha256": "bbe5a4c0c684f088f52f1f3f09db59f005428d6e10aff2504e7f023d0e3e6ace"
+        },
+        {
+          "kind": "METHOD",
+          "name": "activityRequirementsAreMet",
+          "descriptor": "(Lnet/minecraft/world/entity/schedule/Activity;)Z",
+          "line_start": 2927,
+          "line_end": 3001,
+          "slice_sha256": "8e48236084777d531c3c443dfa29fa9803596f7ff33dc4eb86d916938cf6682e"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/schedule/Schedule",
+      "class_hash": "b9c7c0a047ca71fee833c78e87fefc73f7c2db46c64ba13cdf4e32331a195e1e",
+      "disassembly_hash": "b8bc46ef6dc0fe051a375348804a629a69f1ada97b3bf08d27c65a10d1681c0a",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/brain-result-r50-source/Schedule.javap.txt",
+      "selected_members": [
+        {
+          "kind": "METHOD",
+          "name": "getActivityAt",
+          "descriptor": "(I)Lnet/minecraft/world/entity/schedule/Activity;",
+          "line_start": 422,
+          "line_end": 452,
+          "slice_sha256": "64a126fc51c7a47b31810b877cd8e11d8dee75cdd374d77d4dc00cc4f03cc568"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/UpdateActivityFromSchedule",
+      "class_hash": "bc19f64bb1e9868e17624cc9933ce11a2addcfbdff9ecb11552e4a9ec1554c48",
+      "disassembly_hash": "e89f21c23e5dbee081deb8cb071c7284192d2b421b4b87d516c2c60ad615739e",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/brain-result-r50-source/UpdateActivityFromSchedule.javap.txt",
+      "selected_members": [
+        {
+          "kind": "METHOD",
+          "name": "create",
+          "descriptor": "()Lnet/minecraft/world/entity/ai/behavior/BehaviorControl;",
+          "line_start": 124,
+          "line_end": 135,
+          "slice_sha256": "287e0bc4fd848f34e87d7414f0133bfa35adac8a393947aad3f49841d97aeb76"
+        },
+        {
+          "kind": "METHOD",
+          "name": "lambda$create$0",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)Z",
+          "line_start": 151,
+          "line_end": 172,
+          "slice_sha256": "9586cd81b89713c6b91cd84c1611e84f12d83cf79389b37799eb2f13e5ae55fb"
+        }
+      ]
+    }
+  ]
+}
