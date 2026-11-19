@@ -1,0 +1,441 @@
+{
+  "schema_version": 1,
+  "minecraft": "1.21.1",
+  "track": "FRONTIER_CONTROL_CACHE_EXTENSION",
+  "loader": "OFFICIAL_VANILLA_NO_LOADER_TRANSFORM",
+  "namespace": "OFFICIAL_MOJANG_MAPPING_TO_BINARY",
+  "provider": {
+    "name": "jdk-javap17-private-s-c-l-verbose",
+    "executableSha256": "bd5a9f99365fd432f79162f4ed9ca9b956c78cc81dfb6962adb6d207075711fb"
+  },
+  "artifacts": [
+    {
+      "kind": "client",
+      "file": "client.jar",
+      "url": "https://piston-data.mojang.com/v1/objects/30c73b1c5da787909b2f73340419fdf13b9def88/client.jar",
+      "bytes": 26836906,
+      "sha1": "30c73b1c5da787909b2f73340419fdf13b9def88",
+      "sha256": "499f6897d1837516680f3114072d8106e11c9adcd933fe5cf051b551089b0c99"
+    },
+    {
+      "kind": "client_mappings",
+      "file": "client-mappings.txt",
+      "url": "https://piston-data.mojang.com/v1/objects/2244b6f072256667bcd9a73df124d6c58de77992/client.txt",
+      "bytes": 9598610,
+      "sha1": "2244b6f072256667bcd9a73df124d6c58de77992",
+      "sha256": "140c47931cccc8fc9e4c22d7603e2d714d1a953a146f51ea7397d95c955536ec"
+    }
+  ],
+  "javaRuntimeRequired": 21,
+  "scope": "EIGHT_OWNERS_FOURTEEN_CONTROL_COMPARISONS_SEVEN_CACHE_METHODS_STATIC_ONLY",
+  "owners": [
+    {
+      "owner": "net.minecraft.world.level.pathfinder.PathTypeCache",
+      "obfuscated": "epw",
+      "classMajorVersion": 65,
+      "classSha256": "0395dec5d101ec638de4951981bd02919f5cd6a66fa9a2b2937a802fdaffc19e",
+      "bodySha256": "8464fab86efbeed7eb54e301d5798a9593680638aa9e3ca60a2b2a68e6d14f19",
+      "inspectedMethods": [
+        {
+          "name": "getOrCompute",
+          "obfuscated": "a",
+          "obfuscatedDescriptor": "(Ldcc;Ljd;)Lepv;",
+          "sourceLineRange": [
+            17,
+            23
+          ],
+          "descriptorLine": 126,
+          "methodExportSha256": "752ecc6d9c56d6b7123b03f1e7ec3db2dae9f75e8dcb8f53d403c18d5cff0a9a"
+        },
+        {
+          "name": "get",
+          "obfuscated": "a",
+          "obfuscatedDescriptor": "(IJ)Lepv;",
+          "sourceLineRange": [
+            28,
+            31
+          ],
+          "descriptorLine": 173,
+          "methodExportSha256": "418cfc73c38db3229c8a96f2ece7c5fb51b1bafb55e91e2350e33691e024f93c"
+        },
+        {
+          "name": "compute",
+          "obfuscated": "a",
+          "obfuscatedDescriptor": "(Ldcc;Ljd;IJ)Lepv;",
+          "sourceLineRange": [
+            35,
+            38
+          ],
+          "descriptorLine": 211,
+          "methodExportSha256": "206838d4df44246a6431475af0190957e2bb574499770c181672d5ac3f929df3"
+        },
+        {
+          "name": "invalidate",
+          "obfuscated": "a",
+          "obfuscatedDescriptor": "(Ljd;)V",
+          "sourceLineRange": [
+            42,
+            47
+          ],
+          "descriptorLine": 246,
+          "methodExportSha256": "46763d979157e70fb7e5a950f3258085fd24eb9492407ea4375740fa4a0c79ae"
+        },
+        {
+          "name": "index",
+          "obfuscated": "a",
+          "obfuscatedDescriptor": "(J)I",
+          "sourceLineRange": [
+            50,
+            50
+          ],
+          "descriptorLine": 286,
+          "methodExportSha256": "dae216e7da45f6cb84e1d9676737cabd43522d6afa75a6bd8cf59721e2229393"
+        }
+      ]
+    },
+    {
+      "owner": "net.minecraft.server.level.ServerLevel",
+      "obfuscated": "aqu",
+      "classMajorVersion": 65,
+      "classSha256": "ec29f2c2add8452dbd7ffe49d47577f4c4fdea6234afb8de61584508e1baae56",
+      "bodySha256": "c86436b9b079334495ecaef1449ae80b0ec342c219577658cbe3b51ef1f4ef7a",
+      "inspectedMethods": [
+        {
+          "name": "sendBlockUpdated",
+          "obfuscated": "a",
+          "obfuscatedDescriptor": "(Ljd;Ldtc;Ldtc;I)V",
+          "sourceLineRange": [
+            1007,
+            1040
+          ],
+          "descriptorLine": 6277,
+          "methodExportSha256": "14a8f9d7b9f58f7e5aa057756ddf2568641090372c84cc0747fcdd6daf3e7924"
+        },
+        {
+          "name": "getPathTypeCache",
+          "obfuscated": "H",
+          "obfuscatedDescriptor": "()Lepw;",
+          "sourceLineRange": [
+            1567,
+            1567
+          ],
+          "descriptorLine": 9198,
+          "methodExportSha256": "561fb6af55bd35754916b172b9d39f6fa29738cdfa7a7e17087e7c5a3bab7892"
+        }
+      ]
+    },
+    {
+      "owner": "net.minecraft.world.entity.ai.control.MoveControl",
+      "obfuscated": "bzp",
+      "classMajorVersion": 65,
+      "classSha256": "501ac34d6e3f3d2e1d9246b952a0b947ff380e882d65c2239bd579c9975c77e5",
+      "bodySha256": "576781ea9110ac07d48613a4488e2b60d07450dffebad9339fccb84253947bd3",
+      "inspectedMethods": [
+        {
+          "name": "hasWanted",
+          "obfuscated": "b",
+          "obfuscatedDescriptor": "()Z",
+          "sourceLineRange": [
+            35,
+            35
+          ],
+          "descriptorLine": 340,
+          "methodExportSha256": "1f86a8055be1b0175f9aa466b53e87d634bb3477ac29bbb55bde06689265aaaa",
+          "anchor": {
+            "owner": "net/minecraft/world/entity/ai/control/MoveControl",
+            "classSha256": "775d151ddb409265ea7b71df0bb4b36c52a9de2cca4fbf299f704ddfd34082b1",
+            "disassemblySha256": "c51d98fc9fbd4afeee5fa6d2226a714cba29e3bb91af9ea47cab82addefb2e03",
+            "methodExportSha256": "0e10d193bc2f948d2e172cc282d694a4a40bbe67b424eab53604173f9d10dabd"
+          },
+          "opcodeShapeEqualIgnoringConstantPool": true
+        },
+        {
+          "name": "setWantedPosition",
+          "obfuscated": "a",
+          "obfuscatedDescriptor": "(DDDD)V",
+          "sourceLineRange": [
+            43,
+            50
+          ],
+          "descriptorLine": 378,
+          "methodExportSha256": "01e5d6ac71f82d0116fcae78f0426edd0127e7cef08310adbca968c120444a5e",
+          "anchor": {
+            "owner": "net/minecraft/world/entity/ai/control/MoveControl",
+            "classSha256": "775d151ddb409265ea7b71df0bb4b36c52a9de2cca4fbf299f704ddfd34082b1",
+            "disassemblySha256": "c51d98fc9fbd4afeee5fa6d2226a714cba29e3bb91af9ea47cab82addefb2e03",
+            "methodExportSha256": "73d830811cadfcd643def44b4c4d0da72b33e0465a7c6809c4c09f461474366b"
+          },
+          "opcodeShapeEqualIgnoringConstantPool": true
+        },
+        {
+          "name": "strafe",
+          "obfuscated": "a",
+          "obfuscatedDescriptor": "(FF)V",
+          "sourceLineRange": [
+            53,
+            57
+          ],
+          "descriptorLine": 424,
+          "methodExportSha256": "1cebd2f49c92810a224f7facd509ae685ed34b909460e4d2edd9aa3785f59ff2",
+          "anchor": {
+            "owner": "net/minecraft/world/entity/ai/control/MoveControl",
+            "classSha256": "775d151ddb409265ea7b71df0bb4b36c52a9de2cca4fbf299f704ddfd34082b1",
+            "disassemblySha256": "c51d98fc9fbd4afeee5fa6d2226a714cba29e3bb91af9ea47cab82addefb2e03",
+            "methodExportSha256": "a9744327707c1b0628242e125da17182e0fc9dc2b0829f2b481f26a3e5652d24"
+          },
+          "opcodeShapeEqualIgnoringConstantPool": true
+        },
+        {
+          "name": "tick",
+          "obfuscated": "a",
+          "obfuscatedDescriptor": "()V",
+          "sourceLineRange": [
+            60,
+            124
+          ],
+          "descriptorLine": 454,
+          "methodExportSha256": "61992df16f4fe8c405391ede3ab8128442d842c89b271d23a89110112be5571f",
+          "anchor": {
+            "owner": "net/minecraft/world/entity/ai/control/MoveControl",
+            "classSha256": "775d151ddb409265ea7b71df0bb4b36c52a9de2cca4fbf299f704ddfd34082b1",
+            "disassemblySha256": "c51d98fc9fbd4afeee5fa6d2226a714cba29e3bb91af9ea47cab82addefb2e03",
+            "methodExportSha256": "21d5b0660447791b2eabe83a64268ace4f2936b47d6f92516b8f49d2ffda6018"
+          },
+          "opcodeShapeEqualIgnoringConstantPool": true
+        }
+      ]
+    },
+    {
+      "owner": "net.minecraft.world.entity.ai.control.FlyingMoveControl",
+      "obfuscated": "bzm",
+      "classMajorVersion": 65,
+      "classSha256": "f152e0b337c09aede7a3b5d6d7337ac5354ccbce8ec07ec73426abae51d21058",
+      "bodySha256": "d49cb6b4e2d8318f67435180956de4b0d665287dca7032456eae71a7a02b9b4e",
+      "inspectedMethods": [
+        {
+          "name": "tick",
+          "obfuscated": "a",
+          "obfuscatedDescriptor": "()V",
+          "sourceLineRange": [
+            19,
+            57
+          ],
+          "descriptorLine": 188,
+          "methodExportSha256": "cabddad3643d43a70090f14374818459d28b5e696a8be237ccba38901f8cb91a",
+          "anchor": {
+            "owner": "net/minecraft/world/entity/ai/control/FlyingMoveControl",
+            "classSha256": "af6845a950d3a66bea9a015b57728911b860afc34ca06cf2f22c889960b6efbf",
+            "disassemblySha256": "5cf5e93ba0b13d3c9ab8b5fcd17d80c2c00a5354e0203ccecc3721fa236afcfd",
+            "methodExportSha256": "d4ff8f8af72624885be95eb3cbbeeed31d8137277d09118d7ebd49048e828750"
+          },
+          "opcodeShapeEqualIgnoringConstantPool": true
+        }
+      ]
+    },
+    {
+      "owner": "net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl",
+      "obfuscated": "bzr",
+      "classMajorVersion": 65,
+      "classSha256": "5d19de3a59ddc79af743565c7614bba8eea0de20425d861bc6351c683c0901f3",
+      "bodySha256": "92e13948b1aa3e3871aeff0c7f41fd1841437e1a4b74880f091d1f2e57a84ccf",
+      "inspectedMethods": [
+        {
+          "name": "tick",
+          "obfuscated": "a",
+          "obfuscatedDescriptor": "()V",
+          "sourceLineRange": [
+            28,
+            78
+          ],
+          "descriptorLine": 286,
+          "methodExportSha256": "d85d62b36e9e863967c94bd7c5adbfcd72a7ca7c5d1bbf1a022f5b1482790a88",
+          "anchor": {
+            "owner": "net/minecraft/world/entity/ai/control/SmoothSwimmingMoveControl",
+            "classSha256": "7a35963939a3d7972565f74b9b8610bbfd8e2b888eab8f83b8f6993b3b363e6b",
+            "disassemblySha256": "a959678911723e00e0d0145364908f74cf28729997f2be0799b8ac2430b96533",
+            "methodExportSha256": "04c55db35c99c988015845cb24e03e0f042972971f6c70e26957f6009efc5045"
+          },
+          "opcodeShapeEqualIgnoringConstantPool": true
+        },
+        {
+          "name": "getTurningSpeedFactor",
+          "obfuscated": "a",
+          "obfuscatedDescriptor": "(F)F",
+          "sourceLineRange": [
+            81,
+            81
+          ],
+          "descriptorLine": 602,
+          "methodExportSha256": "598a089cd81f298de54155cefbbe97ced494ca2e4b0692bca662b973852a3ab5",
+          "anchor": {
+            "owner": "net/minecraft/world/entity/ai/control/SmoothSwimmingMoveControl",
+            "classSha256": "7a35963939a3d7972565f74b9b8610bbfd8e2b888eab8f83b8f6993b3b363e6b",
+            "disassemblySha256": "a959678911723e00e0d0145364908f74cf28729997f2be0799b8ac2430b96533",
+            "methodExportSha256": "cdc03064228d211292dbdbe750242a19d5c54ab82120399552f03bba07ed3787"
+          },
+          "opcodeShapeEqualIgnoringConstantPool": true
+        }
+      ]
+    },
+    {
+      "owner": "net.minecraft.world.entity.ai.control.LookControl",
+      "obfuscated": "bzo",
+      "classMajorVersion": 65,
+      "classSha256": "f76dc897e8b8ae331ca041a9397318595ebbd1e0e3f306dee5e24917775eca4b",
+      "bodySha256": "7d2049211954242b35195a35569353bf7a64ad02d60683b416a045f9f1c744c7",
+      "inspectedMethods": [
+        {
+          "name": "tick",
+          "obfuscated": "a",
+          "obfuscatedDescriptor": "()V",
+          "sourceLineRange": [
+            50,
+            63
+          ],
+          "descriptorLine": 427,
+          "methodExportSha256": "2a2668b08c5a621aa25d6d36b3a856aaf56b32a50b74051a4f17b0bd485d6342",
+          "anchor": {
+            "owner": "net/minecraft/world/entity/ai/control/LookControl",
+            "classSha256": "ca2152abdf65524b3782a85969b19657235e68850fe21a01e5c407a94cb27d6f",
+            "disassemblySha256": "7fc997ee3f3e513f4e382f58e928c46cec576a1e5210f549c6addb5e23d0b9d3",
+            "methodExportSha256": "4a99bd64a846acf57628317f29aa82d296bc30a6e328d9515fbd5c331073b3e9"
+          },
+          "opcodeShapeEqualIgnoringConstantPool": true
+        }
+      ]
+    },
+    {
+      "owner": "net.minecraft.world.entity.ai.control.JumpControl",
+      "obfuscated": "bzn",
+      "classMajorVersion": 65,
+      "classSha256": "52741113b4dce92ed1d1d909fbfd58a6882232e1c8e8b9c016c388f10f3cfede",
+      "bodySha256": "988622aca1e351724147095cd772c64245ac5beefc510e6069d935799a07574f",
+      "inspectedMethods": [
+        {
+          "name": "jump",
+          "obfuscated": "a",
+          "obfuscatedDescriptor": "()V",
+          "sourceLineRange": [
+            14,
+            15
+          ],
+          "descriptorLine": 75,
+          "methodExportSha256": "7e9c913dfe1f9a16900b7d8b8eed9f21c07cf5d5a25e0f412b926a58491cab14",
+          "anchor": {
+            "owner": "net/minecraft/world/entity/ai/control/JumpControl",
+            "classSha256": "5964bd74bce3bb11da4ccd9352f0edbd08465cd3275f81ce80b5668dce59b42a",
+            "disassemblySha256": "0eeff6cb04b5d11964b52396434edf72ee07181762b2181dd25a2c5abacdfb97",
+            "methodExportSha256": "444abe8630fc677aca08201a294491fd4a8e60289abe8624f18712edf5c8aa44"
+          },
+          "opcodeShapeEqualIgnoringConstantPool": true
+        },
+        {
+          "name": "tick",
+          "obfuscated": "b",
+          "obfuscatedDescriptor": "()V",
+          "sourceLineRange": [
+            18,
+            20
+          ],
+          "descriptorLine": 91,
+          "methodExportSha256": "7e240a00e05fbb5fb8fc09734ab125f262a34904a294af145e8935ca0e352c6f",
+          "anchor": {
+            "owner": "net/minecraft/world/entity/ai/control/JumpControl",
+            "classSha256": "5964bd74bce3bb11da4ccd9352f0edbd08465cd3275f81ce80b5668dce59b42a",
+            "disassemblySha256": "0eeff6cb04b5d11964b52396434edf72ee07181762b2181dd25a2c5abacdfb97",
+            "methodExportSha256": "0be587fd11ebc5c36bed5384c1066744a7e491cbe19f2ea6299f48abb2f3e317"
+          },
+          "opcodeShapeEqualIgnoringConstantPool": true
+        }
+      ]
+    },
+    {
+      "owner": "net.minecraft.world.entity.ai.control.BodyRotationControl",
+      "obfuscated": "bzk",
+      "classMajorVersion": 65,
+      "classSha256": "04a0ac94475e1c889227683dee8ec1598d9c15ae004dedb95ad3c62955cc4db9",
+      "bodySha256": "3f52d54a2e17f247803fd6058cadd203cd9ad52190bf98d2f6d1845305d50e5a",
+      "inspectedMethods": [
+        {
+          "name": "clientTick",
+          "obfuscated": "a",
+          "obfuscatedDescriptor": "()V",
+          "sourceLineRange": [
+            21,
+            46
+          ],
+          "descriptorLine": 162,
+          "methodExportSha256": "ed06431246d7b826f3c1077f767ba936c52bdc2543e00433b420ff75bdcb508a",
+          "anchor": {
+            "owner": "net/minecraft/world/entity/ai/control/BodyRotationControl",
+            "classSha256": "e2a9d2f2ecf8335e283392cd2c28fa2da68776443b8c062b925ddb6cff583f52",
+            "disassemblySha256": "918e27bb16e7a2f0da6b4bc877ca1e731708425124459bb6d6648707fe12e8be",
+            "methodExportSha256": "d1246c2fb665fd11dd0711711a7790590422cf58167c2dc12377e589162ca5b1"
+          },
+          "opcodeShapeEqualIgnoringConstantPool": true
+        },
+        {
+          "name": "rotateHeadTowardsFront",
+          "obfuscated": "d",
+          "obfuscatedDescriptor": "()V",
+          "sourceLineRange": [
+            57,
+            65
+          ],
+          "descriptorLine": 303,
+          "methodExportSha256": "c75110d708ae4c96dd84d49e230fc9f789fdb34576c4058d13a8d4c53b630d32",
+          "anchor": {
+            "owner": "net/minecraft/world/entity/ai/control/BodyRotationControl",
+            "classSha256": "e2a9d2f2ecf8335e283392cd2c28fa2da68776443b8c062b925ddb6cff583f52",
+            "disassemblySha256": "918e27bb16e7a2f0da6b4bc877ca1e731708425124459bb6d6648707fe12e8be",
+            "methodExportSha256": "db64fbc311cd4603b5cf9216d7d0f01368db9ce328a5fca20abf2d2be1869af7"
+          },
+          "opcodeShapeEqualIgnoringConstantPool": true
+        },
+        {
+          "name": "notCarryingMobPassengers",
+          "obfuscated": "e",
+          "obfuscatedDescriptor": "()Z",
+          "sourceLineRange": [
+            68,
+            68
+          ],
+          "descriptorLine": 355,
+          "methodExportSha256": "124d180820d59d6c63a3a496714d8b5b06a93b16222fbf9ed8fef57213cde2cd",
+          "anchor": {
+            "owner": "net/minecraft/world/entity/ai/control/BodyRotationControl",
+            "classSha256": "e2a9d2f2ecf8335e283392cd2c28fa2da68776443b8c062b925ddb6cff583f52",
+            "disassemblySha256": "918e27bb16e7a2f0da6b4bc877ca1e731708425124459bb6d6648707fe12e8be",
+            "methodExportSha256": "60b0c3a34c1d6846635a031ef66b11aad99d2df7619f9f537406114f506b14bd"
+          },
+          "opcodeShapeEqualIgnoringConstantPool": true
+        },
+        {
+          "name": "isMoving",
+          "obfuscated": "f",
+          "obfuscatedDescriptor": "()Z",
+          "sourceLineRange": [
+            72,
+            75
+          ],
+          "descriptorLine": 380,
+          "methodExportSha256": "9b7fa6e09c1939e91e5b9558abe18f08e180e3a3aba1c33d0180fec9a05f0c6b",
+          "anchor": {
+            "owner": "net/minecraft/world/entity/ai/control/BodyRotationControl",
+            "classSha256": "e2a9d2f2ecf8335e283392cd2c28fa2da68776443b8c062b925ddb6cff583f52",
+            "disassemblySha256": "918e27bb16e7a2f0da6b4bc877ca1e731708425124459bb6d6648707fe12e8be",
+            "methodExportSha256": "74aff5a37db0d9604d74aa74be1a15af048a314735b48edca4904011647d3555"
+          },
+          "opcodeShapeEqualIgnoringConstantPool": true
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Opcode shape ignores constant-pool members and values; it is not semantic equivalence, hook readiness or runtime acceptance.",
+    "Methods are identified by exact obfuscated name and descriptor; public hashes do not contain exported third-party bodies.",
+    "A PathTypeCache invalidation callsite in ServerLevel.sendBlockUpdated is not an exhaustive world/chunk mutation or loader invalidation proof.",
+    "No modern runtime, JDK21 installation, gameplay query or ANCHOR member substitution."
+  ],
+  "private_exports_committed": false
+}

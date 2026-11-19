@@ -1,0 +1,468 @@
+{
+  "schema": "kneekura.original-independent-control-source/v1",
+  "scope": "STATIC_BASE_RETURN_FACTORY_AND_REGISTRATION_LOCATORS_NOT_COMPLETE_PACKAGE_OR_TRANSFORMED_CUSTOM_SEMANTICS",
+  "minecraft": "1.20.1",
+  "forge": "47.2.0",
+  "namespace": "Mojmap",
+  "minecraft_artifact_sha256": "1b6e6a166fbc06c6d2422cd5cf515a508977479045095363d5b4c8b89cc7b4eb",
+  "disassembly_provider": {
+    "name": "jdk-javap-v1",
+    "options": [
+      "-private",
+      "-s",
+      "-c",
+      "-l",
+      "-verbose"
+    ],
+    "executable_hash": "bd5a9f99365fd432f79162f4ed9ca9b956c78cc81dfb6962adb6d207075711fb",
+    "jdk_components": {
+      "release": "00d3211a59bc9f2577f93962e9210de8578c49fd2625022cb38606817d3a71f9",
+      "lib/modules": "81f0e1bb87cd303ddcce2b216e27da416bd20799d9a9811ea1b070123cefff0f"
+    },
+    "jdk_image_status": "HASHED"
+  },
+  "classes": [
+    {
+      "owner": "net/minecraft/world/entity/npc/Villager",
+      "class_hash": "81de732fa9dca114773d785844f6e3f4d5b7a5e05762c79e86ee9e7ada191d63",
+      "disassembly_hash": "5418abfb9aa97527f80a1ccb6ed8e3599356f8e8962db0c10883e5f0e905b309",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/concrete-brain-r49-source/Villager.javap.txt",
+      "selected_members": [
+        {
+          "kind": "METHOD",
+          "name": "registerBrainGoals",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/Brain;)V",
+          "line_start": 2428,
+          "line_end": 2567,
+          "slice_sha256": "4d38cbc0c0f03531c270ed35d113dd26137aa81d7f92362fed73d389624f1d40"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/GateBehavior$OrderPolicy",
+      "class_hash": "6f1170adadd8c6102018406df06108374b02423c8f1403d7dc2eb522a43b1557",
+      "disassembly_hash": "c6a36fb489011070c806c901b4a0f451294c552e406003d46f446dd0ca9fc213",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/concrete-brain-r49-source/GateBehavior$OrderPolicy.javap.txt",
+      "selected_members": [
+        {
+          "kind": "METHOD",
+          "name": "apply",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/behavior/ShufflingList;)V",
+          "line_start": 192,
+          "line_end": 213,
+          "slice_sha256": "ad51664d9ab9c579cf2a9e7648f7db7acc78815acb32fa7de5f235c38321c66b"
+        },
+        {
+          "kind": "METHOD",
+          "name": "lambda$static$0",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/behavior/ShufflingList;)V",
+          "line_start": 214,
+          "line_end": 225,
+          "slice_sha256": "a7084961cc1fbe6183b6de7811c0620986a6a6433bc474817e033f9c3010e155"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/GateBehavior$RunningPolicy",
+      "class_hash": "3fa282eef0d9e8e234110efc1ca2f876bc7fb26dfbba129572a51a98f1c09d07",
+      "disassembly_hash": "eb0a40fd425ec4b06d2e39099f92137e8fea210c151dd5cee5284b017cb4793f",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/concrete-brain-r49-source/GateBehavior$RunningPolicy.javap.txt",
+      "selected_members": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/GateBehavior$RunningPolicy$1",
+      "class_hash": "5fbe68e37d3e0f5ead253e4a78021f627ecd161b372edc68f5a007472e8b0d24",
+      "disassembly_hash": "3c05ceeafca3c98fa90184e86d99f6ea948fb326f360fb3182df3ef872ab7850",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/concrete-brain-r49-source/GateBehavior$RunningPolicy$1.javap.txt",
+      "selected_members": [
+        {
+          "kind": "METHOD",
+          "name": "apply",
+          "descriptor": "(Ljava/util/stream/Stream;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "line_start": 135,
+          "line_end": 169,
+          "slice_sha256": "bba2cd181550ae93eabdf04c255f54c52084bcfe2645c4fa6b5e31fb2b992363"
+        },
+        {
+          "kind": "METHOD",
+          "name": "lambda$apply$1",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;JLnet/minecraft/world/entity/ai/behavior/BehaviorControl;)Z",
+          "line_start": 170,
+          "line_end": 189,
+          "slice_sha256": "987899bf66597f67775d4d197f6980d1f3d6370cbe93c6737699ce9988261820"
+        },
+        {
+          "kind": "METHOD",
+          "name": "lambda$apply$0",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/behavior/BehaviorControl;)Z",
+          "line_start": 190,
+          "line_end": 212,
+          "slice_sha256": "ebec38b87de1876ac30a5b43b77965844ffa59185b1689895c45152a6cef8015"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/GateBehavior$RunningPolicy$2",
+      "class_hash": "9e30948a12466a5d5cbbbc756b818aacd069ee31e1c3b147c1549d744ac5d531",
+      "disassembly_hash": "15182ebc0e8059718da9f96a66b1e1fd820bae5f7b6b5501f057f1051c5f0564",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/concrete-brain-r49-source/GateBehavior$RunningPolicy$2.javap.txt",
+      "selected_members": [
+        {
+          "kind": "METHOD",
+          "name": "apply",
+          "descriptor": "(Ljava/util/stream/Stream;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "line_start": 140,
+          "line_end": 171,
+          "slice_sha256": "6c134e6b74e504a12d2b98e897c9abe02f0682d081ff9be2624da24412ebf22d"
+        },
+        {
+          "kind": "METHOD",
+          "name": "lambda$apply$1",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;JLnet/minecraft/world/entity/ai/behavior/BehaviorControl;)V",
+          "line_start": 172,
+          "line_end": 192,
+          "slice_sha256": "36dc1a4d1e6a1c7de891533dee763d69a696d8933e42e4a2ce6c3d6195006add"
+        },
+        {
+          "kind": "METHOD",
+          "name": "lambda$apply$0",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/behavior/BehaviorControl;)Z",
+          "line_start": 193,
+          "line_end": 215,
+          "slice_sha256": "d5276d89202f29b45779ddae0c580914e66abac5b0286293f6ef7dae0a21def3"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/ShufflingList",
+      "class_hash": "9f5aa33764ea890df281db85ccfdd6ea4d6a5e12878ae2377c5f7197f0567fda",
+      "disassembly_hash": "feeb9805a1bd0f8e94c44796d13f6477a9cdebe2352443914d7abc84e4b99df1",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/concrete-brain-r49-source/ShufflingList.javap.txt",
+      "selected_members": [
+        {
+          "kind": "METHOD",
+          "name": "shuffle",
+          "descriptor": "()Lnet/minecraft/world/entity/ai/behavior/ShufflingList;",
+          "line_start": 351,
+          "line_end": 379,
+          "slice_sha256": "7cd798898705a5ce3bf76ec3142fe8ae0cc647d07f58bef53d0ba71ae4e2538a"
+        },
+        {
+          "kind": "METHOD",
+          "name": "stream",
+          "descriptor": "()Ljava/util/stream/Stream;",
+          "line_start": 380,
+          "line_end": 400,
+          "slice_sha256": "07b2faab10a9b97397af567a2c6026a766be8e15ac8d03a0793b00e43d511fec"
+        },
+        {
+          "kind": "METHOD",
+          "name": "iterator",
+          "descriptor": "()Ljava/util/Iterator;",
+          "line_start": 401,
+          "line_end": 421,
+          "slice_sha256": "53b1dd4efca2701867f6fda8c675622c1d5a380cfaafc47f0f296019962b2d1f"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/GateBehavior",
+      "class_hash": "75ef05c4327aea79765c1cd863f1fd2caa02974800051937c250a9f383d5030d",
+      "disassembly_hash": "0055aa068e411da329297aa63578bf1eecce9317e2db441f51667d039fb8bf68",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/concrete-brain-r49-source/GateBehavior.javap.txt",
+      "selected_members": [
+        {
+          "kind": "FIELD",
+          "name": "status",
+          "descriptor": "Lnet/minecraft/world/entity/ai/behavior/Behavior$Status;",
+          "line_start": 384,
+          "line_end": 387,
+          "slice_sha256": "ad7cd7944be40d509df1c35f105c0eb294e1c5176198569cd76f9888ebab085a"
+        },
+        {
+          "kind": "METHOD",
+          "name": "hasRequiredMemories",
+          "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;)Z",
+          "line_start": 463,
+          "line_end": 529,
+          "slice_sha256": "423157b5cf434b1739ccc8bcf35c740b89187325515d60fcea6903a7c2d4d753"
+        },
+        {
+          "kind": "METHOD",
+          "name": "tryStart",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)Z",
+          "line_start": 530,
+          "line_end": 583,
+          "slice_sha256": "97f2e114f3c42a40761c62062a719748b78a05ebb9589be2fea7d921c573fe27"
+        },
+        {
+          "kind": "METHOD",
+          "name": "tickOrStop",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "line_start": 584,
+          "line_end": 634,
+          "slice_sha256": "bbc941c386e7424cdd6675c3c7d565e172d78cec8ffc90f4fb2994e64fcb71de"
+        },
+        {
+          "kind": "METHOD",
+          "name": "doStop",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "line_start": 635,
+          "line_end": 681,
+          "slice_sha256": "75af322b48319544b19ce4e0d35ff2c9671164d63d11893e231d70f984b28278"
+        },
+        {
+          "kind": "METHOD",
+          "name": "lambda$doStop$5",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;JLnet/minecraft/world/entity/ai/behavior/BehaviorControl;)V",
+          "line_start": 758,
+          "line_end": 777,
+          "slice_sha256": "ac74d9fc83e474a5fdc4e6c3acc473d2423839e65093e0d6cc3992e60301a49e"
+        },
+        {
+          "kind": "METHOD",
+          "name": "lambda$doStop$4",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/behavior/BehaviorControl;)Z",
+          "line_start": 778,
+          "line_end": 801,
+          "slice_sha256": "5c8dc294825651ed9cecde413179a5b7b4b7bf2eb0ecb4357b354811a0d1cd4d"
+        },
+        {
+          "kind": "METHOD",
+          "name": "lambda$tickOrStop$3",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/behavior/BehaviorControl;)Z",
+          "line_start": 802,
+          "line_end": 825,
+          "slice_sha256": "194da0156f343c6a43c2eb4f3f86c41cf19323842997a2d0cc95c19f6b28c7e9"
+        },
+        {
+          "kind": "METHOD",
+          "name": "lambda$tickOrStop$2",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;JLnet/minecraft/world/entity/ai/behavior/BehaviorControl;)V",
+          "line_start": 826,
+          "line_end": 845,
+          "slice_sha256": "c396721beaf68228bea658b1bde93f6b008a9235e444bfd4f46a0b1cbea53017"
+        },
+        {
+          "kind": "METHOD",
+          "name": "lambda$tickOrStop$1",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/behavior/BehaviorControl;)Z",
+          "line_start": 846,
+          "line_end": 869,
+          "slice_sha256": "0e3c85dfa8d19d4b778d36f0bb0d3874565c28b3232b7aaeb3648bed95162336"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/OneShot",
+      "class_hash": "1a1212ca6031c397728235ede8cfd10728eefc2aa4859019778f3eb6efcdeef8",
+      "disassembly_hash": "992fd32a5aed0b812a7ea45edf2d568b7c7a789acdacdde67211580c055a0217",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/concrete-brain-r49-source/OneShot.javap.txt",
+      "selected_members": [
+        {
+          "kind": "FIELD",
+          "name": "status",
+          "descriptor": "Lnet/minecraft/world/entity/ai/behavior/Behavior$Status;",
+          "line_start": 92,
+          "line_end": 95,
+          "slice_sha256": "ad7cd7944be40d509df1c35f105c0eb294e1c5176198569cd76f9888ebab085a"
+        },
+        {
+          "kind": "METHOD",
+          "name": "getStatus",
+          "descriptor": "()Lnet/minecraft/world/entity/ai/behavior/Behavior$Status;",
+          "line_start": 117,
+          "line_end": 133,
+          "slice_sha256": "aa764c6e35a978dc239147e58ecdfae4a08c1622d436b2760166b6c1205484e1"
+        },
+        {
+          "kind": "METHOD",
+          "name": "tryStart",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)Z",
+          "line_start": 134,
+          "line_end": 173,
+          "slice_sha256": "198a448d4a2f813469f15490fae2952d6c03281ddeecda61060edb2ff9e99bfb"
+        },
+        {
+          "kind": "METHOD",
+          "name": "tickOrStop",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "line_start": 174,
+          "line_end": 199,
+          "slice_sha256": "73c009f500459d3ed5015f5635dd44fcca71e24d4a0bc271a8b8e20c39e39357"
+        },
+        {
+          "kind": "METHOD",
+          "name": "doStop",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "line_start": 200,
+          "line_end": 223,
+          "slice_sha256": "3c95283cdeb8b3990509bbac3e50ccfbac674aecf4911d9ea9da149774510983"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/VillagerGoalPackages",
+      "class_hash": "d62b378d7f7f1911579d5b7abee196004aa86cc9a1d45a6f8194160cc962ec84",
+      "disassembly_hash": "c7d028abd42329f51b9a0a186f24f667d93323b3af5d84b45bc11f51d33a4a0a",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/concrete-brain-r49-source/VillagerGoalPackages.javap.txt",
+      "selected_members": [
+        {
+          "kind": "METHOD",
+          "name": "getCorePackage",
+          "descriptor": "(Lnet/minecraft/world/entity/npc/VillagerProfession;F)Lcom/google/common/collect/ImmutableList;",
+          "line_start": 621,
+          "line_end": 807,
+          "slice_sha256": "4da1b77d01da27b0078ef8a0631fe17468cdee20e485ab02d4fa660f477fbf61"
+        },
+        {
+          "kind": "METHOD",
+          "name": "getRestPackage",
+          "descriptor": "(Lnet/minecraft/world/entity/npc/VillagerProfession;F)Lcom/google/common/collect/ImmutableList;",
+          "line_start": 1067,
+          "line_end": 1155,
+          "slice_sha256": "5315641e170e7d5da28162528a790f81f3347bd5159651d8d3c5dce65cdc39dc"
+        },
+        {
+          "kind": "METHOD",
+          "name": "getIdlePackage",
+          "descriptor": "(Lnet/minecraft/world/entity/npc/VillagerProfession;F)Lcom/google/common/collect/ImmutableList;",
+          "line_start": 1264,
+          "line_end": 1429,
+          "slice_sha256": "a1593a58778bdb00fe0faf8f71abf74e8ad864f418339168f0a382840db2e014"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/MoveToTargetSink",
+      "class_hash": "e2b60638bb381a1d96702bea9701e594c001ae7138b8134b3ecbdee8f0771dae",
+      "disassembly_hash": "7cd6e7de45969754ab5ec0163cd39f89887b25b27a9d061dad8ee46386c4e846",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/concrete-brain-r49-source/MoveToTargetSink.javap.txt",
+      "selected_members": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/LookAtTargetSink",
+      "class_hash": "136711e54eb3012ffef2907572b9a8770241f38689b5b960911a515d6fca2ea1",
+      "disassembly_hash": "09cbe92a53e916d2a94b4120792c687b40e3cdff216b69e33c69b0ccb558d67a",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/concrete-brain-r49-source/LookAtTargetSink.javap.txt",
+      "selected_members": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/UpdateActivityFromSchedule",
+      "class_hash": "bc19f64bb1e9868e17624cc9933ce11a2addcfbdff9ecb11552e4a9ec1554c48",
+      "disassembly_hash": "e89f21c23e5dbee081deb8cb071c7284192d2b421b4b87d516c2c60ad615739e",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/concrete-brain-r49-source/UpdateActivityFromSchedule.javap.txt",
+      "selected_members": [
+        {
+          "kind": "METHOD",
+          "name": "create",
+          "descriptor": "()Lnet/minecraft/world/entity/ai/behavior/BehaviorControl;",
+          "line_start": 124,
+          "line_end": 135,
+          "slice_sha256": "287e0bc4fd848f34e87d7414f0133bfa35adac8a393947aad3f49841d97aeb76"
+        },
+        {
+          "kind": "METHOD",
+          "name": "lambda$create$0",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)Z",
+          "line_start": 151,
+          "line_end": 172,
+          "slice_sha256": "9586cd81b89713c6b91cd84c1611e84f12d83cf79389b37799eb2f13e5ae55fb"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/VillagerPanicTrigger",
+      "class_hash": "e8fc26b9d66d01bf4d4bdaeef5993586ab8be68c677752dfb4b70e77a99214aa",
+      "disassembly_hash": "0131baf6961023dbe2927de24666f37d613c5af82f0ec2f85b96f4926f77d18a",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/concrete-brain-r49-source/VillagerPanicTrigger.javap.txt",
+      "selected_members": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/declarative/BehaviorBuilder",
+      "class_hash": "861613df2185f9753c2e1751d5ea2ca4ed62f496a83e514f024fbacf04c5807e",
+      "disassembly_hash": "51db08ef3448ce2cb05bede83f747ccd760db39c0def472304a0a3d1e66a502c",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/concrete-brain-r49-factory-source/BehaviorBuilder.javap.txt",
+      "selected_members": [
+        {
+          "kind": "METHOD",
+          "name": "create",
+          "descriptor": "(Ljava/util/function/Function;)Lnet/minecraft/world/entity/ai/behavior/OneShot;",
+          "line_start": 317,
+          "line_end": 345,
+          "slice_sha256": "61e954f5c6f7e865e6c79ccf8051b40d6607125c73775f417ce2c7b7785f5c65"
+        },
+        {
+          "kind": "METHOD",
+          "name": "create",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/behavior/declarative/BehaviorBuilder$TriggerWithResult;)Lnet/minecraft/world/entity/ai/behavior/declarative/BehaviorBuilder;",
+          "line_start": 472,
+          "line_end": 491,
+          "slice_sha256": "4f8dc62f44da0dff619282fda544d39ab5f0737c3f358b8358210c23fcb725ed"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/declarative/BehaviorBuilder$1",
+      "class_hash": "1173b0364e606c6d2c7c2bea2a54e3ca8af2314ffbbb07a2bf97aa8620e0ecff",
+      "disassembly_hash": "51f57ead5e1ad14b137803243bbc40039347a9c1584205c12adcb829c23ec0af",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/concrete-brain-r49-factory-source/BehaviorBuilder$1.javap.txt",
+      "selected_members": [
+        {
+          "kind": "METHOD",
+          "name": "trigger",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)Z",
+          "line_start": 119,
+          "line_end": 164,
+          "slice_sha256": "ca854a7042cbc365d2dd7e8317c3875d0290f903966c2a0e689d60a327b12bce"
+        },
+        {
+          "kind": "METHOD",
+          "name": "debugString",
+          "descriptor": "()Ljava/lang/String;",
+          "line_start": 165,
+          "line_end": 180,
+          "slice_sha256": "93436677290b71e5ed6b67973734a07b4c87531ba81adcba8f00d3f505d3afb3"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/declarative/BehaviorBuilder$Instance",
+      "class_hash": "e4d3080976f292575b2e555802bb0d0fda129d549b4d4054fdfdb3b9712f4f1d",
+      "disassembly_hash": "14ae9e71194bf074c667d2703ea16a990612500178babc6ef20c045ac18305ea",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/concrete-brain-r49-factory-source/BehaviorBuilder$Instance.javap.txt",
+      "selected_members": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/declarative/Trigger",
+      "class_hash": "64117b6891af37a8ae7cd9e15a9aa6adf1efba082deaadbc9d502e20351fe024",
+      "disassembly_hash": "b4a48ae9a0db970cccdc365c87ef251f0bb9471ca8de258390981c43b884be67",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/concrete-brain-r49-factory-source/Trigger.javap.txt",
+      "selected_members": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/RunOne",
+      "class_hash": "dea2160414c4a09891f862f7168964372cf7b5cef2b0f677da7b2b6638ce0fe3",
+      "disassembly_hash": "81457e2e0ba0e0c4c3b4ae59af229644dc7c76b64ceaa6edb7ab1772624548e9",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/concrete-brain-r49-runone-source/RunOne.javap.txt",
+      "selected_members": [
+        {
+          "kind": "METHOD",
+          "name": "RunOne",
+          "descriptor": "(Ljava/util/List;)V",
+          "line_start": 71,
+          "line_end": 95,
+          "slice_sha256": "1995975d18cfd69b934ac8a1973798c1bf49bed1b42313575cf8880c71bd4cdd"
+        },
+        {
+          "kind": "METHOD",
+          "name": "RunOne",
+          "descriptor": "(Ljava/util/Map;Ljava/util/List;)V",
+          "line_start": 96,
+          "line_end": 124,
+          "slice_sha256": "06ad91aba080e48375080bbbc2b74e16982c1879c4f1c173304fef12c887820e"
+        }
+      ]
+    }
+  ]
+}
