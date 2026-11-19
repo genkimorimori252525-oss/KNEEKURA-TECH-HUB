@@ -93,6 +93,10 @@ Preregistered diagnostic thresholds: p95 frame/server-processing and CPU ratio1.
 
 No merge/readiness change is justified by this record. Implementation, measurement, missing evidence and final CI must remain distinct in the handoff.
 
+## Local storage performance continuation, 2026-10-06
+
+[Local iteration configuration and measurements](KNEEKURA_TANK_FAST_ITERATION.md) add a bounded C: game/runtime relocation with the same producer/source/compiled inputs and original-save copy. Four camera-matching ON/OFF/OFF/ON cases reach READY in84.418–96.995s with0/800 server ticks above50ms, preserve all85original hashes and finalize349canonical/drop0/clean owned exits. Both descriptive p95/CPU pair ratios are within the prior1.2threshold. C04 camera drift and an earlier private module-packaging failure remain retained, and the unfavorable original K:7.178server ratio remains historical evidence. Server p50 rises relative to K:, and one C:control frame exceeds50ms; no all-metric improvement or general non-degradation PASS is claimed. Status ON/OFF, isolated grid/brightness, autonomous cases and universal quality acceptance remain open. Draft status is maintained.
+
 ## Publication and remaining gates
 
 [Draft PR94](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/pull/94) is stacked above Draft PR80. The same independent whole-diff reviewer confirmed corrections, production Gson omission handling and exact31-module closure without further actionable findings. Final native/document reconciliation independently rehashed all85 original files and report/canonical/finalization/images, recalculated timing/heartbeat distributions and confirmed the declared limits without further actionable findings. Producer c511c9f [complete pytest](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/37361081237) and [complete source/build/contracts](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/37361081229) succeeded. Final documentation-HEAD hosted checks are recorded separately in the PR; Draft status and no merge/readiness change are maintained.
