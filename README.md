@@ -4,6 +4,10 @@ Internal-purpose technology research infrastructure for discovering large amount
 
 > **Discover broadly. Promote knowledge carefully.**
 
+## For AI coding agents
+
+Start with [AGENTS.md](AGENTS.md) and [AI-ENTRYPOINT.md](docs/AI-ENTRYPOINT.md). Check the registered local checkout for operational guides that may not be tracked on GitHub, then follow the applicable current department/source instructions before historical search or runtime setup. For Minecraft / MOD-AI / Water Tank work, the **Current Minecraft entry point** below supersedes retained standalone LAB and SimLab instructions; guide-listed feature worktrees still require exact-source verification.
+
 ## Three roles
 
 1. **OSS Technology Search Engine** — mass discovery and indexing.
