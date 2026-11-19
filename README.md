@@ -1,8 +1,12 @@
 # KNEEKURA TECH HUB
 
-Private technology research infrastructure for discovering large amounts of engineering knowledge from OSS and other technical sources without confusing discovery with verified knowledge.
+Internal-purpose technology research infrastructure for discovering large amounts of engineering knowledge from OSS and other technical sources without confusing discovery with verified knowledge. The GitHub repository is currently public for repository/CI operation; runtime worlds, credentials, local evidence and other private machine data remain out of Git.
 
 > **Discover broadly. Promote knowledge carefully.**
+
+## For AI coding agents
+
+Start with [AGENTS.md](AGENTS.md) and [AI-ENTRYPOINT.md](docs/AI-ENTRYPOINT.md). Check the registered local checkout for operational guides that may not be tracked on GitHub, then follow the applicable current department/source instructions before historical search or runtime setup. For Minecraft / MOD-AI / Water Tank work, the **Current Minecraft entry point** below supersedes retained standalone LAB and SimLab instructions; guide-listed feature worktrees still require exact-source verification.
 
 ## Three roles
 
@@ -10,9 +14,19 @@ Private technology research infrastructure for discovering large amounts of engi
 2. **Evidence-backed Technology Encyclopedia** — curated claims with traceable evidence.
 3. **Design Research Laboratory** — comparison, experiments, and KNEEKURA application hypotheses.
 
+## AI Technology Department
+
+[AI技術部門](departments/ai/README.md) を `departments/ai/` に新設。基礎AI・群体知能・学習/進化・LLMエージェント・評価を扱い、既存Knowledge Coreの証拠管理・レビュー規則をそのまま使う。Minecraft固有の実装・JAR研究は従来の部門に残す。
+
+最初の研究テーマは [階層型指揮・群体知能](departments/ai/multi-agent/HIERARCHICAL-COMMAND-AI-v0.md)（将軍 → 指揮官 → 軽量な兵士）。**現状は設計候補であり、実行環境・モデル学習・実機性能は未実装・未確認。**
+
 ## Minecraft Technology Department
 
+> **Current Minecraft entry point:** [`departments/minecraft/CURRENT-HANDOFF-2026-10-02.md`](departments/minecraft/CURRENT-HANDOFF-2026-10-02.md). **`main` is the authoritative Minecraft/MOD-AI/LAB baseline.** The former standalone KNEEKURA-LAB source is now vendored at `departments/minecraft/lab/` and is the canonical experiment/observation source for new Minecraft MOD-AI work. Knowledge/Core and LAB responsibilities remain separated in code, but they now share one repository and one revision. Historical LAB runs keep their original repository/SHA provenance.
+
 A dedicated private research lane for Minecraft mod engineering has been established under `departments/minecraft/`.
+
+**建築ジャンル：** [Minecraft Building](departments/minecraft/building/README.md) は mcbuild の固定ソース、反復設計・可視化、オンデマンドの `.schem` 生成を扱う。現時点では実機未検証・ワールド自動変更なし。
 
 Minecraft **1.20.1 + Forge remains the adaptation anchor, not the ceiling**. Each target should preserve a 1.20.1/Forge track when one exists while also acquiring and analyzing the latest useful upstream implementation. Version/loader tracks remain separate SourceSnapshots and are compared explicitly so newer techniques can be reconstructed for the 1.20.1 Forge environment without pretending that code is directly interchangeable.
 

@@ -5,9 +5,7 @@ Status: **COMPLETE_SCOPED_AI_USABILITY — SOURCE GATE AND ACTUAL TRIAL PASSED.*
 The [original scoped acceptance](CURRENT-ACCEPTANCE-2026-09-30.md) is closed.
 The [actual AI trial and source-gate record](AI-USABILITY-ACCEPTANCE.md) now close
 this thin facade and its bounded secondary state/next-action and lineage concerns.
-MCP is **NOT_NEEDED for the tested local coding harness**; no MCP server or
-KNEEKURA-LAB runtime bridge is implemented. Use [current PR](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/pull/74) checks to verify the
-exact publication head; recorded source CI does not attest a later report commit.
+MCP remains **NOT_NEEDED for the tested local coding harness**. The LAB experiment/runtime source is now vendored in this repository at `departments/minecraft/lab/`; TaskContext discovers that source automatically. Runtime execution still requires the existing explicit registry/owner/world/live-attestation contracts. Use the current integration branch/PR checks to verify the exact publication head; recorded source CI does not attest a later report commit.
 
 ## 1. Boundary and first command
 
@@ -71,6 +69,10 @@ Both task subcommands accept the same flags:
 | `--run-registry RUN_REGISTRY_JSON` | Explicit existing run authority to check locally |
 | `--input-registry INPUT_REGISTRY_JSON` | Explicit existing input authority to check locally |
 | `--blockbench-registry REGISTRY_JSON` | Explicit provider registration; never probes it |
+| `--experiment-registry REGISTRY_JSON` | Optional runtime registration for the vendored LAB source; source discovery itself is automatic |
+| `--experiment-result SHA256` | Retained LAB result to inspect/resume without granting execution authority |
+| `--experiment-control-registry REGISTRY_JSON` | Explicit bounded owner/control registration |
+| `--experiment-control-receipt SHA256` | Retained control receipt used for reconciliation gates |
 | `--session PRIVATE_SESSION_JSON` | Existing session loaded with the current private-file checks |
 | `--evidence SHA256` | Repeatable, 0–32 distinct existing CAS hashes, retaining supplied order |
 | `--world OWNED_WORLD_PATH` | Existing owned server-world readiness input only |
@@ -133,6 +135,8 @@ supplied authority fails closed through the existing CLI `ERROR` or
 `ARTIFACT_UNAVAILABLE` envelope (exit 2); it is not silently replaced with an
 unrelated ready capability. Capability reason codes are not separate exit codes.
 
+Vendored LAB source availability is discovered from the same repository and does not make `experimental_runtime` READY. Without a live runtime registry/owner/world attestation it remains `BLOCKED / LAB_RUNTIME_ATTESTATION_REQUIRED`, while still allowing the AI to discover the experiment preparation path without locating another repository.
+
 ## 5. Capability rows and reason codes
 
 Every row has `id`, `surface`, `readiness`, `reason_code`, `missing`, `evidence`.
@@ -142,7 +146,7 @@ The fixed IDs are:
 source_search       bytecode_inspect      mappings
 failure_history     core_context          blockbench_asset
 forge_build         gametest              server_observation
-client_observation  native_input
+client_observation  native_input           experimental_runtime
 ```
 
 - `surface`: `IMPLEMENTED` or `UNSUPPORTED`; it describes the available adapter
@@ -152,7 +156,7 @@ client_observation  native_input
 - `BLOCKED`: known prerequisite, authorization or support restriction
 - `UNKNOWN`: local retained inputs cannot establish current readiness/completion
 
-There are currently 11 rows (budget: at most 12), at most 32 explicit evidence
+There are currently 12 rows (budget: at most 12), at most 32 explicit evidence
 pointers, at most five actions, and a 96 KiB canonical payload budget. Raw source,
 receipt bodies, tokens, endpoints, private paths and registry contents are not
 copied into public summaries. The caller still controls who may read any chosen

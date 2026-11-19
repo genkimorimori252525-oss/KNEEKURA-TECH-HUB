@@ -1,0 +1,192 @@
+{
+  "schema": "kneekura.original-brain-tick-stop-call-source/v1",
+  "scope": "EXACT_KNOWN_SINK_ORIGINAL_BOOLEAN_SHORT_CIRCUIT_AND_DISPATCH_NOT_INDIVIDUAL_OPERAND_REASON_OR_ARRIVAL",
+  "minecraft": "1.20.1",
+  "forge": "47.2.0",
+  "namespace": "Mojmap",
+  "minecraft_artifact_sha256": "1b6e6a166fbc06c6d2422cd5cf515a508977479045095363d5b4c8b89cc7b4eb",
+  "disassembly_provider": {
+    "name": "jdk-javap-v1",
+    "options": [
+      "-private",
+      "-s",
+      "-c",
+      "-l",
+      "-verbose"
+    ],
+    "executable_hash": "bd5a9f99365fd432f79162f4ed9ca9b956c78cc81dfb6962adb6d207075711fb",
+    "jdk_components": {
+      "release": "00d3211a59bc9f2577f93962e9210de8578c49fd2625022cb38606817d3a71f9",
+      "lib/modules": "81f0e1bb87cd303ddcce2b216e27da416bd20799d9a9811ea1b070123cefff0f"
+    },
+    "jdk_image_status": "HASHED"
+  },
+  "classes": [
+    {
+      "owner": "net/minecraft/world/entity/ai/Brain",
+      "class_hash": "441ee6715fb13f271943a9a462c5ff64e491a993ff28d724df06885d83012a3d",
+      "disassembly_hash": "d25d42a41b31c1bb5d24cac87573c1616e163df34980e362d124ca77e8e7b146",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/brain-result-r50-source/Brain.javap.txt",
+      "selected_members": [
+        {
+          "kind": "METHOD",
+          "name": "tickEachRunningBehavior",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)V",
+          "line_start": 2875,
+          "line_end": 2926,
+          "slice_sha256": "3c41150a47055d52e2bb492e2ca2d5a5a44b3f7bb0a0567fd54b45f3ce9bca8e"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/Behavior",
+      "class_hash": "bb73feb84c79565213f7a6001c47d0e1cc2fc7d947a89d99ae5c70b5e058e7dd",
+      "disassembly_hash": "a14ed1bb37e1bbba57916781421c53353d6bff2b8346758b240b0a2d3968f6d0",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/goal-brain-research-r47-r3/Behavior.javap.txt",
+      "selected_members": [
+        {
+          "kind": "FIELD",
+          "name": "status",
+          "descriptor": "Lnet/minecraft/world/entity/ai/behavior/Behavior$Status;",
+          "line_start": 215,
+          "line_end": 218,
+          "slice_sha256": "63d51254e44d38bdd974eae17f54718e0440f5e125e45f7994123dcf3e35cad5"
+        },
+        {
+          "kind": "FIELD",
+          "name": "endTimestamp",
+          "descriptor": "J",
+          "line_start": 219,
+          "line_end": 222,
+          "slice_sha256": "828c256a83bda1596b2559725a2a2c4d07bf61d04357dc679bfb9d52c1bc5921"
+        },
+        {
+          "kind": "METHOD",
+          "name": "tickOrStop",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "line_start": 427,
+          "line_end": 476,
+          "slice_sha256": "973e7969146f0fd85100b96e2b856836d95f60885cf3301eb0672d4b9eba278a"
+        },
+        {
+          "kind": "METHOD",
+          "name": "tick",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "line_start": 477,
+          "line_end": 496,
+          "slice_sha256": "ef658568139cee616e2b56e5237775b36d973faff01b46cff2c51760ed321a7f"
+        },
+        {
+          "kind": "METHOD",
+          "name": "doStop",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "line_start": 497,
+          "line_end": 526,
+          "slice_sha256": "957f486aeadbcdc8e3681226a4c03b85d239c29964f7a3f45be4639d51281300"
+        },
+        {
+          "kind": "METHOD",
+          "name": "stop",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "line_start": 527,
+          "line_end": 546,
+          "slice_sha256": "597855f7518146a1799f038cfd503898b82fdfae8934c515a559d503111585d8"
+        },
+        {
+          "kind": "METHOD",
+          "name": "canStillUse",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)Z",
+          "line_start": 547,
+          "line_end": 567,
+          "slice_sha256": "19d4098c5bc1108b74fede7dbaa0487b016e0b796009ee9d7165303bd88cf32a"
+        },
+        {
+          "kind": "METHOD",
+          "name": "timedOut",
+          "descriptor": "(J)Z",
+          "line_start": 568,
+          "line_end": 596,
+          "slice_sha256": "d0b3082c4f0270c9a32f14bc8c56b81c18a2052a94cb6d389f8546df137bae54"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/BehaviorControl",
+      "class_hash": "bf5d1010d11a963210827ad30c53faa51540309b4d47add7f6fbe6b567d41de4",
+      "disassembly_hash": "d95dbb893b88eb592790cacb8e5e3f45bea5bcbef18af5e2a5adc0c66c8859fd",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/goal-brain-research-r47-r3/BehaviorControl.javap.txt",
+      "selected_members": [
+        {
+          "kind": "METHOD",
+          "name": "tickOrStop",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "line_start": 47,
+          "line_end": 51,
+          "slice_sha256": "744a3e129e14a2b081c44b010d1e5d9bc6c504aa5bad6f1f0b942cae6c463525"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/MoveToTargetSink",
+      "class_hash": "e2b60638bb381a1d96702bea9701e594c001ae7138b8134b3ecbdee8f0771dae",
+      "disassembly_hash": "7cd6e7de45969754ab5ec0163cd39f89887b25b27a9d061dad8ee46386c4e846",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/brain-result-r50-source/MoveToTargetSink.javap.txt",
+      "selected_members": [
+        {
+          "kind": "FIELD",
+          "name": "path",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/Path;",
+          "line_start": 357,
+          "line_end": 363,
+          "slice_sha256": "59ab47b0d9bffaa14b08a83f6c7128a657e500c1e6c0a3aa544b85198d31eca1"
+        },
+        {
+          "kind": "FIELD",
+          "name": "lastTargetPos",
+          "descriptor": "Lnet/minecraft/core/BlockPos;",
+          "line_start": 364,
+          "line_end": 370,
+          "slice_sha256": "afc2e905ab61a9cbc6c4f5e12ec680ab2490ba06e86a9183dbb1f2b99b3a474c"
+        },
+        {
+          "kind": "METHOD",
+          "name": "canStillUse",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/Mob;J)Z",
+          "line_start": 512,
+          "line_end": 592,
+          "slice_sha256": "0eae30276f793b79b55ecde60aeb34b1094064de3af5ab64021647b1ce9b0203"
+        },
+        {
+          "kind": "METHOD",
+          "name": "reachedTarget",
+          "descriptor": "(Lnet/minecraft/world/entity/Mob;Lnet/minecraft/world/entity/ai/memory/WalkTarget;)Z",
+          "line_start": 944,
+          "line_end": 974,
+          "slice_sha256": "9e0fbd59dd2cb4df8cbdea9208ac99c7af0fc892f8b5513b1f80033173588fc7"
+        },
+        {
+          "kind": "METHOD",
+          "name": "isWalkTargetSpectator",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/memory/WalkTarget;)Z",
+          "line_start": 975,
+          "line_end": 1008,
+          "slice_sha256": "5fcdd9618fad3a078aa1af3d6eabb6db763cdfa97fd25a8ece9897ff6e8016de"
+        },
+        {
+          "kind": "METHOD",
+          "name": "canStillUse",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)Z",
+          "line_start": 1026,
+          "line_end": 1043,
+          "slice_sha256": "38fd2dfc92968868f98af7368e5754dd031c876a7072a242769d5353fbb7c0bb"
+        }
+      ]
+    }
+  ],
+  "inherited_timed_out": {
+    "scope": "EXACT_MOVETOTARGETSINK_ONLY",
+    "directSuperclass": "net/minecraft/world/entity/ai/behavior/Behavior",
+    "declaredOverride": false,
+    "originalVirtualReturnRequired": true
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "workspaceId": "tlm-dev",
+  "workspaceDir": "C:/path/to/real-minecraft-mod-workspace",
+  "runtimeRoot": "debug-runtime",
+  "readyTimeoutMs": 180000,
+  "launch": {
+    "command": "gradlew.bat",
+    "args": [
+      "runClient",
+      "--offline",
+      "--console=plain"
+    ],
+    "shell": true,
+    "env": {}
+  },
+  "worldName": "KNEEKURA_DEBUG_WORLD"
+}

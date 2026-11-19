@@ -1,0 +1,131 @@
+{
+  "foundation_map_id": "522cbb565d187f8e1e7b97140206f5ac11e8ca90719528bd661f875f184e34fd",
+  "classes": [
+    {
+      "owner": "net/minecraft/world/entity/Entity",
+      "class_hash": "fb4f0380181adf05db421a154e67eaf30674956d7404ba794c0f8e0ab33935a4",
+      "disassembly_hash": "9ca838ae49e7fb88359c7dfd8528770c5a0b2c8be9ac8b263da626610dbd1cc5",
+      "selected_members": [
+        {
+          "name": "vehicle",
+          "kind": "field",
+          "descriptor": "Lnet/minecraft/world/entity/Entity;",
+          "line_start": 4495,
+          "line_end": 4501
+        },
+        {
+          "name": "position",
+          "kind": "field",
+          "descriptor": "Lnet/minecraft/world/phys/Vec3;",
+          "line_start": 4518,
+          "line_end": 4521
+        },
+        {
+          "name": "blockPosition",
+          "kind": "field",
+          "descriptor": "Lnet/minecraft/core/BlockPos;",
+          "line_start": 4522,
+          "line_end": 4525
+        },
+        {
+          "name": "position",
+          "kind": "method",
+          "descriptor": "()Lnet/minecraft/world/phys/Vec3;",
+          "line_start": 19829,
+          "line_end": 19842
+        },
+        {
+          "name": "blockPosition",
+          "kind": "method",
+          "descriptor": "()Lnet/minecraft/core/BlockPos;",
+          "line_start": 19857,
+          "line_end": 19870
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/server/level/ServerChunkCache",
+      "class_hash": "12b69564971f5b54a666c2d98f3138837e4e0fdba40ccdf4c4332f857b12c609",
+      "disassembly_hash": "57e2dce5d382e32dfaf1fbe822007ad90a764c02d619a268dd917d8ba9ecb97d",
+      "selected_members": [
+        {
+          "name": "getChunkNow",
+          "kind": "method",
+          "descriptor": "(II)Lnet/minecraft/world/level/chunk/LevelChunk;",
+          "line_start": 1482,
+          "line_end": 1647
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/level/chunk/LevelChunk",
+      "class_hash": "0899aaa1b91ba293515174a6e1ed1e1b362367c8ed895e7cda43bf987aedba15",
+      "disassembly_hash": "769a7f0357f43fc4a929c7e5534e3517d236f31307e3dd84d507f02882f30fc7",
+      "selected_members": [
+        {
+          "name": "getBlockState",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;",
+          "line_start": 1724,
+          "line_end": 1878
+        },
+        {
+          "name": "getFluidState",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/material/FluidState;",
+          "line_start": 1879,
+          "line_end": 1899
+        },
+        {
+          "name": "getFluidState",
+          "kind": "method",
+          "descriptor": "(III)Lnet/minecraft/world/level/material/FluidState;",
+          "line_start": 1900,
+          "line_end": 1997
+        },
+        {
+          "name": "getBlockEntities",
+          "kind": "method",
+          "descriptor": "()Ljava/util/Map;",
+          "line_start": 3161,
+          "line_end": 3175
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/level/BlockGetter",
+      "class_hash": "e0c61e6648c63cedc26572add2686f8da417d0fb5ef45fe67f977c63aa7a38dc",
+      "disassembly_hash": "fa8001816311e58c78fb893cabab2b771baaeb5977140565ec1a76d601d0af67",
+      "selected_members": [
+        {
+          "name": "getBlockEntity",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/entity/BlockEntity;",
+          "line_start": 413,
+          "line_end": 419
+        },
+        {
+          "name": "getBlockEntity",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/entity/BlockEntityType;)Ljava/util/Optional;",
+          "line_start": 420,
+          "line_end": 459
+        },
+        {
+          "name": "getBlockState",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;",
+          "line_start": 460,
+          "line_end": 463
+        },
+        {
+          "name": "getFluidState",
+          "kind": "method",
+          "descriptor": "(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/material/FluidState;",
+          "line_start": 464,
+          "line_end": 467
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+node_modules/
+run/
+*.log
+.DS_Store
+
+# Local Minecraft/YSM assets and captures
+simlab/poses/
+simlab/models/
+simlab/palettes/
+bridge/tlm-forge/run/
+
+# Autonomous debug workspace local state
+debug-runtime/
+debug-workspace/config.local.json

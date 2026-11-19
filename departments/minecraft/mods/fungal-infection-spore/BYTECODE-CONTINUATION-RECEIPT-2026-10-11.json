@@ -1,0 +1,190 @@
+{
+  "format": "kneekura.minecraft.bytecode-scope.v1",
+  "date_local": "2026-10-11 Asia/Tokyo",
+  "source_jar": {
+    "filename": "spore_1.20.1_2.2.0j.jar",
+    "sha256": "d20c4be6606f9752ecfd964eba625363eb76a28e327d67fe6dda4be748401489",
+    "minecraft": "1.20.1",
+    "loader": "Forge",
+    "mod_version": "2.2.0j",
+    "size_bytes": 116439461,
+    "rights": "All Rights Reserved"
+  },
+  "read_method": "JDK 21.0.12.1 javap -p -c -constants; focused read of unmodified uploaded .class bytes",
+  "primary_class_anchors": [
+    {
+      "jar_internal_path": "com/Harbinger/Spore/Sentities/Organoids/Proto.class",
+      "sha256": "8ab88d4e784512d910643831d8ec2caaeb4b9acf15a319a28752a3b9c5fcade3",
+      "selected_methods": [
+        "initializeValues",
+        "inputs",
+        "decide",
+        "argmax",
+        "summonMob",
+        "moraleBoost",
+        "praisedForDecision",
+        "punishForDecision",
+        "adjustWeightsForDecision",
+        "awardMember",
+        "punishMember",
+        "m_8119_",
+        "eatBiomass",
+        "loadChunks",
+        "onAddedToWorld",
+        "lambda$loadChunks$2",
+        "m_7380_",
+        "m_7378_"
+      ]
+    },
+    {
+      "jar_internal_path": "com/Harbinger/Spore/sEvents/HandlerEvents.class",
+      "sha256": "632fcefca9b8cbad565fbda408bda3b2a1d73951efc01049844cb4dacdbf3805",
+      "selected_methods": [
+        "DefenseBypass",
+        "onLivingSpawned",
+        "DiscardProto",
+        "onWorldLoad",
+        "onServerTick"
+      ]
+    },
+    {
+      "jar_internal_path": "com/Harbinger/Spore/Sentities/BaseEntities/Organoid.class",
+      "sha256": "bef7703f12a8d06028dfd8a4b72d959b6303b94e17bbb164cb407eefcb7c163f",
+      "selected_methods": [
+        "awardHivemind",
+        "punishHivemind"
+      ]
+    },
+    {
+      "jar_internal_path": "com/Harbinger/Spore/ExtremelySusThings/SporeSavedData.class",
+      "sha256": "c20be21c37d0806c7f84c61f5867f0872de7ff10a99faa8ba11ff9e1798db1e7",
+      "selected_methods": [
+        "addProto",
+        "removeProto",
+        "getHiveminds",
+        "load",
+        "m_7176_"
+      ]
+    },
+    {
+      "jar_internal_path": "com/Harbinger/Spore/ExtremelySusThings/ChunkLoaderHelper.class",
+      "sha256": "c36a94ef283cdeb23e98ad6aa157d34b29d74cff908490f35fbfcbca7dd78d55",
+      "selected_methods": [
+        "addRequest",
+        "removeRequest",
+        "tick"
+      ]
+    },
+    {
+      "jar_internal_path": "com/Harbinger/Spore/ExtremelySusThings/ChunkLoadRequest.class",
+      "sha256": "3f55f0d1b6c61ef2f1a884723c9136b3017baf8ac11b190cc6f0994434dd059e",
+      "selected_methods": [
+        "refreshIfOwnerStillPresent",
+        "isOwnerStillPresentInChunk",
+        "serializeNBT",
+        "deserializeNBT"
+      ]
+    },
+    {
+      "jar_internal_path": "com/Harbinger/Spore/Sentities/AI/NeuralProcessing/ProtoAIs/ProtoTargeting.class",
+      "sha256": "a12fa4539b2721057b0f01d506aa4fa92a6dfbe0a93c32278bfbffc0585ab2ba",
+      "selected_methods": [
+        "m_8036_",
+        "Targeting"
+      ]
+    },
+    {
+      "jar_internal_path": "com/Harbinger/Spore/Sentities/AI/LocHiv/LocalTargettingGoal.class",
+      "sha256": "c509b646ceab8f1af24e33fbeaa5bdcae0ca7d7cceca2a479a78de7cadbe47b5",
+      "selected_methods": [
+        "m_8036_",
+        "Targeting"
+      ]
+    },
+    {
+      "jar_internal_path": "com/Harbinger/Spore/Sentities/Organoids/Womb.class",
+      "sha256": "7ac7824e6164b688caf695976bb892473014d377f99a9151daa2a1ccec213ccc",
+      "selected_methods": [
+        "m_8119_",
+        "CallNearbyInfected",
+        "AssimilateNearbyInfected"
+      ]
+    },
+    {
+      "jar_internal_path": "com/Harbinger/Spore/Sentities/Organoids/Mound.class",
+      "sha256": "997e7ccd88a0748eea6f24c505627617c8999cb1dd88e6f3f3ac94e5208f6edc",
+      "selected_methods": [
+        "m_8119_",
+        "SpreadInfection"
+      ]
+    },
+    {
+      "jar_internal_path": "com/Harbinger/Spore/Sentities/Organoids/HiveTumor.class",
+      "sha256": "cd8406a6a32205f6a3d461fbb0f8503beb7a19cd26d200b61814bde06aa7ee64",
+      "selected_methods": [
+        "m_8119_",
+        "SummonProto"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "SP-AI-11",
+      "scope": "Proto.summonMob + HandlerEvents.DefenseBypass + Proto.awardMember",
+      "basis": "DIRECT_BINARY_PLUS_STATIC_DERIVATION",
+      "summary": "member NBT tag stores decision index j rather than independently sampled member index k; conditional 75% wrong-member attribution with four uniformly sampled candidates",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SP-AI-12",
+      "scope": "Proto.moraleBoost",
+      "basis": "DIRECT_BINARY",
+      "summary": "when >half 16 weights are negative, adds independent random double to all 16 without [-1,1] clamp; reached on 1200-tick conditional path",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SP-AI-13",
+      "scope": "Proto.inputs+decide+adjustWeightsForDecision",
+      "basis": "DIRECT_BINARY_PLUS_STATIC_DERIVATION",
+      "summary": "uniform per-row weight update, unequal ± rewards; all-zero inputs result in j0 tie resolution regardless of trained weights",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SP-AI-14",
+      "scope": "SporeSavedData + HandlerEvents",
+      "basis": "DIRECT_BINARY",
+      "summary": "static loaded Proto list is separate from per-Proto persisted NBT weight arrays; no common global weight transfer proven",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SP-AI-15",
+      "scope": "Proto.m_8119_ + summonMob + eatBiomass",
+      "basis": "DIRECT_BINARY_PLUS_STATIC_DERIVATION",
+      "summary": "1-5 wave attempts check biomass>2 only preloop; each successful spawn subtracts 2 without lower bound; negative biomass possible",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SP-AI-16",
+      "scope": "Proto.loadChunks + ChunkLoaderHelper + ChunkLoadRequest",
+      "basis": "DIRECT_BINARY_PLUS_INFERENCE",
+      "summary": "new ChunkLoadRequest checked with containsValue despite no equals override, allowing redundant requests by identity; actual ticket cost/leak unverified",
+      "runtime": "NOT_RUN"
+    }
+  ],
+  "limitations": {
+    "core_promotion": "NO",
+    "complete_target": "NO",
+    "comparative_frontier": "NOT_ACQUIRED",
+    "runtime": "NOT_RUN",
+    "performance": "NOT_MEASURED",
+    "original_author_source_tree": "UNAVAILABLE",
+    "byte_equivalence_to_official_release": "NOT_VERIFIED",
+    "issue_pr_fix_proof": "NOT_DONE",
+    "raw_jar_committed": false
+  },
+  "source_links": [
+    "https://www.fungalinfectionspore.wiki/mobs/organoids/proto-hivemind",
+    "https://www.fungalinfectionspore.wiki/systems/linking-signals",
+    "https://www.curseforge.com/minecraft/mc-mods/fungal-infection-spore"
+  ]
+}

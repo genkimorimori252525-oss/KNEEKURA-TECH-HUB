@@ -1,0 +1,28 @@
+{
+  "//": "移動/登坂の検証。段差を4段組み、その上にターゲットを置いて接敵させる。",
+  "//読み方": "Viewer の F3 モードで phys レーン(浮き)と onGround を見る。段差を登れていれば onGround が細かく明滅し、登れず張り付いていれば dist が縮まらないまま平坦になる。",
+  "//keepAlive": "true にすると 600tick 後もサーバが生きたまま。実クライアントで localhost に繋いで住まわせて眺められる。",
+
+  "name": "stairs",
+  "seed": 20260814,
+  "duration": 900,
+  "arenas": 1,
+  "spacing": 1024,
+  "keepAlive": true,
+
+  "floor": { "block": "minecraft:barrier", "radius": 24, "y": 64 },
+
+  "blocks": [
+    { "block": "minecraft:stone", "from": [-3, 65, 4],  "to": [3, 65, 6] },
+    { "block": "minecraft:stone", "from": [-3, 66, 7],  "to": [3, 66, 9] },
+    { "block": "minecraft:stone", "from": [-3, 67, 10], "to": [3, 67, 12] },
+    { "block": "minecraft:stone", "from": [-4, 68, 13], "to": [4, 68, 18] }
+  ],
+
+  "actors": [
+    { "type": "touhou_little_maid:reimu", "role": "reimu",  "pos": [0, 65, -6] },
+    { "type": "minecraft:zombie",         "role": "target", "pos": [0, 69, 16], "hp": 300, "noAi": true }
+  ],
+
+  "overrides": {}
+}

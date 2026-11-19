@@ -1,0 +1,20 @@
+{
+  "_comment": "13-04 Task 1 — SimDelta(Java)とdelta.mjs(JS)の唯一の共通の物差し。どちらの実装からも生成していない。手で書いた。keyframeTicksはこのgolden専用の値(本番はSimDelta.KEYFRAME_TICKS=100)。casesは配列の順番どおりに、1つの共有状態(ledger)へ逐次リプレイすること — 各ケースは前のケースの結果に依存する。",
+  "keyframeTicks": 10,
+  "cases": [
+    {"kind": "初回", "ch": "pos", "id": 1, "tick": 0, "body": {"id": 1, "x": 0.0, "y": 64.0, "z": 0.0}, "expect": true},
+    {"kind": "同一", "ch": "pos", "id": 1, "tick": 1, "body": {"id": 1, "x": 0.0, "y": 64.0, "z": 0.0}, "expect": false},
+    {"kind": "差分", "ch": "pos", "id": 1, "tick": 2, "body": {"id": 1, "x": 0.5, "y": 64.0, "z": 0.0}, "expect": true},
+    {"kind": "丸め違い", "ch": "pos", "id": 1, "tick": 3, "body": {"id": 1, "x": 0.501, "y": 64.0, "z": 0.0}, "expect": true},
+    {"kind": "keyframe直前", "ch": "pos", "id": 1, "tick": 12, "body": {"id": 1, "x": 0.501, "y": 64.0, "z": 0.0}, "expect": false},
+    {"kind": "keyframeちょうど", "ch": "pos", "id": 1, "tick": 13, "body": {"id": 1, "x": 0.501, "y": 64.0, "z": 0.0}, "expect": true},
+    {"kind": "初回", "ch": "phys", "id": 1, "tick": 0, "body": {"id": 1, "onG": true, "air": false}, "expect": true},
+    {"kind": "同一", "ch": "phys", "id": 1, "tick": 1, "body": {"id": 1, "onG": true, "air": false}, "expect": false},
+    {"kind": "初回", "ch": "anim", "id": 1, "tick": 0, "body": {"id": 1, "anim": "idle"}, "expect": true},
+    {"kind": "差分", "ch": "anim", "id": 1, "tick": 5, "body": {"id": 1, "anim": "extra43"}, "expect": true},
+    {"kind": "初回", "ch": "pos", "id": 2, "tick": 0, "body": {"id": 2, "x": 10.0, "y": 64.0, "z": 0.0}, "expect": true},
+    {"kind": "forget後", "ch": "pos", "id": 2, "tick": 1, "forget": true, "body": {"id": 2, "x": 10.0, "y": 64.0, "z": 0.0}, "expect": true},
+    {"kind": "対象外チャンネル", "ch": "vis", "id": 5, "tick": 0, "body": {"id": 5, "age": 10}, "expect": true},
+    {"kind": "対象外チャンネル", "ch": "vis", "id": 5, "tick": 1, "body": {"id": 5, "age": 10}, "expect": false}
+  ]
+}
