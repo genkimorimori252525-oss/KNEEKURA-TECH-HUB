@@ -1,0 +1,52 @@
+{
+  "format": "kneekura.target-source-inventory.v1",
+  "target": "Ages of Dominion",
+  "recorded_at": "2026-10-04",
+  "source": {
+    "repository": "NssIs/Ages-of-Dominion-ModJam-2026",
+    "revision": "c1e71a021ba88a053a378292c6011cb89828fd36",
+    "version": "4.2.0",
+    "minecraft": "26.1.2",
+    "loader": "NeoForge 26.1.2.87",
+    "java": 25,
+    "license": "All Rights Reserved (third-party music separate CC0)",
+    "tree_truncated": false,
+    "tree_entries": 473,
+    "blobs": 396,
+    "java_files": 166,
+    "resource_files": 217,
+    "java_by_top_package": {
+      "root": 34,
+      "client": 69,
+      "network": 43,
+      "entity": 12,
+      "mixin": 4,
+      "command": 1,
+      "particle": 2,
+      "sound": 1
+    }
+  },
+  "distribution": {
+    "provider": "CurseForge",
+    "project_id": 1676810,
+    "file_id": 8845160,
+    "file_name": "forgotten_realms_rts-4.2.0.jar",
+    "published": "2026-09-09",
+    "binary_sha256": null,
+    "binary_source_equivalence": "NOT_ESTABLISHED"
+  },
+  "targeted_facets": {
+    "unit_command_authority": "EVIDENCE_BACKED_SOURCE",
+    "worker_fsm": "EVIDENCE_BACKED_SOURCE",
+    "navigation_wrapper": "EVIDENCE_BACKED_SOURCE",
+    "defense_director": "EVIDENCE_BACKED_SOURCE",
+    "construction_progress": "EVIDENCE_BACKED_SOURCE",
+    "siege_loop": "EVIDENCE_BACKED_SOURCE",
+    "network_authority": "EVIDENCE_BACKED_SOURCE",
+    "persistence_domains": "EVIDENCE_BACKED_SOURCE",
+    "camera_anchor": "EVIDENCE_BACKED_SOURCE",
+    "runtime_performance": "NOT_ANALYZED",
+    "distributed_binary_identity": "NOT_ANALYZED",
+    "multiplayer_correctness": "NOT_APPLICABLE_CURRENT_UPSTREAM_CLAIM"
+  }
+}

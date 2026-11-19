@@ -1,0 +1,31 @@
+name: Danmaku JavaFX draft
+
+on:
+  pull_request:
+    paths:
+      - 'departments/minecraft/danmaku-preview/**'
+      - 'tests/test_danmaku_preview.py'
+      - '.github/workflows/danmaku-preview.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  windows-javafx:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Pure Java pattern and JSON contracts
+        shell: pwsh
+        run: ./departments/minecraft/danmaku-preview/run.ps1 -Test
+      - name: Compile real JavaFX application
+        shell: pwsh
+        run: ./departments/minecraft/danmaku-preview/run.ps1 -CompileOnly

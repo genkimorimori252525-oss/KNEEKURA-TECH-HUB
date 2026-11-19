@@ -1,0 +1,84 @@
+{
+  "schema": "kneekura.minecraft.spore.goal-registry-build-and-fixture.v1",
+  "recorded_date_local": "2026-10-11",
+  "anchored_original_artifact": {
+    "filename": "spore_1.20.1_2.2.0j.jar",
+    "minecraft": "1.20.1",
+    "loader": "Forge",
+    "sha256": "d20c4be6606f9752ecfd964eba625363eb76a28e327d67fe6dda4be748401489",
+    "uploaded_by_owner": true,
+    "original_in_ci": false,
+    "raw_jar_published": false
+  },
+  "research_source": {
+    "goal_registration_verified_by_original_jar": true,
+    "verified_callsite_counts": {
+      "owners": 86,
+      "goal_selector": 356,
+      "target_selector": 16,
+      "total": 372
+    },
+    "goal_registration_contracts_passed": 27,
+    "complete_derived_inventory_sha256": "e2d20388fb07e97d2a8b31bdb05cca4ddc52e885df06abaf936095fad4d65492",
+    "reproducer": "departments/minecraft/mods/fungal-infection-spore/tools/audit_spore_goal_registrations.py",
+    "source_proof": "STATIC_JAR_BINARY_WITH_HASH_GUARD",
+    "runtime_effective_goals": "NOT_OBSERVED"
+  },
+  "observer_build": {
+    "workflow_run_id": 38085740754,
+    "workflow_commit": "30c53df7572703cad130736f79d12acc3337be6d",
+    "workflow_url": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38085740754",
+    "jobs": [
+      {
+        "name": "forge-observer-compile",
+        "status": "SUCCESS",
+        "scope": "ForgeGradle owned observer Java17 JAR; goal registry sampler compiled; no original Harbinger Spore classes bundled"
+      },
+      {
+        "name": "portable-observer-core",
+        "status": "SUCCESS",
+        "scope": "Owned Java JSONL writer plus G13 600 synthetic records and G12 2 synthetic mob snapshots, run through Python"
+      },
+      {
+        "name": "test-observation-gates",
+        "status": "SUCCESS",
+        "scope": "31 independent Python synthetic and negative control unit tests"
+      }
+    ],
+    "packaged_own_artifact": {
+      "artifact_id": 11682451799,
+      "artifact_name": "kneekura-spore-observer-30c53df7572703cad130736f79d12acc3337be6d",
+      "artifact_page": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38085740754/artifacts/11682451799",
+      "archive_size_bytes": 20074,
+      "expired_when_checked": false,
+      "retention_days_requested": 7,
+      "third_party_spore_classes_included": false
+    },
+    "runtime": "NOT_RUN"
+  },
+  "synthetic_G12": {
+    "input_type": "JAVA_AUTHORED_OWN_FIXTURE",
+    "number_of_entity_snapshots": 2,
+    "registered_goal_candidates": [
+      "three InfectedWitch BuffAlliesGoal subclasses at priority4, MOVE+LOOK",
+      "SearchAreaGoal priority4 MOVE",
+      "Brute TransportInfected priority1 TARGET and MeleeAttackGoal priority3 MOVE+LOOK"
+    ],
+    "same_priority_shared_flag_pairs": 6,
+    "simultaneous_running_overlap_pairs": 0,
+    "goal_snapshot_review_status": "SYNTHETIC_FIXTURE_ONLY",
+    "core_G12_acceptance_review_status": "SYNTHETIC_FIXTURE_ONLY",
+    "core_G12_acceptance_coverage": "INCONCLUSIVE",
+    "runtime_pass": false
+  },
+  "limits": [
+    "Original Spore JAR was not loaded or GameTest-run in GitHub Actions",
+    "Source compilation/JAR packaging is NOT evidence of mod interoperability or game AI success",
+    "G12 GoalSnapshot is passive state, not Goal start, stop, canUse, interrupt or defeat/event evaluation",
+    "Snapshot truncation to at most 12 goals per Mob can omit contenders",
+    "Missing authenticated LAB run/world/owner build/cleanup evidence",
+    "Spore 1.21.1 NeoForge FRONTIER not analyzed",
+    "Complete 1350-class whole-target analysis remains NOT_COMPLETE"
+  ],
+  "status": "PASS_STATIC_AND_OWN_BUILD_AND_SYNTHETIC_ONLY"
+}

@@ -44,6 +44,16 @@ public final class KneekuraDebugArenaRuntime {
         SEEN_GRANTS.add(grantKey);active=new Active(config,server,grant,gate,controller,lease);capturesReserved=0;CAPTURE_RESERVATIONS.clear();
     }
     public static String readiness(){return active==null?"BLOCKED":active.controller().snapshot().unsafe()?"BLOCKED":"OWNER_INSTALLED";}
+    /** Read-only boundary identity, never action authority. Zero denotes no installed Arena. */
+    static long observationEpoch(KneekuraDebugEnv.Config config,MinecraftServer server)throws IOException {
+        if(server==null||!server.isSameThread())throw new IOException("SERVER_THREAD_REQUIRED");
+        Active a=active;if(a==null)return 0L;
+        if(server!=a.server()||config==null||!a.config().identityKey().equals(config.identityKey())
+                ||!a.config().handshakeNonce().equals(config.handshakeNonce()))throw new IOException("ARENA_CONTEXT_CHANGED");
+        var snapshot=a.controller().snapshot();
+        if(snapshot.unsafe())throw new IOException("ARENA_UNSAFE");
+        return snapshot.arenaEpoch();
+    }
     public static KneekuraDebugArenaController.Snapshot snapshotOwner()throws IOException {return owner().controller().snapshot();}
     private static Active owner()throws IOException {Active a=active;if(a==null)throw new IOException("ARENA_OWNER_NOT_INSTALLED");if(!a.server().isSameThread())throw new IOException("SERVER_THREAD_REQUIRED");a.gate().requireAuthorized(a.config(),a.server(),a.grant());return a;}
     public static KneekuraDebugArenaController.Result submitOwner(KneekuraDebugArenaController.Command command,long tick)throws IOException {return owner().controller().submit(command,tick);}

@@ -1,0 +1,45 @@
+{
+  "format": "kneekura.product-build-evidence.v1",
+  "deliverable": "minecraft/bedrock-wither",
+  "recorded_at": "2026-10-02",
+  "environment": {
+    "minecraft": "1.20.1",
+    "forge": "47.2.0",
+    "java": "17",
+    "gradle": "8.1.1",
+    "runner": "github-hosted-ubuntu"
+  },
+  "runs": [
+    {
+      "source_commit": "f39a929b5aa530b5c99f6f049a678283d08712e9",
+      "workflow_run_id": 36978179672,
+      "outcome": "SUCCESS",
+      "scope": "initial standalone Forge entity scaffold"
+    },
+    {
+      "source_commit": "9c6eb33069d467e36f6a4ed06ef5d4a7649e18fc",
+      "workflow_run_id": 36978390934,
+      "outcome": "FAIL",
+      "scope": "state machine + threat ledger + debug snapshot generation",
+      "failure_record": "../history/failure-repair/BWR-0001-wildcard-optional-compile.md"
+    },
+    {
+      "source_commit": "419bcaac408b5ad12202126235bdd87c257eb594",
+      "workflow_run_id": 36978583434,
+      "outcome": "SUCCESS",
+      "scope": "same generation after BWR-0001 repair"
+    },
+    {
+      "source_commit": "63f97bb45a4dedbe0dc9e562fcdd40bf036ca05c",
+      "workflow_run_id": 36978657407,
+      "outcome": "SUCCESS",
+      "scope": "repaired product source plus CI trigger/concurrency cleanup"
+    }
+  ],
+  "limitations": [
+    "build success is compile/package evidence, not Minecraft runtime acceptance",
+    "no client renderer/model acceptance",
+    "no GameTest or Tank behavior acceptance",
+    "Bedrock parity constants remain measurement-gated"
+  ]
+}
