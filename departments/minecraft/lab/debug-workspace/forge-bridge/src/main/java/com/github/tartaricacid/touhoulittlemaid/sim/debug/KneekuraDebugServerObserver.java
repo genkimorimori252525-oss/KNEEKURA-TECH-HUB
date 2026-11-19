@@ -13,6 +13,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.level.pathfinder.Node;
 import net.minecraft.world.level.pathfinder.Path;
@@ -47,6 +48,7 @@ public final class KneekuraDebugServerObserver {
     @Nullable
     private static UUID targetUuid;
     private static long targetRevision;
+    private static long observationArenaEpoch;
     private static long lastTargetPollTick = Long.MIN_VALUE;
     private static long lastSampleTick = Long.MIN_VALUE;
 
@@ -57,6 +59,10 @@ public final class KneekuraDebugServerObserver {
     private static final IdentityHashMap<Object, String> BEHAVIOR_TOKENS =
             new IdentityHashMap<>();
     private static long nextBehaviorToken;
+    private static boolean decisionSnapshotEnabled;
+    private static KneekuraDebugDecisionBurstRequest decisionBurst;
+    private static KneekuraDebugTerrainQueryRequest decisionTerrain;
+    private static final KneekuraDebugDecisionSnapshot DECISION_SNAPSHOT = new KneekuraDebugDecisionSnapshot();
 
     private KneekuraDebugServerObserver() {
     }
@@ -68,6 +74,8 @@ public final class KneekuraDebugServerObserver {
     ) {
         config = value;
         if (value == null || !value.enabled() || server == null) {
+            KneekuraDebugDecisionBurstRuntime.stop();
+            KneekuraDebugMotionOverlayRuntime.clear();
             return;
         }
 
@@ -76,6 +84,17 @@ public final class KneekuraDebugServerObserver {
             lastTargetPollTick = localServerTick;
             pollTargetFile(value);
         }
+
+        try {
+            long epoch=KneekuraDebugArenaRuntime.observationEpoch(value,server);
+            if(epoch!=observationArenaEpoch){LAST_PAYLOAD.clear();LAST_EMIT_TICK.clear();KneekuraDebugMotionOverlayRuntime.clear();}
+            observationArenaEpoch=epoch;
+            KneekuraDebugMotionOverlayRuntime.select(value,epoch,targetRevision,targetUuid);
+        }catch(Exception error){KneekuraDebugMotionOverlayRuntime.clear();KneekuraDebugDecisionBurstRuntime.stop();return;}
+
+        KneekuraDebugDecisionBurstRuntime.onTick(value,server,localServerTick,targetUuid,
+                targetRevision,decisionBurst,DECISION_SNAPSHOT);
+        KneekuraDebugTerrainRuntime.onTick(value,server,localServerTick,targetUuid,targetRevision,decisionTerrain);
 
         UUID selected = targetUuid;
         if (selected == null) {
@@ -135,6 +154,17 @@ public final class KneekuraDebugServerObserver {
         if (entity instanceof Mob mob) {
             emitAiTarget(localServerTick, gameTime, selected, mob);
             emitNavigation(localServerTick, gameTime, selected, mob);
+            if (decisionSnapshotEnabled) {
+                long started = System.nanoTime();
+                JsonObject snapshot = DECISION_SNAPSHOT.capture(mob);
+                snapshot.addProperty("observerCostNanos", Math.max(0L, System.nanoTime() - started));
+                snapshot.addProperty("observerCostScope", "SNAPSHOT_CAPTURE_ONLY_EXCLUDES_WRITER_AND_VIEWER");
+                snapshot.addProperty("sampleTick", gameTime);
+                emitIfChanged(localServerTick, gameTime, selected, "AI_DECISION",
+                        "KneekuraDebugDecisionSnapshot.capture_cached_components",
+                        snapshot);
+                KneekuraDebugDecisionAdapterRegistry.captureSelected(value,server,mob,targetRevision,localServerTick);
+            }
         }
 
         if (entity instanceof EntityMaid maid) {
@@ -195,6 +225,23 @@ public final class KneekuraDebugServerObserver {
                 next = UUID.fromString(targetElement.getAsString());
             }
 
+            JsonElement snapshotElement = root.get("decisionSnapshot");
+            if (snapshotElement != null && (!snapshotElement.isJsonPrimitive()
+                    || !snapshotElement.getAsJsonPrimitive().isBoolean())) {
+                throw new IllegalArgumentException("decisionSnapshot must be boolean");
+            }
+            boolean nextSnapshot = snapshotElement != null && snapshotElement.getAsBoolean();
+            if (nextSnapshot && next == null) {
+                throw new IllegalArgumentException("decisionSnapshot requires a target");
+            }
+            KneekuraDebugDecisionBurstRequest nextBurst=KneekuraDebugDecisionBurstRequest.parse(root.get("decisionBurst"));
+            KneekuraDebugDecisionBurstRuntime.validateRequest(nextBurst,next);
+            KneekuraDebugTerrainQueryRequest nextTerrain=KneekuraDebugTerrainQueryRequest.parse(root.get("decisionTerrain"));
+            if(nextTerrain!=null&&next==null)throw new IllegalArgumentException("decisionTerrain requires a target");
+
+            KneekuraDebugDecisionBurstRuntime.selectionChanged();
+            KneekuraDebugMotionOverlayRuntime.clear();
+            KneekuraDebugTerrainRuntime.clear();
             targetRevision = revision;
             targetUuid = next;
             lastSampleTick = Long.MIN_VALUE;
@@ -204,6 +251,10 @@ public final class KneekuraDebugServerObserver {
             runningBehaviorBaselineSeen = false;
             BEHAVIOR_TOKENS.clear();
             nextBehaviorToken = 0L;
+            decisionSnapshotEnabled = nextSnapshot;
+            decisionBurst=nextBurst;
+            decisionTerrain=nextTerrain;
+            DECISION_SNAPSHOT.reset(revision);
 
             TouhouLittleMaid.LOGGER.info(
                     "[KNEEKURA-DEBUG] server exact target revision={} uuid={}",
@@ -215,6 +266,17 @@ public final class KneekuraDebugServerObserver {
                     file,
                     e);
         }
+    }
+
+    static void stop() {
+        KneekuraDebugDecisionBurstRuntime.stop();
+        KneekuraDebugMotionOverlayRuntime.clear();observationArenaEpoch=0;
+        KneekuraDebugTerrainRuntime.clear();decisionTerrain=null;
+        targetUuid=null;targetRevision=0;decisionSnapshotEnabled=false;decisionBurst=null;
+        lastTargetPollTick=Long.MIN_VALUE;lastSampleTick=Long.MIN_VALUE;
+        LAST_PAYLOAD.clear();LAST_EMIT_TICK.clear();BEHAVIOR_TOKENS.clear();
+        lastRunningBehaviors=List.of();runningBehaviorBaselineSeen=false;nextBehaviorToken=0;
+        DECISION_SNAPSHOT.reset(0);
     }
 
     private static ResolvedTarget resolveExact(
@@ -240,6 +302,7 @@ public final class KneekuraDebugServerObserver {
         Vec3 velocity = entity.getDeltaMovement();
         JsonObject payload = new JsonObject();
         payload.addProperty("dimension", level.dimension().location().toString());
+        payload.addProperty("motionTraceClass",entity instanceof Projectile ? "PROJECTILE_ACTUAL" : entity instanceof Mob ? "MOB_ACTUAL" : "NOT_APPLICABLE");
         payload.addProperty("x", entity.getX());
         payload.addProperty("y", entity.getY());
         payload.addProperty("z", entity.getZ());
@@ -664,13 +727,12 @@ public final class KneekuraDebugServerObserver {
             rowPayload.addProperty("reason", changed ? "changed" : "keyframe");
             rowPayload.addProperty("targetRevision", targetRevision);
 
-            KneekuraDebugEvidenceWriter.recordEntityObserved(
+            KneekuraDebugEvidenceWriter.recordServerSelectedObserved(
                     cfg,
+                    observationArenaEpoch,
                     tick,
                     gameTime,
-                    "L1",
                     lane,
-                    "SERVER",
                     method,
                     selected,
                     rowPayload);
