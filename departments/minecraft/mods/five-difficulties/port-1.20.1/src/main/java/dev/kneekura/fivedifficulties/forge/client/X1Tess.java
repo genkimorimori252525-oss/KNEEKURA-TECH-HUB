@@ -42,6 +42,10 @@ final class X1Tess {
         INVERT_ADD_DEPTH_CULL(X1RenderTypes.Blend.ONE_ONE_MINUS_SRC_COLOR, true, true, false),
         /** GL_ONE, GL_ONE, depthMask(false), GL_CULL_FACE (nuclear shot glow) */
         ADD_ONE_CULL(X1RenderTypes.Blend.ONE_ONE, false, true, false),
+        /** GL_ZERO, GL_ONE_MINUS_SRC_COLOR, depthMask(false) (Rumia's darkness) */
+        DARKEN(X1RenderTypes.Blend.ZERO_ONE_MINUS_SRC_COLOR, false, false, false),
+        /** same with glDepthFunc(GL_ALWAYS) (Rumia's darkness seen from within 6) */
+        DARKEN_ALWAYS(X1RenderTypes.Blend.ZERO_ONE_MINUS_SRC_COLOR, false, false, true),
         /** GL_SRC_ALPHA, GL_SRC_ALPHA with depth writes (RenderSukima's dark backs) */
         SHADE(X1RenderTypes.Blend.SRC_ALPHA_SRC_ALPHA, true, false, false),
         /** Master Spark laser core: GL_SRC_ALPHA, GL_ONE, glDepthFunc(GL_ALWAYS) */

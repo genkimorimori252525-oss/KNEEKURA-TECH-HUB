@@ -437,6 +437,15 @@ ASSETS = {
         "assets/five_difficulties_port/textures/entity/mob/zombie_fairy.png",
         "4356e0e5022b1ed51521e71229f37e7c5a391bb54df0478c7e973b61cfe41af8",
     ),
+    # P17c mob textures.
+    "assets/thkaguyamod/textures/mob/RumiaTexture.png": (
+        "assets/five_difficulties_port/textures/entity/mob/rumia.png",
+        "7bd13f30b20742007aef61c0ba3dc6123c29b4fed8d1e9f61132e49fce0a84c6",
+    ),
+    "assets/thkaguyamod/textures/mob/Status.png": (
+        "assets/five_difficulties_port/textures/entity/mob/status.png",
+        "193789952c5b29dc86180e03acdfbf926402a47789aa1563ef0783633e74e0ad",
+    ),
     # P15 danmaku crafting table.
     "assets/thkaguyamod/textures/blocks/danmaku_crafting_table.png": (
         "assets/five_difficulties_port/textures/block/danmaku_crafting_table.png",

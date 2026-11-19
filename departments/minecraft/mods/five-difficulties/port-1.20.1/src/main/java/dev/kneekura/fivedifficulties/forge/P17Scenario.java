@@ -41,9 +41,9 @@ public final class P17Scenario {
         if (!enabled()) return;
         level = event.getServer().overworld();
         BlockPos spawn = level.getSharedSpawnPos();
-        bx = spawn.getX() + 70 + 0.5D; // (+70, 0): away from the other scenarios
+        bx = spawn.getX() + 130 + 0.5D; // (+130, 0): beyond X1's 40-block danmaku clears from the others
         bz = spawn.getZ() + 0.5D;
-        by = level.getHeight(Heightmap.Types.MOTION_BLOCKING, spawn.getX() + 70, spawn.getZ());
+        by = level.getHeight(Heightmap.Types.MOTION_BLOCKING, spawn.getX() + 130, spawn.getZ());
         try {
             runFairies();
             FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P17_RUNTIME_SCENARIO_PASS");
@@ -125,6 +125,36 @@ public final class P17Scenario {
         phantom.tickDeath();
         require(phantom.isRemoved(), "the phantom vanishes at once");
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P17_PHANTOM_PASS");
+
+        // Rumia: two phases. Her first "death" declares card 28 at 44 HP; the second is final.
+        var rumia = spawn(PortRegistries.RUMIA.get(), -6, 2);
+        require(rumia.getMaxHealth() == 36.0F && rumia.getUsingSpellCardNo() == -1, "rumia phase 1");
+        Zombie foe = EntityType.ZOMBIE.create(level);
+        foe.moveTo(bx - 6, by, bz + 8, 0F, 0F);
+        foe.setNoAi(true);
+        level.addFreshEntity(foe);
+        rumia.setTarget(foe);
+        rumia.attackCounter = 1;
+        int before = level.getEntitiesOfClass(THShotEntity.class, rumia.getBoundingBox().inflate(6), s -> s.getOwner() == rumia).size();
+        rumia.patternForTest(2);
+        int fired = level.getEntitiesOfClass(THShotEntity.class, rumia.getBoundingBox().inflate(6), s -> s.getOwner() == rumia).size() - before;
+        require(fired == 3 * (12 + 3 * 2), "rumia opens with 3 blue circles of 18, saw " + fired);
+        rumia.hurt(level.damageSources().generic(), 100F);
+        require(rumia.getHealth() <= 0.0F && rumia.deadFlag(), "phase 1 down");
+        rumia.tickCount++;
+        rumia.deathStepForTest();
+        require(rumia.getUsingSpellCardNo() == 28 && rumia.getHealth() == 44.0F && !rumia.deadFlag() && rumia.attackInterval == 60,
+                "phase 2: card 28 at 44 HP");
+        rumia.attackInterval = 0;
+        rumia.hurt(level.damageSources().generic(), 100F);
+        rumia.tickCount++;
+        rumia.deathStepForTest();
+        require(rumia.getDanmakuPattern() == DanmakuMobEntity.ATTACK_END, "the second death is final");
+        rumia.discard();
+        foe.discard();
+        level.getEntitiesOfClass(THShotEntity.class, new net.minecraft.world.phys.AABB(bx - 30, by - 30, bz - 30, bx + 30, by + 30, bz + 30),
+                s -> s.getOwner() == rumia).forEach(Entity::discard);
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P17_RUMIA_PASS fired={}", fired);
 
         // Spawn rules accept egg spawns.
         require(THFairyEntity.checkFairySpawnRules(PortRegistries.TH_FAIRY.get(), level, MobSpawnType.SPAWN_EGG,

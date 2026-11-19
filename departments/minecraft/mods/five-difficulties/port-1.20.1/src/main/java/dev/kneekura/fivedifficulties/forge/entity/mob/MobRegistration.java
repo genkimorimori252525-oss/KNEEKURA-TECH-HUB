@@ -20,6 +20,7 @@ public final class MobRegistration {
         event.put(PortRegistries.SUNFLOWER_FAIRY.get(), DanmakuMobEntity.createDanmakuAttributes().build());
         event.put(PortRegistries.FAMILIAR.get(), DanmakuMobEntity.createDanmakuAttributes().build());
         event.put(PortRegistries.TH_PHANTOM.get(), DanmakuMobEntity.createDanmakuAttributes().build());
+        event.put(PortRegistries.RUMIA.get(), DanmakuMobEntity.createDanmakuAttributes().build());
     }
 
     @SubscribeEvent
@@ -30,5 +31,7 @@ public final class MobRegistration {
                 THFairyEntity::checkFairySpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(PortRegistries.TH_PHANTOM.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 PhantomEntity::checkPhantomSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
+        event.register(PortRegistries.RUMIA.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                RumiaEntity::checkRumiaSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
     }
 }

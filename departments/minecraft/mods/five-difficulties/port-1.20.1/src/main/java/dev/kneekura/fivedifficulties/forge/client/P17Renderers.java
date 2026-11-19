@@ -25,6 +25,7 @@ public final class P17Renderers {
 
     public static final ModelLayerLocation FAIRY_LAYER = layer("th_fairy");
     public static final ModelLayerLocation SUNFLOWER_FAIRY_LAYER = layer("sunflower_fairy");
+    public static final ModelLayerLocation RUMIA_LAYER = layer("rumia");
 
     private static ModelLayerLocation layer(String name) {
         return new ModelLayerLocation(new ResourceLocation(FiveDifficultiesPort.MOD_ID, name), "main");
@@ -150,6 +151,68 @@ public final class P17Renderers {
 
         @Override
         public ResourceLocation getTextureLocation(dev.kneekura.fivedifficulties.forge.entity.mob.PhantomEntity e) {
+            return TEX;
+        }
+    }
+
+    /** X1's renderDark sphere (18 × 9 quads) of {@code width}, white at {@code alpha}. */
+    static void darkSphere(X1Tess t, float width, float alpha) {
+        float maxWidth = width / 2.0F;
+        int zAngleDivNum = 18, zDivNum = 9;
+        double angleSpanZ = Math.PI * 2.0D / (double) zAngleDivNum;
+        double zPos, zPosOld = Math.sin(-Math.PI / 2.0D) * maxWidth;
+        float angle = -(float) Math.PI / 2.0F, angleSpan = (float) Math.PI / (float) zDivNum;
+        angle += angleSpan;
+        float widthOld = 0.0F;
+        for (int j = 0; j < zDivNum; j++) {
+            zPos = Math.sin(angle) * maxWidth;
+            float w = (float) Math.cos(angle) * maxWidth;
+            double angleZ = 0D;
+            float xo = (float) Math.cos(angleZ) * w, yo = (float) Math.sin(angleZ) * w;
+            float x2o = (float) Math.cos(angleZ) * widthOld, y2o = (float) Math.sin(angleZ) * widthOld;
+            angleZ = angleSpanZ;
+            for (int i = 1; i <= zAngleDivNum; i++) {
+                float x = (float) Math.cos(angleZ) * w, y = (float) Math.sin(angleZ) * w;
+                float x2 = (float) Math.cos(angleZ) * widthOld, y2 = (float) Math.sin(angleZ) * widthOld;
+                t.color(1.0F, 1.0F, 1.0F, alpha).v(x, y, zPos, 1.0F, 0.0F).v(xo, yo, zPos, 0.0F, 0.0F)
+                        .v(x2o, y2o, zPosOld, 0.0F, 1.0F).v(x2, y2, zPosOld, 1.0F, 1.0F);
+                xo = x;
+                yo = y;
+                x2o = x2;
+                y2o = y2;
+                angleZ += angleSpanZ;
+            }
+            zPosOld = zPos;
+            angle += angleSpan;
+            widthOld = w;
+        }
+    }
+
+    /** RenderRumia: the boss plus a 12-wide darkening sphere 1.3 up (drawn over everything from within 6). */
+    public static final class Rumia extends THBossRenderer<dev.kneekura.fivedifficulties.forge.entity.mob.RumiaEntity,
+            dev.kneekura.fivedifficulties.forge.client.mob.RumiaModel> {
+        private static final ResourceLocation TEX = mob("rumia");
+
+        public Rumia(EntityRendererProvider.Context context) {
+            super(context, new dev.kneekura.fivedifficulties.forge.client.mob.RumiaModel(context.bakeLayer(RUMIA_LAYER)), 0.25F);
+        }
+
+        @Override
+        public void render(dev.kneekura.fivedifficulties.forge.entity.mob.RumiaEntity e, float yaw, float partialTick,
+                           PoseStack pose, MultiBufferSource buffers, int light) {
+            super.render(e, yaw, partialTick, pose, buffers, light);
+            boolean near = this.entityRenderDispatcher.distanceToSqr(e) < 36.0D;
+            pose.pushPose();
+            pose.mulPose(this.entityRenderDispatcher.cameraOrientation());
+            pose.mulPose(Axis.YP.rotationDegrees(180.0F));
+            pose.translate(0.0F, 1.3F, 0.0F);
+            darkSphere(new X1Tess(pose, buffers, SakuyaTimeControllerRenderer.DARK_TEXTURE)
+                    .begin(near ? X1Tess.State.DARKEN_ALWAYS : X1Tess.State.DARKEN), 12.0F, 1.0F);
+            pose.popPose();
+        }
+
+        @Override
+        public ResourceLocation getTextureLocation(dev.kneekura.fivedifficulties.forge.entity.mob.RumiaEntity e) {
             return TEX;
         }
     }

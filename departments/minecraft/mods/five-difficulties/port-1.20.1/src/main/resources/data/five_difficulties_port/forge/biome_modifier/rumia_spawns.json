@@ -1,0 +1,14 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": [
+    "minecraft:forest",
+    "minecraft:plains",
+    "minecraft:taiga"
+  ],
+  "spawners": {
+    "type": "five_difficulties_port:rumia",
+    "weight": 4,
+    "minCount": 1,
+    "maxCount": 1
+  }
+}

@@ -228,6 +228,8 @@ public abstract class DanmakuMobEntity extends PathfinderMob {
         setDanmakuPattern((byte) nextPattern);
         attackCounter = -interval;
         deathTime = 0;
+        // 1.7.10 let onDeath run again for every phase; 1.20's die() is guarded by `dead`.
+        this.dead = false;
         if (!this.level().isClientSide) {
             setMaxHP(maxHP);
             setHealth(maxHP);
@@ -415,6 +417,20 @@ public abstract class DanmakuMobEntity extends PathfinderMob {
         this.calculateEntityAnimation(false);
     }
 
+    /** Test hook: one death tick (X1 onDeathUpdate), where bosses move to their next phase. */
+    public void deathStepForTest() {
+        this.tickDeath();
+    }
+
+    /** Test hook: run this tick's pattern at the given level. */
+    public void patternForTest(int level) {
+        this.danmakuPattern(level);
+    }
+
+    public boolean deadFlag() {
+        return this.dead;
+    }
+
     /** Overridden by each mob: the danmaku for this tick at the given difficulty level. */
     protected void danmakuPattern(int level) {}
 
@@ -431,6 +447,23 @@ public abstract class DanmakuMobEntity extends PathfinderMob {
                 banishExplosion(this, 5.0F, 5.0F);
             }
         }
+    }
+
+    /** THShotLib.explosionEffect: "random.explosion" at 2.0 / 3.0 and a large (size ≥ 2: huge) explosion particle. */
+    public static void explosionEffect(Level level, double x, double y, double z, float size) {
+        if (level.isClientSide) {
+            level.addParticle(size >= 2.0F ? ParticleTypes.EXPLOSION_EMITTER : ParticleTypes.EXPLOSION, x, y, z, 1.0D, 0.0D, 0.0D);
+        } else {
+            level.playSound(null, x, y, z, SoundEvents.GENERIC_EXPLODE, SoundSource.HOSTILE, 2.0F, 3.0F);
+        }
+    }
+
+    /** X1 isValidLightLevel + not peaceful: sky light at most a random 0..31, light at most 0..7 (thunder: sky 10). */
+    public static boolean darkEnough(net.minecraft.world.level.ServerLevelAccessor level, BlockPos pos, net.minecraft.util.RandomSource random) {
+        if (level.getDifficulty() == Difficulty.PEACEFUL) return false;
+        if (level.getBrightness(net.minecraft.world.level.LightLayer.SKY, pos) > random.nextInt(32)) return false;
+        int light = level.getLevel().isThundering() ? level.getMaxLocalRawBrightness(pos, 10) : level.getMaxLocalRawBrightness(pos);
+        return light <= random.nextInt(8);
     }
 
     /** THShotLib.banishExplosion: nearby fairies (not familiars) take up to maxDamage, at least 2. */

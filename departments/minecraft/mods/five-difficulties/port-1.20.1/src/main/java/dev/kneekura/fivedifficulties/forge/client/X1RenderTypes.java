@@ -24,7 +24,7 @@ public final class X1RenderTypes extends RenderType {
     }
 
     /** glBlendFunc settings X1 uses. */
-    public enum Blend { NONE, SRC_ALPHA_ONE, ONE_ONE_MINUS_SRC_COLOR, ONE_ONE, SRC_ALPHA_SRC_ALPHA }
+    public enum Blend { NONE, SRC_ALPHA_ONE, ONE_ONE_MINUS_SRC_COLOR, ONE_ONE, SRC_ALPHA_SRC_ALPHA, ZERO_ONE_MINUS_SRC_COLOR }
 
     private static final TransparencyStateShard SRC_ALPHA_SRC_ALPHA = new TransparencyStateShard(
             "five_difficulties_src_alpha_src_alpha",
@@ -51,6 +51,17 @@ public final class X1RenderTypes extends RenderType {
                 RenderSystem.defaultBlendFunc();
             });
 
+    private static final TransparencyStateShard ZERO_ONE_MINUS_SRC_COLOR = new TransparencyStateShard(
+            "five_difficulties_zero_one_minus_src_color",
+            () -> {
+                RenderSystem.enableBlend();
+                RenderSystem.blendFunc(GlStateManager.SourceFactor.ZERO, GlStateManager.DestFactor.ONE_MINUS_SRC_COLOR);
+            },
+            () -> {
+                RenderSystem.disableBlend();
+                RenderSystem.defaultBlendFunc();
+            });
+
     private record Key(ResourceLocation texture, Spec spec) {}
 
     private static final Function<Key, RenderType> CACHE = Util.memoize(key -> {
@@ -61,6 +72,7 @@ public final class X1RenderTypes extends RenderType {
             case ONE_ONE_MINUS_SRC_COLOR -> ONE_ONE_MINUS_SRC_COLOR;
             case ONE_ONE -> ADDITIVE_TRANSPARENCY;
             case SRC_ALPHA_SRC_ALPHA -> SRC_ALPHA_SRC_ALPHA;
+            case ZERO_ONE_MINUS_SRC_COLOR -> ZERO_ONE_MINUS_SRC_COLOR;
         };
         String name = "five_difficulties_" + s.blend().name().toLowerCase() + (s.depthWrite() ? "_depth" : "")
                 + (s.cull() ? "_cull" : "") + (s.depthAlways() ? "_always" : "");

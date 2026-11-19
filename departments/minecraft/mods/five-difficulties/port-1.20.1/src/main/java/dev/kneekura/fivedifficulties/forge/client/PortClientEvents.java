@@ -48,6 +48,7 @@ public final class PortClientEvents {
         event.registerEntityRenderer(PortRegistries.TH_ITEM.get(), THItemRenderer::new);
         event.registerEntityRenderer(PortRegistries.MUSOU_FUUIN.get(), P12Renderers.MusouFuuin::new);
         event.registerEntityRenderer(PortRegistries.DRAGON_NECK_JEWEL.get(), DragonNeckJewelRenderer::new);
+        event.registerEntityRenderer(PortRegistries.RUMIA.get(), P17Renderers.Rumia::new);
         event.registerEntityRenderer(PortRegistries.TH_PHANTOM.get(), P17Renderers.Phantom::new);
         event.registerEntityRenderer(PortRegistries.TH_FAIRY.get(), P17Renderers.THFairy::new);
         event.registerEntityRenderer(PortRegistries.SUNFLOWER_FAIRY.get(), P17Renderers.SunFlowerFairy::new);
@@ -90,6 +91,7 @@ public final class PortClientEvents {
                 SakuyaTimeControllerModel::createBodyLayer
         );
         event.registerLayerDefinition(SilverKnifeModel.LAYER_LOCATION, SilverKnifeModel::createBodyLayer);
+        event.registerLayerDefinition(P17Renderers.RUMIA_LAYER, dev.kneekura.fivedifficulties.forge.client.mob.RumiaModel::createBodyLayer);
         event.registerLayerDefinition(P17Renderers.FAIRY_LAYER, dev.kneekura.fivedifficulties.forge.client.mob.THFairyModel::createBodyLayer);
         event.registerLayerDefinition(P17Renderers.SUNFLOWER_FAIRY_LAYER, dev.kneekura.fivedifficulties.forge.client.mob.SunFlowerFairyModel::createBodyLayer);
         event.registerLayerDefinition(X1HatModels.MARISA_HAT, X1HatModels::createMarisaHat);
