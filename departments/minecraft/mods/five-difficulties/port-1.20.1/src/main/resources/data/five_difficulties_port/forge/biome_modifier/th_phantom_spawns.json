@@ -1,0 +1,37 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": [
+    "minecraft:badlands",
+    "minecraft:beach",
+    "minecraft:birch_forest",
+    "minecraft:dark_forest",
+    "minecraft:deep_ocean",
+    "minecraft:desert",
+    "minecraft:forest",
+    "minecraft:frozen_ocean",
+    "minecraft:frozen_river",
+    "minecraft:jungle",
+    "minecraft:ocean",
+    "minecraft:old_growth_pine_taiga",
+    "minecraft:plains",
+    "minecraft:river",
+    "minecraft:savanna",
+    "minecraft:savanna_plateau",
+    "minecraft:snowy_beach",
+    "minecraft:snowy_plains",
+    "minecraft:snowy_taiga",
+    "minecraft:sparse_jungle",
+    "minecraft:stony_shore",
+    "minecraft:swamp",
+    "minecraft:taiga",
+    "minecraft:windswept_forest",
+    "minecraft:windswept_hills",
+    "minecraft:wooded_badlands"
+  ],
+  "spawners": {
+    "type": "five_difficulties_port:th_phantom",
+    "weight": 20,
+    "minCount": 1,
+    "maxCount": 3
+  }
+}

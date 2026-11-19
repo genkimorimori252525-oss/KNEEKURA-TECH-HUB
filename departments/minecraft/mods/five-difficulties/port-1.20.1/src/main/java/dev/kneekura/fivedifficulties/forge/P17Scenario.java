@@ -116,6 +116,16 @@ public final class P17Scenario {
         require(familiar.isRemoved(), "a familiar without a shooter vanishes");
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P17_SUNFLOWER_PASS");
 
+        // A phantom: X1 stats; it leaves no corpse.
+        var phantom = spawn(PortRegistries.TH_PHANTOM.get(), -3, 3);
+        require(phantom.getSpeedValue() == 0.18D && phantom.getAttackDistance() == 6.0D && phantom.getFlyingHeight() == 3
+                && phantom.getForm() >= 0 && phantom.getForm() < 8, "phantom stats");
+        phantom.setHealth(0.0F);
+        phantom.deathTime = 0;
+        phantom.tickDeath();
+        require(phantom.isRemoved(), "the phantom vanishes at once");
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P17_PHANTOM_PASS");
+
         // Spawn rules accept egg spawns.
         require(THFairyEntity.checkFairySpawnRules(PortRegistries.TH_FAIRY.get(), level, MobSpawnType.SPAWN_EGG,
                 BlockPos.containing(bx, by, bz), level.random), "egg spawns allowed");
