@@ -1,0 +1,46 @@
+{
+  "schema": "kneekura.materials",
+  "schemaVersion": "1.0.0",
+  "materials": [
+    {
+      "materialId": "body",
+      "baseTexture": "textures/body.png",
+      "normalTexture": null,
+      "emissiveTexture": null,
+      "alphaMode": "mask",
+      "alphaCutoff": 0.06,
+      "blend": {
+        "enabled": false,
+        "equation": "add",
+        "srcFactor": "one",
+        "dstFactor": "zero"
+      },
+      "cullMode": "back",
+      "depth": {
+        "testFunction": "lequal",
+        "write": true
+      },
+      "emissive": false,
+      "fullbright": false,
+      "sampler": {},
+      "vertexTint": "multiply",
+      "lightmap": true,
+      "overlay": true,
+      "fogMode": "colorMixPreserveAlpha",
+      "replay": {
+        "status": "measured",
+        "vertexLighting": {
+          "mode": "dualDirectionalDiffuse",
+          "power": 0.6,
+          "ambient": 0.4,
+          "clampMax": 1
+        },
+        "fogDistance": "modelViewInverseViewRotationShape",
+        "textureCombine": "sample0TimesVertexTimesShaderColor",
+        "alphaDiscardSource": "sampler0Alpha",
+        "overlayCombine": "rgbMixByOverlayAlpha",
+        "lightmapCombine": "multiplyRgba"
+      }
+    }
+  ]
+}

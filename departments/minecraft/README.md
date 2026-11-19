@@ -2,6 +2,11 @@
 
 KNEEKURA TECH HUB の Minecraft MOD 開発専用部門。
 
+## 弾幕の下書き
+
+[JavaFX 3Dの弾幕スケッチ](danmaku-preview/README.md)で、Minecraft起動前に
+扇状・全周・回転連射の数値と時間変化を調整する。実機への取り込みは次段階。
+
 ## 互換性方針 — Anchor + Frontier
 
 この部門は **Minecraft 1.20.1 + Forge に固定しない**。
@@ -98,6 +103,12 @@ README.md / manifest.json / OVERVIEW.md / CODE-MAP.md / AI-BEHAVIOR.md / WORLDGE
 Sinytra Connector は 1.20.1 Forge 系と現行 NeoForge 系の両方を保持し、Fabric互換技術がどう進化したかを比較する重点対象とする。
 
 対象横断の一覧は catalog/MODS.md。詳細手順は ANALYSIS-SPEC-v1.md。
+
+## Minecraft 1.20.1 Vanilla Foundation Map
+
+[Vanilla Foundation Map](vanilla-foundation/README.md)は、既存Source Intelligenceの exact ANCHOR `IndexSnapshot` から `net/minecraft/**` のクラス・package・subsystem・継承/implements・JVM class-reference候補・由来を content-addressed な小型地図へ変換する。巨大なMinecraft source/JARをGitへ複製せず、実装AIが外部検索より先に1.20.1内部を発見できる入口として使う。
+
+Vanilla AIの意味解析は [vanilla-ai](vanilla-ai/README.md)、実機での意思決定可視化は LAB の Entity Decision Observatory が担当し、Foundation Map自体は静的な発見・由来層に留める。
 
 ## MOD制作AI環境の確定設計
 

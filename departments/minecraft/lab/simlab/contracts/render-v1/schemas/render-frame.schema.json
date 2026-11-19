@@ -1,0 +1,547 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kneekura.local/schemas/render-frame-v1.json",
+  "title": "KNEEKURA RenderFrameIR v1",
+  "type": "object",
+  "required": [
+    "schema",
+    "schemaVersion",
+    "runId",
+    "entityUuid",
+    "renderSequence",
+    "gameTime",
+    "partialTick",
+    "modelId",
+    "packHash",
+    "layoutHash",
+    "source",
+    "modelToWorldMatrix",
+    "deformation",
+    "visibility",
+    "drawOrder",
+    "drawStates"
+  ],
+  "properties": {
+    "schema": {
+      "const": "kneekura.renderframe"
+    },
+    "schemaVersion": {
+      "type": "string",
+      "pattern": "^1\\.[0-9]+\\.[0-9]+(?:[-+].*)?$"
+    },
+    "runId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "entityUuid": {
+      "type": "string",
+      "minLength": 8
+    },
+    "renderSequence": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "gameTime": {
+      "type": "integer"
+    },
+    "partialTick": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "modelId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "packHash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "layoutHash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "type",
+        "authority",
+        "fidelityTier"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "runtimeFinalVertex",
+            "runtimeMatrix",
+            "runtimePaletteConverted",
+            "recordedPose",
+            "animationLibrary",
+            "offlineYsmEmulator"
+          ]
+        },
+        "authority": {
+          "enum": [
+            "authoritative",
+            "derived",
+            "predicted"
+          ]
+        },
+        "fidelityTier": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "auxiliarySamplerInputs": {
+          "enum": [
+            "resolved-per-vertex-rgba"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "modelToWorldMatrix": {
+      "type": "array",
+      "minItems": 16,
+      "maxItems": 16,
+      "items": {
+        "type": "number"
+      }
+    },
+    "globalShaderState": {
+      "type": "object",
+      "required": [
+        "matrixConvention",
+        "modelViewMatrix",
+        "projectionMatrix",
+        "inverseViewRotationMatrix",
+        "directionalLights",
+        "shaderColor",
+        "fog"
+      ],
+      "properties": {
+        "matrixConvention": {
+          "const": "JOML_COLUMN_MAJOR_COLUMN_VECTOR"
+        },
+        "modelViewMatrix": {
+          "type": "array",
+          "minItems": 16,
+          "maxItems": 16,
+          "items": {
+            "type": "number"
+          }
+        },
+        "projectionMatrix": {
+          "type": "array",
+          "minItems": 16,
+          "maxItems": 16,
+          "items": {
+            "type": "number"
+          }
+        },
+        "inverseViewRotationMatrix": {
+          "type": "array",
+          "minItems": 9,
+          "maxItems": 9,
+          "items": {
+            "type": "number"
+          }
+        },
+        "directionalLights": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 3,
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "shaderColor": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {
+            "type": "number"
+          }
+        },
+        "fog": {
+          "type": "object",
+          "required": [
+            "curve",
+            "start",
+            "end",
+            "color",
+            "shape",
+            "distanceSpace"
+          ],
+          "properties": {
+            "curve": {
+              "const": "smoothstep"
+            },
+            "start": {
+              "type": "number"
+            },
+            "end": {
+              "type": "number"
+            },
+            "color": {
+              "type": "array",
+              "minItems": 4,
+              "maxItems": 4,
+              "items": {
+                "type": "number"
+              }
+            },
+            "shape": {
+              "enum": [
+                "sphere",
+                "cylinder"
+              ]
+            },
+            "distanceSpace": {
+              "const": "modelView"
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "deformation": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "type",
+            "matrices"
+          ],
+          "properties": {
+            "type": {
+              "const": "skinMatrices"
+            },
+            "matrices": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "minItems": 16,
+                "maxItems": 16,
+                "items": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "additionalProperties": true
+        },
+        {
+          "type": "object",
+          "required": [
+            "type",
+            "bufferRef",
+            "vertexCount"
+          ],
+          "properties": {
+            "type": {
+              "const": "finalVertices"
+            },
+            "bufferRef": {
+              "type": "string",
+              "minLength": 1
+            },
+            "vertexCount": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "strideFloats": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "format": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": true
+        }
+      ]
+    },
+    "visibility": {
+      "type": "object",
+      "required": [
+        "bones",
+        "groups"
+      ],
+      "properties": {
+        "bones": {
+          "type": "array",
+          "items": {
+            "type": "boolean"
+          }
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "type": "boolean"
+          }
+        },
+        "bonesResolvedInFinalVertices": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    },
+    "drawOrder": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "drawStates": {
+      "type": "object"
+    },
+    "goldenBinding": {
+      "type": "object",
+      "required": [
+        "schema",
+        "schemaVersion",
+        "identity",
+        "renderTick",
+        "framebuffer",
+        "camera",
+        "backgroundDepth"
+      ],
+      "properties": {
+        "schema": {
+          "const": "kneekura.golden-frame-binding"
+        },
+        "schemaVersion": {
+          "const": 1
+        },
+        "identity": {
+          "type": "object",
+          "required": [
+            "runId",
+            "entityUuid",
+            "renderSequence",
+            "gameTime",
+            "partialTick"
+          ],
+          "properties": {
+            "runId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "entityUuid": {
+              "type": "string",
+              "minLength": 8
+            },
+            "renderSequence": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "gameTime": {
+              "type": "integer"
+            },
+            "partialTick": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "renderTick": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "framebuffer": {
+          "type": "object",
+          "required": [
+            "width",
+            "height",
+            "viewportWidth",
+            "viewportHeight",
+            "windowWidth",
+            "windowHeight",
+            "guiScaledWidth",
+            "guiScaledHeight"
+          ],
+          "properties": {
+            "width": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "height": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "viewportWidth": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "viewportHeight": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "windowWidth": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "windowHeight": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "guiScaledWidth": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "guiScaledHeight": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "camera": {
+          "type": "object",
+          "required": [
+            "position",
+            "xRot",
+            "yRot",
+            "rotationQuaternion",
+            "projectionMatrix",
+            "matrixConvention"
+          ],
+          "properties": {
+            "position": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number"
+              }
+            },
+            "xRot": {
+              "type": "number"
+            },
+            "yRot": {
+              "type": "number"
+            },
+            "rotationQuaternion": {
+              "type": "array",
+              "minItems": 4,
+              "maxItems": 4,
+              "items": {
+                "type": "number"
+              }
+            },
+            "projectionMatrix": {
+              "type": "array",
+              "minItems": 16,
+              "maxItems": 16,
+              "items": {
+                "type": "number"
+              }
+            },
+            "matrixConvention": {
+              "const": "JOML_COLUMN_MAJOR_COLUMN_VECTOR"
+            }
+          },
+          "additionalProperties": false
+        },
+        "backgroundDepth": {
+          "type": "object",
+          "required": [
+            "encoding",
+            "origin",
+            "range",
+            "width",
+            "height"
+          ],
+          "properties": {
+            "encoding": {
+              "const": "FLOAT32_LE"
+            },
+            "origin": {
+              "const": "bottom-left"
+            },
+            "range": {
+              "const": "OPENGL_DEPTH_0_1"
+            },
+            "width": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "height": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "source": {
+            "properties": {
+              "type": {
+                "const": "runtimeFinalVertex"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "source"
+        ]
+      },
+      "then": {
+        "required": [
+          "globalShaderState"
+        ],
+        "properties": {
+          "source": {
+            "required": [
+              "auxiliarySamplerInputs"
+            ],
+            "properties": {
+              "auxiliarySamplerInputs": {
+                "const": "resolved-per-vertex-rgba"
+              }
+            }
+          },
+          "deformation": {
+            "required": [
+              "type",
+              "strideFloats",
+              "format"
+            ],
+            "properties": {
+              "type": {
+                "const": "finalVertices"
+              },
+              "strideFloats": {
+                "const": 24
+              },
+              "format": {
+                "const": "KNEEKURA_FINAL_VERTEX_V2"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "additionalProperties": true
+}

@@ -1,6 +1,6 @@
 # Registered LAB adapter and retained experiment resume
 
-This source slice adds an explicit local file bridge to KNEEKURA-LAB. It can register an already prepared request, inspect that registration, and reconcile an existing action journal. It does not launch Minecraft, install a runtime owner, dispatch actions, or convert a retained report into live evidence.
+The LAB source now lives in this repository at `departments/minecraft/lab/`. The registered adapter remains an explicit local file bridge to that LAB runtime surface: it can register an already prepared request, inspect that registration, and reconcile an existing action journal. Merely discovering the vendored source does not launch Minecraft, install a runtime owner, dispatch actions, or convert a retained report into live evidence.
 
 The executable surface is deliberately small:
 
@@ -19,7 +19,7 @@ kneekura-minecraft task prepare --request TASK.json --experiment-result SHA256
 
 ## Private registry
 
-The caller supplies schema version 1, enabled `true`, backend `kneekura.lab.local-bridge.v1`, a canonical LAB workspace, declared source revision, exact Node executable path and SHA-256, exact owner-config path and SHA-256, a deadline up to ten seconds, and SHA-256 values for this fixed module closure:
+The caller supplies schema version 1, enabled `true`, backend `kneekura.lab.local-bridge.v1`, a canonical LAB workspace (normally the same-checkout `departments/minecraft/lab` directory), declared Tech Hub source revision, exact Node executable path and SHA-256, exact owner-config path and SHA-256, a deadline up to ten seconds, and SHA-256 values for this fixed module closure:
 
 - `adapter-cli.mjs`
 - `adapter.mjs`
@@ -43,6 +43,6 @@ TaskContext accepts optional `--experiment-registry` and `--experiment-result` i
 
 ## Source and live gates
 
-The hosted TECH HUB workflow pins exact LAB and MOD revisions, runs LAB source tests and portable Java contracts, exercises an actual Python-to-Node registration fixture, and compiles the bridge against the pinned MOD source. It never runs a Minecraft client/server task. The existing LAB Windows workflow remains a separate gate.
+The hosted TECH HUB workflow uses the same-checkout LAB subtree, pins only the still-separate target MOD revision, runs LAB source tests and portable Java contracts, exercises an actual Python-to-Node registration fixture, and compiles the bridge against the pinned MOD source. It never runs a Minecraft client/server task. The old standalone LAB repository workflow is historical and is not required by the monorepo source gate.
 
 A source fixture is not a real repair cycle. Real action/camera acceptance, holding appearance, the visual-format benchmark and X7's real MOD repair loop are deferred under the user's code-first instruction. X8 same-frame multipass remains conditional on a demonstrated X3 deficiency; it is neither implemented nor declared unnecessary before that evaluation.

@@ -1,0 +1,24 @@
+{
+  "//": "SimLab Phase 0 の縦串。AI を切った高HPゾンビが計測ダミー。",
+  "//ダミーがゾンビな理由": "EntityMaid.ENEMY_IDS に載っているので、霊夢が owner もタスク設定も無しに自力で索敵してターゲットに選ぶ (ReimuGroundAttackTask.findNearestEnemy)。専用のダミー EntityType を作る必要がない。",
+  "//typeについて": "EntityType.byString() で解決するので、mods/ に jar を置いたその mod のモブもそのまま書ける。候補一覧は /tlm sim entities。",
+
+  "name": "smoke",
+  "seed": 20260814,
+  "duration": 600,
+  "arenas": 1,
+  "spacing": 1024,
+
+  "floor": {
+    "block": "minecraft:barrier",
+    "radius": 24,
+    "y": 64
+  },
+
+  "actors": [
+    { "type": "touhou_little_maid:reimu", "role": "reimu", "pos": [0, 65, 0] },
+    { "type": "minecraft:zombie", "role": "target", "pos": [0, 65, 12], "hp": 400, "noAi": true }
+  ],
+
+  "overrides": {}
+}

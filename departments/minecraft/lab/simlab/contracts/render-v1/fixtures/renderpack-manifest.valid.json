@@ -1,0 +1,32 @@
+{
+  "schema": "kneekura.renderpack",
+  "schemaVersion": "1.0.0",
+  "modelId": "test:reimu",
+  "packHash": "sha256:c353b1c348f4e133ca57077bc4a907ea038239cf27c6bd384fd604a67cb27da4",
+  "layoutHash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "compiler": {
+    "name": "kneekura-test-compiler",
+    "version": "0.1.0"
+  },
+  "source": {
+    "adapter": "ysm",
+    "modVersion": "2.6.2",
+    "modJarHash": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "modelResourceHash": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+  },
+  "coordinateSystem": "KNEEKURA_RH_Y_UP_BLOCK",
+  "files": [
+    {
+      "path": "mesh/mesh.json",
+      "sha256": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+    },
+    {
+      "path": "mesh/mesh.bin",
+      "sha256": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    },
+    {
+      "path": "materials/materials.json",
+      "sha256": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+    }
+  ]
+}

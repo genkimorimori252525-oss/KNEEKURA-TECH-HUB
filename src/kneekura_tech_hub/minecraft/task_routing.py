@@ -12,7 +12,7 @@ from pathlib import Path
 import sys
 import zipfile
 
-from . import asset_contract, blockbench, execution, input_route, runtime, task_context, verification
+from . import asset_contract, blockbench, execution, experiment_adapter, input_route, runtime, task_context, verification
 from .storage import ContractError, Limits, Store, _collect, digest, key_for, valid_hash
 from .workspace import workspace_fingerprint
 
@@ -334,6 +334,10 @@ def evaluate_capabilities(store: Store, request: dict, inputs: dict, evidence: d
         result['experimental_runtime'] = _record('experimental_runtime', 'BLOCKED',
             'LAB_RUNTIME_ATTESTATION_REQUIRED', ('loaded_runtime_attestation', 'disposable_world_authority',
             'live_repair_acceptance'), (report['result_hash'],) if report else (control['receipt_hash'],) if control else ())
+    elif experiment_adapter.inspect_builtin_source().get('status') == 'AVAILABLE':
+        result['experimental_runtime'] = _record('experimental_runtime', 'BLOCKED',
+            'LAB_RUNTIME_ATTESTATION_REQUIRED', ('experiment_registry', 'loaded_runtime_attestation',
+            'disposable_world_authority', 'live_repair_acceptance'))
     else:
         result['experimental_runtime'] = _record('experimental_runtime', 'NOT_CONFIGURED',
             'LAB_ADAPTER_NOT_REGISTERED', ('experiment_registry_or_retained_result',))

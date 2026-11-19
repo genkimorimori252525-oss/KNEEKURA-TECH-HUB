@@ -26,6 +26,34 @@ MODULES = ('adapter-cli.mjs', 'adapter.mjs', 'registration.mjs', 'materials.mjs'
 _FIELDS = {'schema_version', 'enabled', 'backend', 'workspace', 'source_revision', 'executable',
            'executable_hash', 'module_hashes', 'owner_file', 'owner_hash', 'timeout_seconds'}
 
+_BUILTIN_LAB_RELATIVE = Path('departments/minecraft/lab')
+
+
+def builtin_lab_root() -> Path:
+    """Return the vendored LAB source root when running from a Tech Hub checkout.
+
+    This is source discovery only. It never grants runtime authority or launches
+    Node, Forge, Minecraft, an owner, or an experiment.
+    """
+    return Path(__file__).resolve().parents[3] / _BUILTIN_LAB_RELATIVE
+
+
+def inspect_builtin_source() -> dict:
+    """Inspect the same-repository LAB source without executing it."""
+    root = builtin_lab_root()
+    bridge = root / 'debug-workspace' / 'bridge'
+    available = root.is_dir() and all((bridge / name).is_file() for name in MODULES)
+    return {
+        'schema_version': 1,
+        'status': 'AVAILABLE' if available else 'UNAVAILABLE',
+        'backend': BACKEND,
+        'source_location': _BUILTIN_LAB_RELATIVE.as_posix(),
+        'source_identity': 'SAME_REPOSITORY_TREE',
+        'module_count': len(MODULES) if available else 0,
+        'execution': 'BLOCKED',
+        'runtime_attestation': 'NOT_ESTABLISHED',
+    }
+
 
 def _resolve(path):
     try:

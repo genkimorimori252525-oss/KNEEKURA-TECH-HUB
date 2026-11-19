@@ -101,6 +101,19 @@ def read_class(data: bytes) -> dict:
                                 'annotations': attributes(r)})
     annotations = attributes(r)
     if r.position != len(data): raise ContractError('Trailing classfile bytes')
+
+    # CONSTANT_Class entries form a bounded structural/reference candidate set.
+    # They include declaration types and owners referenced from bytecode without
+    # requiring javap. Array class constants use descriptors and are excluded
+    # here rather than being misreported as internal owners.
+    class_references = sorted({
+        text(value[1])
+        for value in cp[1:]
+        if value is not None and value[0] == 7
+        and not text(value[1]).startswith('[')
+    })
+
     return {'owner': owner, 'superclass': class_name(parent) if parent else None,
             'interfaces': interfaces, 'major': major, 'minor': minor, 'access': flags,
-            'fields': fields, 'methods': methods, 'annotations': annotations}
+            'fields': fields, 'methods': methods, 'annotations': annotations,
+            'class_references': class_references}
