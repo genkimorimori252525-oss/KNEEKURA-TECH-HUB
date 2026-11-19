@@ -2,6 +2,11 @@
 
 KNEEKURA TECH HUB の Minecraft MOD 開発専用部門。
 
+## 弾幕の下書き
+
+[JavaFX 3Dの弾幕スケッチ](danmaku-preview/README.md)で、Minecraft起動前に
+扇状・全周・回転連射の数値と時間変化を調整する。実機への取り込みは次段階。
+
 ## 互換性方針 — Anchor + Frontier
 
 この部門は **Minecraft 1.20.1 + Forge に固定しない**。
