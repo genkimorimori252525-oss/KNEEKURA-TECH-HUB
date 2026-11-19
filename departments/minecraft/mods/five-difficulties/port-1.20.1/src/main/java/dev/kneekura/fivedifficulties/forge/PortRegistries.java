@@ -251,6 +251,13 @@ public final class PortRegistries {
                     .sized(6.0F, 0.3F).clientTrackingRange(10).updateInterval(3).setShouldReceiveVelocityUpdates(true)
                     .build(FiveDifficultiesPort.MOD_ID + ":kinkakuzi"));
 
+    // ---- P16o entities ----
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.MarisaBroomEntity>> MARISA_BROOM_ENTITY =
+            ENTITIES.register("magic_broom", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.MarisaBroomEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.MarisaBroomEntity::new, MobCategory.MISC)
+                    .sized(0.9F, 0.5F).clientTrackingRange(10).updateInterval(3).setShouldReceiveVelocityUpdates(true)
+                    .build(FiveDifficultiesPort.MOD_ID + ":magic_broom"));
+
     // ---- P13 danmaku-weapon items ----
     public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity>> DRAGON_NECK_JEWEL =
             ENTITIES.register("dragon_neck_jewel", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity>of(
@@ -462,6 +469,10 @@ public final class PortRegistries {
     // ---- P16n kinkakuzi ----
     public static final RegistryObject<Item> KINKAKUZI = ITEMS.register("kinkakuzi",
             () -> new dev.kneekura.fivedifficulties.forge.item.X1EffectItems.Kinkakuzi(new Item.Properties()));
+
+    // ---- P16o broom ----
+    public static final RegistryObject<Item> MARISA_BROOM = ITEMS.register("magic_broom",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1EffectItems.MarisaBroom(new Item.Properties()));
 
     public static final RegistryObject<Item> SHOT_MATERIAL = ITEMS.register("shot_material",
             () -> new dev.kneekura.fivedifficulties.forge.item.ShotMaterialItem(new Item.Properties()));

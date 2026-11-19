@@ -514,4 +514,53 @@ public final class P16Renderers {
             return PLATE;
         }
     }
+
+    /** RenderMarisaBroom: a 2.8-long square rod with a three-stage brush, drawn with the tessellator (no model). */
+    public static final class MarisaBroom extends EntityRenderer<dev.kneekura.fivedifficulties.forge.entity.MarisaBroomEntity> {
+        private static final ResourceLocation BROOM = tex("magic_broom");
+
+        public MarisaBroom(EntityRendererProvider.Context context) {
+            super(context);
+            this.shadowRadius = 0.5F;
+        }
+
+        @Override
+        public void render(dev.kneekura.fivedifficulties.forge.entity.MarisaBroomEntity e, float yaw, float partialTick,
+                           PoseStack pose, MultiBufferSource buffers, int light) {
+            pose.pushPose();
+            pose.mulPose(Axis.YP.rotationDegrees(180.0F - yaw));
+            float f2 = (float) e.getTimeSinceHit() - partialTick;
+            float f3 = Math.max(0.0F, e.getDamageTaken() - partialTick);
+            if (f2 > 0.0F) pose.mulPose(Axis.ZP.rotationDegrees(Mth.sin(f2) * f2 * f3 / 10.0F * e.getForwardDirection()));
+            pose.scale(-1.0F, -1.0F, 1.0F);
+            pose.mulPose(Axis.YP.rotationDegrees(-90F));
+            pose.mulPose(Axis.XP.rotationDegrees(-e.getXRot()));
+            float w = 0.05F, w2 = 0.3F, w3 = 0.4F, w4 = 0.15F;
+            double half = 2.8D / 2.0D;
+            X1Tess t = new X1Tess(pose, buffers, BROOM).begin(CUTOUT);
+            for (int i = 0; i < 4; i++) {
+                t.v(w, -w, half, 0F, 2F / 32F).v(w, -w, -half, 1F, 2F / 32F).v(w, w, -half, 1F, 0F).v(w, w, half, 0F, 0F);
+                pose.mulPose(Axis.ZP.rotationDegrees(90F));
+            }
+            t.v(-w, -w, half, 0F, 2F / 32F).v(w, -w, half, 2F / 64F, 2F / 32F).v(w, w, half, 2F / 64F, 4F / 32F).v(-w, w, half, 0F, 4F / 32F);
+            t.v(-w4, -w4, -half + 0.3D, 0.25F, 0.5F).v(w4, -w4, -half + 0.3D, 0.50F, 0.5F)
+                    .v(w4, w4, -half + 0.3D, 0.50F, 1.0F).v(-w4, w4, -half + 0.3D, 0.25F, 1.0F);
+            t.v(-w3, -w3, -half - 1.3D, 0.25F, 0.5F).v(-w3, w3, -half - 1.3D, 0.25F, 1.0F)
+                    .v(w3, w3, -half - 1.3D, 0.50F, 1.0F).v(w3, -w3, -half - 1.3D, 0.50F, 0.5F);
+            for (int i = 0; i < 4; i++) {
+                t.v(w4, -w4, -half + 0.3D, 0.5F, 0.5F).v(w, -w, -half, 0.5F, 3F / 32F).v(w, w, -half, 1.0F, 3F / 32F).v(w4, w4, -half + 0.3D, 1.0F, 0.5F);
+                t.v(w, -w, -half, 0.5F, 0.5F).v(w2, -w2, -half - 0.6D, 0.5F, 3F / 32F).v(w2, w2, -half - 0.6D, 1.0F, 3F / 32F).v(w, w, -half, 1.0F, 0.5F);
+                t.v(w2, -w2, -half - 0.6D, 0.5F, 1.0F).v(w3, -w3, -half - 1.3D, 0.5F, 16F / 32F)
+                        .v(w3, w3, -half - 1.3D, 1.0F, 16F / 32F).v(w2, w2, -half - 0.6D, 1.0F, 1.0F);
+                pose.mulPose(Axis.ZP.rotationDegrees(90F));
+            }
+            pose.popPose();
+            super.render(e, yaw, partialTick, pose, buffers, light);
+        }
+
+        @Override
+        public ResourceLocation getTextureLocation(dev.kneekura.fivedifficulties.forge.entity.MarisaBroomEntity e) {
+            return BROOM;
+        }
+    }
 }

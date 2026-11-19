@@ -197,4 +197,45 @@ public final class X1EffectItems {
             return true;
         }
     }
+
+    /** ItemMarisaBroom (魔法の箒): places the broom at the feet and gets on it unless riding or sneaking; hits for 2. */
+    public static final class MarisaBroom extends Item {
+        public MarisaBroom(Properties p) {
+            super(p.stacksTo(1));
+        }
+
+        @Override
+        public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+            ItemStack stack = player.getItemInHand(hand);
+            var broom = new dev.kneekura.fivedifficulties.forge.entity.MarisaBroomEntity(level, player.getX(), player.getY(), player.getZ());
+            // X1 plays "random.drr", a sound 1.7.10 does not have: silent.
+            if (!level.isClientSide) {
+                level.addFreshEntity(broom);
+                stack.shrink(1);
+                if (!player.isPassenger() && !player.isShiftKeyDown()) {
+                    player.startRiding(broom);
+                    broom.setYRot(player.getYRot());
+                    broom.setXRot(player.getXRot());
+                }
+            }
+            return InteractionResultHolder.pass(stack);
+        }
+
+        @Override
+        public boolean hurtEnemy(ItemStack stack, net.minecraft.world.entity.LivingEntity target,
+                                 net.minecraft.world.entity.LivingEntity attacker) {
+            target.hurt(attacker.damageSources().mobAttack(attacker), 2.0F);
+            return true;
+        }
+
+        @Override
+        public UseAnim getUseAnimation(ItemStack stack) {
+            return UseAnim.BLOCK;
+        }
+
+        @Override
+        public int getUseDuration(ItemStack stack) {
+            return 72000;
+        }
+    }
 }

@@ -71,6 +71,7 @@ public final class P16Scenario {
             runHisou();
             runEyeOrbBranch();
             runKinkakuzi();
+            runBroom();
             FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_RUNTIME_SCENARIO_PASS");
             ScenarioShutdown.finished(level.getServer(), ENV);
         } catch (Throwable failure) {
@@ -818,6 +819,34 @@ public final class P16Scenario {
         level.getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class, drop.getBoundingBox().inflate(4)).forEach(Entity::discard);
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_KINKAKUZI_PASS rise=" + String.format("%.2f", top - y0)
                 + " dealt=" + dealt);
+    }
+
+    private static void runBroom() {
+        FakePlayer p = player();
+        var hand = net.minecraft.world.InteractionHand.MAIN_HAND;
+        ItemStack item = new ItemStack(PortRegistries.MARISA_BROOM.get());
+        p.setItemInHand(hand, item);
+        item.getItem().use(level, p, hand);
+        require(item.isEmpty() && p.getVehicle() instanceof dev.kneekura.fivedifficulties.forge.entity.MarisaBroomEntity,
+                "on the broom");
+        var broom = (dev.kneekura.fivedifficulties.forge.entity.MarisaBroomEntity) p.getVehicle();
+        // Ridden: always forward along the rider's look, up by the rider's pitch.
+        p.setYRot(-90F);
+        p.setXRot(-30F);
+        double x0 = broom.getX(), y0 = broom.getY();
+        for (int i = 0; i < 10; i++) broom.serverTick();
+        double dx = broom.getX() - x0, dy = broom.getY() - y0;
+        require(dx > 0.5D && dy > 0.0D && p.fallDistance == 0.0F, "flew dx " + dx + " dy " + dy);
+        // Empty: it sinks.
+        p.stopRiding();
+        broom.setDeltaMovement(0, 0, 0);
+        broom.serverTick();
+        require(broom.getDeltaMovement().y < 0.0D, "an empty broom sinks: " + broom.getDeltaMovement());
+        broom.hurt(level.damageSources().generic(), 5F);
+        require(broom.isRemoved(), "broken by hits");
+        level.getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class, broom.getBoundingBox().inflate(4)).forEach(Entity::discard);
+        p.moveTo(bx, by, bz, -90F, 0F);
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_BROOM_PASS dx=" + String.format("%.2f", dx) + " dy=" + String.format("%.2f", dy));
     }
 
     private static void require(boolean ok, String what) {

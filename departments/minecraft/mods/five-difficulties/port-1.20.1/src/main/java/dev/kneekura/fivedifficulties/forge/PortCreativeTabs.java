@@ -15,6 +15,9 @@ public final class PortCreativeTabs {
 
     @SubscribeEvent
     public static void buildContents(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.COMBAT) { // P16o broom
+            event.accept(PortRegistries.MARISA_BROOM.get());
+        }
         if (event.getTabKey() == CreativeModeTabs.COMBAT) { // P16n kinkakuzi
             event.accept(PortRegistries.KINKAKUZI.get());
         }

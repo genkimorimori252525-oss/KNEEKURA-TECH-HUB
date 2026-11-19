@@ -406,6 +406,16 @@ ASSETS = {
         "assets/five_difficulties_port/textures/item/kinkakuzi.png",
         "61954f454e5061a326efbb9981a1dcf0931ac39c8da76a58e88fd616fab86ed6",
     ),
+    # P16o entity textures.
+    "assets/thkaguyamod/textures/MagicBloom.png": (
+        "assets/five_difficulties_port/textures/entity/magic_broom.png",
+        "8e1374dcb08f4b72ef79c567cdfe629367278f8a039d223c9cd20568e119039c",
+    ),
+    # P16o broom.
+    "assets/thkaguyamod/textures/items/magicBroom.png": (
+        "assets/five_difficulties_port/textures/item/magic_broom.png",
+        "68ccbbb332c53ca0765d34011666151d8e487db85fd29c1dee0fe4efa1d6da63",
+    ),
     # P15 danmaku crafting table.
     "assets/thkaguyamod/textures/blocks/danmaku_crafting_table.png": (
         "assets/five_difficulties_port/textures/block/danmaku_crafting_table.png",

@@ -59,7 +59,7 @@ jobs:
           python departments/minecraft/mods/five-difficulties/port-1.20.1/tools/patch-mdk-mixins.py "$ROOT/build.gradle"
           sed -i 's/^mod_id=.*/mod_id=five_difficulties_port/' "$ROOT/gradle.properties"
           sed -i 's/^mod_name=.*/mod_name=Five Difficulties X1 Preservation Port/' "$ROOT/gradle.properties"
-          sed -i 's/^mod_version=.*/mod_version=0.0.16-p16n/' "$ROOT/gradle.properties"
+          sed -i 's/^mod_version=.*/mod_version=0.0.16-p16o/' "$ROOT/gradle.properties"
           sed -i 's/^mod_group_id=.*/mod_group_id=dev.kneekura.fivedifficulties/' "$ROOT/gradle.properties"
           sed -i 's/^mod_authors=.*/mod_authors=KNEEKURA private preservation project/' "$ROOT/gradle.properties"
           sed -i 's/^mod_license=.*/mod_license=All Rights Reserved/' "$ROOT/gradle.properties"
@@ -203,6 +203,7 @@ jobs:
           grep -F "FIVE_DIFFICULTIES_P16_BLOODTHIRSTY_ORB_PASS" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
           grep -F "FIVE_DIFFICULTIES_P16_HOURAI_BRANCH_PASS" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
           grep -F "FIVE_DIFFICULTIES_P16_KINKAKUZI_PASS" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
+          grep -F "FIVE_DIFFICULTIES_P16_BROOM_PASS" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
           grep -F "FIVE_DIFFICULTIES_P16_RUNTIME_SCENARIO_PASS" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
           grep -F "Done (" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
           ! grep -F "Failed to start the minecraft server" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
@@ -216,7 +217,7 @@ jobs:
               ;;
           esac
 
-          echo "P16N_WORLD_RUNTIME_PASS" | tee "$GITHUB_WORKSPACE/forge-evidence/runtime-verdict.txt"
+          echo "P16O_WORLD_RUNTIME_PASS" | tee "$GITHUB_WORKSPACE/forge-evidence/runtime-verdict.txt"
 
       - name: Retain bounded compile evidence
         if: always()
