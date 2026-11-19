@@ -55,6 +55,9 @@ public final class ManualNativeAdapter {
  private static int startupDiagnostics;
  private static String previousScreen="UNOBSERVED";
  private static int ticks,stable;
+ // Bounded READY-wait explanation (<=8 reason changes) and a fail-fast for a declared subject that never loads.
+ private static String lastWait="";private static int waitRecords;private static long subjectWaitSince=-1;
+ static final long SUBJECT_WAIT_LIMIT_MS=20000;
  private static long sequence,dropped;
  private static String reason="NOT_RUN";
  private static final List<String> errors=new CopyOnWriteArrayList<>();
@@ -125,7 +128,12 @@ public final class ManualNativeAdapter {
    }catch(Exception e){errors.add(e.toString());}
    if(!ready&&!stopRequested&&(System.nanoTime()-initializedNanos)/1_000_000>=180000){stopRequested=true;try{var x=new JsonObject();x.addProperty("requestHash",requestHash);x.addProperty("status","STARTUP_TIMEOUT_NOT_WORLD_ACCEPTANCE");exclusive(output.resolve("bootstrap-timeout.json"),x);}catch(IOException failure){errors.add(failure.toString());}mc.stop();return;}
    if(!ready){
-    if(mc.level==null||mc.player==null||mc.getConnection()==null||forgeAt==null||bound()==null||mc.getSingleplayerServer().overworld().getEntity(subjectId)==null||!mc.getSingleplayerServer().overworld().getEntity(subjectId).isAlive()){stable=0;return;}
+    String wait=mc.level==null||mc.player==null||mc.getConnection()==null?"CLIENT_WORLD":forgeAt==null?"FORGE_LOADING":bound()==null?"PLAYER_BINDING":mc.getSingleplayerServer().overworld().getEntity(subjectId)==null?"SUBJECT_NOT_LOADED":!mc.getSingleplayerServer().overworld().getEntity(subjectId).isAlive()?"SUBJECT_NOT_ALIVE":null;
+    if(wait!=null){stable=0;
+     if(!wait.equals(lastWait)&&waitRecords<8){lastWait=wait;waitRecords++;var w=new JsonObject();w.addProperty("at",Instant.now().toString());w.addProperty("requestHash",requestHash);w.addProperty("reason",wait);w.addProperty("subjectUuid",subjectId.toString());try{Files.writeString(output.resolve("ready-wait.jsonl"),GSON.toJson(w)+"\n",StandardOpenOption.CREATE,StandardOpenOption.APPEND);}catch(IOException failure){errors.add(failure.toString());}}
+     // The Player is bound and its spawn area loaded: a subject still absent after the limit will not appear. Same self-stop path as the startup timeout.
+     if(wait.startsWith("SUBJECT_")){if(subjectWaitSince<0)subjectWaitSince=System.nanoTime();else if(!stopRequested&&(System.nanoTime()-subjectWaitSince)/1_000_000>=SUBJECT_WAIT_LIMIT_MS){stopRequested=true;try{var x=new JsonObject();x.addProperty("requestHash",requestHash);x.addProperty("status",wait+"_NOT_WORLD_ACCEPTANCE");x.addProperty("subjectUuid",subjectId.toString());x.addProperty("waitedMs",SUBJECT_WAIT_LIMIT_MS);exclusive(output.resolve("bootstrap-subject.json"),x);}catch(IOException failure){errors.add(failure.toString());}mc.stop();}}else subjectWaitSince=-1;
+     return;}
     if(++stable<5)return;
     try{
      String now=Instant.now().toString();List<String> mods=ModList.get().getMods().stream().map(m->m.getModId()+"@"+m.getVersion()).sorted().toList();String probe;

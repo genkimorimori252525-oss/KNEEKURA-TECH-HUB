@@ -13,7 +13,10 @@ const uuid=value=>typeof value==='string'&&/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}
 
 /** Data only: never resolves commands, executes builds, changes a world or launches. */
 export function validateProfile(p){
- const diagnostic=p?.schema==='kneekura.tank-profile/v3',visual=diagnostic||p?.schema==='kneekura.tank-profile/v2';exact(p,['schema','id','runtime','mods','world','playerUuid','subjectUuid','sourceRevision','mode','maxTicks','maxWallMs','maxEvents',...(visual?['presentation']:[]),...(diagnostic?['diagnostics']:[])]);
+ const diagnostic=p?.schema==='kneekura.tank-profile/v3',visual=diagnostic||p?.schema==='kneekura.tank-profile/v2';exact(p,['schema','id','runtime','mods','world','playerUuid','subjectUuid','sourceRevision','mode','maxTicks','maxWallMs','maxEvents',...(visual?['presentation']:[]),...(diagnostic?['diagnostics']:[]),...['selfTest','view'].filter(key=>p&&Object.hasOwn(p,key))]);
+ // Optional in every schema: absent keeps the original exact behavior.
+ if(Object.hasOwn(p,'selfTest'))assert.equal(p.selfTest,true,'TANK_SELFTEST_FLAG');
+ if(Object.hasOwn(p,'view')){exact(p.view,['renderDistance','simulationDistance']);assert(Number.isInteger(p.view.renderDistance)&&p.view.renderDistance>=2&&p.view.renderDistance<=32,'TANK_VIEW_RENDER');assert(Number.isInteger(p.view.simulationDistance)&&p.view.simulationDistance>=5&&p.view.simulationDistance<=32,'TANK_VIEW_SIMULATION');}
  assert(['kneekura.tank-profile/v1','kneekura.tank-profile/v2','kneekura.tank-profile/v3'].includes(p.schema));if(visual)validatePresentationSettings(p.presentation);if(diagnostic)validateDiagnostics(p.diagnostics,p.maxWallMs);assert(typeof p.id==='string'&&/^[a-z][a-z0-9-]{1,63}$/.test(p.id),'TANK_PROFILE_ID');
  exact(p.runtime,['minecraft','forge','java']);for(const name of ['minecraft','forge','java'])assert.equal(p.runtime[name],versions[name],'TANK_COMPATIBILITY_'+name);
  assert(Array.isArray(p.mods)&&p.mods.length<=32,'TANK_MOD_LIMIT');

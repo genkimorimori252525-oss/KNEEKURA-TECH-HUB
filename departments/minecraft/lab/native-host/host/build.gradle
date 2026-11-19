@@ -18,6 +18,8 @@ minecraft {
                 property 'kneekura.tank.requestSha256', System.getenv('KNEEKURA_MANUAL_REQUEST_SHA256') ?: 'PREPARATION_ONLY'
                 property 'kneekura.tank.installSha256', System.getenv('KNEEKURA_TANK_INSTALL_SHA256') ?: 'PREPARATION_ONLY'
                 property 'kneekura.tank.world', profile.worldDir
+                // Opt-in MOD self-test: the per-trial nonce; a MOD runs its checks only when this property is present.
+                if (System.getenv('KNEEKURA_TANK_SELFTEST')) property 'kneekura.tank.selfTest', System.getenv('KNEEKURA_TANK_SELFTEST')
             }
             // ForgeGradle MDK parity: mapped-dev MODs built for production ship SRG refmaps; remap them to the
             // official names used by this development runtime instead of requiring hand-edited refmaps.
