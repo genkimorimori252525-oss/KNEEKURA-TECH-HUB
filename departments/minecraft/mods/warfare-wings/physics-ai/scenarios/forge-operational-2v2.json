@@ -1,0 +1,12 @@
+{
+  "scenario": "operational-2v2",
+  "kind": "aircombat",
+  "source": "minecraft_runtime_ia_next_tick_injection",
+  "ticks": 280,
+  "flights": [
+    {"id": "red-1", "file": "op-red-1-forge-controls.csv", "aircraft_id": "warfare_wings:a6m", "scenario_id": "op-red-1", "team": "red"},
+    {"id": "red-2", "file": "op-red-2-forge-controls.csv", "aircraft_id": "warfare_wings:a6m", "scenario_id": "op-red-2", "team": "red"},
+    {"id": "blue-1", "file": "op-blue-1-forge-controls.csv", "aircraft_id": "warfare_wings:p47n", "scenario_id": "op-blue-1", "team": "blue"},
+    {"id": "blue-2", "file": "op-blue-2-forge-controls.csv", "aircraft_id": "warfare_wings:p47n", "scenario_id": "op-blue-2", "team": "blue"}
+  ]
+}
