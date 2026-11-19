@@ -1,0 +1,26 @@
+{
+  "end_reason": "completed",
+  "observation_count": 1,
+  "observation_coverage": {
+    "examples": [
+      {
+        "chosen": "far-A",
+        "chosen_closest": false,
+        "chosen_first": true,
+        "closest": "near-B",
+        "first": "far-A",
+        "signal_id": "sample"
+      }
+    ],
+    "qualified_events": 1,
+    "state": "OBSERVED_CONTRAST"
+  },
+  "run_id": "fixture-g09",
+  "runtime_pass": false,
+  "scenario": "G09",
+  "schema": "kneekura.spore.observation-review.v1",
+  "source_kind": "synthetic_fixture",
+  "status": "SYNTHETIC_FIXTURE_ONLY",
+  "trace_sha256": "6e8e3aeb3ef729e23321a734919a5621ea4326dd6c92c6e6df306999d8bf63c3",
+  "warning": "LAB authenticated run/world/cleanup receipts, independent code-path attestation and actual GameTest assertions are required before runtime PASS. A JSONL text file cannot grant this."
+}
