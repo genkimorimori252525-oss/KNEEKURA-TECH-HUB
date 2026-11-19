@@ -2,6 +2,19 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import {decisionBurstFromArgs} from './decision-burst-cli.mjs';
+import {terrainQueryFromArgs} from './terrain-query-cli.mjs';
+import {queryDecisionDrilldown} from './evidence/decision-drilldown.mjs';
+import {buildRetainedDecisionPresentation} from './evidence/decision-presentation.mjs';
+import {writeDecisionPresentationArtifact} from './evidence/decision-view.mjs';
+import {readTankContext,readTankJsonFile,prepareTankResourceFile} from './tank-cli.mjs';
+import {buildCursorDecisionPacket,selectTankCursorTicks} from './evidence/cursor-decision.mjs';
+import {buildTankMap} from './evidence/tank-map.mjs';
+import {writeTankWorkbenchArtifact} from './evidence/tank-workbench-view.mjs';
+import {readExperimentDigest} from './experiment-cli.mjs';
+import {compareExperimentDigests} from './evidence/experiment-comparison.mjs';
+import {buildReproductionManifest,writeReproductionManifest} from './evidence/reproduction-manifest.mjs';
+import {buildExperimentGuidance} from './evidence/experiment-guidance.mjs';
 import {
   doctor,
   launchDebugRun,
@@ -61,6 +74,64 @@ async function main() {
   const command = process.argv[2] || 'status';
   const { file, config } = await loadConfig();
 
+  if(command==='experiment-summary'||command==='experiment-reproduction') {
+    const required=name=>{const value=argValue(name);if(!value||value.startsWith('--'))throw new Error('MISSING_'+name);return value;};
+    const result=await readExperimentDigest({runDir:required('--run-dir'),requestFile:required('--request'),assertionsFile:required('--assertions'),
+      subjectUuid:required('--uuid'),targetRevision:Number(required('--revision')),arenaEpoch:Number(required('--arena-epoch')),
+      window:{startTick:Number(required('--start-tick')),endTick:Number(required('--end-tick'))},
+      actionKeys:argValue('--action-keys')?await readTankJsonFile(required('--action-keys')):[],contextRelative:argValue('--context-relative')});
+    if(command==='experiment-reproduction') {
+      const manifest=buildReproductionManifest({requestBytes:result.requestBytes,assertionsBytes:result.assertionsBytes,
+        sourceBinding:{...result.digest.quality.coverage.sourceBinding,identity:result.digest.identity},worldBinding:result.digest.conditions.worldBinding,
+        observerProfile:result.digest.conditions.observer,exportReferences:{resultHash:result.exported.manifest.result_hash,visualBundleHash:result.exported.result.observations.visual_bundle}});
+      if(argValue('--output'))await writeReproductionManifest({manifest,output:required('--output'),runDir:required('--run-dir')});
+      print(manifest);
+    } else print(result.digest);
+    return;
+  }
+  if(command==='experiment-compare') {
+    const required=name=>{const value=argValue(name);if(!value||value.startsWith('--'))throw new Error('MISSING_'+name);return value;};
+    print(compareExperimentDigests({before:await readTankJsonFile(required('--before')),after:await readTankJsonFile(required('--after')),
+      intendedDifferences:argValue('--intended-differences')?await readTankJsonFile(required('--intended-differences')):[]}));return;
+  }
+  if(command==='experiment-guidance') {
+    const required=name=>{const value=argValue(name);if(!value||value.startsWith('--'))throw new Error('MISSING_'+name);return value;};
+    print(buildExperimentGuidance({digest:await readTankJsonFile(required('--digest')),health:argValue('--health')?await readTankJsonFile(required('--health')):{},
+      capabilities:await readTankJsonFile(required('--capabilities')),maxBookmarks:Number(argValue('--bookmark-limit')??32)}));return;
+  }
+
+  if(command==='tank-resource') {
+    const required=name=>{const value=argValue(name);if(!value||value.startsWith('--'))throw new Error('MISSING_'+name);return value;};
+    print(await prepareTankResourceFile({savedFile:required('--saved-recipe'),profileFile:required('--profile'),output:required('--output')}));return;
+  }
+  if(command==='tank-status'||command==='tank-preflight') {
+    const required=name=>{const value=argValue(name);if(!value||value.startsWith('--'))throw new Error('MISSING_'+name);return value;};
+    const current=await readCurrent(config,ROOT),runtime=evidenceRuntimeFromCurrent(current);await runtime.init();
+    const observations=await runtime.store.readObservations();
+    const context=await readTankContext({current,observations,arenaEpoch:Number(required('--arena-epoch')),
+      expectedRecipeHash:argValue('--recipe-hash'),worldBinding:argValue('--world-binding')?await readTankJsonFile(required('--world-binding')):undefined,
+      profile:command==='tank-preflight'?await readTankJsonFile(required('--profile')):undefined,
+      timeBudget:command==='tank-preflight'?await readTankJsonFile(required('--time-budget')):undefined});
+    print(command==='tank-status'?context.status:context.preflight);return;
+  }
+  if(command==='tank-view') {
+    const required=name=>{const value=argValue(name);if(!value||value.startsWith('--'))throw new Error('MISSING_'+name);return value;};
+    const subjectUuid=process.argv[3];if(!subjectUuid||subjectUuid.startsWith('--'))throw new Error('TANK_VIEW_UUID_REQUIRED');
+    const current=await readCurrent(config,ROOT),runtime=evidenceRuntimeFromCurrent(current);await runtime.init();
+    const observations=await runtime.store.readObservations(),arenaEpoch=Number(required('--arena-epoch'));
+    const context=await readTankContext({current,observations,arenaEpoch,expectedRecipeHash:argValue('--recipe-hash'),
+      worldBinding:argValue('--world-binding')?await readTankJsonFile(required('--world-binding')):undefined});
+    const identity={...context.status.identity,targetRevision:Number(required('--revision'))},window={startTick:Number(required('--start-tick')),endTick:Number(required('--end-tick'))};
+    const cursorSelection=selectTankCursorTicks({observations,identity,subjectUuid,window,maxCursors:Number(argValue('--cursor-limit')??32)});
+    const cursorPackets=cursorSelection.ticks.map(cursorTick=>buildCursorDecisionPacket({observations,identity,subjectUuid,window,cursorTick}));
+    const latest=cursorPackets.at(-1),map=buildTankMap({status:context.status,positions:latest.layers.motion.trace,declaredPaths:latest.layers.declaredNavigation.nodes});
+    const experiment=argValue('--experiment')?await readTankJsonFile(required('--experiment')):null;
+    const comparison=argValue('--comparison')?await readTankJsonFile(required('--comparison')):null;
+    const guidance=argValue('--guidance')?await readTankJsonFile(required('--guidance')):null,reproduction=argValue('--reproduction')?await readTankJsonFile(required('--reproduction')):null;
+    const outputFile=await writeTankWorkbenchArtifact({status:context.status,cursorPackets,map,cursorSelection,experiment,comparison,guidance,reproduction},required('--output'),current.runDir);
+    print({schema:'kneekura.tank-workbench/v1',identity,subjectUuid,outputFile,cursorSelection,readOnlyRetainedEvidence:true});return;
+  }
+
   if (command === 'doctor') {
     const result = await doctor(config, ROOT);
     print({ configFile: file, ...result });
@@ -102,7 +173,11 @@ async function main() {
     if (current.live !== true) {
       throw new Error('cannot set target: debug runtime is not live');
     }
-    const target = await setTargetControl(current, entityUuid);
+    const target = await setTargetControl(current, entityUuid, {
+      decisionSnapshot: process.argv.includes('--decision-snapshot'),
+      decisionBurst: decisionBurstFromArgs(process.argv.slice(4)),
+      decisionTerrain: terrainQueryFromArgs(process.argv.slice(4)),
+    });
     print({
       configFile: file,
       debugSessionId: current.debugSessionId,
@@ -125,6 +200,33 @@ async function main() {
       target
     });
     return;
+  }
+
+  if(command === 'evidence-decision' || command === 'evidence-decision-view') {
+    const subjectUuid=process.argv[3];
+    const required=name=>{const value=argValue(name);if(value==null||!value.trim()||value.startsWith('--'))throw new Error('required decision option: '+name);return value;};
+    const current=await readCurrent(config,ROOT);
+    const runtime=evidenceRuntimeFromCurrent(current);
+    // Retained canonical read only. Do not initialize, ingest or rewrite a finalized evidence run.
+    const observations=await runtime.store.readObservations();
+    const identity={debugSessionId:current.debugSessionId,runId:current.runId,runSnapshotId:current.runSnapshotId,
+      processEpoch:current.processEpoch,arenaEpoch:Number(required('--arena-epoch')),targetRevision:Number(required('--revision'))};
+    if(command === 'evidence-decision-view') {
+      const result=buildRetainedDecisionPresentation({observations,subjectUuid,identity,
+        request:{startTick:Number(required('--start-tick')),endTick:Number(required('--end-tick'))}});
+      const output=argValue('--output');
+      if(output!==null) {
+        required('--output');
+        // Create a separate derived artifact; never overwrite retained evidence or any existing file.
+        const outputFile=await writeDecisionPresentationArtifact(result,output,current.runDir);
+        print({schema:result.schema,identity:result.identity,outputFile,readOnlyRetainedEvidence:true});
+      }else print(result);
+      return;
+    }
+    const result=queryDecisionDrilldown({observations,subjectUuid,identity,
+      request:{channel:required('--channel'),startTick:Number(required('--start-tick')),endTick:Number(required('--end-tick')),
+        limit:Number(argValue('--limit')??64),maxNodes:Number(argValue('--max-nodes')??32)}});
+    print(result);return;
   }
 
   if (command === 'evidence-trigger-watch') {
@@ -559,7 +661,7 @@ async function main() {
     return;
   }
 
-  throw new Error('unknown command: ' + command + ' (expected doctor/start/status/timeline/smoke/g2-smoke/stop/target/target-clear/target-status/evidence-status/evidence-trigger-watch/evidence-anomalies/evidence-entity/evidence-gap/evidence-capture/evidence-finalize)');
+  throw new Error('unknown command: ' + command + ' (expected doctor/start/status/timeline/smoke/g2-smoke/stop/target/target-clear/target-status/evidence-status/evidence-trigger-watch/evidence-anomalies/evidence-entity/evidence-decision/evidence-decision-view/evidence-gap/evidence-capture/evidence-finalize)');
 }
 
 main().catch((error) => {

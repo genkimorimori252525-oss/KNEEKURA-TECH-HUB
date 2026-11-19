@@ -1,0 +1,37 @@
+name: Bedrock Wither build
+
+concurrency:
+  group: bedrock-wither-${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: true
+
+on:
+  push:
+    paths:
+      - 'deliverables/minecraft/bedrock-wither/mod/**'
+      - '.github/workflows/bedrock-wither-build.yml'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: deliverables/minecraft/bedrock-wither/mod
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.1.1'
+
+      - name: Build standalone MOD scaffold
+        run: gradle build --stacktrace --no-daemon
+
+
+      - name: Run Bedrock Wither GameTests
+        run: gradle runGameTestServer --stacktrace --no-daemon
