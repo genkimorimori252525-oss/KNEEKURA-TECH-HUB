@@ -301,6 +301,20 @@ public final class PortRegistries {
     public static final RegistryObject<Item> HOURAI_PEARL_WHITE = ITEMS.register("hourai_pearl_white",
             () -> new Item(new Item.Properties()));
 
+    // ---- P16b weapons ----
+    public static final RegistryObject<Item> SPEAR_THE_GUNGNIR = ITEMS.register("spear_the_gungnir",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1Weapons.SpearTheGungnir(new Item.Properties()));
+    public static final RegistryObject<Item> LAEVATEINN = ITEMS.register("laevateinn",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1Weapons.Laevateinn(new Item.Properties()));
+    public static final RegistryObject<Item> ROUKANKEN = ITEMS.register("roukanken",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1Weapons.Roukanken(new Item.Properties()));
+    public static final RegistryObject<Item> ROUKANKEN_SENPUUZIN = ITEMS.register("roukanken_senpuuzin",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1Weapons.RoukanSenpuuzin(new Item.Properties()));
+    public static final RegistryObject<Item> DEATH_SCYTHE = ITEMS.register("death_scythe",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1Weapons.DeathScythe(new Item.Properties()));
+    public static final RegistryObject<Item> REMORSE_ROD = ITEMS.register("remorse_rod",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1Weapons.Kaigo(new Item.Properties()));
+
     public static final RegistryObject<Item> SHOT_MATERIAL = ITEMS.register("shot_material",
             () -> new dev.kneekura.fivedifficulties.forge.item.ShotMaterialItem(new Item.Properties()));
 

@@ -144,7 +144,7 @@ public final class X1SmallItems {
      */
     public static final class Onbashira extends SwordItem {
         public Onbashira(Properties p) {
-            super(Tiers.WOOD, 3, -2.4F, p);
+            super(Tiers.WOOD, 4, -2.4F, p); // 1.7.10 swords: 4 + material damage
         }
 
         @Override

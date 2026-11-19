@@ -41,6 +41,8 @@ public class THLaserEntity extends THShotEntity {
     /** X1 {@code source}: lasers never hit it. */
     protected Entity source;
 
+    public Entity source() { return source; }
+
     public THLaserEntity(EntityType<? extends THLaserEntity> type, Level level) {
         super(type, level);
         this.noCulling = true; // X1 ignoreFrustumCheck

@@ -57,6 +57,7 @@ public final class P16Scenario {
         by = level.getHeight(Heightmap.Types.MOTION_BLOCKING, spawn.getX() + 70, spawn.getZ() - 70);
         try {
             runSmallItems();
+            runWeapons();
             FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_RUNTIME_SCENARIO_PASS");
             ScenarioShutdown.finished(level.getServer(), ENV);
         } catch (Throwable failure) {
@@ -141,7 +142,7 @@ public final class P16Scenario {
         float before = target.getHealth();
         pillar.getItem().hurtEnemy(pillar, target, p);
         float dealt = before - target.getHealth();
-        require(dealt >= 5F || target.isDeadOrDying(), "onbashira extra damage " + dealt);
+        require(dealt >= 4.6F || target.isDeadOrDying(), "onbashira extra damage (5..22 less zombie armor 2) " + dealt);
         target.discard();
         p.setDeltaMovement(1.0D, 1.0D, -1.0D);
         pillar.getItem().inventoryTick(pillar, level, p, 3, false);
@@ -156,6 +157,119 @@ public final class P16Scenario {
         // Hourai pearls: eight colours registered.
         require(PortRegistries.HOURAI_PEARL_WHITE.get() != PortRegistries.HOURAI_PEARL_RED.get(), "pearls registered");
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16A_ITEMS_PASS");
+    }
+
+    private static Zombie zombie(double dx) {
+        Zombie z = EntityType.ZOMBIE.create(level);
+        z.moveTo(bx + dx, by, bz, 90F, 0F);
+        z.setNoAi(true);
+        level.addFreshEntity(z);
+        return z;
+    }
+
+    private static void runWeapons() {
+        FakePlayer p = player();
+        p.experienceLevel = 30;
+
+        // Gungnir: declares card 27 at a target ahead and throws the spear laser; the spear takes 1 damage.
+        Zombie aim = zombie(10);
+        ItemStack spear = new ItemStack(PortRegistries.SPEAR_THE_GUNGNIR.get());
+        p.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, spear);
+        shots = 0;
+        lastShot = null;
+        counting = true;
+        spear.getItem().use(level, p, net.minecraft.world.InteractionHand.MAIN_HAND);
+        counting = false;
+        require(lastShot instanceof dev.kneekura.fivedifficulties.forge.entity.THLaserEntity, "a gungnir laser, saw " + shots);
+        require(spear.getDamageValue() == 1, "spear damage " + spear.getDamageValue() + " shots=" + shots + " creative=" + p.getAbilities().instabuild + " lvl=" + p.experienceLevel);
+        lastShot.discard();
+        aim.discard();
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_GUNGNIR_PASS shots=" + shots);
+
+        // Laevateinn: one sweeping set laser per player; a second use does nothing; hits set fire.
+        ItemStack lae = new ItemStack(PortRegistries.LAEVATEINN.get());
+        p.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, lae);
+        shots = 0;
+        lastShot = null;
+        counting = true;
+        lae.getItem().use(level, p, net.minecraft.world.InteractionHand.MAIN_HAND);
+        lae.getItem().use(level, p, net.minecraft.world.InteractionHand.MAIN_HAND);
+        counting = false;
+        require(shots == 1 && lastShot instanceof dev.kneekura.fivedifficulties.forge.entity.THSetLaserEntity s
+                && s.source() == p, "one set laser owned by the player, saw " + shots);
+        require(lae.getDamageValue() == 1, "laevateinn damage " + lae.getDamageValue());
+        lastShot.discard();
+        Zombie burn = zombie(2);
+        lae.getItem().hurtEnemy(lae, burn, p);
+        require(burn.getRemainingFireTicks() > 0, "the target burns");
+        burn.discard();
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_LAEVATEINN_PASS");
+
+        // Roukanken: dash 10 ticks -> 3.0 forward; undead take 16 more; at speed > 3 it cuts what it passes.
+        ItemStack rk = new ItemStack(PortRegistries.ROUKANKEN.get());
+        p.setOnGround(true);
+        p.setDeltaMovement(0, 0, 0);
+        rk.getItem().releaseUsing(rk, level, p, 72000 - 10);
+        Vec3 dash = p.getDeltaMovement();
+        require(Math.abs(dash.x - 3.0D) < 1e-6 && Math.abs(dash.z) < 1e-6, "dash " + dash);
+        require(rk.getDamageValue() == 1, "dash wears the sword");
+        Zombie undead = zombie(2);
+        float hp = undead.getHealth();
+        rk.getItem().hurtEnemy(rk, undead, p);
+        require(hp - undead.getHealth() >= 14F, "undead bonus " + (hp - undead.getHealth()));
+        undead.discard();
+        net.minecraft.world.entity.animal.Cow cow = EntityType.COW.create(level);
+        cow.moveTo(bx + 1.5, by, bz, 0F, 0F);
+        cow.setNoAi(true);
+        level.addFreshEntity(cow);
+        p.getInventory().selected = 0;
+        p.getInventory().setItem(0, rk);
+        p.setDeltaMovement(3.5D, 0.0D, 0.0D);
+        int worn = rk.getDamageValue();
+        rk.getItem().inventoryTick(rk, level, p, 0, true);
+        require(cow.getHealth() <= 2.0F + 1e-4F, "the dash cut the cow to " + cow.getHealth());
+        require(rk.getDamageValue() == worn + 1, "cutting wears the sword");
+        cow.discard();
+        p.getInventory().clearContent();
+        p.setDeltaMovement(0, 0, 0);
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_ROUKANKEN_PASS dash=" + dash.x);
+
+        // Death scythe: pulls the zombie on the line 0.6 toward the player.
+        Zombie pulled = zombie(6);
+        pulled.setDeltaMovement(0, 0, 0);
+        ItemStack scythe = new ItemStack(PortRegistries.DEATH_SCYTHE.get());
+        require(scythe.getMaxDamage() == 444, "scythe durability 444");
+        p.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, scythe);
+        scythe.getItem().use(level, p, net.minecraft.world.InteractionHand.MAIN_HAND);
+        require(Math.abs(pulled.getDeltaMovement().x + 0.6D) < 1e-6, "pulled " + pulled.getDeltaMovement());
+        require(scythe.getDamageValue() == 1, "scythe wears");
+        pulled.discard();
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_SCYTHE_PASS");
+
+        // Remorse rod: knocks a healthy target to 3/4 once; an ink sac recharges it.
+        Zombie z = zombie(2);
+        ItemStack rod = new ItemStack(PortRegistries.REMORSE_ROD.get());
+        rod.getItem().hurtEnemy(rod, z, p);
+        require(z.getHealth() == 15F && dev.kneekura.fivedifficulties.forge.item.X1Weapons.Kaigo.used(rod), "rod hit " + z.getHealth());
+        z.setHealth(20F);
+        rod.getItem().hurtEnemy(rod, z, p);
+        require(z.getHealth() == 20F, "a used rod does nothing");
+        p.getInventory().setItem(5, new ItemStack(net.minecraft.world.item.Items.INK_SAC, 2));
+        p.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, rod);
+        rod.getItem().use(level, p, net.minecraft.world.InteractionHand.MAIN_HAND);
+        require(!dev.kneekura.fivedifficulties.forge.item.X1Weapons.Kaigo.used(rod)
+                && p.getInventory().getItem(5).getCount() == 1, "ink recharges the rod");
+        z.discard();
+        p.stopUsingItem();
+        p.getInventory().clearContent();
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_KAIGO_PASS");
+        // Leave nothing behind for the other scenarios (the declared Gungnir card keeps running otherwise).
+        for (Entity e : level.getEntities((Entity) null, new net.minecraft.world.phys.AABB(bx - 64, by - 64, bz - 64, bx + 64, by + 64, bz + 64),
+                e -> (e instanceof dev.kneekura.fivedifficulties.forge.entity.SpellCardEntity c && c.user == p)
+                        || (e instanceof THShotEntity shot && shot.getOwner() == p))) {
+            e.discard();
+        }
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16B_WEAPONS_PASS");
     }
 
     private static void require(boolean ok, String what) {

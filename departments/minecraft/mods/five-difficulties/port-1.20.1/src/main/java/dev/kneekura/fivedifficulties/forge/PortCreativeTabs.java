@@ -15,6 +15,14 @@ public final class PortCreativeTabs {
 
     @SubscribeEvent
     public static void buildContents(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.COMBAT) { // P16b weapons
+            event.accept(PortRegistries.SPEAR_THE_GUNGNIR.get());
+            event.accept(PortRegistries.LAEVATEINN.get());
+            event.accept(PortRegistries.ROUKANKEN.get());
+            event.accept(PortRegistries.ROUKANKEN_SENPUUZIN.get());
+            event.accept(PortRegistries.DEATH_SCYTHE.get());
+            event.accept(PortRegistries.REMORSE_ROD.get());
+        }
         if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) { // P16a small items
             event.accept(PortRegistries.HEAVENLY_PEACH.get());
             event.accept(PortRegistries.SWALLOW_COWRIE_SHELL.get());

@@ -20,6 +20,9 @@ public final class PortClientEvents {
         event.enqueueWork(() -> {
             net.minecraft.client.gui.screens.MenuScreens.register(PortRegistries.DANMAKU_CRAFTING_MENU.get(), DanmakuCraftingScreen::new);
             net.minecraft.client.gui.screens.MenuScreens.register(PortRegistries.LASER_CRAFTING_MENU.get(), DanmakuCraftingScreen::new);
+            net.minecraft.client.renderer.item.ItemProperties.register(PortRegistries.REMORSE_ROD.get(),
+                    new net.minecraft.resources.ResourceLocation(dev.kneekura.fivedifficulties.forge.FiveDifficultiesPort.MOD_ID, "used"),
+                    (stack, level, entity, seed) -> dev.kneekura.fivedifficulties.forge.item.X1Weapons.Kaigo.used(stack) ? 1F : 0F);
         });
     }
 

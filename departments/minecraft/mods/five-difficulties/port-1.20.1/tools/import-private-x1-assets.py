@@ -175,6 +175,36 @@ ASSETS = {
         "assets/five_difficulties_port/textures/item/hourai_pearl_white.png",
         "300952f4eb801945bfd493f6961685ae694350664bfb657ecbb9663c74dde4dc",
     ),
+    # P16b weapons.
+    "assets/thkaguyamod/textures/items/Gungnir.png": (
+        "assets/five_difficulties_port/textures/item/spear_the_gungnir.png",
+        "530312c7407ca56e85ad4d7cacc00bc95885a6ef7073e17ada89c2dbf02fff4f",
+    ),
+    "assets/thkaguyamod/textures/items/Laevateinn.png": (
+        "assets/five_difficulties_port/textures/item/laevateinn.png",
+        "d2c719e06b27cfb72b77d6f35e6aa2544c94b342fc7e3ddcfa24d483d8d7cdfa",
+    ),
+    "assets/thkaguyamod/textures/items/roukanSword.png": (
+        "assets/five_difficulties_port/textures/item/roukanken.png",
+        "1f62aaa294a9a73cc54858c226a67a1fbc3ca6dd62386767f235f803ecd10c3a",
+    ),
+    "assets/thkaguyamod/textures/items/roukanSword.png": (
+        "assets/five_difficulties_port/textures/item/roukanken_senpuuzin.png",
+        "1f62aaa294a9a73cc54858c226a67a1fbc3ca6dd62386767f235f803ecd10c3a",
+    ),
+    "assets/thkaguyamod/textures/items/deathScythe.png": (
+        "assets/five_difficulties_port/textures/item/death_scythe.png",
+        "6edced0174438767a5f4b26eefc346cb7d8a3efe990f3388d59093ada588e837",
+    ),
+    "assets/thkaguyamod/textures/items/kaigoStick_0.png": (
+        "assets/five_difficulties_port/textures/item/remorse_rod.png",
+        "353c459c5581b5b6a069d51e690b3007e09de679293645469ba895d346f49226",
+    ),
+    # P16b remorse rod, used.
+    "assets/thkaguyamod/textures/items/kaigoStick_1.png": (
+        "assets/five_difficulties_port/textures/item/remorse_rod_used.png",
+        "48c28972ea3b5299e70cc71284aa6958222e19e28b3fdc20ebc8ca73b5efad06",
+    ),
     # P15 danmaku crafting table.
     "assets/thkaguyamod/textures/blocks/danmaku_crafting_table.png": (
         "assets/five_difficulties_port/textures/block/danmaku_crafting_table.png",

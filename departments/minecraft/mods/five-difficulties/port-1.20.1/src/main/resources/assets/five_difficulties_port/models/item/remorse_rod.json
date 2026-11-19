@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "five_difficulties_port:item/remorse_rod"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "five_difficulties_port:used": 1
+      },
+      "model": "five_difficulties_port:item/remorse_rod_used"
+    }
+  ]
+}
