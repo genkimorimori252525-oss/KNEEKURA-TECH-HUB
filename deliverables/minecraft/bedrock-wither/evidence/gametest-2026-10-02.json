@@ -1,0 +1,56 @@
+{
+  "format": "kneekura.product-gametest-evidence.v1",
+  "deliverable": "minecraft/bedrock-wither",
+  "recorded_at": "2026-10-02",
+  "latest_accepted": {
+    "source_commit": "da3ee83a14e3d110ffb34a0b442186a06e1cecae",
+    "workflow_run_id": 37001222165,
+    "job_id": 110819160128,
+    "outcome": "SUCCESS",
+    "required_tests": 18,
+    "passed": 18,
+    "failed": 0,
+    "server_log_summary": "All 18 required tests passed :)"
+  },
+  "environment": {
+    "minecraft": "1.20.1",
+    "forge": "47.2.0",
+    "launch_target": "forgegametestserveruserdev",
+    "java": "17",
+    "gradle": "8.1.1",
+    "runner": "github-hosted-ubuntu"
+  },
+  "assertion_scope": [
+    "official/native-resolved entity collision/follow-range/effective movement speed/undead family and initial three-head state",
+    "modern 220-tick spawn countdown and ordinary-damage invulnerability",
+    "undead-source damage rejection",
+    "three independent alternative head-target slots",
+    "normal/dangerous skull identity, reflection gate, Java-equivalent resistance cap and unbreakable exceptions",
+    "explicit Bedrock skull impact damage mapping 5/8/12 plus Wither-effect contract",
+    "center-head 3-normal + 1-dangerous projectile order and observed inter-volley cooldown state",
+    "monotonic 75-point lastHealthInterval bucket tracking",
+    "half-health one-shot phase transition, AirAttack powered-shield switch and phase-2 projectile immunity",
+    "range-1 4x6x4 and range-2 6x8x6 destruction candidate geometry",
+    "phase-1 hurt reaction countdown does not reset and emits one dangerous skull",
+    "phase-2 dash execution lasts exactly 20 controller ticks",
+    "ordinary status effects are rejected while instant heal/harm processing remains allowed",
+    "isolated GameTest batches prevent cross-test AI/projectile/explosion interference",
+    "semantic death is immediate while Bedrock-specific 200-tick provisional death ticking delays removal and advances swell/overlay state",
+    "special movement state gate requires phase-1 aerial state, live target and wantsMove without guessed destination/speed constants",
+    "passive dangerous side-head firing is disabled on Easy and enabled on Normal/Hard",
+    "three Bedrock head pitch queries track main/alternative targets independently and synchronize to the client"
+  ],
+  "not_proven": [
+    "direct current-Bedrock parity",
+    "exact phase-1 special reposition algorithm",
+    "exact current accelerated ticks-per-shot at each health stage",
+    "exact passive dangerous-skull interval",
+    "exact dangerous-skull reflection vector/immunity ticks",
+    "exact current transition explosion binary body/order beyond accepted current/historical corroboration",
+    "dash preparation trigger and movement speed",
+    "current per-attack block exclusion differences",
+    "full powered-shield white/blue Bedrock texture parity",
+    "death duration/explosion/swell/flicker/XP timing",
+    "client visual acceptance in Tank"
+  ]
+}

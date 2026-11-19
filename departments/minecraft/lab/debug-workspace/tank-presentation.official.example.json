@@ -1,0 +1,23 @@
+{
+  "status": "GEOMETRY_VERIFIED",
+  "displayMode": "OBSERVATION_BRIGHT",
+  "recipeHash": "sha256:e9ed87f3b512cf59dac3ce6eb0c08654d047657be1e383dc6df580a5582bcac3",
+  "recipe": {
+    "v": 1,
+    "kind": "tank_recipe",
+    "preset": "wide",
+    "dimensions": {"width": 19, "depth": 19, "height": 11},
+    "origin": {"x": 0, "y": 224, "z": 0},
+    "dimension": "minecraft:overworld",
+    "shellBlock": "minecraft:black_concrete",
+    "environment": {
+      "difficulty": "normal",
+      "time": 6000,
+      "daylightCycle": false,
+      "weatherCycle": false,
+      "weather": "clear",
+      "mobSpawning": false
+    },
+    "presentation": {"mode": "OBSERVATION_BRIGHT", "gridSpacing": 1}
+  }
+}

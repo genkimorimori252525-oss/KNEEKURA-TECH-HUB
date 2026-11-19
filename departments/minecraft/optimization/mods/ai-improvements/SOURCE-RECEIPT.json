@@ -1,0 +1,85 @@
+{
+  "schema": "kneekura.minecraft.optimization-research-receipt.v1",
+  "recorded_at": "2026-10-11",
+  "target": "AI Improvements: Performance Tuning",
+  "origin": "BuiltBrokenModding/AI-Improvements",
+  "track": {
+    "ANCHOR": {
+      "minecraft": "1.20.1",
+      "loader": "Forge",
+      "source_artifact_identity": "NOT_PINNED_AS_EQUIVALENT_TO_RELEASE",
+      "status": "ADAPTATION_DESTINATION"
+    },
+    "ANCHOR_ADJACENT": {
+      "minecraft": "1.20",
+      "loader": "Forge",
+      "mod_version": "0.5.2",
+      "revision": "89c89590d8160f332bd2740acd0a67c96f37f00d",
+      "build_dependency": "Forge 1.20-46.0.12",
+      "source_status": "SELECTED_CLASSES_READ"
+    },
+    "COMPARATIVE": {
+      "minecraft": "1.20.2",
+      "loader": "NeoForge",
+      "commit": "6568bc1343f81c19056b09fada82761fedcbd4d8"
+    },
+    "FRONTIER": {
+      "minecraft": "26.3",
+      "loader": "NeoForge",
+      "commit": "a51cab76acf89099ea3c41393d858f9e061dbe4b"
+    }
+  },
+  "categories": [
+    "TICK_SIMULATION",
+    "ENTITY_BLOCKENTITY",
+    "CACHE_DATA_STRUCTURE"
+  ],
+  "mechanisms": [
+    {
+      "id": "AI-GOAL-PRUNING",
+      "basis": "DIRECT_OBSERVATION",
+      "benchmark": "PERFORMANCE_NOT_VERIFIED",
+      "correctness": "SEMANTICS_CHANGED_BY_OPTIONAL_GOAL_REMOVAL"
+    },
+    {
+      "id": "AI-TRIG-LOOKCONTROL",
+      "basis": "DIRECT_OBSERVATION",
+      "benchmark": "PERFORMANCE_NOT_VERIFIED",
+      "correctness": "APPROXIMATE_ANGLE_MATH"
+    },
+    {
+      "id": "AI-FILTER-HIT-ORDER",
+      "basis": "DIRECT_OBSERVATION",
+      "benchmark": "PERFORMANCE_NOT_VERIFIED",
+      "correctness": "FILTER_ORDER_EFFECTS_UNVERIFIED"
+    },
+    {
+      "id": "AI-EVENT-HOOK-DEDUP",
+      "basis": "DIRECT_OBSERVATION_REPAIR_DIFF",
+      "benchmark": "PERFORMANCE_NOT_VERIFIED",
+      "correctness": "ENTITY_JOIN_COVERAGE_REQUIRES_TEST"
+    }
+  ],
+  "source_locators": [
+    "https://github.com/BuiltBrokenModding/AI-Improvements/tree/89c89590d8160f332bd2740acd0a67c96f37f00d",
+    "https://github.com/BuiltBrokenModding/AI-Improvements/commit/2e95e6e62edeea7cfd86a06865d5cebaf190ab39",
+    "https://github.com/BuiltBrokenModding/AI-Improvements/issues/31"
+  ],
+  "publication": {
+    "license_of_source_code": "MIT - applies to code only",
+    "binary_and_assets_redistributed": false,
+    "license_conflict_with_distribution": "Upstream listing has All Rights Reserved; preserve rights boundaries"
+  },
+  "unfinished": [
+    "exact 1.20.1 Forge binary SHA256 and source parity",
+    "Full source tree acquisition and CAS snapshot index",
+    "FX / CPU / MSPT / correctness paired benchmark",
+    "full 26.3 NeoForge frontier semantics/portability",
+    "cross-mod compatibility regression tests"
+  ],
+  "prior_research": {
+    "url": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/blob/research/nesm-jar-and-ai-perf-2026-10-11/departments/minecraft/mods/ai-improvements/README.md",
+    "pull_request": 110
+  },
+  "status": "MECHANISM_ONLY_NO_PERFORMANCE_BENCHMARK"
+}

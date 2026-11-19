@@ -1,0 +1,495 @@
+name: Warfare Wings Physics AI Runtime Trace
+
+on:
+  push:
+    branches:
+      - jolly/research-warfare-wings-2026-10-07
+    paths:
+      - '.github/warfare-wings-physics-ai-runtime-request.txt'
+  workflow_dispatch:
+    inputs:
+      warfare_wings_path:
+        description: 'Optional absolute local path to the user-owned supplied Warfare Wings ANCHOR JAR'
+        required: false
+        default: ''
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: warfare-wings-physics-ai-runtime
+  cancel-in-progress: false
+
+jobs:
+  a6m-throttle-trace:
+    # Limit the local-artifact stage to the registered owner-controlled runner.
+    runs-on: [self-hosted, Windows, X64, tech-hub, kneekura]
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: powershell
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: jolly/research-warfare-wings-2026-10-07
+          fetch-depth: 1
+          clean: true
+          persist-credentials: false
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.8'
+          # This is the registered owner-controlled Windows runner with an
+          # existing local Gradle 8.8 cache. The preceding execution spent
+          # nearly ten minutes inside remote cache restore before the actual
+          # binary and Forge checks. Keep exact version 8.8 and original-JAR
+          # gates; skip only upload/download of remote Gradle cache entries.
+          cache-disabled: true
+
+      - name: Stage exact runtime jars
+        env:
+          INPUT_WW_PATH: ${{ inputs.warfare_wings_path }}
+          EXPECTED_WW_SHA256: dc3029597c88859744633b6f5e4a9f21d449294b1aaac90ea0c1749d7aa98a43
+          EXPECTED_IA_SHA512: 7b74442e161bb74538e0d8da34a81616daeea56a0da62db86113a78b3bf3c2b3a6b0e12f12454fd7c96092762f6b212ba57cb87eb1af2b242a4d5df4eca03055
+        run: |
+          $probe = Join-Path $env:GITHUB_WORKSPACE 'departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe'
+          $mods = Join-Path $probe 'flight-test-mods'
+          New-Item -ItemType Directory -Force $mods | Out-Null
+
+          $candidates = @()
+          if ($env:INPUT_WW_PATH) { $candidates += $env:INPUT_WW_PATH }
+          if ($env:KNEEKURA_WW_ANCHOR_JAR) { $candidates += $env:KNEEKURA_WW_ANCHOR_JAR }
+          $candidates += (Join-Path $HOME 'Downloads/warfare_wings-1.1.4-1.20.1-forge.jar')
+          $candidates += (Join-Path $HOME 'Documents/warfare_wings-1.1.4-1.20.1-forge.jar')
+          # The owner may retain the original mod inside a top-level Downloads
+          # collection (rather than in Downloads itself). Search only one
+          # folder level: no expensive recursive disk crawl, no personal path
+          # committed to Git and no silent public-JAR substitution.
+          foreach ($collection in @('Downloads', 'Documents')) {
+            $root = Join-Path $HOME $collection
+            if (-not (Test-Path -LiteralPath $root -PathType Container)) { continue }
+            $folders = @(Get-ChildItem -LiteralPath $root -Directory -ErrorAction SilentlyContinue |
+              Select-Object -First 200)
+            foreach ($folder in $folders) {
+              $candidates += (Join-Path $folder.FullName 'warfare_wings-1.1.4-1.20.1-forge.jar')
+            }
+          }
+
+          $source = $null
+          foreach ($candidate in $candidates | Select-Object -Unique) {
+            if (-not $candidate -or -not (Test-Path -LiteralPath $candidate -PathType Leaf)) { continue }
+            $hash = (Get-FileHash -LiteralPath $candidate -Algorithm SHA256).Hash.ToLowerInvariant()
+            if ($hash -eq $env:EXPECTED_WW_SHA256) {
+              $source = (Resolve-Path -LiteralPath $candidate).Path
+              break
+            }
+          }
+          if (-not $source) {
+            throw "Exact user-owned Warfare Wings ANCHOR not found. No public-artifact fallback is allowed. Expected SHA-256=$env:EXPECTED_WW_SHA256"
+          }
+          Copy-Item -LiteralPath $source -Destination (Join-Path $mods 'warfare_wings-1.1.4-1.20.1-forge.jar') -Force
+
+          $env:WW_TRACE_MODS_DIR = $mods
+          @'
+          import json
+          import os
+          import pathlib
+          import urllib.request
+
+          version_id = "GsVmbbkj"
+          target = pathlib.Path(os.environ["WW_TRACE_MODS_DIR"]) / "immersive_aircraft-1.3.3+1.20.1-forge.jar"
+          request = urllib.request.Request(
+              f"https://api.modrinth.com/v2/version/{version_id}",
+              headers={"User-Agent":"KNEEKURA-TechHub-PhysicsTrace/1.0"})
+          with urllib.request.urlopen(request) as response:
+              metadata = json.load(response)
+          selected = next((x for x in metadata["files"] if x.get("primary")), metadata["files"][0])
+          download = urllib.request.Request(
+              selected["url"],
+              headers={"User-Agent":"KNEEKURA-TechHub-PhysicsTrace/1.0"})
+          with urllib.request.urlopen(download) as response:
+              target.write_bytes(response.read())
+          print(target)
+          '@ | python -
+
+          $ww = Join-Path $mods 'warfare_wings-1.1.4-1.20.1-forge.jar'
+          $ia = Join-Path $mods 'immersive_aircraft-1.3.3+1.20.1-forge.jar'
+          if ((Get-FileHash $ww -Algorithm SHA256).Hash.ToLowerInvariant() -ne $env:EXPECTED_WW_SHA256) { throw 'Warfare Wings hash drift' }
+          if ((Get-FileHash $ia -Algorithm SHA512).Hash.ToLowerInvariant() -ne $env:EXPECTED_IA_SHA512) { throw 'Immersive Aircraft hash drift' }
+          Write-Host "Exact runtime jars verified."
+
+      - name: Verify all 24 engine reaction overrides in the pinned original bytecode
+        working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
+        run: |
+          $original = 'flight-test-mods/warfare_wings-1.1.4-1.20.1-forge.jar'
+          $javap = Join-Path $env:JAVA_HOME 'bin/javap.exe'
+          python ../tools/verify_engine_reaction_bytecode.py --jar $original --javap $javap
+          if ($LASTEXITCODE -ne 0) { throw "Exact 24-airframe engine source verification failed: $LASTEXITCODE" }
+
+      - name: Audit pinned original weapons and explicitly preserve no-fire authorization
+        working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
+        run: |
+          python ../tools/audit_exact_weapon_failclosed.py `
+            --ww 'flight-test-mods/warfare_wings-1.1.4-1.20.1-forge.jar' `
+            --ia 'flight-test-mods/immersive_aircraft-1.3.3+1.20.1-forge.jar' `
+            --javap (Join-Path $env:JAVA_HOME 'bin/javap.exe') `
+            --pilot-source 'src/main/java/org/kneekura/techhub/warfarewings/trace/RuntimeTacticalPilot.java' `
+            --output 'run-gametest/ww-physics-traces/exact-weapon-audit.json'
+          if ($LASTEXITCODE -ne 0) { throw "Pinned autonomous weapon security audit FAILED: $LASTEXITCODE" }
+
+      - name: Verify observed-only protected asset threat ranking before real Forge tests
+        working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
+        run: gradle --no-daemon --console=plain verifyObservedThreatPriority
+
+      - name: Run exact A6M throttle GameTest
+        id: exact_gametest
+        # An operational failure (such as a real B-17 escort breakthrough)
+        # must still allow the independent per-plane receipt analyzers to run.
+        # The terminal gate below fails the job if Forge itself failed.
+        continue-on-error: true
+        working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
+        run: gradle --no-daemon --console=plain runGameTestServer
+
+      - name: Verify trace receipt
+        working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
+        run: |
+          $trace = 'run-gametest/ww-physics-traces/a6m-throttle-step-v1-runtime.csv'
+          if (-not (Test-Path $trace)) { throw "Missing runtime trace: $trace" }
+          $lines = Get-Content $trace
+          if ($lines.Count -ne 402) { throw "Expected header + 401 samples, got $($lines.Count)" }
+          if (-not $lines[0].StartsWith('schema_version,source,scenario_id,aircraft_id,tick,game_time,')) { throw 'Trace schema mismatch' }
+          Write-Host "Runtime trace rows verified: 401"
+
+      - name: Verify five real tactical-aircraft GameTest trace receipts
+        working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
+        run: |
+          $cases = [ordered]@{
+            'a6m-steered-interception' = 'warfare_wings:a6m'
+            'p47n-steered-interception' = 'warfare_wings:p47n'
+            'il2-ground-approach-no-fire' = 'warfare_wings:il2'
+            'b17-level-bomb-guidance-only' = 'warfare_wings:b17'
+            'g4m-torpedo-guidance-only' = 'warfare_wings:g4m'
+          }
+          $culture = [System.Globalization.CultureInfo]::InvariantCulture
+          foreach ($scenario in $cases.Keys) {
+            $path = "run-gametest/ww-physics-traces/${scenario}-forge-controls.csv"
+            if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
+              throw "Missing real-aircraft tactical trace for $scenario"
+            }
+            $rows = @(Import-Csv -LiteralPath $path)
+            # RuntimeTacticalPilot writes sample 0 immediately, then 180 aircraft ticks.
+            if ($rows.Count -ne 181) {
+              throw "Incorrect tactical row count $scenario; expected 181 data rows, got $($rows.Count)"
+            }
+            if ($rows[0].sim_tick -ne '0' -or $rows[180].sim_tick -ne '180') {
+              throw "Tactical tick contract failed: $scenario"
+            }
+            $changed = 0
+            $lateral = 0
+            $travel = 0.0
+            for ($i=0; $i -lt $rows.Count; $i++) {
+              $r = $rows[$i]
+              if ($r.schema_version -ne 'ww.physics.forge-tactical-pilot.v1' -or
+                  $r.aircraft_id -ne $cases[$scenario] -or
+                  $r.scenario_id -ne $scenario -or
+                  $r.source -ne 'minecraft_runtime_ia_next_tick_injection') {
+                throw "Wrong tactical schema/aircraft/source identity at $scenario row $i"
+              }
+              if ([Math]::Abs([double]::Parse($r.command_x, $culture)) -gt 0.001) { $lateral++ }
+              if ($i -gt 0) {
+                $yaw = [double]::Parse($r.yaw_deg, $culture)
+                $prev = [double]::Parse($rows[$i-1].yaw_deg, $culture)
+                $delta = ($yaw - $prev + 540.0) % 360.0 - 180.0
+                $travel += [Math]::Abs($delta)
+                if ([Math]::Abs($delta) -gt 0.005) { $changed++ }
+              }
+            }
+            $start = $rows[0]; $end = $rows[180]
+            $dx = [double]::Parse($end.pos_x,$culture) - [double]::Parse($start.pos_x,$culture)
+            $dy = [double]::Parse($end.pos_y,$culture) - [double]::Parse($start.pos_y,$culture)
+            $dz = [double]::Parse($end.pos_z,$culture) - [double]::Parse($start.pos_z,$culture)
+            $moved = [Math]::Sqrt($dx*$dx + $dy*$dy + $dz*$dz)
+            if ($lateral -lt 10 -or $changed -lt 1 -or $travel -lt 2.0 -or $moved -lt 8.0) {
+              throw "Tactical flight did not satisfy movement/steering receipt $scenario xTicks=$lateral yaw=$travel moved=$moved"
+            }
+            Write-Host "TACTICAL_REAL_TRACE_RECEIPT_OK $scenario ticks=180 lateral=$lateral yaw=$travel moved=$moved"
+          }
+
+      - name: Verify IA command smoothing and exact real-flight tick continuity
+        working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
+        run: |
+          python ../tools/verify_tactical_runtime_receipts.py run-gametest/ww-physics-traces --summary run-gametest/ww-physics-traces/tactical-runtime-receipts.json
+          if ($LASTEXITCODE -ne 0) { throw "Strict Forge tactical receipt validation failed: $LASTEXITCODE" }
+
+      - name: Verify all 24 sequential real-aircraft Forge smoke receipts
+        working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
+        run: |
+          python ../tools/verify_all_aircraft_runtime_receipts.py run-gametest/ww-physics-traces --summary run-gametest/ww-physics-traces/24-aircraft-runtime-smoke.json
+          if ($LASTEXITCODE -ne 0) { throw "All-24 real aircraft smoke receipt verification failed: $LASTEXITCODE" }
+
+      - name: Verify real two-aircraft team and same-team GameTest receipts
+        working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
+        run: |
+          $cases = [ordered]@{
+            'live-pair-a6m-red' = @('warfare_wings:a6m', 140)
+            'live-pair-p47n-blue' = @('warfare_wings:p47n', 140)
+            'live-no-hostility-a6m' = @('warfare_wings:a6m', 70)
+            'live-no-hostility-p47n' = @('warfare_wings:p47n', 70)
+          }
+          $culture = [System.Globalization.CultureInfo]::InvariantCulture
+          foreach ($scenario in $cases.Keys) {
+            $id = $cases[$scenario][0]
+            $ticks = [int]$cases[$scenario][1]
+            $path = "run-gametest/ww-physics-traces/${scenario}-forge-controls.csv"
+            if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Missing live GameTest receipt: $scenario" }
+            $rows = @(Import-Csv -LiteralPath $path)
+            if ($rows.Count -ne ($ticks + 1)) {
+              throw "Live GameTest incomplete: $scenario expected $($ticks+1) samples got $($rows.Count)"
+            }
+            for ($i=0; $i -lt $rows.Count; $i++) {
+              $row = $rows[$i]
+              if ($row.schema_version -ne 'ww.physics.forge-tactical-pilot.v1' -or
+                  $row.source -ne 'minecraft_runtime_ia_next_tick_injection' -or
+                  $row.scenario_id -ne $scenario -or $row.aircraft_id -ne $id -or
+                  $row.sim_tick -ne [string]$i) {
+                throw "Invalid live aircraft/tick provenance: $scenario row $i"
+              }
+            }
+            $start = $rows[0]; $end = $rows[-1]
+            $dx = [double]::Parse($end.pos_x, $culture) - [double]::Parse($start.pos_x, $culture)
+            $dy = [double]::Parse($end.pos_y, $culture) - [double]::Parse($start.pos_y, $culture)
+            $dz = [double]::Parse($end.pos_z, $culture) - [double]::Parse($start.pos_z, $culture)
+            $distance = [Math]::Sqrt($dx*$dx+$dy*$dy+$dz*$dz)
+            if ($distance -lt 8) { throw "Live aircraft did not travel 8 blocks: $scenario $distance" }
+            Write-Host "LIVE_SQUADRON_TRACE_OK $scenario aircraft=$id ticks=$ticks displacement=$distance"
+          }
+          Write-Host 'Live team recognition and LOS acceptance still require the Forge GameTest assertions to pass.'
+
+      - name: Independently verify synchronized real multi-aircraft 2v2 and B17 escort geometry
+        id: operational_verification
+        # Preserve both real CSV verdicts even if the protected B17 genuinely
+        # loses. The final required gate below still fails this workflow.
+        continue-on-error: true
+        working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
+        run: |
+          $traces = 'run-gametest/ww-physics-traces'
+          $plans = @(
+            @('../scenarios/forge-operational-2v2.json', 'operational-2v2-verified.json'),
+            @('../scenarios/forge-operational-b17-escort.json', 'operational-b17-escort-verified.json')
+          )
+          $failed = @()
+          foreach ($entry in $plans) {
+            python ../tools/verify_live_aircombat_receipts.py $entry[0] $traces --summary "$traces/$($entry[1])"
+            if ($LASTEXITCODE -ne 0) {
+              $failed += $entry[0]
+            }
+          }
+          if ($failed.Count -gt 0) {
+            throw "Real Minecraft multi-aircraft operational gates FAILED: $($failed -join ', '); no source substitute or relaxed gate"
+          }
+
+      - name: Independently verify original Forge protectee multi-contact visible threat ranking
+        id: original_observed_threat_selection
+        continue-on-error: true
+        working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
+        run: |
+          python ../tools/verify_live_threat_receipts.py `
+            run-gametest/ww-physics-traces `
+            --summary run-gametest/ww-physics-traces/operational-b17-observed-threat-selection.json
+          if ($LASTEXITCODE -ne 0) {
+            throw "Real Forge original 340-tick protectee/escorts did not demonstrate separately visible hostile priority: $LASTEXITCODE"
+          }
+
+      - name: Generate matching microkernel trace and calibration report
+        working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
+        run: |
+          $classes = 'build/trace-classes'
+          New-Item -ItemType Directory -Force $classes | Out-Null
+          $src = '../src/main/java/org/kneekura/techhub/warfarewings/physics'
+          $sources = @(
+            "$src/Ia133Microkernel.java",
+            "$src/PinnedIa133WindWorld.java",
+            "$src/WarfareWingsAircraft.java",
+            "$src/WarfareWingsEngineReaction.java",
+            "$src/AircraftAtlasMain.java",
+            "$src/TraceCsv.java",
+            "$src/TraceScenarioMain.java",
+            "$src/ReactionCalibrationTraceMain.java"
+          )
+          javac --release 17 -d $classes $sources
+          if ($LASTEXITCODE -ne 0) { throw "Microkernel trace compilation failed: $LASTEXITCODE" }
+
+          $traceDir = 'run-gametest/ww-physics-traces'
+          $micro = "$traceDir/a6m-throttle-step-v1-microkernel.csv"
+          $runtime = "$traceDir/a6m-throttle-step-v1-runtime.csv"
+          java -cp $classes org.kneekura.techhub.warfarewings.physics.TraceScenarioMain $micro
+          if ($LASTEXITCODE -ne 0) { throw "Microkernel trace generation failed: $LASTEXITCODE" }
+
+          $metadataPath = "$traceDir/runtime-metadata.json"
+          [ordered]@{
+            schema_version = 'ww.physics.runtime-metadata.v1'
+            scenario_id = 'a6m-throttle-step-v1'
+            aircraft_id = 'warfare_wings:a6m'
+            github_run_id = [long]$env:GITHUB_RUN_ID
+            github_sha = $env:GITHUB_SHA
+            runner_name = $env:RUNNER_NAME
+            runner_os = $env:RUNNER_OS
+            runner_arch = $env:RUNNER_ARCH
+            minecraft_version = '1.20.1'
+            forge_version = '47.4.20'
+            immersive_aircraft_modrinth_version = 'GsVmbbkj'
+            immersive_aircraft_sha512 = '7b74442e161bb74538e0d8da34a81616daeea56a0da62db86113a78b3bf3c2b3a6b0e12f12454fd7c96092762f6b212ba57cb87eb1af2b242a4d5df4eca03055'
+            warfare_wings_sha256 = 'dc3029597c88859744633b6f5e4a9f21d449294b1aaac90ea0c1749d7aa98a43'
+            warfare_wings_source = 'local-user-owned-hash-verified'
+          } | ConvertTo-Json -Depth 4 | ForEach-Object {
+            # PowerShell 5.1 Set-Content -Encoding UTF8 writes an unwanted
+            # BOM; store metadata as explicit UTF-8 without BOM instead.
+            [System.IO.File]::WriteAllText(
+              $metadataPath, $_, (New-Object System.Text.UTF8Encoding($false)))
+          }
+
+          python ../tools/compare_traces.py --microkernel $micro --runtime $runtime --runtime-metadata $metadataPath --output-dir "$traceDir/calibration"
+          if ($LASTEXITCODE -ne 0) { throw "Trace comparison failed: $LASTEXITCODE" }
+
+          # Separate corrected per-airframe engine reaction profile from
+          # unchanged Atlas v2 legacy-golden source predictions. Both remain
+          # CALIBRATION_ONLY_NO_ACCEPTANCE_THRESHOLD until wider parity tests.
+          $reactionTrace = "$traceDir/a6m-throttle-step-v1-reaction-source.csv"
+          java -cp $classes org.kneekura.techhub.warfarewings.physics.ReactionCalibrationTraceMain ../data/base-aircraft-anchor-v1.csv warfare_wings:a6m $reactionTrace
+          if ($LASTEXITCODE -ne 0) { throw "Original-bytecode response source trace failed: $LASTEXITCODE" }
+          python ../tools/compare_traces.py --microkernel $reactionTrace --runtime $runtime --runtime-metadata $metadataPath --output-dir "$traceDir/reaction-calibration"
+          if ($LASTEXITCODE -ne 0) { throw "Reaction-aware calibration comparison failed: $LASTEXITCODE" }
+
+      - name: Compare four additional 401-tick exact-JAR representative aircraft
+        id: representative_calibration
+        continue-on-error: true
+        working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
+        run: |
+          # Keep generated nested filenames below classic Windows MAX_PATH.
+          # Owner runner: old Spitfire source path 263 chars, new path 243.
+          python ../tools/verify_representative_calibrations.py `
+            --trace-dir run-gametest/ww-physics-traces `
+            --anchor ../data/base-aircraft-anchor-v1.csv `
+            --java (Join-Path $env:JAVA_HOME 'bin/java.exe') `
+            --classes build/trace-classes `
+            --output-dir run-gametest/ww-physics-traces/cal-401
+          if ($LASTEXITCODE -ne 0) {
+            throw "Representative same-envelope real Forge calibration FAILED: $LASTEXITCODE"
+          }
+
+      - name: Independently verify real two-aircraft long strike ingress egress and return
+        id: long_strike_verification
+        continue-on-error: true
+        working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
+        run: |
+          python ../tools/verify_long_strike_receipts.py `
+            run-gametest/ww-physics-traces `
+            --summary run-gametest/ww-physics-traces/operational-long-strike-verified.json
+          if ($LASTEXITCODE -ne 0) {
+            throw "Actual no-ordnance strike/egress/RTB physical acceptance FAILED: $LASTEXITCODE"
+          }
+
+      - name: Independently replay 24 original aircraft and 11 extended original-Forge physics traces outside Minecraft
+        id: pinned_physics_twin
+        continue-on-error: true
+        working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
+        run: |
+          # Existing full GameTests have already run with the exact owner JARs.
+          # No proprietary JAR is handed to the replay; it compiles only Java17
+          # source and pairs every physics step against the real CSV receipts.
+          python ../tools/run_physics_twin.py `
+            --anchor ../data/base-aircraft-anchor-v1.csv `
+            --real-traces run-gametest/ww-physics-traces `
+            --output run-gametest/ww-physics-traces/physics-twin `
+            --java-home $env:JAVA_HOME `
+            --max-final-drift 0.01
+          if ($LASTEXITCODE -ne 0) {
+            throw "Original-Forge recorded-control aerodynamic flight physics failed the independent 35-trace replay gate: $LASTEXITCODE"
+          }
+
+      - name: Upload runtime trace
+        id: upload_trace
+        if: always()
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: warfare-wings-a6m-throttle-runtime-trace
+          retention-days: 14
+          if-no-files-found: warn
+          path: |
+            departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe/run-gametest/ww-physics-traces/**
+            departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe/run-gametest/logs/**
+            departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe/run-gametest/crash-reports/**
+
+      - name: Retry owner-runner receipt upload after transient GitHub artifact endpoint failure
+        id: retry_upload_trace
+        if: always() && steps.upload_trace.outcome != 'success'
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: warfare-wings-runtime-receipts-retry
+          retention-days: 14
+          if-no-files-found: warn
+          path: |
+            departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe/run-gametest/ww-physics-traces/**
+            departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe/run-gametest/logs/**
+            departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe/run-gametest/crash-reports/**
+
+      - name: Enforce exact original Forge, operational and evidence acceptance
+        if: always()
+        env:
+          GAME_TEST_OUTCOME: ${{ steps.exact_gametest.outcome }}
+          OPERATIONAL_OUTCOME: ${{ steps.operational_verification.outcome }}
+          CONTACT_SELECTION_OUTCOME: ${{ steps.original_observed_threat_selection.outcome }}
+          CALIBRATION_OUTCOME: ${{ steps.representative_calibration.outcome }}
+          LONG_STRIKE_OUTCOME: ${{ steps.long_strike_verification.outcome }}
+          PHYSICS_TWIN_OUTCOME: ${{ steps.pinned_physics_twin.outcome }}
+          UPLOAD_OUTCOME: ${{ steps.upload_trace.outcome }}
+          RETRY_UPLOAD_OUTCOME: ${{ steps.retry_upload_trace.outcome }}
+        run: |
+          # Every continue-on-error:true evidence step has an actual
+          # `outcome`, which is FAILURE even when its job step has a green
+          # `conclusion`. Print ALL five required gates before failing; do
+          # not let an earlier 95-block breach hide a separate frozen pilot,
+          # incomplete trace, missing receipt, or physical parity failure.
+          $gates = [ordered]@{
+            'original_forge_gametest_20hz' = $env:GAME_TEST_OUTCOME
+            'real_2v2_b17_95block_6block' = $env:OPERATIONAL_OUTCOME
+            'real_b17_allied_multicontact_fov_los_priority' = $env:CONTACT_SELECTION_OUTCOME
+            'real_four_401tick_comparison_completeness' = $env:CALIBRATION_OUTCOME
+            'real_840tick_strike_egress_rtb_no_weapons' = $env:LONG_STRIKE_OUTCOME
+            'real_35trace_pinned_free_air_twin_0.01block' = $env:PHYSICS_TWIN_OUTCOME
+          }
+          $failures = @()
+          $markdown = @('### Warfare Wings exact-owner-Forge acceptance', '',
+            '| Independent required gate | Actual outcome |', '| --- | --- |')
+          foreach ($name in $gates.Keys) {
+            $outcome = $gates[$name]
+            Write-Host "OWNER_FORGE_ACCEPTANCE_GATE $name=$outcome"
+            $markdown += "| $name | $outcome |"
+            if ($outcome -ne 'success') { $failures += "$name=$outcome" }
+          }
+          $uploadOk = $env:UPLOAD_OUTCOME -eq 'success' -or $env:RETRY_UPLOAD_OUTCOME -eq 'success'
+          $uploadStatus = if ($uploadOk) { 'success' } else { 'failure' }
+          Write-Host "OWNER_FORGE_ACCEPTANCE_GATE original_receipts_uploaded=$uploadStatus"
+          $markdown += "| original_receipts_uploaded | $uploadStatus |"
+          if (-not $uploadOk) {
+            $failures += "original_receipts_uploaded=first:$env:UPLOAD_OUTCOME,retry:$env:RETRY_UPLOAD_OUTCOME"
+          }
+          $markdown += ''
+          $markdown += 'Each gate requires actual original-JAR evidence; replay is recorded-control open-loop flight, not proven closed-loop combat, collision or weapon parity.'
+          if (-not [string]::IsNullOrEmpty($env:GITHUB_STEP_SUMMARY)) {
+            [System.IO.File]::AppendAllText($env:GITHUB_STEP_SUMMARY,
+              ($markdown -join "`n") + "`n", (New-Object System.Text.UTF8Encoding($false)))
+          }
+          if ($failures.Count -gt 0) {
+            throw "ORIGINAL_FORGE_ACCEPTANCE_FAILED $($failures -join '; '). Preserve original 190tick/340tick B17 95-block, 6-block and 840tick gates."
+          }
+          Write-Host 'ORIGINAL_FORGE_ACCEPTANCE_ALL_REQUIRED_GATES_PASS'

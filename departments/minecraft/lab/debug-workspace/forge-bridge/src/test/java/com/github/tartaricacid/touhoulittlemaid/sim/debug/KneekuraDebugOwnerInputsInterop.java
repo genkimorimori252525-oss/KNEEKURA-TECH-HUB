@@ -10,6 +10,6 @@ public final class KneekuraDebugOwnerInputsInterop {
   for(var pair:Map.of("debugSessionId","SESSION_ID","runId","RUN_ID","runSnapshotId","RUN_SNAPSHOT_ID","processEpoch","PROCESS_EPOCH","handshakeNonce","HANDSHAKE_NONCE").entrySet())env.put("KNEEKURA_DEBUG_"+pair.getValue(),id.get(pair.getKey()).getAsString());
   env.put("KNEEKURA_DEBUG_OWNER_ENVELOPE_FILE",run.resolve("control/owner-envelope.json").toString());env.put("KNEEKURA_DEBUG_OWNER_ENVELOPE_SHA256",context.get("envelopeHash").getAsString());
   System.out.println("OWNER_SOURCE_JVM_PID="+ProcessHandle.current().pid());System.out.flush();if(new BufferedReader(new InputStreamReader(System.in)).readLine()==null)throw new IOException("NODE_SNAPSHOT_NOT_COMMITTED");
-  var input=KneekuraDebugOwnerInputs.load(KneekuraDebugEnv.fromEnvironment(env));System.out.println("NODE_JAVA_OWNER_INPUTS_VERIFIED request="+input.grant().requestHash()+"; parser only; runtime installation NOT_RUN");
+  var input=KneekuraDebugOwnerInputs.load(KneekuraDebugEnv.fromEnvironment(env));System.out.println("NODE_JAVA_OWNER_INPUTS_VERIFIED request="+input.grant().requestHash()+"; tankRotation="+(input.tankRotation()!=null)+"; parser only; runtime installation NOT_RUN");
  }
 }
