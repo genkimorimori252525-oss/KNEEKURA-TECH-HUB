@@ -16,6 +16,7 @@
 | 8 | [Liberty's Villagers](../mods/liberty-villagers/README.md) | villager Brain / POI / village habits | Revived source `f2e2548` / MC 1.20.1 Forge line; distributed Forge 2.0.1 file 6930028; 78 Java / 46 mixins | `40e1384` / Revived MC 1.21.11 | IN_PROGRESS (targeted villager AI study complete) |
 | 9 | [Goofy Critters](../mods/goofy-critters/README.md) | exotic locomotion / multi-anchor movement | 1.0.0 Forge 1.20.1 file 7553632; release-era source candidate `9188e51`; exact binary/source identity unresolved | `96d01a7` archived frontier; Gestalt anchor locomotion + post-release NoSpin movement framework | IN_PROGRESS (targeted movement study complete) |
 | 10 | [Youkai's Homecoming](../mods/youkai-homecoming/README.md) | danmaku / spell-card / virtual projectile system | `6d57442` / v2.7.0 / MC 1.20.1 Forge 47.1.3; targeted danmaku architecture mapped | current upstream remains same 2.7.0 / 1.20.1 source line | IN_PROGRESS (targeted danmaku study complete) |
+| 11 | [Kimetsu no Yaiba ver3](../mods/kimetsu-no-yaiba/README.md) | content/combat/worldgen Mod | uploaded JAR SHA `b4af6e8a…` / v3 / MC 1.20.1 Forge; 3,713 classes; bytecode whole-target map | no official public source/frontier pinned; current public 1.20.1 release is same ver3 line | IN_PROGRESS (static whole-target architecture mapped) |
 
 ## Rules
 
