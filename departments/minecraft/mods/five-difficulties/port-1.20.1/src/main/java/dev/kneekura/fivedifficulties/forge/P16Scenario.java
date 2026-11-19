@@ -2,6 +2,7 @@ package dev.kneekura.fivedifficulties.forge;
 
 import com.mojang.authlib.GameProfile;
 import dev.kneekura.fivedifficulties.forge.entity.THShotEntity;
+import dev.kneekura.fivedifficulties.forge.shot.X1Danmaku;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -62,6 +63,7 @@ public final class P16Scenario {
             runEffectItems();
             runAjaRedStone();
             runPendulum();
+            runSwordEffects();
             FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_RUNTIME_SCENARIO_PASS");
             ScenarioShutdown.finished(level.getServer(), ENV);
         } catch (Throwable failure) {
@@ -447,6 +449,59 @@ public final class P16Scenario {
         for (int i = 0; i < 5; i++) level.setBlockAndUpdate(base.offset(i, 0, 0), net.minecraft.world.level.block.Blocks.AIR.defaultBlockState());
         p.getInventory().clearContent();
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_PENDULUM_PASS found=5");
+    }
+
+    private static void runSwordEffects() {
+        FakePlayer p = player();
+        var hand = net.minecraft.world.InteractionHand.MAIN_HAND;
+
+        // Icicle sword: one ice box per target; it holds the target in place and melts after 50 ticks.
+        Zombie z = zombie(2);
+        ItemStack ice = new ItemStack(PortRegistries.ICICLE_SWORD.get());
+        ice.getItem().hurtEnemy(ice, z, p);
+        ice.getItem().hurtEnemy(ice, z, p);
+        var boxes = level.getEntitiesOfClass(dev.kneekura.fivedifficulties.forge.entity.CirnoIceBoxEntity.class,
+                z.getBoundingBox().inflate(1.0D), b -> b.frozen == z);
+        require(boxes.size() == 1, "one ice box, saw " + boxes.size());
+        var box = boxes.get(0);
+        double heldX = z.getX();
+        z.xo = heldX;
+        z.setPos(heldX + 1.0D, z.getY(), z.getZ());
+        box.tick();
+        require(Math.abs(z.getX() - heldX) < 1e-9, "the frozen zombie is put back, x " + (z.getX() - heldX));
+        float h = box.getIceBoxHeight();
+        box.tickCount = 51;
+        box.tick();
+        require(Math.abs(h - 0.08F - box.getIceBoxHeight()) < 1e-5, "melts 0.08 a tick after 50");
+        box.discard();
+        z.discard();
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_ICICLE_SWORD_PASS height=" + h);
+
+        // Hakurouken: a sneak release throws the wall; an enemy shot at the wall is removed and answered.
+        ItemStack sword = new ItemStack(PortRegistries.HAKUROUKEN.get());
+        p.setItemInHand(hand, sword);
+        p.setShiftKeyDown(true);
+        sword.getItem().releaseUsing(sword, level, p, 72000 - 5);
+        p.setShiftKeyDown(false);
+        require(sword.getDamageValue() == 1, "the wall costs 1");
+        var walls = level.getEntitiesOfClass(dev.kneekura.fivedifficulties.forge.entity.HakurouReflecterEntity.class,
+                p.getBoundingBox().inflate(4.0D), w -> w.user == p);
+        require(walls.size() == 1, "one wall, saw " + walls.size());
+        var wall = walls.get(0);
+        Zombie enemy = zombie(12);
+        THShotEntity enemyShot = X1Danmaku.createShotEntity(enemy, enemy,
+                new dev.kneekura.fivedifficulties.core.math.Vec3d(wall.getX(), wall.getY(), wall.getZ()),
+                new dev.kneekura.fivedifficulties.core.math.Vec3d(-1, 0, 0), 0F, 0.0D, 0.0D, 0.0D,
+                dev.kneekura.fivedifficulties.core.math.Vec3d.ZERO,
+                dev.kneekura.fivedifficulties.core.x1.X1ShotData.shot(dev.kneekura.fivedifficulties.core.x1.X1ShotTables.FORM_SMALL,
+                        dev.kneekura.fivedifficulties.core.x1.X1ShotTables.RED));
+        int answered = fire(wall::tick);
+        require(enemyShot.isRemoved() && answered == 1 && lastShot.getOwner() == p, "reflected shots " + answered);
+        lastShot.discard();
+        wall.discard();
+        enemy.discard();
+        p.getInventory().clearContent();
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_HAKUROUKEN_PASS");
     }
 
     private static void require(boolean ok, String what) {

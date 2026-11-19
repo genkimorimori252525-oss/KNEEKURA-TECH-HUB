@@ -15,6 +15,10 @@ public final class PortCreativeTabs {
 
     @SubscribeEvent
     public static void buildContents(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.COMBAT) { // P16g swords
+            event.accept(PortRegistries.ICICLE_SWORD.get());
+            event.accept(PortRegistries.HAKUROUKEN.get());
+        }
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) { // P16f pendulum
             event.accept(PortRegistries.NAZRIN_PENDULUM.get());
         }

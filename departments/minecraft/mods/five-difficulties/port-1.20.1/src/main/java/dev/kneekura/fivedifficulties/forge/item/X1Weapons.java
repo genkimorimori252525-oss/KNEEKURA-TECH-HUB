@@ -56,6 +56,8 @@ public final class X1Weapons {
 
     public static final Tier LAEVATEINN = new X1Tier(0, 95, 9.0F, 3.0F, 0, Ingredient.EMPTY);
     public static final Tier ROUKANKEN = new X1Tier(0, 251, 4.0F, 3.0F, 0, Ingredient.EMPTY);
+    public static final Tier ICICLE = new X1Tier(0, 30, 0.0F, 2.0F, 0, Ingredient.EMPTY);
+    public static final Tier HAKUROU = new X1Tier(0, 100, 0.0F, 0.0F, 0, Ingredient.EMPTY);
     public static final Tier KAIGO = new X1Tier(0, 1, 0.0F, -4.0F, 0, Ingredient.EMPTY);
     /** ToolMaterial.IRON (2, 250, 6, 2, 14) with ItemDeathScythe's setMaxDamage(444). */
     public static final Tier DEATH_SCYTHE = new X1Tier(2, 444, 6.0F, 2.0F, 14, Ingredient.of(Items.IRON_INGOT));
@@ -435,6 +437,99 @@ public final class X1Weapons {
         @Override
         public boolean isDamageable(ItemStack stack) {
             return false;
+        }
+    }
+
+    /** 1.7.10 ItemSword right-click: guard (block) for 72000 ticks. */
+    public abstract static class GuardSword extends SwordItem {
+        protected GuardSword(Tier tier, Properties p) {
+            super(tier, 4, -2.4F, p);
+        }
+
+        @Override
+        public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+            player.startUsingItem(hand);
+            return InteractionResultHolder.consume(player.getItemInHand(hand));
+        }
+
+        @Override
+        public int getUseDuration(ItemStack stack) {
+            return 72000;
+        }
+
+        @Override
+        public UseAnim getUseAnimation(ItemStack stack) {
+            return UseAnim.BLOCK;
+        }
+
+        @Override
+        public int getEnchantmentValue() {
+            return 0;
+        }
+
+        @Override
+        public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+            return false;
+        }
+    }
+
+    /**
+     * ItemIcicleSword (icicle 0/30/0/2): freezes what it hits in a Cirno ice box (not things over 3 wide or tall,
+     * nor one already frozen); repaired with ice.
+     */
+    public static final class IcicleSword extends GuardSword {
+        public IcicleSword(Properties p) {
+            super(ICICLE, p);
+        }
+
+        @Override
+        public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+            Level level = target.level();
+            for (Entity e : level.getEntities(target, target.getBoundingBox())) {
+                if (e instanceof dev.kneekura.fivedifficulties.forge.entity.CirnoIceBoxEntity box && target.equals(box.frozen)) {
+                    return super.hurtEnemy(stack, target, attacker);
+                }
+            }
+            if (target.getBbWidth() > 3.0F || target.getBbHeight() > 3.0F) return super.hurtEnemy(stack, target, attacker);
+            if (!level.isClientSide) {
+                level.addFreshEntity(new dev.kneekura.fivedifficulties.forge.entity.CirnoIceBoxEntity(level, target));
+            }
+            return super.hurtEnemy(stack, target, attacker);
+        }
+
+        @Override
+        public boolean isValidRepairItem(ItemStack stack, ItemStack repair) {
+            return repair.is(Items.ICE) || super.isValidRepairItem(stack, repair);
+        }
+    }
+
+    /**
+     * ItemHakurouken (hakurou 0/100/0/0): release a guard to throw a shot-reflecting wall (sneak) or, on the
+     * ground while moving, to step back 1.5; either costs 1 durability.
+     */
+    public static final class Hakurouken extends GuardSword {
+        public Hakurouken(Properties p) {
+            super(HAKUROU, p);
+        }
+
+        @Override
+        public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
+            if (!(entity instanceof Player player)) return;
+            boolean used = false;
+            if (player.isShiftKeyDown()) {
+                if (!level.isClientSide) {
+                    level.addFreshEntity(new dev.kneekura.fivedifficulties.forge.entity.HakurouReflecterEntity(level, player));
+                }
+                used = true;
+            } else {
+                Vec3 m = player.getDeltaMovement();
+                if (player.onGround() && (m.x != 0.0D || m.z != 0.0D)) {
+                    double angle = Math.atan2(m.x, m.z);
+                    player.setDeltaMovement(m.x - Math.sin(angle) * 1.5D, m.y, m.z - Math.cos(angle) * 1.5D);
+                    used = true;
+                }
+            }
+            if (used) stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(player.getUsedItemHand()));
         }
     }
 }

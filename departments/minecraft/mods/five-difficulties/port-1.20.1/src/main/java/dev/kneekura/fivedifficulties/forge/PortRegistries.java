@@ -211,6 +211,18 @@ public final class PortRegistries {
                     .sized(0.1F, 0.1F).clientTrackingRange(8).updateInterval(1).setShouldReceiveVelocityUpdates(true)
                     .build(FiveDifficultiesPort.MOD_ID + ":nazrin_pendulum"));
 
+    // ---- P16g entities ----
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.CirnoIceBoxEntity>> CIRNO_ICE_BOX =
+            ENTITIES.register("cirno_ice_box", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.CirnoIceBoxEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.CirnoIceBoxEntity::new, MobCategory.MISC)
+                    .sized(1.8F, 1.8F).clientTrackingRange(8).updateInterval(1).setShouldReceiveVelocityUpdates(true)
+                    .build(FiveDifficultiesPort.MOD_ID + ":cirno_ice_box"));
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.HakurouReflecterEntity>> HAKUROU_REFLECTER =
+            ENTITIES.register("hakurou_reflecter", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.HakurouReflecterEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.HakurouReflecterEntity::new, MobCategory.MISC)
+                    .sized(1.5F, 1.5F).clientTrackingRange(8).updateInterval(1).setShouldReceiveVelocityUpdates(true)
+                    .build(FiveDifficultiesPort.MOD_ID + ":hakurou_reflecter"));
+
     // ---- P13 danmaku-weapon items ----
     public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity>> DRAGON_NECK_JEWEL =
             ENTITIES.register("dragon_neck_jewel", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity>of(
@@ -364,6 +376,12 @@ public final class PortRegistries {
     // ---- P16f pendulum ----
     public static final RegistryObject<Item> NAZRIN_PENDULUM = ITEMS.register("nazrin_pendulum",
             () -> new dev.kneekura.fivedifficulties.forge.item.X1EffectItems.Pendulum(new Item.Properties()));
+
+    // ---- P16g swords ----
+    public static final RegistryObject<Item> ICICLE_SWORD = ITEMS.register("icicle_sword",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1Weapons.IcicleSword(new Item.Properties()));
+    public static final RegistryObject<Item> HAKUROUKEN = ITEMS.register("hakurouken",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1Weapons.Hakurouken(new Item.Properties()));
 
     public static final RegistryObject<Item> SHOT_MATERIAL = ITEMS.register("shot_material",
             () -> new dev.kneekura.fivedifficulties.forge.item.ShotMaterialItem(new Item.Properties()));

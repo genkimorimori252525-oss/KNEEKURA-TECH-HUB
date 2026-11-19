@@ -250,4 +250,74 @@ public final class P16Renderers {
             return PENDULUM;
         }
     }
+
+    /** RenderCirnoIceBox: a vanilla-ice cube of (width / 2 + 0.4) by (height + 0.8), inverted-add blended. */
+    public static final class CirnoIceBox extends EntityRenderer<dev.kneekura.fivedifficulties.forge.entity.CirnoIceBoxEntity> {
+        private static final ResourceLocation ICE = new ResourceLocation("minecraft", "textures/block/ice.png");
+
+        public CirnoIceBox(EntityRendererProvider.Context context) {
+            super(context);
+        }
+
+        @Override
+        public void render(dev.kneekura.fivedifficulties.forge.entity.CirnoIceBoxEntity e, float yaw, float partialTick,
+                           PoseStack pose, MultiBufferSource buffers, int light) {
+            float width = e.getIceBoxWidth() / 2.0F + 0.4F;
+            float height = e.getIceBoxHeight() + 0.8F;
+            float[] px = {-width, width, width, -width, -width, width, width, -width};
+            float[] py = {height, height, height, height, 0.0F, 0.0F, 0.0F, 0.0F};
+            float[] pz = {width, width, -width, -width, -width, -width, width, width};
+            int[][] p = {{0, 1, 2, 3}, {3, 2, 5, 4}, {2, 1, 6, 5}, {1, 0, 7, 6}, {0, 3, 4, 7}, {4, 5, 6, 7}};
+            X1Tess t = new X1Tess(pose, buffers, ICE).begin(INVERT_ADD_DEPTH);
+            for (int[] q : p) {
+                t.color(1F, 1F, 1F, 1F)
+                        .v(px[q[0]], py[q[0]], pz[q[0]], 0.0F, 1.0F).v(px[q[1]], py[q[1]], pz[q[1]], 1.0F, 1.0F)
+                        .v(px[q[2]], py[q[2]], pz[q[2]], 1.0F, 0.0F).v(px[q[3]], py[q[3]], pz[q[3]], 0.0F, 0.0F);
+            }
+        }
+
+        @Override
+        public ResourceLocation getTextureLocation(dev.kneekura.fivedifficulties.forge.entity.CirnoIceBoxEntity e) {
+            return ICE;
+        }
+    }
+
+    /** RenderHakurouReflecter: three rings of 16 fan blades (radius 1.8, 1.5, 1.2) turning with age. */
+    public static final class HakurouReflecter extends EntityRenderer<dev.kneekura.fivedifficulties.forge.entity.HakurouReflecterEntity> {
+        private static final ResourceLocation REFLECT = tex("hakurou_reflect");
+
+        public HakurouReflecter(EntityRendererProvider.Context context) {
+            super(context);
+        }
+
+        @Override
+        public void render(dev.kneekura.fivedifficulties.forge.entity.HakurouReflecterEntity e, float yaw, float partialTick,
+                           PoseStack pose, MultiBufferSource buffers, int light) {
+            pose.pushPose();
+            pose.mulPose(Axis.YP.rotationDegrees(Mth.lerp(partialTick, e.yRotO, e.getYRot())));
+            pose.mulPose(Axis.XP.rotationDegrees(e.getXRot()));
+            float minU = 0.0F, maxU = 0.5F, minV = 0.0F, maxV = 1.0F;
+            float angle = e.tickCount / 5F;
+            float span = (float) Math.PI / 8F;
+            double length = 1.8D;
+            X1Tess t = new X1Tess(pose, buffers, REFLECT).begin(INVERT_ADD);
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 16; j++) {
+                    double x1 = Math.cos(angle) * length, x2 = Math.cos(angle + span) * length;
+                    double y1 = Math.sin(angle) * length, y2 = Math.sin(angle + span) * length;
+                    t.color(1.0F, 1.0F, 1.0F, 0.2F + j * 0.3F)
+                            .v(x1, y1, 0.0D, minU, maxV).v(x2, y2, 0.0D, maxU, maxV)
+                            .v(0, 0, 0.0D, maxU, minV).v(0, 0, 0.0D, minU, minV);
+                    angle += span;
+                }
+                length -= 0.3D;
+            }
+            pose.popPose();
+        }
+
+        @Override
+        public ResourceLocation getTextureLocation(dev.kneekura.fivedifficulties.forge.entity.HakurouReflecterEntity e) {
+            return REFLECT;
+        }
+    }
 }

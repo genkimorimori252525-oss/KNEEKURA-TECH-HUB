@@ -255,6 +255,20 @@ ASSETS = {
         "assets/five_difficulties_port/textures/item/nazrin_pendulum.png",
         "e6eb78dd57afa5dae477ad7a87fbe5d9733adea7515d929012b61582020c6568",
     ),
+    # P16g entity textures.
+    "assets/thkaguyamod/textures/HakurouReflect.png": (
+        "assets/five_difficulties_port/textures/entity/hakurou_reflect.png",
+        "cdea8224448644c6830871e35316fdfa51f7ecf5c774a50ceeaca47947738a0e",
+    ),
+    # P16g swords.
+    "assets/thkaguyamod/textures/items/IcicleSword.png": (
+        "assets/five_difficulties_port/textures/item/icicle_sword.png",
+        "52db2ab54462769b13c07620898947950a61e596558d2158a00730dd482ce8ac",
+    ),
+    "assets/thkaguyamod/textures/items/hakurouken.png": (
+        "assets/five_difficulties_port/textures/item/hakurouken.png",
+        "21ed4e73032e61d5ebcd6e27de873beceff74f829d4bc8c62abe63fb7da62156",
+    ),
     # P15 danmaku crafting table.
     "assets/thkaguyamod/textures/blocks/danmaku_crafting_table.png": (
         "assets/five_difficulties_port/textures/block/danmaku_crafting_table.png",
