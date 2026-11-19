@@ -16,7 +16,8 @@ overlay); a checkpoint document; commit, push, CI green before the next phase.
 | P10 | `LaserData`, `EntityTHLaser`, `EntityTHSetLaser`, `RenderTHLaser`, THShotLib laser emitters, `ItemTHLaser`, `ISpecialShot` registry | done |
 | P11 | spell-card core: `EntitySpellCard`, `THSpellCard`, `SpellCardRegistry`, `ItemTHSpellCard`, spell-card circle, shot material; 30 of the 35 registered cards | done |
 | P12 | the 5 cards with dedicated entities: Musou Fuuin (0), Master Spark (1), Satuzin Doll (8), Hikouchuu Nest (10), Fafrotskies (15) + Nuclear Shot, Hanabeeper | done |
-| P13 | entities thrown by items rather than cards: Onmyoudama, Sanae Wind, Dragon Neck Jewel, Ryuu Lightning Bolt, Sphere Shot, Henyori laser (may merge into P16) | next |
+| P13 | danmaku-weapon items: Mini Hakkero, Nuclear Control Rod, Dragon Neck Jewel (+ entity); `itemEffectFinish` | done |
+| P13b | the other shot-firing items: Oharaibou R / S (Onmyoudama, Sanae Wind), Houtou, Gap (warp gaps), Gap Folding Umbrella; Henyori laser is dead code in X1 | next |
 | P14 | power / point / bomb / extend / shot-material items, player power, death handler, config | |
 | P15 | danmaku crafting table (block, containers, GUIs, laser crafting) | |
 | P16 | remaining items and their entities (`entity/item`, `entity/effect`) | |

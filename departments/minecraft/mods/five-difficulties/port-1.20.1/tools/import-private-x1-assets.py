@@ -122,6 +122,23 @@ ASSETS = {
         "assets/five_difficulties_port/textures/item/diffusion_amulet.png",
         "48a04fbb8993b87cce4abc2b175f006d8bdaef3254c323b86b023b749f152927",
     ),
+    # P13 danmaku-weapon items.
+    "assets/thkaguyamod/textures/items/miniHakkero.png": (
+        "assets/five_difficulties_port/textures/item/mini_hakkero.png",
+        "cf27ebc5dd106563f4a416cb0b37836a5cc06c6f58c41fc1c2941494396a50fe",
+    ),
+    "assets/thkaguyamod/textures/items/nuclearControlRod.png": (
+        "assets/five_difficulties_port/textures/item/nuclear_control_rod.png",
+        "51dc100b50441de90c772785ab3ee0e8d0a86d5db3c07078e8c0190cd0abf5b6",
+    ),
+    "assets/thkaguyamod/textures/items/ryuuTama.png": (
+        "assets/five_difficulties_port/textures/item/dragon_neck_jewel.png",
+        "bf918d4f10ab28af5230bb61d5cc8ad7a10d57f70fde9e0daaa390c0738b7f3d",
+    ),
+    "assets/thkaguyamod/textures/thKaguyaTerrain.png": (
+        "assets/five_difficulties_port/textures/entity/th_kaguya_terrain.png",
+        "2fef9748d6ca4cd2631df44b7f78cfbda3fea382e730658ec3b51a9ed7524d3f",
+    ),
     # P12 spell-card entities.
     "assets/thkaguyamod/textures/MiniHakkeroTexture.png": (
         "assets/five_difficulties_port/textures/entity/mini_hakkero.png",

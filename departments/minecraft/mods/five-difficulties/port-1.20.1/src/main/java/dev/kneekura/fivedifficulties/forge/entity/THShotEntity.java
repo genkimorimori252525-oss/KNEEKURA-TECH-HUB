@@ -29,6 +29,7 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
+import javax.annotation.Nullable;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -301,13 +302,9 @@ public class THShotEntity extends Projectile {
 
         boolean isHit = false;
         if (hitEntity != null) {
-            isHit = onImpactEntity(hitEntity, m);
+            isHit = onImpact(hitEntity, null, m);
         } else if (block.getType() != HitResult.Type.MISS) {
-            // onImpact: a surviving special (bound) returns false, so the probes below still run.
-            if (!blockHitSpecialProcess(block, m)) {
-                this.discard();
-                isHit = true;
-            }
+            isHit = onImpact(null, block, m);
         }
         if (!isHit) {
             // X1 probes three diameter lines through the centre; each hit goes through
@@ -316,6 +313,20 @@ public class THShotEntity extends Projectile {
             probe(pos.add(-half, 0, 0), pos.add(half, 0, 0), m);
             probe(pos.add(0, 0, -half), pos.add(0, 0, half), m);
         }
+    }
+
+    /**
+     * EntityTHShot.onImpact for the forward hit (exactly one of {@code hitEntity} / {@code block} is set).
+     * Returns true when this shot was consumed; a surviving special (bound) returns false, so the three
+     * probes still run.
+     */
+    protected boolean onImpact(@Nullable Entity hitEntity, @Nullable BlockHitResult block, X1ShotMotion m) {
+        if (hitEntity != null) return onImpactEntity(hitEntity, m);
+        if (!blockHitSpecialProcess(block, m)) {
+            this.discard();
+            return true;
+        }
+        return false;
     }
 
     private void probe(Vec3 start, Vec3 end, X1ShotMotion m) {

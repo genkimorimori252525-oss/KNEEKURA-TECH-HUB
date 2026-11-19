@@ -18,6 +18,9 @@ public final class PortCreativeTabs {
         if (event.getTabKey() == CreativeModeTabs.COMBAT) {
             event.accept(PortRegistries.HOMING_AMULET.get());
             event.accept(PortRegistries.DIFFUSION_AMULET.get());
+            event.accept(PortRegistries.DRAGON_NECK_JEWEL_ITEM.get());
+            event.accept(PortRegistries.MINI_HAKKERO_ITEM.get());
+            event.accept(PortRegistries.NUCLEAR_CONTROL_ROD.get());
         }
         if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) { // X1 CreativeTabs.tabMaterials
             PortRegistries.SHOT_ITEMS.forEach(item -> event.accept(item.get()));

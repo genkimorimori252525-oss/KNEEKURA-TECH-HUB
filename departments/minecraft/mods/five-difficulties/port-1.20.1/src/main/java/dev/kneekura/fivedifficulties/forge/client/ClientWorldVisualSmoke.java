@@ -200,6 +200,8 @@ public final class ClientWorldVisualSmoke {
 
     private static void boot(Minecraft mc) throws IOException {
         if (++bootTicks > 20 * 180) fail("title screen never became ready (screen=" + mc.screen + ")");
+        // Another window taking focus must not open the pause menu over the frames.
+        mc.options.pauseOnLostFocus = false;
         if (mc.getOverlay() != null) return;
         // A fresh run directory opens the 1.20 accessibility onboarding screen first.
         if (mc.screen instanceof AccessibilityOnboardingScreen) {
@@ -372,6 +374,13 @@ public final class ClientWorldVisualSmoke {
                 0.0D, Vec3d.ZERO, X1ShotData.shot(0, X1ShotTables.ORANGE, 1.6F, 10.0F, 0, 2000, 0));
         nuclear.shootingFlag = true;
         level.addFreshEntity(nuclear);
+        // P13: a Dragon Neck Jewel held still (its own speed and gravity zeroed for the frame)
+        var jewel = new dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity(level, player,
+                new Vec3d(0.5D, -54.5D, 6.0D), new Vec3d(0, 0, 1), 1F, 0.1F, 0.1F);
+        jewel.motion().gravity = Vec3d.ZERO;
+        jewel.motion().acceleration = 0.0D;
+        jewel.motion().setSpeed(0.0001D);
+        level.addFreshEntity(jewel);
     }
 
     // Source is an armor stand in front of the camera, so the Watch controller and its

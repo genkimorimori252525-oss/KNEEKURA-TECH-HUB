@@ -198,6 +198,14 @@ public final class ClientRuntimeSmoke {
         minecraft.getEntityModels().bakeLayer(P12Renderers.HAKKERO_LAYER).getChild("plate1");
         minecraft.getEntityModels().bakeLayer(P12Renderers.HAKKERO2_LAYER).getChild("side7");
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P12_CLIENT_RESOURCES_PASS spellCards={} hakkeroModels=2", cards);
+        requireItemModel(minecraft, PortRegistries.MINI_HAKKERO_ITEM.get(), "Mini Hakkero");
+        requireItemModel(minecraft, PortRegistries.NUCLEAR_CONTROL_ROD.get(), "Nuclear Control Rod");
+        requireItemModel(minecraft, PortRegistries.DRAGON_NECK_JEWEL_ITEM.get(), "Dragon Neck Jewel");
+        for (String t : new String[] {"item/mini_hakkero", "item/nuclear_control_rod", "item/dragon_neck_jewel",
+                "entity/th_kaguya_terrain"}) {
+            requireResource(minecraft, id("textures/" + t + ".png"));
+        }
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P13_CLIENT_RESOURCES_PASS items=3");
 
         var root = minecraft.getEntityModels().bakeLayer(SakuyaTimeControllerModel.LAYER_LOCATION);
         root.getChild("watch_base");
