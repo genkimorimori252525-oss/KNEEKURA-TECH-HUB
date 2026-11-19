@@ -70,6 +70,7 @@ public final class P16Scenario {
             runParasol();
             runHisou();
             runEyeOrbBranch();
+            runKinkakuzi();
             FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_RUNTIME_SCENARIO_PASS");
             ScenarioShutdown.finished(level.getServer(), ENV);
         } catch (Throwable failure) {
@@ -781,6 +782,42 @@ public final class P16Scenario {
         require(n == 70 && charge == 50 && recovered == 0, "branch shots " + n + " charge " + charge + " -> " + recovered);
         level.getEntitiesOfClass(THShotEntity.class, p.getBoundingBox().inflate(48), e -> e.getOwner() == p).forEach(Entity::discard);
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_HOURAI_BRANCH_PASS shots=" + n);
+    }
+
+    private static void runKinkakuzi() {
+        FakePlayer p = player();
+        var hand = net.minecraft.world.InteractionHand.MAIN_HAND;
+        // Thrown up from the head (0.7): it rises and falls back.
+        ItemStack item = new ItemStack(PortRegistries.KINKAKUZI.get());
+        p.setItemInHand(hand, item);
+        item.getItem().use(level, p, hand);
+        var found = level.getEntitiesOfClass(dev.kneekura.fivedifficulties.forge.entity.KinkakuziEntity.class,
+                p.getBoundingBox().inflate(4.0D));
+        require(item.isEmpty() && found.size() == 1, "one ceiling thrown");
+        var ceiling = found.get(0);
+        double y0 = ceiling.getY(), top = y0;
+        for (int i = 0; i < 60; i++) {
+            ceiling.stepForTest();
+            top = Math.max(top, ceiling.getY());
+        }
+        require(top - y0 > 3.0D && ceiling.getY() < top, "rose " + (top - y0) + " then fell");
+        ceiling.discard();
+
+        // Dropped onto a zombie: (int)(drop x 40) + 2 indirect magic damage.
+        Zombie z = zombie(12);
+        float hp = z.getHealth();
+        var drop = new dev.kneekura.fivedifficulties.forge.entity.KinkakuziEntity(level, bx + 12, by + 5, bz, p, 0.0D);
+        level.addFreshEntity(drop);
+        for (int i = 0; i < 30 && z.getHealth() == hp; i++) drop.stepForTest();
+        require(z.getHealth() < hp, "the falling ceiling hurt the zombie: dy=" + (drop.getY() - by) + " v=" + drop.getDeltaMovement() + " zy=" + (z.getY() - by) + " near=" + level.getEntities(drop, drop.getBoundingBox().inflate(2.0D, 3.0D, 2.0D)) + " block=" + level.getBlockState(BlockPos.containing(drop.getX(), drop.getY() - 0.3D, drop.getZ())) + " fluid=" + level.getFluidState(BlockPos.containing(drop.getX(), drop.getY() - 0.3D, drop.getZ())));
+        float dealt = hp - z.getHealth();
+        // Hits over 40 accumulated break it back into the item.
+        drop.hurt(level.damageSources().generic(), 5F);
+        require(drop.isRemoved(), "broken by hits");
+        z.discard();
+        level.getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class, drop.getBoundingBox().inflate(4)).forEach(Entity::discard);
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_KINKAKUZI_PASS rise=" + String.format("%.2f", top - y0)
+                + " dealt=" + dealt);
     }
 
     private static void require(boolean ok, String what) {

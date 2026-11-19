@@ -163,4 +163,38 @@ public final class X1EffectItems {
             return InteractionResultHolder.pass(stack);
         }
     }
+
+    /** ItemKinkakuzi (金閣寺の一枚天井, glint): throws the ceiling up from the head (sneak: higher); used up. */
+    public static final class Kinkakuzi extends Item {
+        public Kinkakuzi(Properties p) {
+            super(p.stacksTo(1));
+        }
+
+        @Override
+        public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+            ItemStack stack = player.getItemInHand(hand);
+            double pow = player.isShiftKeyDown() ? 1.0D : 0.7D;
+            var ceiling = new dev.kneekura.fivedifficulties.forge.entity.KinkakuziEntity(level, player.getX(),
+                    player.getY() + player.getBbHeight(), player.getZ(), player, pow);
+            // X1 plays "random.drr", a sound 1.7.10 does not have: silent.
+            if (!level.isClientSide) level.addFreshEntity(ceiling);
+            stack.shrink(1);
+            return InteractionResultHolder.pass(stack);
+        }
+
+        @Override
+        public UseAnim getUseAnimation(ItemStack stack) {
+            return UseAnim.BOW;
+        }
+
+        @Override
+        public int getUseDuration(ItemStack stack) {
+            return 72000;
+        }
+
+        @Override
+        public boolean isFoil(ItemStack stack) {
+            return true;
+        }
+    }
 }

@@ -471,4 +471,47 @@ public final class P16Renderers {
             return HISOU;
         }
     }
+
+    public static final net.minecraft.client.model.geom.ModelLayerLocation KINKAKUZI_LAYER =
+            new net.minecraft.client.model.geom.ModelLayerLocation(new ResourceLocation(FiveDifficultiesPort.MOD_ID, "kinkakuzi"), "main");
+
+    /** ModelKinkakuzi: one 30×30×2 plate laid flat (64×32). */
+    public static net.minecraft.client.model.geom.builders.LayerDefinition createKinkakuziLayer() {
+        var mesh = new net.minecraft.client.model.geom.builders.MeshDefinition();
+        mesh.getRoot().addOrReplaceChild("kinkakuzi", net.minecraft.client.model.geom.builders.CubeListBuilder.create().texOffs(0, 0)
+                .addBox(-15, -15, -2, 30, 30, 2), net.minecraft.client.model.geom.PartPose.rotation((float) Math.PI / 2F, 0F, 0F));
+        return net.minecraft.client.model.geom.builders.LayerDefinition.create(mesh, 64, 32);
+    }
+
+    /** RenderKinkakuzi: the plate scaled 3 × 0.75 × 3, rocking after a hit like a boat. */
+    public static final class Kinkakuzi extends EntityRenderer<dev.kneekura.fivedifficulties.forge.entity.KinkakuziEntity> {
+        private static final ResourceLocation PLATE = tex("kinkakuzi");
+        private final net.minecraft.client.model.geom.ModelPart model;
+
+        public Kinkakuzi(EntityRendererProvider.Context context) {
+            super(context);
+            this.shadowRadius = 3.0F;
+            this.model = context.bakeLayer(KINKAKUZI_LAYER);
+        }
+
+        @Override
+        public void render(dev.kneekura.fivedifficulties.forge.entity.KinkakuziEntity e, float yaw, float partialTick,
+                           PoseStack pose, MultiBufferSource buffers, int light) {
+            pose.pushPose();
+            pose.scale(3.0F, 0.75F, 3.0F);
+            pose.mulPose(Axis.YP.rotationDegrees(180F - yaw));
+            float f = (float) e.getTimeSinceHit() - partialTick;
+            float f1 = Math.max(0.0F, e.getDamageTaken() - partialTick);
+            if (f > 0.0F) pose.mulPose(Axis.XP.rotationDegrees(Mth.sin(f) * f * f1 / 10.0F * e.getForwardDirection()));
+            model.render(pose, buffers.getBuffer(net.minecraft.client.renderer.RenderType.entityCutoutNoCull(PLATE)), light,
+                    net.minecraft.client.renderer.texture.OverlayTexture.NO_OVERLAY, 1F, 1F, 1F, 1F);
+            pose.popPose();
+            super.render(e, yaw, partialTick, pose, buffers, light);
+        }
+
+        @Override
+        public ResourceLocation getTextureLocation(dev.kneekura.fivedifficulties.forge.entity.KinkakuziEntity e) {
+            return PLATE;
+        }
+    }
 }

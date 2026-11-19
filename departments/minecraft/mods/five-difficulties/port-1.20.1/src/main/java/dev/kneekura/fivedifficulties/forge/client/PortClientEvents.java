@@ -48,6 +48,7 @@ public final class PortClientEvents {
         event.registerEntityRenderer(PortRegistries.TH_ITEM.get(), THItemRenderer::new);
         event.registerEntityRenderer(PortRegistries.MUSOU_FUUIN.get(), P12Renderers.MusouFuuin::new);
         event.registerEntityRenderer(PortRegistries.DRAGON_NECK_JEWEL.get(), DragonNeckJewelRenderer::new);
+        event.registerEntityRenderer(PortRegistries.KINKAKUZI_ENTITY.get(), P16Renderers.Kinkakuzi::new);
         event.registerEntityRenderer(PortRegistries.HISOU_ENTITY.get(), P16Renderers.Hisou::new);
         event.registerEntityRenderer(PortRegistries.YUUKA_PARASOL_ENTITY.get(), P16Renderers.YuukaParasol::new);
         event.registerEntityRenderer(PortRegistries.SILVER_KNIFE_ENTITY.get(), P16Renderers.SilverKnife::new);
@@ -88,6 +89,7 @@ public final class PortClientEvents {
         event.registerLayerDefinition(X1HatModels.SUWAKO_HAT, X1HatModels::createSuwakoHat);
         event.registerLayerDefinition(P16Renderers.PARASOL_LAYER, P16Renderers::createParasolLayer);
         event.registerLayerDefinition(P16Renderers.HISOU_LAYER, P16Renderers::createHisouLayer);
+        event.registerLayerDefinition(P16Renderers.KINKAKUZI_LAYER, P16Renderers::createKinkakuziLayer);
         event.registerLayerDefinition(P12Renderers.HAKKERO_LAYER, P12Renderers::createHakkeroLayer);
         event.registerLayerDefinition(P12Renderers.HAKKERO2_LAYER, P12Renderers::createHakkero2Layer);
     }

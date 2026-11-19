@@ -244,6 +244,13 @@ public final class PortRegistries {
                     .sized(4.4F, 4.4F).clientTrackingRange(8).updateInterval(1).setShouldReceiveVelocityUpdates(true)
                     .build(FiveDifficultiesPort.MOD_ID + ":hisou"));
 
+    // ---- P16n entities ----
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.KinkakuziEntity>> KINKAKUZI_ENTITY =
+            ENTITIES.register("kinkakuzi", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.KinkakuziEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.KinkakuziEntity::new, MobCategory.MISC)
+                    .sized(6.0F, 0.3F).clientTrackingRange(10).updateInterval(3).setShouldReceiveVelocityUpdates(true)
+                    .build(FiveDifficultiesPort.MOD_ID + ":kinkakuzi"));
+
     // ---- P13 danmaku-weapon items ----
     public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity>> DRAGON_NECK_JEWEL =
             ENTITIES.register("dragon_neck_jewel", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity>of(
@@ -451,6 +458,10 @@ public final class PortRegistries {
             () -> new dev.kneekura.fivedifficulties.forge.item.X1ToolItems.BloodthirstyOnmyoudama(new Item.Properties()));
     public static final RegistryObject<Item> HOURAI_JEWELED_BRANCH = ITEMS.register("hourai_jeweled_branch",
             () -> new dev.kneekura.fivedifficulties.forge.item.X1ToolItems.HouraiJeweledBranch(new Item.Properties()));
+
+    // ---- P16n kinkakuzi ----
+    public static final RegistryObject<Item> KINKAKUZI = ITEMS.register("kinkakuzi",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1EffectItems.Kinkakuzi(new Item.Properties()));
 
     public static final RegistryObject<Item> SHOT_MATERIAL = ITEMS.register("shot_material",
             () -> new dev.kneekura.fivedifficulties.forge.item.ShotMaterialItem(new Item.Properties()));

@@ -396,6 +396,16 @@ ASSETS = {
         "assets/five_difficulties_port/textures/item/hourai_jeweled_branch_5.png",
         "e83135ecb6fda7a808d6046623534884d39fde553ce19770fc02c20c9ab573e1",
     ),
+    # P16n entity textures.
+    "assets/thkaguyamod/textures/Kinkakuzi.png": (
+        "assets/five_difficulties_port/textures/entity/kinkakuzi.png",
+        "6f4c63736f26590049dda622dc0c77a1c27a47209935a6ac24b31b4bc6e2022b",
+    ),
+    # P16n kinkakuzi.
+    "assets/thkaguyamod/textures/items/kinkakuzi.png": (
+        "assets/five_difficulties_port/textures/item/kinkakuzi.png",
+        "61954f454e5061a326efbb9981a1dcf0931ac39c8da76a58e88fd616fab86ed6",
+    ),
     # P15 danmaku crafting table.
     "assets/thkaguyamod/textures/blocks/danmaku_crafting_table.png": (
         "assets/five_difficulties_port/textures/block/danmaku_crafting_table.png",
