@@ -64,7 +64,7 @@ public final class ClientWorldVisualSmoke {
     public static final String PASS_MARKER = "FIVE_DIFFICULTIES_P7B_WORLD_SMOKE_PASS";
     private static final String LEVEL_NAME = "five_difficulties_p7b_smoke";
 
-    private enum Phase { BOOT, WAIT_WORLD, SETTLE, FIRE, SHOOT_HOMING, P8_SPAWN, P8_SHOT, P9_SPAWN, P9_SHOT, P10_SPAWN, P10_SHOT, P11_SPAWN, P11_SHOT, P12_SPAWN, P12_SHOT, P15_OPEN, P15_SHOT, P16_SPAWN, P16_SHOT, START_STOP, SHOOT_STOP, DONE }
+    private enum Phase { BOOT, WAIT_WORLD, SETTLE, FIRE, SHOOT_HOMING, P8_SPAWN, P8_SHOT, P9_SPAWN, P9_SHOT, P10_SPAWN, P10_SHOT, P11_SPAWN, P11_SHOT, P12_SPAWN, P12_SHOT, P15_OPEN, P15_SHOT, P16_SPAWN, P16_SHOT, P16B_SPAWN, P16B_SHOT, START_STOP, SHOOT_STOP, DONE }
 
     private static final int[] P8_GRID_FORMS = {
             X1ShotTables.FORM_SMALL, X1ShotTables.FORM_MEDIUM, X1ShotTables.FORM_PEARL, X1ShotTables.FORM_CIRCLE,
@@ -199,6 +199,19 @@ public final class ClientWorldVisualSmoke {
                 case P16_SHOT -> {
                     if (++ticks == 12) requestShot(mc, "p16_items.png");
                     else if (ticks > 12) {
+                        server(mc, (level, player) -> level.getEntitiesOfClass(net.minecraft.world.entity.Entity.class,
+                                player.getBoundingBox().inflate(48), e -> !(e instanceof net.minecraft.world.entity.player.Player))
+                                .forEach(net.minecraft.world.entity.Entity::discard));
+                        next(Phase.P16B_SPAWN);
+                    }
+                }
+                case P16B_SPAWN -> {
+                    server(mc, ClientWorldVisualSmoke::spawnP16b);
+                    next(Phase.P16B_SHOT);
+                }
+                case P16B_SHOT -> {
+                    if (++ticks == 6) requestShot(mc, "p16_items2.png");
+                    else if (ticks > 6) {
                         server(mc, (level, player) -> level.getEntitiesOfClass(net.minecraft.world.entity.Entity.class,
                                 player.getBoundingBox().inflate(48), e -> !(e instanceof net.minecraft.world.entity.player.Player))
                                 .forEach(net.minecraft.world.entity.Entity::discard));
@@ -442,6 +455,26 @@ public final class ClientWorldVisualSmoke {
         u.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, new net.minecraft.world.item.ItemStack(held));
         u.startUsingItem(net.minecraft.world.InteractionHand.MAIN_HAND);
         return u;
+    }
+
+    // P16 (2): knives stuck in the air, the parasol, the Hisou swords, the Kinkakuji ceiling and the broom.
+    private static void spawnP16b(ServerLevel level, ServerPlayer player) {
+        for (int c = 0; c < 4; c++) {
+            var k = new dev.kneekura.fivedifficulties.forge.entity.SilverKnifeEntity(level,
+                    new Vec3d(-2.5D + c, -59.0D, 4.0D), new Vec3d(0, 0, 1), 0.0D, c);
+            k.setKnifeCount(-100000); // hold it still for the frame
+            level.addFreshEntity(k);
+        }
+        var holder = p16User(level, 5, -3.0D, 9.0D, dev.kneekura.fivedifficulties.forge.PortRegistries.YUUKA_PARASOL.get());
+        level.addFreshEntity(new dev.kneekura.fivedifficulties.forge.entity.YuukaParasolEntity(level, holder, 0));
+        var swordUser = p16User(level, 6, 2.5D, 9.0D, dev.kneekura.fivedifficulties.forge.PortRegistries.HISOU_SWORD.get());
+        for (int i = 1; i <= 8; i++) {
+            level.addFreshEntity(new dev.kneekura.fivedifficulties.forge.entity.HisouEntity(level, swordUser, null, i, 0));
+        }
+        var ceiling = new dev.kneekura.fivedifficulties.forge.entity.KinkakuziEntity(level, 0.5D, -56.0D, 14.0D, player, 0.0D);
+        ceiling.setNoGravity(true);
+        level.addFreshEntity(ceiling);
+        level.addFreshEntity(new dev.kneekura.fivedifficulties.forge.entity.MarisaBroomEntity(level, 0.5D, -60.5D, 6.0D));
     }
 
     // P16: item-effect entities and the two hats on armour stands, facing the camera.
