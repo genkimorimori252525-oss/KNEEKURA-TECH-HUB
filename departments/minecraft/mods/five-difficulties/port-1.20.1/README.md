@@ -1,6 +1,6 @@
 # Five Difficulties X1 Preservation Port — Minecraft 1.20.1 Forge
 
-Status: **P10 complete — lasers A / B, laser items and the special-shot registry on top of every X1 shot form; see PORT-ROADMAP.md**.
+Status: **P11 complete — spell-card core and 30 of the 35 X1 spell cards on top of every shot / laser form; see PORT-ROADMAP.md**.
 
 Target:
 - Minecraft 1.20.1
@@ -235,3 +235,10 @@ Next gate: lasers (EntityTHLaser / THSetLaser) and the ISpecialShot registry, th
 Laser A / B entities, every laser emitter, the laser renderer (normal, Gungnir, Laevateinn, Master
 Spark beam), the three laser items and the special-shot registry. See
 `IMPLEMENTATION-CHECKPOINT-P10.md` and `PORT-ROADMAP.md`.
+
+
+## P11 spell cards
+
+Spell-card declaration (level cost, look-ray target, enemy-danmaku clear), the card entity, its
+magic circle, the shot material bonus, one item per card and 30 of the 35 X1 cards. The other five
+need their own entities (P12). See `IMPLEMENTATION-CHECKPOINT-P11.md` and `PORT-ROADMAP.md`.

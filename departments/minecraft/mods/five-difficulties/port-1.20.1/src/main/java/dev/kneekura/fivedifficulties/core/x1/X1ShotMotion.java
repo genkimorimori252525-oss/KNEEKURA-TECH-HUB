@@ -146,6 +146,14 @@ public final class X1ShotMotion {
         lastMotion = motion;
     }
 
+    /** setVector: angle from rotationYaw / rotationPitch (X1 yaw convention), then updateMotion. */
+    public void setVector() {
+        double y = yaw / 180F * (float) Math.PI;
+        double p = pitch / 180F * (float) Math.PI;
+        angle = new Vec3d(Math.sin(y) * Math.cos(p), Math.sin(p), Math.cos(y) * Math.cos(p));
+        updateMotion();
+    }
+
     /** setSpeed. */
     public void setSpeed(double speed) {
         shotSpeed = speed;

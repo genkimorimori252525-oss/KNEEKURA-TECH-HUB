@@ -28,6 +28,9 @@ public final class PortClientEvents {
         event.registerEntityRenderer(PortRegistries.TH_SHOT.get(), THShotRenderer::new);
         event.registerEntityRenderer(PortRegistries.TH_LASER.get(), THLaserRenderer::new);
         event.registerEntityRenderer(PortRegistries.TH_SET_LASER.get(), THLaserRenderer::new);
+        event.registerEntityRenderer(PortRegistries.SPELL_CARD.get(), SpellCardRenderers.Card::new);
+        event.registerEntityRenderer(PortRegistries.SPELL_CARD_CIRCLE.get(), SpellCardRenderers.Circle::new);
+        event.registerEntityRenderer(PortRegistries.SHOT_MATERIAL_ENTITY.get(), SpellCardRenderers.ShotMaterial::new);
     }
 
     @SubscribeEvent

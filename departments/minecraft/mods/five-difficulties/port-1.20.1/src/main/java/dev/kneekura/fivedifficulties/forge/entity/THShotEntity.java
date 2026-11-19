@@ -7,6 +7,7 @@ import dev.kneekura.fivedifficulties.core.x1.X1ShotPatterns;
 import dev.kneekura.fivedifficulties.core.x1.X1ShotSpecials;
 import dev.kneekura.fivedifficulties.core.x1.X1ShotTables;
 import dev.kneekura.fivedifficulties.forge.PortRegistries;
+import dev.kneekura.fivedifficulties.forge.shot.X1Danmaku;
 import dev.kneekura.fivedifficulties.forge.shot.X1ShotSpawner;
 import dev.kneekura.fivedifficulties.forge.shot.X1SpecialShotRegistry;
 import net.minecraft.nbt.CompoundTag;
@@ -60,7 +61,12 @@ public class THShotEntity extends Projectile {
             SynchedEntityData.defineId(THShotEntity.class, EntityDataSerializers.FLOAT);
 
     private X1ShotMotion motion;
+    private LivingEntity lastUser;
     public float shotDamage;
+    /** X1 delayTime (kept for reCreate). */
+    public int delayTime;
+    /** X1 userHitCheck: these special shots may hit their own user (Youryoku Spoiler). */
+    public static final java.util.Set<Integer> USER_HITTABLE_SPECIALS = new java.util.HashSet<>();
     /** X1 damageRate: reset to 1 on each impact; WIND01 doubles it for airborne targets. */
     private float damageRate = 1.0F;
 
@@ -82,6 +88,7 @@ public class THShotEntity extends Projectile {
                                   double acceleration, Vec3d gravity, int shotId, float size, float damage, int delay,
                                   int end, int special, boolean laserAngle) {
         this.setOwner(user);
+        this.lastUser = user;
         this.setPos(pos.x(), pos.y(), pos.z());
         this.setAngleZ(slope);
         this.setShotId(shotId);
@@ -89,6 +96,7 @@ public class THShotEntity extends Projectile {
         this.shotDamage = damage;
         this.setShotEndTime(end);
         this.setAnimationCount(X1ShotMotion.initialAnimationCount(delay));
+        this.delayTime = delay;
         this.motion = new X1ShotMotion(pos, angle, rotate, rotationSpeed, rotationEnd, firstSpeed, limitSpeed,
                 acceleration, gravity, special);
         this.motion.laserAngle = laserAngle;
@@ -126,6 +134,22 @@ public class THShotEntity extends Projectile {
     public void setShotId(int id) { this.entityData.set(DATA_SHOT_ID, id); }
     public int getShotForm() { return X1ShotTables.formOf(getShotId()); }
     public int getShotColor() { return X1ShotTables.colorOf(getShotId()); }
+    public void setShotForm(int form) { setShotId(form * 8 + getShotColor()); }
+    public void setShotColor(int color) { setShotId(getShotForm() * 8 + color); }
+    /** isShotEndTime: ticksExisted == end time. */
+    public boolean isShotEndTime() { return this.tickCount == getShotEndTime(); }
+    /** EntityTHShot.delete. */
+    public void delete() { if (!this.level().isClientSide) this.discard(); }
+
+    /** EntityTHShot.reCreate: a copy of this shot's current state; this shot stays. */
+    public THShotEntity reCreate() {
+        if (this.level().isClientSide || motion == null || !(getOwner() instanceof LivingEntity user)) return null;
+        X1ShotData data = X1ShotData.shot(getShotForm(), getShotColor(), getShotSize(), shotDamage, delayTime,
+                getShotEndTime(), motion.special);
+        return X1Danmaku.createShotEntity(user, this, new Vec3d(getX(), getY(), getZ()), motion.angle, getAngleZ(),
+                motion.rotate, motion.rotationYawSpeed, motion.rotationEnd, motion.shotSpeed, motion.limitSpeed,
+                motion.acceleration, motion.gravity, data);
+    }
     public float getShotSize() { return this.entityData.get(DATA_SIZE); }
     public void setShotSize(float size) { this.entityData.set(DATA_SIZE, (float) (int) (size * 100F) / 100F); }
     public int getAnimationCount() { return this.entityData.get(DATA_ANIMATION); }
@@ -151,6 +175,12 @@ public class THShotEntity extends Projectile {
             return;
         }
         Entity owner = this.getOwner();
+        if (owner instanceof LivingEntity living) {
+            lastUser = living;
+        } else if (owner == null && lastUser != null && lastUser.isRemoved() && !(lastUser instanceof Player)) {
+            // 1.7.10 keeps the (dead) userEntity reference; 1.20.1 getOwner() drops removed owners.
+            owner = lastUser;
+        }
         if (!(owner instanceof LivingEntity user)) {
             this.discard();
             return;
@@ -160,7 +190,7 @@ public class THShotEntity extends Projectile {
             return;
         }
         if (!user.isAlive() && !(user instanceof Player)) {
-            this.discard(); // X1 shotFinishBonus; the shot-material drop is not ported yet.
+            shotFinishBonus();
             return;
         }
         if (X1ShotMotion.isPastEnd(getAnimationCount(), getShotEndTime())) {
@@ -312,7 +342,7 @@ public class THShotEntity extends Projectile {
     }
 
     /** EntityTHShot.bound: reflect the motion until the next step is clear, at most returnCount times. */
-    private void bound(X1ShotMotion m, double returnRate, int returnCount) {
+    public void bound(X1ShotMotion m, double returnRate, int returnCount) {
         Vec3 s1 = this.position();
         Vec3 s2 = s1.add(toMc(m.motion));
         BlockHitResult hit = boundClip(s1, s2);
@@ -363,7 +393,8 @@ public class THShotEntity extends Projectile {
 
     private boolean isCandidate(Entity e) {
         Entity owner = this.getOwner();
-        if (!e.isPickable() || e == owner) return false;
+        if (!e.isPickable()) return false;
+        if (e == owner && (motion == null || !USER_HITTABLE_SPECIALS.contains(motion.special))) return false;
         if (e instanceof Animal || e instanceof Villager) return false;
         if (e instanceof THShotEntity other) return other.getOwner() != owner;
         return e instanceof LivingEntity || e instanceof EnderDragonPart;
@@ -437,13 +468,20 @@ public class THShotEntity extends Projectile {
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
-        // X1 attackEntityFrom: another player's hit removes the shot (bonus drop not ported yet).
+        // X1 attackEntityFrom: another player's hit turns the shot (and others nearby) into bonuses.
         Entity attacker = source.getEntity();
         if (attacker == null) return false;
         if (attacker instanceof Player && attacker != this.getOwner() && !this.level().isClientSide) {
-            this.discard();
+            this.shotFinishBonus();
+            X1Danmaku.danmakuRemove(this, this.getShotSize() * 4.0F, "Other", true);
         }
         return true;
+    }
+
+    /** EntityTHShot.shotFinishBonus: leave a shot-material bonus and disappear. */
+    public void shotFinishBonus() {
+        X1Danmaku.spawnShotMaterial(this, getX(), getY(), getZ());
+        if (!this.level().isClientSide) this.discard();
     }
 
     /**

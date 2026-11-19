@@ -179,6 +179,20 @@ public final class ClientRuntimeSmoke {
             requireItemModel(minecraft, shotItem.get(), shotItem.getId().toString());
         }
         requireItemModel(minecraft, PortRegistries.DIFFUSION_AMULET.get(), "Diffusion Amulet");
+        for (var laserItem : PortRegistries.LASER_ITEMS) {
+            requireItemModel(minecraft, laserItem.get(), laserItem.getId().toString());
+        }
+        requireItemModel(minecraft, PortRegistries.SHOT_MATERIAL.get(), "Shot Material");
+        requireResource(minecraft, id("textures/item/material/shot_material.png"));
+        int cards = 0;
+        for (var entry : dev.kneekura.fivedifficulties.forge.spellcard.X1SpellCardRegistry.sorted()) {
+            requireItemModel(minecraft, PortRegistries.SPELL_CARD_ITEMS.get(entry.id()).get(), "spell card " + entry.name());
+            requireResource(minecraft, id("textures/item/spellcard/" + entry.key() + ".png"));
+            requireResource(minecraft, id("textures/item/spellcard/spellcard_lv" + entry.create().getNeedLevel() + ".png"));
+            cards++;
+        }
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P11_CLIENT_RESOURCES_PASS spellCards={} laserItems={}",
+                cards, PortRegistries.LASER_ITEMS.size());
 
         var root = minecraft.getEntityModels().bakeLayer(SakuyaTimeControllerModel.LAYER_LOCATION);
         root.getChild("watch_base");
@@ -196,6 +210,10 @@ public final class ClientRuntimeSmoke {
         BakedModel model = minecraft.getItemRenderer().getModel(new ItemStack(item), null, null, 0);
         require(model != null && model != minecraft.getModelManager().getMissingModel(),
                 label + " resolved to missing item model");
+    }
+
+    private static void requireResource(Minecraft minecraft, ResourceLocation id) {
+        require(minecraft.getResourceManager().getResource(id).isPresent(), "missing client resource " + id);
     }
 
     private static ResourceLocation id(String path) {

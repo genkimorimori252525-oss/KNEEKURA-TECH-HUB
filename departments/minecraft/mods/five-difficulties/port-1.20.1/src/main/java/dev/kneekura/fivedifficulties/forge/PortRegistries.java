@@ -10,6 +10,12 @@ import dev.kneekura.fivedifficulties.forge.item.HomingAmuletItem;
 import dev.kneekura.fivedifficulties.forge.item.SakuyaStopWatchItem;
 import dev.kneekura.fivedifficulties.forge.item.SakuyaWatchItem;
 import dev.kneekura.fivedifficulties.forge.item.THShotItem;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.Item;
@@ -113,6 +119,63 @@ public final class PortRegistries {
     public static final RegistryObject<Item> LONG_LASER = ITEMS.register("long_laser", () -> new THLaserItem(2, new Item.Properties()));
     public static final java.util.List<RegistryObject<Item>> LASER_ITEMS = java.util.List.of(LASER, SHORT_LASER, LONG_LASER);
 
+    // ---- P11 spell cards ----
+    private static final DeferredRegister<SoundEvent> SOUNDS =
+            DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, FiveDifficultiesPort.MOD_ID);
+    private static final DeferredRegister<CreativeModeTab> TABS =
+            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, FiveDifficultiesPort.MOD_ID);
+
+    /** X1 sounds.json events (the X1 bundle ships no audio for them). */
+    public static final RegistryObject<SoundEvent> SOUND_SPELLCARD = sound("spellcard");
+    public static final RegistryObject<SoundEvent> SOUND_MASTERSPARK = sound("masterspark");
+    public static final RegistryObject<SoundEvent> SOUND_SUKIMA = sound("sukima");
+    public static final RegistryObject<SoundEvent> SOUND_DOWN = sound("down");
+
+    private static RegistryObject<SoundEvent> sound(String name) {
+        return SOUNDS.register(name, () -> SoundEvent.createVariableRangeEvent(
+                new ResourceLocation(FiveDifficultiesPort.MOD_ID, name)));
+    }
+
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.SpellCardEntity>> SPELL_CARD =
+            ENTITIES.register("spell_card", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.SpellCardEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.SpellCardEntity::new, MobCategory.MISC)
+                    .sized(0.4F, 0.4F).clientTrackingRange(8).updateInterval(1)
+                    .build(FiveDifficultiesPort.MOD_ID + ":spell_card"));
+
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.SpellCardCircleEntity>> SPELL_CARD_CIRCLE =
+            ENTITIES.register("spell_card_circle", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.SpellCardCircleEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.SpellCardCircleEntity::new, MobCategory.MISC)
+                    .sized(0.5F, 0.5F).clientTrackingRange(8).updateInterval(1)
+                    .build(FiveDifficultiesPort.MOD_ID + ":spell_card_circle"));
+
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.ShotMaterialEntity>> SHOT_MATERIAL_ENTITY =
+            ENTITIES.register("shot_material", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.ShotMaterialEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.ShotMaterialEntity::new, MobCategory.MISC)
+                    .sized(1.2F, 1.2F).clientTrackingRange(8).updateInterval(1).setShouldReceiveVelocityUpdates(true)
+                    .build(FiveDifficultiesPort.MOD_ID + ":shot_material"));
+
+    public static final RegistryObject<Item> SHOT_MATERIAL = ITEMS.register("shot_material",
+            () -> new dev.kneekura.fivedifficulties.forge.item.ShotMaterialItem(new Item.Properties()));
+
+    /** One item per registered X1 spell card (X1: one item, damage value = spell card ID). */
+    public static final java.util.Map<Integer, RegistryObject<Item>> SPELL_CARD_ITEMS = new java.util.LinkedHashMap<>();
+
+    static {
+        dev.kneekura.fivedifficulties.forge.spellcard.X1SpellCards.registerAll();
+        for (var entry : dev.kneekura.fivedifficulties.forge.spellcard.X1SpellCardRegistry.sorted()) {
+            SPELL_CARD_ITEMS.put(entry.id(), ITEMS.register("spell_card_" + entry.key(),
+                    () -> new dev.kneekura.fivedifficulties.forge.spellcard.SpellCardItem(entry.id(), new Item.Properties())));
+        }
+    }
+
+    /** X1 THKaguyaCore.tabSpellCard */
+    public static final RegistryObject<CreativeModeTab> SPELL_CARD_TAB = TABS.register("spell_cards",
+            () -> CreativeModeTab.builder()
+                    .title(Component.translatable("itemGroup.thKaguyaSpellCard"))
+                    .icon(() -> new ItemStack(SPELL_CARD_ITEMS.values().iterator().next().get()))
+                    .displayItems((params, out) -> SPELL_CARD_ITEMS.values().forEach(i -> out.accept(i.get())))
+                    .build());
+
     private static RegistryObject<Item> shotItem(String name, int x1Type) {
         return ITEMS.register(name, () -> new THShotItem(x1Type, new Item.Properties()));
     }
@@ -122,5 +185,7 @@ public final class PortRegistries {
     public static void register(IEventBus modBus) {
         ITEMS.register(modBus);
         ENTITIES.register(modBus);
+        SOUNDS.register(modBus);
+        TABS.register(modBus);
     }
 }

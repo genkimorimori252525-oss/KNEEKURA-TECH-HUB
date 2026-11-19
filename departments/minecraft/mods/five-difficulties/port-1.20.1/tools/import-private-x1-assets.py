@@ -122,6 +122,179 @@ ASSETS = {
         "assets/five_difficulties_port/textures/item/diffusion_amulet.png",
         "48a04fbb8993b87cce4abc2b175f006d8bdaef3254c323b86b023b749f152927",
     ),
+    # P11 spell card art, level frames and the shot material.
+    "assets/thkaguyamod/textures/items/spellCard/Catadioptric.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/catadioptric.png",
+        "faae4e35ae7571582c556ed4cd2997fa79baf7e8f68efa1d94aadb1abf6a704e",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/EternalMeek.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/eternalmeek.png",
+        "15b842e0458265711ad29d5511083d4bccfe49cc782e04f10e5ed8a6fbb6c72a",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/Fafrotskies_no_Kiseki.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/fafrotskies_no_kiseki.png",
+        "a8e16e24f35ab5ace9310cb248e9ad66a437fbcc2613b28176d9a3aa935ab37b",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/FujiyamaVolcano.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/fujiyamavolcano.png",
+        "b95f5a9ab6979afcf2b9311700ca922a17c3b7c59a7c78b5f6e9454c5f34447b",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/GagoujiCyclone.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/gagoujicyclone.png",
+        "bca6b96c6d854e90eb86c5a80597f1869419efae46858a410b548ce7cb86102d",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/HikouchuuNest.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/hikouchuunest.png",
+        "709d8970f730d134f6d431837729ca61225b6d0ed8276fdcf38a246bdc13dccc",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/HoukaKenran.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/houkakenran.png",
+        "c9863ee00872d70c4fce5b671c48c06f220fe63e6b6da760eedffcee113bf6c6",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/IcicleFall.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/iciclefall.png",
+        "f23179e42278eb5fec7db2b519f49282731005047a485d3168dba633f741d52f",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/KachoufuugetuShoufuurougetu.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/kachoufuugetushoufuurougetu.png",
+        "ca35a65d8078f55dbaadfd1c7978c41b8ef799be394632e14eea2f53977c040d",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/Kappa'sPororoca.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/kappaspororoca.png",
+        "026167a275ac9b8909f3b94e77614eb3e0e756bfde5ccd76a92ac512cd067f3a",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/Kasho_no_Eimin.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/kasho_no_eimin.png",
+        "033e8856b6f2f4a7a69c1c32f07a9d3a9fd4fa1c442ecf341154747baf9c9efc",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/Kerochan_Fuuu_ni_Makezu.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/kerochan_fuuu_ni_makezu.png",
+        "d32f573a15cf0391d514b19d0aaa68f12f584b808d0acddb9b356064eba177a9",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/LittleBugStorm.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/littlebugstorm.png",
+        "6499d259ccfd413b717bbc8d8e2a27c6c36ba37142bcb2e998cb59c1b77b373a",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/MasterSpark.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/masterspark.png",
+        "8952c25b2e748e2769682ff860a14b69201f2611bce9b6f5f8b6e2d1ce583b4d",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/MeteonicShower.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/meteonicshower.png",
+        "2a1866aa91c80412aecf6bf838f973a59257f3fc15da397df16dc27ba4043a15",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/Meteor_on_Earth.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/meteor_on_earth.png",
+        "efc98a55be6b4cc06b6797985600b0de724735946dcabaf468a4124009664c30",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/MiracleFruit.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/miraclefruit.png",
+        "16c44265fe1faa5b54dbd33b148f70d17ebe30ce4a2f62212d682eea8a4263d1",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/Mishagujisama.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/mishagujisama.png",
+        "6d7c6e2b6ab39a31ee24ab7159714b3d1c0d8cdcf4e6a88e731296f8c7f09690",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/MoonlightRay.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/moonlightray.png",
+        "25b776227da4c670a95bae227c92cfbaa50d440f798ad00b1a7eef73ae9f3929",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/Moses_no_Kiseki.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/moses_no_kiseki.png",
+        "7d6644d819a3f6fe49b4320f9bf07370b144b6c9d857e8b4f9f9b8e798522cde",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/MusouFuuin.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/musoufuuin.png",
+        "78c4688993b903709b5cca000fde824914429a1a3ac9afc1fa06c9c3858286fc",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/Nami_to_Tubu_no_Kyoukai.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/nami_to_tubu_no_kyoukai.png",
+        "e246579282a7519bce17ace36d8b8d3d9d431601fc95f6028656016db2310a3a",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/NightBird.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/nightbird.png",
+        "65efa9f8c970391beb25058e23bed755657656dbc31b05b682c4cf02da677477",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/NijuuKokushichou.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/nijuukokushichou.png",
+        "be72543a8335a4e628bc629196b586d2b3940195dd770c1a034b554f39330dd1",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/Non-DirectionalLaser.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/non_directionallaser.png",
+        "23b61bff37b9961a607c94f6107d78dd35f0c9618e71d56d65372f0a348cf85d",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/PerfectFreeze.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/perfectfreeze.png",
+        "edc258dfe2e56f1108e562f1e7fb1b2affb7486e1e913344fd2f6cac6e0d0475",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/RedMagic.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/redmagic.png",
+        "c32cb12e18cfae678f7567ca21ddd92c4ffefd928dd181f45523393e28d33ad0",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/SaikouRanbu.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/saikouranbu.png",
+        "7d3273cd3b17d2f5ae061d02343aed2e6fc5bde21ec877f4a166c19538adf0c3",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/SatuzinDoll.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/satuzindoll.png",
+        "47eae1fbfd4a5196bda468491a885fc47124dadd3722495813043d8a9a741f09",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/ScarletShoot.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/scarletshoot.png",
+        "a219c8de036a18901730638482976c42632d9d6e182dddbf0ee768ad62267634",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/Spear_the_Gungnir.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/spear_the_gungnir.png",
+        "551bf971863438cc0dc747078a5d2bcfcc54568d7f803b5f1e5b7e07792b52a4",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/spellcard_frame.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/spellcard_frame.png",
+        "fbfc82ed35cfd6c4bceb054f9e347d2bc6ef813c71d0d2734187f369a98f4bf2",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/spellcard_lv1.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/spellcard_lv1.png",
+        "9956bd80f3a44495f6d206367e104de61da722c06141f91ac15673a3cb4ddbc9",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/spellcard_lv2.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/spellcard_lv2.png",
+        "4b013df9f8d8390667c44dec1cd653d29bc9f46b1c60742282f5ac9bd8fd3be9",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/spellcard_lv3.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/spellcard_lv3.png",
+        "8067b6d67a8db53d97d33800f03f8c4c95e2c40f484bd4760eaa0b0bd29f385e",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/spellcard_lv4.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/spellcard_lv4.png",
+        "b2a6df9c42e6a577319b2afa90511fea9db2071c1f2979b114ce9493e5fa8b67",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/spellcard_lv5.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/spellcard_lv5.png",
+        "5d58a7e2b234457e77bb7a2ee7178660321082bc38d2f2017aa1f3c9e17665ab",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/StarbowBreak.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/starbowbreak.png",
+        "2cc0c5d613176dd1d913e0c9145534512244823ce94b2b9a4d96e5f11c0adc72",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/StardustReverie.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/stardustreverie.png",
+        "2fb5c28705d1f5ab3b236ec73dfa88a02362093628d0f075c28ef08fce60e9b4",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/Yasaka_no_Kamikaze.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/yasaka_no_kamikaze.png",
+        "446a1a7245c077e4104a1587abc6fb76701f7ff1999c0ffb32a3959b292fb862",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/YouryokuSpoiler.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/youryokuspoiler.png",
+        "7d6c348bb62006cefd8dd9caa78ef9d926192a9f52d6496a3c5d2de64c3905df",
+    ),
+    "assets/thkaguyamod/textures/items/spellCard/Zenzinrui_no_Hisouten.png": (
+        "assets/five_difficulties_port/textures/item/spellcard/zenzinrui_no_hisouten.png",
+        "0ae16acc7cc6ebcc2fd3f929aa92c306eaad1f3cb192ef3b53806c20bfba9f23",
+    ),
+    "assets/thkaguyamod/textures/items/material/ShotMaterial.png": (
+        "assets/five_difficulties_port/textures/item/material/shot_material.png",
+        "6d4e0346e46f0a40081cc4e1c774b313976ef605a6560c29d0faca0a787dafda",
+    ),
     # P10 laser item icons.
     "assets/thkaguyamod/textures/items/shot/MiddleLaser.png": (
         "assets/five_difficulties_port/textures/item/shot/laser.png",

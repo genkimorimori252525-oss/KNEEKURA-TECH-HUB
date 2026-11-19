@@ -63,7 +63,7 @@ public final class ClientWorldVisualSmoke {
     public static final String PASS_MARKER = "FIVE_DIFFICULTIES_P7B_WORLD_SMOKE_PASS";
     private static final String LEVEL_NAME = "five_difficulties_p7b_smoke";
 
-    private enum Phase { BOOT, WAIT_WORLD, SETTLE, FIRE, SHOOT_HOMING, P8_SPAWN, P8_SHOT, P9_SPAWN, P9_SHOT, P10_SPAWN, P10_SHOT, START_STOP, SHOOT_STOP, DONE }
+    private enum Phase { BOOT, WAIT_WORLD, SETTLE, FIRE, SHOOT_HOMING, P8_SPAWN, P8_SHOT, P9_SPAWN, P9_SHOT, P10_SPAWN, P10_SHOT, P11_SPAWN, P11_SHOT, START_STOP, SHOOT_STOP, DONE }
 
     private static final int[] P8_GRID_FORMS = {
             X1ShotTables.FORM_SMALL, X1ShotTables.FORM_MEDIUM, X1ShotTables.FORM_PEARL, X1ShotTables.FORM_CIRCLE,
@@ -72,6 +72,7 @@ public final class ClientWorldVisualSmoke {
     private static double shotsColourfulDelta;
     private static double formsColourfulDelta;
     private static double lasersColourfulDelta;
+    private static double cardColourfulDelta;
 
     private static Phase phase = Phase.BOOT;
     private static int ticks;
@@ -144,7 +145,22 @@ public final class ClientWorldVisualSmoke {
                 }
                 case P10_SHOT -> {
                     if (++ticks == 10) requestShot(mc, "p10_lasers.png");
-                    else if (ticks > 10) next(Phase.START_STOP);
+                    else if (ticks > 10) next(Phase.P11_SPAWN);
+                }
+                case P11_SPAWN -> {
+                    server(mc, ClientWorldVisualSmoke::declareCard);
+                    next(Phase.P11_SHOT);
+                }
+                case P11_SHOT -> {
+                    if (++ticks == 30) requestShot(mc, "p11_spellcard.png");
+                    else if (ticks > 30) {
+                        server(mc, (level, player) -> level.getEntitiesOfClass(net.minecraft.world.entity.Entity.class,
+                                player.getBoundingBox().inflate(48), e -> e instanceof THShotEntity
+                                        || e instanceof dev.kneekura.fivedifficulties.forge.entity.SpellCardEntity
+                                        || e instanceof dev.kneekura.fivedifficulties.forge.entity.SpellCardCircleEntity)
+                                .forEach(net.minecraft.world.entity.Entity::discard));
+                        next(Phase.START_STOP);
+                    }
                 }
                 case START_STOP -> {
                     server(mc, ClientWorldVisualSmoke::startStop);
@@ -309,6 +325,19 @@ public final class ClientWorldVisualSmoke {
         level.addFreshEntity(laser);
     }
 
+    // P11: a stand-in player 9.5 blocks ahead declares card 2 at the camera player (its magic circle,
+    // card and danmaku all come toward the camera).
+    private static void declareCard(ServerLevel level, ServerPlayer player) {
+        level.getEntitiesOfClass(THShotEntity.class, player.getBoundingBox().inflate(32), s -> true)
+                .forEach(THShotEntity::discard);
+        var user = net.minecraftforge.common.util.FakePlayerFactory.get(level,
+                new com.mojang.authlib.GameProfile(java.util.UUID.fromString("00000000-0000-0000-0000-0000f9110b11"), "[FDP11-smoke]"));
+        user.moveTo(0.5D, -58.0D, 10.0D, 180.0F, 0.0F);
+        user.getAbilities().instabuild = true;
+        dev.kneekura.fivedifficulties.forge.spellcard.X1SpellCardDeclaration.declare(level, user, player, 2, 0,
+                dev.kneekura.fivedifficulties.forge.spellcard.X1SpellCardDeclaration.NORMAL, true);
+    }
+
     // Source is an armor stand in front of the camera, so the Watch controller and its
     // expanding dark field are on screen and the player (a non-source) is inside the field.
     private static void startStop(ServerLevel level, ServerPlayer player) {
@@ -364,6 +393,11 @@ public final class ClientWorldVisualSmoke {
             case "p10_lasers.png" -> {
                 lasersColourfulDelta = stats[2] - baselineColourful;
                 require(lasersColourfulDelta > 0.01D, "P10 lasers not visible (colourful delta " + lasersColourfulDelta + ")");
+            }
+            case "p11_spellcard.png" -> {
+                cardColourfulDelta = stats[2] - baselineColourful;
+                require(cardColourfulDelta > 0.01D, "P11 spell card danmaku not visible (colourful delta "
+                        + cardColourfulDelta + ")");
             }
             case "p9_forms.png" -> {
                 formsColourfulDelta = stats[2] - baselineColourful;
@@ -421,7 +455,8 @@ public final class ClientWorldVisualSmoke {
     private static void finish(Minecraft mc) {
         FiveDifficultiesPort.LOGGER.info("{} homingWarmDelta={} p8ColourfulDelta={} skyBlueMinusRed baseline={} stop={}",
                 PASS_MARKER + " p9ColourfulDelta=" + String.format("%.5f", formsColourfulDelta)
-                        + " p10ColourfulDelta=" + String.format("%.5f", lasersColourfulDelta),
+                        + " p10ColourfulDelta=" + String.format("%.5f", lasersColourfulDelta)
+                        + " p11ColourfulDelta=" + String.format("%.5f", cardColourfulDelta),
                 String.format("%.5f", homingWarmDelta), String.format("%.5f", shotsColourfulDelta),
                 String.format("%.1f", baselineSky), String.format("%.1f", stopSky));
         phase = Phase.DONE;

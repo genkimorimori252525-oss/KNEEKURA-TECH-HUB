@@ -7,6 +7,7 @@ import dev.kneekura.fivedifficulties.core.x1.X1ShotMotion;
 import dev.kneekura.fivedifficulties.core.x1.X1ShotTables;
 import dev.kneekura.fivedifficulties.core.x1.X1WideShotGeometry;
 import dev.kneekura.fivedifficulties.forge.PortRegistries;
+import dev.kneekura.fivedifficulties.forge.shot.X1Danmaku;
 import dev.kneekura.fivedifficulties.forge.shot.X1ShotSpawner;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -178,5 +179,18 @@ public class THLaserEntity extends THShotEntity {
     @Override
     public boolean hurt(DamageSource source, float amount) {
         return false; // EntityTHLaser.attackEntityFrom
+    }
+
+    /** EntityTHLaser.shotFinishBonus: one shot material every 1.5 blocks along the laser. */
+    @Override
+    public void shotFinishBonus() {
+        X1ShotMotion m = motion();
+        double zPos = 0.0D;
+        while (zPos < getLaserLength()) {
+            double ax = m == null ? 0 : m.angle.x(), ay = m == null ? 0 : m.angle.y(), az = m == null ? 0 : m.angle.z();
+            X1Danmaku.spawnShotMaterial(this, getX() + ax * zPos, getY() + ay * zPos, getZ() + az * zPos);
+            zPos += 1.5D;
+        }
+        if (!this.level().isClientSide) this.discard();
     }
 }
