@@ -72,6 +72,8 @@ public final class P7VisualSmokeScreen extends Screen {
         pose.pushPose();
         pose.translate(width * 0.34D, height * 0.46D, 220.0D);
         pose.scale(120.0F, 120.0F, 120.0F);
+        // X1 draws the amulet in the XZ plane; tip it toward the GUI camera or it is edge-on.
+        pose.mulPose(Axis.XP.rotationDegrees(90.0F));
         HomingAmuletRenderer.renderLegacyVisual(pose, 0.0F, 12.0F);
         pose.popPose();
 
@@ -80,15 +82,8 @@ public final class P7VisualSmokeScreen extends Screen {
         renderWatch(graphics, SakuyaTimeControllerRenderer.WATCH_TEXTURE, width * 0.65D, height * 0.45D, "Sakuya Watch");
         renderWatch(graphics, SakuyaTimeControllerRenderer.STOPWATCH_TEXTURE, width * 0.84D, height * 0.45D, "StopWatch");
 
-        // Same expanding dark-field mesh used by the live controller renderer.
-        pose.pushPose();
-        pose.translate(width * 0.74D, height * 0.78D, 100.0D);
-        pose.scale(5.0F, 5.0F, 5.0F);
-        pose.scale(0.3F, 0.3F, 0.3F);
-        SakuyaTimeControllerRenderer.renderDarkField(pose, 5.0F);
-        pose.popPose();
-
-        graphics.drawCenteredString(this.font, "X1 dark time field", (int)(width * 0.74D), (int)(height * 0.92D), 0xC8C8FF);
+        // The X1 dark (colour-inverting) time field does not draw in this GUI context; its evidence
+        // comes from the in-world ClientWorldVisualSmoke (P7b) instead of a false pass here.
     }
 
     private void renderItem(GuiGraphics graphics, ItemStack stack, int x, int y, String label) {

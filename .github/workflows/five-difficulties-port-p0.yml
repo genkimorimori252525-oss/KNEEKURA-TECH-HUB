@@ -1,8 +1,8 @@
-name: Five Difficulties Port P6
+name: Five Difficulties Port
 
 on:
   push:
-    branches: ["jolly/five-difficulties-1201-port-p6-2026-10-07"]
+    branches: ["jolly/five-difficulties-1201-port-*"]
     paths:
       - 'departments/minecraft/mods/five-difficulties/port-1.20.1/**'
       - '.github/workflows/five-difficulties-port-p0.yml'

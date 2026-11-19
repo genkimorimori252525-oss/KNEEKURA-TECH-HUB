@@ -1,6 +1,6 @@
 # Five Difficulties X1 Preservation Port — Minecraft 1.20.1 Forge
 
-Status: **P6 complete — the Homing + Sakuya vertical slice now passes world-mutating dedicated-server runtime scenarios on Forge 1.20.1**.
+Status: **P7 complete — live Homing + Sakuya visuals verified in a real 1.20.1 client world (local, private overlay)**.
 
 Target:
 - Minecraft 1.20.1
@@ -184,3 +184,20 @@ See:
 - `IMPLEMENTATION-CHECKPOINT-P6.md`
 
 The next gate is **client-integrated visual/runtime parity** with the private canonical X1 texture overlay, followed by connected-client item interaction testing.
+
+
+## P7 client visual evidence
+
+The inherited P7 GUI smoke printed PASS while its frame was blank for the Homing
+primitive and the dark field. P7 now adds an in-world client smoke with pixel
+assertions; live amulets render as flat X1 sprites and the Watch field colour-inverts
+the scene as in X1.
+
+See `IMPLEMENTATION-CHECKPOINT-P7.md`.
+
+Local client runs (need the private overlay, so not in CI):
+
+    FIVE_DIFFICULTIES_P7_WORLD_SMOKE=1 ./gradlew runClient
+    FIVE_DIFFICULTIES_P7_CLIENT_SMOKE=1 ./gradlew runClient
+
+Next gate: P8 generic THShot backend (Phase A, one entity per legacy shot).

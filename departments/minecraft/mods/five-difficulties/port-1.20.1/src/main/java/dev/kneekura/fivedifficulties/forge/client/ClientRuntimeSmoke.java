@@ -135,7 +135,10 @@ public final class ClientRuntimeSmoke {
                     screenshotSha
             );
 
-            Files.deleteIfExists(screenshot);
+            // Local private review may keep the PNG (it contains private X1 art, so CI never sets this).
+            if (!"1".equals(System.getenv("FIVE_DIFFICULTIES_KEEP_SCREENSHOT"))) {
+                Files.deleteIfExists(screenshot);
+            }
             completed = true;
             minecraft.stop();
         } catch (Throwable failure) {
