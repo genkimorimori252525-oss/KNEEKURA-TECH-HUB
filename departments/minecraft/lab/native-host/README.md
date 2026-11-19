@@ -38,9 +38,9 @@ Put a small `tank.json` in the MOD project and run one finite trial on the activ
   "schema": "kneekura.tank-project/v1",
   "id": "five-difficulties",
   "mods": [{"id": "five_difficulties_port", "jar": "build/libs/five_difficulties_port-*.jar", "kind": "forge-distribution"}],
-  "world": "C:/.../Tank/fixtures/FIXTURE/game/saves/KNEEKURA_DEBUG_WORLD",
-  "subjectUuid": "UUID-OF-A-LIVING-ENTITY-SAVED-IN-THAT-WORLD",
-  "mode": "LIFECYCLE"
+  "world": "@swap",
+  "mode": "LIFECYCLE",
+  "selfTest": true
 }
 ```
 
@@ -48,7 +48,15 @@ Put a small `tank.json` in the MOD project and run one finite trial on the activ
 node INSTALLED/native-host/tank.mjs run --project MOD_PROJECT_DIR
 ```
 
-Only developer facts go in `tank.json`. `subjectUuid` is required in every mode, LIFECYCLE included: READY waits until that living entity is loaded in the Overworld, so a wrong UUID ends as `READY timeout` after180s, not a fast error (it cannot be checked offline without NBT). Optional `playerUuid`, `maxTicks` (600), `maxWallMs` (30000), `maxEvents` (128). `jar`/`world` are absolute or project-relative; `*` is allowed in the JAR file name and the newest match wins (the summary reports the chosen file, its build time and the candidate count). `run` copies each JAR into `Tank/mods/<id>/<sha256>-<kind>.jar`, hashes the world inventory (bytes only), infers `playerUuid` from the world's single saved Player, takes `sourceRevision` from the project's git HEAD (null outside git; `sourceDirty` is reported), writes a new pinned v1 profile under `Tank/profiles/`, then performs the ordinary `prepare` and `start`. It prints one JSON summary: `PASS` with startup/exit/evidence counts, or `FAIL` with the trial, crash-report description, last error lines of `latest.log`, `launch-failure.json` and cleanup. It is exactly one trial on the shared lock; it never retries. A normal `gradlew build` output is `forge-distribution`; a `jar`-only (not reobfuscated) output is `mapped-dev`.
+Only developer facts go in `tank.json`. `subjectUuid` is required in every mode, LIFECYCLE included, unless an `@fixture` supplies it: READY waits until that living entity is loaded in the Overworld. It cannot be checked offline without NBT; a wrong UUID stops the client about20s after the Player binds (`SUBJECT_NOT_LOADED`). Optional `playerUuid`, `maxTicks` (600), `maxWallMs` (30000), `maxEvents` (128). `jar`/`world` are absolute or project-relative; `*` is allowed in the JAR file name and the newest match wins (the summary reports the chosen file, its build time and the candidate count). `run` copies each JAR into `Tank/mods/<id>/<sha256>-<kind>.jar`, hashes the world inventory (bytes only), infers `playerUuid` from the world's single saved Player, takes `sourceRevision` from the project's git HEAD (null outside git; `sourceDirty` is reported), writes a new pinned v1 profile under `Tank/profiles/`, then performs the ordinary `prepare` and `start`. It prints one JSON summary: `PASS` with startup/exit/evidence counts, or `FAIL` with the trial, crash-report description, last error lines of `latest.log`, `launch-failure.json` and cleanup. It is exactly one trial on the shared lock; it never retries. A normal `gradlew build` output is `forge-distribution`; a `jar`-only (not reobfuscated) output is `mapped-dev`.
+
+Presets and fixtures (2026-11-20):
+
+- `"world": "@swap"` names a fixture: the single `Tank/fixtures/*/tank-fixture.json` whose `name` matches (`schema: kneekura.tank-fixture/v1`, project-relative `world`, `playerUuid`, `subjectUuid`, optional `description`). It supplies the world, Player and subject; `tank.json` values still override. The `swap` fixture is the 52×52×24 black-concrete tank at (0,224,0).
+- `"view": "tank"` (default) seals `options.txt` (`renderDistance:4`, `simulationDistance:5`) into the trial's private game directory, so the client loads about 9×9 instead of 25×25 chunks around the tank. `"view": "native"` keeps game defaults. The world is not modified.
+- `"look": "grid"` emits a v2 profile with the client grid presentation (`grid:true`, `brightness:NATIVE`); the world must carry a hash-bound `kneekura-tank-owner.json`. Default `plain`.
+- `"selfTest": true` passes `-Dkneekura.tank.selfTest=<this trial's request nonce>`. A MOD runs its own checks only when that property exists and logs `KNEEKURA_TANK_SELFTEST <nonce> PASS|FAIL <name> [detail]` lines and one `KNEEKURA_TANK_SELFTEST <nonce> DONE pass=N fail=M`. After the verified closure, `run` reads `latest.log`, keeps only lines with this nonce (≤256), writes `selftest-result.json` and reports `PASS`, `FAIL`, `EMPTY`, `INCONSISTENT` (DONE disagrees with counted lines) or `INCOMPLETE_NO_DONE`. The run is `PASS` only when the self-test is `PASS`. Scope is `MOD_SELF_REPORTED_NOT_TANK_VERIFIED`: it is the MOD's claim, recorded next to the Tank's own lifecycle evidence, not gameplay acceptance. Checks must finish inside the declared window.
+- READY waiting is explained: the adapter appends up to8 reason changes (`CLIENT_WORLD`, `FORGE_LOADING`, `PLAYER_BINDING`, `SUBJECT_NOT_LOADED`, `SUBJECT_NOT_ALIVE`) to `ready-wait.jsonl`, and when the bound Player's world still lacks the declared subject after20s it writes `bootstrap-subject.json` and stops itself through the same path as the180s startup timeout. The `run` failure digest shows both.
 
 Mixin refmaps: the client run always sets ForgeGradle's `mixin.env.remapRefMap=true` and `mixin.env.refMapRemappingFile=build/createSrgToMcp/output.srg` (MDK parity), so production SRG refmaps work in this official-name runtime. Do not hand-edit refmaps inside JARs. Launch fails closed with `TANK_REFMAP_REMAPPING_FILE_MISSING` when the host lacks that file.
 
