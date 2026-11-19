@@ -1,0 +1,16 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": [
+    "minecraft:birch_forest",
+    "minecraft:forest",
+    "minecraft:jungle",
+    "minecraft:river",
+    "minecraft:sparse_jungle"
+  ],
+  "spawners": {
+    "type": "five_difficulties_port:wriggle",
+    "weight": 20,
+    "minCount": 1,
+    "maxCount": 3
+  }
+}

@@ -1,5 +1,6 @@
 package dev.kneekura.fivedifficulties.forge;
 
+import dev.kneekura.fivedifficulties.forge.spellcard.cards.SpecialCards;
 import com.mojang.authlib.GameProfile;
 import dev.kneekura.fivedifficulties.core.x1.X1DanmakuPatterns;
 import dev.kneekura.fivedifficulties.forge.entity.THShotEntity;
@@ -199,6 +200,52 @@ public final class P17Scenario {
         level.getEntitiesOfClass(THShotEntity.class, new net.minecraft.world.phys.AABB(bx - 30, by - 30, bz - 30, bx + 30, by + 30, bz + 30),
                 s -> s.getOwner() == cirno).forEach(Entity::discard);
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P17_CIRNO_PASS fired={}", cFired);
+
+        // Wriggle: 30 -> card 35 (36 HP, height 2) -> card 34 (42 HP, height 4) -> end. Rice with the bug-storm special.
+        var wriggle = spawn(PortRegistries.WRIGGLE.get(), 10, 2);
+        require(wriggle.getMaxHealth() == 30.0F && wriggle.getFlyingHeight() == 3 && wriggle.getUsingSpellCardNo() == -1, "wriggle phase 1");
+        Zombie foe3 = EntityType.ZOMBIE.create(level);
+        foe3.moveTo(bx + 10, by, bz + 8, 0F, 0F);
+        foe3.setNoAi(true);
+        level.addFreshEntity(foe3);
+        wriggle.setTarget(foe3);
+        java.util.function.Supplier<java.util.List<THShotEntity>> wShots = () -> level.getEntitiesOfClass(THShotEntity.class,
+                wriggle.getBoundingBox().inflate(8), s -> s.getOwner() == wriggle);
+        wriggle.attackCounter = 1;
+        wriggle.patternForTest(2);
+        var rice = wShots.get();
+        require(rice.size() == 1 && rice.get(0).motion().special == SpecialCards.LittleBugStorm.SP_ATTACK01_01,
+                "one yellow bug-storm rice at normal, saw " + rice.size());
+        wriggle.attackCounter = 62;
+        wriggle.patternForTest(2);
+        int wFired = wShots.get().size() - 1;
+        require(wFired == 5, "5-way slowing fan, saw " + wFired);
+        int[] wCards = {35, 34};
+        float[] wHp = {36.0F, 42.0F};
+        int[] wWait = {40, 80};
+        int[] wHeight = {2, 4};
+        for (int k = 0; k < 2; k++) {
+            wriggle.attackInterval = 0;
+            wriggle.invulnerableTime = 0;
+            wriggle.hurt(level.damageSources().generic(), 200F);
+            require(wriggle.getHealth() <= 0.0F && wriggle.deadFlag(), "wriggle phase " + (k + 1) + " down");
+            wriggle.tickCount++;
+            wriggle.deathStepForTest();
+            require(wriggle.getUsingSpellCardNo() == wCards[k] && wriggle.getHealth() == wHp[k] && wriggle.attackInterval == wWait[k]
+                    && wriggle.getFlyingHeight() == wHeight[k], "wriggle card " + wCards[k]);
+        }
+        wriggle.attackInterval = 0;
+        wriggle.invulnerableTime = 0;
+        wriggle.hurt(level.damageSources().generic(), 200F);
+        require(wriggle.getHealth() <= 0.0F && wriggle.deadFlag(), "wriggle final phase down");
+        wriggle.tickCount++;
+        wriggle.deathStepForTest();
+        require(wriggle.getDanmakuPattern() == DanmakuMobEntity.ATTACK_END, "wriggle's third death is final");
+        wriggle.discard();
+        foe3.discard();
+        level.getEntitiesOfClass(THShotEntity.class, new net.minecraft.world.phys.AABB(bx - 30, by - 30, bz - 30, bx + 30, by + 30, bz + 30),
+                s -> s.getOwner() == wriggle).forEach(Entity::discard);
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P17_WRIGGLE_PASS fan={}", wFired);
 
         // Spawn rules accept egg spawns.
         require(THFairyEntity.checkFairySpawnRules(PortRegistries.TH_FAIRY.get(), level, MobSpawnType.SPAWN_EGG,

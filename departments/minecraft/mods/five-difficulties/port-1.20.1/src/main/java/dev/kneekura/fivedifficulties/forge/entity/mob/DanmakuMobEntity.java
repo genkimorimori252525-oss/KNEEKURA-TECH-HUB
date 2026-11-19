@@ -85,7 +85,9 @@ public abstract class DanmakuMobEntity extends PathfinderMob {
             SPECIES_SHIKIGAMI_FAMILIAR = 110, SPECIES_YOUKAI = 128, SPECIES_YOUKAI_BUG = 139, SPECIES_DRAGON = 192,
             SPECIES_HUMAN_SAINT = 6, SPECIES_GOD_ARAHITOGAMI = 33, SPECIES_HUMAN_HALF = 1, SPECIES_OTHERS = 255;
     public static final int NOT_ATTACK = 0, ATTACK_END = 127;
-    public static final int NORMAL_ATTACK01 = 1, SPELLCARD_ATTACK01 = 101;
+    public static final int NORMAL_ATTACK01 = 1, NORMAL_ATTACK02 = 2, NORMAL_ATTACK03 = 3, NORMAL_ATTACK04 = 4, NORMAL_ATTACK05 = 5;
+    public static final int SPELLCARD_ATTACK01 = 101, SPELLCARD_ATTACK02 = 102, SPELLCARD_ATTACK03 = 103, SPELLCARD_ATTACK04 = 104,
+            SPELLCARD_ATTACK05 = 105, SPELLCARD_ATTACK06 = 106;
 
     protected DanmakuMobEntity(EntityType<? extends DanmakuMobEntity> type, Level level) {
         super(type, level);

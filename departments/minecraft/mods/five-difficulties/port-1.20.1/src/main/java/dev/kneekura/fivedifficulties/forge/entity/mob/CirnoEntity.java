@@ -28,7 +28,6 @@ import net.minecraft.world.level.block.Blocks;
  */
 public class CirnoEntity extends DanmakuMobEntity {
     public static final int SC_CIRNO_PERFECT_FREEZE = 9, SC_CIRNO_ICICLE_FALL = 19;
-    public static final int NORMAL_ATTACK02 = 2, SPELLCARD_ATTACK02 = 102;
     private int randomWay;
 
     public CirnoEntity(EntityType<? extends CirnoEntity> type, Level level) {

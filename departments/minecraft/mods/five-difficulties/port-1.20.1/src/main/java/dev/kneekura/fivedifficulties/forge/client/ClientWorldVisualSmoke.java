@@ -64,7 +64,7 @@ public final class ClientWorldVisualSmoke {
     public static final String PASS_MARKER = "FIVE_DIFFICULTIES_P7B_WORLD_SMOKE_PASS";
     private static final String LEVEL_NAME = "five_difficulties_p7b_smoke";
 
-    private enum Phase { BOOT, WAIT_WORLD, SETTLE, FIRE, SHOOT_HOMING, P8_SPAWN, P8_SHOT, P9_SPAWN, P9_SHOT, P10_SPAWN, P10_SHOT, P11_SPAWN, P11_SHOT, P12_SPAWN, P12_SHOT, P15_OPEN, P15_SHOT, P16_SPAWN, P16_SHOT, P16B_SPAWN, P16B_SHOT, START_STOP, SHOOT_STOP, DONE }
+    private enum Phase { BOOT, WAIT_WORLD, SETTLE, FIRE, SHOOT_HOMING, P8_SPAWN, P8_SHOT, P9_SPAWN, P9_SHOT, P10_SPAWN, P10_SHOT, P11_SPAWN, P11_SHOT, P12_SPAWN, P12_SHOT, P15_OPEN, P15_SHOT, P16_SPAWN, P16_SHOT, P16B_SPAWN, P16B_SHOT, P17_SPAWN, P17_SHOT, START_STOP, SHOOT_STOP, DONE }
 
     private static final int[] P8_GRID_FORMS = {
             X1ShotTables.FORM_SMALL, X1ShotTables.FORM_MEDIUM, X1ShotTables.FORM_PEARL, X1ShotTables.FORM_CIRCLE,
@@ -215,6 +215,25 @@ public final class ClientWorldVisualSmoke {
                         server(mc, (level, player) -> level.getEntitiesOfClass(net.minecraft.world.entity.Entity.class,
                                 player.getBoundingBox().inflate(48), e -> !(e instanceof net.minecraft.world.entity.player.Player))
                                 .forEach(net.minecraft.world.entity.Entity::discard));
+                        next(Phase.P17_SPAWN);
+                    }
+                }
+                case P17_SPAWN -> {
+                    server(mc, ClientWorldVisualSmoke::spawnP17);
+                    next(Phase.P17_SHOT);
+                }
+                case P17_SHOT -> {
+                    if (++ticks == 20) {
+                        server(mc, (level, player) -> level.getEntitiesOfClass(net.minecraft.world.entity.Mob.class,
+                                player.getBoundingBox().inflate(32)).forEach(m -> FiveDifficultiesPort.LOGGER.info(
+                                "P17 frame mob {} at {}", m.getType().getDescriptionId(), m.position())));
+                        requestShot(mc, "p17_mobs.png");
+                    }
+                    else if (ticks > 20) {
+                        server(mc, (level, player) -> level.getEntitiesOfClass(net.minecraft.world.entity.Entity.class,
+                                player.getBoundingBox().inflate(48), e -> !(e instanceof net.minecraft.world.entity.player.Player))
+                                .forEach(net.minecraft.world.entity.Entity::discard));
+                        server(mc, (level, player) -> level.getServer().setDifficulty(Difficulty.PEACEFUL, true));
                         next(Phase.START_STOP);
                     }
                 }
@@ -477,6 +496,27 @@ public final class ClientWorldVisualSmoke {
         level.addFreshEntity(new dev.kneekura.fivedifficulties.forge.entity.MarisaBroomEntity(level, 0.5D, -60.5D, 6.0D));
     }
 
+    // P17: the danmaku mobs in a row facing the camera (no AI, so they hold still).
+    private static void spawnP17(ServerLevel level, ServerPlayer player) {
+        level.getServer().setDifficulty(Difficulty.NORMAL, true); // X1 danmaku mobs remove themselves in peaceful
+        net.minecraft.world.entity.EntityType<?>[] types = {
+                dev.kneekura.fivedifficulties.forge.PortRegistries.TH_FAIRY.get(),
+                dev.kneekura.fivedifficulties.forge.PortRegistries.SUNFLOWER_FAIRY.get(),
+                dev.kneekura.fivedifficulties.forge.PortRegistries.TH_PHANTOM.get(),
+                dev.kneekura.fivedifficulties.forge.PortRegistries.CIRNO.get(),
+                dev.kneekura.fivedifficulties.forge.PortRegistries.WRIGGLE.get()};
+        for (int i = 0; i < types.length; i++) {
+            var e = types[i].create(level);
+            if (!(e instanceof net.minecraft.world.entity.Mob mob)) continue;
+            mob.moveTo(-3.5D + i * 2.0D, -59.0D, 7.0D, 180.0F, 0.0F);
+            mob.setYHeadRot(180.0F);
+            mob.yBodyRot = 180.0F;
+            mob.setNoAi(true);
+            mob.setNoGravity(true);
+            level.addFreshEntity(mob);
+        }
+    }
+
     // P16: item-effect entities and the two hats on armour stands, facing the camera.
     private static void spawnP16(ServerLevel level, ServerPlayer player) {
         var scroll = p16User(level, 1, -3.0D, 9.0D, dev.kneekura.fivedifficulties.forge.PortRegistries.SORCERER_SUTRA_SCROLL.get());
@@ -587,6 +627,10 @@ public final class ClientWorldVisualSmoke {
                 cardColourfulDelta = stats[2] - baselineColourful;
                 require(cardColourfulDelta > 0.01D, "P11 spell card danmaku not visible (colourful delta "
                         + cardColourfulDelta + ")");
+            }
+            case "p17_mobs.png" -> {
+                double p17Delta = stats[2] - baselineColourful;
+                FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P17_CLIENT_FRAME colourfulDelta={}", String.format("%.5f", p17Delta));
             }
             case "p9_forms.png" -> {
                 formsColourfulDelta = stats[2] - baselineColourful;

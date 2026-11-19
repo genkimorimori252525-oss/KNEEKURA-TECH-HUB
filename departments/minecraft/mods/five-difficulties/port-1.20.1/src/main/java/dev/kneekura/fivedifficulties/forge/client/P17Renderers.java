@@ -227,6 +227,24 @@ public final class P17Renderers {
             this.texture = mob(texture);
         }
 
+        private boolean fullBright;
+
+        /** X1 getBrightness 1.0 (Wriggle): drawn at full light. */
+        public SimpleBoss<T, M> bright() {
+            this.fullBright = true;
+            return this;
+        }
+
+        @Override
+        protected int getBlockLightLevel(T e, net.minecraft.core.BlockPos pos) {
+            return fullBright ? 15 : super.getBlockLightLevel(e, pos);
+        }
+
+        @Override
+        protected int getSkyLightLevel(T e, net.minecraft.core.BlockPos pos) {
+            return fullBright ? 15 : super.getSkyLightLevel(e, pos);
+        }
+
         @Override
         public ResourceLocation getTextureLocation(T e) {
             return texture;

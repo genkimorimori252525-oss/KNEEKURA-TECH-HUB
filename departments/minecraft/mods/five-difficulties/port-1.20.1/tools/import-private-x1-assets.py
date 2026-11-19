@@ -451,6 +451,11 @@ ASSETS = {
         "assets/five_difficulties_port/textures/entity/mob/cirno.png",
         "8d0e4e061ce69544c9717476789f8bc46e8c44906ee604cef5a76359cbb893d2",
     ),
+    # P17e mob textures.
+    "assets/thkaguyamod/textures/mob/WriggleTexture.png": (
+        "assets/five_difficulties_port/textures/entity/mob/wriggle.png",
+        "b773d4e845fcacb28996c55f08da0061eca4bd370c424297e33afe60e7280de5",
+    ),
     # P15 danmaku crafting table.
     "assets/thkaguyamod/textures/blocks/danmaku_crafting_table.png": (
         "assets/five_difficulties_port/textures/block/danmaku_crafting_table.png",
