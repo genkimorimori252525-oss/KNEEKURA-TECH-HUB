@@ -9,6 +9,9 @@ public final class KneekuraDebugTankPresentation {
     private static volatile KneekuraDebugTankPresentationRecipe.Context context;
     private static String attemptedIdentity;
     private static String reportedFailureIdentity;
+    private static final KneekuraDebugTankStatus STATUS = new KneekuraDebugTankStatus();
+    private record StatusBinding(String configKey, long arenaEpoch) { }
+    private static volatile StatusBinding statusBinding;
     private KneekuraDebugTankPresentation() {}
 
     static void clear() { context = null; }
@@ -16,6 +19,16 @@ public final class KneekuraDebugTankPresentation {
     static KneekuraDebugTankPresentationRecipe.View viewForRender(MinecraftServer currentServer) {
         var current = context;
         return current == null ? null : current.viewFor(currentServer, System.nanoTime());
+    }
+
+    static void sampleStatus(KneekuraDebugEnv.Config config, MinecraftServer server, long localTick,
+            Long gameTime, boolean connected, boolean submitted) {
+        if (config == null || !config.enabled() || config.ownerSetup() == null) return;
+        var snapshot = STATUS.sample(context, server, System.nanoTime(), connected, submitted);
+        if (snapshot == null) return;
+        var binding = statusBinding;
+        if (binding == null || !binding.configKey().equals(config.identityKey())) return;
+        KneekuraDebugEvidenceWriter.recordTankStatus(config, binding.arenaEpoch(), localTick, gameTime, snapshot.json());
     }
 
     public static void update(KneekuraDebugEnv.Config config, MinecraftServer server) {
@@ -35,6 +48,8 @@ public final class KneekuraDebugTankPresentation {
                 return;
             }
             KneekuraDebugArenaRuntime.requireCaptureLeaseRemainingOwner(state, 0);
+            if (statusBinding == null || !statusBinding.configKey().equals(config.identityKey())) STATUS.reset();
+            statusBinding = new StatusBinding(config.identityKey(), state.arenaEpoch());
             if (config.identityKey().equals(attemptedIdentity)) return;
             attemptedIdentity = config.identityKey();
             clear();

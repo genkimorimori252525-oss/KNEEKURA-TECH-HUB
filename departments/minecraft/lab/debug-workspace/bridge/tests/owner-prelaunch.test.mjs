@@ -40,7 +40,8 @@ for (const fault of ['request', 'material', 'world', 'permission', 'extra', 'cla
 }
 test('private world registration must be an actual canonical directory', async t => {
   const f = await fixture(t); const alias = path.join(f.root, 'world-link');
-  await symlink(f.operator.worldRegistration.canonicalWorldRoot, alias, 'dir');
+  // Windows directory junctions exercise the same canonical-root rejection without symlink privilege.
+  await symlink(f.operator.worldRegistration.canonicalWorldRoot, alias, process.platform === 'win32' ? 'junction' : 'dir');
   f.operator.worldRegistration.canonicalWorldRoot = alias; f.options.operatorRegistration = await f.select();
   await assert.rejects(prepareOwnerControl(f.options));
 });

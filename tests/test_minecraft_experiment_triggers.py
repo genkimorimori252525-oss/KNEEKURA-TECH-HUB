@@ -179,11 +179,12 @@ def test_watch_cli_requires_only_registered_request(trigger_control,tmp_path,cap
 @pytest.mark.parametrize('name', [
     'bridge/owner-trigger-config.mjs', 'bridge/owner-trigger-source.mjs', 'bridge/owner-tank-rotation.mjs',
     'evidence/broker.mjs', 'evidence/capture.mjs', 'evidence/ingest.mjs',
-    'evidence/runtime.mjs', 'evidence/trigger-capture.mjs', 'evidence/watchpoints.mjs'])
+    'evidence/runtime.mjs', 'evidence/trigger-capture.mjs', 'evidence/watchpoints.mjs',
+    'bridge/tank-preflight.mjs', 'bridge/tank-resource.mjs', 'evidence/tank-contract.mjs'])
 @pytest.mark.parametrize('change', ['missing', 'tampered'])
 def test_every_new_imported_leaf_remains_pinned(control, monkeypatch, name, change):
     store,_,registry,owner=control
-    assert len(api().MODULES)==28
+    assert len(api().MODULES)==31
     relative='debug-workspace/'+name
     assert relative in api().MODULES
     if change=='missing':registry['module_hashes'].pop(relative)
