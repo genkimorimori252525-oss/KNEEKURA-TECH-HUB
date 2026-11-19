@@ -360,4 +360,137 @@ public final class X1ShotItems {
             net.minecraft.world.level.block.DispenserBlock.registerBehavior(item, knife);
         }
     }
+
+    /**
+     * ItemYuukaParasol (幽香の日傘, durability 60, special 350 "flower land"): guard and release to throw 45 + 11
+     * scale shots in a flower (red or yellow); landing on grass they plant a poppy or dandelion. Sneak right-click
+     * opens the parasol entity instead (one per player within 20). A hit knocks the target 3 away and 1 up for 7.
+     */
+    public static final class YuukaParasol extends Item {
+        public static final int SPECIAL_FLOWER_LAND = 350;
+
+        public YuukaParasol(Properties p) {
+            super(p.stacksTo(1).durability(dev.kneekura.fivedifficulties.forge.entity.YuukaParasolEntity.PARASOL_MAX_DAMAGE));
+            X1SpecialShotRegistry.register(new X1SpecialShotRegistry.SpecialShot() {
+                @Override
+                public void move(THShotEntity shot, X1ShotMotion motion, int id) {}
+
+                @Override
+                public boolean hitBlock(THShotEntity shot, X1ShotMotion motion, int id, BlockHitResult hit) {
+                    Level level = shot.level();
+                    BlockPos at = new BlockPos((int) shot.getX(), (int) (shot.getY() - 0.3D), (int) shot.getZ());
+                    if (level.getBlockState(at).is(net.minecraft.world.level.block.Blocks.GRASS_BLOCK)) {
+                        BlockPos set = at.above();
+                        if (level.isEmptyBlock(set) && !level.isClientSide) {
+                            if (shot.getShotColor() == X1ShotTables.YELLOW) {
+                                level.setBlockAndUpdate(set, net.minecraft.world.level.block.Blocks.DANDELION.defaultBlockState());
+                            } else if (shot.getShotColor() == X1ShotTables.RED) {
+                                level.setBlockAndUpdate(set, net.minecraft.world.level.block.Blocks.POPPY.defaultBlockState());
+                            }
+                        }
+                    }
+                    return false;
+                }
+
+                @Override
+                public boolean hitEntity(THShotEntity shot, X1ShotMotion motion, int id, Entity hit) {
+                    return false;
+                }
+            }, SPECIAL_FLOWER_LAND);
+        }
+
+        @Override
+        public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+            ItemStack stack = player.getItemInHand(hand);
+            player.startUsingItem(hand);
+            if (player.isShiftKeyDown()) {
+                for (Entity e : level.getEntities(player, player.getBoundingBox().inflate(20.0D))) {
+                    if (e instanceof dev.kneekura.fivedifficulties.forge.entity.YuukaParasolEntity parasol && parasol.user == player) {
+                        return InteractionResultHolder.consume(stack);
+                    }
+                }
+                if (!level.isClientSide) {
+                    level.addFreshEntity(new dev.kneekura.fivedifficulties.forge.entity.YuukaParasolEntity(level, player,
+                            stack.getDamageValue()));
+                    stack.shrink(1);
+                }
+            }
+            return InteractionResultHolder.consume(stack);
+        }
+
+        @Override
+        public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
+            if (!(entity instanceof Player player)) return;
+            int shotPower = 10 + getUseDuration(stack) - timeLeft;
+            double shotPower2 = (float) shotPower / 10.0D;
+            if (shotPower2 > 4.0D) shotPower2 = 5.0D;
+            float transDegree = 3.141593F / 180F;
+            java.util.Random random = new java.util.Random();
+            float angle = (float) random.nextInt(36000) / 100F;
+            float angle2 = 0.0F;
+            int shotNum = 45;
+            float angleSpan = (360F / (float) shotNum) * transDegree;
+            float angle2Span = angleSpan * 20F;
+            X1ShotData shot = X1ShotData.shot(X1ShotTables.FORM_SCALE, X1ShotTables.RED, 0.3F, 7.0F, 3, 80, SPECIAL_FLOWER_LAND);
+            if (player.getRandom().nextInt(2) == 0) shot.color = X1ShotTables.YELLOW;
+            Vec3d gravity = new Vec3d(0, -0.02D, 0);
+            if (!level.isClientSide) {
+                Vec3d pos = X1Danmaku.pos(player.getX(), X1Danmaku.getPosYFromEye(player, 0.2D), player.getZ());
+                for (int i = 0; i < shotNum; i++) {
+                    double ax = -(double) net.minecraft.util.Mth.sin(angle), az = net.minecraft.util.Mth.cos(angle);
+                    double speed = 0.23D - (double) net.minecraft.util.Mth.sin(angle2) * 0.02D;
+                    X1Danmaku.createShot(player, player, pos, X1Danmaku.angle(ax * shotPower2, 1.4F, az * shotPower2), 0F,
+                            speed, speed, 0.0D, gravity, shot);
+                    angle += angleSpan;
+                    angle2 += angle2Span;
+                }
+                shotNum = (int) ((float) shotNum * 0.25F);
+                angleSpan = (360F / (float) shotNum) * transDegree;
+                shotPower2 *= 0.66D;
+                for (int i = 0; i < shotNum; i++) {
+                    double ax = -(double) net.minecraft.util.Mth.sin(angle), az = net.minecraft.util.Mth.cos(angle);
+                    X1Danmaku.createShot(player, player, pos, X1Danmaku.angle(ax * shotPower2, 1.1F, az * shotPower2), 0F,
+                            0.23D, 0.23D, 0.0D, gravity, shot);
+                    angle += angleSpan;
+                }
+            }
+            level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS,
+                    0.5F, 0.4F / (level.random.nextFloat() * 4F + 0.8F));
+            stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(player.getUsedItemHand()));
+        }
+
+        @Override
+        public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+            double dx = target.getX() - attacker.getX(), dy = target.getY() - attacker.getY(), dz = target.getZ() - attacker.getZ();
+            float yaw = (float) Math.atan2(dx, dz);
+            float pitch = (float) Math.atan2(dy, Math.sqrt(dx * dx + dz * dz));
+            double power = 3.0D;
+            target.setDeltaMovement(net.minecraft.util.Mth.sin(yaw) * net.minecraft.util.Mth.cos(pitch) * power,
+                    net.minecraft.util.Mth.sin(pitch) * power + 1.0D,
+                    net.minecraft.util.Mth.cos(yaw) * net.minecraft.util.Mth.cos(pitch) * power);
+            target.hurt(attacker.damageSources().mobAttack(attacker), 7);
+            stack.hurtAndBreak(1, attacker, a -> a.broadcastBreakEvent(InteractionHand.MAIN_HAND));
+            return true;
+        }
+
+        @Override
+        public UseAnim getUseAnimation(ItemStack stack) {
+            return UseAnim.BLOCK;
+        }
+
+        @Override
+        public int getUseDuration(ItemStack stack) {
+            return 72000;
+        }
+
+        @Override
+        public int getEnchantmentValue() {
+            return 0;
+        }
+
+        @Override
+        public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+            return false;
+        }
+    }
 }

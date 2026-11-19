@@ -355,4 +355,70 @@ public final class P16Renderers {
             return TEX[c >= 0 && c < 3 ? c : 3];
         }
     }
+
+    public static final net.minecraft.client.model.geom.ModelLayerLocation PARASOL_LAYER =
+            new net.minecraft.client.model.geom.ModelLayerLocation(
+                    new ResourceLocation(FiveDifficultiesPort.MOD_ID, "yuuka_parasol"), "main");
+
+    /** ModelYuukaParasol: four 4×28×4 stick boxes and a three-box crook handle (64×32). */
+    public static net.minecraft.client.model.geom.builders.LayerDefinition createParasolLayer() {
+        var mesh = new net.minecraft.client.model.geom.builders.MeshDefinition();
+        var root = mesh.getRoot();
+        for (int i = 0; i < 4; i++) {
+            root.addOrReplaceChild("stick" + i, net.minecraft.client.model.geom.builders.CubeListBuilder.create().texOffs(0, 0)
+                    .addBox(-2, i * 28, -2, 4, 28, 4), net.minecraft.client.model.geom.PartPose.ZERO);
+        }
+        root.addOrReplaceChild("handle0", net.minecraft.client.model.geom.builders.CubeListBuilder.create().texOffs(32, 16)
+                .addBox(-3, -10, -3, 6, 10, 6), net.minecraft.client.model.geom.PartPose.ZERO);
+        root.addOrReplaceChild("handle1", net.minecraft.client.model.geom.builders.CubeListBuilder.create().texOffs(32, 16)
+                .addBox(0, 0, -6, 6, 10, 6),
+                net.minecraft.client.model.geom.PartPose.offsetAndRotation(-3F, -10F, -3F, (float) Math.PI / 3F * 2F, 0F, 0F));
+        root.addOrReplaceChild("handle2", net.minecraft.client.model.geom.builders.CubeListBuilder.create().texOffs(32, 16)
+                .addBox(0, 0, -6, 6, 10, 6),
+                net.minecraft.client.model.geom.PartPose.offsetAndRotation(-3F, -10F + Mth.cos((float) Math.PI / 3F * 2F) * 10F,
+                        -3F + Mth.sin((float) Math.PI / 3F * 2F) * 10F, (float) Math.PI / 3F, 0F, 0F));
+        return net.minecraft.client.model.geom.builders.LayerDefinition.create(mesh, 64, 32);
+    }
+
+    /** RenderYuukaParasol: an 18-panel canopy and the stick model, 2.4 below the entity, scaled 0.7. */
+    public static final class YuukaParasol extends EntityRenderer<dev.kneekura.fivedifficulties.forge.entity.YuukaParasolEntity> {
+        private static final ResourceLocation PARASOL = tex("yuuka_parasol");
+        private final net.minecraft.client.model.geom.ModelPart model;
+
+        public YuukaParasol(EntityRendererProvider.Context context) {
+            super(context);
+            this.model = context.bakeLayer(PARASOL_LAYER);
+        }
+
+        @Override
+        public void render(dev.kneekura.fivedifficulties.forge.entity.YuukaParasolEntity e, float entityYaw, float partialTick,
+                           PoseStack pose, MultiBufferSource buffers, int light) {
+            float yaw = Mth.lerp(partialTick, e.yRotO, e.getYRot());
+            pose.pushPose();
+            pose.translate(0.0F, -2.4F, 0.0F);
+            pose.mulPose(Axis.YP.rotationDegrees(180F - yaw));
+            pose.mulPose(Axis.XP.rotationDegrees(e.getXRot()));
+            double stickHeight = 2.7D;
+            float uMin = 0.5F, uMax = 0.75F, vMin = 0.0F, vMax = 0.5F;
+            float length = 2.2F, width = 0.5F, span = 360F / 18F;
+            pose.scale(0.7F, 0.7F, 0.7F);
+            X1Tess t = new X1Tess(pose, buffers, PARASOL).begin(CUTOUT);
+            for (int i = 0; i < 18; i++) {
+                t.v(0.0F, stickHeight, 0.0D, uMin, vMax).v(0.0F, stickHeight, 0.0D, uMax, vMax)
+                        .v(width, length, -1.0D, uMax, vMin).v(-width, length, -1.0D, uMin, vMin);
+                t.v(-width, length, -1.0D, uMin, vMax).v(width, length, -1.0D, uMax, vMax)
+                        .v(width * 2F, length - 0.5F, -1.7D, uMax, vMin).v(-width * 2F, length - 0.5F, -1.7D, uMin, vMin);
+                pose.mulPose(Axis.YP.rotationDegrees(span));
+            }
+            pose.scale(0.3F, 0.4F, 0.3F);
+            model.render(pose, new X1Tess(pose, buffers, PARASOL).modelSink(CUTOUT), light,
+                    net.minecraft.client.renderer.texture.OverlayTexture.NO_OVERLAY, 1F, 1F, 1F, 1F);
+            pose.popPose();
+        }
+
+        @Override
+        public ResourceLocation getTextureLocation(dev.kneekura.fivedifficulties.forge.entity.YuukaParasolEntity e) {
+            return PARASOL;
+        }
+    }
 }

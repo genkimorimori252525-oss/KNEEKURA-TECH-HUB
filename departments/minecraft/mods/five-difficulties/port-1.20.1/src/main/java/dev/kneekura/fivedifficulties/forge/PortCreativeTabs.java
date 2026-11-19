@@ -15,6 +15,9 @@ public final class PortCreativeTabs {
 
     @SubscribeEvent
     public static void buildContents(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.COMBAT) { // P16k parasol
+            event.accept(PortRegistries.YUUKA_PARASOL.get());
+        }
         if (event.getTabKey() == CreativeModeTabs.COMBAT) { // P16j silver knives
             event.accept(PortRegistries.SILVER_KNIFE_BLUE.get());
             event.accept(PortRegistries.SILVER_KNIFE_RED.get());

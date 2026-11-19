@@ -67,6 +67,7 @@ public final class P16Scenario {
             runTools();
             runArmour();
             runSilverKnife();
+            runParasol();
             FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_RUNTIME_SCENARIO_PASS");
             ScenarioShutdown.finished(level.getServer(), ENV);
         } catch (Throwable failure) {
@@ -662,6 +663,49 @@ public final class P16Scenario {
         p.setXRot(0F);
         p.getInventory().clearContent();
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_SILVER_KNIFE_PASS whites=" + whites);
+    }
+
+    private static void runParasol() {
+        FakePlayer p = player();
+        var hand = net.minecraft.world.InteractionHand.MAIN_HAND;
+        ItemStack parasol = new ItemStack(PortRegistries.YUUKA_PARASOL.get());
+        p.setItemInHand(hand, parasol);
+        int n = fire(() -> parasol.getItem().releaseUsing(parasol, level, p, 72000 - 10));
+        require(n == 56 && parasol.getDamageValue() == 1 && lastShot.motion().special == 350, "flower shots " + n);
+        // Special 350 on grass (X1 truncates (int)(y - 0.3) toward zero): a yellow shot plants a dandelion.
+        BlockPos grass = BlockPos.containing(bx + 3, by - 1, bz);
+        level.setBlockAndUpdate(grass, net.minecraft.world.level.block.Blocks.GRASS_BLOCK.defaultBlockState());
+        lastShot.setPos(grass.getX() + 0.5D, grass.getY() + 0.0D, grass.getZ() + 0.5D);
+        lastShot.setShotColor(dev.kneekura.fivedifficulties.core.x1.X1ShotTables.YELLOW);
+        dev.kneekura.fivedifficulties.forge.shot.X1SpecialShotRegistry.get(350).hitBlock(lastShot, lastShot.motion(), 350, null);
+        boolean planted = level.getBlockState(grass.above()).is(net.minecraft.world.level.block.Blocks.DANDELION);
+        level.setBlockAndUpdate(grass.above(), net.minecraft.world.level.block.Blocks.AIR.defaultBlockState());
+        level.getEntitiesOfClass(THShotEntity.class, p.getBoundingBox().inflate(48), e -> e.getOwner() == p).forEach(Entity::discard);
+        require(planted, "a dandelion on the grass");
+
+        // Sneak right-click opens the parasol (the item goes into it); it cuts fall distance; sneaking tilts it.
+        ItemStack open = new ItemStack(PortRegistries.YUUKA_PARASOL.get());
+        p.setItemInHand(hand, open);
+        p.setShiftKeyDown(true);
+        open.getItem().use(level, p, hand);
+        var parasols = level.getEntitiesOfClass(dev.kneekura.fivedifficulties.forge.entity.YuukaParasolEntity.class,
+                p.getBoundingBox().inflate(4.0D), e -> e.user == p);
+        require(open.isEmpty() && parasols.size() == 1, "parasol opened");
+        var e = parasols.get(0);
+        require(e.getY() > p.getEyeY() + 1.0D, "the parasol is above the head");
+        p.setShiftKeyDown(false);
+        p.fallDistance = 10F;
+        e.tick();
+        require(Math.abs(p.fallDistance - 7F) < 1e-4F, "fall distance x0.7: " + p.fallDistance);
+        e.tickCount = 11;
+        p.setShiftKeyDown(true);
+        e.tick();
+        p.setShiftKeyDown(false);
+        require(e.getParasolMode() == 1, "sneaking tilts it");
+        e.discard();
+        p.stopUsingItem();
+        p.getInventory().clearContent();
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_PARASOL_PASS shots=" + n);
     }
 
     private static void require(boolean ok, String what) {

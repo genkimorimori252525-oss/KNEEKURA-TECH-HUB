@@ -337,6 +337,16 @@ ASSETS = {
         "assets/five_difficulties_port/textures/item/silver_knife_white.png",
         "e8527df432cf0f88c12842e48705ca138f51d7303eadeb304d31723df5224ad3",
     ),
+    # P16k entity textures.
+    "assets/thkaguyamod/textures/YuukaParasolTexture.png": (
+        "assets/five_difficulties_port/textures/entity/yuuka_parasol.png",
+        "705e2018e30d960d43967309e4c0fbf53adf5777892b38d4c19e6914b891eec7",
+    ),
+    # P16k parasol.
+    "assets/thkaguyamod/textures/items/yuukaParasol.png": (
+        "assets/five_difficulties_port/textures/item/yuuka_parasol.png",
+        "6021b0a275a88f3a78faecfcc84840e0b287e38c71555ec4374d96ac40df092b",
+    ),
     # P15 danmaku crafting table.
     "assets/thkaguyamod/textures/blocks/danmaku_crafting_table.png": (
         "assets/five_difficulties_port/textures/block/danmaku_crafting_table.png",

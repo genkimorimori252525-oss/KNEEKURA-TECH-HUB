@@ -230,6 +230,13 @@ public final class PortRegistries {
                     .sized(0.1F, 0.1F).clientTrackingRange(8).updateInterval(1).setShouldReceiveVelocityUpdates(true)
                     .build(FiveDifficultiesPort.MOD_ID + ":silver_knife"));
 
+    // ---- P16k entities ----
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.YuukaParasolEntity>> YUUKA_PARASOL_ENTITY =
+            ENTITIES.register("yuuka_parasol", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.YuukaParasolEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.YuukaParasolEntity::new, MobCategory.MISC)
+                    .sized(2.0F, 2.0F).clientTrackingRange(8).updateInterval(1).setShouldReceiveVelocityUpdates(true)
+                    .build(FiveDifficultiesPort.MOD_ID + ":yuuka_parasol"));
+
     // ---- P13 danmaku-weapon items ----
     public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity>> DRAGON_NECK_JEWEL =
             ENTITIES.register("dragon_neck_jewel", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity>of(
@@ -421,6 +428,10 @@ public final class PortRegistries {
             () -> new dev.kneekura.fivedifficulties.forge.item.X1ShotItems.SilverKnife(new Item.Properties(), 2));
     public static final RegistryObject<Item> SILVER_KNIFE_WHITE = ITEMS.register("silver_knife_white",
             () -> new dev.kneekura.fivedifficulties.forge.item.X1ShotItems.SilverKnife(new Item.Properties(), 3));
+
+    // ---- P16k parasol ----
+    public static final RegistryObject<Item> YUUKA_PARASOL = ITEMS.register("yuuka_parasol",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1ShotItems.YuukaParasol(new Item.Properties()));
 
     public static final RegistryObject<Item> SHOT_MATERIAL = ITEMS.register("shot_material",
             () -> new dev.kneekura.fivedifficulties.forge.item.ShotMaterialItem(new Item.Properties()));
