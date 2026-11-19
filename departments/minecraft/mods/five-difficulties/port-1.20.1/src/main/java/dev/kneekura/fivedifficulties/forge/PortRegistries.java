@@ -2,7 +2,10 @@ package dev.kneekura.fivedifficulties.forge;
 
 import dev.kneekura.fivedifficulties.forge.entity.HomingAmuletProjectile;
 import dev.kneekura.fivedifficulties.forge.entity.SakuyaTimeControllerEntity;
+import dev.kneekura.fivedifficulties.forge.entity.THLaserEntity;
+import dev.kneekura.fivedifficulties.forge.entity.THSetLaserEntity;
 import dev.kneekura.fivedifficulties.forge.entity.THShotEntity;
+import dev.kneekura.fivedifficulties.forge.item.THLaserItem;
 import dev.kneekura.fivedifficulties.forge.item.HomingAmuletItem;
 import dev.kneekura.fivedifficulties.forge.item.SakuyaStopWatchItem;
 import dev.kneekura.fivedifficulties.forge.item.SakuyaWatchItem;
@@ -93,6 +96,22 @@ public final class PortRegistries {
             SMALL_SHOT, TINY_SHOT, MEDIUM_SHOT, BIG_SHOT, STAR_SHOT, SMALL_STAR_SHOT, CIRCLE_SHOT, SCALE_SHOT,
             BUTTERFLY_SHOT, LIGHT_SHOT, KNIFE_SHOT, HEART_SHOT, KUNAI_SHOT, TALISMAN_SHOT, BIG_LIGHT_SHOT,
             RICE_SHOT, OVAL_SHOT, CRYSTAL_SHOT, ARROW_SHOT);
+
+    public static final RegistryObject<EntityType<THLaserEntity>> TH_LASER =
+            ENTITIES.register("th_laser", () -> EntityType.Builder.<THLaserEntity>of(THLaserEntity::new, MobCategory.MISC)
+                    .sized(0.1F, 0.1F).clientTrackingRange(8).updateInterval(1).setShouldReceiveVelocityUpdates(true)
+                    .build(FiveDifficultiesPort.MOD_ID + ":th_laser"));
+
+    public static final RegistryObject<EntityType<THSetLaserEntity>> TH_SET_LASER =
+            ENTITIES.register("th_set_laser", () -> EntityType.Builder.<THSetLaserEntity>of(THSetLaserEntity::new, MobCategory.MISC)
+                    .sized(0.1F, 0.1F).clientTrackingRange(8).updateInterval(1).setShouldReceiveVelocityUpdates(true)
+                    .build(FiveDifficultiesPort.MOD_ID + ":th_set_laser"));
+
+    // X1 ItemTHLaser subtypes (damage 0 middle, 1 short, 2 long).
+    public static final RegistryObject<Item> LASER = ITEMS.register("laser", () -> new THLaserItem(0, new Item.Properties()));
+    public static final RegistryObject<Item> SHORT_LASER = ITEMS.register("short_laser", () -> new THLaserItem(1, new Item.Properties()));
+    public static final RegistryObject<Item> LONG_LASER = ITEMS.register("long_laser", () -> new THLaserItem(2, new Item.Properties()));
+    public static final java.util.List<RegistryObject<Item>> LASER_ITEMS = java.util.List.of(LASER, SHORT_LASER, LONG_LASER);
 
     private static RegistryObject<Item> shotItem(String name, int x1Type) {
         return ITEMS.register(name, () -> new THShotItem(x1Type, new Item.Properties()));

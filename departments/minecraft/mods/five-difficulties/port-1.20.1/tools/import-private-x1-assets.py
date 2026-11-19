@@ -122,6 +122,19 @@ ASSETS = {
         "assets/five_difficulties_port/textures/item/diffusion_amulet.png",
         "48a04fbb8993b87cce4abc2b175f006d8bdaef3254c323b86b023b749f152927",
     ),
+    # P10 laser item icons.
+    "assets/thkaguyamod/textures/items/shot/MiddleLaser.png": (
+        "assets/five_difficulties_port/textures/item/shot/laser.png",
+        "28935db756daa479e5218568ab13a0619a58de2113124e730b2ea5bc654e46ff",
+    ),
+    "assets/thkaguyamod/textures/items/shot/ShortLaser.png": (
+        "assets/five_difficulties_port/textures/item/shot/short_laser.png",
+        "16a0949b86fd9626a2001de5116cd9a23f1afcbbe84d2eb5e254deda4374738c",
+    ),
+    "assets/thkaguyamod/textures/items/shot/LongLaser.png": (
+        "assets/five_difficulties_port/textures/item/shot/long_laser.png",
+        "6e25e32fde94582899e1e1bdac06d2be5000a55595830e0db29af9395c832b22",
+    ),
     # P9 remaining shot forms, silver knives, familiar and the remaining ItemTHShot icons.
     "assets/thkaguyamod/textures/items/shot/StarShot.png": (
         "assets/five_difficulties_port/textures/item/shot/star_shot.png",

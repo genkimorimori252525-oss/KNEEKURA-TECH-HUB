@@ -8,6 +8,7 @@ import dev.kneekura.fivedifficulties.core.x1.X1ShotSpecials;
 import dev.kneekura.fivedifficulties.core.x1.X1ShotTables;
 import dev.kneekura.fivedifficulties.forge.PortRegistries;
 import dev.kneekura.fivedifficulties.forge.shot.X1ShotSpawner;
+import dev.kneekura.fivedifficulties.forge.shot.X1SpecialShotRegistry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -45,7 +46,7 @@ import java.util.Optional;
  * Not yet ported: the ISpecialShot registry used by spell cards, the shot-material bonus drop,
  * danmaku-mob damage multipliers and the player-power damage bonus.
  */
-public final class THShotEntity extends Projectile {
+public class THShotEntity extends Projectile {
     // X1 DataWatcher slots 16..20.
     private static final EntityDataAccessor<Float> DATA_ANGLE_Z =
             SynchedEntityData.defineId(THShotEntity.class, EntityDataSerializers.FLOAT);
@@ -71,16 +72,27 @@ public final class THShotEntity extends Projectile {
                         float rotationSpeed, int rotationEnd, double firstSpeed, double limitSpeed,
                         double acceleration, Vec3d gravity, X1ShotData shot) {
         this(PortRegistries.TH_SHOT.get(), level);
+        initShot(user, pos, angle, slope, rotate, rotationSpeed, rotationEnd, firstSpeed, limitSpeed, acceleration,
+                gravity, shot.shotId(), shot.size, shot.damage, shot.delay, shot.end, shot.special, false);
+    }
+
+    /** The EntityTHShot constructor body; {@code laserAngle} selects the EntityTHLaser updateAngle. */
+    protected final void initShot(LivingEntity user, Vec3d pos, Vec3d angle, float slope, Vec3d rotate,
+                                  float rotationSpeed, int rotationEnd, double firstSpeed, double limitSpeed,
+                                  double acceleration, Vec3d gravity, int shotId, float size, float damage, int delay,
+                                  int end, int special, boolean laserAngle) {
         this.setOwner(user);
         this.setPos(pos.x(), pos.y(), pos.z());
         this.setAngleZ(slope);
-        this.setShotId(shot.shotId());
-        this.setShotSize(shot.size);
-        this.shotDamage = shot.damage;
-        this.setShotEndTime(shot.end);
-        this.setAnimationCount(X1ShotMotion.initialAnimationCount(shot.delay));
+        this.setShotId(shotId);
+        this.setShotSize(size);
+        this.shotDamage = damage;
+        this.setShotEndTime(end);
+        this.setAnimationCount(X1ShotMotion.initialAnimationCount(delay));
         this.motion = new X1ShotMotion(pos, angle, rotate, rotationSpeed, rotationEnd, firstSpeed, limitSpeed,
-                acceleration, gravity, shot.special);
+                acceleration, gravity, special);
+        this.motion.laserAngle = laserAngle;
+        if (laserAngle) this.motion.updateAngle();
         this.setDeltaMovement(toMc(this.motion.motion));
         this.syncRotation();
         this.xRotO = this.getXRot();
@@ -163,7 +175,11 @@ public final class THShotEntity extends Projectile {
         this.setPos(motion.position.x(), motion.position.y(), motion.position.z());
         this.setDeltaMovement(toMc(motion.motion));
         this.syncRotation();
+        this.afterX1Tick(motion);
     }
+
+    /** Runs after the EntityTHShot.onUpdate body (EntityTHLaser grows its length here). */
+    protected void afterX1Tick(X1ShotMotion m) {}
 
     private final X1ShotMotion.Hooks hooks = new X1ShotMotion.Hooks() {
         @Override public boolean authoritative() { return true; }
@@ -175,7 +191,12 @@ public final class THShotEntity extends Projectile {
 
     // ---- X1 specialMotion ----
 
-    private void specialMotion(X1ShotMotion m) {
+    protected void specialMotion(X1ShotMotion m) {
+        X1SpecialShotRegistry.SpecialShot registered = X1SpecialShotRegistry.get(m.special);
+        if (registered != null) {
+            registered.move(this, m, m.special);
+            return;
+        }
         switch (m.special) {
             case X1ShotTables.HOMING01 -> homing(m, 4.0F);
             case X1ShotTables.DIFFUSION01 -> diffusion(m);
@@ -228,7 +249,7 @@ public final class THShotEntity extends Projectile {
         this.discard();
     }
 
-    private void syncRotation() {
+    protected void syncRotation() {
         // Store X1's rotationYaw / rotationPitch literally for direction-dependent renderers.
         this.setYRot(motion.yaw);
         this.setXRot(motion.pitch);
@@ -236,7 +257,7 @@ public final class THShotEntity extends Projectile {
 
     // ---- X1 hitCheck ----
 
-    private void hitCheck(X1ShotMotion m) {
+    protected void hitCheck(X1ShotMotion m) {
         double half = this.getShotSize() / 2.0D;
         Vec3 pos = this.position();
         Vec3 move = toMc(m.motion);
@@ -273,7 +294,9 @@ public final class THShotEntity extends Projectile {
     }
 
     /** blockHitSpecialProcess: true keeps the shot alive. */
-    private boolean blockHitSpecialProcess(BlockHitResult hit, X1ShotMotion m) {
+    protected boolean blockHitSpecialProcess(BlockHitResult hit, X1ShotMotion m) {
+        X1SpecialShotRegistry.SpecialShot registered = X1SpecialShotRegistry.get(m.special);
+        if (registered != null) return registered.hitBlock(this, m, m.special, hit);
         switch (m.special) {
             case X1ShotTables.BOUND01 -> { bound(m, 0.9D, 2); m.special = 0; return true; }
             case X1ShotTables.BOUND02 -> { bound(m, 0.9D, 3); m.special = X1ShotTables.BOUND01; return true; }
@@ -317,7 +340,7 @@ public final class THShotEntity extends Projectile {
         this.level().explode(this.getOwner(), x, y, z, power, Level.ExplosionInteraction.TNT);
     }
 
-    private BlockHitResult clip(Vec3 start, Vec3 end) {
+    protected BlockHitResult clip(Vec3 start, Vec3 end) {
         return this.level().clip(new ClipContext(start, end, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this));
     }
 
@@ -377,7 +400,9 @@ public final class THShotEntity extends Projectile {
     }
 
     /** entityHitSpecialProcess: false = the shot disappears as usual. */
-    private boolean entityHitSpecialProcess(Entity hit, X1ShotMotion m) {
+    protected boolean entityHitSpecialProcess(Entity hit, X1ShotMotion m) {
+        X1SpecialShotRegistry.SpecialShot registered = X1SpecialShotRegistry.get(m.special);
+        if (registered != null) return registered.hitEntity(this, m, m.special, hit);
         switch (m.special) {
             case X1ShotTables.FIRE -> hit.setSecondsOnFire((int) shotDamage);
             case X1ShotTables.EXPLOSION01 -> explode(hit.getX(), hit.getY(), hit.getZ(), 3.0F);
@@ -421,6 +446,16 @@ public final class THShotEntity extends Projectile {
         return true;
     }
 
+    /**
+     * Vanilla Projectile.lerpMotion re-derives the client rotation from the velocity packet while
+     * yRotO is 0 (just after spawn), which zeroes the yaw of static shots and lasers. X1 rotations
+     * come only from the server, so only the motion is applied here.
+     */
+    @Override
+    public void lerpMotion(double x, double y, double z) {
+        this.setDeltaMovement(x, y, z);
+    }
+
     @Override
     public boolean shouldBeSaved() {
         return false; // X1 writeEntityToNBT is empty
@@ -438,11 +473,11 @@ public final class THShotEntity extends Projectile {
     @Override
     protected void readAdditionalSaveData(CompoundTag tag) {}
 
-    private static Vec3d pure(Vec3 v) {
+    protected static Vec3d pure(Vec3 v) {
         return new Vec3d(v.x, v.y, v.z);
     }
 
-    private static Vec3 toMc(Vec3d v) {
+    protected static Vec3 toMc(Vec3d v) {
         return new Vec3(v.x(), v.y(), v.z());
     }
 }

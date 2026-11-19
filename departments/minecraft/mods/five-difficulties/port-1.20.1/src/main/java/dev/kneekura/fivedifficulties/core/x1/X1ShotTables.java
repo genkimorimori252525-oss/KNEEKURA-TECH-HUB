@@ -21,7 +21,11 @@ public final class X1ShotTables {
 
     // DanmakuConstants special-shot IDs (only those referenced by the port so far).
     public static final int SPECIAL_NONE = 0, HOMING01 = 10, DIFFUSION01 = 20, FALL01 = 30,
-            BOUND01 = 40, BOUND02 = 41, BOUND03 = 42, BOUND04 = 43, FIRE = 60, EXPLOSION01 = 70, WIND01 = 180;
+            BOUND01 = 40, BOUND02 = 41, BOUND03 = 42, BOUND04 = 43, FIRE = 60, EXPLOSION01 = 70, WIND01 = 180,
+            GUNGNIR = 285;
+
+    /** THKaguyaConfig "Laser Max Number" default. */
+    public static final int LASER_MAX_NUMBER = 8;
 
     public static final double GRAVITY_DEFAULT = -0.03D;
 

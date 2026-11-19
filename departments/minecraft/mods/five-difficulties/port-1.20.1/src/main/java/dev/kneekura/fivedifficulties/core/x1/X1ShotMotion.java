@@ -153,8 +153,19 @@ public final class X1ShotMotion {
         lastMotion = motion;
     }
 
+    /** EntityTHLaser overrides updateAngle: yaw / pitch follow the stored angle, not the motion. */
+    public boolean laserAngle;
+
     /** updateAngle (server branch). */
     public void updateAngle() {
+        if (laserAngle) {
+            float horizontal = (float) Math.sqrt(angle.x() * angle.x() + angle.z() * angle.z());
+            yaw = (float) ((Math.atan2(angle.x(), angle.z()) * 180D) / 3.1415927410125732D);
+            if (yaw >= 180F) yaw = -180F + (yaw - 180F);
+            else if (yaw <= -180F) yaw = 180F + (yaw + 180F);
+            pitch = (float) ((Math.atan2(angle.y(), horizontal) * 180D) / 3.1415927410125732D);
+            return;
+        }
         float horizontal = (float) Math.sqrt(motion.x() * motion.x() + motion.z() * motion.z());
         yaw = (float) ((Math.atan2(motion.x(), motion.z()) * 180D) / 3.1415927410125732D);
         pitch = (float) ((Math.atan2(motion.y(), horizontal) * 180D) / 3.1415927410125732D);

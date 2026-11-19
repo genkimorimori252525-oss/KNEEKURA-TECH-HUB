@@ -11,11 +11,11 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.function.Function;
 
 /**
- * 1.7.10 fixed-function states used by X1 RenderTHShot, as batched 1.20.1 render types.
+ * 1.7.10 fixed-function states used by X1 renderers, as batched 1.20.1 render types.
  *
  * All use the text shader: unlit, vertex colour * texture, and {@code alpha < 0.1} discard,
- * which is the 1.7.10 default alpha test ({@code GL_GREATER 0.1}). Shots are full-bright
- * (X1 getBrightnessForRender = 0xF000F0, lighting disabled).
+ * which is the 1.7.10 default alpha test ({@code GL_GREATER 0.1}). X1 shots and lasers are
+ * full-bright (getBrightnessForRender = 0xF000F0, lighting disabled).
  */
 public final class X1RenderTypes extends RenderType {
     private X1RenderTypes(String name, VertexFormat format, VertexFormat.Mode mode, int bufferSize,
@@ -23,7 +23,12 @@ public final class X1RenderTypes extends RenderType {
         super(name, format, mode, bufferSize, affectsCrumbling, sortOnUpload, setup, clear);
     }
 
-    /** glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR): X1 delay light / homing amulet. */
+    /** glBlendFunc settings X1 uses. */
+    public enum Blend { NONE, SRC_ALPHA_ONE, ONE_ONE_MINUS_SRC_COLOR, ONE_ONE }
+
+    /** One GL state combination: blend, glDepthMask, GL_CULL_FACE, glDepthFunc(GL_ALWAYS). */
+    public record Spec(Blend blend, boolean depthWrite, boolean cull, boolean depthAlways) {}
+
     private static final TransparencyStateShard ONE_ONE_MINUS_SRC_COLOR = new TransparencyStateShard(
             "five_difficulties_one_one_minus_src_color",
             () -> {
@@ -35,66 +40,48 @@ public final class X1RenderTypes extends RenderType {
                 RenderSystem.defaultBlendFunc();
             });
 
+    private record Key(ResourceLocation texture, Spec spec) {}
+
+    private static final Function<Key, RenderType> CACHE = Util.memoize(key -> {
+        Spec s = key.spec();
+        TransparencyStateShard transparency = switch (s.blend()) {
+            case NONE -> NO_TRANSPARENCY;
+            case SRC_ALPHA_ONE -> LIGHTNING_TRANSPARENCY;
+            case ONE_ONE_MINUS_SRC_COLOR -> ONE_ONE_MINUS_SRC_COLOR;
+            case ONE_ONE -> ADDITIVE_TRANSPARENCY;
+        };
+        String name = "five_difficulties_" + s.blend().name().toLowerCase() + (s.depthWrite() ? "_depth" : "")
+                + (s.cull() ? "_cull" : "") + (s.depthAlways() ? "_always" : "");
+        return create(name, DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP, VertexFormat.Mode.QUADS, 256, false,
+                s.blend() != Blend.NONE,
+                CompositeState.builder()
+                        .setShaderState(RENDERTYPE_TEXT_SHADER)
+                        .setTextureState(new TextureStateShard(key.texture(), false, false))
+                        .setTransparencyState(transparency)
+                        .setCullState(s.cull() ? CULL : NO_CULL)
+                        .setDepthTestState(s.depthAlways() ? NO_DEPTH_TEST : LEQUAL_DEPTH_TEST)
+                        .setLightmapState(LIGHTMAP)
+                        .setWriteMaskState(s.depthWrite() ? COLOR_DEPTH_WRITE : COLOR_WRITE)
+                        .createCompositeState(false));
+    });
+
+    public static RenderType of(ResourceLocation texture, Spec spec) {
+        return CACHE.apply(new Key(texture, spec));
+    }
+
     /** No blending, alpha test, depth write: renderNormalShot(blend = false). */
-    public static final Function<ResourceLocation, RenderType> SHOT_CUTOUT = Util.memoize(texture -> create(
-            "five_difficulties_shot_cutout", DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP, VertexFormat.Mode.QUADS,
-            256, false, false,
-            CompositeState.builder()
-                    .setShaderState(RENDERTYPE_TEXT_SHADER)
-                    .setTextureState(new TextureStateShard(texture, false, false))
-                    .setTransparencyState(NO_TRANSPARENCY)
-                    .setCullState(NO_CULL)
-                    .setLightmapState(LIGHTMAP)
-                    .createCompositeState(false)));
-
-    /** glBlendFunc(GL_SRC_ALPHA, GL_ONE), depthMask(false): renderNormalShot(blend = true), i.e. BIG. */
-    public static final Function<ResourceLocation, RenderType> SHOT_ADDITIVE = Util.memoize(texture -> create(
-            "five_difficulties_shot_additive", DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP, VertexFormat.Mode.QUADS,
-            256, false, true,
-            CompositeState.builder()
-                    .setShaderState(RENDERTYPE_TEXT_SHADER)
-                    .setTextureState(new TextureStateShard(texture, false, false))
-                    .setTransparencyState(LIGHTNING_TRANSPARENCY)
-                    .setCullState(NO_CULL)
-                    .setLightmapState(LIGHTMAP)
-                    .setWriteMaskState(COLOR_WRITE)
-                    .createCompositeState(false)));
-
-    /** glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR) with depth writes: kunai / arrow tips, wind. */
-    public static final Function<ResourceLocation, RenderType> INVERT_ADD_DEPTH = Util.memoize(texture -> create(
-            "five_difficulties_invert_add_depth", DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP,
-            VertexFormat.Mode.QUADS, 256, false, true,
-            CompositeState.builder()
-                    .setShaderState(RENDERTYPE_TEXT_SHADER)
-                    .setTextureState(new TextureStateShard(texture, false, false))
-                    .setTransparencyState(ONE_ONE_MINUS_SRC_COLOR)
-                    .setCullState(NO_CULL)
-                    .setLightmapState(LIGHTMAP)
-                    .createCompositeState(false)));
-
-    /** glBlendFunc(GL_ONE, GL_ONE), depthMask(false): phantom. */
-    public static final Function<ResourceLocation, RenderType> ADD_ONE = Util.memoize(texture -> create(
-            "five_difficulties_add_one", DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP, VertexFormat.Mode.QUADS,
-            256, false, true,
-            CompositeState.builder()
-                    .setShaderState(RENDERTYPE_TEXT_SHADER)
-                    .setTextureState(new TextureStateShard(texture, false, false))
-                    .setTransparencyState(ADDITIVE_TRANSPARENCY)
-                    .setCullState(NO_CULL)
-                    .setLightmapState(LIGHTMAP)
-                    .setWriteMaskState(COLOR_WRITE)
-                    .createCompositeState(false)));
-
-    /** glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR), depthMask(false): delay light effect. */
-    public static final Function<ResourceLocation, RenderType> LIGHT_EFFECT = Util.memoize(texture -> create(
-            "five_difficulties_light_effect", DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP, VertexFormat.Mode.QUADS,
-            256, false, true,
-            CompositeState.builder()
-                    .setShaderState(RENDERTYPE_TEXT_SHADER)
-                    .setTextureState(new TextureStateShard(texture, false, false))
-                    .setTransparencyState(ONE_ONE_MINUS_SRC_COLOR)
-                    .setCullState(NO_CULL)
-                    .setLightmapState(LIGHTMAP)
-                    .setWriteMaskState(COLOR_WRITE)
-                    .createCompositeState(false)));
+    public static final Function<ResourceLocation, RenderType> SHOT_CUTOUT =
+            t -> of(t, new Spec(Blend.NONE, true, false, false));
+    /** glBlendFunc(GL_SRC_ALPHA, GL_ONE), depthMask(false). */
+    public static final Function<ResourceLocation, RenderType> SHOT_ADDITIVE =
+            t -> of(t, new Spec(Blend.SRC_ALPHA_ONE, false, false, false));
+    /** glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR), depthMask(false). */
+    public static final Function<ResourceLocation, RenderType> LIGHT_EFFECT =
+            t -> of(t, new Spec(Blend.ONE_ONE_MINUS_SRC_COLOR, false, false, false));
+    /** glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR) with depth writes. */
+    public static final Function<ResourceLocation, RenderType> INVERT_ADD_DEPTH =
+            t -> of(t, new Spec(Blend.ONE_ONE_MINUS_SRC_COLOR, true, false, false));
+    /** glBlendFunc(GL_ONE, GL_ONE), depthMask(false). */
+    public static final Function<ResourceLocation, RenderType> ADD_ONE =
+            t -> of(t, new Spec(Blend.ONE_ONE, false, false, false));
 }

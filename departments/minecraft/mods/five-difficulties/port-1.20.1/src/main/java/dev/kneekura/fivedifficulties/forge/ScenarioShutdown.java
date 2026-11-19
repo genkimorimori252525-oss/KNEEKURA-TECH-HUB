@@ -22,7 +22,7 @@ public final class ScenarioShutdown {
         FINISHED.add(env);
         for (String scenario : new String[] {
                 "FIVE_DIFFICULTIES_P6_RUNTIME_SCENARIO", "FIVE_DIFFICULTIES_P8_RUNTIME_SCENARIO",
-                "FIVE_DIFFICULTIES_P9_RUNTIME_SCENARIO"}) {
+                "FIVE_DIFFICULTIES_P9_RUNTIME_SCENARIO", "FIVE_DIFFICULTIES_P10_RUNTIME_SCENARIO"}) {
             if (enabled(scenario) && !FINISHED.contains(scenario)) return;
         }
         server.halt(false);

@@ -21,20 +21,31 @@ import java.util.function.Function;
 final class X1Tess {
     enum State {
         /** no blend, alpha test 0.1, depth write */
-        CUTOUT(X1RenderTypes.SHOT_CUTOUT),
+        CUTOUT(X1RenderTypes.Blend.NONE, true, false, false),
         /** GL_SRC_ALPHA, GL_ONE, depthMask(false) */
-        ADD_ALPHA(X1RenderTypes.SHOT_ADDITIVE),
+        ADD_ALPHA(X1RenderTypes.Blend.SRC_ALPHA_ONE, false, false, false),
+        /** GL_SRC_ALPHA, GL_ONE with depth writes (laser cores) */
+        ADD_ALPHA_DEPTH(X1RenderTypes.Blend.SRC_ALPHA_ONE, true, false, false),
+        /** same, GL_CULL_FACE enabled (normal laser core) */
+        ADD_ALPHA_DEPTH_CULL(X1RenderTypes.Blend.SRC_ALPHA_ONE, true, true, false),
         /** GL_ONE, GL_ONE_MINUS_SRC_COLOR, depthMask(false) */
-        INVERT_ADD(X1RenderTypes.LIGHT_EFFECT),
+        INVERT_ADD(X1RenderTypes.Blend.ONE_ONE_MINUS_SRC_COLOR, false, false, false),
+        /** same, GL_CULL_FACE enabled (normal laser glow) */
+        INVERT_ADD_CULL(X1RenderTypes.Blend.ONE_ONE_MINUS_SRC_COLOR, false, true, false),
         /** GL_ONE, GL_ONE_MINUS_SRC_COLOR, depth write */
-        INVERT_ADD_DEPTH(X1RenderTypes.INVERT_ADD_DEPTH),
+        INVERT_ADD_DEPTH(X1RenderTypes.Blend.ONE_ONE_MINUS_SRC_COLOR, true, false, false),
         /** GL_ONE, GL_ONE, depthMask(false) */
-        ADD_ONE(X1RenderTypes.ADD_ONE);
+        ADD_ONE(X1RenderTypes.Blend.ONE_ONE, false, false, false),
+        /** Master Spark laser core: GL_SRC_ALPHA, GL_ONE, glDepthFunc(GL_ALWAYS) */
+        SPARK_CORE(X1RenderTypes.Blend.SRC_ALPHA_ONE, true, false, true),
+        /** Master Spark laser rainbow: GL_ONE, GL_ONE_MINUS_SRC_COLOR, glDepthFunc(GL_ALWAYS) */
+        SPARK_GLOW(X1RenderTypes.Blend.ONE_ONE_MINUS_SRC_COLOR, true, false, true);
 
         final Function<ResourceLocation, RenderType> type;
 
-        State(Function<ResourceLocation, RenderType> type) {
-            this.type = type;
+        State(X1RenderTypes.Blend blend, boolean depthWrite, boolean cull, boolean depthAlways) {
+            X1RenderTypes.Spec spec = new X1RenderTypes.Spec(blend, depthWrite, cull, depthAlways);
+            this.type = texture -> X1RenderTypes.of(texture, spec);
         }
     }
 

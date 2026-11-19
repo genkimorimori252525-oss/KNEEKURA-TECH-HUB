@@ -1,6 +1,6 @@
 # Five Difficulties X1 Preservation Port — Minecraft 1.20.1 Forge
 
-Status: **P9 complete — every X1 shot form and special shot, all 19 shot items, and the literal Homing / Diffusion Amulet, verified on a dedicated server and in a real client**.
+Status: **P10 complete — lasers A / B, laser items and the special-shot registry on top of every X1 shot form; see PORT-ROADMAP.md**.
 
 Target:
 - Minecraft 1.20.1
@@ -228,3 +228,10 @@ literal X1 THShot amulets plus its Diffusion variant.
 (which belongs to the Houtou item). See `IMPLEMENTATION-CHECKPOINT-P9.md`.
 
 Next gate: lasers (EntityTHLaser / THSetLaser) and the ISpecialShot registry, then spell cards.
+
+
+## P10 lasers
+
+Laser A / B entities, every laser emitter, the laser renderer (normal, Gungnir, Laevateinn, Master
+Spark beam), the three laser items and the special-shot registry. See
+`IMPLEMENTATION-CHECKPOINT-P10.md` and `PORT-ROADMAP.md`.

@@ -4,12 +4,15 @@ import com.mojang.blaze3d.platform.NativeImage;
 import dev.kneekura.fivedifficulties.core.math.Vec3d;
 import dev.kneekura.fivedifficulties.core.timestop.TimeDomainMode;
 import dev.kneekura.fivedifficulties.core.x1.SakuyaControllerKind;
+import dev.kneekura.fivedifficulties.core.x1.X1LaserData;
 import dev.kneekura.fivedifficulties.core.x1.X1ShotData;
 import dev.kneekura.fivedifficulties.core.x1.X1ShotTables;
 import dev.kneekura.fivedifficulties.forge.FiveDifficultiesPort;
 import dev.kneekura.fivedifficulties.forge.entity.HomingAmuletProjectile;
 import dev.kneekura.fivedifficulties.forge.entity.SakuyaTimeControllerEntity;
+import dev.kneekura.fivedifficulties.forge.entity.THLaserEntity;
 import dev.kneekura.fivedifficulties.forge.entity.THShotEntity;
+import dev.kneekura.fivedifficulties.forge.shot.X1LaserSpawner;
 import dev.kneekura.fivedifficulties.forge.timestop.SakuyaTimeStopRuntime;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Screenshot;
@@ -60,7 +63,7 @@ public final class ClientWorldVisualSmoke {
     public static final String PASS_MARKER = "FIVE_DIFFICULTIES_P7B_WORLD_SMOKE_PASS";
     private static final String LEVEL_NAME = "five_difficulties_p7b_smoke";
 
-    private enum Phase { BOOT, WAIT_WORLD, SETTLE, FIRE, SHOOT_HOMING, P8_SPAWN, P8_SHOT, P9_SPAWN, P9_SHOT, START_STOP, SHOOT_STOP, DONE }
+    private enum Phase { BOOT, WAIT_WORLD, SETTLE, FIRE, SHOOT_HOMING, P8_SPAWN, P8_SHOT, P9_SPAWN, P9_SHOT, P10_SPAWN, P10_SHOT, START_STOP, SHOOT_STOP, DONE }
 
     private static final int[] P8_GRID_FORMS = {
             X1ShotTables.FORM_SMALL, X1ShotTables.FORM_MEDIUM, X1ShotTables.FORM_PEARL, X1ShotTables.FORM_CIRCLE,
@@ -68,6 +71,7 @@ public final class ClientWorldVisualSmoke {
     private static double baselineColourful;
     private static double shotsColourfulDelta;
     private static double formsColourfulDelta;
+    private static double lasersColourfulDelta;
 
     private static Phase phase = Phase.BOOT;
     private static int ticks;
@@ -132,6 +136,14 @@ public final class ClientWorldVisualSmoke {
                 }
                 case P9_SHOT -> {
                     if (++ticks == 10) requestShot(mc, "p9_forms.png");
+                    else if (ticks > 10) next(Phase.P10_SPAWN);
+                }
+                case P10_SPAWN -> {
+                    server(mc, ClientWorldVisualSmoke::spawnLasers);
+                    next(Phase.P10_SHOT);
+                }
+                case P10_SHOT -> {
+                    if (++ticks == 10) requestShot(mc, "p10_lasers.png");
                     else if (ticks > 10) next(Phase.START_STOP);
                 }
                 case START_STOP -> {
@@ -267,6 +279,36 @@ public final class ClientWorldVisualSmoke {
         }
     }
 
+    // P10: eight normal lasers, Spear the Gungnir, Laevateinn, a set laser and a laser in its delay.
+    private static void spawnLasers(ServerLevel level, ServerPlayer player) {
+        level.getEntitiesOfClass(THShotEntity.class, player.getBoundingBox().inflate(32), s -> true)
+                .forEach(THShotEntity::discard);
+        Vec3d east = new Vec3d(1, 0, 0);
+        Vec3d up = new Vec3d(0, 1, 0);
+        for (int color = 0; color < 8; color++) {
+            staticLaser(level, player, new Vec3d(-4.5D, -52.8D - color * 0.45D, 8.0D), east, color, 0.15F, 9F, 0);
+        }
+        staticLaser(level, player, new Vec3d(-3.0D, -57.2D, 8.0D), east, 8 + 1, 0.2F, 6F, 0);   // Gungnir
+        staticLaser(level, player, new Vec3d(-3.0D, -59.0D, 8.0D), east, 16, 0.6F, 6F, 0);      // Laevateinn
+        staticLaser(level, player, new Vec3d(-1.0D, -51.6D, 8.0D), east, 3, 0.2F, 5F, 400);     // delay light
+        ArmorStand stand = EntityType.ARMOR_STAND.create(level);
+        stand.moveTo(5.0D, -60.0D, 9.0D, 0F, 0F);
+        stand.setInvisible(true);
+        stand.setNoGravity(true);
+        level.addFreshEntity(stand);
+        X1LaserSpawner.createLaserB(level, player, stand, new Vec3d(5.0D, -60.0D, 9.0D), up, east, 0F, 9999,
+                X1LaserData.laser(5, 0.3F, 6F, 1F, 0, 2000), stand, 0.0D, 0.0D);
+    }
+
+    private static void staticLaser(ServerLevel level, ServerPlayer player, Vec3d pos, Vec3d dir, int shotId, float width,
+                                    float length, int delay) {
+        X1LaserData data = X1LaserData.laser(shotId / 8, shotId % 8, width, length, 1F, delay, 2000, 0);
+        THLaserEntity laser = new THLaserEntity(level, player, player, pos, dir, 0F, new Vec3d(0, 1, 0), 0F, 9999,
+                0D, 0D, 0D, Vec3d.ZERO, data);
+        laser.setLaserLength(length);
+        level.addFreshEntity(laser);
+    }
+
     // Source is an armor stand in front of the camera, so the Watch controller and its
     // expanding dark field are on screen and the player (a non-source) is inside the field.
     private static void startStop(ServerLevel level, ServerPlayer player) {
@@ -318,6 +360,10 @@ public final class ClientWorldVisualSmoke {
                 shotsColourfulDelta = stats[2] - baselineColourful;
                 require(shotsColourfulDelta > 0.004D, "P8 shot grid not visible (colourful delta "
                         + shotsColourfulDelta + ")");
+            }
+            case "p10_lasers.png" -> {
+                lasersColourfulDelta = stats[2] - baselineColourful;
+                require(lasersColourfulDelta > 0.01D, "P10 lasers not visible (colourful delta " + lasersColourfulDelta + ")");
             }
             case "p9_forms.png" -> {
                 formsColourfulDelta = stats[2] - baselineColourful;
@@ -374,7 +420,8 @@ public final class ClientWorldVisualSmoke {
 
     private static void finish(Minecraft mc) {
         FiveDifficultiesPort.LOGGER.info("{} homingWarmDelta={} p8ColourfulDelta={} skyBlueMinusRed baseline={} stop={}",
-                PASS_MARKER + " p9ColourfulDelta=" + String.format("%.5f", formsColourfulDelta),
+                PASS_MARKER + " p9ColourfulDelta=" + String.format("%.5f", formsColourfulDelta)
+                        + " p10ColourfulDelta=" + String.format("%.5f", lasersColourfulDelta),
                 String.format("%.5f", homingWarmDelta), String.format("%.5f", shotsColourfulDelta),
                 String.format("%.1f", baselineSky), String.format("%.1f", stopSky));
         phase = Phase.DONE;

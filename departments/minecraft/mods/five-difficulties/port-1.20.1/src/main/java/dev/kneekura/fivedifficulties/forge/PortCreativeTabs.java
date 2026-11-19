@@ -21,6 +21,7 @@ public final class PortCreativeTabs {
         }
         if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) { // X1 CreativeTabs.tabMaterials
             PortRegistries.SHOT_ITEMS.forEach(item -> event.accept(item.get()));
+            PortRegistries.LASER_ITEMS.forEach(item -> event.accept(item.get()));
         }
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             event.accept(PortRegistries.SAKUYA_WATCH.get());

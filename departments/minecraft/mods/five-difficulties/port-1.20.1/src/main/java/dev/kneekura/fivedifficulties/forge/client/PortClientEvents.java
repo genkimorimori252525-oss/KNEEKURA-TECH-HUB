@@ -26,6 +26,8 @@ public final class PortClientEvents {
                 SakuyaTimeControllerRenderer::new
         );
         event.registerEntityRenderer(PortRegistries.TH_SHOT.get(), THShotRenderer::new);
+        event.registerEntityRenderer(PortRegistries.TH_LASER.get(), THLaserRenderer::new);
+        event.registerEntityRenderer(PortRegistries.TH_SET_LASER.get(), THLaserRenderer::new);
     }
 
     @SubscribeEvent
