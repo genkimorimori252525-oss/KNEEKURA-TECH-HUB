@@ -69,6 +69,7 @@ public final class P16Scenario {
             runSilverKnife();
             runParasol();
             runHisou();
+            runEyeOrbBranch();
             FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_RUNTIME_SCENARIO_PASS");
             ScenarioShutdown.finished(level.getServer(), ENV);
         } catch (Throwable failure) {
@@ -743,6 +744,43 @@ public final class P16Scenario {
                 c -> c.user == p).forEach(Entity::discard);
         p.getInventory().clearContent();
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_HISOU_PASS shots=" + n);
+    }
+
+    private static void runEyeOrbBranch() {
+        FakePlayer p = player();
+        var hand = net.minecraft.world.InteractionHand.MAIN_HAND;
+        // Third eye: reads the zombie ahead, reports it on the next inventory tick.
+        Zombie z = zombie(6);
+        ItemStack eye = new ItemStack(PortRegistries.THIRD_EYE.get());
+        var item = (dev.kneekura.fivedifficulties.forge.item.X1ToolItems.ThirdEye) eye.getItem();
+        item.use(level, p, hand);
+        require(item.pendingTarget() == z, "the eye reads the zombie");
+        item.inventoryTick(eye, level, p, 0, true);
+        require(item.pendingTarget() == null, "reported and cleared");
+        z.discard();
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_THIRD_EYE_PASS");
+
+        // Bloodthirsty orb: jumps to 2 short of the zombie 10 ahead.
+        Zombie far = zombie(10);
+        ItemStack orb = new ItemStack(PortRegistries.BLOODTHIRSTY_YIN_YANG_ORB.get());
+        orb.getItem().releaseUsing(orb, level, p, 71990);
+        double dx = p.getX() - bx;
+        require(dx > 7.5D && dx < 8.5D && orb.getDamageValue() == 1, "jumped to dx " + dx);
+        far.discard();
+        p.moveTo(bx, by, bz, -90F, 0F);
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_BLOODTHIRSTY_ORB_PASS dx=" + String.format("%.2f", dx));
+
+        // Hourai branch: a sneak release (10 ticks -> 14 per ring, rings 0,3,..,12) fires 5 x 14 pearls, charge 50.
+        ItemStack branch = new ItemStack(PortRegistries.HOURAI_JEWELED_BRANCH.get());
+        p.setShiftKeyDown(true);
+        int n = fire(() -> branch.getItem().releaseUsing(branch, level, p, 72000 - 10));
+        p.setShiftKeyDown(false);
+        int charge = dev.kneekura.fivedifficulties.forge.item.X1ToolItems.HouraiJeweledBranch.getCharge(branch);
+        branch.getItem().inventoryTick(branch, level, p, 0, false);
+        int recovered = dev.kneekura.fivedifficulties.forge.item.X1ToolItems.HouraiJeweledBranch.getCharge(branch);
+        require(n == 70 && charge == 50 && recovered == 0, "branch shots " + n + " charge " + charge + " -> " + recovered);
+        level.getEntitiesOfClass(THShotEntity.class, p.getBoundingBox().inflate(48), e -> e.getOwner() == p).forEach(Entity::discard);
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_HOURAI_BRANCH_PASS shots=" + n);
     }
 
     private static void require(boolean ok, String what) {

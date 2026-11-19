@@ -23,6 +23,9 @@ public final class PortClientEvents {
             net.minecraft.client.renderer.item.ItemProperties.register(PortRegistries.REMORSE_ROD.get(),
                     new net.minecraft.resources.ResourceLocation(dev.kneekura.fivedifficulties.forge.FiveDifficultiesPort.MOD_ID, "used"),
                     (stack, level, entity, seed) -> dev.kneekura.fivedifficulties.forge.item.X1Weapons.Kaigo.used(stack) ? 1F : 0F);
+            net.minecraft.client.renderer.item.ItemProperties.register(PortRegistries.HOURAI_JEWELED_BRANCH.get(),
+                    new net.minecraft.resources.ResourceLocation(dev.kneekura.fivedifficulties.forge.FiveDifficultiesPort.MOD_ID, "charge_step"),
+                    (stack, level, entity, seed) -> dev.kneekura.fivedifficulties.forge.item.X1ToolItems.HouraiJeweledBranch.iconStep(stack) / 10F);
         });
     }
 

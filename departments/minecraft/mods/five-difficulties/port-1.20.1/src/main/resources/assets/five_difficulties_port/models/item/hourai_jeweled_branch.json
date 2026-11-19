@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "five_difficulties_port:item/hourai_jeweled_branch"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "five_difficulties_port:charge_step": 0.1
+      },
+      "model": "five_difficulties_port:item/hourai_jeweled_branch_1"
+    },
+    {
+      "predicate": {
+        "five_difficulties_port:charge_step": 0.2
+      },
+      "model": "five_difficulties_port:item/hourai_jeweled_branch_2"
+    },
+    {
+      "predicate": {
+        "five_difficulties_port:charge_step": 0.3
+      },
+      "model": "five_difficulties_port:item/hourai_jeweled_branch_3"
+    },
+    {
+      "predicate": {
+        "five_difficulties_port:charge_step": 0.4
+      },
+      "model": "five_difficulties_port:item/hourai_jeweled_branch_4"
+    },
+    {
+      "predicate": {
+        "five_difficulties_port:charge_step": 0.5
+      },
+      "model": "five_difficulties_port:item/hourai_jeweled_branch_5"
+    }
+  ]
+}

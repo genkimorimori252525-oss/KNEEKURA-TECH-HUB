@@ -15,6 +15,13 @@ public final class PortCreativeTabs {
 
     @SubscribeEvent
     public static void buildContents(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) { // P16m eye orb branch
+            event.accept(PortRegistries.THIRD_EYE.get());
+            event.accept(PortRegistries.BLOODTHIRSTY_YIN_YANG_ORB.get());
+        }
+        if (event.getTabKey() == CreativeModeTabs.COMBAT) { // P16m eye orb branch
+            event.accept(PortRegistries.HOURAI_JEWELED_BRANCH.get());
+        }
         if (event.getTabKey() == CreativeModeTabs.COMBAT) { // P16l hisou sword
             event.accept(PortRegistries.HISOU_SWORD.get());
         }

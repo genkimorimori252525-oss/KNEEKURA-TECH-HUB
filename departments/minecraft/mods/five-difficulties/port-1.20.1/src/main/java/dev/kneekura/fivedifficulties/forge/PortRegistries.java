@@ -444,6 +444,14 @@ public final class PortRegistries {
     public static final RegistryObject<Item> HISOU_SWORD = ITEMS.register("scarlet_perception_sword",
             () -> new dev.kneekura.fivedifficulties.forge.item.X1Weapons.HisouSword(new Item.Properties()));
 
+    // ---- P16m eye orb branch ----
+    public static final RegistryObject<Item> THIRD_EYE = ITEMS.register("third_eye",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1ToolItems.ThirdEye(new Item.Properties()));
+    public static final RegistryObject<Item> BLOODTHIRSTY_YIN_YANG_ORB = ITEMS.register("bloodthirsty_yin_yang_orb",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1ToolItems.BloodthirstyOnmyoudama(new Item.Properties()));
+    public static final RegistryObject<Item> HOURAI_JEWELED_BRANCH = ITEMS.register("hourai_jeweled_branch",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1ToolItems.HouraiJeweledBranch(new Item.Properties()));
+
     public static final RegistryObject<Item> SHOT_MATERIAL = ITEMS.register("shot_material",
             () -> new dev.kneekura.fivedifficulties.forge.item.ShotMaterialItem(new Item.Properties()));
 

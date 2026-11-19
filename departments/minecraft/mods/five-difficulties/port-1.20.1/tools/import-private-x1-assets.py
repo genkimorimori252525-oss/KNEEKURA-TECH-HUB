@@ -362,6 +362,40 @@ ASSETS = {
         "assets/five_difficulties_port/textures/item/scarlet_perception_sword.png.mcmeta",
         "06a8bc09a601ca3355275be1b3e63ded522c87eed6667f67f993451022e570eb",
     ),
+    # P16m eye orb branch.
+    "assets/thkaguyamod/textures/items/thirdEye_0.png": (
+        "assets/five_difficulties_port/textures/item/third_eye.png",
+        "2193ff3f70608b4bc833156ea6b5e4f04d535ac5b929a6ac1701378820c2e9dd",
+    ),
+    "assets/thkaguyamod/textures/items/material/Onmyoudama.png": (
+        "assets/five_difficulties_port/textures/item/bloodthirsty_yin_yang_orb.png",
+        "a7b29efd97219d5d0953a531a3cb1bf5b8924afc494ec3472c142fd328945cf0",
+    ),
+    "assets/thkaguyamod/textures/items/houraiEda.png": (
+        "assets/five_difficulties_port/textures/item/hourai_jeweled_branch.png",
+        "d2d54b212611097204485027b5fc2bee26eeda3564b064c0bb47945b98c1f13f",
+    ),
+    # P16m Hourai branch charge icons.
+    "assets/thkaguyamod/textures/items/houraiEda_4.png": (
+        "assets/five_difficulties_port/textures/item/hourai_jeweled_branch_1.png",
+        "6d7490bf5130e073f4026074beed7920300df45c7695ad37f08ace58b0959a9d",
+    ),
+    "assets/thkaguyamod/textures/items/houraiEda_3.png": (
+        "assets/five_difficulties_port/textures/item/hourai_jeweled_branch_2.png",
+        "31dc8e290c3a935c1d34bce444a1e58c475183e1e497a956073b59641f28340a",
+    ),
+    "assets/thkaguyamod/textures/items/houraiEda_2.png": (
+        "assets/five_difficulties_port/textures/item/hourai_jeweled_branch_3.png",
+        "7462e8213d3a4082cd71b771c57b2bedcde4faf0088966b04c6c48c896d99e26",
+    ),
+    "assets/thkaguyamod/textures/items/houraiEda_1.png": (
+        "assets/five_difficulties_port/textures/item/hourai_jeweled_branch_4.png",
+        "c659f14da801a9334955be770a63aa02a9a94d3c188ecb3cbbb110681576bf66",
+    ),
+    "assets/thkaguyamod/textures/items/houraiEda_0.png": (
+        "assets/five_difficulties_port/textures/item/hourai_jeweled_branch_5.png",
+        "e83135ecb6fda7a808d6046623534884d39fde553ce19770fc02c20c9ab573e1",
+    ),
     # P15 danmaku crafting table.
     "assets/thkaguyamod/textures/blocks/danmaku_crafting_table.png": (
         "assets/five_difficulties_port/textures/block/danmaku_crafting_table.png",
