@@ -383,6 +383,18 @@ public final class PortRegistries {
     public static final RegistryObject<Item> HAKUROUKEN = ITEMS.register("hakurouken",
             () -> new dev.kneekura.fivedifficulties.forge.item.X1Weapons.Hakurouken(new Item.Properties()));
 
+    // ---- P16h tools ----
+    public static final RegistryObject<Item> BUDDHA_STONE_BOWL = ITEMS.register("buddha_stone_bowl",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1ToolItems.BuddhaStoneBowl(new Item.Properties()));
+    public static final RegistryObject<Item> BYOUKIHEIYU_MAMORI = ITEMS.register("byoukiheiyu_mamori",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1ToolItems.ByoukiheiyuMamori(new Item.Properties()));
+    public static final RegistryObject<Item> WALL_PASSING_CHISEL = ITEMS.register("wall_passing_chisel",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1ToolItems.Kabenuke(new Item.Properties()));
+    public static final RegistryObject<Item> SHIP_GHOST_DIPPER = ITEMS.register("ship_ghost_dipper",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1ToolItems.Hisyaku(new Item.Properties(), false));
+    public static final RegistryObject<Item> SHIP_GHOST_DIPPER_EMPTY = ITEMS.register("ship_ghost_dipper_empty",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1ToolItems.Hisyaku(new Item.Properties(), true));
+
     public static final RegistryObject<Item> SHOT_MATERIAL = ITEMS.register("shot_material",
             () -> new dev.kneekura.fivedifficulties.forge.item.ShotMaterialItem(new Item.Properties()));
 

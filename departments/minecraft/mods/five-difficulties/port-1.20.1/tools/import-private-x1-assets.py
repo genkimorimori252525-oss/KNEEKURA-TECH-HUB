@@ -269,6 +269,27 @@ ASSETS = {
         "assets/five_difficulties_port/textures/item/hakurouken.png",
         "21ed4e73032e61d5ebcd6e27de873beceff74f829d4bc8c62abe63fb7da62156",
     ),
+    # P16h tools.
+    "assets/thkaguyamod/textures/items/hotokeHachi.png": (
+        "assets/five_difficulties_port/textures/item/buddha_stone_bowl.png",
+        "a4338da902f4c4be02c9c4414f01944e8d5a5c2ebfc84261c77477c152b09a1f",
+    ),
+    "assets/thkaguyamod/textures/items/ByoukiheiyuMamori.png": (
+        "assets/five_difficulties_port/textures/item/byoukiheiyu_mamori.png",
+        "9baaeebbaac240914a9f57cb19335d097b6ee9cd1d46515d545596f5527c619e",
+    ),
+    "assets/thkaguyamod/textures/items/kabenuke.png": (
+        "assets/five_difficulties_port/textures/item/wall_passing_chisel.png",
+        "b88d8fc34c81453739b7d120b50ff9253663ecd0edd2887172163ce48d177602",
+    ),
+    "assets/thkaguyamod/textures/items/hisyaku_0.png": (
+        "assets/five_difficulties_port/textures/item/ship_ghost_dipper.png",
+        "766d12849ec9c9a300bdd036231f7f7429bd8dcf452cc8893af43641c9c9cc79",
+    ),
+    "assets/thkaguyamod/textures/items/hisyaku_1.png": (
+        "assets/five_difficulties_port/textures/item/ship_ghost_dipper_empty.png",
+        "14ad667945b23788b72d0a31517e1782473ae6dfb7176099e50f8ab0d657f713",
+    ),
     # P15 danmaku crafting table.
     "assets/thkaguyamod/textures/blocks/danmaku_crafting_table.png": (
         "assets/five_difficulties_port/textures/block/danmaku_crafting_table.png",

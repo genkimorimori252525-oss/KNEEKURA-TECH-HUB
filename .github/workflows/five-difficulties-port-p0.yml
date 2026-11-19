@@ -59,7 +59,7 @@ jobs:
           python departments/minecraft/mods/five-difficulties/port-1.20.1/tools/patch-mdk-mixins.py "$ROOT/build.gradle"
           sed -i 's/^mod_id=.*/mod_id=five_difficulties_port/' "$ROOT/gradle.properties"
           sed -i 's/^mod_name=.*/mod_name=Five Difficulties X1 Preservation Port/' "$ROOT/gradle.properties"
-          sed -i 's/^mod_version=.*/mod_version=0.0.16-p16g/' "$ROOT/gradle.properties"
+          sed -i 's/^mod_version=.*/mod_version=0.0.16-p16h/' "$ROOT/gradle.properties"
           sed -i 's/^mod_group_id=.*/mod_group_id=dev.kneekura.fivedifficulties/' "$ROOT/gradle.properties"
           sed -i 's/^mod_authors=.*/mod_authors=KNEEKURA private preservation project/' "$ROOT/gradle.properties"
           sed -i 's/^mod_license=.*/mod_license=All Rights Reserved/' "$ROOT/gradle.properties"
@@ -192,6 +192,9 @@ jobs:
           grep -F "FIVE_DIFFICULTIES_P16_PENDULUM_PASS" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
           grep -F "FIVE_DIFFICULTIES_P16_ICICLE_SWORD_PASS" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
           grep -F "FIVE_DIFFICULTIES_P16_HAKUROUKEN_PASS" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
+          grep -F "FIVE_DIFFICULTIES_P16_BOWL_CHARM_PASS" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
+          grep -F "FIVE_DIFFICULTIES_P16_CHISEL_PASS" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
+          grep -F "FIVE_DIFFICULTIES_P16_DIPPER_PASS" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
           grep -F "FIVE_DIFFICULTIES_P16_RUNTIME_SCENARIO_PASS" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
           grep -F "Done (" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
           ! grep -F "Failed to start the minecraft server" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
@@ -205,7 +208,7 @@ jobs:
               ;;
           esac
 
-          echo "P16G_WORLD_RUNTIME_PASS" | tee "$GITHUB_WORKSPACE/forge-evidence/runtime-verdict.txt"
+          echo "P16H_WORLD_RUNTIME_PASS" | tee "$GITHUB_WORKSPACE/forge-evidence/runtime-verdict.txt"
 
       - name: Retain bounded compile evidence
         if: always()

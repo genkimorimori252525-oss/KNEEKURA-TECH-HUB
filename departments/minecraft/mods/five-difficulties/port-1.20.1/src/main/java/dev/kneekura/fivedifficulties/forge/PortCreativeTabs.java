@@ -15,6 +15,13 @@ public final class PortCreativeTabs {
 
     @SubscribeEvent
     public static void buildContents(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) { // P16h tools
+            event.accept(PortRegistries.BUDDHA_STONE_BOWL.get());
+            event.accept(PortRegistries.BYOUKIHEIYU_MAMORI.get());
+            event.accept(PortRegistries.WALL_PASSING_CHISEL.get());
+            event.accept(PortRegistries.SHIP_GHOST_DIPPER.get());
+            event.accept(PortRegistries.SHIP_GHOST_DIPPER_EMPTY.get());
+        }
         if (event.getTabKey() == CreativeModeTabs.COMBAT) { // P16g swords
             event.accept(PortRegistries.ICICLE_SWORD.get());
             event.accept(PortRegistries.HAKUROUKEN.get());

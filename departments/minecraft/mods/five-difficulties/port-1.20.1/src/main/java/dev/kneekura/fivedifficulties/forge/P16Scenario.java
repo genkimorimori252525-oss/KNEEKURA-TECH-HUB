@@ -64,6 +64,7 @@ public final class P16Scenario {
             runAjaRedStone();
             runPendulum();
             runSwordEffects();
+            runTools();
             FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_RUNTIME_SCENARIO_PASS");
             ScenarioShutdown.finished(level.getServer(), ENV);
         } catch (Throwable failure) {
@@ -502,6 +503,68 @@ public final class P16Scenario {
         enemy.discard();
         p.getInventory().clearContent();
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_HAKUROUKEN_PASS");
+    }
+
+    private static void runTools() {
+        FakePlayer p = player();
+        var hand = net.minecraft.world.InteractionHand.MAIN_HAND;
+
+        // Buddha stone bowl: digs at 4, harvests like stone, never wears.
+        ItemStack bowl = new ItemStack(PortRegistries.BUDDHA_STONE_BOWL.get());
+        require(bowl.getDestroySpeed(net.minecraft.world.level.block.Blocks.DIRT.defaultBlockState()) == 4F
+                && bowl.isCorrectToolForDrops(net.minecraft.world.level.block.Blocks.IRON_ORE.defaultBlockState())
+                && !bowl.isCorrectToolForDrops(net.minecraft.world.level.block.Blocks.DIAMOND_ORE.defaultBlockState()), "bowl digging");
+        Zombie z = zombie(2);
+        bowl.getItem().hurtEnemy(bowl, z, p);
+        require(bowl.getDamageValue() == 0, "the bowl never wears");
+        z.discard();
+
+        // Illness recovery charm: clears effects, Regeneration IV 3 s, one used.
+        p.addEffect(new net.minecraft.world.effect.MobEffectInstance(MobEffects.POISON, 200, 0));
+        ItemStack charm = new ItemStack(PortRegistries.BYOUKIHEIYU_MAMORI.get(), 2);
+        charm.getItem().finishUsingItem(charm, level, p);
+        var regen = p.getEffect(MobEffects.REGENERATION);
+        require(!p.hasEffect(MobEffects.POISON) && regen != null && regen.getAmplifier() == 3 && regen.getDuration() == 60
+                && charm.getCount() == 1, "charm cure");
+        p.removeAllEffects();
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_BOWL_CHARM_PASS");
+
+        // Wall-passing chisel: through a 3-thick, 2-high wall into the air behind it.
+        BlockPos wall = BlockPos.containing(bx + 2, by, bz);
+        for (int dx = 0; dx < 3; dx++) for (int dy = 0; dy < 2; dy++)
+            level.setBlockAndUpdate(wall.offset(dx, dy, 0), net.minecraft.world.level.block.Blocks.STONE.defaultBlockState());
+        ItemStack chisel = new ItemStack(PortRegistries.WALL_PASSING_CHISEL.get());
+        p.setItemInHand(hand, chisel);
+        var face = new net.minecraft.world.phys.BlockHitResult(net.minecraft.world.phys.Vec3.atCenterOf(wall),
+                net.minecraft.core.Direction.WEST, wall, false);
+        chisel.getItem().onItemUseFirst(chisel, new net.minecraft.world.item.context.UseOnContext(p, hand, face));
+        require(chisel.getDamageValue() == 1, "the chisel found the gap and wore 1");
+        double landedX = p.getX();
+        require(Math.abs(landedX - (bx + 5.0D)) < 1e-6 && Math.abs(p.getY() - by) < 1e-6, "landed behind the wall, dx " + (landedX - bx));
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_CHISEL_PASS landedDx=" + String.format("%.2f", landedX - bx));
+        for (int dx = 0; dx < 3; dx++) for (int dy = 0; dy < 2; dy++)
+            level.setBlockAndUpdate(wall.offset(dx, dy, 0), net.minecraft.world.level.block.Blocks.AIR.defaultBlockState());
+        p.moveTo(bx, by, bz, -90F, 0F);
+
+        // Ship-ghost dipper: pours a source in front of a block at eye level (costs 2); empty one takes it back.
+        BlockPos target = BlockPos.containing(bx + 3, by + 1, bz);
+        level.setBlockAndUpdate(target, net.minecraft.world.level.block.Blocks.STONE.defaultBlockState());
+        ItemStack dipper = new ItemStack(PortRegistries.SHIP_GHOST_DIPPER.get());
+        p.setItemInHand(hand, dipper);
+        dipper.getItem().use(level, p, hand);
+        BlockPos poured = target.west();
+        require(level.getBlockState(poured).is(net.minecraft.world.level.block.Blocks.WATER) && dipper.getDamageValue() == 2,
+                "water poured at " + poured + ": " + level.getBlockState(poured));
+        p.setShiftKeyDown(true);
+        ItemStack swapped = dipper.getItem().use(level, p, hand).getObject();
+        p.setShiftKeyDown(false);
+        require(swapped.is(PortRegistries.SHIP_GHOST_DIPPER_EMPTY.get()) && swapped.getDamageValue() == 2, "sneak swaps to empty");
+        p.setItemInHand(hand, swapped);
+        swapped.getItem().use(level, p, hand);
+        require(level.getBlockState(poured).isAir(), "the empty dipper takes the source");
+        level.setBlockAndUpdate(target, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState());
+        p.getInventory().clearContent();
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_DIPPER_PASS");
     }
 
     private static void require(boolean ok, String what) {
