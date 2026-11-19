@@ -1,0 +1,150 @@
+name: Spore static research gates
+
+on:
+  push:
+    paths:
+      - 'departments/minecraft/mods/fungal-infection-spore/tools/**'
+      - 'departments/minecraft/mods/fungal-infection-spore/tests/**'
+      - 'departments/minecraft/mods/fungal-infection-spore/observer/**'
+      - '.github/workflows/spore-research-gates.yml'
+  pull_request:
+    paths:
+      - 'departments/minecraft/mods/fungal-infection-spore/tools/**'
+      - 'departments/minecraft/mods/fungal-infection-spore/tests/**'
+      - 'departments/minecraft/mods/fungal-infection-spore/observer/**'
+      - '.github/workflows/spore-research-gates.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-observation-gates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Compile authored Python analysis tools
+        run: python -m compileall -q departments/minecraft/mods/fungal-infection-spore/tools
+      - name: Unit test synthetic trace guards and TOML parsing
+        run: python -m unittest discover -s departments/minecraft/mods/fungal-infection-spore/tests -v
+
+# No third-party Spore JAR or Minecraft world is fetched into the runner.
+# This workflow never claims live Forge/GameTest or a runtime PASS.
+
+
+  portable-observer-core:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Compile owned portable JSONL writer
+        run: |
+          ROOT=departments/minecraft/mods/fungal-infection-spore/observer
+          mkdir -p "$RUNNER_TEMP/spore-core"
+          javac --release 17 -d "$RUNNER_TEMP/spore-core" \
+            "$ROOT/src/main/java/org/kneekura/sporeobserver/core/TraceSink.java" \
+            "$ROOT/src/main/java/org/kneekura/sporeobserver/core/GoalRunningStateDiff.java" \
+            "$ROOT/src/main/java/org/kneekura/sporeobserver/core/GoalSnapshotSelection.java" \
+            "$ROOT/tests/TraceSinkTest.java" \
+            "$ROOT/tests/GoalRunningStateDiffTest.java" \
+            "$ROOT/tests/GoalSnapshotSelectionTest.java" \
+            "$ROOT/tests/G13SyntheticProducer.java" \
+            "$ROOT/tests/G12SyntheticProducer.java"
+          java -cp "$RUNNER_TEMP/spore-core" TraceSinkTest
+          java -cp "$RUNNER_TEMP/spore-core" GoalRunningStateDiffTest
+          java -cp "$RUNNER_TEMP/spore-core" GoalSnapshotSelectionTest
+      - name: Java-to-Python G13 synthetic pipeline (never runtime PASS)
+        run: |
+          ROOT=departments/minecraft/mods/fungal-infection-spore
+          java -cp "$RUNNER_TEMP/spore-core" G13SyntheticProducer "$RUNNER_TEMP/g13.synthetic.jsonl"
+          python "$ROOT/tools/evaluate_spore_trace.py" "$RUNNER_TEMP/g13.synthetic.jsonl" --out "$RUNNER_TEMP/g13.review.json"
+          python - "$RUNNER_TEMP/g13.review.json" <<'PY'
+          import json,sys
+          d=json.load(open(sys.argv[1],encoding="utf-8"))
+          assert d["status"]=="SYNTHETIC_FIXTURE_ONLY"
+          assert d["observation_count"]==600
+          assert d["observation_coverage"]["state"]=="OBSERVED_BASELINE_COMPARISON"
+          assert d["observation_coverage"]["qualified_baseline_proto_counts"]==[1,4,16]
+          assert d["runtime_pass"] is False
+          print("PASS G13 SYNTHETIC JAVA->JSONL->PYTHON, runtime_pass=False")
+          PY
+
+      - name: Java-to-Python G12 synthetic Goal flag contention pipeline
+        run: |
+          ROOT=departments/minecraft/mods/fungal-infection-spore
+          java -cp "$RUNNER_TEMP/spore-core" G12SyntheticProducer "$RUNNER_TEMP/g12.synthetic.jsonl"
+          python "$ROOT/tools/analyze_spore_goal_snapshots.py" "$RUNNER_TEMP/g12.synthetic.jsonl" --out "$RUNNER_TEMP/g12.goals-review.json"
+          python "$ROOT/tools/evaluate_spore_trace.py" "$RUNNER_TEMP/g12.synthetic.jsonl" --out "$RUNNER_TEMP/g12.scenario-review.json"
+          python - "$RUNNER_TEMP/g12.goals-review.json" "$RUNNER_TEMP/g12.scenario-review.json" <<'PY'
+          import json,sys
+          g=json.load(open(sys.argv[1],encoding="utf-8"))
+          r=json.load(open(sys.argv[2],encoding="utf-8"))
+          assert g["status"]=="SYNTHETIC_FIXTURE_ONLY"
+          assert g["observed_snapshot_rows"]==2
+          assert g["potential_shared_flag_pairs_sum"]==6
+          assert g["same_priority_shared_flag_pairs_sum"]==6
+          assert g["co_running_shared_flag_pairs_sum"]==0
+          assert g["delta_snapshot_events"]==1
+          assert g["delta_snapshot_valid"]==1
+          assert g["delta_changes_false_to_true"]==1
+          assert g["delta_changes_true_to_false"]==0
+          assert g["runtime_pass"] is False
+          assert g["runtime_pass"] is False
+          assert r["status"]=="SYNTHETIC_FIXTURE_ONLY"
+          assert r["observation_coverage"]["state"]=="INCONCLUSIVE"
+          assert r["runtime_pass"] is False
+          print("PASS G12 SYNTHETIC JAVA->JSONL->PYTHON, no runtime/GameTest claims")
+          PY
+
+
+  forge-observer-compile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Build research-only Forge observer against MC 1.20.1
+        run: |
+          bash departments/minecraft/projects/kirby-mod/gradlew \
+            -p departments/minecraft/mods/fungal-infection-spore/observer \
+            build --no-daemon --stacktrace
+      - name: Inspect produced mod JAR and forbid original Spore classes
+        run: |
+          OBS=departments/minecraft/mods/fungal-infection-spore/observer
+          JAR=$(find "$OBS/build/libs" -maxdepth 1 -type f -name 'kneekura-spore-observer-*.jar' | head -n 1)
+          test -n "$JAR" && test -s "$JAR"
+          jar tf "$JAR" | grep -Fx 'org/kneekura/sporeobserver/SporeEvents.class'
+          jar tf "$JAR" | grep -Fx 'org/kneekura/sporeobserver/core/TraceSink.class'
+          jar tf "$JAR" | grep -Fx 'META-INF/mods.toml'
+          unzip -p "$JAR" META-INF/mods.toml | grep -F 'modId="kneekura_spore_observer"'
+          unzip -p "$JAR" META-INF/mods.toml | grep -F '[[dependencies.kneekura_spore_observer]]'
+          if jar tf "$JAR" | grep -q '^com/Harbinger/Spore/'; then
+            echo 'Unexpected third-party Spore classes inside research observer JAR'
+            exit 1
+          fi
+          echo "PASS OWNED_FORGE_OBSERVER_JAR_PACKAGING (NO_RUNTIME)"
+      - name: Upload owned observer JAR only
+        uses: actions/upload-artifact@v4
+        with:
+          name: kneekura-spore-observer-${{ github.sha }}
+          path: departments/minecraft/mods/fungal-infection-spore/observer/build/libs/kneekura-spore-observer-*.jar
+          if-no-files-found: error
+          retention-days: 7
+
+# The Forge task compiles locally owned observer source with public ForgeDev
+# dependencies. It does NOT load Spore, start a game world or check in its JAR.
+# Forge runtime observation remains NOT_RUN until LAB session and cleanup proof.

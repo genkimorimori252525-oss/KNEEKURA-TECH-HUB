@@ -1,0 +1,75 @@
+{
+  "format": "kneekura.target-source-inventory.v1",
+  "target": "Goofy Critters",
+  "focus": "movement / locomotion",
+  "recorded_at": "2026-10-05",
+  "distributed_anchor": {
+    "provider": "CurseForge",
+    "project_id": 1449738,
+    "file_id": 7553632,
+    "file_name": "goofycritters-1.0.0.jar",
+    "version": "1.0.0",
+    "minecraft": "1.20.1",
+    "loader": "Forge",
+    "published": "2026-01-31",
+    "license": "GPLv3",
+    "sha256": null,
+    "source_equivalence": "NOT_ESTABLISHED"
+  },
+  "release_source_candidate": {
+    "repository": "min2222/GoofyCritters",
+    "revision": "9188e5175828154bdae309dd352e16e338dc8089",
+    "date": "2026-01-31",
+    "tree_entries": 133,
+    "blobs": 88,
+    "java_files": 58,
+    "exact_binary_source_match": "NOT_ESTABLISHED"
+  },
+  "frontier": {
+    "repository": "min2222/GoofyCritters",
+    "branch": "main",
+    "revision": "96d01a7b7ceaa18c51ae0cb1e7dfac0c3d467956",
+    "source_version": "1.0.0",
+    "minecraft": "1.20.1",
+    "forge": "47.4.20",
+    "java": 17,
+    "license": "GPLv3",
+    "archived": true,
+    "tree": {
+      "truncated": false,
+      "entries": 142,
+      "blobs": 97,
+      "java_files": 67,
+      "movement_focus_java_files": 23
+    },
+    "commits_ahead_of_release_candidate": 22
+  },
+  "entities": {
+    "gestalt": "IMPLEMENTED",
+    "gestalt_hand": "IMPLEMENTED_HELPER_ACTUATOR",
+    "eyes": "IMPLEMENTED",
+    "masked": "NOT_FOUND_IN_PINNED_SOURCE"
+  },
+  "evidence_status": {
+    "gestalt_anchor_locomotion": "EVIDENCE_BACKED_RELEASE_CANDIDATE_AND_FRONTIER",
+    "rider_anchor_bias": "EVIDENCE_BACKED_RELEASE_CANDIDATE_AND_FRONTIER",
+    "autonomous_follow_anchor_bias": "EVIDENCE_BACKED_RELEASE_CANDIDATE_AND_FRONTIER",
+    "procedural_arm_rendering": "EVIDENCE_BACKED_RELEASE_CANDIDATE_AND_FRONTIER",
+    "eyes_flight": "EVIDENCE_BACKED_SOURCE",
+    "generalized_movement_data": "FRONTIER_ONLY",
+    "no_spin_aabb_sweep": "FRONTIER_ONLY",
+    "masked_movement": "NOT_AVAILABLE",
+    "runtime_performance": "NOT_ANALYZED",
+    "automated_tests": "NOT_FOUND",
+    "distributed_binary_source_equivalence": "NOT_ESTABLISHED"
+  },
+  "notable_boundaries": [
+    "Gestalt body has zero movement-speed attribute and no default movement goals",
+    "up to 16 independent hand helper entities",
+    "full-collision-block anchors only",
+    "no global Gestalt route planner",
+    "undocumented length-vs-distance precision gate in anchor force",
+    "reflective owner lookup",
+    "procedural arm render cost scales with total anchor span"
+  ]
+}

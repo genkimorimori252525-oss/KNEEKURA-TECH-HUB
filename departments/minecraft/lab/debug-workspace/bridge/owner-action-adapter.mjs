@@ -4,7 +4,7 @@ import path from 'node:path';
 import { ownerTriggerIdentity, validateOwnerTriggerIntent } from './owner-trigger-config.mjs';
 
 function same(a,b){return stableJson(a)===stableJson(b);}
-export function validateControlState(prepared,receipt,status,{now=Date.now(),allowUnsafeCleanup=false,allowBusyObservation=false}={}) {
+export function validateControlState(prepared,receipt,status,{now=Date.now(),allowUnsafeCleanup=false,allowBusyObservation=false,minRemainingMs=0}={}) {
   const {receiptHash,...body}=receipt??{};hashId(receiptHash);
   if(sha256(stableJson(body))!==receiptHash||body.schemaVersion!==1||
       body.kind!=='owner_installation_receipt'||body.status!=='INSTALLED_SCOPED_CONTROL'||
@@ -36,20 +36,23 @@ export function validateControlState(prepared,receipt,status,{now=Date.now(),all
       !Number.isFinite(observedAt)||!Number.isFinite(installedAt)||!Number.isFinite(now)||
       now-observedAt>5000||observedAt-now>1000||installedAt-now>1000||now-installedAt>=grant.timeBudgetMs)
     throw new Error('OWNER_NOT_CURRENT_IDLE_CONTROL');
+  integer(minRemainingMs,0,120000);
+  if(minRemainingMs>0&&(!Number.isSafeInteger(status.leaseRemainingMs)||status.leaseRemainingMs>grant.timeBudgetMs
+      ||observedAt>now||status.leaseRemainingMs-(now-observedAt)<minRemainingMs))throw new Error('OWNER_LEASE_BUDGET_INSUFFICIENT_OR_NOT_CAPTURED');
   return {installedReceiptHash:receiptHash,ownerEnvelopeHash:prepared.envelopeHash,
     runSnapshotHash:body.runSnapshotHash,arenaEpoch:status.arenaEpoch,arenaRevision:status.arenaRevision,nextActionId:status.nextActionId,
     scope:'BOUNDED_DIAGNOSTIC_CONTROL',fullTargetAttestation:'NOT_ESTABLISHED'};
 }
 
-export async function readInstalledControl({runDir,envelopeHash,now=Date.now(),allowUnsafeCleanup=false,allowBusyObservation=false}) {
+export async function readInstalledControl({runDir,envelopeHash,now=Date.now(),allowUnsafeCleanup=false,allowBusyObservation=false,minRemainingMs=0}) {
   const {readPreparedOwnerControl}=await import('./owner-prelaunch.mjs');
   const {readRegisteredFile}=await import('./materials.mjs');
   const {decodeJson}=await import('./json.mjs');
   const prepared={...await readPreparedOwnerControl({runDir,envelopeHash,requireSnapshot:true}),envelopeHash};
   const read=async name=>decodeJson((await readRegisteredFile({root:runDir,relativePath:'control/'+name,maxBytes:1024*1024})).bytes);
   const receipt=await read('owner-installed.json'),status=await read('owner-status.json');
-  const control=validateControlState(prepared,receipt,status,{now,allowUnsafeCleanup,allowBusyObservation});
-  return {prepared,control,receipt};
+  const control=validateControlState(prepared,receipt,status,{now,allowUnsafeCleanup,allowBusyObservation,minRemainingMs});
+  return {prepared,control,receipt,status};
 }
 export async function inspectOwnerControl(options) {
   const {prepared,control}=await readInstalledControl(options);
@@ -73,11 +76,12 @@ function publicIntent(prepared,action,status,extra={}) {
     idempotencyKey:action.idempotencyKey,ownerEnvelopeHash:prepared.envelopeHash,
     execution:'NOT_CONFIRMED',scope:'BOUNDED_DIAGNOSTIC_CONTROL',fullTargetAttestation:'NOT_ESTABLISHED',...extra};
 }
-export async function submitSelectedAction({runDir,envelopeHash,selectedActionId,now=Date.now()}) {
+export async function submitSelectedAction({runDir,envelopeHash,selectedActionId,now=Date.now(),minRemainingMs=0}) {
   const {selectRetainedAction,actionIdempotencyKey}=await import('./selected-action.mjs');
   const {beginAction,readActionOutcome}=await import('./action-journal.mjs');
   const path=(await import('node:path')).default;
-  const {prepared,control}=await readInstalledControl({runDir,envelopeHash,now});
+  integer(minRemainingMs,0,120000);
+  const {prepared,control}=await readInstalledControl({runDir,envelopeHash,now,minRemainingMs});
   const {action,priorActionIds}=selectRetainedAction({request:prepared.request,grant:prepared.grant,selectedActionId});
   const identity={...Object.fromEntries(['debugSessionId','runId','runSnapshotId','processEpoch'].map(k=>[k,prepared.identity[k]])),experimentId:prepared.request.experiment_id,
     subjects:Object.fromEntries(prepared.grant.subjects.map(s=>[s.subjectId,s.uuid]))};
@@ -92,7 +96,7 @@ export async function submitSelectedAction({runDir,envelopeHash,selectedActionId
   const arena={schemaVersion:1,arenaId:action.arenaId,arenaEpoch:action.arenaEpoch,arenaRevision:action.expectedArenaRevision,
     baselineHash:prepared.grant.baselineHash,bounds:prepared.grant.bounds,allowedMutationBounds:prepared.grant.bounds,
     resetClasses:{blocks:'RESETTABLE',entities:'UNKNOWN'}};
-  const rechecked=await readInstalledControl({runDir,envelopeHash});
+  const rechecked=await readInstalledControl({runDir,envelopeHash,minRemainingMs});
   if(rechecked.control.arenaRevision!==control.arenaRevision||rechecked.control.installedReceiptHash!==control.installedReceiptHash||rechecked.control.nextActionId!==selectedActionId)
     throw new Error('OWNER_CHANGED_BEFORE_INTENT');
   let begun=false;
@@ -103,7 +107,7 @@ export async function submitSelectedAction({runDir,envelopeHash,selectedActionId
     const dispatch={schemaVersion:1,ownerEnvelopeHash:envelopeHash,runSnapshotId:prepared.envelope.runSnapshotId,
       runSnapshotHash:prepared.snapshot.snapshotHash,requestHash:prepared.envelope.requestHash,
       handshakeNonce:prepared.envelope.handshakeNonce,leaseId:prepared.grant.leaseId,
-      selectedActionId,idempotencyKey:action.idempotencyKey,payloadHash};
+      selectedActionId,idempotencyKey:action.idempotencyKey,payloadHash,...(minRemainingMs>0?{minRemainingMs}:{})};
     const dispatchHash=await publishMarker(path.join(runDir,'control','actions',sha256(action.idempotencyKey)),'dispatch.json',dispatch);
     return publicIntent(prepared,action,'REQUESTED',{dispatchHash,payloadHash});
   } catch(error) {

@@ -1,0 +1,15 @@
+{
+  "scenario": "operational-b17-escort",
+  "kind": "escort",
+  "source": "minecraft_runtime_ia_next_tick_injection",
+  "ticks": 340,
+  "flights": [
+    {"id": "b17", "file": "op-b17-forge-controls.csv", "aircraft_id": "warfare_wings:b17", "scenario_id": "op-b17", "team": "convoy"},
+    {"id": "escort-left", "file": "op-escort-left-forge-controls.csv", "aircraft_id": "warfare_wings:p47n", "scenario_id": "op-escort-left", "team": "convoy"},
+    {"id": "escort-right", "file": "op-escort-right-forge-controls.csv", "aircraft_id": "warfare_wings:p47n", "scenario_id": "op-escort-right", "team": "convoy"},
+    {"id": "raider-1", "file": "op-raider-1-forge-controls.csv", "aircraft_id": "warfare_wings:a6m", "scenario_id": "op-raider-1", "team": "raiders"},
+    {"id": "raider-2", "file": "op-raider-2-forge-controls.csv", "aircraft_id": "warfare_wings:a6m", "scenario_id": "op-raider-2", "team": "raiders"}
+  ],
+  "assets": ["b17"],
+  "escort_assignments": {"b17": ["escort-left", "escort-right"]}
+}
