@@ -122,6 +122,59 @@ ASSETS = {
         "assets/five_difficulties_port/textures/item/diffusion_amulet.png",
         "48a04fbb8993b87cce4abc2b175f006d8bdaef3254c323b86b023b749f152927",
     ),
+    # P16a small items.
+    "assets/thkaguyamod/textures/items/heavenlyPeach.png": (
+        "assets/five_difficulties_port/textures/item/heavenly_peach.png",
+        "4c7fa9e18880a95258bb6a3e0da846ba2ca6a6e2be5f3f42ef0a4bcf3c0bce5c",
+    ),
+    "assets/thkaguyamod/textures/items/koyasugai.png": (
+        "assets/five_difficulties_port/textures/item/swallow_cowrie_shell.png",
+        "5f751d184d32d75a648e56d7de40cdb39538c39aa2e95838e68c1cfde67f0aa7",
+    ),
+    "assets/thkaguyamod/textures/items/closedThirdEye.png": (
+        "assets/five_difficulties_port/textures/item/closed_third_eye.png",
+        "9e81f4b78f2d60ca58bc4eff1c7403a56b83146b60f57c395a8bc3025d9d63df",
+    ),
+    "assets/thkaguyamod/textures/items/tenguFan.png": (
+        "assets/five_difficulties_port/textures/item/tengu_fan.png",
+        "5376ea52f20b5d88ffb8dc34452ab7d8844c1be80f25fcaaa0902333dd3b1f61",
+    ),
+    "assets/thkaguyamod/textures/items/onbashira.png": (
+        "assets/five_difficulties_port/textures/item/onbashira.png",
+        "d940dccf576a4f86ac0178da31cc5bffc56c64c4106501e911200fc70a7da8f2",
+    ),
+    "assets/thkaguyamod/textures/items/material/RedPearl.png": (
+        "assets/five_difficulties_port/textures/item/hourai_pearl_red.png",
+        "989ee845785df5a24f74ae7558fa4dffd6924af77999d36895dac99739ded612",
+    ),
+    "assets/thkaguyamod/textures/items/material/BluePearl.png": (
+        "assets/five_difficulties_port/textures/item/hourai_pearl_blue.png",
+        "9aade49bd42ba4b2320bd9bef98571e77e67fe46333ce82f0c502022a94b8518",
+    ),
+    "assets/thkaguyamod/textures/items/material/GreenPearl.png": (
+        "assets/five_difficulties_port/textures/item/hourai_pearl_green.png",
+        "0bc46fef976cd41e8183adca4a9053aeae5d8e720c3150dc9cee3491d7838222",
+    ),
+    "assets/thkaguyamod/textures/items/material/YellowPearl.png": (
+        "assets/five_difficulties_port/textures/item/hourai_pearl_yellow.png",
+        "eb07848f0faf2a8ef770552aa54877d839149f2995786f174b04b71934c1e6b0",
+    ),
+    "assets/thkaguyamod/textures/items/material/PurplePearl.png": (
+        "assets/five_difficulties_port/textures/item/hourai_pearl_purple.png",
+        "6bfd40ea8b320e72d835a582df1baa3b1451e4283f5f75f5814d50a69707067c",
+    ),
+    "assets/thkaguyamod/textures/items/material/AquaPearl.png": (
+        "assets/five_difficulties_port/textures/item/hourai_pearl_aqua.png",
+        "b0d46f4cb1b0caa0c036c9c637c0a35cdd1da85a6d4910508a29858dccdd22f7",
+    ),
+    "assets/thkaguyamod/textures/items/material/OrangePearl.png": (
+        "assets/five_difficulties_port/textures/item/hourai_pearl_orange.png",
+        "f736c6a929c49e6a2b26d5c10f45527784f8877f95e714f5e0afa92b64e9e082",
+    ),
+    "assets/thkaguyamod/textures/items/material/WhitePearl.png": (
+        "assets/five_difficulties_port/textures/item/hourai_pearl_white.png",
+        "300952f4eb801945bfd493f6961685ae694350664bfb657ecbb9663c74dde4dc",
+    ),
     # P15 danmaku crafting table.
     "assets/thkaguyamod/textures/blocks/danmaku_crafting_table.png": (
         "assets/five_difficulties_port/textures/block/danmaku_crafting_table.png",

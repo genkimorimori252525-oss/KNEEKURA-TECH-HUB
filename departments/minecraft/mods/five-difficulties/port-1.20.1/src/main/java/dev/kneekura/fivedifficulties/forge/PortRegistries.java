@@ -273,6 +273,34 @@ public final class PortRegistries {
             MENUS.register("laser_crafting", () -> net.minecraftforge.common.extensions.IForgeMenuType.create(
                     (id, inv, buf) -> dev.kneekura.fivedifficulties.forge.crafting.DanmakuCraftingMenu.laser(id, inv)));
 
+    // ---- P16a small items ----
+    public static final RegistryObject<Item> HEAVENLY_PEACH = ITEMS.register("heavenly_peach",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1SmallItems.HeavenlyPeach(new Item.Properties()));
+    public static final RegistryObject<Item> SWALLOW_COWRIE_SHELL = ITEMS.register("swallow_cowrie_shell",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1SmallItems.SwallowCowrieShell(new Item.Properties()));
+    public static final RegistryObject<Item> CLOSED_THIRD_EYE = ITEMS.register("closed_third_eye",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1SmallItems.ClosedThirdEye(new Item.Properties()));
+    public static final RegistryObject<Item> TENGU_FAN = ITEMS.register("tengu_fan",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1SmallItems.TenguFan(new Item.Properties()));
+    public static final RegistryObject<Item> ONBASHIRA = ITEMS.register("onbashira",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1SmallItems.Onbashira(new Item.Properties()));
+    public static final RegistryObject<Item> HOURAI_PEARL_RED = ITEMS.register("hourai_pearl_red",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> HOURAI_PEARL_BLUE = ITEMS.register("hourai_pearl_blue",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> HOURAI_PEARL_GREEN = ITEMS.register("hourai_pearl_green",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> HOURAI_PEARL_YELLOW = ITEMS.register("hourai_pearl_yellow",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> HOURAI_PEARL_PURPLE = ITEMS.register("hourai_pearl_purple",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> HOURAI_PEARL_AQUA = ITEMS.register("hourai_pearl_aqua",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> HOURAI_PEARL_ORANGE = ITEMS.register("hourai_pearl_orange",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> HOURAI_PEARL_WHITE = ITEMS.register("hourai_pearl_white",
+            () -> new Item(new Item.Properties()));
+
     public static final RegistryObject<Item> SHOT_MATERIAL = ITEMS.register("shot_material",
             () -> new dev.kneekura.fivedifficulties.forge.item.ShotMaterialItem(new Item.Properties()));
 

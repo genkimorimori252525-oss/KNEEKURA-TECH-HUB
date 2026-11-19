@@ -15,6 +15,27 @@ public final class PortCreativeTabs {
 
     @SubscribeEvent
     public static void buildContents(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) { // P16a small items
+            event.accept(PortRegistries.HEAVENLY_PEACH.get());
+            event.accept(PortRegistries.SWALLOW_COWRIE_SHELL.get());
+        }
+        if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) { // P16a small items
+            event.accept(PortRegistries.CLOSED_THIRD_EYE.get());
+        }
+        if (event.getTabKey() == CreativeModeTabs.COMBAT) { // P16a small items
+            event.accept(PortRegistries.TENGU_FAN.get());
+            event.accept(PortRegistries.ONBASHIRA.get());
+        }
+        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) { // P16a small items
+            event.accept(PortRegistries.HOURAI_PEARL_RED.get());
+            event.accept(PortRegistries.HOURAI_PEARL_BLUE.get());
+            event.accept(PortRegistries.HOURAI_PEARL_GREEN.get());
+            event.accept(PortRegistries.HOURAI_PEARL_YELLOW.get());
+            event.accept(PortRegistries.HOURAI_PEARL_PURPLE.get());
+            event.accept(PortRegistries.HOURAI_PEARL_AQUA.get());
+            event.accept(PortRegistries.HOURAI_PEARL_ORANGE.get());
+        }
+        // X1 getSubItems lists pearls 0..6 only: the white pearl is in no tab.
         if (event.getTabKey() == CreativeModeTabs.COMBAT) {
             event.accept(PortRegistries.HOMING_AMULET.get());
             event.accept(PortRegistries.DIFFUSION_AMULET.get());
