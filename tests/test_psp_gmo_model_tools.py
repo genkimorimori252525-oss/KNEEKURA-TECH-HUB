@@ -466,25 +466,63 @@ def test_subdivide_for_skin_splits_only_where_weights_change():
             assert abs(uv[0] - p[0] / 16) < 1e-9 and abs(uv[1] - p[2] / 16) < 1e-9
 
 
-def test_expand_triangle_moves_every_edge_out_by_the_margin_and_keeps_uv_affine():
-    P = [(0.0, 0.0, 0.0), (6.0, 0.0, 0.0), (0.0, 0.0, 8.0)]   # 3-4-5 の倍、内接円の半径 2
-    UV = [(0.0, 0.0), (0.6, 0.0), (0.0, 0.8)]                 # u = x/10, v = z/10
-    P2, UV2 = hybrid2bbmodel.expand_triangle(P, UV, 0.5)
+def _dist_to_line(p, a, b):
+    ab = [b[k] - a[k] for k in range(3)]
+    ap = [p[k] - a[k] for k in range(3)]
+    c = hybrid2bbmodel.cross(ab, ap)
+    return math.sqrt(hybrid2bbmodel.dot(c, c)) / math.dist(a, b)
 
-    def dist_to_line(p, a, b):
-        ab = [b[k] - a[k] for k in range(3)]
-        ap = [p[k] - a[k] for k in range(3)]
-        c = hybrid2bbmodel.cross(ab, ap)
-        return math.sqrt(hybrid2bbmodel.dot(c, c)) / math.dist(a, b)
+
+def test_expand_triangle_moves_chosen_edges_out_and_keeps_uv_affine():
+    P = [(0.0, 0.0, 0.0), (6.0, 0.0, 0.0), (0.0, 0.0, 8.0)]   # 3-4-5 の倍、内接円の半径 2、内心 (2, 0, 2)
+    UV = [(0.0, 0.0), (0.6, 0.0), (0.0, 0.8)]                 # u = x/10, v = z/10
     inc = (2.0, 0.0, 2.0)
+    P2, UV2 = hybrid2bbmodel.expand_triangle(P, UV, [0.5, 0.5, 0.5], 10.0)
     for i in range(3):  # 内心から各辺までの距離が 2 → 2.5
-        assert abs(dist_to_line(inc, P2[i], P2[(i + 1) % 3]) - 2.5) < 1e-9
-    for p, uv in zip(P2, UV2):  # UV は位置と同じ一次の関係のまま（絵がそのまま外へ続く）
-        assert abs(uv[0] - p[0] / 10) < 1e-9 and abs(uv[1] - p[2] / 10) < 1e-9
-    # 細すぎる三角形でも広げすぎない（上限 2 倍）
-    thin = [(0.0, 0.0, 0.0), (100.0, 0.0, 0.0), (50.0, 0.0, 0.01)]
-    T2, _ = hybrid2bbmodel.expand_triangle(thin, None, 0.5)
-    assert math.dist(T2[0], T2[1]) <= 2 * 100 + 1e-6
+        assert abs(_dist_to_line(inc, P2[i], P2[(i + 1) % 3]) - 2.5) < 1e-9
+    for p, uv in zip(P2, UV2):  # 平面上のまま、UV は位置と同じ一次の関係（絵がそのまま外へ続く）
+        assert abs(p[1]) < 1e-9 and abs(uv[0] - p[0] / 10) < 1e-9 and abs(uv[1] - p[2] / 10) < 1e-9
+    # 辺 0（P0→P1）だけ広げる: その辺だけ外へ 0.5、ほかの辺は元の直線の上
+    P3, _ = hybrid2bbmodel.expand_triangle(P, None, [0.5, 0.0, 0.0], 10.0)
+    assert abs(_dist_to_line(inc, P3[0], P3[1]) - 2.5) < 1e-9
+    assert abs(_dist_to_line(inc, P3[1], P3[2]) - 2.0) < 1e-9 and abs(_dist_to_line(inc, P3[2], P3[0]) - 2.0) < 1e-9
+
+
+def test_expand_triangle_caps_corner_movement_on_slivers():
+    # 細長い三角形は、辺を 0.5 出すだけで鋭い角が大きく飛び出す（トゲになる）→ 角の移動を cap 以下に抑える
+    thin = [(0.0, 0.0, 0.0), (100.0, 0.0, 0.0), (50.0, 0.0, 1.0)]
+    T2, _ = hybrid2bbmodel.expand_triangle(thin, None, [0.5, 0.5, 0.5], 1.0)
+    assert max(math.dist(a, b) for a, b in zip(thin, T2)) <= 1.0 + 1e-9
+
+
+def test_join_helpers_closes_a_seam_and_the_penalty_trades_it_for_staying_put():
+    I = [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
+    # 補助の骨 A は動かず、B は +x へ 1 ずれた。静止位置で共有していた点 (2,0,0)・(2,0,1) が 1 開いている
+    H = [(I, [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]), (I, [4.0, 0.0, 0.0], [5.0, 0.0, 0.0])]
+    pairs = [(10, [2.0, 0.0, 0.0], 11, [2.0, 0.0, 0.0]), (10, [2.0, 0.0, 1.0], 11, [2.0, 0.0, 1.0])]
+
+    def gap(corr):
+        def at(k, p):
+            R, c0, m = H[k]
+            Rc, t = hybrid2bbmodel._rodrigues(corr[k][0]), corr[k][1]
+            x = [sum(R[r][j] * (p[j] - c0[j]) for j in range(3)) for r in range(3)]
+            return [sum(Rc[r][j] * x[j] for j in range(3)) + m[r] + t[r] for r in range(3)]
+        return math.dist(at(0, pairs[0][1]), at(1, pairs[0][3]))
+    weak = hybrid2bbmodel.join_helpers(pairs, H, {}, 10, 1e-4, 8.0, sweeps=30)
+    strong = hybrid2bbmodel.join_helpers(pairs, H, {}, 10, 1.0, 8.0, sweeps=30)
+    assert gap(weak) < 0.01 < gap(strong) < 1.0
+    assert abs(weak[0][1][0] - 0.5) < 0.01 and abs(weak[1][1][0] + 0.5) < 0.01  # 両側が半分ずつ寄る
+    # 元の骨（key < nb）は動かさず、補助の骨だけが寄る
+    Dfix = {3: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]}
+    one = hybrid2bbmodel.join_helpers([(3, [2.0, 0, 0], 11, [2.0, 0, 0])], H, Dfix, 10, 1e-4, 8.0, sweeps=30)
+    assert abs(one[1][1][0] + 1.0) < 0.02
+
+
+def test_cells_go_to_the_bone_of_the_nearest_triangle():
+    cells = {(0, 0, 0): 'a', (5, 0, 0): 'b', (3, 0, 0): 'c'}
+    polys = [dict(pos=[(0, 0, 0), (1, 0, 0), (0, 0, 1)], key=1), dict(pos=[(5, 0, 0), (6, 0, 0), (5, 0, 1)], key=2)]
+    out = hybrid2bbmodel.cells_to_bones(cells, polys, lambda p: p)
+    assert out == {1: {(0, 0, 0): 'a'}, 2: {(5, 0, 0): 'b', (3, 0, 0): 'c'}}  # (3.5,..) は 2 番目に近い
 
 
 def test_seam_report_is_zero_when_neighbours_share_a_bone_and_opens_when_they_do_not():

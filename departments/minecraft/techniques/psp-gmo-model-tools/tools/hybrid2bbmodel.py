@@ -191,7 +191,95 @@ def _continuous_euler(mats):
     return out
 
 
-def build_blend_animations(motion_paths, bones, Wg, helpers, hgid, S4, S4i, prefix='', tol_pos=0.5, tol_rot=0.5):
+def _rodrigues(w):
+    """回転ベクトル（ラジアン）-> 3x3 回転行列。"""
+    th = math.sqrt(sum(c * c for c in w))
+    if th < 1e-12:
+        return [[1.0, -w[2], w[1]], [w[2], 1.0, -w[0]], [-w[1], w[0], 1.0]]
+    k = [c / th for c in w]
+    c, s = math.cos(th), math.sin(th)
+    K = [[0, -k[2], k[1]], [k[2], 0, -k[0]], [-k[1], k[0], 0]]
+    KK = _m3mul(K, K)
+    return [[(1.0 if r == cc else 0.0) + s * K[r][cc] + (1 - c) * KK[r][cc] for cc in range(3)] for r in range(3)]
+
+
+def _solve_small(A, b):
+    """小さい連立一次方程式（部分ピボットのガウス消去）。特異なら 0 を返す。"""
+    n = len(b)
+    M = [A[r][:] + [b[r]] for r in range(n)]
+    for c in range(n):
+        p = max(range(c, n), key=lambda r: abs(M[r][c]))
+        M[c], M[p] = M[p], M[c]
+        if abs(M[c][c]) < 1e-18:
+            return [0.0] * n
+        for r in range(n):
+            if r != c:
+                f = M[r][c] / M[c][c]
+                for cc in range(c, n + 1):
+                    M[r][cc] -= f * M[c][cc]
+    return [M[r][n] / M[r][r] for r in range(n)]
+
+
+def join_helpers(pairs, H, Dfix, nb, lam, r0, corr=None, sweeps=6, damp=0.8):
+    """結合処理（1 時刻ぶん）。補助の骨 h は剛体で、点 p を x = R_h (p - c_h) + m_h に運ぶ（H[h] = (R, c, m)）。
+    継ぎ目の組 pairs = [(keyA, pA, keyB, pB)]（静止位置が同じ点。key < nb は元の骨で動かさない: Dfix[key] の 4x4）について、
+    補助の骨ごとに小さな補正（m まわりの回転 ω と移動 t）を足し、継ぎ目の点が一致するように寄せる。
+    元の動きから離れすぎないよう、補正の大きさに罰 λ（回転は半径 r0 で長さに換算）を付ける。Jacobi 反復（減衰 damp）。
+    戻り: 補正 [(ω, t)]（各補助の骨）。次の時刻の初期値に使える。"""
+    nh = len(H)
+    corr = [(list(w), list(t)) for w, t in corr] if corr else [([0.0] * 3, [0.0] * 3) for _ in range(nh)]
+
+    def place(key, p, Rc):
+        if key < nb:
+            return _apply4(Dfix[key], p)
+        h = key - nb
+        R, c0, m = H[h]
+        x = [sum(R[r][j] * (p[j] - c0[j]) for j in range(3)) for r in range(3)]  # m からの相対
+        y = [sum(Rc[h][r][j] * x[j] for j in range(3)) for r in range(3)]
+        t = corr[h][1]
+        return [y[a] + m[a] + t[a] for a in range(3)], [y[a] for a in range(3)]
+    for _ in range(sweeps):
+        Rc = [_rodrigues(w) for w, _ in corr]
+        AtA = [None] * nh
+        Atb = [None] * nh
+        cnt = [0] * nh
+        for ka, pa, kb, pb in pairs:
+            A = place(ka, pa, Rc)
+            B = place(kb, pb, Rc)
+            xa, ra = (A, None) if ka < nb else A
+            xb, rb = (B, None) if kb < nb else B
+            e = [xa[a] - xb[a] for a in range(3)]
+            for key, sgn, r in ((ka, 1.0, ra), (kb, -1.0, rb)):
+                if key < nb:
+                    continue
+                h = key - nb
+                if AtA[h] is None:
+                    AtA[h] = [[0.0] * 6 for _ in range(6)]
+                    Atb[h] = [0.0] * 6
+                # x(δω, δt) ≈ x + δω × r + δt  → ヤコビアン J = [-[r]×, I]
+                J = [[0.0, r[2], -r[1], 1.0, 0.0, 0.0], [-r[2], 0.0, r[0], 0.0, 1.0, 0.0], [r[1], -r[0], 0.0, 0.0, 0.0, 1.0]]
+                for a in range(3):
+                    Ja = J[a]
+                    for u in range(6):
+                        if Ja[u]:
+                            Atb[h][u] -= sgn * Ja[u] * e[a]
+                            for v in range(6):
+                                AtA[h][u][v] += Ja[u] * Ja[v]
+                cnt[h] += 1
+        for h in range(nh):
+            if not cnt[h]:
+                continue
+            w, t = corr[h]
+            reg = [lam * cnt[h] * r0 * r0] * 3 + [lam * cnt[h]] * 3
+            cur = w + t
+            A = [[AtA[h][u][v] + (reg[u] if u == v else 0.0) for v in range(6)] for u in range(6)]
+            d = _solve_small(A, [Atb[h][u] - reg[u] * cur[u] for u in range(6)])
+            corr[h] = ([w[a] + damp * d[a] for a in range(3)], [t[a] + damp * d[3 + a] for a in range(3)])
+    return corr
+
+
+def build_blend_animations(motion_paths, bones, Wg, helpers, hgid, S4, S4i, prefix='', tol_pos=0.5, tol_rot=0.5,
+                           join_pairs=None, join_lam=0.02, join_r0=128.0, join_every=3, join_sweeps=6, join_stats=None):
     """補助の骨（重みが混ざった面のまとまり）のアニメ。各フレームで、元の骨の動き D_b（モデル座標）を
     重みどおりに混ぜた変換 M = Σ w_b D_b を作り、その線形部分に最も近い回転 R と、ピボット c の移動 M·c - c をキーにする。
     補助の骨は親なし・静止回転0のグループ。戻り: {アニメ名: (animators, 最終時刻)}"""
@@ -219,6 +307,9 @@ def build_blend_animations(motion_paths, bones, Wg, helpers, hgid, S4, S4i, pref
         frames = list(range(0, int(math.ceil(last)) + 1))
         rots = {k: [] for k in range(len(helpers))}
         poss = {k: [] for k in range(len(helpers))}
+        nb = len(bones)
+        fixed = sorted({k for ka, _a, kb, _b in (join_pairs or []) for k in (ka, kb) if k < nb})
+        Dfix_frames = []
         for fr in frames:
             T = [_lerp_at(chT[b][0], chT[b][1], fr) if b in chT else list(bones[b]['t']) for b in range(len(bones))]
             Q = [_nlerp_at(chQ[b][0], chQ[b][1], fr) if b in chQ else list(bones[b]['q']) for b in range(len(bones))]
@@ -242,6 +333,43 @@ def build_blend_animations(motion_paths, bones, Wg, helpers, hgid, S4, S4i, pref
                 mc = [sum(M[r][k2] * c0[k2] for k2 in range(3)) + M[r][3] for r in range(3)]
                 rots[k].append(_blend_rotation([(wgt, [row[:3] for row in D[b][:3]]) for b, wgt in hp['wts'].items()]))
                 poss[k].append([mc[a] - c0[a] for a in range(3)])
+            if fixed:
+                Dfix_frames.append({b: D[b] if b in D else mul(mul(S4, mul(world(b), Winv[b])), S4i) for b in fixed})
+        if join_pairs and helpers:
+            # 結合処理: join_every フレームごとに解き（前の解から始める）、間は補正を線形補間して全フレームに掛ける
+            solve_at = list(range(0, len(frames), join_every))
+            if solve_at[-1] != len(frames) - 1:
+                solve_at.append(len(frames) - 1)
+            sols, corr = {}, None
+            for fi in solve_at:
+                H = [(rots[k][fi], helpers[k]['pivot_bb'], [poss[k][fi][a] + helpers[k]['pivot_bb'][a] for a in range(3)])
+                     for k in range(len(helpers))]
+                Dfx = Dfix_frames[fi] if fixed else {}
+                corr = join_helpers(join_pairs, H, Dfx, nb, join_lam, join_r0, corr,
+                                    sweeps=join_sweeps if sols else 3 * join_sweeps)
+                sols[fi] = corr
+                if join_stats is not None:  # 継ぎ目の開き（寄せる前・後、モデル単位）
+                    zero = [([0.0] * 3, [0.0] * 3)] * len(helpers)
+                    for cc, lst in ((zero, join_stats.setdefault('before', [])), (corr, join_stats.setdefault('after', []))):
+                        Rc = [_rodrigues(wv) for wv, _ in cc]
+
+                        def at(key, p):
+                            if key < nb:
+                                return _apply4(Dfx[key], p)
+                            R, c0, m = H[key - nb]
+                            x = [sum(R[r][j] * (p[j] - c0[j]) for j in range(3)) for r in range(3)]
+                            Rk, t = Rc[key - nb], cc[key - nb][1]
+                            return [sum(Rk[r][j] * x[j] for j in range(3)) + m[r] + t[r] for r in range(3)]
+                        lst.extend(math.dist(at(ka, pa), at(kb, pb)) for ka, pa, kb, pb in join_pairs)
+            for i0, i1 in zip(solve_at, solve_at[1:] + [solve_at[-1]]):
+                for fi in range(i0, (i1 if i1 > i0 else i0 + 1)):
+                    u = (fi - i0) / (i1 - i0) if i1 > i0 else 0.0
+                    for k in range(len(helpers)):
+                        (w0, t0), (w1, t1) = sols[i0][k], sols[i1][k]
+                        w = [w0[a] + (w1[a] - w0[a]) * u for a in range(3)]
+                        t = [t0[a] + (t1[a] - t0[a]) * u for a in range(3)]
+                        rots[k][fi] = _m3mul(_rodrigues(w), rots[k][fi])  # m（ピボットの行き先）まわりの回転
+                        poss[k][fi] = [poss[k][fi][a] + t[a] for a in range(3)]
         animators, max_t = {}, 0.0
         for k, hp in enumerate(helpers):
             eu = _continuous_euler(rots[k])
@@ -476,7 +604,7 @@ def _mix(ws, cs):
     return out
 
 
-def subdivide_for_skin(polys, Ds, cell, budget, match, max_depth=6, min_edge=1.0):
+def subdivide_for_skin(polys, Ds, cell, budget, match, max_depth=6, min_piece=4.0):
     """元のスキニング（頂点ごとの重み）は面の中で伸び縮みするが、板やブロックは1つの骨に乗ると硬い。
     1つの面の中で重みが大きく変わると、面全体を1つの動きにしたとき継ぎ目が大きく割れる（実測で最大十数ブロック）。
     そこで match に合う面を、「面の重心の重みで動かしたときの、頂点ごとの元の変形からのずれ」の見積もりが
@@ -492,59 +620,171 @@ def subdivide_for_skin(polys, Ds, cell, budget, match, max_depth=6, min_edge=1.0
         return cache[k]
 
     out = []
+    # 元の面の辺が、ほかの面と共有されているか（共有されていない辺 = 服の縁などの外周。広げるとはみ出す）
+    ekey = lambda a, b: tuple(sorted((tuple(round(c / cell * 64) for c in a), tuple(round(c / cell * 64) for c in b))))
+    ecount = {}
+    for q in polys:
+        if match(q) and 'vw' in q:
+            n = len(q['pos'])
+            for i in range(n):
+                k = ekey(q['pos'][i], q['pos'][(i + 1) % n])
+                ecount[k] = ecount.get(k, 0) + 1
 
-    def emit(src, P, UV, VW, depth):
+    def emit(src, P, UV, VW, depth, tags):
         wc = _mix(VW, [1 / len(VW)] * len(VW))
-        out.append(dict(src, pos=P, uv=UV, vw=VW, wts=wc, bone=max(wc, key=wc.get), split=depth > 0))
+        # grow[i]: 辺 i（P[i]→P[i+1]）を広げてよいか。元の面の内側の辺（切って生まれた辺・対角線）か、隣と共有の辺
+        grow = [t is None or ecount.get(t, 0) >= 2 for t in tags]
+        out.append(dict(src, pos=P, uv=UV, vw=VW, wts=wc, bone=max(wc, key=wc.get), split=depth > 0, grow=grow))
 
-    def split(src, P, UV, VW, depth):
+    def split(src, P, UV, VW, depth, tags):
         wc = _mix(VW, [1 / 3] * 3)
         dom = max(wc, key=wc.get)
         err = 0.0
         for p, vw in zip(P, VW):
             err = max(err, sum(abs(vw.get(b, 0.0) - wc.get(b, 0.0)) * mrel(p, b, dom) for b in set(vw) | set(wc) if b != dom))
         edge = max(math.dist(P[i], P[(i + 1) % 3]) for i in range(3)) / cell
-        if err <= budget or edge <= min_edge or depth >= max_depth:
-            emit(src, P, UV, VW, depth)
+        # 切った子の最長辺（= edge/2）が min_piece ブロック未満になるなら切らない。小さすぎる板は絵が 1〜2 ピクセルになり、
+        # 色がモザイク状に崩れる（胸・袖など、もともと面の細かい所が壊れた）。切るのは大きな面（スカート）だけ
+        if err <= budget or edge / 2 < min_piece or depth >= max_depth:
+            emit(src, P, UV, VW, depth, tags)
             return
         M = [tuple((P[i][a] + P[(i + 1) % 3][a]) / 2 for a in range(3)) for i in range(3)]
         MU = [tuple((UV[i][a] + UV[(i + 1) % 3][a]) / 2 for a in range(2)) for i in range(3)] if UV else None
         MW = [_mix([VW[i], VW[(i + 1) % 3]], (0.5, 0.5)) for i in range(3)]
-        for a, b, c in ((0, 'm0', 'm2'), ('m0', 1, 'm1'), ('m2', 'm1', 2), ('m0', 'm1', 'm2')):
-            idx = [a, b, c]
+        T0, T1, T2 = tags
+        # 子の三角形と、その 3 辺が親のどの辺の上にあるか（None = 親の内側に新しくできた辺）
+        for idx, ctags in (((0, 'm0', 'm2'), (T0, None, T2)), (('m0', 1, 'm1'), (T0, T1, None)),
+                           (('m2', 'm1', 2), (None, T1, T2)), (('m0', 'm1', 'm2'), (None, None, None))):
             pick = lambda arr, marr: [arr[i] if isinstance(i, int) else marr[int(i[1])] for i in idx]
-            split(src, pick(P, M), pick(UV, MU) if UV else None, pick(VW, MW), depth + 1)
+            split(src, pick(P, M), pick(UV, MU) if UV else None, pick(VW, MW), depth + 1, ctags)
 
     for q in polys:
         if not match(q) or 'vw' not in q:
             out.append(q)
             continue
         P, UV, VW = q['pos'], q['uv'], q['vw']
-        for k in range(1, len(P) - 1):  # 四角形以上は扇形に三角形へ
+        n = len(P)
+        for k in range(1, n - 1):  # 四角形以上は扇形に三角形へ（対角線は内側の辺）
             tri = [0, k, k + 1]
-            split(q, [P[i] for i in tri], [UV[i] for i in tri] if UV else None, [VW[i] for i in tri], 0)
+            tags = (ekey(P[0], P[1]) if k == 1 else None, ekey(P[k], P[k + 1]),
+                    ekey(P[k + 1], P[0]) if k + 1 == n - 1 else None)
+            split(q, [P[i] for i in tri], [UV[i] for i in tri] if UV else None, [VW[i] for i in tri], 0, tags)
     return out
 
 
-def expand_triangle(P, UV, margin, max_scale=2.0):
-    """三角形を内心まわりに広げ、各辺を margin（P と同じ単位）だけ外へ出す。UV も同じ比率で外へ延ばす（絵が続く）。
+def _pt_tri_dist2(p, a, b, c):
+    """点 p と三角形 abc の最短距離の 2 乗（Ericson, Real-Time Collision Detection 5.1.5）。"""
+    ab, ac, ap = sub(b, a), sub(c, a), sub(p, a)
+    d1, d2 = dot(ab, ap), dot(ac, ap)
+    if d1 <= 0 and d2 <= 0:
+        return dot(ap, ap)
+    bp = sub(p, b)
+    d3, d4 = dot(ab, bp), dot(ac, bp)
+    if d3 >= 0 and d4 <= d3:
+        return dot(bp, bp)
+    vc = d1 * d4 - d3 * d2
+    if vc <= 0 and d1 >= 0 and d3 <= 0:
+        v = d1 / (d1 - d3)
+        q = sub(p, add(a, mul(ab, v)))
+        return dot(q, q)
+    cp = sub(p, c)
+    d5, d6 = dot(ab, cp), dot(ac, cp)
+    if d6 >= 0 and d5 <= d6:
+        return dot(cp, cp)
+    vb = d5 * d2 - d1 * d6
+    if vb <= 0 and d2 >= 0 and d6 <= 0:
+        w = d2 / (d2 - d6)
+        q = sub(p, add(a, mul(ac, w)))
+        return dot(q, q)
+    va = d3 * d6 - d5 * d4
+    if va <= 0 and (d4 - d3) >= 0 and (d5 - d6) >= 0:
+        w = (d4 - d3) / ((d4 - d3) + (d5 - d6))
+        q = sub(p, add(b, mul(sub(c, b), w)))
+        return dot(q, q)
+    den = 1.0 / (va + vb + vc)
+    v, w = vb * den, vc * den
+    q = sub(p, add(a, add(mul(ab, v), mul(ac, w))))
+    return dot(q, q)
+
+
+def cells_to_bones(cells, polys, to_vox, bucket=8):
+    """ボクセルのセル -> 骨（key）の割り当て。セルの中心に一番近い元の三角形の key を取る。
+    戻り: {key: {セル: ブロック}}。polys の各面は key を持つこと。to_vox はゲーム座標 -> 連続のボクセル座標。"""
+    tris = []
+    for q in polys:
+        P = [list(to_vox(p)) for p in q['pos']]
+        for k in range(1, len(P) - 1):
+            tris.append((P[0], P[k], P[k + 1], q['key']))
+    grid = {}
+    for ti, (a, b, c, _k) in enumerate(tris):
+        lo = [math.floor((min(a[i], b[i], c[i]) - 1.5) / bucket) for i in range(3)]
+        hi = [math.floor((max(a[i], b[i], c[i]) + 1.5) / bucket) for i in range(3)]
+        for x in range(lo[0], hi[0] + 1):
+            for y in range(lo[1], hi[1] + 1):
+                for z in range(lo[2], hi[2] + 1):
+                    grid.setdefault((x, y, z), []).append(ti)
+    out = {}
+    for cc, blk in cells.items():
+        p = [cc[i] + 0.5 for i in range(3)]
+        cand = grid.get(tuple(math.floor(p[i] / bucket) for i in range(3)))
+        if not cand:  # 近くの三角形が無い（ほぼ起きない）: 全部から探す
+            cand = range(len(tris))
+        best = min(cand, key=lambda ti: _pt_tri_dist2(p, *tris[ti][:3]))
+        out.setdefault(tris[best][3], {})[cc] = blk
+    return out
+
+
+def expand_triangle(P, UV, margins, cap):
+    """三角形の辺ごとに外へ margins[i]（辺 i = P[i]→P[i+1]、P と同じ単位）だけ出す。角の移動は cap 以下に抑える
+    （細長い三角形で角が大きく飛び出し、トゲになるのを防ぐ。超えるときは全辺の出し幅を同じ比率で縮める）。
+    新しい角は元の三角形の平面上（重心座標の一次結合）に置き、UV も同じ重心座標で延ばす（絵がそのまま続く）。
     切った小片どうしは別の補助の骨に乗るので、動くと細い隙間が開く。少し重ねてその隙間を隠すために使う。"""
-    a, b, c = (math.dist(P[1], P[2]), math.dist(P[2], P[0]), math.dist(P[0], P[1]))
-    per = a + b + c
-    if per <= 1e-12:
+    if not any(m > 0 for m in margins):
         return P, UV
-    inc = [(a * P[0][k] + b * P[1][k] + c * P[2][k]) / per for k in range(3)]
-    s = (per / 2)
-    area = math.sqrt(max(0.0, s * (s - a) * (s - b) * (s - c)))
-    r = area / s
-    if r <= 1e-12:
+    ex = [P[1][k] - P[0][k] for k in range(3)]
+    ln = math.sqrt(sum(c * c for c in ex))
+    nrm = cross(ex, [P[2][k] - P[0][k] for k in range(3)])
+    if ln <= 1e-12 or dot(nrm, nrm) <= 1e-24:
         return P, UV
-    f = min(max_scale, (r + margin) / r)
-    P2 = [tuple(inc[k] + (p[k] - inc[k]) * f for k in range(3)) for p in P]
-    if not UV:
-        return P2, UV
-    uinc = [(a * UV[0][k] + b * UV[1][k] + c * UV[2][k]) / per for k in range(2)]
-    return P2, [tuple(uinc[k] + (u[k] - uinc[k]) * f for k in range(2)) for u in UV]
+    ex = [c / ln for c in ex]
+    ey = norm(cross(nrm, ex))
+    Q = [(dot(sub(p, P[0]), ex), dot(sub(p, P[0]), ey)) for p in P]  # 2D（反時計回り）
+
+    def corners(ms):
+        lines = []
+        for i in range(3):
+            a, b = Q[i], Q[(i + 1) % 3]
+            d = (b[0] - a[0], b[1] - a[1])
+            L = math.hypot(*d)
+            n = (d[1] / L, -d[0] / L)  # 反時計回りの三角形の外向き法線
+            lines.append((n, n[0] * a[0] + n[1] * a[1] + ms[i]))
+        out = []
+        for j in range(3):  # 角 j = 辺 j-1 と辺 j の交点
+            (n1, c1), (n2, c2) = lines[j - 1], lines[j]
+            det = n1[0] * n2[1] - n1[1] * n2[0]
+            if abs(det) < 1e-12:
+                return None
+            out.append(((c1 * n2[1] - c2 * n1[1]) / det, (n1[0] * c2 - n2[0] * c1) / det))
+        return out
+    C = corners(margins)
+    if C is None:
+        return P, UV
+    move = max(math.dist(C[j], Q[j]) for j in range(3))
+    if move > cap:  # 出し幅に比例して角が動くので、同じ比率で縮める
+        C = corners([m * cap / move for m in margins])
+        if C is None:
+            return P, UV
+
+    def bary(x):
+        (x0, y0), (x1, y1), (x2, y2) = Q
+        d = (y1 - y2) * (x0 - x2) + (x2 - x1) * (y0 - y2)
+        w0 = ((y1 - y2) * (x[0] - x2) + (x2 - x1) * (x[1] - y2)) / d
+        w1 = ((y2 - y0) * (x[0] - x2) + (x0 - x2) * (x[1] - y2)) / d
+        return (w0, w1, 1 - w0 - w1)
+    W = [bary(c) for c in C]
+    P2 = [tuple(sum(w[i] * P[i][k] for i in range(3)) for k in range(3)) for w in W]
+    UV2 = [tuple(sum(w[i] * UV[i][k] for i in range(3)) for k in range(2)) for w in W] if UV else UV
+    return P2, UV2
 
 
 def seam_report(polys, Ds, cell, nb, helpers):
@@ -707,7 +947,8 @@ def make_plate(poly, textures, palette_fn, unit, thickness, texel, coverage=0.5)
 def build(gmo_path, outdir, name='model', size=128, plates='^AL_body', exclude='TR_pattern', gain=1.3, sat=1.3,
           thickness=0.5, texel=1.0, unit=16, keep_front=False, dump_expected=None, plate_tex=None, quantize=True,
           coverage=0.5, fine_parts=None, fine_texel=None, rig=False, motion_paths=(), blend=True, blend_step=0.1,
-          blend_parts='^AL_body', blend_budget=2.0, seams=False, blend_tol=0.25, blend_margin=0.5):
+          blend_parts='^AL_body', blend_budget=2.0, seams=False, blend_tol=0.25, blend_margin=0.5, blend_min_piece=4.0,
+          join_lam=0.02):
     """rig=True: 元の骨をグループにして、各キューブを骨に固定する。motion_paths でアニメも付ける。
     blend=True: 重みが2本以上の骨に混ざる面（スカートなど）は、重みを blend_step 刻みに丸めた「混ぜ方」ごとの
     補助の骨（blend_N）にまとめ、元の変形に近い動きをさせる（1本の骨に固定すると継ぎ目が割れるため）。"""
@@ -718,13 +959,14 @@ def build(gmo_path, outdir, name='model', size=128, plates='^AL_body', exclude='
     allpts = [p for q in polys for p in q['pos']]
     mn, cell, dims = obj2schem.bbox_frame(allpts, size)
     w, h, l = dims
-    n_split, Ds, seam_stats = 0, None, None
+    n_split, Ds, seam_stats, join_report = 0, None, None, None
     if rig and blend and motion_paths and blend_budget and blend_budget > 0:
         # 面の中で重みが大きく変わる面（伸び縮みする所）を細かく切ってから、板・ブロックにする
         bre = re.compile(blend_parts) if blend_parts else None
         Ds = sample_deforms(motion_paths, bones)
         before = len(polys)
-        polys = subdivide_for_skin(polys, Ds, cell, blend_budget, lambda q: bre is None or bool(bre.search(q['part'])))
+        polys = subdivide_for_skin(polys, Ds, cell, blend_budget, lambda q: bre is None or bool(bre.search(q['part'])),
+                                   min_piece=blend_min_piece)
         n_split = len(polys) - before
         print(f'skin subdivision: {before} -> {len(polys)} faces (budget {blend_budget} blocks, {len(Ds)} sampled poses)')
     palette = obj2schem.build_palette()
@@ -803,18 +1045,16 @@ def build(gmo_path, outdir, name='model', size=128, plates='^AL_body', exclude='
                 out[c if keep_front else (w - 1 - c[0], c[1], l - 1 - c[2])] = blk
         return out
 
-    # rig のときは骨ごとにボクセル化（1つのキューブが2本の骨にまたがらないように）。重なったセルは先の骨が取る
-    by_bone = {}
-    for q in polys:
-        if not is_plate(q):
-            by_bone.setdefault(q['key'] if rig else None, []).append(q)
-    solids, claimed = {}, set()
-    for b in sorted(by_bone, key=lambda x: -1 if x is None else x):
-        sol = {c: blk for c, blk in voxel_solid(by_bone[b]).items() if c not in claimed}
-        claimed |= set(sol)
-        if sol:
-            solids[b] = sol
-    solid = {c: blk for sol in solids.values() for c, blk in sol.items()}
+    # ブロックは骨に関係なく一度にボクセル化する（静止姿勢の形と色を、骨なしの最終形と完全に同じにする）。
+    # rig のときは、各セルを「一番近い元の三角形」の骨に割り当てる（1つのキューブが2本の骨にまたがらないよう、骨ごとに統合する）
+    nonplate = [q for q in polys if not is_plate(q)]
+    allsol = voxel_solid(nonplate)
+    claimed = set(allsol)
+    if rig:
+        solids = cells_to_bones(allsol, nonplate, to_vox)
+    else:
+        solids = {None: allsol} if allsol else {}
+    solid = allsol
 
     # --- 領域（アトラスに詰める画素の塊）---
     regions, pixels, uniq = [], [], {}
@@ -875,7 +1115,8 @@ def build(gmo_path, outdir, name='model', size=128, plates='^AL_body', exclude='
         src = q
         if q.get('split') and blend_margin > 0 and len(q['pos']) == 3:
             # 切った小片は少し広げて隣と重ねる（動いたときの細い隙間を隠す）
-            P2, UV2 = expand_triangle(q['pos'], q['uv'], blend_margin * cell)
+            P2, UV2 = expand_triangle(q['pos'], q['uv'], [blend_margin * cell if g else 0.0 for g in q['grow']],
+                                      2 * blend_margin * cell)
             src = dict(q, pos=P2, uv=UV2)
         bpoly = dict(src, pos=[to_bb(p) for p in src['pos']])
         tx = fine_texel if (fine_re and fine_texel and fine_re.search(q['part'])) else texel  # 顔など一部だけ細かい絵
@@ -899,6 +1140,7 @@ def build(gmo_path, outdir, name='model', size=128, plates='^AL_body', exclude='
             expected_plates.append(dict(name=f'p{idx}', C=pl['C'], X=pl['X'], N=pl['N'], Z=pl['Z'], w=pl['w'], h=pl['h'],
                                         t=pl['t'], pw=pl['pw'], ph=pl['ph'], pix=[list(p) if p else [0, 0, 0, 0] for p in pl['pix']]))
     n_plate = len(cubes) - n_vox
+
 
     # --- アトラス ---
     size_px, pos = voxel2bbmodel.pack(regions)
@@ -993,15 +1235,41 @@ def build(gmo_path, outdir, name='model', size=128, plates='^AL_body', exclude='
             S4 = [[A[0], 0, 0, c0[0]], [0, A[1], 0, c0[1]], [0, 0, A[2], c0[2]], [0, 0, 0, 1]]
             S4i = [[1 / A[0], 0, 0, -c0[0] / A[0]], [0, 1 / A[1], 0, -c0[1] / A[1]], [0, 0, 1 / A[2], -c0[2] / A[2]], [0, 0, 0, 1]]
             hgid = {k: gid[nb + k] for k in range(len(helpers))}
+            # 結合処理の継ぎ目: 静止位置が同じで頂点の重みも同じ（元のメッシュでは同じ頂点）なのに、別の骨に乗っている点の組
+            join_pairs, join_stats = None, None
+            if join_lam and join_lam > 0:
+                jre = re.compile(blend_parts) if blend_parts else None
+                jp = [q for q in polys if 'vw' in q and (jre is None or jre.search(q['part']))]
+                share = {}
+                for i, q in enumerate(jp):
+                    for k, p in enumerate(q['pos']):
+                        share.setdefault(tuple(round(c / cell * 64) for c in p), []).append((i, k))
+                same_w = lambda x, y: all(abs(x.get(b, 0.0) - y.get(b, 0.0)) < 1e-3 for b in set(x) | set(y))
+                join_pairs = []
+                for v in share.values():
+                    # 注意: l は寸法（w, h, l = dims）。ループ変数に使うと to_bb の向きが壊れる（実際に踏んだ）
+                    for (i, k), (j, kj) in zip(v, v[1:]):
+                        a_, b_ = jp[i]['key'], jp[j]['key']
+                        if a_ != b_ and (a_ >= nb or b_ >= nb) and same_w(jp[i]['vw'][k], jp[j]['vw'][kj]):
+                            join_pairs.append((a_, to_bb(jp[i]['pos'][k]), b_, to_bb(jp[j]['pos'][kj])))
+                join_stats = {}
             extra = build_blend_animations(motion_paths, bones, Wg, helpers, hgid, S4, S4i, prefix,
-                                           tol_pos=blend_tol * unit, tol_rot=max(0.5, 4 * blend_tol))
+                                           tol_pos=blend_tol * unit, tol_rot=max(0.5, 4 * blend_tol),
+                                           join_pairs=join_pairs, join_lam=join_lam, join_r0=8 * unit, join_stats=join_stats)
+            if join_stats:
+                def _st(a):
+                    a = sorted(x / unit for x in a)
+                    pc = lambda p: round(a[min(len(a) - 1, int(len(a) * p))], 3)
+                    return dict(max=round(a[-1], 3), p99=pc(0.99), p95=pc(0.95), p50=pc(0.5))
+                join_report = dict(pairs=len(join_pairs), before=_st(join_stats['before']), after=_st(join_stats['after']))
+                print('join (seam gap in blocks, solved frames):', join_report)
             for an in anims:
                 if an['name'] in extra:
                     animators, mt = extra[an['name']]
                     an['animators'].update(animators)
                     an['length'] = round(max(an['length'], mt), 5)
         rig_info = dict(mn=mn, cell=cell, dims=dims, unit=unit, keep_front=keep_front, ox=ox, oz=oz,
-                        split_faces=n_split, seams=seam_stats,
+                        split_faces=n_split, seams=seam_stats, join=join_report,
                         cube_bone={c['name']: gname[c['bone']] for c in cubes},
                         blend_weights={hp['name']: {bones[b]['name']: wv for b, wv in hp['wts'].items()} for hp in helpers},
                         plate_weights={c['name']: {bones[b]['name']: wv for b, wv in c['wts'].items()}
@@ -1110,7 +1378,12 @@ if __name__ == '__main__':
                     help='補助の骨のキーを間引く許容誤差（ブロック）。回転は 4 倍の度数（最低 0.5°）。大きいほど軽い')
     ap.add_argument('--blend-margin', type=float, default=0.5,
                     help='切った小片の板を、各辺でこのブロック数だけ外へ広げて隣と重ねる（動いたときの細い隙間を隠す。0=広げない）')
+    ap.add_argument('--blend-min-piece', type=float, default=4.0,
+                    help='面を切るときの小片の最小の大きさ（ブロック）。これより小さくは切らない（小さい板は絵が崩れる）')
+    ap.add_argument('--join', type=float, default=0.02,
+                    help='結合処理の強さ λ（小さいほど継ぎ目を強く寄せ、元の動きから離れる。0 = 結合しない）')
     a = ap.parse_args()
     build(a.gmo, a.outdir, a.name, a.size, a.plates, a.exclude, a.gain, a.sat, a.thickness, a.texel, a.unit, a.keep_front,
           a.dump_expected, a.plate_tex, not a.no_quantize, a.coverage, a.fine_parts, a.fine_texel, a.rig, a.motion,
-          not a.no_blend, a.blend_step, a.blend_parts, a.blend_budget, a.seam_report, a.blend_tol, a.blend_margin)
+          not a.no_blend, a.blend_step, a.blend_parts, a.blend_budget, a.seam_report, a.blend_tol, a.blend_margin,
+          a.blend_min_piece, a.join)
