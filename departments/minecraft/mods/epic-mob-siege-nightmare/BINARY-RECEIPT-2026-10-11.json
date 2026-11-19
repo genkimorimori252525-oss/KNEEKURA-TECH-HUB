@@ -1,0 +1,60 @@
+{
+  "schema": "kneekura.minecraft.binary-anchor.v1",
+  "captured_date": "2026-10-11",
+  "target": "Epic Mob Siege: Nightmare",
+  "target_track": "ANCHOR",
+  "minecraft": "1.20.1",
+  "loader": "Forge",
+  "filename": "NESM-1.20.1-1.0.1.jar",
+  "acquisition": "user-uploaded exact binary",
+  "bytes": 62318,
+  "sha256": "7b931b42b42e6f9b349d3eb4f7ad59904d3cfb82afbe8cbfee12448810b31de9",
+  "zip_entries": 49,
+  "class_count": 39,
+  "bytecode_major": 61,
+  "package_class_counts": {
+    "com.esm.nightmare": 15,
+    "com.esm.nightmare.Base": 6,
+    "com.esm.nightmare.MobBehavs": 17,
+    "com.esm.nightmare.esmsounds": 1
+  },
+  "jar_manifest_version": "1.20.1-1.0.1",
+  "mods_toml_version": "1.0.0",
+  "mod_id": "nightmareesm",
+  "loader_version_range": "[47,)",
+  "license": "All Rights Reserved",
+  "analysis": {
+    "jar_list": "DONE",
+    "class_bytes_disassembled": "39_OF_39_JAVAP",
+    "selected_constructor_control_flow": "EVIDENCE_BACKED",
+    "source_to_binary_equivalence": "NOT_ESTABLISHED",
+    "runtime": "NOT_RUN",
+    "performance": "NOT_RUN",
+    "full_mappings": "PENDING",
+    "all_bytecode_callers_exhaustive": "PARTIAL"
+  },
+  "notable_symbols": [
+    "NightmareMain.LivingMobTick",
+    "NightmareMain.onEntitySpawn",
+    "MobBehavs.MobDamageBlock",
+    "MobBehavs.MobPlaceBlock",
+    "MobBehavs.MobBuildUp",
+    "MobBehavs.MobBuildBridge",
+    "MobBehavs.MobDig",
+    "MobBehavs.MobDigUp",
+    "MobBehavs.MobDigDown",
+    "MobBehavs.CreeperBreachWalls",
+    "Clocker.IsAtTimeInterval"
+  ],
+  "verified_facts": [
+    "MobDamageBlock directly calls Level destroyBlock(BlockPos,true)",
+    "MobPlaceBlock directly calls Level setBlockAndUpdate",
+    "Configured dig/build intervals source defaults are both 5 ticks",
+    "Pickaxe eligibility boolean is assigned but never consumed by LivingMobTick condition",
+    "AllowZombieBuilding config field has no consumers in analyzed binary call inventory",
+    "Dig table switch cases fall through 0 to 1 to 2",
+    "JAR contains no dedicated saved terrain undo journal class"
+  ],
+  "other_published_evidence": "https://www.curseforge.com/minecraft/mc-mods/epic-mob-siege-nightmare/files/7273546",
+  "code_or_assets_redistributed": false
+}

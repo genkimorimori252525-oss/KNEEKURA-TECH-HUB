@@ -1,0 +1,905 @@
+package org.kneekura.bedrockwither.gametest;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.gametest.framework.GameTest;
+import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.WitherSkeleton;
+import net.minecraft.world.entity.projectile.Arrow;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.gametest.GameTestHolder;
+import net.minecraftforge.gametest.PrefixGameTestTemplate;
+import org.kneekura.bedrockwither.BedrockWitherMod;
+import org.kneekura.bedrockwither.entity.BedrockWitherEntity;
+import org.kneekura.bedrockwither.entity.BedrockWitherState;
+import org.kneekura.bedrockwither.entity.projectile.BedrockWitherSkullEntity;
+import org.kneekura.bedrockwither.registry.ModEntities;
+
+import java.util.UUID;
+
+@GameTestHolder(BedrockWitherMod.MOD_ID)
+@PrefixGameTestTemplate(false)
+public final class BedrockWitherGameTests {
+    private BedrockWitherGameTests() {
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_officialentitysurface")
+    public static void officialEntitySurface(GameTestHelper helper) {
+        BedrockWitherEntity wither = createWither(helper);
+
+        helper.runAfterDelay(1, () -> {
+            assertClose(helper, 1.0F, wither.getBbWidth(), "Bedrock collision width");
+            assertClose(helper, 3.0F, wither.getBbHeight(), "Bedrock collision height");
+            assertClose(helper, 70.0D, wither.getAttributeValue(Attributes.FOLLOW_RANGE), "Bedrock follow range");
+            assertClose(helper, 0.6D, wither.getAttributeValue(Attributes.MOVEMENT_SPEED), "Bedrock native runtime movement speed");
+            assertClose(helper, 0.6D, wither.getAttributeValue(Attributes.FLYING_SPEED), "Bedrock native runtime flying speed");
+
+            if (BedrockWitherEntity.maxHealthForDifficulty(net.minecraft.world.Difficulty.EASY) != 300.0D
+                    || BedrockWitherEntity.maxHealthForDifficulty(net.minecraft.world.Difficulty.NORMAL) != 450.0D
+                    || BedrockWitherEntity.maxHealthForDifficulty(net.minecraft.world.Difficulty.HARD) != 600.0D) {
+                helper.fail("Bedrock difficulty health mapping is not 300/450/600");
+                return;
+            }
+
+            if (wither.getMobType() != net.minecraft.world.entity.MobType.UNDEAD) {
+                helper.fail("Bedrock type_family should map Wither to MobType.UNDEAD");
+                return;
+            }
+            if (wither.getBedrockState() != BedrockWitherState.SPAWN_SEQUENCE) {
+                helper.fail("Expected initial reconstruction state SPAWN_SEQUENCE");
+                return;
+            }
+            if (wither.runtimeState().spawningFrames() <= 0
+                    || wither.runtimeState().spawningFrames()
+                    > org.kneekura.bedrockwither.entity.BedrockWitherSpawnController.CURRENT_SPAWN_DURATION_TICKS) {
+                helper.fail("Modern Bedrock spawn countdown was not active");
+                return;
+            }
+            if (wither.runtimeState().headCount() != 3) {
+                helper.fail("Expected three BDS-style head runtime slots");
+                return;
+            }
+            helper.succeed();
+        });
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_spawnsequenceusesmodern220tickcontract")
+    public static void spawnSequenceUsesModern220TickContract(GameTestHelper helper) {
+        BedrockWitherEntity wither = createWither(helper);
+
+        if (wither.runtimeState().spawningFrames()
+                != org.kneekura.bedrockwither.entity.BedrockWitherSpawnController.CURRENT_SPAWN_DURATION_TICKS) {
+            helper.fail("New Bedrock Wither did not initialize a 220-tick spawn countdown");
+            return;
+        }
+
+        net.minecraft.world.entity.animal.Cow attacker = EntityType.COW.create(helper.getLevel());
+        if (attacker == null) {
+            helper.fail("Failed to create spawn-sequence attacker");
+            return;
+        }
+        BlockPos attackerPos = helper.absolutePos(new BlockPos(8, 1, 0));
+        attacker.moveTo(attackerPos.getX() + 0.5D, attackerPos.getY(), attackerPos.getZ() + 0.5D);
+        helper.getLevel().addFreshEntity(attacker);
+
+        float before = wither.getHealth();
+        boolean acceptedDuringSpawn = wither.hurt(
+                helper.getLevel().damageSources().mobAttack(attacker),
+                4.0F
+        );
+        if (acceptedDuringSpawn || Math.abs(wither.getHealth() - before) > 0.0001F) {
+            helper.fail("Spawn sequence did not reject ordinary damage");
+            return;
+        }
+
+        for (int tick = 0;
+             tick < org.kneekura.bedrockwither.entity.BedrockWitherSpawnController.CURRENT_SPAWN_DURATION_TICKS - 1;
+             tick++) {
+            wither.spawnController().tick();
+        }
+
+        if (wither.runtimeState().spawningFrames() != 1
+                || wither.getBedrockState() != BedrockWitherState.SPAWN_SEQUENCE) {
+            helper.fail("Spawn sequence ended before the 220th controller tick");
+            return;
+        }
+
+        wither.spawnController().tick();
+
+        if (wither.runtimeState().spawningFrames() != 0
+                || wither.getBedrockState() != BedrockWitherState.PHASE1_REPOSITION) {
+            helper.fail("Spawn sequence did not complete exactly on the 220th controller tick");
+            return;
+        }
+
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_undeaddamageisrejected")
+    public static void undeadDamageIsRejected(GameTestHelper helper) {
+        BedrockWitherEntity wither = createCombatReadyWither(helper);
+        WitherSkeleton attacker = EntityType.WITHER_SKELETON.create(helper.getLevel());
+        if (attacker == null) {
+            helper.fail("Failed to create Wither Skeleton attacker");
+            return;
+        }
+
+        BlockPos attackerPos = helper.absolutePos(new BlockPos(0, 1, 0));
+        attacker.moveTo(attackerPos.getX() + 0.5D, attackerPos.getY(), attackerPos.getZ() + 0.5D);
+        helper.getLevel().addFreshEntity(attacker);
+
+        float before = wither.getHealth();
+        boolean accepted = wither.hurt(helper.getLevel().damageSources().mobAttack(attacker), 10.0F);
+
+        if (accepted) {
+            helper.fail("Bedrock damage_sensor contract should reject undead-source damage");
+            return;
+        }
+        if (Math.abs(wither.getHealth() - before) > 0.0001F) {
+            helper.fail("Undead-source damage changed Wither health");
+            return;
+        }
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_threealternativeheadtargetsareindependent")
+    public static void threeAlternativeHeadTargetsAreIndependent(GameTestHelper helper) {
+        BedrockWitherEntity wither = createWither(helper);
+        UUID first = UUID.randomUUID();
+        UUID second = UUID.randomUUID();
+        UUID third = UUID.randomUUID();
+
+        wither.setAlternativeHeadTarget(0, first);
+        wither.setAlternativeHeadTarget(1, second);
+        wither.setAlternativeHeadTarget(2, third);
+
+        if (!wither.getAlternativeHeadTarget(0).filter(first::equals).isPresent()) {
+            helper.fail("Head 0 target did not round-trip");
+            return;
+        }
+        if (!wither.getAlternativeHeadTarget(1).filter(second::equals).isPresent()) {
+            helper.fail("Head 1 target did not round-trip");
+            return;
+        }
+        if (!wither.getAlternativeHeadTarget(2).filter(third::equals).isPresent()) {
+            helper.fail("Head 2 target did not round-trip");
+            return;
+        }
+
+        wither.clearAlternativeHeadTarget(1);
+        if (wither.getAlternativeHeadTarget(1).isPresent()) {
+            helper.fail("Head 1 target clear did not remain independent");
+            return;
+        }
+        if (wither.getAlternativeHeadTarget(0).isEmpty() || wither.getAlternativeHeadTarget(2).isEmpty()) {
+            helper.fail("Clearing head 1 changed another head target");
+            return;
+        }
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_skullkindsremaindistinct")
+    public static void skullKindsRemainDistinct(GameTestHelper helper) {
+        BedrockWitherEntity wither = createWither(helper);
+        Vec3 origin = wither.position().add(0.0D, 2.0D, 0.0D);
+
+        BedrockWitherSkullEntity normal = BedrockWitherSkullEntity.create(
+                helper.getLevel(),
+                wither,
+                origin,
+                new Vec3(1.0D, 0.0D, 0.0D),
+                BedrockWitherSkullEntity.Kind.NORMAL
+        );
+        BedrockWitherSkullEntity dangerous = BedrockWitherSkullEntity.create(
+                helper.getLevel(),
+                wither,
+                origin,
+                new Vec3(1.0D, 0.0D, 0.0D),
+                BedrockWitherSkullEntity.Kind.DANGEROUS
+        );
+
+        if (normal.isDangerous()) {
+            helper.fail("Normal Bedrock skull was marked dangerous");
+            return;
+        }
+        if (!dangerous.isDangerous()) {
+            helper.fail("Dangerous Bedrock skull lost dangerous identity");
+            return;
+        }
+        if (normal.isPickable()) {
+            helper.fail("Normal Bedrock skull should not expose reflect_on_hurt");
+            return;
+        }
+        if (!dangerous.isPickable()) {
+            helper.fail("Dangerous Bedrock skull should expose reflect_on_hurt");
+            return;
+        }
+
+        assertClose(helper, 0.15F, normal.getBbWidth(), "Normal skull collision width");
+        assertClose(helper, 0.15F, dangerous.getBbWidth(), "Dangerous skull collision width");
+
+        net.minecraft.core.BlockPos resistancePos = helper.absolutePos(new BlockPos(0, 0, 0));
+        net.minecraft.world.level.block.state.BlockState obsidian =
+                net.minecraft.world.level.block.Blocks.OBSIDIAN.defaultBlockState();
+        float sourceResistance = 1200.0F;
+
+        float normalResistance = normal.getBlockExplosionResistance(
+                null,
+                helper.getLevel(),
+                resistancePos,
+                obsidian,
+                obsidian.getFluidState(),
+                sourceResistance
+        );
+        float dangerousResistance = dangerous.getBlockExplosionResistance(
+                null,
+                helper.getLevel(),
+                resistancePos,
+                obsidian,
+                obsidian.getFluidState(),
+                sourceResistance
+        );
+
+        assertClose(helper, sourceResistance, normalResistance, "Normal skull explosion resistance");
+        assertClose(helper, 0.8F, dangerousResistance, "Dangerous skull Java-equivalent resistance cap");
+
+        net.minecraft.world.level.block.state.BlockState bedrock =
+                net.minecraft.world.level.block.Blocks.BEDROCK.defaultBlockState();
+        float dangerousBedrockResistance = dangerous.getBlockExplosionResistance(
+                null,
+                helper.getLevel(),
+                resistancePos,
+                bedrock,
+                bedrock.getFluidState(),
+                sourceResistance
+        );
+        assertClose(
+                helper,
+                sourceResistance,
+                dangerousBedrockResistance,
+                "Dangerous skull must not cap Bedrock resistance"
+        );
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_centerheadsequenceisthreenormalthendangerous")
+    public static void centerHeadSequenceIsThreeNormalThenDangerous(GameTestHelper helper) {
+        BedrockWitherEntity wither = createWither(helper);
+
+        BedrockWitherSkullEntity.Kind[] expected = {
+                BedrockWitherSkullEntity.Kind.NORMAL,
+                BedrockWitherSkullEntity.Kind.NORMAL,
+                BedrockWitherSkullEntity.Kind.NORMAL,
+                BedrockWitherSkullEntity.Kind.DANGEROUS,
+                BedrockWitherSkullEntity.Kind.NORMAL
+        };
+
+        for (int i = 0; i < expected.length; i++) {
+            BedrockWitherSkullEntity.Kind actual = wither.attackController().nextCenterSkullKind();
+            if (actual != expected[i]) {
+                helper.fail("Center-head projectile " + (i + 1)
+                        + " expected " + expected[i] + " but was " + actual);
+                return;
+            }
+        }
+
+        if (wither.runtimeState().projectileCounter() != expected.length) {
+            helper.fail("Projectile counter did not retain the Bedrock volley sequence state");
+            return;
+        }
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 80, batch = "bwr_halfhealthtransitionisoneshotandprojectileimmune")
+    public static void halfHealthTransitionIsOneShotAndProjectileImmune(GameTestHelper helper) {
+        BedrockWitherEntity wither = createCombatReadyWither(helper);
+
+        helper.runAfterDelay(2, () -> {
+            if (!wither.isAerialAttack() || wither.isPowered()) {
+                helper.fail("Phase 1 should have AirAttack=1 and powered shield hidden");
+                return;
+            }
+
+            int threshold = wither.runtimeState().healthThreshold();
+            if (threshold <= 0) {
+                helper.fail("Difficulty health initialization did not establish half-health threshold");
+                return;
+            }
+
+            // Current behavior returns to the original firing rate at half health.
+            wither.runtimeState().setFireRate(5);
+            wither.setHealth(threshold);
+
+            helper.runAfterDelay(2, () -> {
+                if (wither.runtimeState().nativePhase()
+                        != org.kneekura.bedrockwither.entity.BedrockWitherPhaseController.secondPhaseNativeId()) {
+                    helper.fail("Half-health transition did not enter native phase 0");
+                    return;
+                }
+                if (wither.isAerialAttack() || !wither.isPowered()) {
+                    helper.fail("Phase 2 should have AirAttack=0 and powered shield visible");
+                    return;
+                }
+                if (wither.runtimeState().fireRate()
+                        != org.kneekura.bedrockwither.entity.BedrockWitherVolleyController.PROVISIONAL_NATIVE_BASE_FIRE_RATE_TICKS) {
+                    helper.fail("Half-health transition did not reset firing to the original rate");
+                    return;
+                }
+                if (wither.getBedrockState() != BedrockWitherState.PHASE2_DASH_PREP) {
+                    helper.fail("Half-health transition did not reach PHASE2_DASH_PREP");
+                    return;
+                }
+                if (wither.runtimeState().wantsToExplode()) {
+                    helper.fail("Transition explosion latch was not cleared");
+                    return;
+                }
+
+                int expectedSkeletons = switch (helper.getLevel().getDifficulty()) {
+                    case PEACEFUL, EASY -> 0;
+                    case NORMAL, HARD -> 3;
+                };
+                if (wither.runtimeState().maxSkeletons() != expectedSkeletons
+                        || wither.runtimeState().numSkeletons() != expectedSkeletons) {
+                    helper.fail("Half-health skeleton counters expected "
+                            + expectedSkeletons + " but were "
+                            + wither.runtimeState().numSkeletons() + "/"
+                            + wither.runtimeState().maxSkeletons());
+                    return;
+                }
+
+                int nearbySkeletons = helper.getLevel().getEntitiesOfClass(
+                        WitherSkeleton.class,
+                        wither.getBoundingBox().inflate(6.0D)
+                ).size();
+                if (nearbySkeletons < expectedSkeletons) {
+                    helper.fail("Expected at least " + expectedSkeletons
+                            + " spawned Wither Skeletons but found " + nearbySkeletons);
+                    return;
+                }
+
+                Arrow arrow = EntityType.ARROW.create(helper.getLevel());
+                if (arrow == null) {
+                    helper.fail("Failed to create projectile for phase-2 immunity test");
+                    return;
+                }
+
+                float beforeProjectile = wither.getHealth();
+                boolean accepted = wither.hurt(
+                        helper.getLevel().damageSources().arrow(arrow, arrow),
+                        10.0F
+                );
+                if (accepted || Math.abs(wither.getHealth() - beforeProjectile) > 0.0001F) {
+                    helper.fail("Phase-2 projectile immunity did not reject arrow damage");
+                    return;
+                }
+
+                // A second phase-controller tick must not replay the transition.
+                int beforeCount = wither.runtimeState().numSkeletons();
+                wither.phaseController().tick();
+                if (wither.runtimeState().numSkeletons() != beforeCount
+                        || wither.runtimeState().wantsToExplode()) {
+                    helper.fail("Half-health transition replayed after native phase reached 0");
+                    return;
+                }
+
+                helper.succeed();
+            });
+        });
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_destructionrangesmatchobservedcuboids")
+    public static void destructionRangesMatchObservedCuboids(GameTestHelper helper) {
+        BedrockWitherEntity wither = createWither(helper);
+
+        int hurtVolume = wither.destructionController().candidateBlockCount(1);
+        int chargeVolume = wither.destructionController().candidateBlockCount(2);
+
+        if (hurtVolume != 4 * 6 * 4) {
+            helper.fail("Range-1 hurt destruction expected 4x6x4=96 positions but got " + hurtVolume);
+            return;
+        }
+        if (chargeVolume != 6 * 8 * 6) {
+            helper.fail("Range-2 charge destruction expected 6x8x6=288 positions but got " + chargeVolume);
+            return;
+        }
+
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 60, batch = "bwr_hurtreactiondelaydoesnotresetandfiresdangerousskull")
+    public static void hurtReactionDelayDoesNotResetAndFiresDangerousSkull(GameTestHelper helper) {
+        BedrockWitherEntity wither = createCombatReadyWither(helper);
+        net.minecraft.world.entity.animal.Cow attacker = EntityType.COW.create(helper.getLevel());
+        if (attacker == null) {
+            helper.fail("Failed to create hurt-reaction attacker");
+            return;
+        }
+
+        BlockPos attackerPos = helper.absolutePos(new BlockPos(3, 1, 0));
+        attacker.moveTo(attackerPos.getX() + 0.5D, attackerPos.getY(), attackerPos.getZ() + 0.5D);
+        helper.getLevel().addFreshEntity(attacker);
+
+        helper.runAfterDelay(2, () -> {
+            boolean firstAccepted = wither.hurt(
+                    helper.getLevel().damageSources().mobAttack(attacker),
+                    1.0F
+            );
+            if (!firstAccepted || wither.runtimeState().destroyBlocksTick() != 20) {
+                helper.fail("First phase-1 hit did not arm a 20-tick destroy timer");
+                return;
+            }
+
+            for (int i = 0; i < 5; i++) {
+                wither.hurtReactionController().tick();
+            }
+            if (wither.runtimeState().destroyBlocksTick() != 15) {
+                helper.fail("Manual hurt reaction countdown expected 15 ticks remaining");
+                return;
+            }
+
+            // Reset vanilla hurt invulnerability only for this deterministic controller test.
+            wither.invulnerableTime = 0;
+            boolean secondAccepted = wither.hurt(
+                    helper.getLevel().damageSources().mobAttack(attacker),
+                    1.0F
+            );
+            if (!secondAccepted) {
+                helper.fail("Second deterministic hurt-reaction hit was unexpectedly rejected");
+                return;
+            }
+            if (wither.runtimeState().destroyBlocksTick() != 15) {
+                helper.fail("Repeated damage reset the Bedrock hurt-reaction timer");
+                return;
+            }
+
+            for (int i = 0; i < 15; i++) {
+                wither.hurtReactionController().tick();
+            }
+
+            if (wither.runtimeState().destroyBlocksTick() != 0) {
+                helper.fail("Hurt reaction did not complete after 20 total controller ticks");
+                return;
+            }
+
+            java.util.List<BedrockWitherSkullEntity> skulls = helper.getLevel().getEntitiesOfClass(
+                    BedrockWitherSkullEntity.class,
+                    wither.getBoundingBox().inflate(8.0D)
+            );
+            long dangerousCount = skulls.stream()
+                    .filter(BedrockWitherSkullEntity::isDangerous)
+                    .count();
+            if (dangerousCount != 1L) {
+                helper.fail("Hurt reaction expected exactly one dangerous skull but found " + dangerousCount);
+                return;
+            }
+
+            helper.succeed();
+        });
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 80, batch = "bwr_dashexecutionlastsexactlytwentycontrollerticks")
+    public static void dashExecutionLastsExactlyTwentyControllerTicks(GameTestHelper helper) {
+        BedrockWitherEntity wither = createWither(helper);
+
+        helper.runAfterDelay(2, () -> {
+            // Put the boss directly into the accepted native second-phase identity.
+            wither.runtimeState().setNativePhase(
+                    org.kneekura.bedrockwither.entity.BedrockWitherPhaseController.secondPhaseNativeId()
+            );
+            wither.setBedrockState(BedrockWitherState.PHASE2_DASH_PREP);
+
+            // Speed remains a measurement-gated value. Zero is deliberate here:
+            // this test validates the Bedrock duration/state/destruction loop only.
+            wither.dashController().beginMeasuredDash(new Vec3(1.0D, 0.0D, 0.0D), 0.0D);
+
+            if (!wither.runtimeState().charging()
+                    || wither.runtimeState().chargeFrames() != 20
+                    || wither.getBedrockState() != BedrockWitherState.PHASE2_DASH) {
+                helper.fail("Dash did not initialize the 20-tick Bedrock execution state");
+                return;
+            }
+
+            for (int i = 0; i < 19; i++) {
+                wither.dashController().tick();
+            }
+
+            if (!wither.runtimeState().charging()
+                    || wither.runtimeState().chargeFrames() != 1) {
+                helper.fail("Dash ended before the twentieth controller tick");
+                return;
+            }
+
+            wither.dashController().tick();
+
+            if (wither.runtimeState().charging()
+                    || wither.runtimeState().chargeFrames() != 0
+                    || wither.getBedrockState() != BedrockWitherState.PHASE2_RECOVER) {
+                helper.fail("Dash did not end exactly after twenty controller ticks");
+                return;
+            }
+
+            helper.succeed();
+        });
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_statuseffectsallowonlyinstanthealandharm")
+    public static void statusEffectsAllowOnlyInstantHealAndHarm(GameTestHelper helper) {
+        BedrockWitherEntity wither = createWither(helper);
+
+        if (!wither.canBeAffected(new net.minecraft.world.effect.MobEffectInstance(
+                net.minecraft.world.effect.MobEffects.HEAL, 1, 0
+        ))) {
+            helper.fail("Bedrock Wither should allow Instant Health processing");
+            return;
+        }
+        if (!wither.canBeAffected(new net.minecraft.world.effect.MobEffectInstance(
+                net.minecraft.world.effect.MobEffects.HARM, 1, 0
+        ))) {
+            helper.fail("Bedrock Wither should allow Instant Damage processing");
+            return;
+        }
+        if (wither.canBeAffected(new net.minecraft.world.effect.MobEffectInstance(
+                net.minecraft.world.effect.MobEffects.POISON, 200, 0
+        ))) {
+            helper.fail("Bedrock Wither should reject ordinary status effects");
+            return;
+        }
+
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 80, batch = "bwr_centervolleyusesfireratethensevensecondcooldown")
+    public static void centerVolleyUsesFireRateThenSevenSecondCooldown(GameTestHelper helper) {
+        BedrockWitherEntity wither = createCombatReadyWither(helper);
+        net.minecraft.world.entity.animal.Cow target = EntityType.COW.create(helper.getLevel());
+        if (target == null) {
+            helper.fail("Failed to create volley target");
+            return;
+        }
+
+        BlockPos targetPos = helper.absolutePos(new BlockPos(4, 1, 0));
+        target.moveTo(targetPos.getX() + 0.5D, targetPos.getY(), targetPos.getZ() + 0.5D);
+        // Other Wither GameTests run in the same GameTest world. Make this
+        // controller-test target invulnerable so neighboring bosses/explosions
+        // cannot invalidate the target before the synchronous assertion.
+        target.setInvulnerable(true);
+        helper.getLevel().addFreshEntity(target);
+
+        helper.runAfterDelay(2, () -> {
+            // This test drives the volley controller synchronously. Re-establish
+            // every precondition here so ambient server AI ticks cannot make the
+            // controller-unit assertion nondeterministic.
+            wither.runtimeState().setNativePhase(
+                    org.kneekura.bedrockwither.entity.BedrockWitherPhaseController.firstPhaseNativeId()
+            );
+            wither.runtimeState().setSpawningFrames(0);
+            wither.spawnController().restore(0, BedrockWitherState.PHASE1_REPOSITION);
+            wither.setBedrockState(BedrockWitherState.PHASE1_REPOSITION);
+            wither.setTarget(target);
+
+            if (wither.runtimeState().fireRate()
+                    != org.kneekura.bedrockwither.entity.BedrockWitherVolleyController.PROVISIONAL_NATIVE_BASE_FIRE_RATE_TICKS) {
+                helper.fail("Volley controller did not initialize provisional native fireRate=20");
+                return;
+            }
+
+            if (!target.isAlive()) {
+                helper.fail("Isolated volley target was not alive before manual controller tick");
+                return;
+            }
+
+            // REPOSITION -> BURST without consuming a firing tick.
+            wither.volleyController().tick();
+            if (wither.getBedrockState() != BedrockWitherState.PHASE1_BURST) {
+                helper.fail("Target acquisition did not enter PHASE1_BURST");
+                return;
+            }
+
+            for (int shot = 0; shot < 4; shot++) {
+                int cadence = wither.runtimeState().fireRate();
+                for (int tick = 0; tick < cadence; tick++) {
+                    wither.volleyController().tick();
+                }
+            }
+
+            if (wither.runtimeState().projectileCounter() != 4) {
+                helper.fail("Expected projectileCounter=4 after one Bedrock center volley");
+                return;
+            }
+            if (wither.getBedrockState() != BedrockWitherState.PHASE1_COOLDOWN) {
+                helper.fail("Fourth/dangerous projectile did not enter PHASE1_COOLDOWN");
+                return;
+            }
+            if (wither.runtimeState().mainHeadAttackCountdown()
+                    != org.kneekura.bedrockwither.entity.BedrockWitherVolleyController.OBSERVED_INTER_VOLLEY_COOLDOWN_TICKS) {
+                helper.fail("Inter-volley cooldown was not armed to 140 ticks");
+                return;
+            }
+
+            java.util.List<BedrockWitherSkullEntity> skulls = helper.getLevel().getEntitiesOfClass(
+                    BedrockWitherSkullEntity.class,
+                    wither.getBoundingBox().inflate(12.0D)
+            );
+            long dangerous = skulls.stream().filter(BedrockWitherSkullEntity::isDangerous).count();
+            long normal = skulls.size() - dangerous;
+            if (normal != 3L || dangerous != 1L) {
+                helper.fail("Expected 3 normal + 1 dangerous center skull, found "
+                        + normal + " normal / " + dangerous + " dangerous");
+                return;
+            }
+
+            for (int tick = 0;
+                 tick < org.kneekura.bedrockwither.entity.BedrockWitherVolleyController.OBSERVED_INTER_VOLLEY_COOLDOWN_TICKS - 1;
+                 tick++) {
+                wither.volleyController().tick();
+            }
+            if (wither.getBedrockState() != BedrockWitherState.PHASE1_COOLDOWN
+                    || wither.runtimeState().mainHeadAttackCountdown() != 1) {
+                helper.fail("Volley cooldown ended before 140 controller ticks");
+                return;
+            }
+
+            wither.volleyController().tick();
+            if (wither.getBedrockState() != BedrockWitherState.PHASE1_BURST
+                    || wither.runtimeState().mainHeadAttackCountdown() != wither.runtimeState().fireRate()) {
+                helper.fail("Volley cooldown did not re-arm the next burst after 140 ticks");
+                return;
+            }
+
+            helper.succeed();
+        });
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 60, batch = "bwr_lasthealthintervaltrackslowesthealthin75pointbuckets")
+    public static void lastHealthIntervalTracksLowestHealthIn75PointBuckets(GameTestHelper helper) {
+        BedrockWitherEntity wither = createCombatReadyWither(helper);
+
+        helper.runAfterDelay(2, () -> {
+            int baseRate = wither.runtimeState().fireRate();
+            if (baseRate != org.kneekura.bedrockwither.entity.BedrockWitherVolleyController.PROVISIONAL_NATIVE_BASE_FIRE_RATE_TICKS) {
+                helper.fail("Volley controller did not initialize the base fire rate");
+                return;
+            }
+
+            int maxHealth = Math.round(wither.getMaxHealth());
+            int firstLow = Math.max(1, maxHealth - 1);
+            wither.setHealth(firstLow);
+            wither.volleyController().onAcceptedDamage();
+
+            int expectedFirst = org.kneekura.bedrockwither.entity.BedrockWitherVolleyController
+                    .lastHealthIntervalFor(firstLow);
+            if (wither.runtimeState().lastHealthValue() != expectedFirst) {
+                helper.fail("lastHealthInterval did not track the strict-lower 75-point bucket");
+                return;
+            }
+            if (wither.runtimeState().fireRate() != baseRate) {
+                helper.fail("Unmeasured accelerated fire-rate values must not be invented");
+                return;
+            }
+
+            // Healing must not increase the stored lowest-health interval.
+            wither.setHealth(wither.getMaxHealth());
+            wither.volleyController().onAcceptedDamage();
+            if (wither.runtimeState().lastHealthValue() != expectedFirst) {
+                helper.fail("Healing incorrectly increased Bedrock lastHealthInterval");
+                return;
+            }
+
+            int secondLow = Math.max(1, expectedFirst - 1);
+            wither.setHealth(secondLow);
+            wither.volleyController().onAcceptedDamage();
+            int expectedSecond = org.kneekura.bedrockwither.entity.BedrockWitherVolleyController
+                    .lastHealthIntervalFor(secondLow);
+            if (wither.runtimeState().lastHealthValue() != expectedSecond) {
+                helper.fail("Further damage did not lower lastHealthInterval monotonically");
+                return;
+            }
+
+            helper.succeed();
+        });
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_deathsequencekeepssemanticdeathandextendsremoval")
+    public static void deathSequenceKeepsSemanticDeathAndExtendsRemoval(GameTestHelper helper) {
+        BedrockWitherEntity wither = createCombatReadyWither(helper);
+
+        boolean accepted = wither.hurt(
+                helper.getLevel().damageSources().genericKill(),
+                Float.MAX_VALUE
+        );
+
+        if (!accepted || !wither.isDeadOrDying()) {
+            helper.fail("Killing hit did not enter Java semantic death immediately");
+            return;
+        }
+        if (wither.isRemoved()) {
+            helper.fail("Bedrock death sequence removed the boss immediately");
+            return;
+        }
+        if (wither.getBedrockState() != BedrockWitherState.DEATH_SEQUENCE) {
+            helper.fail("Killing hit did not enter DEATH_SEQUENCE");
+            return;
+        }
+        if (wither.getDeathTicksRemaining()
+                != org.kneekura.bedrockwither.entity.BedrockWitherDeathController.PROVISIONAL_DEATH_DURATION_TICKS) {
+            helper.fail("Bedrock death countdown did not initialize to 200 ticks");
+            return;
+        }
+
+        for (int tick = 0;
+             tick < org.kneekura.bedrockwither.entity.BedrockWitherDeathController.PROVISIONAL_DEATH_DURATION_TICKS - 1;
+             tick++) {
+            wither.deathController().tickServer();
+        }
+
+        if (wither.isRemoved()) {
+            helper.fail("Bedrock Wither was removed before the final death tick");
+            return;
+        }
+        if (wither.getDeathTicksRemaining() != 1) {
+            helper.fail("Death countdown expected one tick remaining");
+            return;
+        }
+
+        assertClose(
+                helper,
+                199.0F,
+                wither.getDeathSwell(),
+                "Historical-corroborated death swell progression"
+        );
+        assertClose(
+                helper,
+                0.995F,
+                wither.getDeathOverlayAlpha(),
+                "Historical-corroborated death overlay progression"
+        );
+
+        wither.deathController().tickServer();
+
+        if (!wither.isRemoved()) {
+            helper.fail("Bedrock Wither did not remove on the final death tick");
+            return;
+        }
+        if (wither.getDeathTicksRemaining() != 0) {
+            helper.fail("Death countdown did not end at zero");
+            return;
+        }
+
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_specialmovementgatematchesbedrockstateboundary")
+    public static void specialMovementGateMatchesBedrockStateBoundary(GameTestHelper helper) {
+        BedrockWitherEntity wither = createCombatReadyWither(helper);
+        net.minecraft.world.entity.animal.Cow target = EntityType.COW.create(helper.getLevel());
+        if (target == null) {
+            helper.fail("Failed to create special-movement target");
+            return;
+        }
+
+        BlockPos targetPos = helper.absolutePos(new BlockPos(4, 1, 0));
+        target.moveTo(targetPos.getX() + 0.5D, targetPos.getY(), targetPos.getZ() + 0.5D);
+        target.setInvulnerable(true);
+        helper.getLevel().addFreshEntity(target);
+        wither.setTarget(target);
+
+        wither.runtimeState().setWantsMove(false);
+        wither.runtimeState().setPathing(false);
+
+        if (wither.specialMovementController().canBegin()) {
+            helper.fail("Special movement began without wantsMove");
+            return;
+        }
+
+        wither.specialMovementController().requestMove();
+        if (!wither.runtimeState().wantsMove()
+                || !wither.specialMovementController().canBegin()) {
+            helper.fail("Phase-1 target + wantsMove did not satisfy special-movement gate");
+            return;
+        }
+
+        wither.setAerialAttack(false);
+        if (wither.specialMovementController().canBegin()) {
+            helper.fail("Powered/second-phase Wither should not begin phase-1 special movement");
+            return;
+        }
+
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_passivedangeroussidedifficultygate")
+    public static void passiveDangerousSideHeadDifficultyGateMatchesBedrock(GameTestHelper helper) {
+        if (org.kneekura.bedrockwither.entity.BedrockWitherSideHeadController
+                .passiveDangerousEnabled(net.minecraft.world.Difficulty.EASY)) {
+            helper.fail("Easy should not enable the historical/current passive dangerous side-head path");
+            return;
+        }
+        if (!org.kneekura.bedrockwither.entity.BedrockWitherSideHeadController
+                .passiveDangerousEnabled(net.minecraft.world.Difficulty.NORMAL)
+                || !org.kneekura.bedrockwither.entity.BedrockWitherSideHeadController
+                .passiveDangerousEnabled(net.minecraft.world.Difficulty.HARD)) {
+            helper.fail("Normal/Hard should enable passive dangerous side-head scheduling");
+            return;
+        }
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_headpitchqueriestracktargets")
+    public static void headPitchQueriesTrackTargetsIndependently(GameTestHelper helper) {
+        BedrockWitherEntity wither = createCombatReadyWither(helper);
+
+        net.minecraft.world.entity.animal.Cow mainTarget = EntityType.COW.create(helper.getLevel());
+        net.minecraft.world.entity.animal.Cow sideTarget = EntityType.COW.create(helper.getLevel());
+        if (mainTarget == null || sideTarget == null) {
+            helper.fail("Failed to create head-tracking targets");
+            return;
+        }
+
+        BlockPos mainPos = helper.absolutePos(new BlockPos(4, 5, 0));
+        mainTarget.moveTo(mainPos.getX() + 0.5D, mainPos.getY(), mainPos.getZ() + 0.5D);
+        mainTarget.setInvulnerable(true);
+        helper.getLevel().addFreshEntity(mainTarget);
+
+        BlockPos sidePos = helper.absolutePos(new BlockPos(-4, 1, 0));
+        sideTarget.moveTo(sidePos.getX() + 0.5D, sidePos.getY(), sidePos.getZ() + 0.5D);
+        sideTarget.setInvulnerable(true);
+        helper.getLevel().addFreshEntity(sideTarget);
+
+        wither.setTarget(mainTarget);
+        wither.setAlternativeHeadTarget(1, sideTarget.getUUID());
+        wither.clearAlternativeHeadTarget(2);
+
+        wither.headTrackingController().tick();
+
+        float centerPitch = wither.getSyncedHeadPitch(0);
+        float sidePitch = wither.getSyncedHeadPitch(1);
+        float idlePitch = wither.getSyncedHeadPitch(2);
+
+        if (Math.abs(centerPitch) < 0.0001F) {
+            helper.fail("Center head did not track elevated main target");
+            return;
+        }
+        if (Math.abs(sidePitch) < 0.0001F) {
+            helper.fail("Side head did not track its alternative target");
+            return;
+        }
+        if (Math.abs(idlePitch) > 0.0001F) {
+            helper.fail("Untargeted side head should relax toward zero pitch");
+            return;
+        }
+        if (Math.abs(centerPitch - sidePitch) < 0.0001F) {
+            helper.fail("Independent head targets produced indistinguishable pitch values");
+            return;
+        }
+
+        helper.succeed();
+    }
+
+    private static BedrockWitherEntity createCombatReadyWither(GameTestHelper helper) {
+        BedrockWitherEntity wither = createWither(helper);
+        wither.runtimeState().setSpawningFrames(0);
+        wither.setBedrockState(BedrockWitherState.PHASE1_REPOSITION);
+        wither.spawnController().restore(0, BedrockWitherState.PHASE1_REPOSITION);
+        return wither;
+    }
+
+    private static BedrockWitherEntity createWither(GameTestHelper helper) {
+        BedrockWitherEntity wither = ModEntities.BEDROCK_WITHER.get().create(helper.getLevel());
+        if (wither == null) {
+            helper.fail("Failed to create KNEEKURA Bedrock Wither");
+            throw new IllegalStateException("GameTest failure already recorded");
+        }
+
+        BlockPos pos = helper.absolutePos(new BlockPos(0, 1, 0));
+        wither.moveTo(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D);
+        helper.getLevel().addFreshEntity(wither);
+        return wither;
+    }
+
+    private static void assertClose(GameTestHelper helper, double expected, double actual, String label) {
+        if (Math.abs(expected - actual) > 0.0001D) {
+            helper.fail(label + " expected " + expected + " but was " + actual);
+        }
+    }
+}

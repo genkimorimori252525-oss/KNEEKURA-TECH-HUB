@@ -1,0 +1,30 @@
+{
+  "schema": "kneekura.spore.bytecode-gate.v1",
+  "artifact_sha256": "d20c4be6606f9752ecfd964eba625363eb76a28e327d67fe6dda4be748401489",
+  "status": "PASS_STATIC_BYTECODE",
+  "class_hashes_verified": 9,
+  "contracts_passed": 13,
+  "contracts_total": 13,
+  "checks": {
+    "sampled_index_differs_from_member_tag": true,
+    "four_candidates_per_team_default": true,
+    "damage_event_praises_and_punishes": true,
+    "feedback_not_scaled_by_damage_amount": true,
+    "reward_and_penalty_deltas": true,
+    "ordinary_row_update_clamps": true,
+    "deterministic_argmax_and_fixed_null_features": true,
+    "morale_additive_unclamped": true,
+    "multi_spawn_biomass_unbounded": true,
+    "global_static_proto_count": true,
+    "world_load_no_dimension_gate": true,
+    "ticket_containsValue_without_equals": true,
+    "proto_join_leave_registry_hooks": true
+  },
+  "conditional_deductions": {
+    "team_members_uniform_four": "12/16 mismatched indices (75%), not necessarily distinct species",
+    "two_hits_one_hit_taken_no_clamp": "+0.05 +0.05 -0.10 = 0",
+    "nonnegative_expected_delta_exclusive_feedback": "P(positive) >= 2/3",
+    "global_three_protos_two_dimensions": "2 in dimension A +1 in dimension B -> global count3, conditional on being registered"
+  },
+  "verification_scope": "JAR bytecode structures only; NO Forge launch, GameTest, TPS, AI effectiveness or fix-confirmation"
+}

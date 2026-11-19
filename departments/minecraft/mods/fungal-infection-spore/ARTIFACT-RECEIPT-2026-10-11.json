@@ -1,0 +1,80 @@
+{
+  "schema": "kneekura.mod-artifact-receipt.v1",
+  "recorded_at_local": "2026-10-11 Asia/Tokyo",
+  "source_kind": "USER_UPLOADED_LOCAL_JAR",
+  "filename": "spore_1.20.1_2.2.0j.jar",
+  "sha256": "d20c4be6606f9752ecfd964eba625363eb76a28e327d67fe6dda4be748401489",
+  "size_bytes": 116439461,
+  "inventory": {
+    "zip_total_entries": 3850,
+    "non_directory_entries": 3692,
+    "class_files": 1350,
+    "json": 1130,
+    "png": 809,
+    "ogg": 346,
+    "mcmeta": 31,
+    "nbt": 21
+  },
+  "metadata": {
+    "mod_id": "spore",
+    "version": "2.2.0j",
+    "name": "Spore",
+    "authors": [
+      "Harbinger"
+    ],
+    "loader": "javafml",
+    "forge_loader_range": "[47,)",
+    "minecraft_target": "1.20.1",
+    "license": "All Rights Reserved",
+    "origin": "META-INF/mods.toml"
+  },
+  "tracks": {
+    "ANCHOR": {
+      "minecraft": "1.20.1",
+      "loader": "Forge",
+      "target_version": "2.2.0j",
+      "artifact_hash_verified_locally": true,
+      "source_to_distribution_match": "NOT_VERIFIED",
+      "runtime": "NOT_RUN"
+    },
+    "FRONTIER": {
+      "minecraft": "1.21.1",
+      "loader": "NeoForge",
+      "status": "RELEASE_METADATA_ONLY_NO_BINARY_REVIEW"
+    }
+  },
+  "local_analysis": {
+    "tool": "JDK javap -p -c -constants",
+    "selected_class_dumps": 183,
+    "total_classes": 1350,
+    "evidence_kind": "original distributed-style JAR bytecode selected review; not full tree semantic audit",
+    "scope": [
+      "organoid/Proto learning",
+      "Womb and Mound biomass",
+      "HiveTumor evolution",
+      "squad target sharing",
+      "ScatterShot volley AI",
+      "selected pathfinding methods",
+      "infected classes inventory"
+    ],
+    "jvm_method_descriptors_verified_for_all_claims": false,
+    "whole_target_complete": false,
+    "performance_benchmark": "NOT_RUN",
+    "forge_runtime": "NOT_RUN",
+    "issue_pr_repair_confirmation": "NOT_DONE"
+  },
+  "identity_risks": [
+    "Exact identity to officially downloaded CurseForge binary has NOT been independently verified",
+    "MANIFEST.MF contains placeholder ExampleMod vendor/version fields; do not treat as canonical mod identity",
+    "Source trees mentioned in community wiki may be private; no authoritative original source-to-JAR commit linked",
+    "Java class name NeuralProcessing is NOT evidence of deep learning",
+    "Original JAR and assets cannot be copied into public Git by default"
+  ],
+  "primary_locator_format": "SHA256 of JAR + internal .class path + method name and descriptor",
+  "external_links": [
+    "https://www.curseforge.com/minecraft/mc-mods/fungal-infection-spore",
+    "https://www.fungalinfectionspore.wiki/home",
+    "https://github.com/DynamicTreesTeam/DynamicTrees/issues/1201"
+  ],
+  "canonical_promotion": "NOT_REQUESTED; HUMAN_REVIEW_REQUIRED"
+}

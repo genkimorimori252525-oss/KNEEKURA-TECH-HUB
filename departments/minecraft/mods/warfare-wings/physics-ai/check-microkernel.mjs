@@ -1,0 +1,199 @@
+import { mkdtemp, readFile, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { spawnSync } from 'node:child_process';
+
+const options = new Map();
+for (let i = 2; i < process.argv.length; i += 2) {
+  const key = process.argv[i], value = process.argv[i + 1];
+  if (key !== '--java-home' || !value || options.has(key))
+    throw new Error('Usage: node check-microkernel.mjs --java-home REGISTERED_JDK');
+  options.set(key, value);
+}
+if (!options.has('--java-home')) throw new Error('Explicit registered JDK path required');
+
+const here = path.dirname(fileURLToPath(import.meta.url));
+const packageDir = 'org/kneekura/techhub/warfarewings/physics';
+const mainDir = path.join(here, 'src/main/java', packageDir);
+const testDir = path.join(here, 'src/test/java', packageDir);
+const work = await mkdtemp(path.join(tmpdir(), 'warfare-wings-physics-ai-'));
+const classes = path.join(work, 'classes');
+const generated = path.join(work, 'reports');
+const suffix = process.platform === 'win32' ? '.exe' : '';
+const javac = path.join(options.get('--java-home'), 'bin', 'javac' + suffix);
+const java = path.join(options.get('--java-home'), 'bin', 'java' + suffix);
+
+function run(command, args) {
+  const result = spawnSync(command, args, { encoding: 'utf8', timeout: 120000, maxBuffer: 4 * 1024 * 1024 });
+  if (result.stdout) process.stdout.write(result.stdout);
+  if (result.stderr) process.stderr.write(result.stderr);
+  if (result.error || result.status !== 0) throw result.error ?? new Error(`Command failed: ${result.status}`);
+}
+
+async function same(generatedPath, goldenPath) {
+  const normalize = value => value.replace(/\r\n/g, '\n').replace(/\n*$/, '') + '\n';
+  const a = normalize(await readFile(generatedPath, 'utf8'));
+  const b = normalize(await readFile(goldenPath, 'utf8'));
+  if (a === b) return;
+  const al = a.split('\n');
+  const bl = b.split('\n');
+  const limit = Math.max(al.length, bl.length);
+  for (let i = 0; i < limit; i++) {
+    if (al[i] !== bl[i]) {
+      throw new Error(`Generated report drift: ${path.basename(goldenPath)} line ${i + 1}\nGENERATED: ${al[i]}\nGOLDEN:    ${bl[i]}`);
+    }
+  }
+  throw new Error(`Generated report drift: ${path.basename(goldenPath)}`);
+}
+
+try {
+  const sources = [
+    path.join(mainDir, 'Ia133Microkernel.java'),
+    path.join(mainDir, 'PinnedIa133WindWorld.java'),
+    path.join(mainDir, 'RealPhysicsTwinReplayMain.java'),
+    path.join(mainDir, 'RealTacticalPhysicsTwinReplayMain.java'),
+    path.join(mainDir, 'WarfareWingsAircraft.java'),
+    path.join(mainDir, 'PerformanceReportMain.java'),
+    path.join(mainDir, 'TraceCsv.java'),
+    path.join(mainDir, 'TraceScenarioMain.java'),
+    path.join(mainDir, 'ReactionCalibrationTraceMain.java'),
+    path.join(mainDir, 'WarfareWingsEngineReaction.java'),
+    path.join(mainDir, 'AircraftAtlasMain.java'),
+    path.join(mainDir, 'FlightGuidance.java'),
+    path.join(mainDir, 'FlightSafetyPlanner.java'),
+    path.join(mainDir, 'FlightControlLoop.java'),
+    path.join(mainDir, 'SquadronCommand.java'),
+    path.join(mainDir, 'CombatSimulation.java'),
+    path.join(mainDir, 'StrikeSimulation.java'),
+    path.join(mainDir, 'TacticalAirAI.java'),
+    path.join(mainDir, 'ObservedProtectedAssetThreatSelection.java'),
+    path.join(mainDir, 'HistoricalDoctrineOrders.java'),
+    path.join(mainDir, 'TacticalScenarioMain.java'),
+    path.join(testDir, 'Ia133MicrokernelSelfTest.java'),
+    path.join(testDir, 'PinnedIa133WindSelfTest.java'),
+    path.join(testDir, 'RealPhysicsTwinReplaySelfTest.java'),
+    path.join(testDir, 'WarfareWingsEngineReactionSelfTest.java'),
+    path.join(testDir, 'ExactReactionSquadronSelfTest.java'),
+    path.join(testDir, 'FlightGuidanceSelfTest.java'),
+    path.join(testDir, 'FlightGuidanceAtlasSelfTest.java'),
+    path.join(testDir, 'FlightControlLoopSelfTest.java'),
+    path.join(testDir, 'FlightSafetyPlannerSourceSelfTest.java'),
+    path.join(testDir, 'FlightTerrainChallengeSelfTest.java'),
+    path.join(testDir, 'MissionScenarioSelfTest.java'),
+    path.join(testDir, 'CombatSimulationSelfTest.java'),
+    path.join(testDir, 'StrikeSimulationSelfTest.java'),
+    path.join(testDir, 'TacticalAirAISelfTest.java'),
+    path.join(testDir, 'ObservedProtectedAssetThreatSelectionSelfTest.java'),
+    path.join(testDir, 'HistoricalDoctrineOrdersSelfTest.java'),
+  ];
+  // Windows javac otherwise inherits CP932 and rejects the UTF-8 en dashes
+  // already present in the immutable legacy performance reports. Keep the
+  // identical source bytes/Java17 meaning across Docker, Ubuntu and Windows.
+  run(javac, ['-encoding', 'UTF-8', '--release', '17', '-d', classes, ...sources]);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.Ia133MicrokernelSelfTest']);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.PinnedIa133WindSelfTest',
+    path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.RealPhysicsTwinReplaySelfTest',
+    path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.WarfareWingsEngineReactionSelfTest',
+    path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.ExactReactionSquadronSelfTest',
+    path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.FlightGuidanceSelfTest']);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.FlightGuidanceAtlasSelfTest',
+    path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.FlightControlLoopSelfTest']);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.FlightSafetyPlannerSourceSelfTest']);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.FlightTerrainChallengeSelfTest',
+    path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.MissionScenarioSelfTest',
+    path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.CombatSimulationSelfTest',
+    path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.StrikeSimulationSelfTest',
+    path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.TacticalAirAISelfTest',
+    path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.ObservedProtectedAssetThreatSelectionSelfTest']);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.HistoricalDoctrineOrdersSelfTest',
+    path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.PerformanceReportMain', generated]);
+  const traceA = path.join(generated, 'a6m-throttle-step-v1-a.csv');
+  const traceB = path.join(generated, 'a6m-throttle-step-v1-b.csv');
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.TraceScenarioMain', traceA]);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.TraceScenarioMain', traceB]);
+  await same(traceA, traceB);
+  const reactionA = path.join(generated, 'a6m-throttle-bytecode-reaction-a.csv');
+  const reactionB = path.join(generated, 'a6m-throttle-bytecode-reaction-b.csv');
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.ReactionCalibrationTraceMain',
+    path.join(here, 'data/base-aircraft-anchor-v1.csv'), 'warfare_wings:a6m', reactionA]);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.ReactionCalibrationTraceMain',
+    path.join(here, 'data/base-aircraft-anchor-v1.csv'), 'warfare_wings:a6m', reactionB]);
+  await same(reactionA, reactionB);
+  // New opt-in original IA speed-dependent aerodynamic wind. Keep old
+  // zero-wind V2/V3 reports byte-for-byte as historical provenance.
+  const originalWindA = path.join(generated, 'a6m-throttle-pinned-wind-a.csv');
+  const originalWindB = path.join(generated, 'a6m-throttle-pinned-wind-b.csv');
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.ReactionCalibrationTraceMain',
+    path.join(here, 'data/base-aircraft-anchor-v1.csv'), 'warfare_wings:a6m', originalWindA, '--pinned-wind']);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.ReactionCalibrationTraceMain',
+    path.join(here, 'data/base-aircraft-anchor-v1.csv'), 'warfare_wings:a6m', originalWindB, '--pinned-wind']);
+  await same(originalWindA, originalWindB);
+  if ((await readFile(originalWindA, 'utf8')) === (await readFile(reactionA, 'utf8')))
+    throw new Error('Original IA speed-dependent wind was silently omitted from the new source path');
+  const traceText = await readFile(traceA, 'utf8');
+  const traceLines = traceText.trimEnd().split(/\r?\n/);
+  if (traceLines.length !== 402) throw new Error(`Expected trace header + 401 rows, got ${traceLines.length}`);
+  if (!traceLines[0].startsWith('schema_version,source,scenario_id,aircraft_id,tick,game_time,'))
+    throw new Error('Unexpected trace schema header');
+  await same(path.join(generated, 'a6m-p47n-source-microkernel.csv'), path.join(here, 'reports/a6m-p47n-source-microkernel.csv'));
+  await same(path.join(generated, 'a6m-p47n-source-microkernel.md'), path.join(here, 'reports/a6m-p47n-source-microkernel.md'));
+  const atlasA = path.join(generated, 'base-aircraft-source-atlas-a.csv');
+  const atlasB = path.join(generated, 'base-aircraft-source-atlas-b.csv');
+  const dataset = path.join(here, 'data/base-aircraft-anchor-v1.csv');
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.AircraftAtlasMain', dataset, atlasA]);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.AircraftAtlasMain', dataset, atlasB]);
+  await same(atlasA, atlasB);
+  // Experimental V3 uses each of the 24 exact-owner EngineVehicle overrides.
+  // Keep V2 byte-for-byte unchanged; both predictions are SOURCE, not
+  // measurements or validated equal-envelope turns in Minecraft.
+  const reactionAtlasA = path.join(generated, 'base-aircraft-reaction-a.csv');
+  const reactionAtlasB = path.join(generated, 'base-aircraft-reaction-b.csv');
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.AircraftAtlasMain',
+    dataset, reactionAtlasA, '--exact-engine-reaction']);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.AircraftAtlasMain',
+    dataset, reactionAtlasB, '--exact-engine-reaction']);
+  await same(reactionAtlasA, reactionAtlasB);
+  await same(reactionAtlasA, path.join(here, 'reports/base-aircraft-source-reaction-v3.csv'));
+  const reactionLines = (await readFile(reactionAtlasA, 'utf8')).trimEnd().split(/\r?\n/);
+  if (reactionLines.length !== 25
+      || !reactionLines[0].endsWith(',engine_reaction_ticks')
+      || !reactionLines[1].startsWith('ww.physics.aircraft-atlas.v3-source-reaction,'))
+    throw new Error('Unexpected original-binary reaction Atlas V3 schema/rows');
+  try {
+    await same(atlasA, path.join(here, 'reports/base-aircraft-source-atlas.csv'));
+  } catch (error) {
+    process.stderr.write('GENERATED_ATLAS_BEGIN\n');
+    process.stderr.write(await readFile(atlasA, 'utf8'));
+    process.stderr.write('GENERATED_ATLAS_END\n');
+    throw error;
+  }
+  const atlasLines = (await readFile(atlasA, 'utf8')).trimEnd().split(/\r?\n/);
+  if (atlasLines.length !== 25) throw new Error(`Expected Atlas header + 24 rows, got ${atlasLines.length}`);
+  const tacticalA = path.join(generated, 'tactical-scenarios-a.csv');
+  const tacticalB = path.join(generated, 'tactical-scenarios-b.csv');
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.TacticalScenarioMain', dataset, tacticalA]);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.TacticalScenarioMain', dataset, tacticalB]);
+  await same(tacticalA, tacticalB);
+  const tacticalLines = (await readFile(tacticalA, 'utf8')).trimEnd().split(/\r?\n/);
+  if (tacticalLines.length !== 97) throw new Error(`Expected 4 cases for 24 aircraft, got ${tacticalLines.length} lines`);
+  // Keep v1 as immutable earlier-policy evidence. The improved measured-track
+  // intercept/descending escort policy intentionally changes source flights;
+  // require the explicitly versioned new 24x4 baseline instead of silently
+  // overwriting earlier source predictions or disabling the drift check.
+  await same(tacticalA, path.join(here, 'reports/tactical-source-scenarios-v2.csv'));
+  process.stdout.write('Warfare Wings Physics AI + 24-aircraft flight guidance + terrain + squadron mission checks passed; REAL_MINECRAFT_PARITY: NOT_RUN\n');
+} finally {
+  await rm(work, { recursive: true, force: true });
+}

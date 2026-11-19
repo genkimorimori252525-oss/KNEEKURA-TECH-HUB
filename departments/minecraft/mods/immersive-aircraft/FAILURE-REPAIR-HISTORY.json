@@ -1,0 +1,28 @@
+{
+  "format": "kneekura.failure-history.v1",
+  "repository": "Luke100000/ImmersiveAircraft",
+  "scope": {
+    "track": "ANCHOR",
+    "head_revision": "550b38d3dfdbf5cb6ec3f78468e0e60725a47605",
+    "history_window": "Minecraft 1.20.1 / Forge source tags 1.3.0 through 1.3.3 plus selected stat-semantics issue #266",
+    "queries": [
+      "1.3.2 Forge aircraft sinking",
+      "1.3.3 rudder orientation",
+      "restored combat with addons",
+      "driftDrag VehicleStat"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "inspected_evidence_ids": [],
+    "deferred": [
+      "Capture selected mutable GitHub Issue/release/diff payloads into Tech Hub profile/CAS and attach immutable document IDs.",
+      "Compare raw distributed 1.3.2/1.3.3 Forge JAR resources to resolve the rudder-orientation changelog/tag discrepancy."
+    ],
+    "unavailable": [
+      "Current-session local raw bytes for official Immersive Aircraft 1.3.3 Forge JAR were unavailable."
+    ]
+  },
+  "scope_evidence": [],
+  "cases": []
+}

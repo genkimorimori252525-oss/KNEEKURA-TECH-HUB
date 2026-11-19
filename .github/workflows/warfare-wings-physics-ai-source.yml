@@ -1,0 +1,157 @@
+name: Warfare Wings Physics AI Source
+
+on:
+  push:
+    branches:
+      - jolly/research-warfare-wings-2026-10-07
+    paths:
+      - 'departments/minecraft/mods/warfare-wings/physics-ai/**'
+      - '.github/workflows/warfare-wings-physics-ai-source.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pure-java:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: jolly/research-warfare-wings-2026-10-07
+          fetch-depth: 1
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Verify microkernel and deterministic traces
+        run: node departments/minecraft/mods/warfare-wings/physics-ai/check-microkernel.mjs --java-home "$JAVA_HOME"
+      - name: Verify trace comparator
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_compare_traces.py
+      - name: Verify exact-runtime receipt parser rejects tampered traces
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_tactical_runtime_receipts.py
+      - name: Verify all-24-runtime receipt parser rejects incomplete and corrupt traces
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_all_aircraft_runtime_receipts.py
+      - name: Verify synchronized multi-aircraft geometric gates reject invalid Forge receipts
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_live_aircombat_receipts.py
+      - name: Verify multi-contact protected-asset selection rejects invisible, fabricated and missing original Forge actor evidence
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_live_threat_receipts.py
+      - name: Verify representative 401-tick Forge calibration parser rejects missing/frozen source fixtures
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_representative_calibrations.py
+      - name: Verify exact-original weapon audit rejects missing APIs and substituted binary fixtures
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_exact_weapon_failclosed.py
+      - name: Verify long real-strike receipt parser rejects early RTB and missing synchronized actors
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_long_strike_receipts.py
+      - name: Verify source-vs-Forge physics-twin mismatch auditor rejects substitute samples
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_physics_twin_review.py
+      - name: Verify original Forge teacher replay rejects missing server ticks and forged actor samples
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_real_tactical_clock.py
+      - name: Verify deterministic 24-airframe high-throughput AI research lab and offline visualization
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_flight_lab.py
+      - name: Verify simultaneous 24-unique-airframe closed-loop Physics Twin, observed contacts and unchanged 95/6 block gates
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_flight_twin_lab.py
+      - name: Verify deterministic multi-seed 24-unique-airframe stress experiment and reject unsafe fake mission success
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_flight_twin_seed_sweep.py
+      - name: Run real-B17 forensic provenance tests only where original receipts exist (otherwise explicit SKIP)
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_flight_twin_forensic.py
+      - name: Verify independent two-real-Forge-run B17 policy comparison where original receipts exist (otherwise explicit SKIP)
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_flight_twin_policy_delta.py
+      - name: Verify three real original Forge B17 policy timelines and reject mixed/missing evidence (otherwise explicit SKIP)
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_flight_twin_three_run.py
+      - name: Execute 32 distinct seeds of 24 physically concurrent SOURCE aircraft at 20Hz
+        run: |
+          ROOT=departments/minecraft/mods/warfare-wings/physics-ai
+          python "$ROOT/tools/flight_twin_seed_sweep.py" \
+            --output "$RUNNER_TEMP/ww-24-aircraft-source-safety" \
+            --java-home "$JAVA_HOME" --seed-start 20261011 --count 32 --ticks 240
+      - name: Publish 24-aircraft independent-seed collision and B17 failure evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: warfare-wings-24-aircraft-multiseed-source-safety
+          retention-days: 14
+          if-no-files-found: error
+          path: ${{ runner.temp }}/ww-24-aircraft-source-safety/
+      - name: Produce downloadable self-contained SOURCE flight laboratory and simultaneous 24-plane Twin
+        run: |
+          ROOT=departments/minecraft/mods/warfare-wings/physics-ai
+          python "$ROOT/tools/flight_lab_run.py" \
+            --mode both --output "$RUNNER_TEMP/ww-flight-source-offline-research" \
+            --seed 20261011 --trials-per-aircraft 512 --ticks 180 \
+            --twin-24-ticks 240 --trace-stride 10 --java-home "$JAVA_HOME"
+      - name: Publish portable offline research visualizations, traces and explicit failed SOURCE safety gates
+        uses: actions/upload-artifact@v4
+        with:
+          name: warfare-wings-flight-physics-twin-source-lab
+          retention-days: 14
+          if-no-files-found: error
+          path: ${{ runner.temp }}/ww-flight-source-offline-research/
+      - name: Rebuild and verify 24-aircraft AI Atlas
+        run: |
+          ROOT=departments/minecraft/mods/warfare-wings/physics-ai
+          mkdir -p "$RUNNER_TEMP/ww-atlas"
+          python "$ROOT/tools/build_aircraft_atlas.py" "$ROOT/reports/base-aircraft-source-atlas.csv" \
+            --json "$RUNNER_TEMP/ww-atlas/aircraft-atlas-ai-view.json" \
+            --markdown "$RUNNER_TEMP/ww-atlas/AIRCRAFT-ATLAS.md"
+          python - "$RUNNER_TEMP/ww-atlas/aircraft-atlas-ai-view.json" "$ROOT/reports/aircraft-atlas-ai-view.json" <<'PY'
+          import json, sys
+          with open(sys.argv[1], encoding='utf-8') as a, open(sys.argv[2], encoding='utf-8') as b:
+              if json.load(a) != json.load(b):
+                  raise SystemExit('AI Atlas JSON semantic drift')
+          print('AI Atlas JSON semantic equality passed')
+          PY
+          python - "$RUNNER_TEMP/ww-atlas/AIRCRAFT-ATLAS.md" "$ROOT/reports/AIRCRAFT-ATLAS.md" <<'PY'
+          import difflib, sys
+          def norm(path):
+              return open(path, encoding='utf-8').read().replace('\r\n','\n').rstrip() + '\n'
+          generated, golden = norm(sys.argv[1]), norm(sys.argv[2])
+          if generated != golden:
+              diff = ''.join(difflib.unified_diff(
+                  golden.splitlines(True), generated.splitlines(True),
+                  fromfile='committed/AIRCRAFT-ATLAS.md',
+                  tofile='generated/AIRCRAFT-ATLAS.md',
+                  n=3))
+              print(diff[:24000])
+              raise SystemExit('Aircraft Atlas Markdown drift')
+          print('Aircraft Atlas Markdown normalized equality passed')
+          PY
+
+  runtime-probe-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: jolly/research-warfare-wings-2026-10-07
+          fetch-depth: 1
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.8'
+      - name: Compile tactical Forge adapter and verify IA non-player input phase contract
+        working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
+        run: gradle --no-daemon --console=plain compileJava processResources verifyTacticalInputCorrection verifyLiveAirSensorCone verifyObservedThreatPriority verifyLiveMissionPhases
+
+  docker-headless:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: jolly/research-warfare-wings-2026-10-07
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Build isolated Java 17 headless physics image
+        run: |
+          ROOT=departments/minecraft/mods/warfare-wings/physics-ai
+          docker build --pull --progress plain -f "$ROOT/Dockerfile" -t warfare-wings-physics-ai:source "$ROOT"
+          docker image inspect --format 'Image ID: {{.Id}}' warfare-wings-physics-ai:source
+      - name: Verify source physics and Atlas offline in container
+        run: |
+          docker run --rm --network none --read-only \
+            --tmpfs /tmp:rw,nosuid,nodev,size=256m,mode=1777 \
+            --security-opt no-new-privileges \
+            warfare-wings-physics-ai:source

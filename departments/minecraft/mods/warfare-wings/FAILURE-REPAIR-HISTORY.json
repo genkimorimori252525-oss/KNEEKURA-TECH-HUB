@@ -1,0 +1,28 @@
+{
+  "format": "kneekura.failure-history.v1",
+  "repository": "Warfare Wings public project pages; upstream source repository not established",
+  "scope": {
+    "track": "ANCHOR",
+    "head_revision": "sha256:dc3029597c88859744633b6f5e4a9f21d449294b1aaac90ea0c1749d7aa98a43",
+    "history_window": "Public Forge 1.20.1 Warfare Wings release-note reconnaissance, versions 1.0.2 through 1.1.4",
+    "queries": [
+      "Warfare Wings 1.20.1 Forge changelog machine gun",
+      "Warfare Wings 1.20.1 Forge multiplayer machine gun",
+      "Warfare Wings 1.1.4 client startup",
+      "Warfare Wings source GitHub issues"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "inspected_evidence_ids": [],
+    "deferred": [
+      "Capture public release-note pages with the existing Tech Hub profile adapter before importing structured cases.",
+      "Inspect exact before/after source or bytecode revisions if upstream source history becomes available."
+    ],
+    "unavailable": [
+      "No version-pinned public Warfare Wings source repository / Issue / PR repair diff was established in this pass."
+    ]
+  },
+  "scope_evidence": [],
+  "cases": []
+}
