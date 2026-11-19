@@ -1,7 +1,9 @@
 # MOD analysis: practical entry guide
 
 Use this guide with [ANALYSIS-SPEC-v1.md](ANALYSIS-SPEC-v1.md) and the target's own
-README. It turns the existing specification into a repeatable research pass; it
+README. For historically isolated targets in the **古文** lane, read
+[kobun/ANALYSIS-SPEC.md](kobun/ANALYSIS-SPEC.md) first: ORIGINAL / ERA-CONTEXT /
+DESCENDANT / MODERN-EXTRACTION replace the normal ANCHOR / FRONTIER framing. It turns the existing specification into a repeatable research pass; it
 does not introduce a crawler, another knowledge graph, or new CLI commands.
 
 ## 1. Resume the right work

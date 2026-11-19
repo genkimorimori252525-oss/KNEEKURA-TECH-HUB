@@ -1,5 +1,10 @@
 # Minecraft Whole-Target Analysis Specification v1.2
 
+> Scope note: this specification is the default for the modern Minecraft analysis lane.
+> Historically isolated "古文" targets use [kobun/ANALYSIS-SPEC.md](kobun/ANALYSIS-SPEC.md)
+> for track semantics while retaining this document's provenance/evidence discipline.
+> Do not force ancient targets into ANCHOR/FRONTIER when that would erase historical version context.
+
 ## 1. Compatibility contract — dual track
 
 Every target should define:

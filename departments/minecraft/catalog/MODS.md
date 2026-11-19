@@ -1,5 +1,8 @@
 # Minecraft Technology Analysis Catalog
 
+> This is the **modern** catalog. Historically isolated ancient MODs belong in
+> [古文 catalog](../kobun/catalog/MODS.md) and must not be inserted into this ANCHOR / FRONTIER table.
+
 **Adaptation anchor:** Minecraft **1.20.1 + Forge**
 
 **Discovery frontier:** latest useful upstream implementation, regardless of Forge / NeoForge / Fabric when technically relevant.
