@@ -52,9 +52,9 @@ public final class P16Scenario {
         if (!enabled()) return;
         level = event.getServer().overworld();
         BlockPos spawn = level.getSharedSpawnPos();
-        bx = spawn.getX() + 70 + 0.5D;
-        bz = spawn.getZ() - 70 + 0.5D;
-        by = level.getHeight(Heightmap.Types.MOTION_BLOCKING, spawn.getX() + 70, spawn.getZ() - 70);
+        bx = spawn.getX() + 0.5D; // (0, +70): away from the other scenarios
+        bz = spawn.getZ() + 70 + 0.5D;
+        by = level.getHeight(Heightmap.Types.MOTION_BLOCKING, spawn.getX(), spawn.getZ() + 70);
         try {
             runSmallItems();
             runWeapons();
