@@ -34,7 +34,7 @@ import static dev.kneekura.fivedifficulties.core.x1.X1ShotTables.FORM_LIGHT;
 public final class P13ItemScenario {
     public static final String ENV = "FIVE_DIFFICULTIES_P13_RUNTIME_SCENARIO";
 
-    private enum Phase { IDLE, HAKKERO, ROD, JEWEL, GOHEI, WIND, DONE }
+    private enum Phase { IDLE, HAKKERO, ROD, JEWEL, GOHEI, WIND, GAP, DONE }
 
     private static Phase phase = Phase.IDLE;
     private static ServerLevel level;
@@ -51,6 +51,10 @@ public final class P13ItemScenario {
     private static dev.kneekura.fivedifficulties.forge.entity.SanaeWindEntity wind;
     private static net.minecraft.world.entity.monster.Husk windTarget;
     private static int windStep;
+    private static dev.kneekura.fivedifficulties.forge.entity.SukimaEntity gapA, gapB;
+    private static net.minecraft.world.entity.monster.Husk traveller;
+    private static THShotEntity travellingShot;
+    private static int gapStep;
 
     private P13ItemScenario() {}
 
@@ -79,6 +83,7 @@ public final class P13ItemScenario {
             key = "orb";
             orb = o;
         } else if (e instanceof dev.kneekura.fivedifficulties.forge.entity.MiracleCircleEntity) key = "circle";
+        else if (e instanceof dev.kneekura.fivedifficulties.forge.entity.SukimaEntity g) key = "gap" + g.getColor();
         else if (e instanceof dev.kneekura.fivedifficulties.forge.entity.SanaeWindEntity w) {
             key = "wind";
             wind = w;
@@ -120,6 +125,7 @@ public final class P13ItemScenario {
                 case JEWEL -> tickJewel();
                 case GOHEI -> tickGohei();
                 case WIND -> tickWind();
+                case GAP -> tickGap();
                 default -> {}
             }
         } catch (Throwable failure) {
@@ -347,6 +353,86 @@ public final class P13ItemScenario {
             require(charged == 5, "five miracle cards charged, got " + charged);
             require(gohei.getDamageValue() == 0, "charging repairs the gohei, damage " + gohei.getDamageValue());
             FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P13_MIRACLE_CHARGE_PASS cards=5");
+            startGap();
+        }
+    }
+
+    // ---- 6. Gap: place, warp a husk and a shot, re-dye, pick up; the sneak pair; the folding umbrella ----
+
+    private static void startGap() {
+        SEEN.clear();
+        player.experienceLevel = 0;
+        player.moveTo(bx, by, bz + 20.0D, -90F, 0F); // facing +X over open ground: the gap goes 2 ahead in the air
+        hold(new ItemStack(PortRegistries.GAP.get(), 2));
+        player.getMainHandItem().use(level, player, InteractionHand.MAIN_HAND);
+        require(count("gap1") == 1 && player.getMainHandItem().getCount() == 1, "a placed gap uses up one Gap");
+        gapA = level.getEntitiesOfClass(dev.kneekura.fivedifficulties.forge.entity.SukimaEntity.class,
+                player.getBoundingBox().inflate(4)).get(0);
+        gapB = dev.kneekura.fivedifficulties.forge.entity.SukimaEntity.placed(level, player,
+                gapA.getX() + 20.0D, gapA.getY(), gapA.getZ(), gapA.getYRot());
+        require(level.addFreshEntity(gapB), "second gap");
+        traveller = net.minecraft.world.entity.EntityType.HUSK.create(level);
+        traveller.moveTo(gapA.getX(), gapA.getY() - 1.0D, gapA.getZ(), 0F, 0F);
+        traveller.setNoAi(true);
+        traveller.setNoGravity(true);
+        traveller.setInvulnerable(true);
+        require(level.addFreshEntity(traveller), "traveller");
+        travellingShot = dev.kneekura.fivedifficulties.forge.shot.X1Danmaku.createShotEntity(player, player,
+                new dev.kneekura.fivedifficulties.core.math.Vec3d(gapA.getX() + 0.3D, gapA.getY(), gapA.getZ()),
+                new dev.kneekura.fivedifficulties.core.math.Vec3d(0, 0, 1), 0F,
+                new dev.kneekura.fivedifficulties.core.math.Vec3d(0, 1, 0), 0F, 9999, 0.01D, 0.01D, 0.0D,
+                dev.kneekura.fivedifficulties.core.math.Vec3d.ZERO,
+                dev.kneekura.fivedifficulties.core.x1.X1ShotData.shot(0, 0, 0.3F, 1.0F, 0, 200, 0));
+        gapStep = 0;
+        phase = Phase.GAP;
+        ticks = 0;
+    }
+
+    private static void tickGap() {
+        if (gapStep == 0 && ticks == 3) {
+            require(traveller.position().distanceTo(gapB.position()) < 3.0D,
+                    "the husk warps to the other gap, still " + String.format("%.1f", traveller.position().distanceTo(gapB.position())));
+            require(travellingShot.position().distanceTo(gapB.position()) < 3.0D, "the shot warps too");
+            require(traveller.isOnPortalCooldown(), "a warped entity is immune for a while");
+            // re-dye A blue: blue dye is 1.7.10 dye damage 4
+            player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.BLUE_DYE));
+            gapA.interact(player, InteractionHand.MAIN_HAND);
+            require(gapA.getColor() == 4, "blue dye recolours the gap to 4, got " + gapA.getColor());
+            player.setShiftKeyDown(true);
+            player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+            gapA.interact(player, InteractionHand.MAIN_HAND);
+            require(gapA.isRemoved(), "sneak-use picks the gap up");
+            // the direct pair: a wall 20 blocks ahead at eye height
+            for (int y = 0; y < 4; y++) {
+                level.setBlockAndUpdate(BlockPos.containing(player.getX() + 20.0D, by + y, player.getZ()),
+                        net.minecraft.world.level.block.Blocks.STONE.defaultBlockState());
+            }
+            SEEN.clear();
+            hold(new ItemStack(PortRegistries.GAP.get(), 64));
+            player.getMainHandItem().use(level, player, InteractionHand.MAIN_HAND);
+            player.setShiftKeyDown(false);
+            require(count("gap16") == 2, "sneak opens a pair of direct gaps, got " + count("gap16"));
+            gapStep = 1;
+            ticks = 0;
+        } else if (gapStep == 1 && ticks == 30) {
+            int open = level.getEntitiesOfClass(dev.kneekura.fivedifficulties.forge.entity.SukimaEntity.class,
+                    player.getBoundingBox().inflate(40), g -> g.getColor() == 16).size();
+            require(open == 0, "direct gaps close after 24 ticks, open " + open);
+            // folding umbrella: sneak cycles the colour, use opens 32 + c, the 30th use folds it into a Gap
+            SEEN.clear();
+            hold(new ItemStack(PortRegistries.GAP_FOLDING_UMBRELLA.get()));
+            player.setShiftKeyDown(true);
+            ItemStack umbrella = player.getMainHandItem();
+            umbrella.use(level, player, InteractionHand.MAIN_HAND);
+            umbrella.use(level, player, InteractionHand.MAIN_HAND);
+            player.setShiftKeyDown(false);
+            require(umbrella.getTag().getByte("GapColor") == 1, "two sneak-uses: colour 1");
+            umbrella.use(level, player, InteractionHand.MAIN_HAND);
+            require(count("gap33") == 1 && umbrella.getDamageValue() == 1, "umbrella gap of colour 33, damage 1");
+            umbrella.setDamageValue(29);
+            var result = umbrella.use(level, player, InteractionHand.MAIN_HAND);
+            require(result.getObject().is(PortRegistries.GAP.get()), "the 30th use folds the umbrella into a Gap");
+            FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P13_GAP_PASS warp=husk+shot dye=4 pair=2 umbrella=33");
             FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P13_RUNTIME_SCENARIO_PASS");
             phase = Phase.DONE;
             ScenarioShutdown.finished(level.getServer(), ENV);

@@ -21,6 +21,15 @@ public final class X1ShotSpecials {
     }
 
     /** THShotLib.getVectorNomalize: length through MathHelper.sqrt_double (float). */
+    /** THShotLib.getAngleAndAngleSpan: angle B seen from angle A, in -180..180 (via getAngleMax180). */
+    public static float angleAndAngleSpan(float angleA, float angleB) {
+        angleA = angleMax180(angleA);
+        angleB = angleMax180(angleB);
+        if (angleA == 0.0F) return angleB;
+        if (angleA > 0.0F) return angleB > angleA - 180F ? angleB - angleA : (angleB - angleA) + 360F;
+        return angleB < angleA + 180F ? angleB - angleA : (angleB - angleA) - 360F;
+    }
+
     public static Vec3d normalize(Vec3d v) {
         double length = (double) (float) Math.sqrt(v.x() * v.x() + v.y() * v.y() + v.z() * v.z());
         length = 1.0D / length;

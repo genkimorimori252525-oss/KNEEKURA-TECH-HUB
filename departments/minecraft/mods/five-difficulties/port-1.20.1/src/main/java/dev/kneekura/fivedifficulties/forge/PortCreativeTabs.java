@@ -29,7 +29,9 @@ public final class PortCreativeTabs {
             PortRegistries.LASER_ITEMS.forEach(item -> event.accept(item.get()));
             event.accept(PortRegistries.SHOT_MATERIAL.get());
         }
-        if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
+        if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) { // X1 tabMisc for the gaps
+            event.accept(PortRegistries.GAP.get());
+            event.accept(PortRegistries.GAP_FOLDING_UMBRELLA.get());
             event.accept(PortRegistries.SAKUYA_WATCH.get());
             event.accept(PortRegistries.SAKUYA_STOPWATCH.get());
         }

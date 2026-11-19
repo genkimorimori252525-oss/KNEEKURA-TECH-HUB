@@ -122,6 +122,19 @@ ASSETS = {
         "assets/five_difficulties_port/textures/item/diffusion_amulet.png",
         "48a04fbb8993b87cce4abc2b175f006d8bdaef3254c323b86b023b749f152927",
     ),
+    # P13d gaps.
+    "assets/thkaguyamod/textures/items/sukima.png": (
+        "assets/five_difficulties_port/textures/item/gap.png",
+        "2da2286b8fae92b25c3fc7b4faaa4c45bd3073853cdb1cd2ef73d1a1cd180ba3",
+    ),
+    "assets/thkaguyamod/textures/items/GapFoldingUmbrella_base.png": (
+        "assets/five_difficulties_port/textures/item/gap_folding_umbrella_base.png",
+        "e245f3b395ca533d8e695eda274adf39c54475d9538eab7467e436ff3e5593bd",
+    ),
+    "assets/thkaguyamod/textures/items/GapFoldingUmbrella_ribbon.png": (
+        "assets/five_difficulties_port/textures/item/gap_folding_umbrella_ribbon.png",
+        "7d377c9aa7c25abc2a7b9e70a0baba794b7e3f73c3038ed1288c9774edf276bb",
+    ),
     # P13c wind gohei.
     "assets/thkaguyamod/textures/items/mikoStick_S.png": (
         "assets/five_difficulties_port/textures/item/wind_miko_stick.png",

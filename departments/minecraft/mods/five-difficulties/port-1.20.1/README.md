@@ -1,6 +1,6 @@
 # Five Difficulties X1 Preservation Port — Minecraft 1.20.1 Forge
 
-Status: **P13 complete — all 35 X1 spell cards and the Mini Hakkero / Nuclear Control Rod / Dragon Neck Jewel items on top of every shot / laser form; see PORT-ROADMAP.md**.
+Status: **P13 complete — all 35 X1 spell cards and the danmaku-weapon items (Mini Hakkero, Nuclear Control Rod, Dragon Neck Jewel, both gohei, Gap, Gap Folding Umbrella) on top of every shot / laser form; see PORT-ROADMAP.md**.
 
 Target:
 - Minecraft 1.20.1

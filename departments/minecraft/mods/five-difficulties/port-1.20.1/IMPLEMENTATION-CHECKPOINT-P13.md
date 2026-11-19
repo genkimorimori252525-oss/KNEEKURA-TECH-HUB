@@ -111,3 +111,31 @@ quick release blows a wind that knocks a husk up by 2.0 and costs 1 durability, 
 repairs the gohei from 40 to 0); `FIVE_DIFFICULTIES_P13_CLIENT_RESOURCES_PASS items=5`; the P12 in-world
 frame shows a half-drawn pentagram and a wind.
 
+## P13d — Gap, Gap Folding Umbrella and the gap warp
+
+Oracle: X1 `ItemSukima`, `ItemGapFoldingUmbrella`, `EntitySukima` (the warp and interaction the P12 port
+left out), `THShotLib.getAngleAndAngleSpan` (now `X1ShotSpecials.angleAndAngleSpan`).
+
+- `SukimaEntity` warp: anything (except gaps) inside a gap's 2 × 2.5 × 2 box goes to the nearest other gap
+  of the same colour mod 32, more than 5 and at most 128 away, 1.8 in front of it, and is immune for 40
+  ticks (portal cooldown). Shots are re-aimed by the angle between the gaps; other entities have their
+  yaw turned and their motion multiplied by sin / cos of a degree value fed in as radians (an X1 bug,
+  kept). An empty 128-block search keeps the previous target, as in X1. Dye re-colours a placed gap
+  (1.7.10 dye-damage order); sneak-use (or the remorse rod, once ported) picks it up as a Gap item.
+- `GapItem`: places a colour-1 gap on the face you look at (angle by face, top / bottom snapped to 45°)
+  or 2 blocks ahead in the air, using up one Gap. Sneak-use opens a 24-tick colour-16 pair, here and
+  where a 128-block look ray hits (a block more than 5 away, or a living entity beyond 5 on the way), and
+  uses up the Gap only 15% of the time. The far end of that ray starts from the feet, as in X1.
+- `GapFoldingUmbrellaItem` (30 uses, glint, ribbon tinted by its colour): sneak-use cycles 16 colours;
+  use opens a 24-tick gap of colour 32 + c (pairing with colour-c gaps); the 30th use folds it into a Gap.
+  A 1.20 damageable stack always has a tag, so X1's "no NBT yet" is read as "no GapColor yet".
+- X1's `ItemHoutou` is not registered (its line in `THKaguyaItems` is commented out) and only plays a
+  sound; nothing live in X1 spawns `EntityHomingAmulet` or `EntityTHHenyoriLaser`. Neither the Houtou
+  item nor the Henyori laser is ported; P2's `HomingAmuletProjectile` stays for its P6 checks.
+
+Receipts: `FIVE_DIFFICULTIES_P13_GAP_PASS warp=husk+shot dye=4 pair=2 umbrella=33` (a placed gap uses one
+Gap; a husk and a shot in it reach the other gap 20 blocks away and the husk is on cooldown; blue dye
+gives colour 4; sneak-use picks it up; a sneak-use against a wall 20 blocks away opens two colour-16
+gaps that are gone 30 ticks later; the umbrella cycles to colour 1, opens a colour-33 gap at damage 1,
+and its 30th use returns a Gap); `FIVE_DIFFICULTIES_P13_CLIENT_RESOURCES_PASS items=7`.
+

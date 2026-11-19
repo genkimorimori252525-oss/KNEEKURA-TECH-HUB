@@ -211,7 +211,13 @@ public final class ClientRuntimeSmoke {
         requireItemModel(minecraft, PortRegistries.WIND_MIKO_STICK.get(), "Wind Shrine Maiden Stick");
         requireResource(minecraft, id("textures/item/wind_miko_stick.png"));
         requireResource(minecraft, id("textures/entity/miracle_circle.png"));
-        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P13_CLIENT_RESOURCES_PASS items=5");
+        requireItemModel(minecraft, PortRegistries.GAP.get(), "Gap");
+        requireItemModel(minecraft, PortRegistries.GAP_FOLDING_UMBRELLA.get(), "Gap Folding Umbrella");
+        for (String t : new String[] {"item/gap", "item/gap_folding_umbrella_base", "item/gap_folding_umbrella_ribbon",
+                "entity/sukima"}) {
+            requireResource(minecraft, id("textures/" + t + ".png"));
+        }
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P13_CLIENT_RESOURCES_PASS items=7");
 
         var root = minecraft.getEntityModels().bakeLayer(SakuyaTimeControllerModel.LAYER_LOCATION);
         root.getChild("watch_base");

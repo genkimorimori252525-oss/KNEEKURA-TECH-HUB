@@ -45,6 +45,8 @@ public final class PortClientEvents {
 
     @SubscribeEvent
     public static void registerItemColors(net.minecraftforge.client.event.RegisterColorHandlersEvent.Item event) {
+        event.register((stack, layer) -> dev.kneekura.fivedifficulties.forge.item.GapFoldingUmbrellaItem.tint(stack, layer),
+                PortRegistries.GAP_FOLDING_UMBRELLA.get());
         for (var item : PortRegistries.SHOT_ITEMS) {
             event.register((stack, tintIndex) -> dev.kneekura.fivedifficulties.forge.item.THShotItem.tint(stack, tintIndex),
                     item.get());

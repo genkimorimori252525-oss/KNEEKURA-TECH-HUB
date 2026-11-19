@@ -225,6 +225,12 @@ public final class PortRegistries {
     public static final RegistryObject<Item> WIND_MIKO_STICK = ITEMS.register("wind_miko_stick",
             () -> new dev.kneekura.fivedifficulties.forge.item.OharaibouSItem(new Item.Properties()));
 
+    // ---- P13d ----
+    public static final RegistryObject<Item> GAP = ITEMS.register("gap",
+            () -> new dev.kneekura.fivedifficulties.forge.item.GapItem(new Item.Properties()));
+    public static final RegistryObject<Item> GAP_FOLDING_UMBRELLA = ITEMS.register("gap_folding_umbrella",
+            () -> new dev.kneekura.fivedifficulties.forge.item.GapFoldingUmbrellaItem(new Item.Properties()));
+
     public static final RegistryObject<Item> SHOT_MATERIAL = ITEMS.register("shot_material",
             () -> new dev.kneekura.fivedifficulties.forge.item.ShotMaterialItem(new Item.Properties()));
 
