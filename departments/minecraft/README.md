@@ -2,6 +2,23 @@
 
 KNEEKURA TECH HUB の Minecraft MOD 開発専用部門。
 
+## 建築（Minecraft Building）
+
+[建築ジャンル](building/README.md)を独立登録。第一候補 [mcbuild](building/mcbuild/README.md) の自然言語→DSL→3Dプレビュー→自己見直し→`.schem` 出力を、**必要時だけ**使う固定リビジョンのローカルアダプターとして接続。Forge 1.20.1へのワールド反映は未検証で、NeoForge 1.21.1のupstream直接建築とは区別する。
+
+
+## 独立AI部門との連携（2026-10-11）
+
+[AI専門研究部門](../ai/README.md) は指揮階層・群体知能・学習・AI評価の一般化を担当し、Minecraft部門はMob実装、Forge API、JAR/Bytecode、LAB/GameTestでの検証を担当する。`mod-ai/`（MOD制作AI基盤）を改名・移動しない。
+
+- [階層型指揮・群体知能 v0](../ai/multi-agent/HIERARCHICAL-COMMAND-AI-v0.md) — **独立した将来設計候補**
+- [Scape and Run: Parasites 1.9.21 Bytecode解析](mods/scape-and-run-parasites/COMBAT-AI-BYTECODE-2026-10-11.md) — **実物の旧版JARの限定的な静的証拠**
+
+## 弾幕の下書き
+
+[JavaFX 3Dの弾幕スケッチ](danmaku-preview/README.md)で、Minecraft起動前に
+扇状・全周・回転連射の数値と時間変化を調整する。実機への取り込みは次段階。
+
 ## 互換性方針 — Anchor + Frontier
 
 この部門は **Minecraft 1.20.1 + Forge に固定しない**。
@@ -99,6 +116,31 @@ Sinytra Connector は 1.20.1 Forge 系と現行 NeoForge 系の両方を保持�
 
 対象横断の一覧は catalog/MODS.md。詳細手順は ANALYSIS-SPEC-v1.md。
 
+## 再利用技術ライブラリ
+
+対象MOD固有の解析から、複数製品へ安全に移植できる設計契約は `techniques/` に分離する。
+
+最初の正式Toolkit:
+- [Boss Combat Toolkit v1](techniques/boss-combat-toolkit/README.md) — Attack Lifecycle / Beam / Projectile Deflection / Temporary Faction / Client FX Budget / Boss Presentation を、製品固有の数値を持たない再利用契約と検証シナリオとして定義する。
+
+Toolkitは共通ランタイム実装を強制しない。各製品は必要なmoduleだけを採用し、実装・数値・受け入れ根拠を自身で所有する。
+
+## 古文 — 太古の MOD 解析
+
+Minecraft 1.7.10以前を典型例とする、現代APIと大きく隔たった歴史的MODは
+[古文](kobun/README.md)で別系統として解析する。
+
+古文targetは通常の `mods/` / `catalog/MODS.md` に混ぜず、
+
+- ORIGINAL — 当時の原版
+- ERA-CONTEXT — 同時代資料
+- DESCENDANT — 後世のport/remake
+- MODERN-EXTRACTION — 現代へ持ち帰る派生知識
+
+を分離する。古いclass/APIを1.20.1へ黙って読み替えない。
+
+古文専用catalog: [kobun/catalog/MODS.md](kobun/catalog/MODS.md)
+
 ## 軽量化 — Performance / Optimization Technology
 
 性能改善を主目的とするMODは [軽量化](optimization/README.md) で別系統として解析する。
@@ -129,3 +171,28 @@ Vanilla AIの意味解析は [vanilla-ai](vanilla-ai/README.md)、実機での�
 [2026-09-28 確定設計](design/2026-09-28-mod-ai-environment/DESIGN.md)は、Source Intelligence、全classpath、source/bytecode、Connector研究、実装例・失敗例、GameTestと実機観測を既存部門へ接続する設計。4巡の敵対的設計監査、採否記録、受け入れ仕様、参考原典を同じディレクトリに保持する。
 
 設計資料であり、新機能の実装・動作検証・既存解析キューの完了を意味しない。
+
+
+## 成果物との境界
+
+この部門はMinecraft技術の調査・根拠・移植知識を保持する。KNEEKURA自身が作るMODの製品ソースは [`deliverables/minecraft/`](../../deliverables/minecraft/README.md) に置く。
+
+例: Bedrock Witherの仕様調査・先行MOD解析・受入根拠は本部門、実際のKNEEKURA Wither MODコード・製品Status・自開発の失敗修理史はdeliverable側。製品で得た教訓を一般技術へ戻す場合も、通常のEvidence/Review経路を通す。
+
+
+## 再利用技術ノート
+
+複数対象へ転用できる実装パターンは [`techniques/`](techniques/README.md) に分離する。これは各MOD固有の仕様書やcanonical Claimの代替ではなく、原典・適用条件・失敗例を保持した技術回収ノート。
+
+最初のノートは [Boss combat state machines and lifecycle boundaries](techniques/boss-combat-state-machines.md)。Bedrock Wither/BEStyleWither調査から、フェーズLatch、突進分離、semantic deathとvisual deathの分離、projectile policy、曖昧仕様の保持、read-only debug stateを一般化した。
+
+## KNEEKURA-made product MODs (2026-10-09)
+
+- [Product workspaces](projects/README.md) — `projects/kirby-mod/` contains the canonical Kirby source import from the former `Kirby_mod` repository. The old repo remains a read-only historical backup; Reimu and Natural Ghast have not been migrated in this Kirby change.
+- [Shared MOD debugging roadmap](design/2026-10-09-shared-mod-debug-roadmap.md) — plan to replace incomplete per-MOD diagnostics with optional adapters to the existing LAB / MOD-AI system; no shared debug runtime claimed yet.
+
+
+### 新しい感染・指揮AI原作研究
+
+[Spore 2.2.0j](mods/fungal-infection-spore/README.md) はユーザー提供Minecraft 1.20.1 Forge JARを固定し、Protoの4×4部隊選択/報酬更新、Womb/Moundの資源回収・感染、上位個体の標的共有を選定Bytecodeから調査中。AI部門での一般化は [別研究](../ai/multi-agent/PROTO-HIVEMIND-CASE-STUDY-2026-10-11.md)。実機検証とwhole-target completeは未実施。
+

@@ -149,7 +149,7 @@ globalThis.SimStore = (function () {
     function ensureLane(id) {
       let lane = lanes.get(id);
       if (!lane) {
-        lane = { ticks: new Int32Array(CAP0), values: new Float32Array(CAP0 * STRIDE), n: 0 };
+        lane = { ticks: new Int32Array(CAP0), values: new Float32Array(CAP0 * STRIDE), n: 0, syntheticAnchor: false };
         lanes.set(id, lane);
       }
       return lane;
@@ -569,6 +569,50 @@ globalThis.SimStore = (function () {
         t0: lane.ticks[0],
         t1: lane.ticks[lane.n - 1],
         at: (t) => stateAt('pos', id, t),
+        /**
+         * SampledMotionTrace v1 用の「保持されている点」だけを返す。
+         *
+         * at(t) は前方フィルされた状態なので、任意tickを「観測点」として扱ってはいけない。
+         * samples() は pos レーンに実際に残っている変化点/ライブ窓アンカーだけを公開し、
+         * 由来を明示した source_observation_id を付ける。二次的な軌跡生成側はこの入口を
+         * 使うことで、前方フィルを生観測と取り違えない。
+         */
+        samples: (startTick, endTick, limit) => {
+          const start = startTick == null ? lane.ticks[0] : (startTick | 0);
+          const end = endTick == null ? lane.ticks[lane.n - 1] : (endTick | 0);
+          const max = limit == null ? 4096 : (limit | 0);
+          if (max < 1) throw new Error('SimStore.trackOf.samples: limit must be positive');
+          if (end < start) return [];
+          const lo = lowerBoundBy(lane.n, start, (i) => lane.ticks[i]);
+          const hi = upperBoundBy(lane.n, end, (i) => lane.ticks[i]);
+          if (hi - lo > max) {
+            throw new Error('SimStore.trackOf.samples: retained sample count ' + (hi - lo) + ' exceeds limit ' + max);
+          }
+          const out = [];
+          for (let i = lo; i < hi; i++) {
+            // trimBefore() が状態継続のために左端へ移した合成アンカーは、
+            // 位置問い合わせには必要でも「観測されたサンプル」ではない。
+            if (i === 0 && lane.syntheticAnchor === true) continue;
+            const tick = lane.ticks[i];
+            const base = i * STRIDE;
+            const row = rowFromValues(id, tick, lane.values.subarray(base, base + STRIDE));
+            row.source_observation_id = 'simlab-pos:' + id + ':' + tick;
+            row.source_kind = 'SIMLAB_POS_RETAINED_POINT';
+            out.push(row);
+          }
+          return out;
+        },
+        /** 直近の保持点を二分探索で1件だけ返す。前方フィルした問い合わせ値ではない。 */
+        sampleAtOrBefore: (tick) => {
+          const i = findFloorIndex(lane.ticks, lane.n, tick | 0);
+          if (i < 0 || (i === 0 && lane.syntheticAnchor === true)) return null;
+          const sampleTick = lane.ticks[i];
+          const base = i * STRIDE;
+          const row = rowFromValues(id, sampleTick, lane.values.subarray(base, base + STRIDE));
+          row.source_observation_id = 'simlab-pos:' + id + ':' + sampleTick;
+          row.source_kind = 'SIMLAB_POS_RETAINED_POINT';
+          return row;
+        },
       };
     }
 
@@ -633,6 +677,8 @@ globalThis.SimStore = (function () {
     function trimStrided(lane, w, stride) {
       const k = findFloorIndex(lane.ticks, lane.n, w);
       if (k < 0) return 0;                       // 窓より前に変化点が無い。何もしない
+      const sourceTick = lane.ticks[k];
+      const sourceWasSynthetic = k === 0 && lane.syntheticAnchor === true;
       const keep = lane.n - k;
       if (k > 0) {
         lane.ticks.copyWithin(0, k, lane.n);
@@ -640,6 +686,9 @@ globalThis.SimStore = (function () {
         lane.n = keep;
       }
       lane.ticks[0] = w;                          // アンカーを窓の左端へ寄せる
+      // 状態問い合わせ用に tick を w へ寄せた点は「実際に w で観測した点」ではない。
+      // Motion Trace がこの合成アンカーを生観測として扱わないよう印を保持する。
+      lane.syntheticAnchor = sourceWasSynthetic || sourceTick < w;
       // 中身が容量の 1/4 を切ったらその 1 回だけ縮める。戦闘のピークで伸びたレーンが
       // 静かになった後も大きな Float32Array を握り続けるのを防ぐ。4 倍の余裕を残すので、
       // 伸ばし直しと縮め直しが交互に起きることはない。

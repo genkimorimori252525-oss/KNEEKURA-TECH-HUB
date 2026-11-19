@@ -1,5 +1,7 @@
 # KNEEKURA Minecraft — Current Handoff
 
+**Newer continuation entry:** [CURRENT-HANDOFF-2026-10-03.md](CURRENT-HANDOFF-2026-10-03.md). The dated foundation status below is preserved as history.
+
 Date: **2026-10-02**  
 Status: **CURRENT ENTRY POINT — supersedes older files that call themselves "current"**  
 Canonical development line: **`main`**  
@@ -11,7 +13,17 @@ For the complete remaining-work sequence from the 2026-10-02 Water Tank / Vanill
 
 - [LOCAL-EXECUTION-HANDOFF-2026-10-02.md](LOCAL-EXECUTION-HANDOFF-2026-10-02.md)
 
-It includes the real local Vanilla Foundation Map generation, unfinished Vanilla AI research, the **still-unimplemented On-Demand Sampled Motion Trace plan**, Entity Decision Observatory implementation, MOD adapter proofs, and final integrated verification.
+It includes the real local Vanilla Foundation Map generation, unfinished Vanilla AI research, the On-Demand Sampled Motion Trace workstream, Entity Decision Observatory implementation, MOD adapter proofs, and final integrated verification.
+
+## 2026-10-03 foundation progress
+
+The GitHub-executable foundation slice is recorded in:
+
+- [lab/docs/MOTION-DECISION-FOUNDATION-2026-10-03.md](lab/docs/MOTION-DECISION-FOUNDATION-2026-10-03.md)
+
+That slice establishes `SampledMotionTrace v1`, shared Human/AI trace consumption, `DecisionObservationModel v1`, conservative exact-subject adapters over existing SimLab/Debug Workspace evidence, default-OFF Viewer behavior, and regression contracts.
+
+This does **not** mark the complete Motion Trace or Entity Decision Observatory workstreams finished. The real local Forge Foundation Map generation, complete Vanilla AI research, deep Goal/Brain/path-search/malus/movement-control instrumentation, live Minecraft overlay, MOD proof adapters, and representative real-machine acceptance remain open exactly as described in the local execution handoff.
 
 ## Read this first
 
@@ -27,7 +39,8 @@ The Minecraft engineering system is now one Tech Hub monorepo:
 departments/minecraft/
 ├─ mod-ai/       knowledge, TaskContext, evidence contracts and MOD-making AI interfaces
 ├─ lab/          bounded experiment/observation apparatus, Tank, capture and retained SimLab/Viewer history
-├─ mods/         analyzed MOD technology and reusable engineering findings
+├─ mods/         modern analyzed MOD technology (ANCHOR / FRONTIER)
+├─ kobun/        historically isolated ancient MOD analysis (ORIGINAL-first)
 └─ design/       architecture and acceptance design records
 ```
 

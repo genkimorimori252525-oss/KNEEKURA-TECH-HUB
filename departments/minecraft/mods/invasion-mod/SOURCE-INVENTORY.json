@@ -1,0 +1,70 @@
+{
+  "record_kind": "SOURCE_AND_ARTIFACT_INVENTORY",
+  "captured_at": "2026-10-04",
+  "target": "Invasion Mod",
+  "comparative_legacy": {
+    "distribution": {
+      "filename": "Invasion_1.1.2_1.7.10.jar",
+      "minecraft": "1.7.10",
+      "mod_version": "1.1.2",
+      "size_bytes": 1189673,
+      "sha256": "944f4c33687ef256bf692666421a757345519b1318df96de95565a53c2e28ddc",
+      "sha1": "be07920e0e793d331f5eb934c884448363a4cf52",
+      "zip_entries": 327,
+      "class_entries": 231,
+      "mcmod_authors": [
+        "Lieu",
+        "Elsee",
+        "UnstoppableN"
+      ],
+      "dependency": [
+        "MinecraftForge"
+      ]
+    },
+    "public_source": {
+      "repository": "UnstoppableN/Invasion-mod",
+      "commit": "644a52ddea104c206d022bef9edc135c060cba1d",
+      "tree": "4e811387f192fc9649d09135eb253abf0fa76f39",
+      "files": 392,
+      "java_files": 231,
+      "resources": 75,
+      "recursive_tree_truncated": false,
+      "compiled_class_equivalence": "NOT_PROVEN"
+    }
+  },
+  "anchor": {
+    "repository": "kevintrini2811/Invasion-Mod",
+    "branch": "1.20.1-neo",
+    "commit": "aaa6812b786eeb4c7b48ec5cc7a77d061d6b9e10",
+    "tree": "1a9ceaca853f06fadd9f4d7da23085abbf85d51a",
+    "minecraft": "1.20.1",
+    "loader_build": "LegacyForge/NeoForge-compatible",
+    "java": 17,
+    "source_mod_version": "2.1.0",
+    "files": 684,
+    "java_files": 366,
+    "resources": 309,
+    "recursive_tree_truncated": false,
+    "distribution_correspondence": "UNKNOWN"
+  },
+  "frontier": {
+    "repository": "kevintrini2811/Invasion-Mod",
+    "branch": "26.3neo",
+    "commit": "fce5d30b74f804ae90814c7a10cdff255ba80363",
+    "tree": "bde815ea7f1de411f0d3e53579d4a63ae96d89b6",
+    "minecraft": "26.3",
+    "loader": "NeoForge 26.3.0.6-beta",
+    "java": 25,
+    "source_mod_version": "2.1.0",
+    "files": 700,
+    "java_files": 371,
+    "resources": 319,
+    "recursive_tree_truncated": false
+  },
+  "notes": [
+    "Player-facing websites are not included in full-tree counts.",
+    "No runtime was launched.",
+    "No source-binary reproducible-build comparison was performed.",
+    "Current CurseForge release metadata can be newer than the pinned public source branch; it is treated as separate distribution evidence."
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "format": "kneekura.product-gametest-evidence.v1",
+  "deliverable": "minecraft/bedrock-wither",
+  "recorded_at": "2026-10-03",
+  "kind": "EXISTING_CONTRACT_ACCEPTANCE_STRENGTHENED",
+  "baseline_commit": "6e169f1dc1607f389de29a3ea6ea093aff24c4cc",
+  "production_behavior_changed": false,
+  "changed_test_sha256": {
+    "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/gametest/BedrockWitherGameTests.java": "98123a83a574ed79be289af7128b8d46fbc5f58ecda8647c4a0f641bd10c1fe9"
+  },
+  "environment": {
+    "minecraft": "1.20.1",
+    "forge": "47.2.0",
+    "java": "Temurin 17.0.20.1+1",
+    "gradle": "8.1.1",
+    "runner": "isolated cloud Linux"
+  },
+  "final_runs": [
+    {
+      "command": "gradle build runGameTestServer --no-daemon --max-workers=2",
+      "sequence": 1,
+      "same_world_as_prior_final_run": false,
+      "exit_code": 0,
+      "required_tests": 24,
+      "passed": 24,
+      "failed": 0,
+      "log_sha256": "945918f4553d7acbc6be8dca129d0a290f1564f329fceaf93840384f31790812"
+    },
+    {
+      "command": "gradle build runGameTestServer --no-daemon --max-workers=2",
+      "sequence": 2,
+      "same_world_as_prior_final_run": true,
+      "exit_code": 0,
+      "required_tests": 24,
+      "passed": 24,
+      "failed": 0,
+      "log_sha256": "e58b217ee1b6a259a2a768540dbc1fe786bc051aaf5099a501e87332cc3bc6fa"
+    }
+  ],
+  "repository_suite": {
+    "command": "python -m pytest -q --basetemp=/dev/shm/wither-pytest-rewards-20261003",
+    "passed": 3038,
+    "skipped": 435,
+    "failed": 0,
+    "duration_seconds": 311.96,
+    "log_sha256": "b68106ac7593b69a1fea3a04c715267aa331e8bc0264de2b8501cc03bf3fcfd5"
+  },
+  "assertion_scope": [
+    "real playerAttack damage path using the built-in survival-player GameTest fixture preserves initial kill credit and matching Forge death/loot/XP events",
+    "initial actual rewards total 50 XP including saved orb Count times value and exactly one Nether Star",
+    "repeated die during the active countdown does not restart it; ordinary Forge XP/drop hooks and observed rewards are not duplicated through final removal and repeated terminal calls",
+    "per-call positive reward observations, finally-scoped observer cleanup and two repeated-world runs"
+  ],
+  "fixture_history": {
+    "early_draft_passed": 24,
+    "failed_reuse_precondition": "doMobLoot=true, existingOrbs=0, existingItems=5",
+    "diagnosed_items": "Saved entity NBT identified dirt, cobbled deepslate and cobblestone, with no XP or Nether Star in the observation bounds",
+    "repair": "Restrict the item precondition to the actual Nether Star target, retain the XP guard/exact reward assertions, and clean only test-owned rewards and boss on success/failure",
+    "reset": "Only the generated draft GameTest world was archived. Final verification ran twice consecutively without resetting between runs.",
+    "failed_log_sha256": "733bc7aa4e907e89c53c3bb06da470c8184dea17baad528976863552c0338af9"
+  },
+  "review": {
+    "method": "independent Forge source/mapped-bytecode, fixture code and generated-NBT review",
+    "blocking_findings": 0
+  },
+  "not_proven": [
+    "actual ServerPlayer advancement grants or player-credit lifetime over 200 real world ticks",
+    "survival of ordinary XP orbs through the final explosion",
+    "a direct award created and destroyed within one synchronous call without normal Forge reward hooks",
+    "exact current Bedrock XP/death timing, real-client rendering or Tank parity"
+  ],
+  "retention": "Only hashes and bounded summaries are tracked. Generated worlds, raw logs, credentials and upstream binaries remain excluded."
+}

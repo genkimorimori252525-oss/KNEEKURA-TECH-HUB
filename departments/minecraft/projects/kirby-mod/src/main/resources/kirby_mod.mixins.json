@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "com.example.kirby_mod.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "kirby_mod.refmap.json",
+  "mixins": [
+    "LivingEntityEffectParticleMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -1,0 +1,94 @@
+name: Bedrock Wither UIA Probe
+
+on:
+  push:
+    branches:
+      - codex/bedrock-wither-lifecycle-regressions-2026-10-03
+    paths:
+      - '.github/workflows/bedrock-wither-uia-probe.yml'
+      - '.github/bedrock-wither-uia-probe-request.txt'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bedrock-wither-uia-probe
+  cancel-in-progress: false
+
+jobs:
+  uia-probe:
+    runs-on: [self-hosted, Windows, X64]
+    timeout-minutes: 8
+    defaults:
+      run:
+        shell: powershell
+
+    steps:
+      - name: Launch Bedrock and inspect UI Automation tree
+        run: |
+          $ErrorActionPreference = 'Stop'
+          Add-Type -AssemblyName UIAutomationClient
+          Add-Type -AssemblyName UIAutomationTypes
+
+          $sessionId = (Get-Process -Id $PID).SessionId
+          $before = @(
+            Get-Process -ErrorAction SilentlyContinue |
+              Where-Object { $_.SessionId -eq $sessionId -and $_.ProcessName -match 'Minecraft|Minecraft.Windows' } |
+              Select-Object -ExpandProperty Id
+          )
+
+          Start-Process 'minecraft://'
+          $deadline = (Get-Date).AddSeconds(60)
+          do {
+            Start-Sleep -Seconds 2
+            $windowProcess = Get-Process -ErrorAction SilentlyContinue |
+              Where-Object {
+                $_.SessionId -eq $sessionId -and
+                $_.MainWindowHandle -ne 0 -and
+                $_.MainWindowTitle -eq 'Minecraft'
+              } |
+              Select-Object -First 1
+          } while ($null -eq $windowProcess -and (Get-Date) -lt $deadline)
+
+          if ($null -eq $windowProcess) { throw 'No top-level Minecraft window found' }
+          Start-Sleep -Seconds 15
+
+          $root = [System.Windows.Automation.AutomationElement]::FromHandle($windowProcess.MainWindowHandle)
+          if ($null -eq $root) { throw 'UI Automation root unavailable' }
+
+          $all = $root.FindAll(
+            [System.Windows.Automation.TreeScope]::Descendants,
+            [System.Windows.Automation.Condition]::TrueCondition
+          )
+
+          $items = @()
+          $limit = [Math]::Min($all.Count, 250)
+          for ($i = 0; $i -lt $limit; $i++) {
+            $el = $all.Item($i)
+            $items += [ordered]@{
+              index = $i
+              name = $el.Current.Name
+              automation_id = $el.Current.AutomationId
+              control_type = $el.Current.ControlType.ProgrammaticName
+              enabled = $el.Current.IsEnabled
+              keyboard_focusable = $el.Current.IsKeyboardFocusable
+            }
+          }
+
+          $interesting = @($items | Where-Object {
+            $_.name -match 'プレイ|Play|作成|Create|閉じ|Close|世界|World|マーケット|Marketplace|設定|Settings'
+          })
+
+          Write-Host ('BWR_UIA_SUMMARY_JSON=' + ([ordered]@{
+            root_name = $root.Current.Name
+            descendant_count = $all.Count
+            sampled_count = $items.Count
+            interesting = $interesting
+          } | ConvertTo-Json -Depth 6 -Compress))
+
+          $newPids = @(
+            Get-Process -ErrorAction SilentlyContinue |
+              Where-Object { $_.SessionId -eq $sessionId -and $_.ProcessName -match 'Minecraft|Minecraft.Windows' -and $before -notcontains $_.Id } |
+              Select-Object -ExpandProperty Id
+          )
+          foreach ($pidToStop in $newPids) { Stop-Process -Id $pidToStop -Force -ErrorAction SilentlyContinue }

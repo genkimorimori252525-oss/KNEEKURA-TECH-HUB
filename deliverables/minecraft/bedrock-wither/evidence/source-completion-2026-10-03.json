@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "recorded_date_utc": "2026-10-03",
+  "baseline_commit": "6e2faafcb5789ce5f3d8c355bf208d037cf96646",
+  "scope": "Source-backed standalone Wither software completion; no empirical Bedrock/Tank measurement prerequisite or parity claim",
+  "anchor": {
+    "java": 17,
+    "minecraft_java": "1.20.1",
+    "forge": "47.2.0",
+    "gradle": "8.1.1",
+    "mojang_samples": "46ba6ea985fb5a92d79a9419198f10dda14c199d"
+  },
+  "source_fingerprint": {
+    "algorithm": "SHA256 over sorted relative path + NUL + file SHA256 + newline",
+    "value": "2ac9aaa28e3cea3eded657bb3a86d2a90a8dad2bc94b78efdc1df8f3508fec36",
+    "files": {
+      "deliverables/minecraft/bedrock-wither/mod/build.gradle": "7874bbe1aa4daacb84a619df39ee52e1c8cf0e57304bad95d276dc43f1f121f6",
+      "deliverables/minecraft/bedrock-wither/mod/gradle.properties": "807f0a93ebf731acddaedf4a9ce0953bd4479bdd97d1d72129f98cdd352ab05b",
+      "deliverables/minecraft/bedrock-wither/mod/settings.gradle": "151b8003a1513cd62ee3c8378655a94f75a0ead7f17ce35373a7138cedd01086",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/BedrockWitherMod.java": "e291f7574e67b3b82ace4528c554ef2d782ceae22a795fa85b062593d1956eba",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/client/BedrockWitherArmorLayer.java": "95941b4f0320dc407691bf91e3ec082e47a6362d57c23ac772667c3c8122e8e5",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/client/BedrockWitherModel.java": "420cd6489a4f68ef133a813650583ec564cbf565aab08bdc2a7ae36a3afc5a89",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/client/BedrockWitherPlaceholderRenderer.java": "3e14d5c1ca158d0033325eaf858ba823a02b85d78e995e5473acfad355ec3d0d",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/client/BedrockWitherRenderer.java": "28fc759c5b111820a55962c54709d5b619b30340d0c33085246982928bd968cb",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/client/ClientEntityRenderers.java": "5c220367d801d391098f98f7f5a5d20d5aa5b3f9ddfd52ebb7a70d7a0d321390",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/entity/BedrockWitherAttackController.java": "aad2f051fbc1917bd8664564561212d2a129c9a543eac5197a60882f4da4fe1d",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/entity/BedrockWitherAttackType.java": "4fc2308fe42d7ed0a6ac4b35da8e3849e0a9e0886a2a7344eb36b481dcf163ad",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/entity/BedrockWitherBlockRules.java": "c5352a5c0b268ae5dc7ae30bbbfb21f73fb5e7edf3d61070fd8edda8a7b8c427",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/entity/BedrockWitherDashController.java": "d08258395ecaf82e7f9099573582efb83c3dac05529b7ad430beec1944d8262a",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/entity/BedrockWitherDeathController.java": "41818622f783cf4112408efd5cb31d91fbd04a2b0f63cadcda814210e5e78c46",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/entity/BedrockWitherDebugSnapshot.java": "d425c983464b0bb3e57cdd91a303dc07b0c75416a835d3add4ef2301d68af0b6",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/entity/BedrockWitherDestructionController.java": "00f0a8f530b38989e86dcc158a2aa24653c2873048828d0f370c3ac95dd5015d",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/entity/BedrockWitherEntity.java": "6c25aab085763585b29efc2d86638c995940f1f4b7a1759c81e2dd84907b032b",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/entity/BedrockWitherHeadDebugSnapshot.java": "d43075400723c453615b9f834a987e13c6e774046251bc42fdd6ebef69660593",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/entity/BedrockWitherHeadRuntime.java": "5e3d383a5cff018d642273271217e25518ff0ead632b12c3677e63e9ccf9855f",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/entity/BedrockWitherHeadTrackingController.java": "fc6486e81674193eb1458f1865914816884f9b55e3f876d5a4e71b20ce0bcdb7",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/entity/BedrockWitherHurtReactionController.java": "b6b0202660d58202c50a230bf2f85773df158257aed2b33e02e24363c4887cc3",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/entity/BedrockWitherPhaseController.java": "363196deb4bdea390c679f400c3f6a4494a07d3c4af5e16203100f4885ffab52",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/entity/BedrockWitherPreAiStepResult.java": "7e29ac5cc29eb7448a9cb3f5ac87d54fc6e568df46e2abc3e78a79c8a4bd77ed",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/entity/BedrockWitherPresentation.java": "751a7ae2ca1efbc1f5467d8bb2511893c1fa1985879c63d709cded3588cb035f",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/entity/BedrockWitherRuntimeState.java": "67cc4a06b62bf75c28ce774d1f93c42f657c3906a66dadcd57fb0b4959c9e1bf",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/entity/BedrockWitherSideHeadController.java": "c3ac9382032b79bdf2c4e6deacfa1da41472efe27e81d72dc2c13aa5887d0231",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/entity/BedrockWitherSpawnController.java": "3e8bff9680767af08782092f6f10708d009b6eac99947101970a887a6cfb8bdc",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/entity/BedrockWitherSpecialMovementController.java": "4943b377f03571275fbc460d082b6e5bd4a9412a496f8ba995b413c7f8e889e0",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/entity/BedrockWitherState.java": "842f73e67b28ec7949285435f61b8e3189c3b5aa5561586ac8e6e4a9c13940c7",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/entity/BedrockWitherStateMachine.java": "288b59b419deb0336d2530387cc23c85665d1c9f6c9afcb3d167181b0e0b3e85",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/entity/BedrockWitherThreatLedger.java": "6ae21870309a4181f7cf1fb75aeadb2965e2fd8e9e03e37c63ba286b5712fea5",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/entity/BedrockWitherVolleyController.java": "cd067da39e33f29ac7235329d092e9682b48247cdee44e73a288608876340500",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/entity/ai/BedrockHighestDamageTargetGoal.java": "c4d8a772430ff906a8c8600f00ea8c4752061423de874edc1d2d4d18f0ec2e0f",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/entity/projectile/BedrockWitherSkullEntity.java": "c5697f980410f24aa50ca22072815d5d5aeb3028722fef17592ac7c0db2975c3",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/entity/projectile/BedrockWitherSkullGameTests.java": "e1ec244f801340da36e67e6014be3bb0d2292d3c91b239128bc7c697abaa93cd",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/gametest/BedrockWitherCombatGameTests.java": "645a6f6d923c3fafca50451f2b16f6495d6938dfcf1077bdc3fd669d29be4967",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/gametest/BedrockWitherGameTests.java": "e2b10a5ce8d3da966da5e713678afec8355475c541e4708d80e38f99059ef674",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/gametest/BedrockWitherLifecycleCompletionGameTests.java": "a956bcbda4ca0429e48b92f54a1071ac74f7824b1f21922ab43049a76be7bc3c",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/gametest/BedrockWitherPresentationGameTests.java": "a527af5c22620c8ddd0e6a9bc85e3e96fabfa05c1208d44055f4c7c7f2d23f5c",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/registry/ModEntities.java": "ae36be02d545584765797baebee41ee1d95cbb0e8b704d1443cdc9b8af2094db",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/resources/META-INF/mods.toml": "1ea3f857d3ef9b3e7154fc134c8773dce483cb127b10f9bd2e528a027decc4e5",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/resources/assets/kneekura_bedrock_wither/lang/en_us.json": "379df83f3bb8426f6994df59f1ee1d859093675972eb6c2a8180defd31aa14c7",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/resources/assets/kneekura_bedrock_wither/lang/ja_jp.json": "8d7cec710cfba40374ad274f5129ff56cd3052f7fe3f4f6faf1b11999ec6fb46",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/resources/data/kneekura_bedrock_wither/loot_tables/entities/bedrock_wither.json": "78d6071a55bdff6f4f8b716f9ba2be4e102d23979986c5f2fb7637efbaf5d22f",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/resources/data/kneekura_bedrock_wither/structures/empty.nbt": "f7123226733f18db4cbf3cc2083939244ecc996fa722e6fe639eacb5d4be253b",
+      "deliverables/minecraft/bedrock-wither/mod/src/main/resources/pack.mcmeta": "5df081ab98b20b2418b2fa6d6db013512a8535da632d00096175c63f91a0c436"
+    }
+  },
+  "forge": {
+    "command": "gradle build runGameTestServer --no-daemon",
+    "required": 60,
+    "passed": 60,
+    "failed": 0,
+    "consecutive_final_source_runs": 2,
+    "same_generated_world": true,
+    "reset_between_final_runs": false,
+    "build_exit_code": 0,
+    "runs": [
+      {
+        "name": "persistence-green",
+        "duration": "57s"
+      },
+      {
+        "name": "completion-final-60",
+        "duration": "50s"
+      }
+    ],
+    "coverage": {
+      "retained_baseline": 24,
+      "ordinary_combat_targeting_persistence": 20,
+      "projectile_presentation": 11,
+      "lifecycle_loot_block_rule": 5
+    }
+  },
+  "python_repository": {
+    "command": "python -m pytest --basetemp <fresh Git-external test directory>",
+    "passed": 3038,
+    "skipped": 435,
+    "failed": 0,
+    "exit_code": 0,
+    "duration_seconds": 309.23,
+    "scope_note": "Completed before the final Java-only species-persistence guard; Python sources/dependencies were unchanged. The exact published tree also receives the complete hosted repository workflow."
+  },
+  "independent_review": {
+    "remaining_critical": 0,
+    "remaining_important": 0,
+    "resolved": [
+      "creative/spectator highest-damage targeting",
+      "transition bypass through public dash adapter",
+      "target loss freezing shared delay and passive heads",
+      "official persistent component lost through Monster inheritance"
+    ],
+    "source_and_bytecode_review": true,
+    "narrow_rereviews": true
+  },
+  "red_green": [
+    {
+      "scope": "initial ordinary combat paths",
+      "required": 30,
+      "failed": 5,
+      "prior_baseline_passed": 24
+    },
+    {
+      "scope": "lifecycle and block-rule regressions",
+      "own_expected_failures": 4,
+      "combined_required": 34,
+      "combined_failed": 9
+    },
+    {
+      "scope": "actual projectile dispatch/travel/reflection",
+      "own_expected_failures": 6,
+      "combined_required": 41,
+      "combined_failed": 12
+    },
+    {
+      "scope": "literal presentation expressions",
+      "own_expected_failures": 3,
+      "combined_required": 44,
+      "combined_failed": 15
+    },
+    {
+      "scope": "Nether Star expiry",
+      "own_expected_failures": 1,
+      "combined_required": 50,
+      "combined_failed": 3
+    },
+    {
+      "scope": "independent-review transition and targetless-delay defects",
+      "required": 59,
+      "failed": 2,
+      "green_passed": 59
+    },
+    {
+      "scope": "official persistence on new and legacy NBT bosses",
+      "required": 60,
+      "failed": 1,
+      "green_passed": 60
+    }
+  ],
+  "fixture_repairs": [
+    "absolute isolated heights instead of relative offsets through reused terrain",
+    "registered eligible high-health targets and real ServerLevel.tickNonPassenger",
+    "scoped no-network FakePlayers; difficulty/listener/entity/block cleanup in finally",
+    "owner-scoped projectile assertions and reward-empty high-altitude area",
+    "40-HP direct-impact fixture so Hard damage12 is not saturated by cow HP10"
+  ],
+  "artifact": {
+    "local_build_name": "kneekura_bedrock_wither-0.1.0-dev.jar",
+    "sha256": "9d9f83c991b63723318d27990e76f378e49d2dbd372d67404cf397905ace0be6",
+    "uploaded_as_binary": false
+  },
+  "publication": {
+    "repository": "genkimorimori252525-oss/KNEEKURA-TECH-HUB",
+    "branch": "codex/bedrock-wither-lifecycle-regressions-2026-10-03",
+    "pull_request": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/pull/81",
+    "hosted_record": "PR body records exact published commit/tree and terminal workflow links",
+    "draft": true,
+    "merge_authorized": false
+  },
+  "limits": [
+    "Historical native version is unresolved; current BDS headers are structural, not function bodies",
+    "Movement, cadence rounding/reset, descent, reflection and texture adapters are explicitly documented in ADOPTION",
+    "No Bedrock/client/Tank measurements or measured-equivalence claim",
+    "Headless presentation tests verify production-used math and state, not rendered pixels or network wire delivery",
+    "Actual ServerPlayer advancement grants and arbitrary third-party mod interactions are not established",
+    "Raw logs, generated worlds, dependencies and Bedrock textures are excluded from publication"
+  ]
+}

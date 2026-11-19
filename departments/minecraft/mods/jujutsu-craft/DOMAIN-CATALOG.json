@@ -1,0 +1,312 @@
+{
+  "format": "kneekura.jujutsucraft.domain-catalog.v1",
+  "anchor_sha256": "094247a33bf9c4a741a17fee9ecd1eb5879c97f107ae784af81cfc0f1eee26c9",
+  "default_radius": 22,
+  "default_shell_thickness": 1,
+  "zone_shell_thickness": 3,
+  "idle_death_gamble_shell_thickness": 10,
+  "modes": {
+    "normal_closed": 0,
+    "open_type_positive": "cnt2 > 0; normal shell branch suppressed except Cover/clash repair",
+    "megumi_special": -1
+  },
+  "domains": [
+    {
+      "id": 1,
+      "name": "Malevolent Shrine",
+      "outside": "jujutsu_barrier",
+      "inside": "domain_bone",
+      "floor": "block_red",
+      "special": [
+        "open-type capable",
+        "patterned inner shell"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Unlimited Void",
+      "outside": "jujutsu_barrier",
+      "inside": "block_universe",
+      "floor": "block_universe",
+      "special": []
+    },
+    {
+      "id": 3,
+      "name": "Inumaki Domain",
+      "outside": "jujutsu_barrier",
+      "inside": "domain_blue_sky",
+      "floor": "default/block_universe",
+      "special": []
+    },
+    {
+      "id": 4,
+      "name": "Coffin of the Iron Mountain",
+      "outside": "jujutsu_barrier",
+      "inside": "coffinofthe_ironmountain_1",
+      "floor": "coffinofthe_ironmountain_2",
+      "special": []
+    },
+    {
+      "id": 5,
+      "name": "Authentic Mutual Love",
+      "outside": "jujutsu_barrier",
+      "inside": "block_universe",
+      "floor": "block_gravel",
+      "special": []
+    },
+    {
+      "id": 6,
+      "name": "Chimera Shadow Garden",
+      "outside": "jujutsu_barrier",
+      "inside": "block_universe",
+      "floor": "block_universe",
+      "special": [
+        "Megumi cnt2=-1 route"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Kashimo Domain",
+      "outside": "jujutsu_barrier",
+      "inside": "domain_cloud",
+      "floor": "domain_cloud",
+      "special": []
+    },
+    {
+      "id": 8,
+      "name": "Horizon of Captivating Skandha",
+      "outside": "jujutsu_barrier",
+      "inside": "domain_blue_sky",
+      "floor": "domain_sand",
+      "special": [
+        "central grass",
+        "sand edge",
+        "water band"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Tsukumo Domain",
+      "outside": "jujutsu_barrier",
+      "inside": "default/block_universe",
+      "floor": "domain_sand",
+      "special": []
+    },
+    {
+      "id": 10,
+      "name": "Choso Domain",
+      "outside": "jujutsu_barrier",
+      "inside": "domain_blood",
+      "floor": "domain_blood",
+      "special": []
+    },
+    {
+      "id": 11,
+      "name": "Meimei Domain",
+      "outside": "jujutsu_barrier",
+      "inside": "domain_cloud",
+      "floor": "podzol",
+      "special": []
+    },
+    {
+      "id": 12,
+      "name": "Ishigori Domain",
+      "outside": "jujutsu_barrier",
+      "inside": "block_universe",
+      "floor": "domain_sand_black",
+      "special": []
+    },
+    {
+      "id": 13,
+      "name": "Nanami Domain",
+      "outside": "jujutsu_barrier",
+      "inside": "block_universe",
+      "floor": "stone_bricks",
+      "special": []
+    },
+    {
+      "id": 14,
+      "name": "Ceremonial Sea of Light",
+      "outside": "jujutsu_barrier",
+      "inside": "domain_blue_sky",
+      "floor": "domain_flower",
+      "special": []
+    },
+    {
+      "id": 15,
+      "name": "Self-Embodiment of Perfection",
+      "outside": "jujutsu_barrier",
+      "inside": "domain_bone",
+      "floor": "block_universe",
+      "special": [
+        "3-axis modulo-5 lattice"
+      ]
+    },
+    {
+      "id": 18,
+      "name": "Womb Profusion",
+      "outside": "jujutsu_barrier",
+      "inside": "domain_blood",
+      "floor": "block_red",
+      "special": [
+        "open-type capable"
+      ]
+    },
+    {
+      "id": 19,
+      "name": "Time Cell Moon Palace",
+      "outside": "jujutsu_barrier",
+      "inside": "default/block_universe",
+      "floor": "default/block_universe",
+      "special": [
+        "direct named route; no explicit palette override found"
+      ]
+    },
+    {
+      "id": 21,
+      "name": "Itadori Domain",
+      "outside": "jujutsu_barrier",
+      "inside": "default/block_universe",
+      "floor": "family-selected",
+      "special": [
+        "water/floor/fence layered lower structure"
+      ]
+    },
+    {
+      "id": 22,
+      "name": "Jinichi Domain",
+      "outside": "jujutsu_barrier",
+      "inside": "default/block_universe",
+      "floor": "default/block_universe",
+      "special": []
+    },
+    {
+      "id": 23,
+      "name": "Kurourushi Domain",
+      "outside": "jujutsu_barrier",
+      "inside": "domain_bone",
+      "floor": "block_red",
+      "special": []
+    },
+    {
+      "id": 25,
+      "name": "Graveyard",
+      "outside": "jujutsu_barrier",
+      "inside": "default/block_universe",
+      "floor": "block_gravel",
+      "special": []
+    },
+    {
+      "id": 27,
+      "name": "Deadly Sentencing",
+      "outside": "jujutsu_barrier",
+      "inside": "default/block_universe",
+      "floor": "planks",
+      "special": [
+        "inner plank-like radial floor",
+        "outer domain_stone_bricks"
+      ]
+    },
+    {
+      "id": 28,
+      "name": "Angel Domain",
+      "outside": "jujutsu_barrier",
+      "inside": "domain_blue_sky",
+      "floor": "domain_cloud",
+      "special": []
+    },
+    {
+      "id": 29,
+      "name": "Idle Death Gamble",
+      "outside": "jujutsu_barrier",
+      "inside": "domain_white",
+      "floor": "domain_white",
+      "special": [
+        "10-block shell thickness",
+        "special longer domain duration"
+      ]
+    },
+    {
+      "id": 34,
+      "name": "Kugisaki Domain",
+      "outside": "jujutsu_barrier",
+      "inside": "default/block_universe",
+      "floor": "podzol",
+      "special": []
+    },
+    {
+      "id": 38,
+      "name": "Uro Domain",
+      "outside": "jujutsu_barrier",
+      "inside": "block_universe",
+      "floor": "block_universe",
+      "special": []
+    },
+    {
+      "id": 39,
+      "name": "Threefold Affliction",
+      "outside": "jujutsu_barrier",
+      "inside": "domain_white",
+      "floor": "domain_white",
+      "special": []
+    },
+    {
+      "id": 43,
+      "name": "Rozetsu Domain",
+      "outside": "jujutsu_barrier",
+      "inside": "domain_dark_stone",
+      "floor": "domain_dark_stone",
+      "special": []
+    }
+  ],
+  "generic_family_palette_examples": [
+    {
+      "id": 24,
+      "family": "Uraume",
+      "inside": "domain_ice",
+      "floor": "domain_ice"
+    },
+    {
+      "id": 26,
+      "family": "Ogi",
+      "inside": "default/block_universe",
+      "floor": "block_gravel"
+    },
+    {
+      "id": 32,
+      "family": "Chojuro",
+      "inside": "domain_sand",
+      "floor": "domain_sand"
+    },
+    {
+      "id": 33,
+      "family": "Yaga",
+      "inside": "block_red",
+      "floor": "planks"
+    },
+    {
+      "id": 36,
+      "family": "Nishimiya",
+      "inside": "default/block_universe",
+      "floor": "domain_cloud"
+    },
+    {
+      "id": 40,
+      "family": "Ino",
+      "inside": "default/block_universe",
+      "floor": "domain_dark_stone"
+    },
+    {
+      "id": 47,
+      "family": "Crystal Curse",
+      "inside": "domain_cloud",
+      "floor": "coffinofthe_ironmountain_1"
+    }
+  ],
+  "restoration": {
+    "old_block_nbt": true,
+    "cleanup_procedure": "JujutsuBarrierUpdateTickProcedure",
+    "driver": "AIDomainExpansionEntityProcedure"
+  },
+  "runtime_status": "NOT_RUN"
+}
