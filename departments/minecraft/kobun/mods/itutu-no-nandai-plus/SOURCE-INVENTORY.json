@@ -1,0 +1,84 @@
+{
+  "format": "kneekura.kobun.source-inventory.v1",
+  "outer_bundle": {
+    "name": "5難題+アドオン達.zip",
+    "sha256": "9d8ea665ab8b925437fa2294f34051b8b9bdc6e9036c540f5c2a77432b689a98",
+    "entries": 4
+  },
+  "artifacts": [
+    {
+      "name": "五つの難題MOD+ ver2.90.1.X1-1.7.10",
+      "sha256": "6307789d5f2f43b762bcc7d5aa03d67207eaa237fb124447e7ea951aa856e634",
+      "bytes": 4596892,
+      "zip_entries": 956,
+      "class_entries": 276,
+      "bundled_java_sources": 266,
+      "class_major": 50,
+      "source_basis": [
+        "ORIGINAL_BINARY",
+        "ORIGINAL_SOURCE"
+      ]
+    },
+    {
+      "name": "Add_Battler_Sakuya.jar",
+      "sha256": "18ccd13fcb3a7874024d1ac141183131fddfe972f5fab1ce2f1677051119c1d3",
+      "bytes": 26002,
+      "zip_entries": 23,
+      "class_entries": 9,
+      "class_major": 50,
+      "source_basis": [
+        "ORIGINAL_BINARY"
+      ]
+    },
+    {
+      "name": "Add_Last Judgment.zip",
+      "sha256": "2bbcb98fb6e5ee32ef509554e37fa56bbb4edb408a7a12788a15a9fb8742368a",
+      "bytes": 47066,
+      "zip_entries": 19,
+      "class_entries": 6,
+      "class_major": 50,
+      "source_basis": [
+        "ORIGINAL_BINARY"
+      ]
+    },
+    {
+      "name": "EntityModeTOHOU MAIDs 2.61.zip",
+      "sha256": "76470568cf1dc016e950badfb9458f567943e730c647043b467daaf070765b3f",
+      "bytes": 31890,
+      "zip_entries": 7,
+      "class_entries": 5,
+      "class_major": 50,
+      "source_basis": [
+        "ORIGINAL_BINARY"
+      ]
+    },
+    {
+      "name": "Illusion Laser mod 2.2.jar",
+      "sha256": "dd8f4d5c1397f11f5a86f8cb145b7645d9a092cb2b9f215292a2333c49c16c8c",
+      "bytes": 14212,
+      "zip_entries": 20,
+      "class_entries": 8,
+      "class_major": 50,
+      "source_basis": [
+        "ORIGINAL_BINARY"
+      ]
+    }
+  ],
+  "representative_core_paths": [
+    "sources/java/thKaguyaMod/ShotData.java",
+    "sources/java/thKaguyaMod/LaserData.java",
+    "sources/java/thKaguyaMod/THShotLib.java",
+    "sources/java/thKaguyaMod/registry/DanmakuPatternRegistry.java",
+    "sources/java/thKaguyaMod/registry/SpellCardRegistry.java",
+    "sources/java/thKaguyaMod/registry/SpecialShotRegistry.java",
+    "sources/java/thKaguyaMod/entity/shot/EntityTHShot.java",
+    "sources/java/thKaguyaMod/entity/shot/EntityTHLaser.java",
+    "sources/java/thKaguyaMod/entity/shot/EntityTHSetLaser.java",
+    "sources/java/thKaguyaMod/entity/spellcard/EntitySpellCard.java",
+    "sources/java/thKaguyaMod/entity/spellcard/THSpellCard.java",
+    "sources/java/thKaguyaMod/entity/item/EntitySakuyaWatch.java",
+    "sources/java/thKaguyaMod/entity/item/EntitySakuyaStopWatch.java",
+    "sources/java/thKaguyaMod/event/THKaguyaTimeStopEventHandler.java"
+  ],
+  "raw_distribution_policy": "Raw JAR/ZIP/full source trees are not committed; hashes, inventories and findings are retained."
+}

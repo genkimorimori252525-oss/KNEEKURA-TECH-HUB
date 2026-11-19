@@ -1,0 +1,64 @@
+{
+  "format": "kneekura.kobun.historical-manifest.v1",
+  "target": "五つの難題MOD+ X1 ecosystem",
+  "original": {
+    "mod_version": "2.90-1.7.10",
+    "minecraft_version": "1.7.10",
+    "loader": "Forge/FML",
+    "loader_version": "10.13.4.1614 (author-supported X1 environment)",
+    "java_version": "UNKNOWN; distributed classfile major 50, observed contemporary runtime reports include Java 8",
+    "mapping_namespace": "deobfuscated net.minecraft names with SRG-style method symbols observed; exact mapping revision UNKNOWN",
+    "mapping_version": "UNKNOWN; contemporary crash report mentions MCP 9.05",
+    "artifact": "五つの難題MOD+ ver2.90.1.X1-1.7.10",
+    "artifact_sha256": "6307789d5f2f43b762bcc7d5aa03d67207eaa237fb124447e7ea951aa856e634",
+    "repository": null,
+    "revision": null,
+    "release_date": null,
+    "license": null
+  },
+  "dependencies": [],
+  "runtime": {
+    "launch_mechanism": "ordinary Forge/FML @Mod loading; no supplied coremod transformer found",
+    "side": "client+server expected by author",
+    "status": "NOT_RUN"
+  },
+  "addons": [
+    {
+      "artifact": "Add_Battler_Sakuya.jar",
+      "modid": "add_angry_sakuya",
+      "sha256": "18ccd13fcb3a7874024d1ac141183131fddfe972f5fab1ce2f1677051119c1d3",
+      "dependencies": [
+        "THKaguyaMod"
+      ]
+    },
+    {
+      "artifact": "Add_Last Judgment.zip",
+      "modid": "add_eiki_spell",
+      "sha256": "2bbcb98fb6e5ee32ef509554e37fa56bbb4edb408a7a12788a15a9fb8742368a",
+      "dependencies": [
+        "THKaguyaMod"
+      ]
+    },
+    {
+      "artifact": "EntityModeTOHOU MAIDs 2.61.zip",
+      "modid": "TOHOmaidCore",
+      "sha256": "76470568cf1dc016e950badfb9458f567943e730c647043b467daaf070765b3f",
+      "dependencies": [
+        "THKaguyaMod",
+        "lmmx"
+      ],
+      "hidden_binary_reference": [
+        "illusion_Laser.Item_LaserCore"
+      ]
+    },
+    {
+      "artifact": "Illusion Laser mod 2.2.jar",
+      "modid": "Illusion_Laser_mod",
+      "sha256": "dd8f4d5c1397f11f5a86f8cb145b7645d9a092cb2b9f215292a2333c49c16c8c",
+      "dependencies": [
+        "THKaguyaMod"
+      ]
+    }
+  ],
+  "evidence_boundary": "Core has bundled ORIGINAL_SOURCE plus distributed bytecode. Addons are binary-first. ERA-CONTEXT is kept separate from implementation authority."
+}

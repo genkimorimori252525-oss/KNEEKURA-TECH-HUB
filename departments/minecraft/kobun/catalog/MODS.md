@@ -8,7 +8,7 @@
 
 | Queue | Target | ORIGINAL era | Historical identity | Main technology | Status |
 |---:|---|---|---|---|---|
-| — | — | — | — | — | EMPTY / READY |
+| 1 | 五つの難題MOD+ X1 ecosystem | Minecraft 1.7.10 / Forge-FML | X1 2.90-1.7.10 + 4 supplied addons; exact artifact hashes pinned | danmaku geometry, spell-card plugins, lasers, time-stop, addon APIs | EVIDENCE_BACKED static / runtime NOT_RUN |
 
 ## Intake rules
 
