@@ -25,6 +25,7 @@ MODULES = (
     'debug-workspace/bridge/json.mjs', 'debug-workspace/bridge/materials.mjs',
     'debug-workspace/bridge/owner-action-adapter.mjs', 'debug-workspace/bridge/owner-control-cli.mjs',
     'debug-workspace/bridge/owner-grant.mjs', 'debug-workspace/bridge/owner-prelaunch.mjs',
+    'debug-workspace/bridge/owner-tank-rotation.mjs',
     'debug-workspace/bridge/owner-trigger-config.mjs', 'debug-workspace/bridge/owner-trigger-source.mjs',
     'debug-workspace/bridge/registration.mjs', 'debug-workspace/bridge/result-export-source.mjs',
     'debug-workspace/bridge/result-export.mjs', 'debug-workspace/bridge/selected-action.mjs',
@@ -117,7 +118,7 @@ def _registry(value, *, deadline=None, require_triggers=False):
         raise ContractError('Private export transport overlaps the sealed run')
     envelope = decode_json(_file(run_dir/'control/owner-envelope.json', 128*1024,
         expected=run['ownerEnvelopeHash'], deadline=deadline), max_bytes=128*1024)
-    if (not isinstance(envelope, dict) or set(envelope) not in (_ENVELOPE_FIELDS, _ENVELOPE_FIELDS | {'triggerConfigHash'})
+    if (not isinstance(envelope, dict) or set(envelope) not in (_ENVELOPE_FIELDS, _ENVELOPE_FIELDS | {'triggerConfigHash'}, _ENVELOPE_FIELDS | {'tankRotationHash'})
             or type(envelope['schemaVersion']) is not int or envelope['schemaVersion'] != 1
             or envelope['controlMode'] != 'BOUNDED_DIAGNOSTIC_CONTROL'
             or type(envelope['processEpoch']) is not int):
@@ -137,6 +138,25 @@ def _registry(value, *, deadline=None, require_triggers=False):
         _trigger_config(config, request)
     elif require_triggers:
         raise ContractError('Explicit sealed owner trigger configuration required')
+    if 'tankRotationHash' in envelope:
+        # Closure pins only. The pinned Node parser and concrete Java owner independently validate maintenance permissions/geometry.
+        valid_hash(envelope['tankRotationHash'])
+        plan=decode_json(_file(run_dir/'control/owner-tank-rotation.json',16384,
+            expected=envelope['tankRotationHash'],deadline=deadline),max_bytes=16384)
+        fields={'schemaVersion','scope','rotationId','debugSessionId','runId','runSnapshotId','processEpoch','handshakeNonce',
+            'requestHash','grantId','leaseId','arenaId','expectedArenaEpoch','expectedArenaRevision','previousOwnerFileSha256',
+            'previousRecipeHash','previousTankEpoch','nextRecipeHash','nextRecipe'}
+        if (not isinstance(plan,dict) or set(plan)!=fields or type(plan['schemaVersion']) is not int or plan['schemaVersion']!=1
+                or plan['scope']!='PRE_EXPERIMENT_TANK_ROTATION' or not isinstance(plan['nextRecipe'],dict)):
+            raise ContractError('Exact sealed Tank rotation pin required')
+        for name in ('debugSessionId','runId','runSnapshotId','processEpoch','handshakeNonce','requestHash'):
+            if type(plan[name]) is not type(envelope[name]) or plan[name]!=envelope[name]:raise IntegrityError('Tank pin identity mismatch')
+        for name in ('rotationId','grantId','leaseId','arenaId'):_id(plan[name])
+        for name in ('previousOwnerFileSha256','previousRecipeHash','nextRecipeHash'):valid_hash(plan[name])
+        for name in ('expectedArenaEpoch','expectedArenaRevision','previousTankEpoch'):
+            maximum=9007199254740990 if name=='previousTankEpoch' else 9007199254740991
+            if type(plan[name]) is not int or not 0<=plan[name]<=maximum:raise ContractError('Invalid Tank pin counter')
+        _file(run_dir/'control/owner-tank-predecessor.json',65536,expected=plan['previousOwnerFileSha256'],deadline=deadline)
     return root, owner
 
 

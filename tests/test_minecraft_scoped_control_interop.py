@@ -31,7 +31,7 @@ def test_real_lab_scoped_control_cli_and_private_export_roundtrip():
             'inspection':'REQUESTED', 'capture':'REQUESTED', 'freshStoreReplay':'ALREADY_RECORDED',
             'repeatedCapture':'ALREADY_RECORDED', 'cleanup':'REQUESTED',
             'cleanupInspection':'OUTCOME_UNKNOWN', 'repeatedCleanup':'ALREADY_RECORDED',
-            'triggerWatch':'WINDOWS_FINISHED', 'triggerWindow':'PARTIAL', 'repeatedWatch':'OUTCOME_UNKNOWN', 'moduleCount':27},
+            'triggerWatch':'WINDOWS_FINISHED', 'triggerWindow':'PARTIAL', 'repeatedWatch':'OUTCOME_UNKNOWN', 'moduleCount':28},
         'export':'EXPORTED', 'import':'IMPORTED_LAB_REPORT', 'execution':'UNKNOWN', 'cleanup':'UNKNOWN',
         'assertions':['INCONCLUSIVE'], 'evidenceCount':6, 'runtimeAttestation':'NOT_ESTABLISHED', 'canReplay':False,
     }

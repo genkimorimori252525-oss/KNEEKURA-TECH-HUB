@@ -2,6 +2,11 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import {decisionBurstFromArgs} from './decision-burst-cli.mjs';
+import {terrainQueryFromArgs} from './terrain-query-cli.mjs';
+import {queryDecisionDrilldown} from './evidence/decision-drilldown.mjs';
+import {buildRetainedDecisionPresentation} from './evidence/decision-presentation.mjs';
+import {writeDecisionPresentationArtifact} from './evidence/decision-view.mjs';
 import {
   doctor,
   launchDebugRun,
@@ -102,7 +107,11 @@ async function main() {
     if (current.live !== true) {
       throw new Error('cannot set target: debug runtime is not live');
     }
-    const target = await setTargetControl(current, entityUuid);
+    const target = await setTargetControl(current, entityUuid, {
+      decisionSnapshot: process.argv.includes('--decision-snapshot'),
+      decisionBurst: decisionBurstFromArgs(process.argv.slice(4)),
+      decisionTerrain: terrainQueryFromArgs(process.argv.slice(4)),
+    });
     print({
       configFile: file,
       debugSessionId: current.debugSessionId,
@@ -125,6 +134,33 @@ async function main() {
       target
     });
     return;
+  }
+
+  if(command === 'evidence-decision' || command === 'evidence-decision-view') {
+    const subjectUuid=process.argv[3];
+    const required=name=>{const value=argValue(name);if(value==null||!value.trim()||value.startsWith('--'))throw new Error('required decision option: '+name);return value;};
+    const current=await readCurrent(config,ROOT);
+    const runtime=evidenceRuntimeFromCurrent(current);
+    // Retained canonical read only. Do not initialize, ingest or rewrite a finalized evidence run.
+    const observations=await runtime.store.readObservations();
+    const identity={debugSessionId:current.debugSessionId,runId:current.runId,runSnapshotId:current.runSnapshotId,
+      processEpoch:current.processEpoch,arenaEpoch:Number(required('--arena-epoch')),targetRevision:Number(required('--revision'))};
+    if(command === 'evidence-decision-view') {
+      const result=buildRetainedDecisionPresentation({observations,subjectUuid,identity,
+        request:{startTick:Number(required('--start-tick')),endTick:Number(required('--end-tick'))}});
+      const output=argValue('--output');
+      if(output!==null) {
+        required('--output');
+        // Create a separate derived artifact; never overwrite retained evidence or any existing file.
+        const outputFile=await writeDecisionPresentationArtifact(result,output,current.runDir);
+        print({schema:result.schema,identity:result.identity,outputFile,readOnlyRetainedEvidence:true});
+      }else print(result);
+      return;
+    }
+    const result=queryDecisionDrilldown({observations,subjectUuid,identity,
+      request:{channel:required('--channel'),startTick:Number(required('--start-tick')),endTick:Number(required('--end-tick')),
+        limit:Number(argValue('--limit')??64),maxNodes:Number(argValue('--max-nodes')??32)}});
+    print(result);return;
   }
 
   if (command === 'evidence-trigger-watch') {
@@ -559,7 +595,7 @@ async function main() {
     return;
   }
 
-  throw new Error('unknown command: ' + command + ' (expected doctor/start/status/timeline/smoke/g2-smoke/stop/target/target-clear/target-status/evidence-status/evidence-trigger-watch/evidence-anomalies/evidence-entity/evidence-gap/evidence-capture/evidence-finalize)');
+  throw new Error('unknown command: ' + command + ' (expected doctor/start/status/timeline/smoke/g2-smoke/stop/target/target-clear/target-status/evidence-status/evidence-trigger-watch/evidence-anomalies/evidence-entity/evidence-decision/evidence-decision-view/evidence-gap/evidence-capture/evidence-finalize)');
 }
 
 main().catch((error) => {

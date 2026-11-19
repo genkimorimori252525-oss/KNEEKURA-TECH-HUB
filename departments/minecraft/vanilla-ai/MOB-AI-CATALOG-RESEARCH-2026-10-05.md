@@ -1,0 +1,37 @@
+# General Mob catalog — exact ANCHOR inheritance and registrations
+
+The additive [general source catalog](MOB-AI-INHERITANCE-2026-10-05.json) maps the exact Minecraft1.20.1 / Forge47.2.0 resolved development artifact. It complements the original [eight static families](MOB-AI-CATALOG.json), the earlier [class inventory](ANCHOR-MOB-CLASS-INVENTORY-2026-10-04.json) and the separately identified [eight-family native catalog](REPRESENTATIVE-DECISION-CATALOG-2026-10-04.md). It does not change their historical producer, runtime status or evidence.
+
+## Coverage and reproducible identities
+
+All7,108 `net/minecraft/` class headers were read without loading classes. The superclass closure to `Mob` contains101 classes,22 abstract and79 concrete. All101 previously retained class and disassembly hashes were reverified.349 selected declared constructor/AI/navigation/Brain/control-adjacent methods have exact descriptors, access, whole-class/disassembly hashes and javap line/slice hashes.879 name+descriptor lookups resolve the nearest nonprivate, nonstatic declaration **within the Mob superclass chain**.
+
+The actual `EntityType.<clinit>` initializes124 typed fields, of which79 have a Mob-derived declared generic owner. Every one of those79 has an actual `EntityFactory` invokedynamic site whose BootstrapMethods implementation handle is the matching constructor. Each registered concrete Mob owner maps to one of these79 resource IDs; every concrete Mob class in this artifact is accounted for. Four additional namespace-helper slices verify EntityType.register → Registry.register(String) → ResourceLocation(String)/decompose, including the actual default `minecraft` namespace for the captured unqualified strings. Non-Mob entity/projectile/display/vehicle fields are listed separately. This does not inventory MOD registrations, runtime registry replacements, or loaded post-Mixin classes.
+
+The source JAR SHA256 is `1b6e6a166fbc06c6d2422cd5cf515a508977479045095363d5b4c8b89cc7b4eb`; Foundation Map `522cbb565d187f8e1e7b97140206f5ac11e8ca90719528bd661f875f184e34fd`, source index `55a63559b62697c11e8ece0cd2fcb97d2db4730684789a31240b2c515f08ba06`. `EntityType.class` SHA256 is `01085b4264f509b8b8e647bf5efb97c9f6255a4ebb00ff964683bcb4fd4f185b`; its retained disassembly SHA256 is `85d85d3b53df8a32ad3cb49f8dd30051b2bc2ca75eeedb4967f97323dee6c167`. JDK executable/release/module identities and exact options are in the catalog. The original101 exports used `-p -c -s`; new EntityType uses `-private -s -c -l -verbose`. Their providers/options and line namespaces are not interchangeable.
+
+A slice hash is SHA256 of decoded lines joined with LF, preserving retained CR and encoding them as UTF8. Whole original bytes have an independent SHA256. These are exact retained javap locators, not canonical bytecode-body or original Java source hashes. Whole class bytes/disassembly and machine paths stay private.
+
+## Interpretation rules
+
+- `registered_mob_types` binds resource ID → static field → generic owner → invokedynamic/bootstrap → actual constructor handle. It is stronger than guessing a registry ID from a class name. Registration does not establish natural spawning: `giant` and `illusioner` are included without such a claim.
+- `nearest_declaring_owners_within_mob_chain` resolves exact name+descriptor and excludes private/static methods. It is a source lookup aid. Super calls, virtual overrides at other call sites, interface defaults and methods above Mob require their own evidence; this table is not a JVM execution trace.
+- `constructor_new_control_navigation_owners` records actual `new` instructions inside declared constructors whose referenced class name ends in Control or Navigation. This name filter is not an exhaustive constructor allocation inventory. An allocation can be conditional, overwritten, or replaced later. An inherited controller allocation remains attached to its declaring constructor; it is not silently repeated as a new allocation in every subclass.
+- `registergoals_direct_new_goal_owners` records direct allocations in that method, not the final runtime scheduler list. Inherited/super registration, helper factories, equipment-dependent changes and MOD injection are separate. Empty direct allocations mean none in that selected body, not no Goals.
+- `direct_brain_tick_sites` identifies13 original static sites in `customServerAiStep`: Allay, Axolotl, Camel, Frog, Tadpole, Goat, Sniffer, Zoglin, Hoglin, Piglin, PiglinBrute, Warden and Villager. It does not observe a current entity tick, activity, memory or cause. A base/inherited Brain object without such a call is not automatically an active Brain decision mechanism.
+
+## Concrete inheritance examples
+
+| Registered type | Relevant declaration/control boundary |
+| --- | --- |
+| Skeleton / Stray / Wither Skeleton | The concrete registered classes are distinct. Skeleton/Stray inherit `registerGoals`, `aiStep` and `performRangedAttack` from AbstractSkeleton; WitherSkeleton declares its own `registerGoals`. The original representative catalog's AbstractSkeleton source owner remains a valid mechanism anchor, not the concrete registered class. |
+| Guardian / Elder Guardian | Both resolve `aiStep`, navigation creation and travel to Guardian. ElderGuardian adds its own `customServerAiStep`. Goal state alone does not account for Guardian's server-side out-of-water grounded impulse in `aiStep`. |
+| Slime / Magma Cube | MagmaCube inherits Slime's Goal registration and tick, and the Slime constructor allocates its custom MoveControl. Direct hopping/steering is not evidence of a conventional Navigation search. |
+| Squid / Glow Squid | GlowSquid declares its own `aiStep` while inheriting Goal registration and travel from Squid. Source lookup must retain both declarations. |
+| Piglin / Piglin Brute | Each declares an actual Brain tick site; both inherit debug sending through AbstractPiglin. Debug sender inheritance and active Brain caller ownership are separate relationships. |
+| Sniffer | Its `customServerAiStep` calls Brain.tick and SnifferAi.updateActivity before the superclass call. A navigation API result and a subsequent behavior action cannot be conflated. |
+| Drowned | Its constructor allocates both Ground and WaterBound navigation and a custom MoveControl. The nearest `createNavigation` declaration alone cannot describe its later navigation switching. |
+| Ghast / Phantom | Constructors allocate their custom controls; their retained [movement research](MOVEMENT-CONTROLS.md) explains steering boundaries. A base navigation object does not justify inventing a ground-A* route. |
+| Ender Dragon | Its own `aiStep` is the relevant source entry, although base Goal/navigation declarations exist. A phase/path or Boss-specific algorithm requires its own field/caller evidence. |
+
+The selected source mechanisms, [Goal/Brain semantics](GOAL-BRAIN-RESEARCH-2026-10-04.md), [Path/terrain families](PATH-TERRAIN-RESEARCH-2026-10-05.md), [movement controls](MOVEMENT-CONTROLS.md) and [debug flow](DEBUG-INFRASTRUCTURE-RESEARCH-2026-10-05.md) now have a general inheritance/registration lookup. This completes the static general-catalog mapping, not exhaustive review of every branch of every Mob algorithm. Broader candidate populations, true TF fields, same-case section15 diagnoses, allnine section16 measurements and final acceptance remain in [the reconciliation](ORIGINAL-REQUIREMENT-RECONCILIATION-2026-10-05.md). Opaque MOD implementations retain generic fallback and `NOT_EXPOSED`.

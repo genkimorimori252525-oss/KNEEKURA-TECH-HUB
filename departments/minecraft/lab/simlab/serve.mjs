@@ -907,6 +907,9 @@ http.createServer((req, res) => {
     if (u.pathname === '/motion-trace.mjs') {
       return send(res, 200, fs.readFileSync(path.join(HERE, 'motion-trace.mjs')), MIME['.mjs']);
     }
+    if (u.pathname === '/trace-age-style.mjs') {
+      return send(res, 200, fs.readFileSync(path.join(HERE, 'trace-age-style.mjs')), MIME['.mjs']);
+    }
     // 解析結果 —— **CLI が出すものと同じ関数の出力をそのまま返す** (AGENT-01)。
     // サーバ側で数え直したら、その瞬間に Viewer と CLI が食い違いうる状態になる。
     // ガードは /api/trace と同じ path.resolve + startsWith(TRACES)。

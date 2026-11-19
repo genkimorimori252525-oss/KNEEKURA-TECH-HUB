@@ -1,5 +1,7 @@
 # KNEEKURA Minecraft — Current Handoff
 
+**Newer continuation entry:** [CURRENT-HANDOFF-2026-10-03.md](CURRENT-HANDOFF-2026-10-03.md). The dated foundation status below is preserved as history.
+
 Date: **2026-10-02**  
 Status: **CURRENT ENTRY POINT — supersedes older files that call themselves "current"**  
 Canonical development line: **`main`**  

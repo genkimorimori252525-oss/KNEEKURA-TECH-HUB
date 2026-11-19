@@ -250,6 +250,7 @@ html.bare main { grid-template-columns:1fr !important }
     <span class="chrome-label">残光</span>
     <input type="range" id="trail" min="0" max="120" step="5" value="0">
     <span class="num" id="trailV" style="width:34px;color:var(--ink-dim)">0t</span>
+    <span class="chrome-label" title="cursorとの差で青→黄→赤→消失。弾はIDの固定色から黄・赤へ。色が近い弾はIDも確認。通常20t/秒。">青→黄→赤 / 弾はID色</span>
     <span class="chrome-label">対象</span>
     <select class="btn" id="traceSubject" title="明示的に選んだMobだけ軌跡を重ねる">
       <option value="">弾のみ</option>
@@ -343,6 +344,10 @@ let MOTION_TRACE=null;
 const MOTION_TRACE_READY=import('/motion-trace.mjs').then(m=>{MOTION_TRACE=m;draw();}).catch(e=>{
   console.error('[SimLab] motion-trace.mjs を読めなかった。Mob軌跡は表示しません:',e);
 });
+let TRACE_AGE_STYLE=null;
+const TRACE_AGE_STYLE_READY=import('/trace-age-style.mjs').then(m=>{TRACE_AGE_STYLE=m;draw();}).catch(e=>{
+  console.error('[SimLab] trace-age-style.mjs を読めなかった。軌跡は表示しません:',e);
+});
 
 /**
  * ai イベントから構造化 section を取る。
@@ -405,6 +410,33 @@ function selectedMotionTrace(t0,t1){
     endTick:Math.min(t1,tr.t1),
     maxSamples:4096,
   });
+}
+
+function projectileMotionTrace(e,t0,t1){
+  const retained=D.store.trackOf(e.id);
+  if(!MOTION_TRACE||!retained||retained.t0>t1||retained.t1<t0)return null;
+  return MOTION_TRACE.buildTraceFromSimStore({store:D.store,entityId:e.id,traceClass:'PROJECTILE_ACTUAL',
+    identity:{arena_id:D.meta?.arena??null,world_id:D.meta?.world??null},startTick:t0,endTick:t1,maxSamples:4096});
+}
+function drawStyledMotionTrace(motion,map){
+  if(!motion||!TRACE_AGE_STYLE||T.trail<=0)return;
+  const projectile=motion.trace_class==='PROJECTILE_ACTUAL',visible=new Map();
+  for(const p of motion.samples){const style=TRACE_AGE_STYLE.traceAgeStyle({traceClass:motion.trace_class,identity:motion.subject.id,sampleTick:p.tick,currentTick:T.tick,lifetimeTicks:T.trail});if(style)visible.set(p.sample_id,{p,style});}
+  sctx.save();sctx.lineWidth=projectile?1.25:2.5;
+  if(projectile)sctx.setLineDash([4,4]);else sctx.setLineDash([10,6]);
+  for(const edge of motion.segments){
+    const a=visible.get(edge.from_sample_id),b=visible.get(edge.to_sample_id);if(!a||!b)continue;
+    const p=map(a.p),q=map(b.p);if(!p||!q)continue;
+    sctx.strokeStyle=b.style.color;sctx.globalAlpha=b.style.alpha;sctx.beginPath();sctx.moveTo(p.x,p.y);sctx.lineTo(q.x,q.y);sctx.stroke();
+  }
+  sctx.setLineDash([]);
+  for(const {p,style} of visible.values()){
+    const q=map(p);if(!q)continue;sctx.strokeStyle=style.color;sctx.fillStyle=style.color;sctx.globalAlpha=style.alpha;sctx.beginPath();
+    if(projectile){sctx.moveTo(q.x,q.y-3);sctx.lineTo(q.x+3,q.y);sctx.lineTo(q.x,q.y+3);sctx.lineTo(q.x-3,q.y);sctx.closePath();sctx.stroke();}
+    else{sctx.arc(q.x,q.y,2.6,0,Math.PI*2);sctx.fill();}
+  }
+  if(projectile&&visible.size){const last=[...visible.values()].at(-1),q=map(last.p);if(q){sctx.fillStyle=last.style.color;sctx.globalAlpha=last.style.alpha;sctx.fillText(motion.subject.id.slice(-12),q.x+5,q.y-5);}}
+  sctx.restore();
 }
 
 function load(text,name,opts){
@@ -632,63 +664,16 @@ function drawF3(){
   line(sctx,o,project(ox,floorY+3,oz,W,H),CSS('--axis-y'),1.5,.9);
   line(sctx,o,project(ox,floorY,oz+3,W,H),CSS('--axis-z'),1.5,.9);
 
-  // --- 残光: 過去 trail tick の弾道。止めた瞬間に「弾が作った形」が見える ---
-  // 段ごとに濃さを変えるが、線は 5 段のバッチにまとめて 5 回の stroke で描く。
-  // 13-02: D.tracks(前もって全弾ぶん作っていた入れ物)を廃し、D.store.trackOf(id)
-  // (posレーンへの薄いビュー。複製を持たない)からtick単位で直接引く。tr.at(t)は
-  // stateAt('pos',id,t)相当(isAliveでgone後は自動的にnullになる——旧buildTracksの
-  // 「欠測は直前値で埋める」は実質forward-fillの重複実装だったので引き継がない)。
+  // Retained SampledMotionTrace segments only; three age bands and stable projectile IDs.
   if(T.trail>0){
-    const t0=Math.max(0,T.tick-T.trail), BANDS=5;
-    const bands=Array.from({length:BANDS},()=>[]);
+    const t0=Math.max(0,T.tick-T.trail);
     for(const e of D.entities.values()){
-      if(e.role!=='projectile') continue;
-      const tr=D.store.trackOf(e.id);
-      if(!tr||tr.t0>T.tick||tr.t1<t0) continue;
-      const half=e.h/2;   // entity Y は AABB の底なので中心へ寄せる
-      const s=Math.max(t0,tr.t0), en=Math.min(T.tick,tr.t1);
-      let prev=tr.at(s);
-      for(let t=s+1;t<=en;t++){
-        const cur=tr.at(t);
-        if(prev&&cur){
-          const a=project(prev.x,prev.y+half,prev.z,W,H), b=project(cur.x,cur.y+half,cur.z,W,H);
-          if(a&&b){
-            const age=(T.tick-t)/Math.max(1,T.trail);
-            bands[Math.min(BANDS-1,(age*BANDS)|0)].push(a,b);
-          }
-        }
-        prev=cur;
-      }
+      if(e.role!=='projectile')continue;
+      const projectile=projectileMotionTrace(e,t0,T.tick);
+      drawStyledMotionTrace(projectile,p=>project(p.x,p.y+e.h/2,p.z,W,H));
     }
-    for(let bd=0;bd<BANDS;bd++){
-      const arr=bands[bd]; if(!arr.length) continue;
-      batch(sctx,CSS('--vel'),.6*(1-(bd+.5)/BANDS),1.25);
-      for(let i=0;i<arr.length;i+=2) seg(sctx,arr[i],arr[i+1]);
-      flush(sctx);
-    }
-
-    // 明示的に選んだ Mob だけを追加。人間表示も AI と同じ SampledMotionTrace v1
-    // を消費し、保持点から独自に線を組み立てない。
     const motion=selectedMotionTrace(t0,T.tick);
-    if(motion){
-      const byId=new Map(motion.samples.map(p=>[p.sample_id,p]));
-      sctx.save();
-      sctx.strokeStyle=CSS('--target'); sctx.fillStyle=CSS('--target');
-      sctx.lineWidth=2.5; sctx.globalAlpha=.82; sctx.setLineDash([10,6]); sctx.beginPath();
-      for(const edge of motion.segments){
-        const p=byId.get(edge.from_sample_id), q=byId.get(edge.to_sample_id);
-        if(!p||!q) continue;
-        const a=project(p.x,p.y,p.z,W,H), b=project(q.x,q.y,q.z,W,H);
-        if(a&&b){sctx.moveTo(a.x,a.y);sctx.lineTo(b.x,b.y);}
-      }
-      sctx.stroke();
-      sctx.setLineDash([]); sctx.globalAlpha=.9;
-      for(const p of motion.samples){
-        const q=project(p.x,p.y,p.z,W,H); if(!q) continue;
-        sctx.beginPath(); sctx.arc(q.x,q.y,2.6,0,Math.PI*2); sctx.fill();
-      }
-      sctx.restore();
-    }
+    drawStyledMotionTrace(motion,p=>project(p.x,p.y,p.z,W,H));
   }
 
   // --- エンティティ (奥→手前) ---
@@ -1009,50 +994,16 @@ function drawPlan(){
       sctx.beginPath(); sctx.moveTo(cx-span*sc,cy+i*sc); sctx.lineTo(cx+span*sc,cy+i*sc); sctx.stroke();
     }
     sctx.globalAlpha=1;
-    // 弾道 (残光)
-    // 13-02: D.tracksを廃し、D.store.trackOf(id)から直接引く(drawF3の残光と同じ置き換え)。
-    // tr.at(t)がnullを返す(gone後)ことがあるので、そこでmoveTo扱いへ戻して線を切る
-    // ——旧D.tracksは前方フィル済みの配列なのでnullは無かったが、trackOfは
-    // isAlive境界で自然にnullになる。
+    // The same retained contract and style in plan/elevation views.
     if(T.trail>0){
       const t0=Math.max(0,T.tick-T.trail);
-      sctx.strokeStyle=CSS('--vel'); sctx.lineWidth=1; sctx.globalAlpha=.5; sctx.beginPath();
       for(const e of D.entities.values()){
-        if(e.role!=='projectile') continue;
-        const tr=D.store.trackOf(e.id);
-        if(!tr||tr.t0>T.tick||tr.t1<t0) continue;
-        const half=e.h/2;
-        const s0=Math.max(t0,tr.t0), e0=Math.min(T.tick,tr.t1);
-        let needMove=true;
-        for(let t=s0;t<=e0;t++){
-          const p=tr.at(t);
-          if(!p){ needMove=true; continue; }
-          const X=cx+v.mapx(p)*sc, Y=cy+v.mapy(p,half)*sc;
-          if(needMove){ sctx.moveTo(X,Y); needMove=false; } else sctx.lineTo(X,Y);
-        }
+        if(e.role!=='projectile')continue;
+        const projectile=projectileMotionTrace(e,t0,T.tick);
+        drawStyledMotionTrace(projectile,p=>({x:cx+v.mapx(p)*sc,y:cy+v.mapy(p,e.h/2)*sc}));
       }
-      sctx.stroke(); sctx.globalAlpha=1;
-
       const motion=selectedMotionTrace(t0,T.tick);
-      if(motion){
-        const byId=new Map(motion.samples.map(p=>[p.sample_id,p]));
-        sctx.save();
-        sctx.strokeStyle=CSS('--target'); sctx.fillStyle=CSS('--target');
-        sctx.lineWidth=2.5; sctx.globalAlpha=.82; sctx.setLineDash([10,6]); sctx.beginPath();
-        for(const edge of motion.segments){
-          const p=byId.get(edge.from_sample_id), q=byId.get(edge.to_sample_id);
-          if(!p||!q) continue;
-          sctx.moveTo(cx+v.mapx(p)*sc,cy+v.mapy(p,0)*sc);
-          sctx.lineTo(cx+v.mapx(q)*sc,cy+v.mapy(q,0)*sc);
-        }
-        sctx.stroke();
-        sctx.setLineDash([]); sctx.globalAlpha=.9;
-        for(const p of motion.samples){
-          const X=cx+v.mapx(p)*sc, Y=cy+v.mapy(p,0)*sc;
-          sctx.beginPath(); sctx.arc(X,Y,2.6,0,Math.PI*2); sctx.fill();
-        }
-        sctx.restore();
-      }
+      drawStyledMotionTrace(motion,p=>({x:cx+v.mapx(p)*sc,y:cy+v.mapy(p,0)*sc}));
     }
     // アクター
     for(const [id,p] of f.pos){
