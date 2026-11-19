@@ -3,6 +3,11 @@
 > This is the **modern** catalog. Historically isolated ancient MODs belong in
 > [古文 catalog](../kobun/catalog/MODS.md) and must not be inserted into this ANCHOR / FRONTIER table.
 
+> This is the general MOD technology catalog. Performance-first targets belong in the
+> [軽量化 MOD catalog](../optimization/catalog/MODS.md). Reusable optimization techniques from
+> any lane are indexed separately in
+> [Optimization Techniques](../optimization/catalog/TECHNIQUES.md).
+
 **Adaptation anchor:** Minecraft **1.20.1 + Forge**
 
 **Discovery frontier:** latest useful upstream implementation, regardless of Forge / NeoForge / Fabric when technically relevant.

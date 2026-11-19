@@ -3,7 +3,10 @@
 Use this guide with [ANALYSIS-SPEC-v1.md](ANALYSIS-SPEC-v1.md) and the target's own
 README. For historically isolated targets in the **古文** lane, read
 [kobun/ANALYSIS-SPEC.md](kobun/ANALYSIS-SPEC.md) first: ORIGINAL / ERA-CONTEXT /
-DESCENDANT / MODERN-EXTRACTION replace the normal ANCHOR / FRONTIER framing. It turns the existing specification into a repeatable research pass; it
+DESCENDANT / MODERN-EXTRACTION replace the normal ANCHOR / FRONTIER framing. If the target's primary purpose is performance optimization, also use
+[optimization/ANALYSIS-SPEC.md](optimization/ANALYSIS-SPEC.md) and
+[optimization/BENCHMARK-SPEC.md](optimization/BENCHMARK-SPEC.md); do not promote a source-level
+fast path into an empirical performance claim without workload-bound benchmark evidence. It turns the existing specification into a repeatable research pass; it
 does not introduce a crawler, another knowledge graph, or new CLI commands.
 
 ## 1. Resume the right work

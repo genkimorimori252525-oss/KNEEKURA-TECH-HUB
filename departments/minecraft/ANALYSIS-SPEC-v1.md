@@ -5,6 +5,11 @@
 > for track semantics while retaining this document's provenance/evidence discipline.
 > Do not force ancient targets into ANCHOR/FRONTIER when that would erase historical version context.
 
+> Performance-focused targets additionally use
+> [optimization/ANALYSIS-SPEC.md](optimization/ANALYSIS-SPEC.md) and
+> [optimization/BENCHMARK-SPEC.md](optimization/BENCHMARK-SPEC.md).
+> Source-level optimization mechanism and runtime performance evidence are separate claims.
+
 ## 1. Compatibility contract — dual track
 
 Every target should define:
