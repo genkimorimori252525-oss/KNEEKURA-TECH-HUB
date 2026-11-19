@@ -1,0 +1,101 @@
+{
+  "schema": "kneekura.minecraft.bytecode-crossdim-evidence.v1",
+  "date_local": "2026-10-11 Asia/Tokyo",
+  "artifact": {
+    "name": "spore_1.20.1_2.2.0j.jar",
+    "sha256": "d20c4be6606f9752ecfd964eba625363eb76a28e327d67fe6dda4be748401489",
+    "loader": "Forge",
+    "minecraft": "1.20.1",
+    "mod_version": "2.2.0j",
+    "author": "Harbinger",
+    "license": "All Rights Reserved"
+  },
+  "method": "JDK javap -p -c -constants; selected .class bytes directly read; no runtime",
+  "class_anchors": [
+    {
+      "path": "com/Harbinger/Spore/Core/SConfig$Server.class",
+      "sha256": "11eb1371ed17b8fc34e6e462551090a373064096677fb8b144c57ea52b25240d",
+      "selected_methods": "constructor; proto_spawn_world_mod default"
+    },
+    {
+      "path": "com/Harbinger/Spore/ExtremelySusThings/SporeSavedData.class",
+      "sha256": "c20be21c37d0806c7f84c61f5867f0872de7ff10a99faa8ba11ff9e1798db1e7",
+      "selected_methods": "addProto/removeProto/getAmountOfHiveminds/addRequest/getRequests/load/m_7176_"
+    },
+    {
+      "path": "com/Harbinger/Spore/sEvents/HandlerEvents.class",
+      "sha256": "632fcefca9b8cbad565fbda408bda3b2a1d73951efc01049844cb4dacdbf3805",
+      "selected_methods": "onLivingSpawned/DiscardProto/onWorldLoad"
+    },
+    {
+      "path": "com/Harbinger/Spore/Sentities/BaseEntities/Hyper.class",
+      "sha256": "8498d82418cc960a414871dc99992d7c4c4080c6219446bb13a0173dab40cb5a",
+      "selected_methods": "m_6785_"
+    },
+    {
+      "path": "com/Harbinger/Spore/Sentities/BaseEntities/Infected.class",
+      "sha256": "bd015ae9d0bd634fac9a6d4b2aa6c9ea9e70c293c373b88d215326c2ed98cd0b",
+      "selected_methods": "setDefaultLinkage"
+    },
+    {
+      "path": "com/Harbinger/Spore/Sentities/BaseEntities/Calamity.class",
+      "sha256": "ca7b48770085457460fbcc422d395254c71c2cb5a8fe31b2f81993b70593fa76",
+      "selected_methods": "setDefaultAdaptation"
+    },
+    {
+      "path": "com/Harbinger/Spore/Sentities/Organoids/Mound.class",
+      "sha256": "997e7ccd88a0748eea6f24c505627617c8999cb1dd88e6f3f3ac94e5208f6edc",
+      "selected_methods": "setDefaultLinkage"
+    },
+    {
+      "path": "com/Harbinger/Spore/ExtremelySusThings/ChunkLoaderHelper.class",
+      "sha256": "c36a94ef283cdeb23e98ad6aa157d34b29d74cff908490f35fbfcbca7dd78d55",
+      "selected_methods": "addRequest/removeRequest/tick/forceChunk/unforceChunk"
+    },
+    {
+      "path": "com/Harbinger/Spore/ExtremelySusThings/ChunkLoadRequest.class",
+      "sha256": "3f55f0d1b6c61ef2f1a884723c9136b3017baf8ac11b190cc6f0994434dd059e",
+      "selected_methods": "getDimension/serializeNBT/deserializeNBT"
+    }
+  ],
+  "findings": [
+    {
+      "id": "SP-AI-17",
+      "title": "DIMENSION_AGNOSTIC_PROTO_COUNT",
+      "basis": "DIRECT_BINARY_PLUS_DEDUCTIVE_CASE",
+      "detail": "SporeSavedData.protos static list is global per JVM; getAmountOfHiveminds returns size, regardless of queried ServerLevel. Per-level setDefaultLinkage/Adaptation checks use this global size against proto_spawn_world_mod (default 3). 2+1 loaded Protos in two dimensions meet threshold even though no dimension has 3, provided SavedData is initialized.",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SP-AI-18",
+      "title": "CROSS_DIMENSION_TICKET_REPLAY_CANDIDATE",
+      "basis": "DIRECT_BINARY_PLUS_DEDUCTIVE_CASE",
+      "detail": "SporeSavedData.activeRequests is static; getRequests returns all; onWorldLoad iterates entries and forceChunk(currentServerLevel,pos) without comparing stored request dimension. World NBT serializer likewise writes static all-requests without per-level filter.",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "id": "SP-AI-19",
+      "title": "DEFAULT_TEAM_MEMBER_CREDIT",
+      "basis": "DIRECT_BINARY_PLUS_STATIC_PROBABILITY",
+      "detail": "Proto.fillDefaultTeams unconditionally shuffles 4 eligible entries and populates each of 4 team lists with exactly 4 slots; summonMob records selected team index j as both decision and member, while actual selected unit index k uniform 0..3; j!=k on 12 of 16 combinations (75%) absent later team mutations.",
+      "runtime": "NOT_RUN"
+    }
+  ],
+  "external_behavior_hint": {
+    "url": "https://www.fungalinfectionspore.wiki/mobs/organoids/proto-hivemind",
+    "description": "Community wiki claims per-dimension 3-Proto threshold; differs from original JAR counter scope. Do not count guide as direct proof.",
+    "retrieved_date": "2026-10-11"
+  },
+  "verification": {
+    "jar_matches_official_release": "NOT_VERIFIED",
+    "game_client": "NOT_RUN",
+    "game_server": "NOT_RUN",
+    "real_TPS": "NOT_RUN",
+    "multidimensional_world": "NOT_RUN",
+    "source_code_equivalence": "NOT_VERIFIED",
+    "all_facet_completion": "NO",
+    "historical_issue_repair": "NOT_DONE",
+    "canonical_promotion": "NO"
+  },
+  "rights_note": "Only derived summaries/selected hashes are published. No third-party .class bytes/entire code/texture/music redistributed."
+}
