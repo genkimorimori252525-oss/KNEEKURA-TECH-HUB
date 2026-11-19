@@ -11,6 +11,7 @@
 | 3 | [Wither: Reincarnated](../mods/wither-reincarnated/README.md) | content/gameplay Mod / vanilla Wither overhaul | exact user-supplied v1.0.5 JAR pinned (`00589726…ab80a`); 102 classes + Mixins/tags/AI/network mapped; runtime not run | not reviewed in this pass | STATIC_ANALYSIS_COMPLETE / RUNTIME_NOT_RUN |
 | 4 | [Fungal Infection: Spore](../mods/fungal-infection-spore/README.md) | Infection/ecology + Hivemind AI | 2.2.0j user-provided SHA-256 `d20c4be6…1489`; selected Proto, Womb, Mound, group targeting and combat bytecode MAPPED; runtime NOT_RUN | 1.21.1 NeoForge metadata only / no binary reviewed | IN_PROGRESS (selected STATIC); NOT COMPLETE |
 | 5 | [Chronoclones](../mods/chronoclones/README.md) | recorded-player automation / clone replay | 1.1 / Forge 1.20.1 file `8986915` metadata pinned; targeted clone-replay behavior mapped; JAR/source not acquired | 1.1 / NeoForge 26.2 file `8986919` metadata pinned | IN_PROGRESS (targeted clone study complete; whole-target incomplete) |
+| 6 | [Ages of Dominion](../mods/ages-of-dominion/README.md) | Minecraft-native RTS / unit-worker command system | no native 1.20.1 Forge source; explicit backport boundary mapped | `c1e71a0` / v4.2.0 / MC 26.1.2 NeoForge; 166 Java files inventoried | IN_PROGRESS (targeted RTS architecture mapped) |
 
 ## Rules
 
