@@ -1,6 +1,6 @@
 # Five Difficulties X1 Preservation Port — Minecraft 1.20.1 Forge
 
-Status: **P8 complete — generic X1 THShot backend (Phase A) with six shot items, verified on a dedicated server and in a real client**.
+Status: **P9 complete — every X1 shot form and special shot, all 19 shot items, and the literal Homing / Diffusion Amulet, verified on a dedicated server and in a real client**.
 
 Target:
 - Minecraft 1.20.1
@@ -214,5 +214,17 @@ pass on a dedicated server; the shot grid and item icons were checked in a real 
 
 See `IMPLEMENTATION-CHECKPOINT-P8.md`.
 
-Next gate: remaining shot-form renderers and special shots (homing, bound, diffusion), then
-lasers.
+P9 followed: see below.
+
+
+
+## P9 all shot forms and special shots
+
+Every RenderTHShot form (incl. the silver-knife model), the X1 special shots (homing, diffusion,
+fall, bound, fire, explosion, wind), all 19 shot items, and the Homing Amulet item rewired to the
+literal X1 THShot amulets plus its Diffusion variant.
+
+**Correction to P2:** X1 ItemHomingAmulet fires EntityTHShot amulets, not EntityHomingAmulet
+(which belongs to the Houtou item). See `IMPLEMENTATION-CHECKPOINT-P9.md`.
+
+Next gate: lasers (EntityTHLaser / THSetLaser) and the ISpecialShot registry, then spell cards.

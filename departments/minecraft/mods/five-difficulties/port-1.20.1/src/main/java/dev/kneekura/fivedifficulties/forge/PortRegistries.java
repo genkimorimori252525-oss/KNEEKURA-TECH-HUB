@@ -22,7 +22,10 @@ public final class PortRegistries {
             DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, FiveDifficultiesPort.MOD_ID);
 
     public static final RegistryObject<Item> HOMING_AMULET =
-            ITEMS.register("homing_amulet", () -> new HomingAmuletItem(new Item.Properties()));
+            ITEMS.register("homing_amulet", () -> new HomingAmuletItem(false, new Item.Properties()));
+
+    public static final RegistryObject<Item> DIFFUSION_AMULET =
+            ITEMS.register("diffusion_amulet", () -> new HomingAmuletItem(true, new Item.Properties()));
 
     public static final RegistryObject<Item> SAKUYA_WATCH =
             ITEMS.register("sakuya_watch", () -> new SakuyaWatchItem(new Item.Properties()));
@@ -63,16 +66,33 @@ public final class PortRegistries {
                             .build(FiveDifficultiesPort.MOD_ID + ":th_shot")
             );
 
-    // X1 ItemTHShot subtypes ported in P8 (all drawn by renderNormalShot). Value = X1 damage value.
+    // X1 ItemTHShot subtypes. Value = X1 damage value.
     public static final RegistryObject<Item> SMALL_SHOT = shotItem("small_shot", 0);
     public static final RegistryObject<Item> TINY_SHOT = shotItem("tiny_shot", 1);
     public static final RegistryObject<Item> MEDIUM_SHOT = shotItem("medium_shot", 2);
     public static final RegistryObject<Item> BIG_SHOT = shotItem("big_shot", 3);
     public static final RegistryObject<Item> CIRCLE_SHOT = shotItem("circle_shot", 6);
     public static final RegistryObject<Item> HEART_SHOT = shotItem("heart_shot", 11);
+    // P9: the remaining X1 ItemTHShot subtypes.
+    public static final RegistryObject<Item> STAR_SHOT = shotItem("star_shot", 4);
+    public static final RegistryObject<Item> SMALL_STAR_SHOT = shotItem("small_star_shot", 5);
+    public static final RegistryObject<Item> SCALE_SHOT = shotItem("scale_shot", 7);
+    public static final RegistryObject<Item> BUTTERFLY_SHOT = shotItem("butterfly_shot", 8);
+    public static final RegistryObject<Item> LIGHT_SHOT = shotItem("light_shot", 9);
+    public static final RegistryObject<Item> KNIFE_SHOT = shotItem("knife_shot", 10);
+    public static final RegistryObject<Item> KUNAI_SHOT = shotItem("kunai_shot", 12);
+    public static final RegistryObject<Item> TALISMAN_SHOT = shotItem("talisman_shot", 13);
+    public static final RegistryObject<Item> BIG_LIGHT_SHOT = shotItem("big_light_shot", 14);
+    public static final RegistryObject<Item> RICE_SHOT = shotItem("rice_shot", 15);
+    public static final RegistryObject<Item> OVAL_SHOT = shotItem("oval_shot", 16);
+    public static final RegistryObject<Item> CRYSTAL_SHOT = shotItem("crystal_shot", 17);
+    public static final RegistryObject<Item> ARROW_SHOT = shotItem("arrow_shot", 18);
 
-    public static final java.util.List<RegistryObject<Item>> SHOT_ITEMS =
-            java.util.List.of(SMALL_SHOT, TINY_SHOT, MEDIUM_SHOT, BIG_SHOT, CIRCLE_SHOT, HEART_SHOT);
+    /** All 19 X1 ItemTHShot subtypes, in X1 damage-value order. */
+    public static final java.util.List<RegistryObject<Item>> SHOT_ITEMS = java.util.List.of(
+            SMALL_SHOT, TINY_SHOT, MEDIUM_SHOT, BIG_SHOT, STAR_SHOT, SMALL_STAR_SHOT, CIRCLE_SHOT, SCALE_SHOT,
+            BUTTERFLY_SHOT, LIGHT_SHOT, KNIFE_SHOT, HEART_SHOT, KUNAI_SHOT, TALISMAN_SHOT, BIG_LIGHT_SHOT,
+            RICE_SHOT, OVAL_SHOT, CRYSTAL_SHOT, ARROW_SHOT);
 
     private static RegistryObject<Item> shotItem(String name, int x1Type) {
         return ITEMS.register(name, () -> new THShotItem(x1Type, new Item.Properties()));

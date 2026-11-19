@@ -60,13 +60,14 @@ public final class ClientWorldVisualSmoke {
     public static final String PASS_MARKER = "FIVE_DIFFICULTIES_P7B_WORLD_SMOKE_PASS";
     private static final String LEVEL_NAME = "five_difficulties_p7b_smoke";
 
-    private enum Phase { BOOT, WAIT_WORLD, SETTLE, FIRE, SHOOT_HOMING, P8_SPAWN, P8_SHOT, START_STOP, SHOOT_STOP, DONE }
+    private enum Phase { BOOT, WAIT_WORLD, SETTLE, FIRE, SHOOT_HOMING, P8_SPAWN, P8_SHOT, P9_SPAWN, P9_SHOT, START_STOP, SHOOT_STOP, DONE }
 
     private static final int[] P8_GRID_FORMS = {
             X1ShotTables.FORM_SMALL, X1ShotTables.FORM_MEDIUM, X1ShotTables.FORM_PEARL, X1ShotTables.FORM_CIRCLE,
             X1ShotTables.FORM_HEART, X1ShotTables.FORM_BIG};
     private static double baselineColourful;
     private static double shotsColourfulDelta;
+    private static double formsColourfulDelta;
 
     private static Phase phase = Phase.BOOT;
     private static int ticks;
@@ -123,6 +124,14 @@ public final class ClientWorldVisualSmoke {
                 }
                 case P8_SHOT -> {
                     if (++ticks == 10) requestShot(mc, "p8_shots.png");
+                    else if (ticks > 10) next(Phase.P9_SPAWN);
+                }
+                case P9_SPAWN -> {
+                    server(mc, ClientWorldVisualSmoke::spawnFormGrid);
+                    next(Phase.P9_SHOT);
+                }
+                case P9_SHOT -> {
+                    if (++ticks == 10) requestShot(mc, "p9_forms.png");
                     else if (ticks > 10) next(Phase.START_STOP);
                 }
                 case START_STOP -> {
@@ -233,6 +242,31 @@ public final class ClientWorldVisualSmoke {
         }
     }
 
+    // P9: the 18 remaining RenderTHShot forms, three rows of six, drifting slowly along +X so the
+    // direction-dependent forms (kunai, arrow, rice, ...) are seen side-on.
+    private static final int[] P9_FORMS = {
+            X1ShotTables.FORM_SCALE, X1ShotTables.FORM_BUTTERFLY, X1ShotTables.FORM_SMALLSTAR, X1ShotTables.FORM_STAR,
+            X1ShotTables.FORM_RICE, X1ShotTables.FORM_CRYSTAL,
+            X1ShotTables.FORM_KUNAI, X1ShotTables.FORM_TALISMAN, X1ShotTables.FORM_OVAL, X1ShotTables.FORM_ARROW,
+            X1ShotTables.FORM_AMULET, X1ShotTables.FORM_KNIFE,
+            X1ShotTables.FORM_LIGHT, X1ShotTables.FORM_FAMILIAR, X1ShotTables.FORM_WIND, X1ShotTables.FORM_PHANTOM,
+            X1ShotTables.FORM_BIGLIGHT, X1ShotTables.FORM_KISHITU};
+
+    private static void spawnFormGrid(ServerLevel level, ServerPlayer player) {
+        level.getEntitiesOfClass(THShotEntity.class, player.getBoundingBox().inflate(32), s -> true)
+                .forEach(THShotEntity::discard);
+        Vec3d east = new Vec3d(1, 0, 0);
+        for (int i = 0; i < P9_FORMS.length; i++) {
+            int form = P9_FORMS[i];
+            int color = i % 8;
+            Vec3d pos = new Vec3d(4.0D - (i % 6) * 1.6D, -53.4D - (i / 6) * 2.0D, 9.0D);
+            X1ShotData data = X1ShotData.shot(form, color, X1ShotTables.SIZE[form] == 0F ? 0.5F : X1ShotTables.SIZE[form],
+                    1.0F, 0, 2000, 0);
+            level.addFreshEntity(new THShotEntity(level, player, pos, east, 0F, new Vec3d(0, 1, 0), 0F, 9999,
+                    0.001D, 0.001D, 0D, Vec3d.ZERO, data));
+        }
+    }
+
     // Source is an armor stand in front of the camera, so the Watch controller and its
     // expanding dark field are on screen and the player (a non-source) is inside the field.
     private static void startStop(ServerLevel level, ServerPlayer player) {
@@ -285,6 +319,11 @@ public final class ClientWorldVisualSmoke {
                 require(shotsColourfulDelta > 0.004D, "P8 shot grid not visible (colourful delta "
                         + shotsColourfulDelta + ")");
             }
+            case "p9_forms.png" -> {
+                formsColourfulDelta = stats[2] - baselineColourful;
+                require(formsColourfulDelta > 0.01D, "P9 form grid not visible (colourful delta "
+                        + formsColourfulDelta + ")");
+            }
             case "p7b_baseline.png" -> {
                 baselineColourful = stats[2];
                 baselineWarmFraction = warmFraction;
@@ -335,7 +374,8 @@ public final class ClientWorldVisualSmoke {
 
     private static void finish(Minecraft mc) {
         FiveDifficultiesPort.LOGGER.info("{} homingWarmDelta={} p8ColourfulDelta={} skyBlueMinusRed baseline={} stop={}",
-                PASS_MARKER, String.format("%.5f", homingWarmDelta), String.format("%.5f", shotsColourfulDelta),
+                PASS_MARKER + " p9ColourfulDelta=" + String.format("%.5f", formsColourfulDelta),
+                String.format("%.5f", homingWarmDelta), String.format("%.5f", shotsColourfulDelta),
                 String.format("%.1f", baselineSky), String.format("%.1f", stopSky));
         phase = Phase.DONE;
         mc.stop();

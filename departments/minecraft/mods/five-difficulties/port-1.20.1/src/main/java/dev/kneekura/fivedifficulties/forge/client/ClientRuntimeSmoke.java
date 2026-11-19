@@ -178,6 +178,7 @@ public final class ClientRuntimeSmoke {
         for (var shotItem : PortRegistries.SHOT_ITEMS) {
             requireItemModel(minecraft, shotItem.get(), shotItem.getId().toString());
         }
+        requireItemModel(minecraft, PortRegistries.DIFFUSION_AMULET.get(), "Diffusion Amulet");
 
         var root = minecraft.getEntityModels().bakeLayer(SakuyaTimeControllerModel.LAYER_LOCATION);
         root.getChild("watch_base");
@@ -186,7 +187,7 @@ public final class ClientRuntimeSmoke {
         root.getChild("watch_cover");
 
         FiveDifficultiesPort.LOGGER.info(
-                "FIVE_DIFFICULTIES_P7_CLIENT_RESOURCES_PASS canonicalTextures={} watchLayer=ok itemModels=" + (3 + PortRegistries.SHOT_ITEMS.size()) + "",
+                "FIVE_DIFFICULTIES_P7_CLIENT_RESOURCES_PASS canonicalTextures={} watchLayer=ok itemModels=" + (4 + PortRegistries.SHOT_ITEMS.size()) + "",
                 TEXTURES.size()
         );
     }

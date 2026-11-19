@@ -118,6 +118,183 @@ ASSETS = {
         "assets/five_difficulties_port/textures/item/shot/heart_shot_2.png",
         "f2efcd8af85341e3d9c9524b82b039f4424e6c29ffcb60fc4e2041c4443035ef",
     ),
+    "assets/thkaguyamod/textures/items/diffusionAmulet.png": (
+        "assets/five_difficulties_port/textures/item/diffusion_amulet.png",
+        "48a04fbb8993b87cce4abc2b175f006d8bdaef3254c323b86b023b749f152927",
+    ),
+    # P9 remaining shot forms, silver knives, familiar and the remaining ItemTHShot icons.
+    "assets/thkaguyamod/textures/items/shot/StarShot.png": (
+        "assets/five_difficulties_port/textures/item/shot/star_shot.png",
+        "a30c378badbf2b8c14205005f8db8d50b61530b22c02cd31588af5638d87c9e8",
+    ),
+    "assets/thkaguyamod/textures/items/shot/StarShot_2.png": (
+        "assets/five_difficulties_port/textures/item/shot/star_shot_2.png",
+        "0c6f9f867c37aee844e08718b0b8e50cc28ae15352d01a0674ba1c0b518fa89c",
+    ),
+    "assets/thkaguyamod/textures/items/shot/SmallStarShot.png": (
+        "assets/five_difficulties_port/textures/item/shot/small_star_shot.png",
+        "54e69818a777d6e1654894153169072402e5e4956bec967d7fe4bf6a3fbb5a3c",
+    ),
+    "assets/thkaguyamod/textures/items/shot/SmallStarShot_2.png": (
+        "assets/five_difficulties_port/textures/item/shot/small_star_shot_2.png",
+        "59be1aec16255efdc0ca9148aa6738e2009e1610dac5d36f2b10e6d569a3d9fb",
+    ),
+    "assets/thkaguyamod/textures/items/shot/ScaleShot.png": (
+        "assets/five_difficulties_port/textures/item/shot/scale_shot.png",
+        "c77300df5822b0ca4caea8199e355cea5e7631963acf13f8b537796d2c5ebad2",
+    ),
+    "assets/thkaguyamod/textures/items/shot/ScaleShot_2.png": (
+        "assets/five_difficulties_port/textures/item/shot/scale_shot_2.png",
+        "e47ecae4a0ba13a6c05f1c5d1bdf8226ba6fd50dd5f9b2a13b4bc6d6d6109043",
+    ),
+    "assets/thkaguyamod/textures/items/shot/ButterflyShot.png": (
+        "assets/five_difficulties_port/textures/item/shot/butterfly_shot.png",
+        "a85db4c120ee1830d3b602168a031f9ee605e22bd26f9c2df669ce26e387b48f",
+    ),
+    "assets/thkaguyamod/textures/items/shot/ButterflyShot_2.png": (
+        "assets/five_difficulties_port/textures/item/shot/butterfly_shot_2.png",
+        "0af198a54d314d67c0de4934d7d9b31ef9c0395c93fff611b6f9ae1523d36c7c",
+    ),
+    "assets/thkaguyamod/textures/items/shot/LightShot.png": (
+        "assets/five_difficulties_port/textures/item/shot/light_shot.png",
+        "70788947c65fbca3fcc3e6b9ca760541b491ce012baa591a62d645a2ea9ee208",
+    ),
+    "assets/thkaguyamod/textures/items/shot/LightShot_2.png": (
+        "assets/five_difficulties_port/textures/item/shot/light_shot_2.png",
+        "d6f76b048ed9d1e98c0f68c8980e0a79b4d7a362f8cf5f5147334d1eecb16bfa",
+    ),
+    "assets/thkaguyamod/textures/items/shot/KnifeShot.png": (
+        "assets/five_difficulties_port/textures/item/shot/knife_shot.png",
+        "537c13227e80a87a49efb88456de6aead1ab43af363d06e5f1832b62503e85f8",
+    ),
+    "assets/thkaguyamod/textures/items/shot/KnifeShot_2.png": (
+        "assets/five_difficulties_port/textures/item/shot/knife_shot_2.png",
+        "ce6a4e77908b0eefaeaa6746f1a404383fa6898ba1c0c16e838b5bc46256ed80",
+    ),
+    "assets/thkaguyamod/textures/items/shot/KunaiShot.png": (
+        "assets/five_difficulties_port/textures/item/shot/kunai_shot.png",
+        "88f201f1617cf90469d395ed199703c06b1f07a705147f3f72cea8aa226d2cd3",
+    ),
+    "assets/thkaguyamod/textures/items/shot/KunaiShot_2.png": (
+        "assets/five_difficulties_port/textures/item/shot/kunai_shot_2.png",
+        "3e5ce25f99b57235847fbbb0ba847ab2f868f2b4d511bd92b1fe5cacafaf2d8a",
+    ),
+    "assets/thkaguyamod/textures/items/shot/TalismanShot.png": (
+        "assets/five_difficulties_port/textures/item/shot/talisman_shot.png",
+        "81b6a1cd0c74f5f49a4097680e72b9913a20d013a0cc06e74ca3b0e9db389fe6",
+    ),
+    "assets/thkaguyamod/textures/items/shot/TalismanShot_2.png": (
+        "assets/five_difficulties_port/textures/item/shot/talisman_shot_2.png",
+        "3e71de3692440aaeeb9dba062bb0c95d849f82913791832cbd61f1c94b44d623",
+    ),
+    "assets/thkaguyamod/textures/items/shot/BigLightShot.png": (
+        "assets/five_difficulties_port/textures/item/shot/big_light_shot.png",
+        "86c176875955d354923a75e1ea57f5c3a8d233aa309ac86b8b6ccecc4c23e831",
+    ),
+    "assets/thkaguyamod/textures/items/shot/BigLightShot_2.png": (
+        "assets/five_difficulties_port/textures/item/shot/big_light_shot_2.png",
+        "199e2f39d2e4a2bf755a5e203a7f74b40b79ef189105d836c1255c047a9dc3c4",
+    ),
+    "assets/thkaguyamod/textures/items/shot/RiceShot.png": (
+        "assets/five_difficulties_port/textures/item/shot/rice_shot.png",
+        "bf04ceae28e1b8659313baf7d937fdddead4413011b57b5dccaa021a51822143",
+    ),
+    "assets/thkaguyamod/textures/items/shot/RiceShot_2.png": (
+        "assets/five_difficulties_port/textures/item/shot/rice_shot_2.png",
+        "b0296b18ddfd74c986c07714207481e9dc1f3e6209380f69baccce6a87f6480b",
+    ),
+    "assets/thkaguyamod/textures/items/shot/OvalShot.png": (
+        "assets/five_difficulties_port/textures/item/shot/oval_shot.png",
+        "3b993a8f7d1cb6eb777d6d52ea529cc6e854adb1785167e8b7d083f3fb866167",
+    ),
+    "assets/thkaguyamod/textures/items/shot/OvalShot_2.png": (
+        "assets/five_difficulties_port/textures/item/shot/oval_shot_2.png",
+        "722457c5c76adebc3073c07a8e7822f1d0110e2715d1d48c146bccf264e6051b",
+    ),
+    "assets/thkaguyamod/textures/items/shot/CrystalShot.png": (
+        "assets/five_difficulties_port/textures/item/shot/crystal_shot.png",
+        "a48941330112dacc5cebe0e1bbc8e972f69c7dcb1be2693dbe266da5ac7189a2",
+    ),
+    "assets/thkaguyamod/textures/items/shot/CrystalShot_2.png": (
+        "assets/five_difficulties_port/textures/item/shot/crystal_shot_2.png",
+        "9359de893d586d498f07fca65a5dd33665c37d86c7c55940c417315e9de7a38f",
+    ),
+    "assets/thkaguyamod/textures/items/shot/ArrowShot.png": (
+        "assets/five_difficulties_port/textures/item/shot/arrow_shot.png",
+        "ddcb9f6aa61cdd2ea23a043573fdd65c57ecf3ea15379b2b7a7c3af9925b46ce",
+    ),
+    "assets/thkaguyamod/textures/items/shot/ArrowShot_2.png": (
+        "assets/five_difficulties_port/textures/item/shot/arrow_shot_2.png",
+        "ebd88497ce90916401474953dfa6cd479bf8ef7f27e8a120f3984fa829bd4e36",
+    ),
+    "assets/thkaguyamod/textures/shot/StarShot.png": (
+        "assets/five_difficulties_port/textures/entity/shot/star_shot.png",
+        "4c34a8041cf508bc9937e9e14de04e1d8d186170309865d023b9639b144379f5",
+    ),
+    "assets/thkaguyamod/textures/shot/ButterflyShot.png": (
+        "assets/five_difficulties_port/textures/entity/shot/butterfly_shot.png",
+        "fa0e411fe29844cbeedc8f6675b1895700156952d48dd195ff7ba1b71f2e29b7",
+    ),
+    "assets/thkaguyamod/textures/shot/Laser.png": (
+        "assets/five_difficulties_port/textures/entity/shot/laser.png",
+        "4173f5d7613c88027d45148bc2e2f473aeb0f6a8cc97b88512063fc1516bae4a",
+    ),
+    "assets/thkaguyamod/textures/shot/KunaiShot.png": (
+        "assets/five_difficulties_port/textures/entity/shot/kunai_shot.png",
+        "52713fd1930b4cb243e7c3d0bbf78e1f19f940647441b0846232864c4e9a7178",
+    ),
+    "assets/thkaguyamod/textures/shot/ArrowShot.png": (
+        "assets/five_difficulties_port/textures/entity/shot/arrow_shot.png",
+        "bfd964b6f5b404cc8e938da40bee2e924b021623bb2a9714b84f50cb307b396c",
+    ),
+    "assets/thkaguyamod/textures/shot/TalismanShot.png": (
+        "assets/five_difficulties_port/textures/entity/shot/talisman_shot.png",
+        "0c44e6554ec6813d539d91e6d4edf920ef37d3d4140f2b615b15e6188b2179bb",
+    ),
+    "assets/thkaguyamod/textures/shot/WindShot.png": (
+        "assets/five_difficulties_port/textures/entity/shot/wind_shot.png",
+        "ce352673ada9f49056c9eda1c9b89f1a4f69f325c761aaf16f0e6c51bdb3c805",
+    ),
+    "assets/thkaguyamod/textures/shot/DiffusionAmulet.png": (
+        "assets/five_difficulties_port/textures/entity/shot/diffusion_amulet.png",
+        "e73ca263f48df41e29712920c398145385d3b0226ccf706531f10e0e15d04213",
+    ),
+    "assets/thkaguyamod/textures/mob/Familiar.png": (
+        "assets/five_difficulties_port/textures/entity/shot/familiar.png",
+        "e2257429fa7999bba3727d131550dae5266c0b628c75c907da209a9814c125ea",
+    ),
+    "assets/thkaguyamod/textures/shot/SilverKnife_Red.png": (
+        "assets/five_difficulties_port/textures/entity/shot/silver_knife_red.png",
+        "76b9992e9d08946e181b9b17be21bbece8a9406b9e296cda34aa4ec7c55d489a",
+    ),
+    "assets/thkaguyamod/textures/shot/SilverKnife_Blue.png": (
+        "assets/five_difficulties_port/textures/entity/shot/silver_knife_blue.png",
+        "e888a7df0507111eb26c2ed9c0b2f6c4a18ac198fd04c6d5f6c7ec8caae5491c",
+    ),
+    "assets/thkaguyamod/textures/shot/SilverKnife_Green.png": (
+        "assets/five_difficulties_port/textures/entity/shot/silver_knife_green.png",
+        "1405063927b75f5c38f3867833bd02095c575aec9ff153753c9ac22b3e0be20c",
+    ),
+    "assets/thkaguyamod/textures/shot/SilverKnife_Yellow.png": (
+        "assets/five_difficulties_port/textures/entity/shot/silver_knife_yellow.png",
+        "ed5b4b630316aeffa8aad20c6c967f851067f9e501f597275007baf9edbc849d",
+    ),
+    "assets/thkaguyamod/textures/shot/SilverKnife_Purple.png": (
+        "assets/five_difficulties_port/textures/entity/shot/silver_knife_purple.png",
+        "2cabfccb34052aa69c7fb0f244c760c6178828514dd49bf65445c78ea954c38f",
+    ),
+    "assets/thkaguyamod/textures/shot/SilverKnife_Aqua.png": (
+        "assets/five_difficulties_port/textures/entity/shot/silver_knife_aqua.png",
+        "20a480fa805ffbf2464df499a78f3793f6c7f32082f429d06d51e2c3a8fa18d0",
+    ),
+    "assets/thkaguyamod/textures/shot/SilverKnife_Orange.png": (
+        "assets/five_difficulties_port/textures/entity/shot/silver_knife_orange.png",
+        "d1133f36ccac61f9eaf15614edb07aceac90ae00c6eeb7cabc07fd7e497425cd",
+    ),
+    "assets/thkaguyamod/textures/shot/SilverKnife_White.png": (
+        "assets/five_difficulties_port/textures/entity/shot/silver_knife_white.png",
+        "8da12ca6ee191c544aa8407cdccf38aff65d656b78c616f1bf1d860b6f4d5f71",
+    ),
 }
 
 def sha(data: bytes) -> str:

@@ -3,12 +3,16 @@ package dev.kneekura.fivedifficulties.forge.entity;
 import dev.kneekura.fivedifficulties.core.math.Vec3d;
 import dev.kneekura.fivedifficulties.core.x1.X1ShotData;
 import dev.kneekura.fivedifficulties.core.x1.X1ShotMotion;
+import dev.kneekura.fivedifficulties.core.x1.X1ShotPatterns;
+import dev.kneekura.fivedifficulties.core.x1.X1ShotSpecials;
 import dev.kneekura.fivedifficulties.core.x1.X1ShotTables;
 import dev.kneekura.fivedifficulties.forge.PortRegistries;
+import dev.kneekura.fivedifficulties.forge.shot.X1ShotSpawner;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
@@ -37,9 +41,9 @@ import java.util.Optional;
  * Like X1 (whose client copy never received the shot parameters), the client does not
  * simulate: it follows server position updates.
  *
- * Not yet ported (P9+): special shots other than FALL01 (homing, diffusion, bound, fire,
- * explosion, wind), the shot-material bonus drop, danmaku-mob damage multipliers and the
- * player-power damage bonus.
+ * Special shots (P9): HOMING01, DIFFUSION01, FALL01, BOUND01-04, FIRE, EXPLOSION01, WIND01.
+ * Not yet ported: the ISpecialShot registry used by spell cards, the shot-material bonus drop,
+ * danmaku-mob damage multipliers and the player-power damage bonus.
  */
 public final class THShotEntity extends Projectile {
     // X1 DataWatcher slots 16..20.
@@ -56,6 +60,8 @@ public final class THShotEntity extends Projectile {
 
     private X1ShotMotion motion;
     public float shotDamage;
+    /** X1 damageRate: reset to 1 on each impact; WIND01 doubles it for airborne targets. */
+    private float damageRate = 1.0F;
 
     public THShotEntity(EntityType<? extends THShotEntity> type, Level level) {
         super(type, level);
@@ -164,7 +170,63 @@ public final class THShotEntity extends Projectile {
         @Override public int animationCount() { return getAnimationCount(); }
         @Override public void setAnimationCount(int value) { THShotEntity.this.setAnimationCount(value); }
         @Override public void hitCheck(X1ShotMotion m) { THShotEntity.this.hitCheck(m); }
+        @Override public void specialMotion(X1ShotMotion m) { THShotEntity.this.specialMotion(m); }
     };
+
+    // ---- X1 specialMotion ----
+
+    private void specialMotion(X1ShotMotion m) {
+        switch (m.special) {
+            case X1ShotTables.HOMING01 -> homing(m, 4.0F);
+            case X1ShotTables.DIFFUSION01 -> diffusion(m);
+            case X1ShotTables.FALL01 -> m.motion = new Vec3d(m.motion.x(), m.motion.y() - 0.02D, m.motion.z());
+            default -> {}
+        }
+    }
+
+    /** EntityTHShot.homing: turn the stored angle (not the motion), then accelerate again. */
+    private void homing(X1ShotMotion m, float homingLevel) {
+        Entity owner = this.getOwner();
+        Vec3 pos = this.position();
+        Vec3d shotVec = X1ShotSpecials.normalize(m.angle);
+        LivingEntity best = null;
+        double bestScore = X1ShotSpecials.homingInitialScore();
+        AABB search = this.getBoundingBox().expandTowards(toMc(m.motion)).inflate(24.0D);
+        for (Entity e : this.level().getEntities(this, search)) {
+            if (!(e instanceof LivingEntity living) || e instanceof Animal || e instanceof Villager || e == owner) continue;
+            if (!living.isAlive()) continue;
+            Vec3 eye = new Vec3(living.getX(), living.getEyeY(), living.getZ());
+            if (clip(pos, eye).getType() != HitResult.Type.MISS) continue; // blocked line of sight
+            Vec3d targetVec = X1ShotSpecials.normalize(pure(eye.subtract(pos)));
+            float angleSpan = Math.abs(X1ShotSpecials.vectorAngle(shotVec, targetVec));
+            double score = X1ShotSpecials.homingScore(pos.distanceTo(eye), angleSpan);
+            if (bestScore > score) {
+                best = living;
+                bestScore = score;
+            }
+        }
+        if (best == null) return;
+        Vec3 eye = new Vec3(best.getX(), best.getEyeY(), best.getZ());
+        m.angle = X1ShotSpecials.homingTurn(m.angle, pure(eye.subtract(pos)), homingLevel);
+        m.accelerate();
+    }
+
+    /** EntityTHShot.diffusion: at the end time, burst into three spheres of blue amulets. */
+    private void diffusion(X1ShotMotion m) {
+        if (this.tickCount != this.getShotEndTime()) return;
+        if (this.getOwner() instanceof LivingEntity user && this.level() instanceof ServerLevel server) {
+            Vec3d gravity = X1ShotSpecials.diffusionGravity(user.getYRot(), user.getXRot());
+            X1ShotPatterns patterns = X1ShotSpawner.patterns(server, user);
+            X1ShotData shot = X1ShotSpecials.diffusionShot();
+            Vec3d pos = new Vec3d(this.getX(), this.getY(), this.getZ());
+            for (double[] burst : X1ShotSpecials.DIFFUSION_BURSTS) {
+                patterns.createSphereShot(pos, m.angle, 0F, new Vec3d(0, 1, 0), 0F, 9999, burst[0],
+                        X1ShotSpecials.DIFFUSION_LIMIT_SPEED, burst[1], gravity, shot, (int) burst[2], 0.0D,
+                        this.random.nextFloat() * 360F);
+            }
+        }
+        this.discard();
+    }
 
     private void syncRotation() {
         // Store X1's rotationYaw / rotationPitch literally for direction-dependent renderers.
@@ -188,19 +250,71 @@ public final class THShotEntity extends Projectile {
 
         boolean isHit = false;
         if (hitEntity != null) {
-            isHit = onImpactEntity(hitEntity);
+            isHit = onImpactEntity(hitEntity, m);
         } else if (block.getType() != HitResult.Type.MISS) {
-            this.discard(); // default blockHitSpecialProcess returns false
-            isHit = true;
-        }
-        if (!isHit) {
-            // X1 probes three diameter lines through the centre for block overlap.
-            if (clip(pos.add(0, -half, 0), pos.add(0, half, 0)).getType() != HitResult.Type.MISS
-                    || clip(pos.add(-half, 0, 0), pos.add(half, 0, 0)).getType() != HitResult.Type.MISS
-                    || clip(pos.add(0, 0, -half), pos.add(0, 0, half)).getType() != HitResult.Type.MISS) {
+            // onImpact: a surviving special (bound) returns false, so the probes below still run.
+            if (!blockHitSpecialProcess(block, m)) {
                 this.discard();
+                isHit = true;
             }
         }
+        if (!isHit) {
+            // X1 probes three diameter lines through the centre; each hit goes through
+            // blockHitSpecialProcess again (bounces can repeat within one tick).
+            probe(pos.add(0, -half, 0), pos.add(0, half, 0), m);
+            probe(pos.add(-half, 0, 0), pos.add(half, 0, 0), m);
+            probe(pos.add(0, 0, -half), pos.add(0, 0, half), m);
+        }
+    }
+
+    private void probe(Vec3 start, Vec3 end, X1ShotMotion m) {
+        BlockHitResult hit = clip(start, end);
+        if (hit.getType() != HitResult.Type.MISS && !blockHitSpecialProcess(hit, m)) this.discard();
+    }
+
+    /** blockHitSpecialProcess: true keeps the shot alive. */
+    private boolean blockHitSpecialProcess(BlockHitResult hit, X1ShotMotion m) {
+        switch (m.special) {
+            case X1ShotTables.BOUND01 -> { bound(m, 0.9D, 2); m.special = 0; return true; }
+            case X1ShotTables.BOUND02 -> { bound(m, 0.9D, 3); m.special = X1ShotTables.BOUND01; return true; }
+            case X1ShotTables.BOUND03 -> { bound(m, 0.9D, 4); m.special = X1ShotTables.BOUND02; return true; }
+            case X1ShotTables.BOUND04 -> { bound(m, 0.9D, 9999); return true; }
+            case X1ShotTables.EXPLOSION01 -> {
+                Vec3 at = hit.getLocation();
+                explode(at.x, at.y, at.z, 5.0F);
+                return false;
+            }
+            default -> { return false; }
+        }
+    }
+
+    /** EntityTHShot.bound: reflect the motion until the next step is clear, at most returnCount times. */
+    private void bound(X1ShotMotion m, double returnRate, int returnCount) {
+        Vec3 s1 = this.position();
+        Vec3 s2 = s1.add(toMc(m.motion));
+        BlockHitResult hit = boundClip(s1, s2);
+        while (hit.getType() != HitResult.Type.MISS) {
+            m.motion = X1ShotSpecials.reflect(m.motion, hit.getDirection().ordinal(), returnRate);
+            Vec3 at = hit.getLocation();
+            s1 = s1.add(at.subtract(s1).scale(0.99D));
+            s2 = s1.add(toMc(m.motion));
+            hit = boundClip(s1, s2);
+            returnCount--;
+            if (returnCount <= 0) {
+                this.discard();
+                return;
+            }
+        }
+    }
+
+    /** 1.7.10 rayTraceBlocks(a, b, true): outline shapes, source liquids stop the ray. */
+    private BlockHitResult boundClip(Vec3 start, Vec3 end) {
+        return this.level().clip(new ClipContext(start, end, ClipContext.Block.OUTLINE, ClipContext.Fluid.SOURCE_ONLY, this));
+    }
+
+    private void explode(double x, double y, double z, float power) {
+        // THKaguyaConfig.MasterSparkDestroysBlocks defaults to true.
+        this.level().explode(this.getOwner(), x, y, z, power, Level.ExplosionInteraction.TNT);
     }
 
     private BlockHitResult clip(Vec3 start, Vec3 end) {
@@ -233,7 +347,7 @@ public final class THShotEntity extends Projectile {
     }
 
     /** onImpact for an entity. Returns true when this shot was consumed. */
-    private boolean onImpactEntity(Entity hitEntity) {
+    private boolean onImpactEntity(Entity hitEntity, X1ShotMotion m) {
         if (this.getShotForm() == X1ShotTables.FORM_FAMILIAR) return false;
         Entity owner = this.getOwner();
         if (hitEntity instanceof THShotEntity other) {
@@ -248,13 +362,35 @@ public final class THShotEntity extends Projectile {
             }
             return false;
         }
-        // entityHitSpecialProcess: no special shot keeps the bullet alive in P8.
+        damageRate = 1.0F;
+        boolean keep = entityHitSpecialProcess(hitEntity, m);
         if (hitEntity != owner) {
             DamageSource source = this.damageSources().indirectMagic(this, owner == null ? this : owner);
-            hitEntity.hurt(source, getShotDamageWithDifficulty());
+            // The danmaku-mob x2 multiplier (youkai / fairy / phantom) arrives with the X1 mobs.
+            hitEntity.hurt(source, getShotDamageWithDifficulty() * damageRate);
         }
-        this.discard();
-        return true;
+        if (!keep) {
+            this.discard();
+            return true;
+        }
+        return false;
+    }
+
+    /** entityHitSpecialProcess: false = the shot disappears as usual. */
+    private boolean entityHitSpecialProcess(Entity hit, X1ShotMotion m) {
+        switch (m.special) {
+            case X1ShotTables.FIRE -> hit.setSecondsOnFire((int) shotDamage);
+            case X1ShotTables.EXPLOSION01 -> explode(hit.getX(), hit.getY(), hit.getZ(), 3.0F);
+            case X1ShotTables.WIND01 -> {
+                Vec3 v = hit.getDeltaMovement();
+                hit.setDeltaMovement(v.x + m.motion.x() * 1.7D, v.y + m.motion.y() * 1.7D + 2.0D,
+                        v.z + m.motion.z() * 1.7D);
+                hit.hurtMarked = true;
+                if (!hit.onGround()) damageRate *= 2.0F;
+            }
+            default -> {}
+        }
+        return false;
     }
 
     /** getShotDamageWithDifficulty: players' shots ignore difficulty. */
@@ -301,6 +437,10 @@ public final class THShotEntity extends Projectile {
 
     @Override
     protected void readAdditionalSaveData(CompoundTag tag) {}
+
+    private static Vec3d pure(Vec3 v) {
+        return new Vec3d(v.x, v.y, v.z);
+    }
 
     private static Vec3 toMc(Vec3d v) {
         return new Vec3(v.x(), v.y(), v.z());

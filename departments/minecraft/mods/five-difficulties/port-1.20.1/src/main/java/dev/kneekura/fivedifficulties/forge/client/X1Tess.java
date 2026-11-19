@@ -1,0 +1,96 @@
+package dev.kneekura.fivedifficulties.forge.client;
+
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.renderer.LightTexture;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.resources.ResourceLocation;
+
+import java.util.function.Function;
+
+/**
+ * Minimal emulation of the 1.7.10 {@code Tessellator} as X1 renderers use it:
+ * {@code startDrawingQuads} picks the current GL state (a render type), {@code setColorRGBA_F}
+ * applies to the following vertices, and a quad without a colour is white. Vertices are
+ * transformed by the pose at emission time, like immediate-mode GL.
+ *
+ * Switching render type in a {@code BufferSource} flushes the previous batch, so X1's draw
+ * order across GL state changes is preserved.
+ */
+final class X1Tess {
+    enum State {
+        /** no blend, alpha test 0.1, depth write */
+        CUTOUT(X1RenderTypes.SHOT_CUTOUT),
+        /** GL_SRC_ALPHA, GL_ONE, depthMask(false) */
+        ADD_ALPHA(X1RenderTypes.SHOT_ADDITIVE),
+        /** GL_ONE, GL_ONE_MINUS_SRC_COLOR, depthMask(false) */
+        INVERT_ADD(X1RenderTypes.LIGHT_EFFECT),
+        /** GL_ONE, GL_ONE_MINUS_SRC_COLOR, depth write */
+        INVERT_ADD_DEPTH(X1RenderTypes.INVERT_ADD_DEPTH),
+        /** GL_ONE, GL_ONE, depthMask(false) */
+        ADD_ONE(X1RenderTypes.ADD_ONE);
+
+        final Function<ResourceLocation, RenderType> type;
+
+        State(Function<ResourceLocation, RenderType> type) {
+            this.type = type;
+        }
+    }
+
+    private final PoseStack pose;
+    private final MultiBufferSource buffers;
+    private final ResourceLocation texture;
+    private VertexConsumer consumer;
+    private float r = 1F, g = 1F, b = 1F, a = 1F;
+
+    X1Tess(PoseStack pose, MultiBufferSource buffers, ResourceLocation texture) {
+        this.pose = pose;
+        this.buffers = buffers;
+        this.texture = texture;
+    }
+
+    /** startDrawingQuads under the given GL state; colour resets to "unset" (white). */
+    X1Tess begin(State state) {
+        consumer = buffers.getBuffer(state.type.apply(texture));
+        r = g = b = a = 1F;
+        return this;
+    }
+
+    X1Tess color(float red, float green, float blue, float alpha) {
+        r = red;
+        g = green;
+        b = blue;
+        a = alpha;
+        return this;
+    }
+
+    X1Tess v(double x, double y, double z, float u, float v) {
+        consumer.vertex(pose.last().pose(), (float) x, (float) y, (float) z)
+                .color(r, g, b, a).uv(u, v).uv2(LightTexture.FULL_BRIGHT).endVertex();
+        return this;
+    }
+
+    /** A VertexConsumer for ModelPart rendering that keeps only position, colour and UV. */
+    VertexConsumer modelSink(State state) {
+        VertexConsumer inner = buffers.getBuffer(state.type.apply(texture));
+        return new VertexConsumer() {
+            @Override
+            public void vertex(float x, float y, float z, float red, float green, float blue, float alpha,
+                               float u, float v, int overlay, int light, float nx, float ny, float nz) {
+                inner.vertex(x, y, z).color(red, green, blue, alpha).uv(u, v)
+                        .uv2(LightTexture.FULL_BRIGHT).endVertex();
+            }
+
+            @Override public VertexConsumer vertex(double x, double y, double z) { return inner.vertex(x, y, z); }
+            @Override public VertexConsumer color(int red, int green, int blue, int alpha) { return inner.color(red, green, blue, alpha); }
+            @Override public VertexConsumer uv(float u, float v) { return inner.uv(u, v); }
+            @Override public VertexConsumer overlayCoords(int u, int v) { return this; }
+            @Override public VertexConsumer uv2(int u, int v) { return inner.uv2(u, v); }
+            @Override public VertexConsumer normal(float x, float y, float z) { return this; }
+            @Override public void endVertex() { inner.endVertex(); }
+            @Override public void defaultColor(int red, int green, int blue, int alpha) { inner.defaultColor(red, green, blue, alpha); }
+            @Override public void unsetDefaultColor() { inner.unsetDefaultColor(); }
+        };
+    }
+}

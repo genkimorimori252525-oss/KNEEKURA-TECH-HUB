@@ -60,6 +60,31 @@ public final class X1RenderTypes extends RenderType {
                     .setWriteMaskState(COLOR_WRITE)
                     .createCompositeState(false)));
 
+    /** glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR) with depth writes: kunai / arrow tips, wind. */
+    public static final Function<ResourceLocation, RenderType> INVERT_ADD_DEPTH = Util.memoize(texture -> create(
+            "five_difficulties_invert_add_depth", DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP,
+            VertexFormat.Mode.QUADS, 256, false, true,
+            CompositeState.builder()
+                    .setShaderState(RENDERTYPE_TEXT_SHADER)
+                    .setTextureState(new TextureStateShard(texture, false, false))
+                    .setTransparencyState(ONE_ONE_MINUS_SRC_COLOR)
+                    .setCullState(NO_CULL)
+                    .setLightmapState(LIGHTMAP)
+                    .createCompositeState(false)));
+
+    /** glBlendFunc(GL_ONE, GL_ONE), depthMask(false): phantom. */
+    public static final Function<ResourceLocation, RenderType> ADD_ONE = Util.memoize(texture -> create(
+            "five_difficulties_add_one", DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP, VertexFormat.Mode.QUADS,
+            256, false, true,
+            CompositeState.builder()
+                    .setShaderState(RENDERTYPE_TEXT_SHADER)
+                    .setTextureState(new TextureStateShard(texture, false, false))
+                    .setTransparencyState(ADDITIVE_TRANSPARENCY)
+                    .setCullState(NO_CULL)
+                    .setLightmapState(LIGHTMAP)
+                    .setWriteMaskState(COLOR_WRITE)
+                    .createCompositeState(false)));
+
     /** glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR), depthMask(false): delay light effect. */
     public static final Function<ResourceLocation, RenderType> LIGHT_EFFECT = Util.memoize(texture -> create(
             "five_difficulties_light_effect", DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP, VertexFormat.Mode.QUADS,

@@ -33,7 +33,50 @@ public final class X1ShotCoreRegression {
         randomRingStaysInsideCone();
         sphereShotCountsRings();
         rainbowAndRandomColours();
+        homingScoreAndClamp();
+        homingNonUnitAxisQuirk();
+        homingSteersThroughFloatAcceleration();
+        boundReflectsBySide();
         System.out.println("X1_SHOT_CORE_REGRESSION_PASS");
+    }
+
+    private static void homingScoreAndClamp() {
+        near(dev.kneekura.fivedifficulties.core.x1.X1ShotSpecials.homingInitialScore(), 999.9, 1e-3, "initial score");
+        near(dev.kneekura.fivedifficulties.core.x1.X1ShotSpecials.homingScore(10, 0F), 0, 1e-9, "dead ahead scores 0");
+        // perpendicular target: unit cross product, turn clamped to 4 degrees toward the target
+        Vec3d turned = dev.kneekura.fivedifficulties.core.x1.X1ShotSpecials.homingTurn(SOUTH, new Vec3d(5, 0, 0), 4F);
+        near(signedYaw(turned), 4.0, 1e-4, "clamped 4 degree turn toward +X");
+        near(turned.length(), 1.0, 1e-9, "unit axis keeps length");
+    }
+
+    private static void homingNonUnitAxisQuirk() {
+        // X1 rotates about the raw cross product (length sin(30) = 0.5): the turn is smaller than
+        // the clamp and the angle vector shrinks. Kept literally.
+        Vec3d target = new Vec3d(Math.sin(Math.toRadians(30)), 0, Math.cos(Math.toRadians(30)));
+        Vec3d turned = dev.kneekura.fivedifficulties.core.x1.X1ShotSpecials.homingTurn(SOUTH, target, 4F);
+        double s = Math.sin(4.0 / 180.0 * Math.PI), c = Math.cos(4.0 / 180.0 * Math.PI);
+        near(turned.x(), 0.5 * s, 1e-6, "raw-axis x");
+        near(turned.z(), c, 1e-6, "raw-axis z");
+        require(turned.length() < 0.9999, "angle vector shrinks with a non-unit axis");
+    }
+
+    private static void homingSteersThroughFloatAcceleration() {
+        // ItemHomingAmulet: first = limit = acceleration = 0.7. speed() is float-rounded
+        // (0.699999988 < 0.7), so acceleration fires and then snaps motion to angle * limit.
+        X1ShotMotion m = straight(0.7, 0.7, 0.7, Vec3d.ZERO);
+        m.angle = dev.kneekura.fivedifficulties.core.x1.X1ShotSpecials.homingTurn(m.angle, new Vec3d(1, 0, 0), 4F);
+        m.accelerate();
+        near(signedYaw(m.motion), 4.0, 1e-4, "motion follows the turned angle");
+        near(m.motion.length(), 0.7, 1e-9, "speed snapped to the limit");
+    }
+
+    private static void boundReflectsBySide() {
+        Vec3d v = new Vec3d(0.3, -0.4, 0.5);
+        Vec3d up = dev.kneekura.fivedifficulties.core.x1.X1ShotSpecials.reflect(v, 1, 0.9);
+        near(up.y(), 0.36, 1e-12, "floor bounce");
+        near(up.x(), 0.3, 1e-12, "floor keeps x");
+        near(dev.kneekura.fivedifficulties.core.x1.X1ShotSpecials.reflect(v, 3, 0.9).z(), -0.45, 1e-12, "z wall");
+        near(dev.kneekura.fivedifficulties.core.x1.X1ShotSpecials.reflect(v, 4, 0.9).x(), -0.27, 1e-12, "x wall");
     }
 
     /** Minimal 1.7.10/1.20.1 world loop: ticksExisted++ then onUpdate; death check first. */

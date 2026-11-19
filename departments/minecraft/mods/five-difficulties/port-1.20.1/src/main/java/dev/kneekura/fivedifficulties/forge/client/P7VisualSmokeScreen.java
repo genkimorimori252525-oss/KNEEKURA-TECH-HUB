@@ -85,19 +85,22 @@ public final class P7VisualSmokeScreen extends Screen {
         // The X1 dark (colour-inverting) time field does not draw in this GUI context; its evidence
         // comes from the in-world ClientWorldVisualSmoke (P7b) instead of a false pass here.
 
-        // P8 ItemTHShot icons: layer0 tinted by NBT Color (here 0..5), layer1 untinted.
+        // ItemTHShot icons (all 19 X1 subtypes): layer0 tinted by NBT Color (index % 8), layer1 untinted.
         int index = 0;
         for (var shotItem : PortRegistries.SHOT_ITEMS) {
             ItemStack stack = new ItemStack(shotItem.get());
-            stack.getOrCreateTag().putByte("Color", (byte) index);
+            stack.getOrCreateTag().putByte("Color", (byte) (index % 8));
             pose.pushPose();
-            pose.translate(width * 0.56D + index * 34, height * 0.80D, 0.0D);
-            pose.scale(2.0F, 2.0F, 1.0F);
+            pose.translate(width * 0.30D + (index % 10) * 26, height * 0.74D + (index / 10) * 26, 0.0D);
+            pose.scale(1.5F, 1.5F, 1.0F);
             graphics.renderItem(stack, 0, 0);
             pose.popPose();
             index++;
         }
-        graphics.drawString(this.font, "P8 shot items (Color 0..5)", (int) (width * 0.56D), (int) (height * 0.94D), 0xFFFFFF);
+        graphics.renderItem(new ItemStack(PortRegistries.DIFFUSION_AMULET.get()),
+                (int) (width * 0.30D) + 9 * 26 + 4, (int) (height * 0.74D) + 30);
+        graphics.drawString(this.font, "shot items (Color = index % 8) + diffusion amulet",
+                (int) (width * 0.30D), (int) (height * 0.95D), 0xFFFFFF);
     }
 
     private void renderItem(GuiGraphics graphics, ItemStack stack, int x, int y, String label) {

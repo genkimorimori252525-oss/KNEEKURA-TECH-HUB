@@ -17,6 +17,7 @@ public final class PortCreativeTabs {
     public static void buildContents(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.COMBAT) {
             event.accept(PortRegistries.HOMING_AMULET.get());
+            event.accept(PortRegistries.DIFFUSION_AMULET.get());
         }
         if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) { // X1 CreativeTabs.tabMaterials
             PortRegistries.SHOT_ITEMS.forEach(item -> event.accept(item.get()));

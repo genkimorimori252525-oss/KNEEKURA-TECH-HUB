@@ -119,3 +119,12 @@ Renderer:
 The original PNG bytes are available again from the verified historical Drive bundle, but are **not committed to the public TECH-HUB repository**.
 
 P2 live implementation should use a private/local asset-import helper that verifies the canonical archive SHA and texture SHA before copying the PNG into a local resource overlay.
+
+
+## Correction (P9, 2026-11-19)
+
+The item numbers above come from `ItemHomingAmulet`, but the behaviour and visual sections come
+from `EntityHomingAmulet` / `RenderHomingAmulet`, which X1 uses for the Houtou item. X1's Homing
+Amulet item fires generic `EntityTHShot` amulets (`HOMING01`) drawn by
+`RenderTHShot.renderAmuletShot`. From P9 the item is wired literally; this projectile is kept for
+Houtou. See `IMPLEMENTATION-CHECKPOINT-P9.md`.

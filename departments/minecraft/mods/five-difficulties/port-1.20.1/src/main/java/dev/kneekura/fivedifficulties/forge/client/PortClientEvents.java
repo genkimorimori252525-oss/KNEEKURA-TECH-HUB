@@ -42,5 +42,6 @@ public final class PortClientEvents {
                 SakuyaTimeControllerModel.LAYER_LOCATION,
                 SakuyaTimeControllerModel::createBodyLayer
         );
+        event.registerLayerDefinition(SilverKnifeModel.LAYER_LOCATION, SilverKnifeModel::createBodyLayer);
     }
 }
