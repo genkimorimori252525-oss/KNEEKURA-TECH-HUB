@@ -62,10 +62,18 @@ public final class X1WideShotGeometry {
      * Direct port of THShotLib.getVectorFromRotation (Rodrigues rotation matrix).
      */
     public static Vec3d rotateAroundAxis(Vec3d axis, Vec3d vector, double angleDegrees) {
-        Vec3d a = axis.normalized();
+        return rotateAroundAxisRaw(axis.normalized(), vector, angleDegrees);
+    }
+
+    /**
+     * Literal THShotLib.getVectorFromRotation: the axis is used as given (X1 never normalizes it,
+     * and some callers pass non-unit axes such as {@code (-x, -y, z)} of the aim vector).
+     */
+    public static Vec3d rotateAroundAxisRaw(Vec3d axis, Vec3d vector, double angleDegrees) {
+        Vec3d a = axis;
         double x = a.x(), y = a.y(), z = a.z();
         double vx = vector.x(), vy = vector.y(), vz = vector.z();
-        double angle = Math.toRadians(angleDegrees);
+        double angle = angleDegrees / 180.0D * Math.PI; // literal X1 order of operations
         double sin = Math.sin(angle);
         double cos = Math.cos(angle);
         double oneMinus = 1.0 - cos;

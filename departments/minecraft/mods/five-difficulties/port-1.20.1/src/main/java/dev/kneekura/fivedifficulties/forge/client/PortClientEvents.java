@@ -25,6 +25,15 @@ public final class PortClientEvents {
                 PortRegistries.SAKUYA_TIME_CONTROLLER.get(),
                 SakuyaTimeControllerRenderer::new
         );
+        event.registerEntityRenderer(PortRegistries.TH_SHOT.get(), THShotRenderer::new);
+    }
+
+    @SubscribeEvent
+    public static void registerItemColors(net.minecraftforge.client.event.RegisterColorHandlersEvent.Item event) {
+        for (var item : PortRegistries.SHOT_ITEMS) {
+            event.register((stack, tintIndex) -> dev.kneekura.fivedifficulties.forge.item.THShotItem.tint(stack, tintIndex),
+                    item.get());
+        }
     }
 
     @SubscribeEvent

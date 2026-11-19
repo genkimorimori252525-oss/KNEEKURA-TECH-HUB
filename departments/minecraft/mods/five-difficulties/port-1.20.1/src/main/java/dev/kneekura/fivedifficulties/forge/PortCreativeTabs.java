@@ -18,6 +18,9 @@ public final class PortCreativeTabs {
         if (event.getTabKey() == CreativeModeTabs.COMBAT) {
             event.accept(PortRegistries.HOMING_AMULET.get());
         }
+        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) { // X1 CreativeTabs.tabMaterials
+            PortRegistries.SHOT_ITEMS.forEach(item -> event.accept(item.get()));
+        }
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             event.accept(PortRegistries.SAKUYA_WATCH.get());
             event.accept(PortRegistries.SAKUYA_STOPWATCH.get());

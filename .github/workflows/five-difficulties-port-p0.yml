@@ -12,7 +12,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: five-difficulties-p6-${{ github.sha }}
+  group: five-difficulties-${{ github.sha }}
   cancel-in-progress: true
 
 jobs:
@@ -59,7 +59,7 @@ jobs:
           python departments/minecraft/mods/five-difficulties/port-1.20.1/tools/patch-mdk-mixins.py "$ROOT/build.gradle"
           sed -i 's/^mod_id=.*/mod_id=five_difficulties_port/' "$ROOT/gradle.properties"
           sed -i 's/^mod_name=.*/mod_name=Five Difficulties X1 Preservation Port/' "$ROOT/gradle.properties"
-          sed -i 's/^mod_version=.*/mod_version=0.0.7-p6/' "$ROOT/gradle.properties"
+          sed -i 's/^mod_version=.*/mod_version=0.0.8-p8/' "$ROOT/gradle.properties"
           sed -i 's/^mod_group_id=.*/mod_group_id=dev.kneekura.fivedifficulties/' "$ROOT/gradle.properties"
           sed -i 's/^mod_authors=.*/mod_authors=KNEEKURA private preservation project/' "$ROOT/gradle.properties"
           sed -i 's/^mod_license=.*/mod_license=All Rights Reserved/' "$ROOT/gradle.properties"
@@ -86,6 +86,7 @@ jobs:
         shell: bash
         env:
           FIVE_DIFFICULTIES_P6_RUNTIME_SCENARIO: "1"
+          FIVE_DIFFICULTIES_P8_RUNTIME_SCENARIO: "1"
         run: |
           set -euo pipefail
           cd "$RUNNER_TEMP/five-difficulties-mdk"
@@ -118,6 +119,11 @@ jobs:
           grep -F "FIVE_DIFFICULTIES_P6_HALF_PASS" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
           grep -F "FIVE_DIFFICULTIES_P6_HOMING_PASS" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
           grep -F "FIVE_DIFFICULTIES_P6_RUNTIME_SCENARIO_PASS" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
+          grep -F "FIVE_DIFFICULTIES_P8_MOTION_PASS" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
+          grep -F "FIVE_DIFFICULTIES_P8_END_TIME_PASS" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
+          grep -F "FIVE_DIFFICULTIES_P8_HIT_PASS" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
+          grep -F "FIVE_DIFFICULTIES_P8_ITEM_FORMS_PASS" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
+          grep -F "FIVE_DIFFICULTIES_P8_RUNTIME_SCENARIO_PASS" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
           grep -F "Done (" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
           ! grep -F "Failed to start the minecraft server" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
           ! grep -F "Crash report saved to" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
@@ -130,13 +136,13 @@ jobs:
               ;;
           esac
 
-          echo "P6_WORLD_RUNTIME_PASS" | tee "$GITHUB_WORKSPACE/forge-evidence/runtime-verdict.txt"
+          echo "P8_WORLD_RUNTIME_PASS" | tee "$GITHUB_WORKSPACE/forge-evidence/runtime-verdict.txt"
 
       - name: Retain bounded compile evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: five-difficulties-p6-${{ github.sha }}
+          name: five-difficulties-${{ github.sha }}
           path: |
             pure-core.txt
             forge-evidence/

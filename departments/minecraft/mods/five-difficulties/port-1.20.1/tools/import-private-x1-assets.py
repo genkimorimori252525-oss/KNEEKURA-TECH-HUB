@@ -44,6 +44,80 @@ ASSETS = {
         "assets/five_difficulties_port/textures/entity/sakuya_time_dark.png",
         "c0b1a2f92f0b3f366cdfcecf212de161eb853fd987d2790bd7d943b4dcde0d05",
     ),
+    # P8 generic THShot: RenderTHShot sprite strips (8 colour columns) and the delay light.
+    "assets/thkaguyamod/textures/shot/SmallShot.png": (
+        "assets/five_difficulties_port/textures/entity/shot/small_shot.png",
+        "a1fae537d35016dd43cd5af3058616a833ed2c157ac603f37899b1dd0e6b943f",
+    ),
+    "assets/thkaguyamod/textures/shot/PearlShot.png": (
+        "assets/five_difficulties_port/textures/entity/shot/pearl_shot.png",
+        "d06dd8b8751bba385c17e9c620b4723327389913a95dcf19fc2b26b6b9530576",
+    ),
+    "assets/thkaguyamod/textures/shot/CircleShot.png": (
+        "assets/five_difficulties_port/textures/entity/shot/circle_shot.png",
+        "817b2de8514f8a7116f782337775550211986f790cb38e1cc9c69ac0b7b26359",
+    ),
+    "assets/thkaguyamod/textures/shot/HeartShot.png": (
+        "assets/five_difficulties_port/textures/entity/shot/heart_shot.png",
+        "7d2927c4b8c3311d326719faab41b94efc0ea3001699d918f67b60c1b4b614d6",
+    ),
+    "assets/thkaguyamod/textures/shot/BigShot.png": (
+        "assets/five_difficulties_port/textures/entity/shot/big_shot.png",
+        "59bb9c4df6907b19805322e4c0d62264a25fdd2c8d924022892b2c0fb0a1dd31",
+    ),
+    "assets/thkaguyamod/textures/shot/MusouFuuin.png": (
+        "assets/five_difficulties_port/textures/entity/shot/musou_fuuin.png",
+        "1fe5340a695754e4ae73c52c2d91638f775a2a08aba107da52b35916cf75e438",
+    ),
+    # P8 ItemTHShot two-pass icons (layer0 tinted by NBT Color, layer1 white).
+    "assets/thkaguyamod/textures/items/shot/SmallShot.png": (
+        "assets/five_difficulties_port/textures/item/shot/small_shot.png",
+        "f118752099d7b77c48b99494eeae50993bbb9a64fe9a08027a5bd9c3a38634ed",
+    ),
+    "assets/thkaguyamod/textures/items/shot/SmallShot_2.png": (
+        "assets/five_difficulties_port/textures/item/shot/small_shot_2.png",
+        "d329d9089f1c7155bc762b9d39b8ef517df6f42622144fa91a8821bdf221f7c0",
+    ),
+    "assets/thkaguyamod/textures/items/shot/TinyShot.png": (
+        "assets/five_difficulties_port/textures/item/shot/tiny_shot.png",
+        "f3073625d3760f733dd6c48e90499a358b3d916ac128f2c400c101d9c2857b5d",
+    ),
+    "assets/thkaguyamod/textures/items/shot/TinyShot_2.png": (
+        "assets/five_difficulties_port/textures/item/shot/tiny_shot_2.png",
+        "24a0c0152810c685579b201adef54875d7741660feab24180abc4429fabb11bd",
+    ),
+    "assets/thkaguyamod/textures/items/shot/MediumShot.png": (
+        "assets/five_difficulties_port/textures/item/shot/medium_shot.png",
+        "b9ec16cfc0a05b1e2fe9ee0a6a007258bd02098b381401b53ae1a3c4fb9f5912",
+    ),
+    "assets/thkaguyamod/textures/items/shot/MediumShot_2.png": (
+        "assets/five_difficulties_port/textures/item/shot/medium_shot_2.png",
+        "aded0d55152b45296c26fc5f8a21d2be17229fde53af757a9966564044a6ed9f",
+    ),
+    "assets/thkaguyamod/textures/items/shot/BigShot.png": (
+        "assets/five_difficulties_port/textures/item/shot/big_shot.png",
+        "0adac9ea5226cfead7ff74b23b142a4e971a1c4ce8a498bd0ff25076bd1d3beb",
+    ),
+    "assets/thkaguyamod/textures/items/shot/BigShot_2.png": (
+        "assets/five_difficulties_port/textures/item/shot/big_shot_2.png",
+        "10a1cec8f27a512b5a5eb1e881e2b41f82259c281d7c36357d3c3a72e929ef7f",
+    ),
+    "assets/thkaguyamod/textures/items/shot/CircleShot.png": (
+        "assets/five_difficulties_port/textures/item/shot/circle_shot.png",
+        "62b3f926573f8e2ae3a02ae3af71084870f575278ed46a0cfba6cc9bbf79607a",
+    ),
+    "assets/thkaguyamod/textures/items/shot/CircleShot_2.png": (
+        "assets/five_difficulties_port/textures/item/shot/circle_shot_2.png",
+        "7545d906c9101d2818726700c2715eb70de1f0dcb05d41ab750478b7dc944b34",
+    ),
+    "assets/thkaguyamod/textures/items/shot/HeartShot.png": (
+        "assets/five_difficulties_port/textures/item/shot/heart_shot.png",
+        "347fe203ee3426ee67291e952737d948d9597da62cef1680557d632955afb41c",
+    ),
+    "assets/thkaguyamod/textures/items/shot/HeartShot_2.png": (
+        "assets/five_difficulties_port/textures/item/shot/heart_shot_2.png",
+        "f2efcd8af85341e3d9c9524b82b039f4424e6c29ffcb60fc4e2041c4443035ef",
+    ),
 }
 
 def sha(data: bytes) -> str:

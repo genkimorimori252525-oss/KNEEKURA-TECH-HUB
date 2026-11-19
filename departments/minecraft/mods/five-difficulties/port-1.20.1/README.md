@@ -1,6 +1,6 @@
 # Five Difficulties X1 Preservation Port — Minecraft 1.20.1 Forge
 
-Status: **P7 complete — live Homing + Sakuya visuals verified in a real 1.20.1 client world (local, private overlay)**.
+Status: **P8 complete — generic X1 THShot backend (Phase A) with six shot items, verified on a dedicated server and in a real client**.
 
 Target:
 - Minecraft 1.20.1
@@ -200,4 +200,19 @@ Local client runs (need the private overlay, so not in CI):
     FIVE_DIFFICULTIES_P7_WORLD_SMOKE=1 ./gradlew runClient
     FIVE_DIFFICULTIES_P7_CLIENT_SMOKE=1 ./gradlew runClient
 
-Next gate: P8 generic THShot backend (Phase A, one entity per legacy shot).
+P8 followed: see below.
+
+
+## P8 generic THShot backend (Phase A)
+
+One entity per legacy shot, literal X1 numbers: `X1ShotMotion` (pure movement kernel),
+`X1ShotPatterns` (all six THShotLib emission helpers), `THShotEntity` (X1 hit/impact/damage),
+`THShotRenderer` (normal sprite forms + delay light) and six `ItemTHShot` items with X1 NBT.
+
+Live positions match the pure kernel exactly; end time, hit damage and all six item patterns
+pass on a dedicated server; the shot grid and item icons were checked in a real client.
+
+See `IMPLEMENTATION-CHECKPOINT-P8.md`.
+
+Next gate: remaining shot-form renderers and special shots (homing, bound, diffusion), then
+lasers.

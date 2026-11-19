@@ -1,11 +1,15 @@
 package dev.kneekura.fivedifficulties.forge.client;
 
 import com.mojang.blaze3d.platform.NativeImage;
+import dev.kneekura.fivedifficulties.core.math.Vec3d;
 import dev.kneekura.fivedifficulties.core.timestop.TimeDomainMode;
 import dev.kneekura.fivedifficulties.core.x1.SakuyaControllerKind;
+import dev.kneekura.fivedifficulties.core.x1.X1ShotData;
+import dev.kneekura.fivedifficulties.core.x1.X1ShotTables;
 import dev.kneekura.fivedifficulties.forge.FiveDifficultiesPort;
 import dev.kneekura.fivedifficulties.forge.entity.HomingAmuletProjectile;
 import dev.kneekura.fivedifficulties.forge.entity.SakuyaTimeControllerEntity;
+import dev.kneekura.fivedifficulties.forge.entity.THShotEntity;
 import dev.kneekura.fivedifficulties.forge.timestop.SakuyaTimeStopRuntime;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Screenshot;
@@ -56,7 +60,13 @@ public final class ClientWorldVisualSmoke {
     public static final String PASS_MARKER = "FIVE_DIFFICULTIES_P7B_WORLD_SMOKE_PASS";
     private static final String LEVEL_NAME = "five_difficulties_p7b_smoke";
 
-    private enum Phase { BOOT, WAIT_WORLD, SETTLE, FIRE, SHOOT_HOMING, START_STOP, SHOOT_STOP, DONE }
+    private enum Phase { BOOT, WAIT_WORLD, SETTLE, FIRE, SHOOT_HOMING, P8_SPAWN, P8_SHOT, START_STOP, SHOOT_STOP, DONE }
+
+    private static final int[] P8_GRID_FORMS = {
+            X1ShotTables.FORM_SMALL, X1ShotTables.FORM_MEDIUM, X1ShotTables.FORM_PEARL, X1ShotTables.FORM_CIRCLE,
+            X1ShotTables.FORM_HEART, X1ShotTables.FORM_BIG};
+    private static double baselineColourful;
+    private static double shotsColourfulDelta;
 
     private static Phase phase = Phase.BOOT;
     private static int ticks;
@@ -105,7 +115,15 @@ public final class ClientWorldVisualSmoke {
                 }
                 case SHOOT_HOMING -> {
                     if (++ticks == 3) requestShot(mc, "p7b_homing.png");
-                    else if (ticks > 3) next(Phase.START_STOP);
+                    else if (ticks > 3) next(Phase.P8_SPAWN);
+                }
+                case P8_SPAWN -> {
+                    server(mc, ClientWorldVisualSmoke::spawnShotGrid);
+                    next(Phase.P8_SHOT);
+                }
+                case P8_SHOT -> {
+                    if (++ticks == 10) requestShot(mc, "p8_shots.png");
+                    else if (ticks > 10) next(Phase.START_STOP);
                 }
                 case START_STOP -> {
                     server(mc, ClientWorldVisualSmoke::startStop);
@@ -198,6 +216,23 @@ public final class ClientWorldVisualSmoke {
         }
     }
 
+    // P8: every renderNormalShot form x 8 colours, static, plus one row still in its delay (light).
+    private static void spawnShotGrid(ServerLevel level, ServerPlayer player) {
+        Vec3d none = Vec3d.ZERO;
+        Vec3d up = new Vec3d(0, 1, 0);
+        Vec3d south = new Vec3d(0, 0, 1);
+        for (int row = 0; row <= P8_GRID_FORMS.length; row++) {
+            boolean delayed = row == P8_GRID_FORMS.length;
+            int form = delayed ? X1ShotTables.FORM_SMALL : P8_GRID_FORMS[row];
+            for (int color = 0; color < 8; color++) {
+                Vec3d pos = new Vec3d(-2.3D + color * 0.8D, -53.0D - row * 0.62D, 6.0D);
+                X1ShotData data = X1ShotData.shot(form, color, X1ShotTables.SIZE[form], X1ShotTables.DAMAGE[form],
+                        delayed ? 400 : 0, 2000, 0);
+                level.addFreshEntity(new THShotEntity(level, player, pos, south, 0F, up, 0F, 9999, 0, 0, 0, none, data));
+            }
+        }
+    }
+
     // Source is an armor stand in front of the camera, so the Watch controller and its
     // expanding dark field are on screen and the player (a non-source) is inside the field.
     private static void startStop(ServerLevel level, ServerPlayer player) {
@@ -245,7 +280,13 @@ public final class ClientWorldVisualSmoke {
                 name, String.format("%.5f", warmFraction), String.format("%.1f", skyBlueMinusRed), sha256(png));
 
         switch (name) {
+            case "p8_shots.png" -> {
+                shotsColourfulDelta = stats[2] - baselineColourful;
+                require(shotsColourfulDelta > 0.004D, "P8 shot grid not visible (colourful delta "
+                        + shotsColourfulDelta + ")");
+            }
             case "p7b_baseline.png" -> {
+                baselineColourful = stats[2];
                 baselineWarmFraction = warmFraction;
                 baselineSky = skyBlueMinusRed;
                 require(skyBlueMinusRed > 40.0D, "baseline sky is not blue; camera staging failed");
@@ -271,7 +312,7 @@ public final class ClientWorldVisualSmoke {
      * NativeImage pixels are ABGR.
      */
     private static double[] analyze(NativeImage image) {
-        long n = 0, warm = 0, skyN = 0;
+        long n = 0, warm = 0, skyN = 0, colourful = 0;
         double sky = 0;
         int skyRows = image.getHeight() / 5;
         for (int y = 0; y < image.getHeight(); y += 2) {
@@ -279,6 +320,9 @@ public final class ClientWorldVisualSmoke {
                 int abgr = image.getPixelRGBA(x, y);
                 int r = abgr & 0xFF, g = (abgr >> 8) & 0xFF, b = (abgr >> 16) & 0xFF;
                 if (r > 180 && b < 120 && r >= g) warm++; // flat world is green/blue
+                // saturated or near-white pixels: X1 shot sprites; flat grass and sky are neither
+                int max = Math.max(r, Math.max(g, b)), min = Math.min(r, Math.min(g, b));
+                if (max - min > 140 || min > 225) colourful++;
                 if (y < skyRows) {
                     sky += b - r;
                     skyN++;
@@ -286,12 +330,12 @@ public final class ClientWorldVisualSmoke {
                 n++;
             }
         }
-        return new double[] { (double) warm / n, sky / skyN };
+        return new double[] { (double) warm / n, sky / skyN, (double) colourful / n };
     }
 
     private static void finish(Minecraft mc) {
-        FiveDifficultiesPort.LOGGER.info("{} homingWarmDelta={} skyBlueMinusRed baseline={} stop={}",
-                PASS_MARKER, String.format("%.5f", homingWarmDelta),
+        FiveDifficultiesPort.LOGGER.info("{} homingWarmDelta={} p8ColourfulDelta={} skyBlueMinusRed baseline={} stop={}",
+                PASS_MARKER, String.format("%.5f", homingWarmDelta), String.format("%.5f", shotsColourfulDelta),
                 String.format("%.1f", baselineSky), String.format("%.1f", stopSky));
         phase = Phase.DONE;
         mc.stop();

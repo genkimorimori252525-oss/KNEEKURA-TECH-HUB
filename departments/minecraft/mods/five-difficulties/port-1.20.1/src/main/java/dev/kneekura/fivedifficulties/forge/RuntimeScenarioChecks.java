@@ -128,7 +128,7 @@ public final class RuntimeScenarioChecks {
             );
             phase = Phase.DONE;
             cleanupControllersAndEntities();
-            server.halt(false);
+            ScenarioShutdown.failed(server);
             if (failure instanceof RuntimeException runtime) throw runtime;
             throw new IllegalStateException("P6 runtime scenario failed", failure);
         }
@@ -293,7 +293,7 @@ public final class RuntimeScenarioChecks {
 
         phase = Phase.DONE;
         cleanupControllersAndEntities();
-        server.halt(false);
+        ScenarioShutdown.finished(server, "FIVE_DIFFICULTIES_P6_RUNTIME_SCENARIO");
     }
 
     private static void cleanupControllersAndEntities() {
