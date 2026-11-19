@@ -1,0 +1,115 @@
+name: Bedrock Wither Settings Focus Map
+
+on:
+  push:
+    branches:
+      - codex/bedrock-wither-lifecycle-regressions-2026-10-03
+    paths:
+      - '.github/workflows/bedrock-wither-settings-focus-map.yml'
+      - '.github/bedrock-wither-settings-focus-map-request.txt'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bedrock-wither-settings-focus-map
+  cancel-in-progress: false
+
+jobs:
+  settings-focus-map:
+    runs-on: [self-hosted, Windows, X64]
+    timeout-minutes: 10
+    defaults:
+      run:
+        shell: powershell
+
+    steps:
+      - name: Capture Tab-only creation-settings focus map
+        run: |
+          $ErrorActionPreference='Stop'
+          $out=Join-Path $env:GITHUB_WORKSPACE 'bedrock-settings-focus-map'
+          if(Test-Path $out){Remove-Item $out -Recurse -Force}
+          New-Item -ItemType Directory -Path $out | Out-Null
+
+          Add-Type @'
+          using System;
+          using System.Runtime.InteropServices;
+          public static class Win32SettingsFocusBwr {
+            [DllImport("user32.dll")] public static extern bool SetCursorPos(int X,int Y);
+            [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr hWnd);
+            [DllImport("user32.dll")] public static extern IntPtr GetForegroundWindow();
+            [DllImport("user32.dll",CharSet=CharSet.Unicode)] public static extern int GetWindowText(IntPtr hWnd,System.Text.StringBuilder text,int count);
+            [DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr hWnd,int command);
+            [DllImport("user32.dll")] public static extern uint GetWindowThreadProcessId(IntPtr hWnd,IntPtr processId);
+            [DllImport("user32.dll")] public static extern bool AttachThreadInput(uint a,uint b,bool attach);
+            [DllImport("user32.dll")] public static extern bool BringWindowToTop(IntPtr hWnd);
+            [DllImport("kernel32.dll")] public static extern uint GetCurrentThreadId();
+          }
+          '@
+          Add-Type -AssemblyName System.Drawing
+          Add-Type -AssemblyName System.Windows.Forms
+
+          function Capture([string]$path){
+            $s=[System.Windows.Forms.SystemInformation]::VirtualScreen
+            $bmp=New-Object System.Drawing.Bitmap $s.Width,$s.Height
+            $g=[System.Drawing.Graphics]::FromImage($bmp)
+            try{$g.CopyFromScreen($s.Left,$s.Top,0,0,$s.Size);$bmp.Save($path,[System.Drawing.Imaging.ImageFormat]::Png)}
+            finally{$g.Dispose();$bmp.Dispose()}
+          }
+          function Get-ForegroundTitle{
+            $h=[Win32SettingsFocusBwr]::GetForegroundWindow()
+            $sb=New-Object System.Text.StringBuilder 512
+            [void][Win32SettingsFocusBwr]::GetWindowText($h,$sb,$sb.Capacity)
+            return $sb.ToString()
+          }
+
+          $sid=(Get-Process -Id $PID).SessionId
+          $p=Get-Process -ErrorAction SilentlyContinue |
+            Where-Object{$_.SessionId -eq $sid -and $_.MainWindowHandle -ne 0 -and $_.MainWindowTitle -eq 'Minecraft'} |
+            Select-Object -First 1
+          if($null -eq $p){throw 'Minecraft settings window absent'}
+
+          $fg=[Win32SettingsFocusBwr]::GetForegroundWindow()
+          $cur=[Win32SettingsFocusBwr]::GetCurrentThreadId()
+          $fgT=[Win32SettingsFocusBwr]::GetWindowThreadProcessId($fg,[IntPtr]::Zero)
+          $targetT=[Win32SettingsFocusBwr]::GetWindowThreadProcessId($p.MainWindowHandle,[IntPtr]::Zero)
+          if($fgT -ne 0){[Win32SettingsFocusBwr]::AttachThreadInput($cur,$fgT,$true)|Out-Null}
+          if($targetT -ne 0 -and $targetT -ne $cur){[Win32SettingsFocusBwr]::AttachThreadInput($cur,$targetT,$true)|Out-Null}
+          try{
+            [Win32SettingsFocusBwr]::ShowWindow($p.MainWindowHandle,9)|Out-Null
+            [Win32SettingsFocusBwr]::BringWindowToTop($p.MainWindowHandle)|Out-Null
+            [Win32SettingsFocusBwr]::SetForegroundWindow($p.MainWindowHandle)|Out-Null
+          }finally{
+            if($targetT -ne 0 -and $targetT -ne $cur){[Win32SettingsFocusBwr]::AttachThreadInput($cur,$targetT,$false)|Out-Null}
+            if($fgT -ne 0){[Win32SettingsFocusBwr]::AttachThreadInput($cur,$fgT,$false)|Out-Null}
+          }
+
+          Start-Sleep -Seconds 1
+          if((Get-ForegroundTitle) -ne 'Minecraft'){throw 'Foreground verification failed'}
+          [Win32SettingsFocusBwr]::SetCursorPos(10,10)|Out-Null
+          Start-Sleep -Milliseconds 500
+
+          Capture (Join-Path $out 'tab00.png')
+          $shell=New-Object -ComObject WScript.Shell
+          for($i=1;$i -le 30;$i++){
+            [void]$shell.SendKeys('{TAB}')
+            Start-Sleep -Milliseconds 500
+            Capture (Join-Path $out ("tab{0:d2}.png" -f $i))
+          }
+
+          Write-Host ('BWR_SETTINGS_FOCUS_MAP_JSON=' + ([ordered]@{
+            foreground_verified=$true
+            tab_steps=30
+            enter_sent=$false
+            space_sent=$false
+            settings_changed=$false
+            world_created=$false
+          } | ConvertTo-Json -Compress))
+
+      - name: Upload settings focus map
+        uses: actions/upload-artifact@v4
+        with:
+          name: bedrock-wither-settings-focus-map
+          retention-days: 3
+          if-no-files-found: error
+          path: bedrock-settings-focus-map/*.png

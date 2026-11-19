@@ -1,0 +1,140 @@
+name: Bedrock Wither World Settings Probe
+
+on:
+  push:
+    branches:
+      - codex/bedrock-wither-lifecycle-regressions-2026-10-03
+    paths:
+      - '.github/workflows/bedrock-wither-world-settings-probe.yml'
+      - '.github/bedrock-wither-world-settings-probe-request.txt'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bedrock-wither-world-settings-probe
+  cancel-in-progress: false
+
+jobs:
+  world-settings-probe:
+    runs-on: [self-hosted, Windows, X64]
+    timeout-minutes: 8
+    defaults:
+      run:
+        shell: powershell
+
+    steps:
+      - name: Enter focused vanilla New World settings safely
+        run: |
+          $ErrorActionPreference='Stop'
+          $out=Join-Path $env:GITHUB_WORKSPACE 'bedrock-world-settings-probe'
+          if (Test-Path $out) { Remove-Item $out -Recurse -Force }
+          New-Item -ItemType Directory -Path $out | Out-Null
+
+          Add-Type @'
+          using System;
+          using System.Runtime.InteropServices;
+          public static class Win32WorldSettingsBwr {
+            [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr hWnd);
+            [DllImport("user32.dll")] public static extern IntPtr GetForegroundWindow();
+            [DllImport("user32.dll", CharSet=CharSet.Unicode)] public static extern int GetWindowText(IntPtr hWnd,System.Text.StringBuilder text,int count);
+            [DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr hWnd,int command);
+            [DllImport("user32.dll")] public static extern uint GetWindowThreadProcessId(IntPtr hWnd,IntPtr processId);
+            [DllImport("user32.dll")] public static extern bool AttachThreadInput(uint a,uint b,bool attach);
+            [DllImport("user32.dll")] public static extern bool BringWindowToTop(IntPtr hWnd);
+            [DllImport("kernel32.dll")] public static extern uint GetCurrentThreadId();
+          }
+          '@
+          Add-Type -AssemblyName System.Drawing
+          Add-Type -AssemblyName System.Windows.Forms
+
+          function Capture([string]$path) {
+            $s=[System.Windows.Forms.SystemInformation]::VirtualScreen
+            $bmp=New-Object System.Drawing.Bitmap $s.Width,$s.Height
+            $g=[System.Drawing.Graphics]::FromImage($bmp)
+            try {
+              $g.CopyFromScreen($s.Left,$s.Top,0,0,$s.Size)
+              $bmp.Save($path,[System.Drawing.Imaging.ImageFormat]::Png)
+            } finally { $g.Dispose(); $bmp.Dispose() }
+          }
+
+          function Get-ForegroundTitle {
+            $h=[Win32WorldSettingsBwr]::GetForegroundWindow()
+            $sb=New-Object System.Text.StringBuilder 512
+            [void][Win32WorldSettingsBwr]::GetWindowText($h,$sb,$sb.Capacity)
+            return $sb.ToString()
+          }
+
+          $sessionId=(Get-Process -Id $PID).SessionId
+          $p=Get-Process -ErrorAction SilentlyContinue |
+            Where-Object { $_.SessionId -eq $sessionId -and $_.MainWindowHandle -ne 0 -and $_.MainWindowTitle -eq 'Minecraft' } |
+            Select-Object -First 1
+          if ($null -eq $p) { throw 'Minecraft window absent' }
+
+          $fg=[Win32WorldSettingsBwr]::GetForegroundWindow()
+          $cur=[Win32WorldSettingsBwr]::GetCurrentThreadId()
+          $fgT=[Win32WorldSettingsBwr]::GetWindowThreadProcessId($fg,[IntPtr]::Zero)
+          $targetT=[Win32WorldSettingsBwr]::GetWindowThreadProcessId($p.MainWindowHandle,[IntPtr]::Zero)
+          if ($fgT -ne 0) { [Win32WorldSettingsBwr]::AttachThreadInput($cur,$fgT,$true) | Out-Null }
+          if ($targetT -ne 0 -and $targetT -ne $cur) { [Win32WorldSettingsBwr]::AttachThreadInput($cur,$targetT,$true) | Out-Null }
+          try {
+            [Win32WorldSettingsBwr]::ShowWindow($p.MainWindowHandle,9) | Out-Null
+            [Win32WorldSettingsBwr]::BringWindowToTop($p.MainWindowHandle) | Out-Null
+            [Win32WorldSettingsBwr]::SetForegroundWindow($p.MainWindowHandle) | Out-Null
+          } finally {
+            if ($targetT -ne 0 -and $targetT -ne $cur) { [Win32WorldSettingsBwr]::AttachThreadInput($cur,$targetT,$false) | Out-Null }
+            if ($fgT -ne 0) { [Win32WorldSettingsBwr]::AttachThreadInput($cur,$fgT,$false) | Out-Null }
+          }
+
+          Start-Sleep -Seconds 1
+          if ((Get-ForegroundTitle) -ne 'Minecraft') { throw 'Minecraft foreground verification failed' }
+
+          $before=Join-Path $out 'create-from-screen.png'
+          Capture $before
+          $bmp=[System.Drawing.Bitmap]::FromFile($before)
+          try {
+            $center=$bmp.GetPixel(342,239)
+            $left=$bmp.GetPixel(84,239)
+            $top=$bmp.GetPixel(342,174)
+            $right=$bmp.GetPixel(600,239)
+            $bottom=$bmp.GetPixel(342,303)
+
+            $green=($center.G -ge 100 -and $center.G -gt ($center.R + 35) -and $center.G -gt ($center.B + 35))
+            $white=(
+              $left.R -ge 245 -and $left.G -ge 245 -and $left.B -ge 245 -and
+              $top.R -ge 245 -and $top.G -ge 245 -and $top.B -ge 245 -and
+              $right.R -ge 245 -and $right.G -ge 245 -and $right.B -ge 245 -and
+              $bottom.R -ge 245 -and $bottom.G -ge 245 -and $bottom.B -ge 245
+            )
+          } finally { $bmp.Dispose() }
+
+          if (-not ($green -and $white)) {
+            throw 'Focused New World creation fingerprint missing; refusing Enter'
+          }
+
+          $shell=New-Object -ComObject WScript.Shell
+          [void]$shell.SendKeys('{ENTER}')
+          Start-Sleep -Seconds 8
+          if ((Get-ForegroundTitle) -ne 'Minecraft') { throw 'Minecraft foreground lost after New World settings activation' }
+
+          Capture (Join-Path $out 'world-settings-screen.png')
+
+          Write-Host ('BWR_WORLD_SETTINGS_JSON=' + ([ordered]@{
+            foreground_verified=$true
+            new_world_focus_verified=$true
+            enter_sent=$true
+            settings_screen_captured=$true
+            world_created=$false
+            existing_world_clicked=$false
+          } | ConvertTo-Json -Compress))
+
+      - name: Upload world-settings probe
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bedrock-wither-world-settings-probe
+          retention-days: 3
+          if-no-files-found: warn
+          path: |
+            bedrock-world-settings-probe/create-from-screen.png
+            bedrock-world-settings-probe/world-settings-screen.png

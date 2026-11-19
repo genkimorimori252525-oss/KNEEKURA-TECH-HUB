@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "kind": "kneekura_vfx_provider_capabilities",
+  "providerId": "photon-1.20.1-forge",
+  "providerSourceRevision": "507499fbe5a3fc72bb90993e059848cbb31f13ca",
+  "anchor": { "minecraft": "1.20.1", "loader": "forge", "java": 17 },
+  "license": { "spdx": "GPL-3.0", "gate": "RECORDED", "codeImport": "FORBIDDEN" },
+  "capabilities": {
+    "validate": "UNVERIFIED",
+    "prepare": "UNVERIFIED",
+    "play": "UNVERIFIED",
+    "stop": "UNVERIFIED",
+    "observe": "UNVERIFIED",
+    "controlledSeek": "UNAVAILABLE",
+    "pause": "UNAVAILABLE",
+    "particlePositions": "NOT_EXPOSED",
+    "emitterPosition": "UNVERIFIED"
+  },
+  "evidence": [
+    "2026-11-14 source-only: LICENSE and gradle.properties (mod_version=1.1.17, mod_license=GPL-3.0) at the pinned 1.20.1 commit",
+    "2026-11-14 source-only: IFXEffect exposes setOffset/setRotation/setScale/setDelay/setForcedDeath/setAllowMulti/start; FXRuntime exposes isAlive/destroy(force)",
+    "No seek, time-scale or pause method found on IFXEffect/FXRuntime; controlledSeek and pause are UNAVAILABLE until a provider proves otherwise",
+    "Runtime co-existence with LDLib/GeckoLib on Forge 1.20.1 is NOT_RUN; every runtime capability stays UNVERIFIED",
+    "Default branch 1.21 is CC BY-NC-SA 4.0 and is not this provider"
+  ]
+}

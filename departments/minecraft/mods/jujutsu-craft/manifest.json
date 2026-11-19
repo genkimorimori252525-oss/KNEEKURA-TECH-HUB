@@ -1,0 +1,39 @@
+{
+  "format": "kneekura.minecraft.mod-analysis.v1",
+  "target": "Jujutsu Craft (Sorcery Fight)",
+  "slug": "jujutsu-craft",
+  "overall_status": "IN_PROGRESS",
+  "runtime_status": "NOT_RUN",
+  "anchor": {
+    "minecraft": "1.20.1",
+    "loader": "Forge",
+    "loader_version": "47+",
+    "distribution": "JujutsuCraft-ver50.1-forge-1.20.1.jar",
+    "public_version": "50.1",
+    "embedded_version": "50",
+    "curseforge_file_id": 7985964,
+    "sha256": "094247a33bf9c4a741a17fee9ecd1eb5879c97f107ae784af81cfc0f1eee26c9",
+    "sha1": "6c5dd6c74c45351b1029c204cc1d147fc459de4d",
+    "java_major": 17,
+    "license": "All Rights Reserved",
+    "public_source": "NOT_FOUND"
+  },
+  "frontier": {
+    "status": "SAME_PUBLIC_DISTRIBUTION_AS_ANCHOR",
+    "latest_public_version": "50.1",
+    "checked_date": "2026-10-06"
+  },
+  "facets": {
+    "provenance": "EVIDENCE_BACKED",
+    "inventory": "EVIDENCE_BACKED",
+    "techniques": "EVIDENCE_BACKED",
+    "domains": "EVIDENCE_BACKED",
+    "entity_ai": "MAPPED",
+    "rendering_animation": "MAPPED",
+    "networking_sync": "MAPPED",
+    "world_data": "MAPPED",
+    "persistence": "EVIDENCE_BACKED",
+    "failure_history": "PARTIAL",
+    "runtime": "NOT_RUN"
+  }
+}

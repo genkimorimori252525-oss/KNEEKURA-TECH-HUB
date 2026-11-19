@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "workspaceId": "official-tank-fast-iteration",
+  "workspaceDir": "C:/KNEEKURA/source/reimu-mod",
+  "runtimeRoot": "C:/KNEEKURA/iteration/runtime",
+  "gameDir": "C:/KNEEKURA/iteration/game",
+  "worldName": "KNEEKURA_DEBUG_WORLD",
+  "requireExistingWorld": true,
+  "requireGitIdentity": true,
+  "debugProfile": "FAST_DEBUG",
+  "decisionHooks": false,
+  "motionOverlay": false,
+  "readyTimeoutMs": 1200000,
+  "launch": {
+    "command": "gradlew.bat",
+    "args": ["runClient", "--offline", "--console=plain", "--daemon", "--init-script", "C:/KNEEKURA/iteration/local-game-dir.gradle"],
+    "shell": true,
+    "env": {}
+  }
+}

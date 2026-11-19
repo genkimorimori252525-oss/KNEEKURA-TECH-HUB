@@ -1,0 +1,117 @@
+name: Bedrock Wither Client Launch Probe
+
+on:
+  push:
+    branches:
+      - codex/bedrock-wither-lifecycle-regressions-2026-10-03
+    paths:
+      - '.github/bedrock-wither-client-launch-probe-request.txt'
+      - '.github/workflows/bedrock-wither-client-launch-probe.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bedrock-wither-client-launch-probe
+  cancel-in-progress: false
+
+jobs:
+  launch-probe:
+    runs-on: [self-hosted, Windows, X64]
+    timeout-minutes: 10
+    defaults:
+      run:
+        shell: powershell
+
+    steps:
+      - name: Probe focused client settings
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $packageRoot = Join-Path $env:LOCALAPPDATA 'Packages\Microsoft.MinecraftUWP_8wekyb3d8bbwe\LocalState\games\com.mojang\minecraftpe'
+          $options = Join-Path $packageRoot 'options.txt'
+          $selected = [ordered]@{}
+          if (Test-Path $options) {
+            foreach ($line in Get-Content $options -ErrorAction Stop) {
+              if ($line -match '^(gfx_field_of_view|gfx_viewdistance|gui_scale|gui_scale_offset|screen_animations|hide_hud|show_advanced_video_settings):') {
+                $parts = $line -split ':',2
+                $selected[$parts[0]] = $parts[1]
+              }
+            }
+          }
+          Write-Host ('BWR_CLIENT_SETTINGS_JSON=' + ($selected | ConvertTo-Json -Compress))
+
+      - name: Launch stable Bedrock and capture desktop
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $out = Join-Path $env:GITHUB_WORKSPACE 'client-launch-probe'
+          if (Test-Path $out) { Remove-Item $out -Recurse -Force }
+          New-Item -ItemType Directory -Path $out | Out-Null
+
+          $sessionId = (Get-Process -Id $PID).SessionId
+          $before = @(
+            Get-Process -ErrorAction SilentlyContinue |
+              Where-Object { $_.SessionId -eq $sessionId -and $_.ProcessName -match 'Minecraft|Minecraft.Windows' } |
+              Select-Object -ExpandProperty Id
+          )
+
+          Start-Process 'minecraft://'
+
+          $deadline = (Get-Date).AddSeconds(60)
+          $minecraft = @()
+          do {
+            Start-Sleep -Seconds 2
+            $minecraft = @(
+              Get-Process -ErrorAction SilentlyContinue |
+                Where-Object { $_.SessionId -eq $sessionId -and $_.ProcessName -match 'Minecraft|Minecraft.Windows' }
+            )
+          } while ($minecraft.Count -eq 0 -and (Get-Date) -lt $deadline)
+
+          $launched = $minecraft.Count -gt 0
+          if ($launched) { Start-Sleep -Seconds 15 }
+
+          Add-Type -AssemblyName System.Drawing
+          Add-Type -AssemblyName System.Windows.Forms
+          $bounds = [System.Windows.Forms.SystemInformation]::VirtualScreen
+          $bitmap = New-Object System.Drawing.Bitmap $bounds.Width, $bounds.Height
+          $graphics = [System.Drawing.Graphics]::FromImage($bitmap)
+          try {
+            $graphics.CopyFromScreen($bounds.Left, $bounds.Top, 0, 0, $bounds.Size)
+            $bitmap.Save((Join-Path $out 'desktop.png'), [System.Drawing.Imaging.ImageFormat]::Png)
+          } finally {
+            $graphics.Dispose()
+            $bitmap.Dispose()
+          }
+
+          $ffmpeg = Get-Command ffmpeg.exe -ErrorAction SilentlyContinue
+          $videoCaptured = $false
+          if ($null -ne $ffmpeg) {
+            & $ffmpeg.Source -y -f gdigrab -framerate 30 -t 5 -i desktop -c:v libx264 -preset ultrafast -crf 28 (Join-Path $out 'desktop-5s.mp4')
+            $videoCaptured = ($LASTEXITCODE -eq 0 -and (Test-Path (Join-Path $out 'desktop-5s.mp4')))
+          }
+
+          $newPids = @($minecraft | Where-Object { $before -notcontains $_.Id } | Select-Object -ExpandProperty Id)
+          $summary = [ordered]@{
+            session_id = $sessionId
+            minecraft_launched = $launched
+            minecraft_process_count = $minecraft.Count
+            new_process_count = $newPids.Count
+            screenshot_captured = (Test-Path (Join-Path $out 'desktop.png'))
+            video_captured = $videoCaptured
+            world_opened = $false
+            input_sent = $false
+          }
+          Write-Host ('BWR_CLIENT_LAUNCH_JSON=' + ($summary | ConvertTo-Json -Compress))
+
+          foreach ($pidToStop in $newPids) {
+            Stop-Process -Id $pidToStop -Force -ErrorAction SilentlyContinue
+          }
+
+      - name: Upload launch probe visuals
+        uses: actions/upload-artifact@v4
+        with:
+          name: bedrock-wither-client-launch-probe
+          retention-days: 3
+          if-no-files-found: error
+          path: |
+            client-launch-probe/desktop.png
+            client-launch-probe/desktop-5s.mp4
