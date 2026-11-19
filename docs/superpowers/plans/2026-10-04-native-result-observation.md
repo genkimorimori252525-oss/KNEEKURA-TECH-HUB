@@ -1,0 +1,141 @@
+# Native result observation implementation plan
+
+> **For agentic workers:** Use `superpowers:executing-plans` inline. This continues the user's already approved local execution architecture and standing authorization; keep the full original goal active until its remaining requirements are met.
+
+**Goal:** Close missing result-observation channels and retain integrated native scenarios without promoting attempts, cancelled events or fixture state to successful gameplay results.
+
+**Architecture:** Extend existing bounded `KneekuraDebugDecisionHooks.Session`, immutable evidence adapters and shared `SampledMotionTrace`. Use original-return callbacks and selected context; retain separate related-projectile identities only after exact source semantics and finite retention are established. No new observation database or gameplay visualization objects.
+
+**Tech Stack:** Minecraft 1.20.1, Forge 47.2.0, Java 17, existing Node ESM consumers/tests.
+
+**Spec:** `departments/minecraft/LOCAL-EXECUTION-HANDOFF-2026-10-02.md`; `departments/minecraft/vanilla-ai/REMAINING-EXECUTION-MATRIX-2026-10-04.md`; exact result research in `NATIVE-RESULT-HOOK-RESEARCH-2026-10-04.md`.
+
+## Global constraints
+
+- Baseline `1291b5e562982c851c8ce3d5c713ab87fd0a6056`, existing isolated `codex/minecraft-decision-native-20261003`, canonical LAB subtree only.
+- Existing burst maximum 200 ticks /256 events /512 KiB and exact session/run/snapshot/process/Arena/UUID/selection-generation fences remain authoritative.
+- Observation is OFF unless selected and explicitly armed. Never replay AI/search/eligibility or modify its budget/order.
+- Original world and unrelated checkouts remain read-only; new private data is on C: due limited K: capacity. Native source freezes until clean stop.
+- Preserve Draft, private evidence, missing channels and all original remaining requirements. No full-project completion from one slice.
+
+## Review focus
+
+1. False, cancelled or custom-overridden teleport must not create an explicit successful-teleport gap.
+2. Callback in another selection revision/run/Arena must not split this subject's trace or enter its Decision result.
+3. Multiple original callbacks within one sample interval, or callback at a sample tick, must retain evidence without creating duplicate/fabricated samples.
+4. Projectile impact/hurt return/health loss are distinct; shielding, absorption, piercing and subclass dispatch must not become a false damage outcome.
+5. Observer callbacks must remain finite/no replay even on sink failure, expired context, thread mismatch or identity retention limits.
+
+## Task 1 — Original teleport return producer and typed consumer
+
+**Files:**
+- Modify `departments/minecraft/lab/debug-workspace/forge-bridge/src/main/java/com/github/tartaricacid/touhoulittlemaid/sim/debug/KneekuraDebugDecisionHooks.java`.
+- Create matching `decisionmixin/KneekuraDebugLivingResultMixin.java`; register in existing `src/main/resources/kneekura-decision.mixins.json`.
+- Modify `debug-workspace/evidence/original-decision-events.mjs`, `debug-workspace/evidence/debug-workspace-decision-adapter.mjs` and their existing tests.
+- Extend `KneekuraDebugMotionTraceCache`, `KneekuraDebugMotionOverlayRuntime` and the existing pure cache test so native display also consumes a flushed successful callback as a gap, never a sampled position.
+- Extend genuine Forge producer contracts with selected/excluded/thread/budget cases; no fixture call is native acceptance.
+
+**Interfaces:**
+- Consume original `LivingEntity.randomTeleport(DDDZ)Z` RETURN and its actual argument coordinates/boolean, existing `control` channel, `Session.matches` and `Session.record`.
+- Produce `CONTROL_TELEPORT_RETURN` under the existing original-event schema. Data: `result` boolean; `requestedPosition` and `returnedPosition` each finite `{x,y,z}`; `dispatchScope='BASE_RANDOM_TELEPORT_RETURN'`; `reasonStatus='NOT_EXPOSED'`. Callback serializes after context/budget validation and never invokes teleport.
+- Consume valid records as `RESULT` / `teleport_result`, with exact source observation IDs. Only `result=true` breaks the enclosing pair of retained SERVER points as `EXPLICIT_TELEPORT`; callback coordinates do not become samples.
+
+- [ ] Write positive/negative/malformed and mixed-context retained tests; run the exact file and observe unsupported callback / unbroken short teleport fail.
+- [ ] Add RETURN mixin and bounded producer callback; test selected subject, excluded channel, thread mismatch, exhausted context/budget and no replay using genuine APIs.
+- [ ] Add strict typed consumer and trace boundary derivation; preserve false attempt as a result fact while keeping its trace connected.
+- [ ] Run focused Node suite, portable/genuine Java source contracts and all actual bridge compilation. Expected: no failures; source/API proof distinguished from runtime hook proof.
+- [ ] Commit the verified slice without publishing native-success claims.
+
+## Task 2 — Original ranged-result relationship capture
+
+**Files:** Existing Forge producer/lifecycle hooks and evidence adapters selected from exact method-body research; related tests and minimized research record.
+
+**Interfaces:** Selected owner UUID plus explicitly observed projectile UUID/target UUID and existing immutable observation identities. Finite opt-in retention; original spawn/impact/result references preserve independent entity identities.
+
+- [ ] Complete exact spawn/tick/impact/hurt/health-loss/subclass source-call research and define the smallest finite policy before edits.
+- [ ] Write cancelled/failed/absorbed/removed/mixed-owner/mixed-context regressions and observe failure first.
+- [ ] Instrument only original calls or authoritative post-result events; separate impact, return and HP effects. Do not change target selection to fabricate simultaneous traces.
+- [ ] Run genuine Forge and focused consumer regressions; commit only proven source behavior.
+
+## Task 3 — Native integrated acceptance and measurement
+
+**Files:** Private trial drivers/fixtures/receipts outside Git, dated minimized acceptance/current handoff inside Git.
+
+**Interfaces:** Frozen clean producer SHA, private copies of the preserved world, existing registered owner gates and finalized evidence stores.
+
+- [ ] Prepare independent prelaunch conditions for Enderman teleport, Skeleton/Ghast ranged shot, damageable TF phases and Knight coordination. Retain original-save hashes and predecessor copies.
+- [ ] Run finite trials; arm appropriate channels, retain actual source IDs and outcome receipts, and stop cleanly. No callbacks in constructors/load before arm count as selected capture.
+- [ ] Show integrated Brain/pursuit/custom-flight/missing-capture diagnosis and explicit unavailable layers.
+- [ ] Run same-initial-state paired observer-effect trials and authorized image checks; retain CPU/JFR/GPU/pixel coverage separately. Lack of capture capability remains an open item.
+
+## Task 4 — Full remaining reconciliation and final gate
+
+**Files:** Vanilla/FRONTIER research, requirement matrix, current handoff, tests and Draft PR80.
+
+- [ ] Complete remaining per-algorithm semantic research, terrain/community/modern comparisons and source-established additional path/malus/control slices under the original constraints.
+- [ ] Reconcile every original section21 criterion with specific evidence; do not close the goal while required work remains.
+- [ ] Perform one fresh whole-diff review against baseline1291b5e; regrade by actual user impact and fix substantive findings in one RED→GREEN pass.
+- [ ] Verify final exactHEAD focused/full suites, genuine Forge compile and hostedCI; publish Draft/update current handoff and report measured limits.
+
+## Bounded custom-flight continuation — original Ghast reach return
+
+Exact ANCHOR `Ghast$GhastMoveControl` class SHA256 `9cf70e9f2224e83c26b76de3ed734789c44e6e61d016550e443bea8b1de8934d`, normalized disassembly SHA256 `5602ddf2ea35d4692483668446b2d2b235611b8b3437dfa198f406a86893ec3d`, establishes a private `canReach(Vec3,int):boolean`. Its one inspected caller uses the normalized wanted-position displacement and `ceil(distance)` during original control tick. The method advances the Ghast bounding box for integer steps1 through length-1 and returns false at the first failed `Level.noCollision`; lengths0/1 return true without a collision-loop iteration. This is custom steering feasibility, not a complete A* search, exact collision location or final chosen destination.
+
+- Reuse the existing explicitly armed `control` channel and its unchanged caps. Add one non-cancelling original private-method RETURN injection; never invoke/replay reach tests, collision queries, random, controller setters or movement.
+- Retain exact selected Ghast/controller reference, cached UUID, owning server thread and full burst context. Record only actual direction argument, step count and boolean with explicit custom-steering scope; collision location and cause remain NOT_EXPOSED.
+- Consumer accepts a strictly scoped `CONTROL_GHAST_REACH_RETURN` as direct EVALUATION / partial custom-flight reach capability. No invented CANDIDATE/SELECTION, destination, extra Motion sample or path frontier.
+- First write genuine mapped producer owner/thread/OFF/channel/context/window/UUID/event/byte/sink tests and retained positive/false/malformed/identity/late-arm tests; preserve RED evidence. Then add the minimal hook/validator and integrate existing source suites. Genuine all-bridge/Mixin compile and Java/Gson→Node interop precede a fresh frozen private native trial.
+- Preserve all prior producers and original world; native return/position correspondence is temporal unless stronger evidence exists. This slice does not complete Phantom/custom MOD controls, full flight diagnosis, all-view/GPU or the broad goal.
+
+### Retained missing-capture display follow-through
+
+R40 actual post-budget packet reports NOT_CAPTURED correctly. Controlled read-only omission of eight actual SERVER point inputs creates SOURCE_GAP40628..40673 while canonical bytes remain unchanged. Browser inspection shows the line break but no visible gap explanation before expanding raw JSON. Add a compact visible summary for the complete requested window: total gap count, at most four kind/tick/subject examples and omitted-detail notice. Keep cursor age expiry distinct from acquisition gaps, retain full source/provenance in existing details, and never claim a gap proves teleport or a zero count proves continuous acquisition. Write meaningful renderer RED→GREEN tests; then regenerate separate private artifacts without overwriting the first images/receipts and verify actual browser rendering.
+
+## Bounded original open/closed heap-operation continuation
+
+This continues Task4 and original sections5B4/8E4 without replacing the path recorder. Exact Forge ANCHOR PathFinder class `5d308818c953fcba2353de06b03fb4a80a0f12370c7f92f1baad7f7d574cae3b`, disassembly `d929f5154b88c5c977b99d47a7e0d8003a4d45373e08989b2b04711e8dc4f4aa`, has original inner insert calls at61/408, pop120, closed field write128 and changeCost380. BinaryHeap class is `05af3f22ca50b795799311c528044598e9e05974b56050929b4c5bcd8d808ff0`, disassembly `8648cc10e9147a1e58456630d4fb07e092f37445fce36cbd0f703f8d7218c8c3`. The actual profiler-bearing inner descriptor remains unchanged.
+
+- Add only an explicit opt-in `frontier` channel; preserve default channels and200tick/256event/512KiB/node limits. Path-only and neighbors-only output remains unchanged. Use existing selected outer finder search/context rather than globally instrumenting every heap.
+- Preserve each original virtual insert/pop/changeCost exactly once, including actual return/exception. Copy detached base Node fields only after the authority/channel/context/budget checks. Verify the passed heap is the finder's actual cached openSet reference. Never call search, distance/heuristic/evaluator, peek/size/getHeap, random or controller setters for observation.
+- Distinguish start insertion, later accepted insertion/update and popped-before-caller-close. The inspected closed field write at128 is not a method return: do not relabel it as ORIGINAL_INVOCATION_RETURN_ONLY or add a field-write wrapper to this slice. Existing later neighbor/current-node and search-end cache flags remain separate state observations, with missing exact closed transitions explicitly unobserved. Do not infer rejection reasons from absent heap operations or equate popped with closed at the wrong boundary. Retain actual passed cost separately from g/h/f/costMalus and original return identity.
+- If relating Node objects, use a finite per-search reference-identity table with explicit unknown/truncation at the limit; never treat equal coordinates or hash codes as unique object identity. Clear it on search begin/end and session/context teardown. Keep search IDs and source observation IDs; no complete frontier/path-cost claim from a capped stream.
+- Write consumer positive/malformed/other-search/context/channel/partial-stream tests and genuine counting-heap tests first. Verify RED for missing hooks, then implement minimal wrappers/Mixin/strict consumer/optional drilldown and integrate existing suites. Java/Gson→Node interop and genuine all-bridge/Mixin compile precede a frozen private native trial. Preserve prior world/evidence and disclose callback conflicts/observer cost.
+- Existing cache flags remain independently sampled search-end state. The new facts are original operation boundaries, not a complete pre-evaluator candidate population, reason trace, arbitrary MOD compatibility, final effective path cost or arrival result.
+
+### Bounded original caller closed-field checkpoint
+
+The next slice observes the original inner `Node.closed=true` write at128 separately. The actual pop120 return is stored at123 in local12 and loaded at125 before this write; no original call occurs between them. Reuse `frontier` and its unchanged budgets, selected search and thread. Retain at most one actual non-null pop-return reference plus its producer event index per finder (at most8 finders), after original heap identity and context/budget checks; this adds at most one transient reference beyond each capped Node identity table. Clear on consumption, next pop (including original exception), search begin/end, excluded Mob, session/context/window/budget/writer teardown.
+
+- Add a non-cancelling FIELD injection, opcode181/ordinal0/shiftAFTER/require1, on the exact profiler-bearing inner descriptor. Do not capture locals, replace the field assignment, replay calls or invoke Node/heap query methods.
+- Emit `PATH_NODE_CLOSED_CHECKPOINT` with `ORIGINAL_FIELD_WRITE_CHECKPOINT_ONLY`, explicit preceding pop event index/reference scope and detached `openAtCheckpoint`/`closedAtCheckpoint` fields. Keep return flags/semantics unchanged. Read actual values rather than inventing a permanent closed state in the presence of other Mixins.
+- Strictly validate this kind and expose an optional `path_closed_nodes` retained drilldown as INSTRUMENTED_ALGORITHM_STATE/ALGORITHM_TRACE_RELATION. Do not derive missing pop observation IDs, selection, rejection reasons or final cost. Equal coordinates never imply same reference.
+- Preserve consumer RED3 and genuine missing-hook compile RED before implementation. Test one-shot/reference/exception/identity cap/OFF/legacy/thread/search/context/event/byte/sink boundaries and actual Gson interop. Compile every bridge/Mixin against genuine hash-verified APIs, then freeze a new source generation for private Java Forge acceptance. Native proof remains separate from manual test field writes.
+
+### Original returned Path nodes and terminal cached values
+
+Exact Path class/disassembly `94bfcd6f1aa220bce972201fc2f109f2bff3abc45c39b502fa2807da4cd65c93` / `dd1540b07207eab558c5462623ee7b323a05957beacf8348068e6a8067996e63` stores the original List reference and constructor-time distance-to-target. getEndNode/getNodeCount dispatch to the stored List; they are not safe observational calls for an arbitrary custom List. Exact PathFinder reconstruction creates an ArrayList; final selection does not minimize terminal g.
+
+- Add only an explicitly requested `path_nodes` channel, keeping default channels and all existing budgets unchanged. Extend the existing selected outer RETURN callback; no new search/AI/Node/Path getter invocation or locals capture. Preserve the original return reference and copy cached fields only inside Session.record after authority/thread/context/budget checks.
+- Support exact Path.class with exact ArrayList.class only; null Path, subclass and custom List are explicitly unavailable without invoking their methods. For legacy path summary, remove the proven unsafe custom-list getNodeCount query and mark its count unavailable; genuine standard ArrayList output stays the same.
+- Emit PATH_RETURNED_NODES / ORIGINAL_INVOCATION_RETURN_ONLY with at most maxNodes indexed prefix slots, independent terminal slot, cached target/canReach/distance/next index and Node g/h/f/malus/flags. Share the existing finite per-search reference identity table (also allocated for path_nodes); copy predecessor reference identity without traversal or coordinate joins. Clear through existing lifecycle gates. Terminal g and constructor distance are not complete effective cost; navigation adoption and final effective cost stay NOT_EXPOSED.
+- Strict retained validation/drilldown exposes actual RESULT/sourceIDs, not SELECTION. A query may further clip prefix slots without inventing terminal adjacency. Optional default-OFF returnedPath presentation stays separate from Motion and navigation/cache; only contiguous captured path indices get declared edges. NULL slots/truncated intervals never become lines; target and terminal marks remain independent. Numeric inspection and retained source provenance are available. No ELEVATION tick trajectory is fabricated from path indices.
+- Write meaningful consumer and genuine custom-List/Path/Node no-getter, detached-prefix/terminal/predecessor/cap/thread/context/window/event/byte/sink RED tests. Add renderer runtime tests for OFF, source/terminal labels and no edges over missing slots. Verify actual mapped compile/Gson interop/focused suites; freeze a fresh private native trial and read-only browser QA before publishing bounded acceptance. Other original cost/branch/Goal/Brain/Boss/paired/GPU/criterion21 requirements remain open.
+
+### Original accepted-neighbor g-field write
+
+Exact ANCHOR inner PathFinder writes Node.g at27 (start zero) and336 (accepted neighbor's actual local17). Receiver332/value334 are the original PUTFIELD operands; cameFrom329 precedes this boundary and getBestH346/h update follows. Genuine Mixin0.8.5 artifact `ca15a907e4d1f6b38cefed51d7df96a83347dcfb0bc8ced53111519e991d887d`, RedirectInjector class `c86d6303b898002065ceaae8bae8039d745d20039547b2a65c0e7f7dfd07dceb`, validates void handler parameters (instance field owner, field type) and supplies those original stack values. This is a static mechanism proof, not actual transformed acceptance or arbitrary Mixin coexistence.
+
+- Add one exact inner FIELD Redirect, opcode181/ordinal1/require1, with Node/float parameters. Its helper performs the original direct `node.g=writtenG` once before observation; original null-reference exception remains before any capture. Do not replace it with a gameplay setter, protected-method/base-only RETURN, locals capture, virtual distance/heuristic/inOpenSet/search replay, or a different receiver.
+- New explicit `path_g` channel is default OFF; all numeric caps/default channel list stay unchanged. Reuse selected finder/context/thread gates and shared finite per-search reference IDs, without new pending arrays or Node holders. Release via existing begin/end/excluded/context/stop/window/event/byte/writer lifecycle.
+- Emit PATH_NODE_G_WRITE_CHECKPOINT / ORIGINAL_FIELD_WRITE_CHECKPOINT_ONLY after the original accepted g write and before the original heuristic update. Retain the actual passed written g with ORIGINAL_PUTFIELD_ARGUMENT scope; cached Node flags/values use BASE_NODE_FIELDS_AFTER_WRITE_AND_CAPTURE_GATES scope. The context/time suppliers run before capture, so do not require their later cached g to equal the written argument or invent a reason for differences. Actual predecessor reference presence/ID is copied without traversal; NaN/infinite values remain unknown. g/h/f from different original update phases do not imply a consistent final f=g+h cost.
+- Expose EVALUATION algorithm-state facts and an optional `path_g_writes` drilldown with source IDs. Validate finite-or-unknown written g and explicit separate field scopes, preserve reference-limit unknowns, and reject return/adoption/complete-cost claims. Earlier exact comparison operands, complete neighbor/rejection population, rejection reasons, final effective path cost and Navigation adoption remain NOT_EXPOSED. Missing checkpoint never proves rejection.
+- Genuine missing-helper RED precedes a minimal single-write implementation. Tests cover actual assignment before sink/cap/closed/OFF gates, original null exception, custom Node no-query, detached fields, identity/predecessor limits, wrong thread/context/search/legacy channels, all stop/writer boundaries, compiled sole direct g PUTFIELD and real Gson→JS interop. Consumer RED→GREEN covers field-only semantics, strict contradictory values/keys, unavailable numbers and immutable exact-context reads. All bridge/Mixin genuine compilation and relevant suites precede a fresh clean frozen native generation and exact-source CI. Broader Goal/Brain/Boss/paired/GPU/criterion21 and final whole-diff review stay open.
+
+### Original protected virtual edge-distance return
+
+Exact inner PathFinder261 invokes protected virtual `distance(Node,Node):float` with the original caller `this` (aload0 at256), expanded Node local12 and neighbor local15. Actual return local16 is consumed by walkedDistance276 and tentative-g293 before range/cost gates; an edge-distance return alone proves neither rejection nor final effective path cost. Base distance delegates to Node.distanceTo; base RETURN-only capture misses subclasses. Genuine Mixin0.8.5 MixinTargetContext.transformMethodRef rebinds a mixin-owned method reference to the target owner at27 and retains virtual182 dispatch for this protected member. Preserve this exact-source receiver constraint and disclose other transformations/coexistence as unverified.
+
+- Add one exact inner INVOKE Redirect/ordinal0/require1 and protected abstract `@Shadow(remap=false) distance`. Call that original virtual target member exactly once before observer work and return the same primitive afterward. No public access widening, direct protected call from an external helper, base-only RETURN, Node query/distance replay, original argument/receiver substitution or locals capture. The original pinned call receiver is always target this; arbitrary changed receiver sites are outside this source proof.
+- Add only explicit default-OFF `path_distance`; keep default channels and numeric caps. Record `PATH_EDGE_DISTANCE_RETURN` with original invocation-return semantics, actual returned finite/unknown distance and separate later cached from/to fields and bounded per-search reference IDs. Receiver scope, phase before original walkedDistance write, original-call-return scope and unknown comparisons/rejection/population/finalcost/adoption are explicit. No second pending Node table or long-lived references.
+- Expose EVALUATION direct-original-return facts and optional typed `path_edge_distances`, preserving source/context and absence/unknown. Do not turn these edges into an adopted route, complete candidate population or causal reason. No Viewer geometry change is required to read the typed evidence.
+- Genuine RED missing helper/Shadow/handler and consumer RED precede implementation. Execute the actual compiled handler through an untransformed Shadow carrier against a counting protected-override PathFinder fixture; verify single call, primitive bits, same original exception and observer fences. This fixture is not transformed-runtime evidence. Inspect actual handler bytecode for one invokevirtual shadow before any observer, unchanged final float return and no base/super/query replay. Test null/custom Nodes, detached actual fields, finite IDs/shared caps, OFF/legacy/thread/context/window/event/byte/writer/search/end/reuse and actual Gson→JS interop. Genuine all-bridge/Mixin compile precedes a fresh frozen native generation with actual transformed original AI; previous R45 cannot validate this producer.

@@ -8,6 +8,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
+import net.minecraftforge.event.server.ServerStoppingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
@@ -49,6 +50,13 @@ public final class KneekuraDebugClientBootstrap {
     private static String debugWorldReadyAt;
 
     private KneekuraDebugClientBootstrap() {
+    }
+
+    static void sampleTankStatus(boolean submitted) {
+        if (!envResolved || disabled || config == null) return;
+        var mc = Minecraft.getInstance();
+        KneekuraDebugTankPresentation.sampleStatus(config, mc.getSingleplayerServer(), tickCounter,
+                mc.level == null ? null : mc.level.getGameTime(), mc.level != null && mc.getConnection() != null, submitted);
     }
 
     @SubscribeEvent
@@ -214,6 +222,11 @@ public final class KneekuraDebugClientBootstrap {
                     server,
                     serverTickCounter);
         }
+    }
+
+    @SubscribeEvent
+    public static void onServerStopping(ServerStoppingEvent event) {
+        KneekuraDebugServerObserver.stop();
     }
 
     @SubscribeEvent

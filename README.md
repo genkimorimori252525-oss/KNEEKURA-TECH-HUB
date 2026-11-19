@@ -4,6 +4,10 @@ Internal-purpose technology research infrastructure for discovering large amount
 
 > **Discover broadly. Promote knowledge carefully.**
 
+## For AI coding agents
+
+Start with [AGENTS.md](AGENTS.md) and [AI-ENTRYPOINT.md](docs/AI-ENTRYPOINT.md). Check the registered local checkout for operational guides that may not be tracked on GitHub, then follow the applicable current department/source instructions before historical search or runtime setup. For Minecraft / MOD-AI / Water Tank work, the **Current Minecraft entry point** below supersedes retained standalone LAB and SimLab instructions; guide-listed feature worktrees still require exact-source verification.
+
 ## Three roles
 
 1. **OSS Technology Search Engine** — mass discovery and indexing.
@@ -21,6 +25,8 @@ Internal-purpose technology research infrastructure for discovering large amount
 > **Current Minecraft entry point:** [`departments/minecraft/CURRENT-HANDOFF-2026-10-02.md`](departments/minecraft/CURRENT-HANDOFF-2026-10-02.md). **`main` is the authoritative Minecraft/MOD-AI/LAB baseline.** The former standalone KNEEKURA-LAB source is now vendored at `departments/minecraft/lab/` and is the canonical experiment/observation source for new Minecraft MOD-AI work. Knowledge/Core and LAB responsibilities remain separated in code, but they now share one repository and one revision. Historical LAB runs keep their original repository/SHA provenance.
 
 A dedicated private research lane for Minecraft mod engineering has been established under `departments/minecraft/`.
+
+**建築ジャンル：** [Minecraft Building](departments/minecraft/building/README.md) は mcbuild の固定ソース、反復設計・可視化、オンデマンドの `.schem` 生成を扱う。現時点では実機未検証・ワールド自動変更なし。
 
 Minecraft **1.20.1 + Forge remains the adaptation anchor, not the ceiling**. Each target should preserve a 1.20.1/Forge track when one exists while also acquiring and analyzing the latest useful upstream implementation. Version/loader tracks remain separate SourceSnapshots and are compared explicitly so newer techniques can be reconstructed for the 1.20.1 Forge environment without pretending that code is directly interchangeable.
 
