@@ -1,0 +1,330 @@
+# Bedrock Wither — Current BDS Structural Map
+
+Reviewed: 2026-10-02  
+Purpose: map current Bedrock Dedicated Server Wither structure before assigning Java behavior.
+
+## Current BDS anchor
+
+Source surface: LiteLDev/LeviLamina generated Bedrock headers.
+
+Current main checked:
+`1bab1522cdfd697d241e77fe60f19b9db2a20a5a`
+
+Immediately previous inspected parent:
+`32fcaa02baa38371b705358801c7d185c284233e`
+
+The following relevant files have identical blob SHAs across both commits:
+
+| File | blob SHA |
+|---|---|
+| `WitherBoss.h` | `03cd288d06c8c053678a51891c014d0d910e94e5` |
+| `WitherTargetHighestDamage.h` | `1857b2a20df2b86f07e4d661a09e67ad709a5057` |
+| `WitherRandomAttackPosGoal.h` | `258cdeb206ac193336e8d90ba598a6695bd42ad1` |
+| `WitherBossPreAIStepResult.h` | `6d02f203c934b22240e1cf63598e3de8cce78524` |
+| `tooth.json` | `68a8054ee0cf71390c80b3d21c66921ed0c9f272` |
+
+The current LeviLamina package declares:
+- loader line: 26.51.x
+- BDS dependency: `github.com/LiteLDev/bds = 1.26.51`
+- supported server version: 26.51.1
+
+This file treats the generated headers as **current Bedrock structure evidence**, not source-body evidence.
+
+## WitherBoss attack categories
+
+Current BDS declares:
+
+```
+WitherAttackType
+0 Charge
+1 HurtExplosion
+2 Projectile
+```
+
+The same class exposes:
+- `_destroyBlocks(Level&, AABB const&, BlockSource&, int range, WitherAttackType)`
+- `canDestroy(Block const&, WitherAttackType)`
+
+Implication:
+Bedrock does not model all block destruction as one generic Wither action. Charge, hurt reaction and projectile destruction are distinguishable at the native API boundary.
+
+KNEEKURA adaptation:
+`BedrockWitherAttackType` mirrors only the names/IDs. Exact block predicates and ranges remain unimplemented until stronger evidence exists.
+
+## Current WitherBoss runtime fields
+
+The generated class exposes these member fields:
+
+### Shield / phase
+- `MAX_SHIELD_HEALTH`
+- `mShieldHealth`
+- `mHealthThreshold`
+- `mPhase`
+- `mWantsToExplode`
+
+### Heads
+- `mHeadRots[3]`
+- `mOldHeadRots[3]`
+- `mNextHeadUpdate[3]`
+- `mIdleHeadUpdates[3]`
+- `mlastFiredHead`
+
+### Charge
+- `mCharging`
+- `mChargeDirection`
+- `mChargeFrames`
+- `mPreparingCharge`
+
+### Projectile cadence
+- `mProjectileCounter`
+- `mTimeTillNextShot`
+- `mFireRate`
+- `mDelayShot`
+- `mTimeSinceLastShot`
+- `mSecondVolley`
+- `mMainHeadAttackCountdown`
+- `mAttackRange`
+
+### Movement
+- `mFramesTillMove`
+- `mWantsMove`
+- `mIsPathing`
+- `mMovementTime`
+
+### Skeleton / health tracking
+- `mMaxHealth`
+- `mNumSkeletons`
+- `mMaxSkeletons`
+- `mHealthIntervals`
+- `mLastHealthValue`
+
+### Other combat lifecycle
+- `mDestroyBlocksTick`
+- `mSpawningFrames`
+- `mSpinSpeed`
+- `mStunTimer`
+- `mDeathSource`
+
+These names strongly constrain what the Java reconstruction should be capable of representing, but do not reveal each field's initialization value or exact transition equations.
+
+KNEEKURA now mirrors the non-pointer/runtime-observable subset in `BedrockWitherRuntimeState`. Unknown values default neutrally and are not claimed to be Bedrock defaults.
+
+## AI step structure
+
+Current BDS exposes:
+- `preAiStep()`
+- `postAiStep()`
+- `aiStep()`
+- `newServerAiStep()`
+
+`WitherBossPreAIStepResult` contains:
+
+```
+0 StopAiStepExecution
+1 RunAiStep
+2 RunPostAiStepAndAiStep
+```
+
+Implication:
+native Wither processing has an explicit pre-AI gate capable of suppressing or altering the normal AI-step sequence. The Java reconstruction should therefore not assume all states can be represented only through Goal priorities.
+
+KNEEKURA action:
+keep the high-level Java phase state machine separate from Goal selectors so spawn/transition/stun/charge states can later gate ordinary AI execution.
+
+## Highest-damage goal
+
+Current class:
+`WitherTargetHighestDamage : TargetGoal`
+
+Exposed members:
+- reference to `WitherBoss`
+- current `Mob* mTarget`
+- `canUse`
+- `canContinueToUse`
+- `start`
+- `_canAttack`
+- `getHighestDamageTarget()`
+
+Notably, current generated signature is:
+
+```
+Player* getHighestDamageTarget()
+```
+
+This is stronger structural evidence than the generic wording of public documentation.
+
+KNEEKURA action:
+- threat ledger may retain all attackers for diagnostics;
+- priority-1 highest-damage Goal currently evaluates Players only;
+- `hurt_by_target` and nearest-target paths remain responsible for non-player retaliation/acquisition;
+- direct Bedrock runtime testing must confirm that this interpretation matches actual combat.
+
+## Random attack-position goal
+
+Current class:
+`WitherRandomAttackPosGoal : RandomStrollGoal`
+
+It adds:
+- `bool mIsPathing`
+- `start`
+- `stop`
+- `canUse`
+- `canContinueToUse`
+
+This is useful evidence that the native Wither special movement goal is structurally related to random-stroll behavior and tracks pathing explicitly.
+
+Unknown:
+- exact candidate-position generator;
+- vertical distribution;
+- target-relative offsets;
+- path retry timing;
+- interaction with `mFramesTillMove / mWantsMove / mMovementTime`.
+
+Do not copy Java `RandomStrollGoal` movement blindly until these are measured or otherwise recovered.
+
+## Java reconstruction rule
+
+For each BDS field/function:
+
+1. mirror the state/interface if it materially affects later observation;
+2. do not invent its numeric default;
+3. bind it to official JSON where public values exist;
+4. otherwise seek direct Bedrock observation;
+5. use historical Bedrock reverse engineering only as a version-labelled hypothesis;
+6. use BEStyleWither only after all Bedrock-origin evidence is exhausted.
+
+## Immediate high-value unknowns
+
+- `mPhase` values and transition conditions
+- `mHealthThreshold` initialization
+- shield semantics and `MAX_SHIELD_HEALTH`
+- `mProjectileCounter` / `mSecondVolley` sequence
+- `mFireRate` and health-interval relationship
+- `mPreparingCharge` / `mChargeFrames`
+- skeleton counters and difficulty initialization
+- per-attack-type block destruction predicates/ranges
+- preAiStep result by spawn/phase/stun/death state
+
+These are now preferred measurement/reverse-analysis targets.
+
+
+## Random-stroll inherited fields versus exposed schema
+
+Current C++ structural definition:
+`WitherRandomAttackPosGoalDefinition : RandomStrollGoalDefinition`.
+
+The parent definition contains:
+- `mSpeedModifier`
+- `mXZDist`
+- `mYDist`
+- `mInterval`
+
+The ordinary Mojang `minecraft:behavior.random_stroll` schema exposes defaults:
+- speed multiplier 1
+- xz distance 10
+- y distance 7
+- interval 120
+
+However, the current dedicated `minecraft:behavior.wither_random_attack_pos_goal` schema exposes only:
+- priority
+- control_flags
+
+Therefore KNEEKURA does **not** assume the ordinary random-stroll numeric defaults are the effective native Wither values. The C++ inheritance proves field shape, not current initialized values. Those four values remain measurement/symbol-body targets.
+
+
+## Dedicated Wither death ECS path
+
+Current BDS exposes dedicated Wither death systems rather than routing every visual concern through the generic mob death implementation:
+
+- `ServerWitherBossTickDeathSystemImpl`
+- `ClientWitherBossTickDeathSystemImpl`
+- `WitherBossDeathWrapper`
+- `DeathTickingType::Wither = 2`
+
+The server system filters entities with:
+- `ActorTickedComponent`
+- `TickDeathNeededComponent`
+- `WitherBossFlagComponent`
+
+It reads:
+- `DeathTickingComponent`
+- actor identity/flags/position/sound information
+- optional `ExperienceRewardComponent`
+
+It writes:
+- `OverlayAlphaComponent`
+- `ShieldFlickerComponent`
+- `SwellComponent`
+- `SynchedActorDataComponent`
+
+and can write the experience-orb request queue.
+
+The client system reads `DeathTickingComponent` and writes the same core visual/synced state.
+
+Component structures:
+- `DeathTickingComponent`: short `mTicks`, `DeathTickingType mType`, bool `mSpawnedXP`
+- `SwellComponent`: interpolated swell amount + swell direction
+- `ShieldFlickerComponent`: integer value
+- `OverlayAlphaComponent`: float value
+
+Engineering consequence:
+the current Bedrock architecture separates **semantic death ticking / XP state** from **visual swelling / shield flicker / overlay**. KNEEKURA must preserve that separation. Visual parity must never be implemented by keeping the boss semantically alive after the killing blow.
+
+Unknown:
+- exact Wither death duration;
+- explosion tick and strength;
+- exact swell/flicker/overlay equations;
+- XP spawn tick.
+
+These remain direct-runtime or binary-body analysis targets.
+
+
+## Current NBT semantics refine the structural map
+
+A current detailed Bedrock entity-format reference gives behavioral meaning to several persisted Wither fields that the generated BDS header exposes only structurally.
+
+### AirAttack versus Phase
+
+Current field interpretation:
+- `AirAttack=1`: first/aerial combat behavior; powered shield visual is hidden.
+- `AirAttack=0`: second-phase behavior; powered shield visual is visible.
+- `Phase`: 1 during spawning/first phase and 0 during second/death, but the persisted value itself is documented as not directly controlling behavior or shield visibility.
+
+Design consequence:
+- KNEEKURA retains `mPhase`/nativePhase as structural state;
+- a separate synced `AirAttack`-equivalent boolean is the product authority for powered-shield visibility and the first/second combat presentation boundary;
+- renderer code must not infer shield visibility solely from nativePhase.
+
+### firerate
+
+Current field interpretation:
+`firerate` is the delay in ticks between Wither skull shots and explicitly does not represent the inter-volley delay.
+
+This reinforces the product split between:
+- `mFireRate`-shaped per-shot cadence;
+- the separately observed ~7-second inter-volley cooldown.
+
+Exact current ticks-per-shot at each health acceleration stage remain unresolved.
+
+### lastHealthInterval
+
+Current field interpretation:
+`lastHealthInterval` is the greatest multiple of **75** strictly below the lowest health the Wither has reached, and does not increase if the Wither heals.
+
+This conflicts with treating the historical native `maxHealth/3` interval as a current runtime rule.
+
+KNEEKURA correction:
+- persist/observe the current 75-point lowest-health bucket;
+- do not automatically halve fireRate using the old `maxHealth/3` equation;
+- retain current-observed firing acceleration points (500/400, reset at half, 200/100) as behavior evidence;
+- leave exact accelerated tick values measurement-gated.
+
+### Invul / spawn / death
+
+Current field interpretation:
+- `Invul` mirrors `SpawningFrames` during spawn and `dyingFrames` during death.
+- `SpawningFrames`: remaining spawn-animation ticks before vulnerability.
+- `dyingFrames`: remaining ticks before the death explosion.
+- `swellAmount`, `oldSwellAmount`, `overlayAlpha`: death-visual state.
+
+This supports separate spawn/death controllers plus separate visual state rather than one generic invulnerability timer.

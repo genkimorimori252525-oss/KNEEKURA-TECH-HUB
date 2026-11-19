@@ -1,0 +1,71 @@
+{
+  "format": "kneekura.target-source-inventory.v1",
+  "target": "Gensokyo Delight ~ Youkai's Homecoming",
+  "focus": "danmaku / spell-card / grazing / projectile virtualization",
+  "recorded_at": "2026-10-05",
+  "anchor": {
+    "repository": "Minecraft-LightLand/Youkai-Homecoming",
+    "revision": "6d5744269aa597370a265d5c20eeb69902629441",
+    "version": "2.7.0",
+    "minecraft": "1.20.1",
+    "loader_distribution": [
+      "Forge",
+      "NeoForge"
+    ],
+    "source_forge": "47.1.3",
+    "java": 17,
+    "mappings": "official Mojang 1.20.1",
+    "license": "LGPL-2.1",
+    "curseforge": {
+      "project_id": 957437,
+      "file_id": 8004757,
+      "file_name": "youkaishomecoming-2.7.0.jar",
+      "uploaded": "2026-04-28"
+    },
+    "tree": {
+      "truncated": false,
+      "entries": 6589,
+      "blobs": 6099,
+      "java_files": 744,
+      "resource_files": 5320,
+      "broad_danmaku_spell_entries": 1014,
+      "focused_danmaku_java_files": 164
+    },
+    "binary_source_equivalence": "NOT_ESTABLISHED"
+  },
+  "frontier": {
+    "relation": "SAME_AS_ANCHOR_CURRENT_UPSTREAM",
+    "revision": "6d5744269aa597370a265d5c20eeb69902629441",
+    "note": "No newer useful upstream source track was identified; current latest remains MC 1.20.1 / 2.7.0."
+  },
+  "subsystem_counts": {
+    "fastprojectileapi/collision": 11,
+    "fastprojectileapi/entity": 8,
+    "fastprojectileapi/render": 21,
+    "fastprojectileapi/spellcircle": 6,
+    "youkaishomecoming/entity/danmaku": 13,
+    "youkaishomecoming/spell/custom": 32,
+    "youkaishomecoming/spell/game": 17,
+    "youkaishomecoming/spell/player": 10,
+    "youkaishomecoming/spell/mover": 13,
+    "youkaishomecoming/spell/shooter": 7,
+    "youkaishomecoming/spell/spellcard": 10
+  },
+  "evidence_status": {
+    "simplified_projectile_lifecycle": "EVIDENCE_BACKED_SOURCE",
+    "owner_managed_virtual_projectiles": "EVIDENCE_BACKED_SOURCE_AND_HISTORY",
+    "batched_spawn_sync": "EVIDENCE_BACKED_SOURCE_AND_HISTORY",
+    "client_virtual_cache": "EVIDENCE_BACKED_SOURCE_AND_HISTORY",
+    "render_type_batching": "EVIDENCE_BACKED_SOURCE",
+    "direct_buffer_fast_path_fallback": "EVIDENCE_BACKED_SOURCE_AND_REPAIR_HISTORY",
+    "section_collision_cache": "EVIDENCE_BACKED_SOURCE_AND_HISTORY",
+    "moving_target_collision": "EVIDENCE_BACKED_SOURCE_AND_REPAIR_HISTORY",
+    "graze_geometry_and_economy": "EVIDENCE_BACKED_SOURCE_AND_HISTORY",
+    "trajectory_mover_dsl": "EVIDENCE_BACKED_SOURCE",
+    "spellcard_ticker_scheduler": "EVIDENCE_BACKED_SOURCE",
+    "custom_ring_homing_forms": "EVIDENCE_BACKED_SOURCE",
+    "runtime_benchmark": "NOT_ANALYZED",
+    "focused_danmaku_automated_tests": "NOT_FOUND",
+    "target_tracker_velocity_anomaly": "DIRECT_OBSERVATION_RUNTIME_NOT_REPRODUCED"
+  }
+}
