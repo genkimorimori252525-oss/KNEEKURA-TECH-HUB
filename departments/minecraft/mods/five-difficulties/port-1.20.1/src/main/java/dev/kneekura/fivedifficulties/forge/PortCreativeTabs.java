@@ -34,6 +34,10 @@ public final class PortCreativeTabs {
             event.accept(PortRegistries.BOMB_ITEM.get());
             event.accept(PortRegistries.EXTEND_ITEM.get());
         }
+        if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) { // X1 tabDecorations
+            event.accept(PortRegistries.DANMAKU_CRAFTING_TABLE_ITEM.get());
+            event.accept(PortRegistries.LASER_CRAFTING_TABLE_ITEM.get());
+        }
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) { // X1 tabMisc for the gaps
             event.accept(PortRegistries.GAP.get());
             event.accept(PortRegistries.GAP_FOLDING_UMBRELLA.get());

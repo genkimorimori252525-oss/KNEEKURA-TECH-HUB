@@ -122,6 +122,23 @@ ASSETS = {
         "assets/five_difficulties_port/textures/item/diffusion_amulet.png",
         "48a04fbb8993b87cce4abc2b175f006d8bdaef3254c323b86b023b749f152927",
     ),
+    # P15 danmaku crafting table.
+    "assets/thkaguyamod/textures/blocks/danmaku_crafting_table.png": (
+        "assets/five_difficulties_port/textures/block/danmaku_crafting_table.png",
+        "42f6fce6bbf10d50405fb384474ad872fb56f5e9ae118de343dbd2a16ec26306",
+    ),
+    "assets/thkaguyamod/textures/blocks/danmaku_crafting_table2.png": (
+        "assets/five_difficulties_port/textures/block/laser_crafting_table.png",
+        "e123460b05e7be9165a66647b56accee03897588a6af25f32dd27b4e5f5b6307",
+    ),
+    "assets/thkaguyamod/textures/gui/danmaku_crafting_table.png": (
+        "assets/five_difficulties_port/textures/gui/danmaku_crafting_table.png",
+        "4324a683864bfb8644a377639ccc622192671dc3cfdf5aaa072838dd147fb2a3",
+    ),
+    "assets/thkaguyamod/textures/gui/laser_crafting_table.png": (
+        "assets/five_difficulties_port/textures/gui/laser_crafting_table.png",
+        "1abbcf6dc80a4ac12f90962000c468046c80670b44f94744a6507928eced00ba",
+    ),
     # P14 bonus items.
     "assets/thkaguyamod/textures/items/material/SmallPowerUpItem.png": (
         "assets/five_difficulties_port/textures/item/power_item_small.png",

@@ -20,3 +20,4 @@ java -cp "$OUT" dev.kneekura.fivedifficulties.core.X1SakuyaTimePolicyRegression
 java -cp "$OUT" dev.kneekura.fivedifficulties.core.X1SakuyaControllerGeometryRegression
 java -cp "$OUT" dev.kneekura.fivedifficulties.core.X1ShotCoreRegression
 java -cp "$OUT" dev.kneekura.fivedifficulties.core.X1LaserCoreRegression
+java -cp "$OUT" dev.kneekura.fivedifficulties.core.X1DanmakuCraftingRegression

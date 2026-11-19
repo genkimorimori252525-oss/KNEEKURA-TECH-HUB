@@ -16,6 +16,14 @@ public final class PortClientEvents {
     private PortClientEvents() {}
 
     @SubscribeEvent
+    public static void clientSetup(net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent event) {
+        event.enqueueWork(() -> {
+            net.minecraft.client.gui.screens.MenuScreens.register(PortRegistries.DANMAKU_CRAFTING_MENU.get(), DanmakuCraftingScreen::new);
+            net.minecraft.client.gui.screens.MenuScreens.register(PortRegistries.LASER_CRAFTING_MENU.get(), DanmakuCraftingScreen::new);
+        });
+    }
+
+    @SubscribeEvent
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(
                 PortRegistries.HOMING_AMULET_PROJECTILE.get(),

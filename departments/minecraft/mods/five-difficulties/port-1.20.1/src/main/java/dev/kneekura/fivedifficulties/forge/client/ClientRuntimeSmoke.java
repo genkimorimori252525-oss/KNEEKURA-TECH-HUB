@@ -224,6 +224,13 @@ public final class ClientRuntimeSmoke {
             requireResource(minecraft, id("textures/item/" + bonus.getId().getPath() + ".png"));
         }
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P14_CLIENT_RESOURCES_PASS bonusItems=5");
+        requireItemModel(minecraft, PortRegistries.DANMAKU_CRAFTING_TABLE_ITEM.get(), "Danmaku Crafting Table");
+        requireItemModel(minecraft, PortRegistries.LASER_CRAFTING_TABLE_ITEM.get(), "Laser Crafting Table");
+        for (String t : new String[] {"gui/danmaku_crafting_table", "gui/laser_crafting_table",
+                "block/danmaku_crafting_table", "block/laser_crafting_table"}) {
+            requireResource(minecraft, id("textures/" + t + ".png"));
+        }
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P15_CLIENT_RESOURCES_PASS tables=2");
 
         var root = minecraft.getEntityModels().bakeLayer(SakuyaTimeControllerModel.LAYER_LOCATION);
         root.getChild("watch_base");

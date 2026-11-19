@@ -15,6 +15,7 @@ import dev.kneekura.fivedifficulties.forge.entity.THShotEntity;
 import dev.kneekura.fivedifficulties.forge.shot.X1LaserSpawner;
 import dev.kneekura.fivedifficulties.forge.timestop.SakuyaTimeStopRuntime;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
 import net.minecraft.client.Screenshot;
 import net.minecraft.client.gui.screens.AccessibilityOnboardingScreen;
 import net.minecraft.client.gui.screens.TitleScreen;
@@ -63,7 +64,7 @@ public final class ClientWorldVisualSmoke {
     public static final String PASS_MARKER = "FIVE_DIFFICULTIES_P7B_WORLD_SMOKE_PASS";
     private static final String LEVEL_NAME = "five_difficulties_p7b_smoke";
 
-    private enum Phase { BOOT, WAIT_WORLD, SETTLE, FIRE, SHOOT_HOMING, P8_SPAWN, P8_SHOT, P9_SPAWN, P9_SHOT, P10_SPAWN, P10_SHOT, P11_SPAWN, P11_SHOT, P12_SPAWN, P12_SHOT, START_STOP, SHOOT_STOP, DONE }
+    private enum Phase { BOOT, WAIT_WORLD, SETTLE, FIRE, SHOOT_HOMING, P8_SPAWN, P8_SHOT, P9_SPAWN, P9_SHOT, P10_SPAWN, P10_SHOT, P11_SPAWN, P11_SHOT, P12_SPAWN, P12_SHOT, P15_OPEN, P15_SHOT, START_STOP, SHOOT_STOP, DONE }
 
     private static final int[] P8_GRID_FORMS = {
             X1ShotTables.FORM_SMALL, X1ShotTables.FORM_MEDIUM, X1ShotTables.FORM_PEARL, X1ShotTables.FORM_CIRCLE,
@@ -175,6 +176,19 @@ public final class ClientWorldVisualSmoke {
                                     e -> !(e instanceof net.minecraft.world.entity.player.Player))
                                     .forEach(net.minecraft.world.entity.Entity::discard);
                         });
+                        next(Phase.P15_OPEN);
+                    }
+                }
+                case P15_OPEN -> {
+                    server(mc, ClientWorldVisualSmoke::openCraftingTable);
+                    next(Phase.P15_SHOT);
+                }
+                case P15_SHOT -> {
+                    if (++ticks == 15) {
+                        require(mc.screen instanceof DanmakuCraftingScreen, "the danmaku crafting screen is open, got " + mc.screen);
+                        requestShot(mc, "p15_crafting.png");
+                    } else if (ticks > 15) {
+                        server(mc, (level, player) -> player.closeContainer());
                         next(Phase.START_STOP);
                     }
                 }
@@ -406,6 +420,16 @@ public final class ClientWorldVisualSmoke {
                 Vec3d.ZERO, dev.kneekura.fivedifficulties.forge.entity.THItemEntity.ITEM_ID_BIGPOWER));
     }
 
+    // P15: both tables in front of the camera; using the danmaku one opens its screen.
+    private static void openCraftingTable(ServerLevel level, ServerPlayer player) {
+        BlockPos shot = BlockPos.containing(-1.0D, -60.0D, 4.0D);
+        BlockPos laser = BlockPos.containing(2.0D, -60.0D, 4.0D);
+        level.setBlockAndUpdate(shot, dev.kneekura.fivedifficulties.forge.PortRegistries.DANMAKU_CRAFTING_TABLE.get().defaultBlockState());
+        level.setBlockAndUpdate(laser, dev.kneekura.fivedifficulties.forge.PortRegistries.LASER_CRAFTING_TABLE.get().defaultBlockState());
+        level.getBlockState(shot).use(level, player, net.minecraft.world.InteractionHand.MAIN_HAND,
+                new net.minecraft.world.phys.BlockHitResult(Vec3.atCenterOf(shot), net.minecraft.core.Direction.UP, shot, false));
+    }
+
     // Source is an armor stand in front of the camera, so the Watch controller and its
     // expanding dark field are on screen and the player (a non-source) is inside the field.
     private static void startStop(ServerLevel level, ServerPlayer player) {
@@ -461,6 +485,10 @@ public final class ClientWorldVisualSmoke {
             case "p10_lasers.png" -> {
                 lasersColourfulDelta = stats[2] - baselineColourful;
                 require(lasersColourfulDelta > 0.01D, "P10 lasers not visible (colourful delta " + lasersColourfulDelta + ")");
+            }
+            case "p15_crafting.png" -> {
+                // the GUI background is opaque: the sky must be covered
+                require(skyBlueMinusRed < 40.0D, "the crafting screen covers the view (sky " + skyBlueMinusRed + ")");
             }
             case "p12_entities.png" -> {
                 p12ColourfulDelta = stats[2] - baselineColourful;

@@ -250,6 +250,29 @@ public final class PortRegistries {
     public static final RegistryObject<Item> EXTEND_ITEM = ITEMS.register("extend_item",
             () -> new Item(new Item.Properties().stacksTo(8)));
 
+    // ---- P15 danmaku crafting table ----
+    private static final DeferredRegister<net.minecraft.world.level.block.Block> BLOCKS =
+            DeferredRegister.create(ForgeRegistries.BLOCKS, FiveDifficultiesPort.MOD_ID);
+    private static final DeferredRegister<net.minecraft.world.inventory.MenuType<?>> MENUS =
+            DeferredRegister.create(ForgeRegistries.MENU_TYPES, FiveDifficultiesPort.MOD_ID);
+
+    /** X1 danmaku_crafting_table metadata 0 / 1. */
+    public static final RegistryObject<net.minecraft.world.level.block.Block> DANMAKU_CRAFTING_TABLE =
+            BLOCKS.register("danmaku_crafting_table", () -> new dev.kneekura.fivedifficulties.forge.crafting.DanmakuCraftingTableBlock(false));
+    public static final RegistryObject<net.minecraft.world.level.block.Block> LASER_CRAFTING_TABLE =
+            BLOCKS.register("laser_crafting_table", () -> new dev.kneekura.fivedifficulties.forge.crafting.DanmakuCraftingTableBlock(true));
+    public static final RegistryObject<Item> DANMAKU_CRAFTING_TABLE_ITEM = ITEMS.register("danmaku_crafting_table",
+            () -> new net.minecraft.world.item.BlockItem(DANMAKU_CRAFTING_TABLE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> LASER_CRAFTING_TABLE_ITEM = ITEMS.register("laser_crafting_table",
+            () -> new net.minecraft.world.item.BlockItem(LASER_CRAFTING_TABLE.get(), new Item.Properties()));
+
+    public static final RegistryObject<net.minecraft.world.inventory.MenuType<dev.kneekura.fivedifficulties.forge.crafting.DanmakuCraftingMenu>> DANMAKU_CRAFTING_MENU =
+            MENUS.register("danmaku_crafting", () -> net.minecraftforge.common.extensions.IForgeMenuType.create(
+                    (id, inv, buf) -> dev.kneekura.fivedifficulties.forge.crafting.DanmakuCraftingMenu.shot(id, inv)));
+    public static final RegistryObject<net.minecraft.world.inventory.MenuType<dev.kneekura.fivedifficulties.forge.crafting.DanmakuCraftingMenu>> LASER_CRAFTING_MENU =
+            MENUS.register("laser_crafting", () -> net.minecraftforge.common.extensions.IForgeMenuType.create(
+                    (id, inv, buf) -> dev.kneekura.fivedifficulties.forge.crafting.DanmakuCraftingMenu.laser(id, inv)));
+
     public static final RegistryObject<Item> SHOT_MATERIAL = ITEMS.register("shot_material",
             () -> new dev.kneekura.fivedifficulties.forge.item.ShotMaterialItem(new Item.Properties()));
 
@@ -279,6 +302,8 @@ public final class PortRegistries {
     private PortRegistries() {}
 
     public static void register(IEventBus modBus) {
+        BLOCKS.register(modBus);
+        MENUS.register(modBus);
         ITEMS.register(modBus);
         ENTITIES.register(modBus);
         dev.kneekura.fivedifficulties.forge.spellcard.X1SpellCardDeclaration.bombItem = () -> BOMB_ITEM.get();

@@ -1,6 +1,6 @@
 # Five Difficulties X1 Preservation Port — Minecraft 1.20.1 Forge
 
-Status: **P14 complete — spell cards, danmaku-weapon items, bonus items (power / point / bomb / extend) and the X1 config on top of every shot / laser form; see PORT-ROADMAP.md**.
+Status: **P15 complete — spell cards, danmaku-weapon items, bonus items, config and the danmaku / laser crafting tables on top of every shot / laser form; see PORT-ROADMAP.md**.
 
 Target:
 - Minecraft 1.20.1
@@ -262,3 +262,9 @@ Dragon Neck Jewel (thrown, bursts into lasers and lights). See `IMPLEMENTATION-C
 Power / point / bomb / extend items and their dropped bonus entity, player power (shot damage), the
 extend that saves a dying player, bombs paying for spell cards, and X1's config. See
 `IMPLEMENTATION-CHECKPOINT-P14.md`.
+
+
+## P15 crafting tables
+
+The danmaku and laser crafting tables (block, menu, screen) with X1's arithmetic as a tested pure core.
+See `IMPLEMENTATION-CHECKPOINT-P15.md`.
