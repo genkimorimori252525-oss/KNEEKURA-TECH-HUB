@@ -36,6 +36,7 @@ public final class P11SpellCardScenario {
     public static final String ENV = "FIVE_DIFFICULTIES_P11_RUNTIME_SCENARIO";
     /** X1 cards whose spellcard_main fires nothing (Spear the Gungnir; Hisouten only registers a special shot). */
     private static final Set<Integer> SILENT_CARDS = Set.of(7, 27);
+    private static final Set<Integer> P12_CARDS = Set.of(0, 1, 8, 10, 15);
 
     private enum Phase { IDLE, COST, CARDS, BONUS, DONE }
 
@@ -151,6 +152,7 @@ public final class P11SpellCardScenario {
     private static void startCards() {
         int i = 0;
         for (X1SpellCardRegistry.Entry entry : X1SpellCardRegistry.all()) {
+            if (P12_CARDS.contains(entry.id())) continue; // checked one at a time by P12 (time stop, own entities)
             double x = bx - 25.0D + (i % 6) * 10.0D;
             double z = bz + 10.0D + (i / 6) * 12.0D;
             FakePlayer p = player(i, x, z);

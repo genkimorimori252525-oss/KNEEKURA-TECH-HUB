@@ -193,6 +193,11 @@ public final class ClientRuntimeSmoke {
         }
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P11_CLIENT_RESOURCES_PASS spellCards={} laserItems={}",
                 cards, PortRegistries.LASER_ITEMS.size());
+        requireResource(minecraft, id("textures/entity/mini_hakkero.png"));
+        requireResource(minecraft, id("textures/entity/sukima.png"));
+        minecraft.getEntityModels().bakeLayer(P12Renderers.HAKKERO_LAYER).getChild("plate1");
+        minecraft.getEntityModels().bakeLayer(P12Renderers.HAKKERO2_LAYER).getChild("side7");
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P12_CLIENT_RESOURCES_PASS spellCards={} hakkeroModels=2", cards);
 
         var root = minecraft.getEntityModels().bakeLayer(SakuyaTimeControllerModel.LAYER_LOCATION);
         root.getChild("watch_base");

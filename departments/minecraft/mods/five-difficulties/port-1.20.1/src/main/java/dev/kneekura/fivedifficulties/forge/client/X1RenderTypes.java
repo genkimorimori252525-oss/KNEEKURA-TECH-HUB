@@ -24,7 +24,18 @@ public final class X1RenderTypes extends RenderType {
     }
 
     /** glBlendFunc settings X1 uses. */
-    public enum Blend { NONE, SRC_ALPHA_ONE, ONE_ONE_MINUS_SRC_COLOR, ONE_ONE }
+    public enum Blend { NONE, SRC_ALPHA_ONE, ONE_ONE_MINUS_SRC_COLOR, ONE_ONE, SRC_ALPHA_SRC_ALPHA }
+
+    private static final TransparencyStateShard SRC_ALPHA_SRC_ALPHA = new TransparencyStateShard(
+            "five_difficulties_src_alpha_src_alpha",
+            () -> {
+                RenderSystem.enableBlend();
+                RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.SRC_ALPHA);
+            },
+            () -> {
+                RenderSystem.disableBlend();
+                RenderSystem.defaultBlendFunc();
+            });
 
     /** One GL state combination: blend, glDepthMask, GL_CULL_FACE, glDepthFunc(GL_ALWAYS). */
     public record Spec(Blend blend, boolean depthWrite, boolean cull, boolean depthAlways) {}
@@ -49,6 +60,7 @@ public final class X1RenderTypes extends RenderType {
             case SRC_ALPHA_ONE -> LIGHTNING_TRANSPARENCY;
             case ONE_ONE_MINUS_SRC_COLOR -> ONE_ONE_MINUS_SRC_COLOR;
             case ONE_ONE -> ADDITIVE_TRANSPARENCY;
+            case SRC_ALPHA_SRC_ALPHA -> SRC_ALPHA_SRC_ALPHA;
         };
         String name = "five_difficulties_" + s.blend().name().toLowerCase() + (s.depthWrite() ? "_depth" : "")
                 + (s.cull() ? "_cull" : "") + (s.depthAlways() ? "_always" : "");

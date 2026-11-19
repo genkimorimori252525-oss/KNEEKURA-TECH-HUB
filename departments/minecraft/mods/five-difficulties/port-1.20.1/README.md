@@ -1,6 +1,6 @@
 # Five Difficulties X1 Preservation Port — Minecraft 1.20.1 Forge
 
-Status: **P11 complete — spell-card core and 30 of the 35 X1 spell cards on top of every shot / laser form; see PORT-ROADMAP.md**.
+Status: **P12 complete — all 35 X1 spell cards (with Musou Fuuin, Mini Hakkero, gaps, nuclear shot and Hanabeeper) on top of every shot / laser form; see PORT-ROADMAP.md**.
 
 Target:
 - Minecraft 1.20.1
@@ -242,3 +242,10 @@ Spark beam), the three laser items and the special-shot registry. See
 Spell-card declaration (level cost, look-ray target, enemy-danmaku clear), the card entity, its
 magic circle, the shot material bonus, one item per card and 30 of the 35 X1 cards. The other five
 need their own entities (P12). See `IMPLEMENTATION-CHECKPOINT-P11.md` and `PORT-ROADMAP.md`.
+
+
+## P12 spell-card entities
+
+The five cards that spawn their own entities: Musou Fuuin, Master Spark (Mini Hakkero), Satuzin Doll
+(spell-card time stop), Hikouchuu Nest (gaps) and Fafrotskies (nuclear shot, Hanabeeper). All 35 X1
+cards are registered. See `IMPLEMENTATION-CHECKPOINT-P12.md` and `PORT-ROADMAP.md`.

@@ -122,6 +122,15 @@ ASSETS = {
         "assets/five_difficulties_port/textures/item/diffusion_amulet.png",
         "48a04fbb8993b87cce4abc2b175f006d8bdaef3254c323b86b023b749f152927",
     ),
+    # P12 spell-card entities.
+    "assets/thkaguyamod/textures/MiniHakkeroTexture.png": (
+        "assets/five_difficulties_port/textures/entity/mini_hakkero.png",
+        "c03e896d0fc97bfdbae474fe0fe5ade90a365bce5271163403924b5b831acb7b",
+    ),
+    "assets/thkaguyamod/textures/SukimaTexture3.png": (
+        "assets/five_difficulties_port/textures/entity/sukima.png",
+        "8f28ca100736a557eac20b163d48ba14c9b148d1585aeb2d5043679d25959e2a",
+    ),
     # P11 spell card art, level frames and the shot material.
     "assets/thkaguyamod/textures/items/spellCard/Catadioptric.png": (
         "assets/five_difficulties_port/textures/item/spellcard/catadioptric.png",

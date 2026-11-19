@@ -31,6 +31,12 @@ public final class PortClientEvents {
         event.registerEntityRenderer(PortRegistries.SPELL_CARD.get(), SpellCardRenderers.Card::new);
         event.registerEntityRenderer(PortRegistries.SPELL_CARD_CIRCLE.get(), SpellCardRenderers.Circle::new);
         event.registerEntityRenderer(PortRegistries.SHOT_MATERIAL_ENTITY.get(), SpellCardRenderers.ShotMaterial::new);
+        event.registerEntityRenderer(PortRegistries.MUSOU_FUUIN.get(), P12Renderers.MusouFuuin::new);
+        event.registerEntityRenderer(PortRegistries.MINI_HAKKERO.get(), P12Renderers.MiniHakkero::new);
+        event.registerEntityRenderer(PortRegistries.SUKIMA.get(), P12Renderers.Sukima::new);
+        event.registerEntityRenderer(PortRegistries.NUCLEAR_SHOT.get(), P12Renderers.NuclearShot::new);
+        event.registerEntityRenderer(PortRegistries.DANMAKU_CREEPER.get(),
+                net.minecraft.client.renderer.entity.CreeperRenderer::new); // X1 RenderCreeper
     }
 
     @SubscribeEvent
@@ -48,5 +54,7 @@ public final class PortClientEvents {
                 SakuyaTimeControllerModel::createBodyLayer
         );
         event.registerLayerDefinition(SilverKnifeModel.LAYER_LOCATION, SilverKnifeModel::createBodyLayer);
+        event.registerLayerDefinition(P12Renderers.HAKKERO_LAYER, P12Renderers::createHakkeroLayer);
+        event.registerLayerDefinition(P12Renderers.HAKKERO2_LAYER, P12Renderers::createHakkero2Layer);
     }
 }

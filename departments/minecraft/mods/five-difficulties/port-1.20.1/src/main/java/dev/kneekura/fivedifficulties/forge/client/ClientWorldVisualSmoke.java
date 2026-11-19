@@ -63,7 +63,7 @@ public final class ClientWorldVisualSmoke {
     public static final String PASS_MARKER = "FIVE_DIFFICULTIES_P7B_WORLD_SMOKE_PASS";
     private static final String LEVEL_NAME = "five_difficulties_p7b_smoke";
 
-    private enum Phase { BOOT, WAIT_WORLD, SETTLE, FIRE, SHOOT_HOMING, P8_SPAWN, P8_SHOT, P9_SPAWN, P9_SHOT, P10_SPAWN, P10_SHOT, P11_SPAWN, P11_SHOT, START_STOP, SHOOT_STOP, DONE }
+    private enum Phase { BOOT, WAIT_WORLD, SETTLE, FIRE, SHOOT_HOMING, P8_SPAWN, P8_SHOT, P9_SPAWN, P9_SHOT, P10_SPAWN, P10_SHOT, P11_SPAWN, P11_SHOT, P12_SPAWN, P12_SHOT, START_STOP, SHOOT_STOP, DONE }
 
     private static final int[] P8_GRID_FORMS = {
             X1ShotTables.FORM_SMALL, X1ShotTables.FORM_MEDIUM, X1ShotTables.FORM_PEARL, X1ShotTables.FORM_CIRCLE,
@@ -73,6 +73,7 @@ public final class ClientWorldVisualSmoke {
     private static double formsColourfulDelta;
     private static double lasersColourfulDelta;
     private static double cardColourfulDelta;
+    private static double p12ColourfulDelta;
 
     private static Phase phase = Phase.BOOT;
     private static int ticks;
@@ -158,6 +159,19 @@ public final class ClientWorldVisualSmoke {
                                 player.getBoundingBox().inflate(48), e -> e instanceof THShotEntity
                                         || e instanceof dev.kneekura.fivedifficulties.forge.entity.SpellCardEntity
                                         || e instanceof dev.kneekura.fivedifficulties.forge.entity.SpellCardCircleEntity)
+                                .forEach(net.minecraft.world.entity.Entity::discard));
+                        next(Phase.P12_SPAWN);
+                    }
+                }
+                case P12_SPAWN -> {
+                    server(mc, ClientWorldVisualSmoke::spawnP12);
+                    next(Phase.P12_SHOT);
+                }
+                case P12_SHOT -> {
+                    if (++ticks == 20) requestShot(mc, "p12_entities.png");
+                    else if (ticks > 20) {
+                        server(mc, (level, player) -> level.getEntitiesOfClass(net.minecraft.world.entity.Entity.class,
+                                player.getBoundingBox().inflate(48), e -> !(e instanceof net.minecraft.world.entity.player.Player))
                                 .forEach(net.minecraft.world.entity.Entity::discard));
                         next(Phase.START_STOP);
                     }
@@ -338,6 +352,28 @@ public final class ClientWorldVisualSmoke {
                 dev.kneekura.fivedifficulties.forge.spellcard.X1SpellCardDeclaration.NORMAL, true);
     }
 
+    // P12: Musou Fuuin orbs, a Mini Hakkero (in its laser delay), a gap and a nuclear shot in front of the camera.
+    private static void spawnP12(ServerLevel level, ServerPlayer player) {
+        for (int i = 0; i < 3; i++) {
+            level.addFreshEntity(new dev.kneekura.fivedifficulties.forge.entity.MusouFuuinEntity(level, player,
+                    new Vec3d(-3.0D + i * 1.4D, -53.0D, 8.0D), new Vec3d(0, 0, 1), 0F, new Vec3d(0, 1, 0), 0F, 9999,
+                    0.0001D, 0.0D, 0.0D, Vec3d.ZERO, 2.0F, 9.0F, null));
+        }
+        ArmorStand stand = EntityType.ARMOR_STAND.create(level);
+        stand.moveTo(-1.5D, -58.5D, 7.0D, 135F, 0F);
+        stand.setInvisible(true);
+        stand.setNoGravity(true);
+        level.addFreshEntity(stand);
+        level.addFreshEntity(new dev.kneekura.fivedifficulties.forge.entity.MiniHakkeroEntity(level, stand, null));
+        level.addFreshEntity(new dev.kneekura.fivedifficulties.forge.entity.SukimaEntity(level, player, 2.5D, -58.0D, 9.0D,
+                0F, 0));
+        var nuclear = new dev.kneekura.fivedifficulties.forge.entity.NuclearShotEntity(level, player,
+                new Vec3d(3.0D, -53.5D, 11.0D), new Vec3d(0, 0, 1), 0F, new Vec3d(0, 1, 0), 0F, 9999, 0.0001D, 0.0D,
+                0.0D, Vec3d.ZERO, X1ShotData.shot(0, X1ShotTables.ORANGE, 1.6F, 10.0F, 0, 2000, 0));
+        nuclear.shootingFlag = true;
+        level.addFreshEntity(nuclear);
+    }
+
     // Source is an armor stand in front of the camera, so the Watch controller and its
     // expanding dark field are on screen and the player (a non-source) is inside the field.
     private static void startStop(ServerLevel level, ServerPlayer player) {
@@ -393,6 +429,11 @@ public final class ClientWorldVisualSmoke {
             case "p10_lasers.png" -> {
                 lasersColourfulDelta = stats[2] - baselineColourful;
                 require(lasersColourfulDelta > 0.01D, "P10 lasers not visible (colourful delta " + lasersColourfulDelta + ")");
+            }
+            case "p12_entities.png" -> {
+                p12ColourfulDelta = stats[2] - baselineColourful;
+                require(p12ColourfulDelta > 0.01D, "P12 spell-card entities not visible (colourful delta "
+                        + p12ColourfulDelta + ")");
             }
             case "p11_spellcard.png" -> {
                 cardColourfulDelta = stats[2] - baselineColourful;
@@ -456,7 +497,8 @@ public final class ClientWorldVisualSmoke {
         FiveDifficultiesPort.LOGGER.info("{} homingWarmDelta={} p8ColourfulDelta={} skyBlueMinusRed baseline={} stop={}",
                 PASS_MARKER + " p9ColourfulDelta=" + String.format("%.5f", formsColourfulDelta)
                         + " p10ColourfulDelta=" + String.format("%.5f", lasersColourfulDelta)
-                        + " p11ColourfulDelta=" + String.format("%.5f", cardColourfulDelta),
+                        + " p11ColourfulDelta=" + String.format("%.5f", cardColourfulDelta)
+                        + " p12ColourfulDelta=" + String.format("%.5f", p12ColourfulDelta),
                 String.format("%.5f", homingWarmDelta), String.format("%.5f", shotsColourfulDelta),
                 String.format("%.1f", baselineSky), String.format("%.1f", stopSky));
         phase = Phase.DONE;

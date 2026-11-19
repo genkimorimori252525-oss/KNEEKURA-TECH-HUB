@@ -85,6 +85,19 @@ public final class SakuyaTimeStopRuntime {
         return level.addFreshEntity(controller) ? controller : null;
     }
 
+    /**
+     * {@code new EntitySakuyaWatch(world, user, TIME_STOP_IN_SPELLCARD)} spawned by a spell card
+     * (Satuzin Doll): full stop, ends after tick 60, and no item-style duplicate precheck (the card
+     * checks only for its own user's watch).
+     */
+    @Nullable
+    public static SakuyaTimeControllerEntity startSpellCardX1(ServerLevel level, LivingEntity source) {
+        int tick = logicalTick(level) + 1;
+        SakuyaTimeControllerEntity controller = new SakuyaTimeControllerEntity(level, source, TimeDomainMode.FULL_STOP,
+                SakuyaWatchContract.SPELL_STOP_PROCESSING_TICKS, SakuyaControllerKind.SPELL_CARD, tick);
+        return level.addFreshEntity(controller) ? controller : null;
+    }
+
     public static boolean stopX1(ServerLevel level, LivingEntity source) {
         boolean stopped = false;
         for (SakuyaTimeControllerEntity controller : controllers(level)) {

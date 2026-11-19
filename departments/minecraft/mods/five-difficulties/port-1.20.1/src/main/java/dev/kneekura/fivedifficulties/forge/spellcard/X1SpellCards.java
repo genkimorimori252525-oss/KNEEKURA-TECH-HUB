@@ -1,12 +1,12 @@
 package dev.kneekura.fivedifficulties.forge.spellcard;
 
+import dev.kneekura.fivedifficulties.forge.spellcard.cards.EntityCards;
 import dev.kneekura.fivedifficulties.forge.spellcard.cards.SimpleCards;
 import dev.kneekura.fivedifficulties.forge.spellcard.cards.SpecialCards;
 
 /**
  * X1 CommonProxy.registerSpellCards: registered names and IDs are X1's.
- * Not yet registered (need their own entities, P12): 0 MusouFuuin, 1 MasterSpark, 8 SatuzinDoll,
- * 10 HikouchuuNest, 15 Fafrotskies_no_Kiseki.
+ * All 35 X1 cards are registered (0, 1, 8, 10 and 15 spawn their own entities, P12).
  */
 public final class X1SpellCards {
     private static boolean done;
@@ -16,17 +16,22 @@ public final class X1SpellCards {
     public static synchronized void registerAll() {
         if (done) return;
         done = true;
+        r(EntityCards.MusouFuuin::new, "MusouFuuin", 0);
+        r(EntityCards.MasterSpark::new, "MasterSpark", 1);
         r(SimpleCards.KashoNoEimin::new, "Kasho_no_Eimin", 2);
         r(SimpleCards.MeteonicShower::new, "MeteonicShower", 3);
         r(SimpleCards.NamiToTubuNoKyoukai::new, "Nami_to_Tubu_no_Kyoukai", 4);
         r(SpecialCards.NijuuKokushichou::new, "NijuuKokushichou", 5);
         r(SimpleCards.ScarletShoot::new, "ScarletShoot", 6);
         r(SimpleCards.ZenzinruiNoHisouten::new, "Zenzinrui_no_Hisouten", 7);
+        r(EntityCards.SatuzinDoll::new, "SatuzinDoll", 8);
         r(SpecialCards.PerfectFreeze::new, "PerfectFreeze", 9);
+        r(EntityCards.HikouchuuNest::new, "HikouchuuNest", 10);
         r(SpecialCards.KappaPororoca::new, "Kappa'sPororoca", 11);
         r(SpecialCards.StardustReverie::new, "StardustReverie", 12);
         r(SimpleCards.KerochanFuuuNiMakezu::new, "Kerochan_Fuuu_ni_Makezu", 13);
         r(SpecialCards.MiracleFruit::new, "MiracleFruit", 14);
+        r(EntityCards.Fafrotskies::new, "Fafrotskies_no_Kiseki", 15);
         r(SpecialCards.YouryokuSpoiler::new, "YouryokuSpoiler", 16);
         r(SimpleCards.MosesMiracle::new, "Moses_no_Kiseki", 17);
         r(SimpleCards.YasakaNoKamikaze::new, "Yasaka_no_Kamikaze", 18);

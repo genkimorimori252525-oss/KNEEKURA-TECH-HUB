@@ -36,6 +36,12 @@ final class X1Tess {
         INVERT_ADD_DEPTH(X1RenderTypes.Blend.ONE_ONE_MINUS_SRC_COLOR, true, false, false),
         /** GL_ONE, GL_ONE, depthMask(false) */
         ADD_ONE(X1RenderTypes.Blend.ONE_ONE, false, false, false),
+        /** GL_ONE, GL_ONE_MINUS_SRC_COLOR, depth write, GL_CULL_FACE (nuclear shot core) */
+        INVERT_ADD_DEPTH_CULL(X1RenderTypes.Blend.ONE_ONE_MINUS_SRC_COLOR, true, true, false),
+        /** GL_ONE, GL_ONE, depthMask(false), GL_CULL_FACE (nuclear shot glow) */
+        ADD_ONE_CULL(X1RenderTypes.Blend.ONE_ONE, false, true, false),
+        /** GL_SRC_ALPHA, GL_SRC_ALPHA with depth writes (RenderSukima's dark backs) */
+        SHADE(X1RenderTypes.Blend.SRC_ALPHA_SRC_ALPHA, true, false, false),
         /** Master Spark laser core: GL_SRC_ALPHA, GL_ONE, glDepthFunc(GL_ALWAYS) */
         SPARK_CORE(X1RenderTypes.Blend.SRC_ALPHA_ONE, true, false, true),
         /** Master Spark laser rainbow: GL_ONE, GL_ONE_MINUS_SRC_COLOR, glDepthFunc(GL_ALWAYS) */
@@ -68,12 +74,17 @@ final class X1Tess {
         return this;
     }
 
+    /** setColorRGBA_F: 1.7.10 clamps each channel to 0..255; 1.20 byte packing would wrap instead. */
     X1Tess color(float red, float green, float blue, float alpha) {
-        r = red;
-        g = green;
-        b = blue;
-        a = alpha;
+        r = clamp(red);
+        g = clamp(green);
+        b = clamp(blue);
+        a = clamp(alpha);
         return this;
+    }
+
+    private static float clamp(float c) {
+        return c < 0F ? 0F : Math.min(c, 1F);
     }
 
     X1Tess v(double x, double y, double z, float u, float v) {

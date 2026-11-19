@@ -154,6 +154,37 @@ public final class PortRegistries {
                     .sized(1.2F, 1.2F).clientTrackingRange(8).updateInterval(1).setShouldReceiveVelocityUpdates(true)
                     .build(FiveDifficultiesPort.MOD_ID + ":shot_material"));
 
+    // ---- P12 spell-card entities (X1 registerModEntity names in comments) ----
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.MusouFuuinEntity>> MUSOU_FUUIN =
+            ENTITIES.register("musou_fuuin", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.MusouFuuinEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.MusouFuuinEntity::new, MobCategory.MISC)
+                    .sized(0.1F, 0.1F).clientTrackingRange(8).updateInterval(1).setShouldReceiveVelocityUpdates(true)
+                    .build(FiveDifficultiesPort.MOD_ID + ":musou_fuuin"));
+
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.MiniHakkeroEntity>> MINI_HAKKERO =
+            ENTITIES.register("mini_hakkero", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.MiniHakkeroEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.MiniHakkeroEntity::new, MobCategory.MISC)
+                    .sized(0.4F, 0.4F).clientTrackingRange(8).updateInterval(5)
+                    .build(FiveDifficultiesPort.MOD_ID + ":mini_hakkero"));
+
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.SukimaEntity>> SUKIMA =
+            ENTITIES.register("sukima", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.SukimaEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.SukimaEntity::new, MobCategory.MISC)
+                    .sized(0.6F, 1.8F).clientTrackingRange(8).updateInterval(5)
+                    .build(FiveDifficultiesPort.MOD_ID + ":sukima"));
+
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.NuclearShotEntity>> NUCLEAR_SHOT =
+            ENTITIES.register("nuclear_shot", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.NuclearShotEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.NuclearShotEntity::new, MobCategory.MISC)
+                    .sized(0.1F, 0.1F).clientTrackingRange(8).updateInterval(1).setShouldReceiveVelocityUpdates(true)
+                    .build(FiveDifficultiesPort.MOD_ID + ":nuclear_shot"));
+
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.DanmakuCreeperEntity>> DANMAKU_CREEPER =
+            ENTITIES.register("danmaku_creeper", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.DanmakuCreeperEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.DanmakuCreeperEntity::new, MobCategory.MONSTER)
+                    .sized(0.6F, 1.7F).clientTrackingRange(8).updateInterval(1)
+                    .build(FiveDifficultiesPort.MOD_ID + ":danmaku_creeper"));
+
     public static final RegistryObject<Item> SHOT_MATERIAL = ITEMS.register("shot_material",
             () -> new dev.kneekura.fivedifficulties.forge.item.ShotMaterialItem(new Item.Properties()));
 
@@ -185,6 +216,8 @@ public final class PortRegistries {
     public static void register(IEventBus modBus) {
         ITEMS.register(modBus);
         ENTITIES.register(modBus);
+        modBus.addListener((net.minecraftforge.event.entity.EntityAttributeCreationEvent event) ->
+                event.put(DANMAKU_CREEPER.get(), net.minecraft.world.entity.monster.Creeper.createAttributes().build()));
         SOUNDS.register(modBus);
         TABS.register(modBus);
     }
