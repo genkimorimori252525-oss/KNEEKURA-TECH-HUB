@@ -185,6 +185,18 @@ public final class PortRegistries {
                     .sized(0.6F, 1.7F).clientTrackingRange(8).updateInterval(1)
                     .build(FiveDifficultiesPort.MOD_ID + ":danmaku_creeper"));
 
+    // ---- P16d entities ----
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.SpiritualStrikeTalismanEntity>> SPIRITUAL_STRIKE_TALISMAN_ENTITY =
+            ENTITIES.register("spiritual_strike_talisman", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.SpiritualStrikeTalismanEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.SpiritualStrikeTalismanEntity::new, MobCategory.MISC)
+                    .sized(0.2F, 0.2F).clientTrackingRange(8).updateInterval(1).setShouldReceiveVelocityUpdates(true)
+                    .build(FiveDifficultiesPort.MOD_ID + ":spiritual_strike_talisman"));
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.MazinkyoukanEntity>> MAZINKYOUKAN_ENTITY =
+            ENTITIES.register("mazinkyoukan", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.MazinkyoukanEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.MazinkyoukanEntity::new, MobCategory.MISC)
+                    .sized(2.0F, 2.0F).clientTrackingRange(8).updateInterval(1).setShouldReceiveVelocityUpdates(true)
+                    .build(FiveDifficultiesPort.MOD_ID + ":mazinkyoukan"));
+
     // ---- P13 danmaku-weapon items ----
     public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity>> DRAGON_NECK_JEWEL =
             ENTITIES.register("dragon_neck_jewel", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity>of(
@@ -324,6 +336,12 @@ public final class PortRegistries {
             () -> new dev.kneekura.fivedifficulties.forge.item.X1ShotItems.KappaWaterPistol(new Item.Properties()));
     public static final RegistryObject<Item> IBUKI_GOURD = ITEMS.register("ibuki_gourd",
             () -> new dev.kneekura.fivedifficulties.forge.item.X1ShotItems.IbukiGourd(new Item.Properties()));
+
+    // ---- P16d effect items ----
+    public static final RegistryObject<Item> SPIRITUAL_STRIKE_TALISMAN = ITEMS.register("spiritual_strike_talisman",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1EffectItems.SpiritualStrikeTalisman(new Item.Properties()));
+    public static final RegistryObject<Item> SORCERER_SUTRA_SCROLL = ITEMS.register("sorcerer_sutra_scroll",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1EffectItems.MazinKyoukan(new Item.Properties()));
 
     public static final RegistryObject<Item> SHOT_MATERIAL = ITEMS.register("shot_material",
             () -> new dev.kneekura.fivedifficulties.forge.item.ShotMaterialItem(new Item.Properties()));

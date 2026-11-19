@@ -222,6 +222,24 @@ ASSETS = {
         "assets/five_difficulties_port/textures/item/ibuki_gourd.png",
         "c7a6ec9a91c22f0b9ce7341486540a3a6a91011faac0d1b4426486abf4fd4e2d",
     ),
+    # P16d entity textures.
+    "assets/thkaguyamod/textures/SpiritualStrikeTalismanTexture.png": (
+        "assets/five_difficulties_port/textures/entity/spiritual_strike_talisman.png",
+        "387f00ef269ad865829386692743959d2c53cdc837f5b9f0d8c0e9718cd2a847",
+    ),
+    "assets/thkaguyamod/textures/Mazinkyoukan_Texture.png": (
+        "assets/five_difficulties_port/textures/entity/mazinkyoukan.png",
+        "804aea986d71abd58831b59574f7ea913525834d5364274d506f07272c225875",
+    ),
+    # P16d effect items.
+    "assets/thkaguyamod/textures/items/SpiritualStrikeTalisman.png": (
+        "assets/five_difficulties_port/textures/item/spiritual_strike_talisman.png",
+        "ed85e00d4fa50bb412e80ed839a08a0cceabce059eca7c21f5d988b1c13b16af",
+    ),
+    "assets/thkaguyamod/textures/items/mazinKyoukan.png": (
+        "assets/five_difficulties_port/textures/item/sorcerer_sutra_scroll.png",
+        "251e8e9b05e6acc02f22d465bcdad4f0ee284d53cb07188b0af1ccb7ff2f1c3b",
+    ),
     # P15 danmaku crafting table.
     "assets/thkaguyamod/textures/blocks/danmaku_crafting_table.png": (
         "assets/five_difficulties_port/textures/block/danmaku_crafting_table.png",

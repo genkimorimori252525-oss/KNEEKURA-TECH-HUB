@@ -24,6 +24,8 @@ final class X1Tess {
         CUTOUT(X1RenderTypes.Blend.NONE, true, false, false),
         /** GL_SRC_ALPHA, GL_ONE, depthMask(false) */
         ADD_ALPHA(X1RenderTypes.Blend.SRC_ALPHA_ONE, false, false, false),
+        /** same, GL_CULL_FACE enabled (spiritual strike talisman dark sphere) */
+        ADD_ALPHA_CULL(X1RenderTypes.Blend.SRC_ALPHA_ONE, false, true, false),
         /** GL_SRC_ALPHA, GL_ONE with depth writes (laser cores) */
         ADD_ALPHA_DEPTH(X1RenderTypes.Blend.SRC_ALPHA_ONE, true, false, false),
         /** same, GL_CULL_FACE enabled (normal laser core) */

@@ -59,6 +59,7 @@ public final class P16Scenario {
             runSmallItems();
             runWeapons();
             runShotItems();
+            runEffectItems();
             FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_RUNTIME_SCENARIO_PASS");
             ScenarioShutdown.finished(level.getServer(), ENV);
         } catch (Throwable failure) {
@@ -334,6 +335,55 @@ public final class P16Scenario {
         }
         p.getInventory().clearContent();
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16C_SHOT_ITEMS_PASS");
+    }
+
+    private static void runEffectItems() {
+        FakePlayer p = player();
+        var hand = net.minecraft.world.InteractionHand.MAIN_HAND;
+
+        // Spiritual strike talisman: one used; at tick 2 (range 8) a zombie is blown away and up, a cow is not.
+        Zombie z = zombie(4);
+        z.setDeltaMovement(0, 0, 0);
+        net.minecraft.world.entity.animal.Cow cow = EntityType.COW.create(level);
+        cow.moveTo(bx + 1.5, by, bz + 3, 0F, 0F);
+        cow.setNoAi(true);
+        level.addFreshEntity(cow);
+        ItemStack tal = new ItemStack(PortRegistries.SPIRITUAL_STRIKE_TALISMAN.get(), 3);
+        p.setItemInHand(hand, tal);
+        tal.getItem().use(level, p, hand);
+        require(tal.getCount() == 2, "one talisman used");
+        var blasts = level.getEntitiesOfClass(dev.kneekura.fivedifficulties.forge.entity.SpiritualStrikeTalismanEntity.class,
+                p.getBoundingBox().inflate(4.0D), e -> e.userEntity == p);
+        require(blasts.size() == 1, "one blast entity, saw " + blasts.size());
+        var blast = blasts.get(0);
+        blast.tickCount = 2;
+        blast.tick();
+        Vec3 push = z.getDeltaMovement();
+        require(push.x > 0.0D && push.y > 0.0D, "the zombie is blown away from the talisman: " + push);
+        require(cow.getDeltaMovement().lengthSqr() == 0.0D, "animals are left alone");
+        blast.tickCount = 4;
+        blast.tick();
+        require(blast.isRemoved(), "gone after tick 3");
+        z.discard();
+        cow.discard();
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_TALISMAN_PASS push=" + String.format("%.3f,%.3f", push.x, push.y));
+
+        // Sorcerer sutra scroll: released at count 60 -> 20 -> 3 levels, Speed V / Strength / Jump II / Resistance 200 ticks.
+        p.removeAllEffects();
+        p.experienceLevel = 5;
+        var scroll = new dev.kneekura.fivedifficulties.forge.entity.MazinkyoukanEntity(level, p);
+        level.addFreshEntity(scroll);
+        scroll.count = 60;
+        scroll.tick();
+        var speed = p.getEffect(MobEffects.MOVEMENT_SPEED);
+        require(p.experienceLevel == 2 && speed != null && speed.getAmplifier() == 4 && speed.getDuration() == 200
+                && p.hasEffect(MobEffects.DAMAGE_BOOST) && p.getEffect(MobEffects.JUMP).getAmplifier() == 1
+                && p.hasEffect(MobEffects.DAMAGE_RESISTANCE), "scroll buffs level=" + p.experienceLevel + " speed=" + speed);
+        require(scroll.isRemoved(), "the scroll closes");
+        p.removeAllEffects();
+        p.getInventory().clearContent();
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_SUTRA_SCROLL_PASS");
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16D_EFFECT_ITEMS_PASS");
     }
 
     private static void require(boolean ok, String what) {

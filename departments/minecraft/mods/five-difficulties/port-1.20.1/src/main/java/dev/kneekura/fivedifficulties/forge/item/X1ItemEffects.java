@@ -14,6 +14,34 @@ public final class X1ItemEffects {
     private X1ItemEffects() {}
 
     /**
+     * itemEffectFollowUser: put the effect entity {@code length} ahead of the user at {@code angle} off its yaw
+     * (yFollow: tilted by pitch and set 0.5 below the eyes; otherwise at feet + yOffset); motion is the user's
+     * motion plus the jump.
+     */
+    public static void followUser(Entity item, @Nullable Entity user, double length, float angle, boolean yFollow,
+                                  double yOffset) {
+        if (user == null) return;
+        double x, y, z;
+        float yaw = user.getYRot(), pitch = user.getXRot();
+        if (yFollow) {
+            x = user.getX() - Math.sin((yaw + angle) / 180F * 3.141593F) * Math.cos(pitch / 180F * 3.141593F) * length;
+            z = user.getZ() + Math.cos((yaw + angle) / 180F * 3.141593F) * Math.cos(pitch / 180F * 3.141593F) * length;
+            y = user.getY() - Math.sin(pitch / 180F * 3.141593F) * length + (double) user.getEyeHeight() - 0.5D;
+        } else {
+            x = user.getX() - Math.sin((yaw + angle) / 180F * 3.141593F) * length;
+            z = user.getZ() + Math.cos((yaw + angle) / 180F * 3.141593F) * length;
+            y = user.getY() + yOffset;
+        }
+        var m = user.getDeltaMovement();
+        item.setDeltaMovement(m.x + (x - item.getX()), m.y + (y - item.getY()), m.z + (z - item.getZ()));
+        item.setPos(x, y, z);
+    }
+
+    public static void followUser(Entity item, @Nullable Entity user, double length, float angle) {
+        followUser(item, user, length, angle, true, 0.0D);
+    }
+
+    /**
      * itemEffectFinish: the effect entity turns back into its item. A creative player gets nothing back;
      * another player gets it in the inventory (dropped at the entity when full); a dead or missing user
      * leaves it on the ground. The entity always disappears.

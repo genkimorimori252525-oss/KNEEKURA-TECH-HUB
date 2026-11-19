@@ -15,6 +15,12 @@ public final class PortCreativeTabs {
 
     @SubscribeEvent
     public static void buildContents(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.COMBAT) { // P16d effect items
+            event.accept(PortRegistries.SPIRITUAL_STRIKE_TALISMAN.get());
+        }
+        if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) { // P16d effect items
+            event.accept(PortRegistries.SORCERER_SUTRA_SCROLL.get());
+        }
         if (event.getTabKey() == CreativeModeTabs.COMBAT) { // P16c shot items
             event.accept(PortRegistries.SOUL_TORCH.get());
             event.accept(PortRegistries.YUYUKO_FAN.get());
