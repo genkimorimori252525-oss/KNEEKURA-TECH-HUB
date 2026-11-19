@@ -58,6 +58,7 @@ public final class P16Scenario {
         try {
             runSmallItems();
             runWeapons();
+            runShotItems();
             FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_RUNTIME_SCENARIO_PASS");
             ScenarioShutdown.finished(level.getServer(), ENV);
         } catch (Throwable failure) {
@@ -270,6 +271,69 @@ public final class P16Scenario {
             e.discard();
         }
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16B_WEAPONS_PASS");
+    }
+
+    private static int fire(Runnable action) {
+        shots = 0;
+        lastShot = null;
+        counting = true;
+        action.run();
+        counting = false;
+        return shots;
+    }
+
+    private static void runShotItems() {
+        FakePlayer p = player();
+        var hand = net.minecraft.world.InteractionHand.MAIN_HAND;
+
+        // Soul torch: three phantoms with special 352 (homing 16); one torch used.
+        ItemStack torch = new ItemStack(PortRegistries.SOUL_TORCH.get(), 2);
+        p.setItemInHand(hand, torch);
+        int n = fire(() -> torch.getItem().finishUsingItem(torch, level, p));
+        require(n == 3 && lastShot.motion().special == 352 && torch.getCount() == 1, "soul torch shots " + n);
+        require(dev.kneekura.fivedifficulties.forge.shot.X1SpecialShotRegistry.get(352) != null, "special 352 registered");
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_SOUL_TORCH_PASS shots=" + n);
+
+        // Yuyuko fan: held 10 ticks -> 42 -> 14 per third; fans ahead = 2 x 15, rings (sneak) = 6 x 14.
+        ItemStack fan = new ItemStack(PortRegistries.YUYUKO_FAN.get());
+        p.setItemInHand(hand, fan);
+        int wide = fire(() -> fan.getItem().releaseUsing(fan, level, p, 72000 - 10));
+        p.setShiftKeyDown(true);
+        int rings = fire(() -> fan.getItem().releaseUsing(fan, level, p, 72000 - 10));
+        p.setShiftKeyDown(false);
+        require(wide == 30 && rings == 84 && fan.getDamageValue() == 2, "fan wide " + wide + " rings " + rings);
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_YUYUKO_FAN_PASS wide=" + wide + " rings=" + rings);
+
+        // Kappa water pistol: three shots a click; the last charge never fires.
+        ItemStack pistol = new ItemStack(PortRegistries.KAPPA_WATER_PISTOL.get());
+        p.setItemInHand(hand, pistol);
+        int three = fire(() -> pistol.getItem().use(level, p, hand));
+        require(three == 3 && pistol.getDamageValue() == 1, "pistol shots " + three);
+        pistol.setDamageValue(38);
+        int none = fire(() -> pistol.getItem().use(level, p, hand));
+        require(none == 0 && pistol.getDamageValue() == 38, "the last charge stays");
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_WATER_PISTOL_PASS");
+
+        // Ibuki gourd: two drinks of 5, then dry; Strength 15 s and Nausea III 20 s.
+        ItemStack gourd = new ItemStack(PortRegistries.IBUKI_GOURD.get());
+        p.setItemInHand(hand, gourd);
+        p.removeAllEffects();
+        gourd.getItem().finishUsingItem(gourd, level, p);
+        var str = p.getEffect(MobEffects.DAMAGE_BOOST);
+        var nau = p.getEffect(MobEffects.CONFUSION);
+        require(gourd.getDamageValue() == 5 && str != null && str.getDuration() == 300 && nau != null
+                && nau.getAmplifier() == 2 && nau.getDuration() == 400, "first drink " + gourd.getDamageValue());
+        gourd.getItem().finishUsingItem(gourd, level, p);
+        gourd.getItem().finishUsingItem(gourd, level, p);
+        require(gourd.getDamageValue() == 10 && !gourd.isEmpty(), "two drinks then dry: " + gourd.getDamageValue());
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_IBUKI_GOURD_PASS");
+
+        for (Entity e : level.getEntities((Entity) null, new net.minecraft.world.phys.AABB(bx - 64, by - 64, bz - 64, bx + 64, by + 64, bz + 64),
+                e -> e instanceof THShotEntity shot && shot.getOwner() == p)) {
+            e.discard();
+        }
+        p.getInventory().clearContent();
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16C_SHOT_ITEMS_PASS");
     }
 
     private static void require(boolean ok, String what) {

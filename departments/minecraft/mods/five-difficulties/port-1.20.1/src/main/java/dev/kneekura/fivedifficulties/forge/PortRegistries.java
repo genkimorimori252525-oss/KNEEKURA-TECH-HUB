@@ -315,6 +315,16 @@ public final class PortRegistries {
     public static final RegistryObject<Item> REMORSE_ROD = ITEMS.register("remorse_rod",
             () -> new dev.kneekura.fivedifficulties.forge.item.X1Weapons.Kaigo(new Item.Properties()));
 
+    // ---- P16c shot items ----
+    public static final RegistryObject<Item> SOUL_TORCH = ITEMS.register("soul_torch",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1ShotItems.SoulTorch(new Item.Properties()));
+    public static final RegistryObject<Item> YUYUKO_FAN = ITEMS.register("yuyuko_fan",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1ShotItems.YuyukoFan(new Item.Properties()));
+    public static final RegistryObject<Item> KAPPA_WATER_PISTOL = ITEMS.register("kappa_water_pistol",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1ShotItems.KappaWaterPistol(new Item.Properties()));
+    public static final RegistryObject<Item> IBUKI_GOURD = ITEMS.register("ibuki_gourd",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1ShotItems.IbukiGourd(new Item.Properties()));
+
     public static final RegistryObject<Item> SHOT_MATERIAL = ITEMS.register("shot_material",
             () -> new dev.kneekura.fivedifficulties.forge.item.ShotMaterialItem(new Item.Properties()));
 

@@ -237,7 +237,7 @@ public class THShotEntity extends Projectile {
     }
 
     /** EntityTHShot.homing: turn the stored angle (not the motion), then accelerate again. */
-    private void homing(X1ShotMotion m, float homingLevel) {
+    public void homing(X1ShotMotion m, float homingLevel) {
         Entity owner = this.getOwner();
         Vec3 pos = this.position();
         Vec3d shotVec = X1ShotSpecials.normalize(m.angle);

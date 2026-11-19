@@ -205,6 +205,23 @@ ASSETS = {
         "assets/five_difficulties_port/textures/item/remorse_rod_used.png",
         "48c28972ea3b5299e70cc71284aa6958222e19e28b3fdc20ebc8ca73b5efad06",
     ),
+    # P16c shot items.
+    "assets/thkaguyamod/textures/items/soulTorch.png": (
+        "assets/five_difficulties_port/textures/item/soul_torch.png",
+        "58aab3c885f789bcacc925fdcfc25f0bc07f09b34331e9be3ebdf325555f0deb",
+    ),
+    "assets/thkaguyamod/textures/items/yuyukoOugi.png": (
+        "assets/five_difficulties_port/textures/item/yuyuko_fan.png",
+        "a7bc9e85ab92814f4b6f9c8e80b26a3c9ebaff641f10e7f7da6b1fa2410dc4f6",
+    ),
+    "assets/thkaguyamod/textures/items/kappaWaterPistol.png": (
+        "assets/five_difficulties_port/textures/item/kappa_water_pistol.png",
+        "8676e022d5d4d468553dcbe756fb0832b5b18b3c9ad3a9f97bd949ad53762c47",
+    ),
+    "assets/thkaguyamod/textures/items/ibukihyou.png": (
+        "assets/five_difficulties_port/textures/item/ibuki_gourd.png",
+        "c7a6ec9a91c22f0b9ce7341486540a3a6a91011faac0d1b4426486abf4fd4e2d",
+    ),
     # P15 danmaku crafting table.
     "assets/thkaguyamod/textures/blocks/danmaku_crafting_table.png": (
         "assets/five_difficulties_port/textures/block/danmaku_crafting_table.png",
