@@ -1,0 +1,55 @@
+{
+  "schema": "kneekura.optimization.sourcesnapshot.partial-v1",
+  "captured_at": "2026-10-11",
+  "target": "AllTheLeaks",
+  "track": "ANCHOR",
+  "source": {
+    "repo": "pietro-lopes/AllTheLeaks",
+    "commit": "5f4157f5362ea6471601114f8695ae44b0a3e28e",
+    "tree_sha": "8d3fe6e1244e6bdd7cd80729fef70de8a254f6ea",
+    "branch": "1.20.1",
+    "blobs": 373,
+    "java_paths": 356,
+    "truncated": false,
+    "all_bodies_acquired": false,
+    "selected_sources_read": [
+      "IssueManager.java",
+      "ClearLeakedLevelChunks.java",
+      "IngredientDedupe.java",
+      "ResourceLocationDedupe.java",
+      "MemoryMonitor.java",
+      "Issue39.java",
+      "UntrackedIssue001.java"
+    ],
+    "source_mod_version": "1.1.1+1.20.1-forge",
+    "mc": "1.20.1",
+    "forge_dev": "47.4.10",
+    "license": "MIT"
+  },
+  "frontier": {
+    "repo": "pietro-lopes/AllTheLeaks",
+    "branch": "1.21.x",
+    "commit": "a0e6f2749f367628043f9272cde2b7abaead539d",
+    "path_inventory": {
+      "blobs": 306,
+      "java": 286
+    },
+    "state": "NOT_ANALYZED_BODY"
+  },
+  "binary": {
+    "user_file": "alltheleaks-1.1.1+1.20.1-forge.jar",
+    "uploaded": false,
+    "sha256": null,
+    "source_binary_parity": "UNESTABLISHED"
+  },
+  "evidence": {
+    "mechanisms": "STATIC_SELECTED_SOURCE",
+    "history": "PARTIAL_RESEARCH_DRAFT",
+    "performance": "PERFORMANCE_NOT_VERIFIED",
+    "runtime": "NOT_RUN",
+    "cas": "NOT_MINTED"
+  },
+  "copyright": {
+    "raw_copied": false
+  }
+}

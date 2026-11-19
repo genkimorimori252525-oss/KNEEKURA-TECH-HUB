@@ -1,0 +1,58 @@
+{
+  "schema": "kneekura.optimization-cohort.phase6.v1",
+  "date": "2026-10-11",
+  "input_manifest": "INPUT-MANIFEST.json",
+  "input_basename_count": 58,
+  "candidate_counts": {
+    "optimization": 27,
+    "related": 3,
+    "diagnostics": 3,
+    "utility": 25
+  },
+  "phase6": {
+    "new_dossiers": [
+      "alternate-current",
+      "starlight",
+      "noisium",
+      "clumps"
+    ],
+    "count": 4,
+    "source_repair_diff_confirmed": [
+      "alternate-current:815fac14e103ce5defcf98578acdd55da0b0cd63",
+      "noisium:a5aa5eac09647f93e0d3f32c66839bbdb0ff00f4",
+      "clumps:ebb464852a132188a023cf0f5698e8a4216b9476"
+    ],
+    "starlight_1_1_2_release_commit": "1cda73ccfa016e35d7cf0ed848bc8786f5881740",
+    "noisium_2_3_0_release_commit": "8cf451809eca7cfae1dd839edad96fc9092c4ef8",
+    "source_selected_only": true,
+    "all_source_bytes_acquired": false,
+    "full_facet_complete": 0
+  },
+  "cumulative": {
+    "deep_dossiers_before": 16,
+    "new_dossiers": 4,
+    "deep_dossiers_now": 20,
+    "remaining_without_in_cohort_deep_dossier": 7,
+    "whole_target_complete": 0,
+    "technique_catalog_before": 40,
+    "technique_rows_added": 10,
+    "technique_catalog_after": 50,
+    "mod_catalog_rows": 27
+  },
+  "verification": {
+    "user_jars_received": 0,
+    "sha256_user_jars": 0,
+    "source_binary_parity": 0,
+    "minecraft_runs": 0,
+    "paired_benchmarks": 0,
+    "failure_history_cas_imports": 0,
+    "canonical_validated_claims": 0,
+    "performance_state": "PERFORMANCE_NOT_VERIFIED"
+  },
+  "next": [
+    "resolve source identities of Canary and Saturn",
+    "complete source slices for remaining candidates",
+    "research spark and Observable as diagnostic only",
+    "acquire exact binaries and run isolated Forge1.20.1 paired correctness benchmarks"
+  ]
+}

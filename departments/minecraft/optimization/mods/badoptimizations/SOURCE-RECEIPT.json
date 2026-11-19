@@ -1,0 +1,43 @@
+{
+  "schema": "kneekura.optimization.sourcesnapshot.partial-v1",
+  "captured_at": "2026-10-11",
+  "subject": "badoptimizations",
+  "source": {
+    "repository": "https://github.com/imthosea/BadOptimizations",
+    "branch_discovery": "1.20.1",
+    "immutable_commit": "f1540411b21e8458d6d143d00f53743e7a9bc893",
+    "git_tree_sha": "db90837b3164e0e6a211891528db8e66aa0ae5b9",
+    "tree_index": {
+      "blob_count": 65,
+      "java_count": 43,
+      "kotlin_count": 0,
+      "truncated": false,
+      "all_paths_acquired_as_index": true,
+      "all_source_bytes_acquired": false
+    },
+    "source_declared_mod_version": "2.4.1",
+    "source_minecraft_scope": "1.20.1",
+    "source_loader_scope": "Forge 47.2.0 dev",
+    "license_reference": "https://github.com/imthosea/BadOptimizations/blob/f1540411b21e8458d6d143d00f53743e7a9bc893/LICENSE",
+    "license_identified": "MIT"
+  },
+  "distribution": {
+    "user_requested_version": "2.4.1",
+    "requested_jar_uploaded": false,
+    "requested_jar_sha256": null,
+    "source_binary_equivalence": "NOT_ESTABLISHED"
+  },
+  "analysis": {
+    "state": "SELECTED_SOURCE_AND_TWO_FIXES",
+    "feature_map": "EVIDENCE_BACKED_STATIC_SELECTED_SUBSYSTEM_ONLY",
+    "failure_repair": "PARTIAL",
+    "failure_history_json_schema": "kneekura.failure-history.research-draft.v1",
+    "history_cas_index_snapshot_id": null,
+    "history_document_ids": [],
+    "runtime": "NOT_RUN",
+    "benchmark": "PERFORMANCE_NOT_VERIFIED",
+    "correctness_gametest": "NOT_RUN",
+    "canonical_validated": false
+  },
+  "boundary": "A fixed Git source revision (and complete source path inventory) is not a verified release binary, full source body acquisition, GameTest or proof of measured FPS."
+}

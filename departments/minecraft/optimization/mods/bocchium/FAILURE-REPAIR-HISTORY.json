@@ -1,0 +1,45 @@
+{
+  "format": "kneekura.failure-history.research-draft.v1",
+  "repository": "https://github.com/MCTeamPotato/Bocchium",
+  "created_at": "2026-10-11",
+  "import_ready": false,
+  "history_adapter_status": "NOT_IMPORTED",
+  "scope": {
+    "track": "ANCHOR or explicitly marked comparative",
+    "head_revision": "57a2e920273422253dde64f2c3d907bca8679afe",
+    "history_window": "Selected fixed Forge 1.20.1 source; GitHub Issues searched 'cull'; no supported case found",
+    "queries": [
+      "cull",
+      "render",
+      "sodium",
+      "embeddium"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "inspected_evidence_ids": [],
+    "deferred": [
+      "full upstream issue/PR query + pagination",
+      "release JAR SHA and bytecode parity",
+      "direct performance and correctness GameTests",
+      "CAS original byte/document IDs"
+    ],
+    "unavailable": [
+      "original raw issue/diff CAS profile not minted"
+    ]
+  },
+  "evidence_notes": {
+    "source_tree_sha": "00b5af979cb53be206c414e4f73e8da260651de2",
+    "source_tree_blobs": 19,
+    "java_sources_indexed": 3,
+    "source_version_boundary": "source gradle 1.20.1-0.0.3 matches requested version string; JAR absent",
+    "source_license": "LGPL-3.0",
+    "byte_artifacts_acquired": false,
+    "cas_index_snapshot_id": null,
+    "cas_document_id": null,
+    "source_mechanism_state": "EVIDENCE_BACKED_STATIC_SELECTED_ONLY",
+    "runtime": "NOT_RUN",
+    "benchmark": "PERFORMANCE_NOT_VERIFIED"
+  },
+  "cases": []
+}

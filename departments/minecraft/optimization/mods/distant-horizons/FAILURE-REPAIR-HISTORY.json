@@ -1,0 +1,187 @@
+{
+  "format": "kneekura.failure-history.research-draft.v1",
+  "repository": "https://gitlab.com/distant-horizons-team/distant-horizons",
+  "mirrored_source": "https://github.com/DecoderCoder/Distant-Horizons",
+  "import_ready": false,
+  "scope": {
+    "track": "ANCHOR_1.20.1_FORGE",
+    "head_revision": "eb6bf9ae7836bca986b429a28e2a9f94cb45ca77",
+    "submodule_revision": "a0d2dfe405a8cd8f3c50639378315484e5b56609",
+    "history_window": "June–July 2026: viewport texture memory lifetime and Iris LOD texture compatibility",
+    "queries": [
+      "viewport",
+      "texture leak",
+      "Iris",
+      "3.2.0b"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "inspected_evidence_ids": [
+      "dh-commit-1a7",
+      "dh-commit-20f",
+      "dh-release"
+    ],
+    "deferred": [
+      "raw GitLab Issue/MR originals",
+      "CAPTURE CAS adapter identity",
+      "release JAR bytecode equivalence",
+      "runtime tests"
+    ],
+    "unavailable": []
+  },
+  "cases": [
+    {
+      "case_id": "DH-GL-VIEWPORT",
+      "origin": "UPSTREAM",
+      "track": "ANCHOR_1.20.1_FORGE",
+      "environment": {
+        "minecraft": "1.20.1",
+        "loader": "Forge",
+        "release": "3.2.0-b source tag"
+      },
+      "affected_symbols": [
+        "GlDhMetaRenderer.createAndBindTextures"
+      ],
+      "before_revision": "2bffb410a82a8225454d1ce1c4b41be10b4211b0",
+      "after_revision": "1a7d3a4e87f84044b2222998db6ef80e4540a602",
+      "evidence": [
+        {
+          "id": "dh-commit-1a7",
+          "role": "diff",
+          "url": "https://github.com/DecoderCoder/Distant-Horizons/commit/1a7d3a4e87f84044b2222998db6ef80e4540a602",
+          "index_snapshot_id": null,
+          "document_id": null
+        }
+      ],
+      "causal_chain": [
+        "Old viewport textures replaced without destroy",
+        "Patch destroys previous depth/color objects before recreating",
+        "Tagged source includes patched guards"
+      ],
+      "symptom": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "GL memory leak when viewport size changes",
+        "evidence_ids": [
+          "dh-commit-1a7"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "INFERENCE",
+        "text": "Repeated viewport size change and allocation/recreation",
+        "evidence_ids": [
+          "dh-commit-1a7"
+        ]
+      },
+      "root_cause": {
+        "basis": "INFERENCE",
+        "text": "Lost references to prior GPU texture ownership",
+        "evidence_ids": [
+          "dh-commit-1a7"
+        ]
+      },
+      "repair": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "Destroy old depth/color GPU textures before creating replacements",
+        "evidence_ids": [
+          "dh-commit-1a7"
+        ]
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Explicit cleanup on resize and GPU context teardown prevents retained resources",
+        "evidence_ids": [
+          "dh-commit-1a7"
+        ]
+      },
+      "reproduction": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      }
+    },
+    {
+      "case_id": "DH-IRIS-LODTEX",
+      "origin": "UPSTREAM",
+      "track": "ANCHOR_1.20.1_FORGE",
+      "environment": {
+        "minecraft": "1.20.1",
+        "loader": "Forge/Fabric code family",
+        "release": "3.2.0-b"
+      },
+      "affected_symbols": [
+        "GlDhMetaRenderer.runRenderPassSetup",
+        "GlDhMetaRenderer.runRenderPassCleanup"
+      ],
+      "before_revision": "f4724012fc7e825a0f1c6522152c4258dca7d831",
+      "after_revision": "20f1cc438cbbb656342ea34720cdff5be170cc48",
+      "evidence": [
+        {
+          "id": "dh-commit-20f",
+          "role": "diff",
+          "url": "https://github.com/DecoderCoder/Distant-Horizons/commit/20f1cc438cbbb656342ea34720cdff5be170cc48",
+          "index_snapshot_id": null,
+          "document_id": null
+        },
+        {
+          "id": "dh-release",
+          "role": "release_note",
+          "url": "https://www.curseforge.com/minecraft/mc-mods/distant-horizons/files/8389142",
+          "index_snapshot_id": null,
+          "document_id": null
+        }
+      ],
+      "causal_chain": [
+        "Enabled LOD texture atlas path incompatible with Iris shader rendering",
+        "Patch checks Iris shader state before bind/unbind",
+        "LODs fall back to untextured under Iris"
+      ],
+      "symptom": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "LODs with textures unsupported by Iris shader path",
+        "evidence_ids": [
+          "dh-release"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Active Iris shaders with enableTexturedLods",
+        "evidence_ids": [
+          "dh-release"
+        ]
+      },
+      "root_cause": {
+        "basis": "INFERENCE",
+        "text": "Iris rendering path lacks compatible textured LOD support",
+        "evidence_ids": [
+          "dh-commit-20f"
+        ]
+      },
+      "repair": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "Skip texture atlas bind/upload under Iris and return to compatible untextured LOD mode",
+        "evidence_ids": [
+          "dh-commit-20f"
+        ]
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Feature fallback by shader compatibility is preferable to invalid rendering state",
+        "evidence_ids": [
+          "dh-commit-20f"
+        ]
+      },
+      "reproduction": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      }
+    }
+  ]
+}

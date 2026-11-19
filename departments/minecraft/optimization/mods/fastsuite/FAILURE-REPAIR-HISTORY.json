@@ -1,0 +1,50 @@
+{
+  "format": "kneekura.failure-history.research-draft.v1",
+  "import_ready": false,
+  "why_not_import_ready": "Source/Issue bytes lack immutable CAS index_snapshot_id and document_id; this record is a source-backed research memo, NOT a validated history-adapter artifact.",
+  "origin": "Shadows-of-Fire/FastSuite",
+  "captured_at": "2026-10-11",
+  "scope": {
+    "track": "COMPARATIVE_NEWER_1.21_API",
+    "head_revision": "883aed9f39f6b83225cbf20ca9d59f1c98239278",
+    "history_window": "2025-04/09, cross-version concurrency fix and misleading freeze report",
+    "queries": [
+      "FS-44",
+      "FS-47"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "raw_evidence_cas_identity": "UNAVAILABLE",
+    "runtime": "NOT_RUN",
+    "no_full_issue_history_claim": true
+  },
+  "cases": [
+    {
+      "id": "FS-44",
+      "issue": "https://github.com/Shadows-of-Fire/FastSuite/issues/44",
+      "fix": "https://github.com/Shadows-of-Fire/FastSuite/commit/49971164e235bfc819a4cca896baa95575df9cf2",
+      "before": "ef4d391c7a3a163571ca36364e1007bd1a020d4a",
+      "after": "49971164e235bfc819a4cca896baa95575df9cf2",
+      "env": "Newer Minecraft 1.21+ RecipeInput API, not the requested 1.20.1 5.1.2 JAR",
+      "symptom": "Reported random recipe matching failures tied to shared non-thread-safe StackedContents",
+      "diagnosis": "Shapeless matching accesses cached shared StackedContents from multiple workers per author",
+      "repair": "CraftingInputMixin generates fresh StackedContents per call",
+      "verification": "NOT_RUN",
+      "basis": "DIRECT_OBSERVATION_DIFF_AND_AUTHOR_CLAIM"
+    },
+    {
+      "id": "FS-47",
+      "issue": "https://github.com/Shadows-of-Fire/FastSuite/issues/47",
+      "fix": null,
+      "before": null,
+      "after": null,
+      "env": "All The Mods 10 report; no validated 1.20.1 applicability",
+      "symptom": "Reporter suspected FastSuite in a server freeze",
+      "diagnosis": "Maintainer found no FastSuite-related errors and suspected MiniHUD; attribution CONTESTED",
+      "repair": null,
+      "verification": "NOT_RUN",
+      "basis": "CONTRARY_EVIDENCE_NOT_A_CONFIRMED_FASTSUITE_BUG"
+    }
+  ]
+}

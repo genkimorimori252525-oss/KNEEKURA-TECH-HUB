@@ -1,0 +1,196 @@
+{
+  "format": "kneekura.failure-history.research-draft.v1",
+  "repository": "https://github.com/pietro-lopes/AllTheLeaks",
+  "scope": {
+    "track": "ANCHOR_1.20.1_FORGE",
+    "head_revision": "5f4157f5362ea6471601114f8695ae44b0a3e28e",
+    "history_window": "Jan2025–Jun2026 EventBus #65 + ATL #70/#79/#99",
+    "queries": [
+      "eventbus",
+      "listener retention",
+      "chunk unload",
+      "force_refresh",
+      "twilightforest"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "inspected_evidence_ids": [
+      "eventbus-pr65",
+      "atl79",
+      "atl70",
+      "atl99",
+      "pinned-issue39"
+    ],
+    "deferred": [
+      "exact binary equivalence and EventBus loaded version",
+      "full ATL per-mod issue history",
+      "CAS original capture",
+      "live heap profiler"
+    ],
+    "unavailable": []
+  },
+  "import_ready": false,
+  "cases": [
+    {
+      "case_id": "ATL-EVENTBUS-VERSION",
+      "origin": "UPSTREAM",
+      "track": "ANCHOR_1.20.1_FORGE",
+      "environment": {
+        "minecraft": "1.20.1",
+        "loader": "Forge",
+        "framework": "EventBus older vs >=6.2.26"
+      },
+      "affected_symbols": [
+        "Issue39.rebuildListenersCache",
+        "ListenerListInst.getListeners"
+      ],
+      "before_revision": null,
+      "after_revision": "5f4157f5362ea6471601114f8695ae44b0a3e28e",
+      "evidence": [
+        {
+          "id": "eventbus-pr65",
+          "role": "pull_request",
+          "url": "https://github.com/MinecraftForge/EventBus/pull/65",
+          "index_snapshot_id": null,
+          "document_id": null
+        },
+        {
+          "id": "atl79",
+          "role": "issue",
+          "url": "https://github.com/pietro-lopes/AllTheLeaks/issues/79",
+          "index_snapshot_id": null,
+          "document_id": null
+        },
+        {
+          "id": "pinned-issue39",
+          "role": "after_code",
+          "url": "https://github.com/pietro-lopes/AllTheLeaks/blob/5f4157f5362ea6471601114f8695ae44b0a3e28e/src/main/java/dev/uncandango/alltheleaks/leaks/common/mods/forge/Issue39.java",
+          "index_snapshot_id": null,
+          "document_id": null
+        }
+      ],
+      "causal_chain": [
+        "Old EventBus does not immediately invalidate deregistered listener cached arrays",
+        "EventBus PR #65 repairs this with eager invalidation marker",
+        "AllTheLeaks newer EventBus gate skips obsolete workaround",
+        "ATL #79 reporter acknowledges gate already present; no fix chain inside ATL proved"
+      ],
+      "symptom": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Old EventBus stale listeners retain listener references after unregistration until next post",
+        "evidence_ids": [
+          "eventbus-pr65"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Obsolete workaround forcibly building unused caches on already updated EventBus",
+        "evidence_ids": [
+          "atl79"
+        ]
+      },
+      "root_cause": {
+        "basis": "INFERENCE",
+        "text": "Incompatible cache lifecycle between old workaround and new dependency semantics",
+        "evidence_ids": [
+          "eventbus-pr65",
+          "pinned-issue39"
+        ]
+      },
+      "repair": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "Disable AllTheLeaks old EventBus listener rebuild workaround when runtime EventBus version >=6.2.26; actual upstream repair PR #65",
+        "evidence_ids": [
+          "pinned-issue39",
+          "eventbus-pr65"
+        ]
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Dependency-version and side-gated patches must retire old workarounds when upstream fixes underlying bug",
+        "evidence_ids": [
+          "pinned-issue39"
+        ]
+      },
+      "reproduction": {
+        "state": "REPORTED",
+        "evidence_ids": [
+          "atl79"
+        ]
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      }
+    },
+    {
+      "case_id": "ATL-70",
+      "origin": "UPSTREAM",
+      "track": "ANCHOR_1.20.1_FORGE",
+      "environment": {
+        "minecraft": "1.20.1",
+        "loader": "Forge 47.4.0",
+        "mod_version": "1.1.1+1.20.1-forge"
+      },
+      "affected_symbols": [],
+      "before_revision": null,
+      "after_revision": null,
+      "evidence": [
+        {
+          "id": "atl70",
+          "role": "issue",
+          "url": "https://github.com/pietro-lopes/AllTheLeaks/issues/70",
+          "index_snapshot_id": null,
+          "document_id": null
+        }
+      ],
+      "causal_chain": [
+        "Reporter chunk pregeneration → resident chunks grow",
+        "Author spark heap check reports large resident chunks",
+        "Reporter suspects independent Fast Async World Save/Smooth Chunk Save save-disable interaction"
+      ],
+      "symptom": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Memory rises during chunk pregen even with ATL installed",
+        "evidence_ids": [
+          "atl70"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Chunky pregen and possibly save-related mods",
+        "evidence_ids": [
+          "atl70"
+        ]
+      },
+      "root_cause": {
+        "basis": "UNKNOWN",
+        "text": null,
+        "reason": "No exact saved chunk lifecycle/source proof"
+      },
+      "repair": {
+        "basis": "UNKNOWN",
+        "text": null,
+        "reason": "Reporter workaround not tied to source patch"
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Use retained-heap data and save/flush lifecycle before attributing a leak to installed optimizer",
+        "evidence_ids": [
+          "atl70"
+        ]
+      },
+      "reproduction": {
+        "state": "REPORTED",
+        "evidence_ids": [
+          "atl70"
+        ]
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "schema": "kneekura.optimization.sourcesnapshot.partial-v1",
+  "date": "2026-10-11",
+  "mod": "GpuTape / GPUBooster",
+  "source": {
+    "historical_unmatched": {
+      "repo": "StarmanMine142/GpuTape",
+      "commit": "e57f961776195894ed23687f9c143fd6942b9d58",
+      "git_tree_sha": "e8f36b21b9e7414daf563f3ed2b3057f9a3987f8",
+      "mc": "1.20.2",
+      "loader": "Fabric",
+      "source_mod_version": "1.0.0",
+      "blob_count": 17,
+      "java_count": 3
+    },
+    "comparative_later": {
+      "repo": "ITsMrToad/GPUBooster",
+      "commit": "16bf18cee756ab47a760da9e2892f1ea02d015b0",
+      "git_tree_sha": "a5fe633b86881149690f30e261551c3a4f7d6f28",
+      "mc": "1.21.1",
+      "loader": "Fabric",
+      "source_mod_version": "1.1.0",
+      "blob_count": 18,
+      "java_count": 5,
+      "all_source_bodies_acquired": false,
+      "source_subset_read": true
+    },
+    "anchor": {
+      "requested_filename": "GPUTape-1.18x-1.21x-1.0.5.1.jar",
+      "minecraft": "1.20.1",
+      "loader": "Forge requested",
+      "release_url": "https://modrinth.com/mod/gputape/version/1.0.5.1-forge",
+      "version_code_snapshot": "NOT_ESTABLISHED",
+      "source_binary_equivalence": "NOT_ESTABLISHED",
+      "sha256": null
+    }
+  },
+  "metadata_conflicts": [
+    "Official Modrinth Forge release supports MC1.20.x",
+    "CurseForge file listing says NeoForge only for MC1.20.1",
+    "Named unadorned JAR no uploaded manifest to resolve"
+  ],
+  "evidence_classes": {
+    "framebuffer_cleanup": "COMPARATIVE_SOURCE_EVIDENCE",
+    "actual_1_0_5_1": "RELEASE_NOTE_ONLY",
+    "runtime": "NOT_RUN",
+    "benchmark": "PERFORMANCE_NOT_VERIFIED"
+  },
+  "history": "PARTIAL_BOUNDED_RESEARCH_DRAFT_NOT_CAS_IMPORTED",
+  "license": "GPL-3.0",
+  "source_copied": false
+}

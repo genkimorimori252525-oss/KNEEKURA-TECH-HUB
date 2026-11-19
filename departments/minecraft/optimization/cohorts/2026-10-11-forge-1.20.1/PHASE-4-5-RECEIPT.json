@@ -1,0 +1,48 @@
+{
+  "schema": "kneekura.optimization.cohort.phase4-5.v1",
+  "date": "2026-10-11",
+  "input_cohort": 58,
+  "optimization_candidates": 27,
+  "new_partial_dossiers": [
+    {
+      "slug": "gputape",
+      "trace": "COMPARATIVE_SOURCE_ONLY",
+      "requested_version": "1.0.5.1",
+      "source_binary_parity": false
+    },
+    {
+      "slug": "distant-horizons",
+      "trace": "EXACT_RELEASE_GIT_MAIN_PLUS_GITLINK_CORE",
+      "requested_version": "3.2.0-b",
+      "source_binary_parity": false
+    },
+    {
+      "slug": "alltheleaks",
+      "trace": "ANCHOR_1_20_1_SOURCE",
+      "requested_version": "1.1.1",
+      "source_binary_parity": false
+    },
+    {
+      "slug": "memoryleakfix",
+      "trace": "ANCHOR_ADJACENT_DEV_1_20_4",
+      "requested_version": "1.1.5",
+      "source_binary_parity": false
+    }
+  ],
+  "prior_partial_deep_subjects": 12,
+  "new_subjects": 4,
+  "cumulative_partial_dossiers": 16,
+  "remaining_without_deep_dossier": 11,
+  "technologies_catalog_before": 29,
+  "techniques_added": 11,
+  "technologies_catalog_after": 40,
+  "performance_state": "PERFORMANCE_NOT_VERIFIED",
+  "runtime_trials": 0,
+  "benchmarks": 0,
+  "jars_received": 0,
+  "canonical_claims": 0,
+  "cas_documents": 0,
+  "formal_failure_imports": 0,
+  "json_drafts_not_import_ready": true,
+  "model": "Selected source snapshots, binary and loader parity pending"
+}

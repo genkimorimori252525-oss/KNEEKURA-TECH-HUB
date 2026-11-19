@@ -1,0 +1,50 @@
+{
+  "format": "kneekura.failure-history.research-draft.v1",
+  "import_ready": false,
+  "why_not_import_ready": "Source/Issue bytes lack immutable CAS index_snapshot_id and document_id; this record is a source-backed research memo, NOT a validated history-adapter artifact.",
+  "origin": "fzzyhmstrs/pc",
+  "captured_at": "2026-10-11",
+  "scope": {
+    "track": "ANCHOR_1.20.1_AND_COMPARATIVE",
+    "head_revision": "8ae835f2abe100ff7a39f2e582e1cfa71ba6004a",
+    "history_window": "2026-01–2026-09 issues #39, #47, #65; precise source repair not traced",
+    "queries": [
+      "PC-39",
+      "PC-47"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "raw_evidence_cas_identity": "UNAVAILABLE",
+    "runtime": "NOT_RUN",
+    "no_full_issue_history_claim": true
+  },
+  "cases": [
+    {
+      "id": "PC-39",
+      "issue": "https://github.com/fzzyhmstrs/pc/issues/39",
+      "fix": null,
+      "before": null,
+      "after": null,
+      "env": "Reported Forge Minecraft 1.20.1, Particle Core 0.3.0",
+      "symptom": "Visual size glitches on particles after upgrade",
+      "diagnosis": "UNKNOWN_NO_REPAIR_DIFF_TRACED",
+      "repair": null,
+      "verification": "NOT_RUN",
+      "basis": "USER_REPORT"
+    },
+    {
+      "id": "PC-47",
+      "issue": "https://github.com/fzzyhmstrs/pc/issues/47",
+      "fix": null,
+      "before": null,
+      "after": null,
+      "env": "Fabric Minecraft 1.21.11, Particle Core 0.3.2 (NOT 1.20.1)",
+      "symptom": "Crash from LegacyRandomSource access on worker thread",
+      "diagnosis": "Off-thread random ownership reported; selected 1.20.1 source catches some matching failure patterns, but chronology unknown",
+      "repair": null,
+      "verification": "NOT_RUN",
+      "basis": "CROSS_VERSION_REPORT"
+    }
+  ]
+}

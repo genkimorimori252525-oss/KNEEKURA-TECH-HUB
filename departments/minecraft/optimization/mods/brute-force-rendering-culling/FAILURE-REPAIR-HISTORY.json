@@ -1,0 +1,186 @@
+{
+  "format": "kneekura.failure-history.research-draft.v1",
+  "repository": "https://github.com/RogoShum/BruteForceRenderingCulling",
+  "created_at": "2026-10-11",
+  "import_ready": false,
+  "history_adapter_status": "NOT_IMPORTED",
+  "scope": {
+    "track": "ANCHOR or explicitly marked comparative",
+    "head_revision": "58c55dcfe3d0a90c471c8a8b2bfedb1bf52685b3",
+    "history_window": "2024-05 through 2024-10; Issues #10/#27: asynchronous rebuilding and shader/depth occlusion",
+    "queries": [
+      "chunk not visible",
+      "occlusion",
+      "shader",
+      "async",
+      "0.5.12"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "inspected_evidence_ids": [
+      "issue-27",
+      "issue-10"
+    ],
+    "deferred": [
+      "full upstream issue/PR query + pagination",
+      "release JAR SHA and bytecode parity",
+      "direct performance and correctness GameTests",
+      "CAS original byte/document IDs"
+    ],
+    "unavailable": [
+      "original raw issue/diff CAS profile not minted"
+    ]
+  },
+  "evidence_notes": {
+    "source_tree_sha": "2762e116c69fcc7cfb04946df91117a796f5d026",
+    "source_tree_blobs": 91,
+    "java_sources_indexed": 55,
+    "source_version_boundary": "0.5.13 source vs 0.5.12 requested",
+    "source_license": "LGPL-3.0",
+    "byte_artifacts_acquired": false,
+    "cas_index_snapshot_id": null,
+    "cas_document_id": null,
+    "source_mechanism_state": "EVIDENCE_BACKED_STATIC_SELECTED_ONLY",
+    "runtime": "NOT_RUN",
+    "benchmark": "PERFORMANCE_NOT_VERIFIED"
+  },
+  "cases": [
+    {
+      "case_id": "BFRC-27",
+      "origin": "UPSTREAM",
+      "track": "ANCHOR_REPORTED_1.20.1_FORGE",
+      "environment": {
+        "minecraft": "1.20.1",
+        "loader": "Forge and Fabric as separately reported",
+        "mod_version": "0.5.12"
+      },
+      "affected_symbols": [],
+      "before_revision": null,
+      "after_revision": null,
+      "evidence": [
+        {
+          "id": "issue-27",
+          "role": "issue",
+          "url": "https://github.com/RogoShum/BruteForceRenderingCulling/issues/27",
+          "index_snapshot_id": null,
+          "document_id": null
+        }
+      ],
+      "causal_chain": [
+        "Low FPS amplifies symptoms; async chunk rebuild only in one scenario; occlusion culling independently in another",
+        "Root cause UNCONFIRMED",
+        "Repair not evidenced"
+      ],
+      "symptom": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Newly revealed chunks remain invisible briefly after quick camera turn or emerge from behind occluder",
+        "evidence_ids": [
+          "issue-27"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Low FPS amplifies symptoms; async chunk rebuild only in one scenario; occlusion culling independently in another",
+        "evidence_ids": [
+          "issue-27"
+        ]
+      },
+      "root_cause": {
+        "basis": "UNKNOWN",
+        "text": null,
+        "reason": "No code-supported causal repair chain or same-version reproduction"
+      },
+      "repair": {
+        "basis": "UNKNOWN",
+        "text": null,
+        "reason": "No verified repair source diff"
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "GPU visibility map freshness and rebuild scheduling require measured reveal latency and correct fallback",
+        "evidence_ids": [
+          "issue-27"
+        ]
+      },
+      "reproduction": {
+        "state": "REPORTED",
+        "evidence_ids": [
+          "issue-27"
+        ]
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      }
+    },
+    {
+      "case_id": "BFRC-10",
+      "origin": "UPSTREAM",
+      "track": "COMPARATIVE_FABRIC_1.20.1",
+      "environment": {
+        "minecraft": "1.20.1",
+        "loader": "Fabric",
+        "mod_version": "0.5.8"
+      },
+      "affected_symbols": [],
+      "before_revision": null,
+      "after_revision": null,
+      "evidence": [
+        {
+          "id": "issue-10",
+          "role": "issue",
+          "url": "https://github.com/RogoShum/BruteForceRenderingCulling/issues/10",
+          "index_snapshot_id": null,
+          "document_id": null
+        }
+      ],
+      "causal_chain": [
+        "Fabric Iris + Sodium + BFRC shader toggle",
+        "Root cause UNCONFIRMED",
+        "Repair not evidenced"
+      ],
+      "symptom": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Reporter describes crash when enabling Iris shaders",
+        "evidence_ids": [
+          "issue-10"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Fabric Iris + Sodium + BFRC shader toggle",
+        "evidence_ids": [
+          "issue-10"
+        ]
+      },
+      "root_cause": {
+        "basis": "UNKNOWN",
+        "text": null,
+        "reason": "No code-supported causal repair chain or same-version reproduction"
+      },
+      "repair": {
+        "basis": "UNKNOWN",
+        "text": null,
+        "reason": "No verified repair source diff"
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Shader framebuffer depth source cannot be assumed stable across shader packs and loaders",
+        "evidence_ids": [
+          "issue-10"
+        ]
+      },
+      "reproduction": {
+        "state": "REPORTED",
+        "evidence_ids": [
+          "issue-10"
+        ]
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "format": "kneekura.failure-history.research-draft.v1",
+  "repository": "https://github.com/bl4ckscor3/GetItTogetherDrops",
+  "import_ready": false,
+  "scope": {
+    "track": "COMPARATIVE_FORGE_1.19.2;_ANCHOR_SOURCE_MISSING",
+    "head_revision": "5adec7a58162d9762feeb1348eb11ce349638ae6",
+    "history_window": "2022–2026 selected issues #9/#10 and 2023 source gap",
+    "queries": [
+      "merge",
+      "radius",
+      "do not combine",
+      "dup"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "inspected_evidence_ids": [
+      "issue9",
+      "issue10",
+      "commit095d",
+      "release4578649"
+    ],
+    "deferred": [
+      "exact release 1.20.1 source/JAR",
+      "all issues",
+      "raw CAS",
+      "runtime"
+    ],
+    "unavailable": [
+      "original Forge 1.20 release source explicitly not committed per author"
+    ]
+  },
+  "cases": [],
+  "notice": "No supported exact 1.20.1 Forge issue→repair source pair in bounded search. Source mechanism COMPARATIVE only."
+}

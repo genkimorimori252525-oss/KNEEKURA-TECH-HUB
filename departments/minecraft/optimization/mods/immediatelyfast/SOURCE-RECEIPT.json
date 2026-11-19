@@ -1,0 +1,43 @@
+{
+  "schema": "kneekura.optimization.sourcesnapshot.partial-v1",
+  "captured_at": "2026-10-11",
+  "subject": "immediatelyfast",
+  "source": {
+    "repository": "https://github.com/RaphiMC/ImmediatelyFast",
+    "branch_discovery": "1.20",
+    "immutable_commit": "b66885773494bfad58c83a8eee7b2f41424d4d9b",
+    "git_tree_sha": "c27cb3ed0db2b96d6b9e655d6e3130418c6c791a",
+    "tree_index": {
+      "blob_count": 141,
+      "java_count": 92,
+      "kotlin_count": 0,
+      "truncated": false,
+      "all_paths_acquired_as_index": true,
+      "all_source_bytes_acquired": false
+    },
+    "source_declared_mod_version": "1.5.6-SNAPSHOT+1.20.4",
+    "source_minecraft_scope": "1.20.4 dev (advertised runtime 1.20-1.20.4)",
+    "source_loader_scope": "Forge module",
+    "license_reference": "https://github.com/RaphiMC/ImmediatelyFast/blob/b66885773494bfad58c83a8eee7b2f41424d4d9b/LICENSE",
+    "license_identified": "LGPL-3.0-or-later"
+  },
+  "distribution": {
+    "user_requested_version": "1.5.5+1.20.4",
+    "requested_jar_uploaded": false,
+    "requested_jar_sha256": null,
+    "source_binary_equivalence": "NOT_ESTABLISHED"
+  },
+  "analysis": {
+    "state": "SELECTED_SOURCE_AND_ORDER_FIX",
+    "feature_map": "EVIDENCE_BACKED_STATIC_SELECTED_SUBSYSTEM_ONLY",
+    "failure_repair": "PARTIAL",
+    "failure_history_json_schema": "kneekura.failure-history.research-draft.v1",
+    "history_cas_index_snapshot_id": null,
+    "history_document_ids": [],
+    "runtime": "NOT_RUN",
+    "benchmark": "PERFORMANCE_NOT_VERIFIED",
+    "correctness_gametest": "NOT_RUN",
+    "canonical_validated": false
+  },
+  "boundary": "A fixed Git source revision (and complete source path inventory) is not a verified release binary, full source body acquisition, GameTest or proof of measured FPS."
+}

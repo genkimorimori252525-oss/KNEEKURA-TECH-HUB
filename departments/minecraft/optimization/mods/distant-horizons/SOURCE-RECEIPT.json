@@ -1,0 +1,69 @@
+{
+  "schema": "kneekura.optimization.sourcesnapshot.partial-v1",
+  "captured_at": "2026-10-11",
+  "target": "Distant Horizons",
+  "requested_filename": "DistantHorizons-3.2.0-b-1.20.1-fabric-forge.jar",
+  "distribution": {
+    "curseforge_file_id": 8389142,
+    "release_page": "https://www.curseforge.com/minecraft/mc-mods/distant-horizons/files/8389142",
+    "date": "2026-07-07",
+    "version": "3.2.0-b",
+    "minecraft": "1.20.1",
+    "loaders": [
+      "Forge",
+      "Fabric"
+    ],
+    "binary_bytes_acquired": false,
+    "sha256": null,
+    "source_binary_parity": "NOT_VERIFIED"
+  },
+  "source": {
+    "upstream_origin": "https://gitlab.com/distant-horizons-team/distant-horizons",
+    "official_tag": "3.2.0b",
+    "matching_mirror_repo": "DecoderCoder/Distant-Horizons",
+    "main_commit": "eb6bf9ae7836bca986b429a28e2a9f94cb45ca77",
+    "main_git_tree_sha": "6ce262f33ad3eb17cdf69ead8488138c57099846",
+    "main_git_blob_count": 424,
+    "main_java_source_path_count": 266,
+    "submodule_name": "coreSubProjects",
+    "upstream_gitmodules_url": "https://gitlab.com/jeseibel/distant-horizons-core.git",
+    "gitlink_commit": "a0d2dfe405a8cd8f3c50639378315484e5b56609",
+    "matching_core_mirror": "EaseCation/distant-horizons-core",
+    "core_git_tree_sha": "596062ffc67a6d1643dff7fdde7262c216e01102",
+    "core_git_blob_count": 666,
+    "core_java_source_path_count": 540,
+    "recursive_tree_truncated": false,
+    "all_java_source_bodies_acquired": false,
+    "selected_source_bodies_read": true,
+    "main_gradle_mcVer_default": "26.2.0",
+    "target_specific_version_properties": "versionProperties/1.20.1.properties",
+    "forge_dev_version": "47.4.20",
+    "java_1_20_1": "17"
+  },
+  "frontier": {
+    "official_last_tag_discovered": "3.3.4",
+    "released": "2026-09-28",
+    "analysis": "NOT_ANALYZED"
+  },
+  "features": {
+    "full_data_source_to_lod_column": "SOURCE_EVIDENCE",
+    "greedy_quad_merging": "SOURCE_EVIDENCE",
+    "quadtree_lod_visibility": "SOURCE_EVIDENCE",
+    "gl_frustum_shader_fallback": "SOURCE_EVIDENCE",
+    "asynchronous_delayed_saving": "SELECTED_SOURCE_EVIDENCE",
+    "sqlite_wal": "PATH_INVENTORY_ONLY"
+  },
+  "provenance": {
+    "limitations": [
+      "GitLab raw file/tree page inaccessible through web UI; verified matching immutable Git commits mirrored",
+      "Core submodule gitlink exact match",
+      "No original repo full clone",
+      "No CAS raw evidence profile",
+      "No official JAR SHA parity",
+      "No actual runtime/benchmark"
+    ],
+    "performance": "PERFORMANCE_NOT_VERIFIED",
+    "license": "LGPL-3.0",
+    "raw_source_redistributed": false
+  }
+}

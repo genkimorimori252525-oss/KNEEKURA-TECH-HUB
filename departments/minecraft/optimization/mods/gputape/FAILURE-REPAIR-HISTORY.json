@@ -1,0 +1,107 @@
+{
+  "format": "kneekura.failure-history.research-draft.v1",
+  "repository": "https://github.com/ITsMrToad/GPUBooster",
+  "import_ready": false,
+  "scope": {
+    "track": "ANCHOR_REPORTED_1.20.1_FORGE",
+    "head_revision": "16bf18cee756ab47a760da9e2892f1ea02d015b0",
+    "history_window": "2025-01 Issue #5 and 1.0.5.1 release; newer Fabric 1.1 source comparative",
+    "queries": [
+      "instant mixin crash",
+      "forge 1.20.1",
+      "1.0.5.1"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "deferred": [
+      "exact Forge repair commit/binary proof",
+      "raw captured source CAS",
+      "runtime tests",
+      "full upstream issue history"
+    ],
+    "unavailable": [
+      "original release JAR bytes"
+    ]
+  },
+  "cases": [
+    {
+      "case_id": "GPU-ISSUE-5",
+      "origin": "UPSTREAM",
+      "track": "ANCHOR_REPORTED_1.20.1_FORGE",
+      "environment": {
+        "minecraft": "1.20.1",
+        "loader": "Forge",
+        "mod_version": "1.0.5"
+      },
+      "affected_symbols": [],
+      "before_revision": null,
+      "after_revision": null,
+      "evidence": [
+        {
+          "id": "GPUISSUE5",
+          "role": "issue",
+          "url": "https://github.com/ITsMrToad/GPUBooster/issues/5",
+          "index_snapshot_id": null,
+          "document_id": null
+        },
+        {
+          "id": "GPUVERSION1051",
+          "role": "release_note",
+          "url": "https://modrinth.com/mod/gputape/version/1.0.5.1-forge",
+          "index_snapshot_id": null,
+          "document_id": null
+        }
+      ],
+      "causal_chain": [
+        "Reporter: instant crash in Forge 1.20.1 using 1.0.5",
+        "Maintainer: claimed fixed in 1.0.5.1",
+        "Exact repair diff not acquired"
+      ],
+      "symptom": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Launch crash under 1.20.1 Forge / 1.0.5",
+        "evidence_ids": [
+          "GPUISSUE5"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Launching 1.0.5 on Forge 1.20.1",
+        "evidence_ids": [
+          "GPUISSUE5"
+        ]
+      },
+      "root_cause": {
+        "basis": "UNKNOWN",
+        "text": null,
+        "reason": "No patch/stack trace acquisition to establish Mixin target"
+      },
+      "repair": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Maintainer and release notes say fixed in 1.0.5.1, exact change unknown",
+        "evidence_ids": [
+          "GPUISSUE5",
+          "GPUVERSION1051"
+        ]
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Version-specific loader descriptors and Mixins must be pinned to binaries before adoption",
+        "evidence_ids": [
+          "GPUVERSION1051"
+        ]
+      },
+      "reproduction": {
+        "state": "REPORTED",
+        "evidence_ids": [
+          "GPUISSUE5"
+        ]
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      }
+    }
+  ]
+}

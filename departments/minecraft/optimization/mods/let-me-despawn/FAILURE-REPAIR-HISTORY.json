@@ -1,0 +1,60 @@
+{
+  "format": "kneekura.failure-history.research-draft.v1",
+  "repository": "https://github.com/frikinjay/let-me-despawn",
+  "import_ready": false,
+  "scope": {
+    "track": "ANCHOR_1.20.1_FORGE_SOURCE_UNAVAILABLE",
+    "head_revision": null,
+    "historical_snapshots": [
+      "af665026e2fb60d8715c4b6910db2cbf16f7090d",
+      "b37f7ccee129d0500a9bd8d4d7ba513b7056f887"
+    ],
+    "history_window": "2023-2026 selected #45 #57 #66",
+    "queries": [
+      "persistence",
+      "gear",
+      "enderman",
+      "despawn",
+      "1.5.0"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "inspected_evidence_ids": [
+      "lmd66",
+      "lmd-release-6311230",
+      "lmd-sources"
+    ],
+    "deferred": [
+      "exact v1.5.0 Forge source/bytecode",
+      "full issue and revision history",
+      "original raw issue CAS",
+      "runtime and GameTest"
+    ],
+    "unavailable": [
+      "original version-matching v1.5.0 source commit not identified"
+    ]
+  },
+  "cases": [
+    {
+      "case_id": "LMD-66",
+      "track": "ANCHOR_USER_REPORTED",
+      "issue": "https://github.com/frikinjay/let-me-despawn/issues/66",
+      "fix_commit": null,
+      "environment": {
+        "minecraft": "1.20.1",
+        "loader": "Forge",
+        "version": "1.5.0",
+        "extra_mods": [
+          "Dynamic Trees 1.4.9",
+          "Biomes O Plenty"
+        ]
+      },
+      "symptom": "Block-carrying Endermen stuck without natural despawn",
+      "root_cause": "UNKNOWN_NO_TARGET_SOURCE",
+      "fix": "Only newer 1.26.9.1 comment, not proven backport",
+      "report_basis": "AUTHOR_CLAIM",
+      "runtime": "NOT_RUN"
+    }
+  ]
+}

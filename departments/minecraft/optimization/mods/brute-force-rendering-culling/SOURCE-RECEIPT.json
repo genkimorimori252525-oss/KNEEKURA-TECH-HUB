@@ -1,0 +1,43 @@
+{
+  "schema": "kneekura.optimization.sourcesnapshot.partial-v1",
+  "captured_at": "2026-10-11",
+  "subject": "brute-force-rendering-culling",
+  "source": {
+    "repository": "https://github.com/RogoShum/BruteForceRenderingCulling",
+    "branch_discovery": "forge-1.20.1",
+    "immutable_commit": "58c55dcfe3d0a90c471c8a8b2bfedb1bf52685b3",
+    "git_tree_sha": "2762e116c69fcc7cfb04946df91117a796f5d026",
+    "tree_index": {
+      "blob_count": 91,
+      "java_count": 55,
+      "kotlin_count": 0,
+      "truncated": false,
+      "all_paths_acquired_as_index": true,
+      "all_source_bytes_acquired": false
+    },
+    "source_declared_mod_version": "0.5.13",
+    "source_minecraft_scope": "1.20.1",
+    "source_loader_scope": "Forge",
+    "license_reference": "https://github.com/RogoShum/BruteForceRenderingCulling/blob/58c55dcfe3d0a90c471c8a8b2bfedb1bf52685b3/LICENSE",
+    "license_identified": "LGPL-3.0"
+  },
+  "distribution": {
+    "user_requested_version": "0.5.12",
+    "requested_jar_uploaded": false,
+    "requested_jar_sha256": null,
+    "source_binary_equivalence": "NOT_ESTABLISHED"
+  },
+  "analysis": {
+    "state": "SELECTED_SOURCE_AND_OPEN_ISSUE",
+    "feature_map": "EVIDENCE_BACKED_STATIC_SELECTED_SUBSYSTEM_ONLY",
+    "failure_repair": "PARTIAL",
+    "failure_history_json_schema": "kneekura.failure-history.research-draft.v1",
+    "history_cas_index_snapshot_id": null,
+    "history_document_ids": [],
+    "runtime": "NOT_RUN",
+    "benchmark": "PERFORMANCE_NOT_VERIFIED",
+    "correctness_gametest": "NOT_RUN",
+    "canonical_validated": false
+  },
+  "boundary": "A fixed Git source revision (and complete source path inventory) is not a verified release binary, full source body acquisition, GameTest or proof of measured FPS."
+}

@@ -1,0 +1,48 @@
+{
+  "schema": "kneekura.optimization.sourcesnapshot.partial-v1",
+  "captured_at": "2026-10-11",
+  "target": "Alternate Current 1.7.0",
+  "anchor": {
+    "minecraft": "1.20.1",
+    "loader": "Forge",
+    "src_repo": "SpaceWalkerRS/alternate-current",
+    "branch": "forge",
+    "commit": "ab87061f1d04c44bfd42ba219ca567f8709c2acc",
+    "git_tree_sha": "8cc855648961cc14c99bea115c5e7b869cbff8a5",
+    "source_blobs": 30,
+    "java_paths": 16,
+    "all_paths_indexed": true,
+    "truncated": false,
+    "source_full_bodies_acquired": false,
+    "selected_sources_read": true,
+    "mod_version_source": "1.7.0",
+    "forge_dev": "47.1.0",
+    "license": "MIT"
+  },
+  "frontier": {
+    "version": "1.9.x",
+    "status": "RELEASE_NOTES_DISCOVERY_ONLY",
+    "update_order_config_from": "1.8.0"
+  },
+  "requested": {
+    "file": "alternate_current-mc1.20-1.7.0.jar",
+    "release_url": "https://www.curseforge.com/minecraft/mc-mods/alternate-current/files/4721662",
+    "jar_uploaded": false,
+    "sha256": null,
+    "source_binary_parity": "NOT_VERIFIED"
+  },
+  "facets": {
+    "redstone_propagation": "EVIDENCE_BACKED_SELECTED_SOURCE",
+    "chunk_state_fastpath": "EVIDENCE_BACKED_SELECTED_SOURCE",
+    "explicit_vanilla_behavior_parity": "KNOWN_DIFFERENCE_UPDATE_ORDER",
+    "history": "PARTIAL_WITH_DIRECT_REPAIR_DIFF",
+    "compatibility": "INVENTORIED",
+    "performance": "PERFORMANCE_NOT_VERIFIED",
+    "runtime": "NOT_RUN"
+  },
+  "cas": {
+    "index_snapshot_id": null,
+    "document_id": null,
+    "imported": false
+  }
+}

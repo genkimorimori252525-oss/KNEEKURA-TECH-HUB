@@ -1,0 +1,278 @@
+{
+  "format": "kneekura.failure-history.research-draft.v1",
+  "repository": "https://github.com/tr7zw/EntityCulling",
+  "created_at": "2026-10-11",
+  "import_ready": false,
+  "history_adapter_status": "NOT_IMPORTED",
+  "scope": {
+    "track": "ANCHOR or explicitly marked comparative",
+    "head_revision": "dff7304bcbb9186bada0a8c4617dc584fb2c3ea1",
+    "history_window": "2024–2026 selected Issues #167/#204/#328, fix commits 5542327 and 984ae74",
+    "queries": [
+      "whitelist",
+      "tick culling",
+      "display entity",
+      "interpolation",
+      "invisible"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "inspected_evidence_ids": [
+      "issue-204",
+      "commit-5542327d",
+      "issue-328",
+      "commit-984ae74b",
+      "issue-167"
+    ],
+    "deferred": [
+      "full upstream issue/PR query + pagination",
+      "release JAR SHA and bytecode parity",
+      "direct performance and correctness GameTests",
+      "CAS original byte/document IDs"
+    ],
+    "unavailable": [
+      "original raw issue/diff CAS profile not minted"
+    ]
+  },
+  "evidence_notes": {
+    "source_tree_sha": "d0527107cf14612e18566d81bbac6e3f68c0ed31",
+    "source_tree_blobs": 42,
+    "java_sources_indexed": 17,
+    "source_version_boundary": "1.6.2 source metadata vs 1.10.5 requested",
+    "source_license": "tr7zw Protective License",
+    "byte_artifacts_acquired": false,
+    "cas_index_snapshot_id": null,
+    "cas_document_id": null,
+    "source_mechanism_state": "EVIDENCE_BACKED_STATIC_SELECTED_ONLY",
+    "runtime": "NOT_RUN",
+    "benchmark": "PERFORMANCE_NOT_VERIFIED"
+  },
+  "cases": [
+    {
+      "case_id": "EC-204",
+      "origin": "UPSTREAM",
+      "track": "COMPARATIVE_1.21.4_FABRIC",
+      "environment": {
+        "minecraft": "1.21.4",
+        "loader": "Fabric",
+        "target_source_track": "old 1.20 branch / later reworked source"
+      },
+      "affected_symbols": [],
+      "before_revision": "8449cf49c11afd8625f1718fa6cc045180373e78",
+      "after_revision": "5542327d4a81c5fadfdad4c0d4c676862eea131b",
+      "evidence": [
+        {
+          "id": "issue-204",
+          "role": "issue",
+          "url": "https://github.com/tr7zw/EntityCulling/issues/204",
+          "index_snapshot_id": null,
+          "document_id": null
+        },
+        {
+          "id": "commit-5542327d",
+          "role": "diff",
+          "url": "https://github.com/tr7zw/EntityCulling/commit/5542327d4a81c5fadfdad4c0d4c676862eea131b",
+          "index_snapshot_id": null,
+          "document_id": null
+        }
+      ],
+      "causal_chain": [
+        "block_display teleport while not looked at",
+        "tickCullWhitelist mistakenly fed into entityWhitelist instead of separate tick list",
+        "Correct insertion into tickCullWhistelist and check both lists in ClientWorldMixin"
+      ],
+      "symptom": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Teleported display entity may render stale/invisible when tick culled; tick exclusion did not work as expected",
+        "evidence_ids": [
+          "issue-204"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "block_display teleport while not looked at",
+        "evidence_ids": [
+          "issue-204"
+        ]
+      },
+      "root_cause": {
+        "basis": "INFERENCE",
+        "text": "tickCullWhitelist mistakenly fed into entityWhitelist instead of separate tick list",
+        "evidence_ids": [
+          "commit-5542327d"
+        ]
+      },
+      "repair": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "Correct insertion into tickCullWhistelist and check both lists in ClientWorldMixin",
+        "evidence_ids": [
+          "commit-5542327d"
+        ]
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Keep draw visibility policy and client-side ticking policy distinct; verify teleport re-entry",
+        "evidence_ids": [
+          "commit-5542327d"
+        ]
+      },
+      "reproduction": {
+        "state": "REPORTED",
+        "evidence_ids": [
+          "issue-204"
+        ]
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      }
+    },
+    {
+      "case_id": "EC-328",
+      "origin": "UPSTREAM",
+      "track": "FRONTIER_26.3_FABRIC",
+      "environment": {
+        "minecraft": "26.3",
+        "loader": "Fabric"
+      },
+      "affected_symbols": [],
+      "before_revision": "59c757d47b8c16c3d99e1d5d4f5d72a0d0de35af",
+      "after_revision": "984ae74b7fe191922e8bdc044e9be009e83f4091",
+      "evidence": [
+        {
+          "id": "issue-328",
+          "role": "issue",
+          "url": "https://github.com/tr7zw/EntityCulling/issues/328",
+          "index_snapshot_id": null,
+          "document_id": null
+        },
+        {
+          "id": "commit-984ae74b",
+          "role": "diff",
+          "url": "https://github.com/tr7zw/EntityCulling/commit/984ae74b7fe191922e8bdc044e9be009e83f4091",
+          "index_snapshot_id": null,
+          "document_id": null
+        }
+      ],
+      "causal_chain": [
+        "Screen edge, skipped reduced client-side tick on newer renderer pipeline",
+        "Reduced basicTick missed interpolation queue advancement in 26.3",
+        "Invoke getInterpolation().interpolate() during reduced client tick"
+      ],
+      "symptom": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Culled moving entities freeze then fast forward into view",
+        "evidence_ids": [
+          "issue-328"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Screen edge, skipped reduced client-side tick on newer renderer pipeline",
+        "evidence_ids": [
+          "issue-328"
+        ]
+      },
+      "root_cause": {
+        "basis": "INFERENCE",
+        "text": "Reduced basicTick missed interpolation queue advancement in 26.3",
+        "evidence_ids": [
+          "commit-984ae74b"
+        ]
+      },
+      "repair": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "Invoke getInterpolation().interpolate() during reduced client tick",
+        "evidence_ids": [
+          "commit-984ae74b"
+        ]
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Reduced tick must preserve interpolation and visual state advancement, not only tickCount",
+        "evidence_ids": [
+          "commit-984ae74b"
+        ]
+      },
+      "reproduction": {
+        "state": "REPORTED",
+        "evidence_ids": [
+          "issue-328"
+        ]
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      }
+    },
+    {
+      "case_id": "EC-167",
+      "origin": "UPSTREAM",
+      "track": "COMPARATIVE_1.20.1_FABRIC",
+      "environment": {
+        "minecraft": "1.20.1",
+        "loader": "Fabric",
+        "mod_version": "1.6.7"
+      },
+      "affected_symbols": [],
+      "before_revision": null,
+      "after_revision": null,
+      "evidence": [
+        {
+          "id": "issue-167",
+          "role": "issue",
+          "url": "https://github.com/tr7zw/EntityCulling/issues/167",
+          "index_snapshot_id": null,
+          "document_id": null
+        }
+      ],
+      "causal_chain": [
+        "Fabric + Botania 1.20.1-446",
+        "Root cause UNCONFIRMED",
+        "Repair not evidenced"
+      ],
+      "symptom": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Botania magic missile invisible despite blacklist per reporter",
+        "evidence_ids": [
+          "issue-167"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Fabric + Botania 1.20.1-446",
+        "evidence_ids": [
+          "issue-167"
+        ]
+      },
+      "root_cause": {
+        "basis": "UNKNOWN",
+        "text": null,
+        "reason": "No code-supported causal repair chain or same-version reproduction"
+      },
+      "repair": {
+        "basis": "UNKNOWN",
+        "text": null,
+        "reason": "No verified repair source diff"
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Test modded projectiles and force-visible allowlists separately for draw and tick",
+        "evidence_ids": [
+          "issue-167"
+        ]
+      },
+      "reproduction": {
+        "state": "REPORTED",
+        "evidence_ids": [
+          "issue-167"
+        ]
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      }
+    }
+  ]
+}

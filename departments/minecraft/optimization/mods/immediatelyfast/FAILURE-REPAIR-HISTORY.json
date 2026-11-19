@@ -1,0 +1,281 @@
+{
+  "format": "kneekura.failure-history.research-draft.v1",
+  "repository": "https://github.com/RaphiMC/ImmediatelyFast",
+  "created_at": "2026-10-11",
+  "import_ready": false,
+  "history_adapter_status": "NOT_IMPORTED",
+  "scope": {
+    "track": "ANCHOR or explicitly marked comparative",
+    "head_revision": "b66885773494bfad58c83a8eee7b2f41424d4d9b",
+    "history_window": "2023–2024 issues #129/#181/#287/#288 and selected render order repairs",
+    "queries": [
+      "batching",
+      "render order",
+      "glint",
+      "text",
+      "HUD"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "inspected_evidence_ids": [
+      "issue-181",
+      "commit-3f7d86fb",
+      "issue-287",
+      "commit-f9fbf5d8",
+      "issue-129"
+    ],
+    "deferred": [
+      "full upstream issue/PR query + pagination",
+      "release JAR SHA and bytecode parity",
+      "direct performance and correctness GameTests",
+      "CAS original byte/document IDs"
+    ],
+    "unavailable": [
+      "original raw issue/diff CAS profile not minted"
+    ]
+  },
+  "evidence_notes": {
+    "source_tree_sha": "c27cb3ed0db2b96d6b9e655d6e3130418c6c791a",
+    "source_tree_blobs": 141,
+    "java_sources_indexed": 92,
+    "source_version_boundary": "1.5.6-SNAPSHOT source vs 1.5.5 requested; dev 1.20.4, declared compatibility 1.20..1.20.4",
+    "source_license": "LGPL-3.0-or-later",
+    "byte_artifacts_acquired": false,
+    "cas_index_snapshot_id": null,
+    "cas_document_id": null,
+    "source_mechanism_state": "EVIDENCE_BACKED_STATIC_SELECTED_ONLY",
+    "runtime": "NOT_RUN",
+    "benchmark": "PERFORMANCE_NOT_VERIFIED"
+  },
+  "cases": [
+    {
+      "case_id": "IF-181",
+      "origin": "UPSTREAM",
+      "track": "COMPARATIVE_1.20.1_FABRIC",
+      "environment": {
+        "minecraft": "1.20.1",
+        "loader": "Fabric",
+        "mod": "Truly Modular"
+      },
+      "affected_symbols": [],
+      "before_revision": "6cc19fa68c9c01243108ce80922e2ba1e3d7d985",
+      "after_revision": "3f7d86fbdafb64fbb6e087e53bd3444bed4a717b",
+      "evidence": [
+        {
+          "id": "issue-181",
+          "role": "issue",
+          "url": "https://github.com/RaphiMC/ImmediatelyFast/issues/181",
+          "index_snapshot_id": null,
+          "document_id": null
+        },
+        {
+          "id": "commit-3f7d86fb",
+          "role": "diff",
+          "url": "https://github.com/RaphiMC/ImmediatelyFast/commit/3f7d86fbdafb64fbb6e087e53bd3444bed4a717b",
+          "index_snapshot_id": null,
+          "document_id": null
+        }
+      ],
+      "causal_chain": [
+        "Truly Modular glint render layer reused across modules",
+        "Layer batching iteration order differed from last invocation's needed order",
+        "Add last-usage batch reordering option; disabled by default"
+      ],
+      "symptom": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Glint visible on only first module in modded GUI",
+        "evidence_ids": [
+          "issue-181"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Truly Modular glint render layer reused across modules",
+        "evidence_ids": [
+          "issue-181"
+        ]
+      },
+      "root_cause": {
+        "basis": "INFERENCE",
+        "text": "Layer batching iteration order differed from last invocation's needed order",
+        "evidence_ids": [
+          "commit-3f7d86fb"
+        ]
+      },
+      "repair": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "Add last-usage batch reordering option; disabled by default",
+        "evidence_ids": [
+          "commit-3f7d86fb"
+        ]
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Batching must keep overlay order and layering; optional last-use ordering is a compatibility tool",
+        "evidence_ids": [
+          "commit-3f7d86fb"
+        ]
+      },
+      "reproduction": {
+        "state": "REPORTED",
+        "evidence_ids": [
+          "issue-181"
+        ]
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      }
+    },
+    {
+      "case_id": "IF-287",
+      "origin": "UPSTREAM",
+      "track": "COMPARATIVE_1.20_1.20.4",
+      "environment": {
+        "minecraft": "1.20.x",
+        "loader": "unspecified",
+        "mod": "Custom-font inventory UI"
+      },
+      "affected_symbols": [],
+      "before_revision": "ba0826894014b4369953bcc48573071dc3c71a92",
+      "after_revision": "f9fbf5d83d6bd2bd73f403f833c419fff26a7368",
+      "evidence": [
+        {
+          "id": "issue-287",
+          "role": "issue",
+          "url": "https://github.com/RaphiMC/ImmediatelyFast/issues/287",
+          "index_snapshot_id": null,
+          "document_id": null
+        },
+        {
+          "id": "commit-f9fbf5d8",
+          "role": "diff",
+          "url": "https://github.com/RaphiMC/ImmediatelyFast/commit/f9fbf5d83d6bd2bd73f403f833c419fff26a7368",
+          "index_snapshot_id": null,
+          "document_id": null
+        }
+      ],
+      "causal_chain": [
+        "Custom font overlay and vanilla text overlapping",
+        "Batch grouping allowed shader/text layers to render in non-vanilla relative order",
+        "Explicit text RenderLayer ordering by font texture namespace; remove previous workaround"
+      ],
+      "symptom": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Bottom inventory title text obscured by custom top title due to render layer ordering",
+        "evidence_ids": [
+          "issue-287"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Custom font overlay and vanilla text overlapping",
+        "evidence_ids": [
+          "issue-287"
+        ]
+      },
+      "root_cause": {
+        "basis": "INFERENCE",
+        "text": "Batch grouping allowed shader/text layers to render in non-vanilla relative order",
+        "evidence_ids": [
+          "commit-f9fbf5d8"
+        ]
+      },
+      "repair": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "Explicit text RenderLayer ordering by font texture namespace; remove previous workaround",
+        "evidence_ids": [
+          "commit-f9fbf5d8"
+        ]
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Order-dependent alpha/depth/text composition requires explicit draw barriers or stable sort",
+        "evidence_ids": [
+          "commit-f9fbf5d8"
+        ]
+      },
+      "reproduction": {
+        "state": "REPORTED",
+        "evidence_ids": [
+          "issue-287"
+        ]
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      }
+    },
+    {
+      "case_id": "IF-129",
+      "origin": "UPSTREAM",
+      "track": "ANCHOR_REPORTED_1.20.1",
+      "environment": {
+        "minecraft": "1.20.1",
+        "loader": "unspecified",
+        "mod": "ModernUI"
+      },
+      "affected_symbols": [],
+      "before_revision": null,
+      "after_revision": null,
+      "evidence": [
+        {
+          "id": "issue-129",
+          "role": "issue",
+          "url": "https://github.com/RaphiMC/ImmediatelyFast/issues/129",
+          "index_snapshot_id": null,
+          "document_id": null
+        }
+      ],
+      "causal_chain": [
+        "HUD batching enabled",
+        "Root cause UNCONFIRMED",
+        "Reporter workaround disables hud_batching"
+      ],
+      "symptom": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "XP bar drawn over experience level in ModernUI combination",
+        "evidence_ids": [
+          "issue-129"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "HUD batching enabled",
+        "evidence_ids": [
+          "issue-129"
+        ]
+      },
+      "root_cause": {
+        "basis": "UNKNOWN",
+        "text": null,
+        "reason": "No code-supported causal repair chain or same-version reproduction"
+      },
+      "repair": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Reporter workaround disables hud_batching",
+        "evidence_ids": [
+          "issue-129"
+        ]
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Compare layer output with and without HUD batching under multiple UI mods",
+        "evidence_ids": [
+          "issue-129"
+        ]
+      },
+      "reproduction": {
+        "state": "REPORTED",
+        "evidence_ids": [
+          "issue-129"
+        ]
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      }
+    }
+  ]
+}
