@@ -204,6 +204,13 @@ public final class PortRegistries {
                     .sized(2.0F, 0.0F).clientTrackingRange(8).updateInterval(1).setShouldReceiveVelocityUpdates(true)
                     .build(FiveDifficultiesPort.MOD_ID + ":aja_red_stone_effect"));
 
+    // ---- P16f entities ----
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.PendulumEntity>> PENDULUM_ENTITY =
+            ENTITIES.register("nazrin_pendulum", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.PendulumEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.PendulumEntity::new, MobCategory.MISC)
+                    .sized(0.1F, 0.1F).clientTrackingRange(8).updateInterval(1).setShouldReceiveVelocityUpdates(true)
+                    .build(FiveDifficultiesPort.MOD_ID + ":nazrin_pendulum"));
+
     // ---- P13 danmaku-weapon items ----
     public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity>> DRAGON_NECK_JEWEL =
             ENTITIES.register("dragon_neck_jewel", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity>of(
@@ -353,6 +360,10 @@ public final class PortRegistries {
     // ---- P16e aja red stone ----
     public static final RegistryObject<Item> AJA_RED_STONE = ITEMS.register("aja_red_stone",
             () -> new dev.kneekura.fivedifficulties.forge.item.X1EffectItems.AjaRedStone(new Item.Properties()));
+
+    // ---- P16f pendulum ----
+    public static final RegistryObject<Item> NAZRIN_PENDULUM = ITEMS.register("nazrin_pendulum",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1EffectItems.Pendulum(new Item.Properties()));
 
     public static final RegistryObject<Item> SHOT_MATERIAL = ITEMS.register("shot_material",
             () -> new dev.kneekura.fivedifficulties.forge.item.ShotMaterialItem(new Item.Properties()));

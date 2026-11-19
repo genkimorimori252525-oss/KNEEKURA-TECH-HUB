@@ -15,6 +15,9 @@ public final class PortCreativeTabs {
 
     @SubscribeEvent
     public static void buildContents(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) { // P16f pendulum
+            event.accept(PortRegistries.NAZRIN_PENDULUM.get());
+        }
         if (event.getTabKey() == CreativeModeTabs.COMBAT) { // P16e aja red stone
             event.accept(PortRegistries.AJA_RED_STONE.get());
         }

@@ -61,6 +61,7 @@ public final class P16Scenario {
             runShotItems();
             runEffectItems();
             runAjaRedStone();
+            runPendulum();
             FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_RUNTIME_SCENARIO_PASS");
             ScenarioShutdown.finished(level.getServer(), ENV);
         } catch (Throwable failure) {
@@ -416,6 +417,36 @@ public final class P16Scenario {
         cow.discard();
         lastShot.discard();
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_AJA_RED_STONE_PASS idleLight=" + idle.lightLevel);
+    }
+
+    private static void runPendulum() {
+        FakePlayer p = player();
+        var hand = net.minecraft.world.InteractionHand.MAIN_HAND;
+        // Five gold blocks 3 below the pendulum: the first search finds them.
+        BlockPos base = BlockPos.containing(bx, by - 3, bz);
+        for (int i = 0; i < 5; i++) level.setBlockAndUpdate(base.offset(i, 0, 0), net.minecraft.world.level.block.Blocks.GOLD_BLOCK.defaultBlockState());
+        p.getInventory().selected = 0;
+        p.getInventory().setItem(0, new ItemStack(PortRegistries.NAZRIN_PENDULUM.get()));
+        p.getInventory().setItem(1, new ItemStack(net.minecraft.world.item.Items.GOLD_BLOCK));
+        ItemStack held = p.getItemInHand(hand);
+        held.getItem().use(level, p, hand);
+        require(held.isEmpty(), "the pendulum leaves the inventory");
+        var found = level.getEntitiesOfClass(dev.kneekura.fivedifficulties.forge.entity.PendulumEntity.class,
+                p.getBoundingBox().inflate(4.0D), e -> e.user == p);
+        require(found.size() == 1, "one pendulum, saw " + found.size());
+        var pen = found.get(0);
+        pen.tick();
+        require(pen.getSearchCount() == 5 && Math.abs(pen.getSearchAngle() - 5F / 3F) < 0.01F,
+                "found " + pen.getSearchCount() + " angle " + pen.getSearchAngle());
+        // Sneaking after 10 ticks returns it to the inventory.
+        pen.tickCount = 11;
+        p.setShiftKeyDown(true);
+        pen.tick();
+        p.setShiftKeyDown(false);
+        require(pen.isRemoved() && p.getInventory().countItem(PortRegistries.NAZRIN_PENDULUM.get()) == 1, "returned");
+        for (int i = 0; i < 5; i++) level.setBlockAndUpdate(base.offset(i, 0, 0), net.minecraft.world.level.block.Blocks.AIR.defaultBlockState());
+        p.getInventory().clearContent();
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_PENDULUM_PASS found=5");
     }
 
     private static void require(boolean ok, String what) {

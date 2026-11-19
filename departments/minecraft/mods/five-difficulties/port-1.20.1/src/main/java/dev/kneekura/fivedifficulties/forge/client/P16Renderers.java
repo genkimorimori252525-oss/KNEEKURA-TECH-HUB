@@ -16,6 +16,7 @@ import net.minecraft.util.Mth;
 import static dev.kneekura.fivedifficulties.forge.client.X1Tess.State.ADD_ALPHA_CULL;
 import static dev.kneekura.fivedifficulties.forge.client.X1Tess.State.CUTOUT;
 import static dev.kneekura.fivedifficulties.forge.client.X1Tess.State.INVERT_ADD;
+import static dev.kneekura.fivedifficulties.forge.client.X1Tess.State.INVERT_ADD_DEPTH_CULL;
 import static dev.kneekura.fivedifficulties.forge.client.X1Tess.State.INVERT_ADD_DEPTH;
 
 /** Renderers for the P16 item-effect entities. */
@@ -200,6 +201,53 @@ public final class P16Renderers {
         @Override
         public ResourceLocation getTextureLocation(AjaRedStoneEffectEntity e) {
             return CIRCLE;
+        }
+    }
+
+    /** RenderPendulum: a 0.3-scale crystal (4 pyramids up and down, 4 crossed tags) swung by the search count. */
+    public static final class Pendulum extends EntityRenderer<dev.kneekura.fivedifficulties.forge.entity.PendulumEntity> {
+        private static final ResourceLocation PENDULUM = tex("pendulum");
+
+        public Pendulum(EntityRendererProvider.Context context) {
+            super(context);
+            this.shadowRadius = 0.5F;
+        }
+
+        @Override
+        public void render(dev.kneekura.fivedifficulties.forge.entity.PendulumEntity e, float entityYaw, float partialTick,
+                           PoseStack pose, MultiBufferSource buffers, int light) {
+            float yaw = Mth.lerp(partialTick, e.yRotO, e.getYRot());
+            float rotationLength = (float) e.getSearchCount() / 48.0F;
+            float xDrawPos = -Mth.sin(e.getSearchAngle() / 180F * 3.141593F) * rotationLength;
+            float zDrawPos = Mth.cos(e.getSearchAngle() / 180F * 3.141593F) * rotationLength;
+            pose.pushPose();
+            pose.translate(xDrawPos, 0.0F, zDrawPos);
+            pose.mulPose(Axis.YP.rotationDegrees(180F - yaw));
+            float uMin = 16F / 64F, vMin = 20F / 32F, uMax = 28F / 64F, vMax = 32F / 32F;
+            float t1u = 12F / 64F, t1v = 4F / 32F, t2u = 1F / 64F, t2v = 19F / 32F, t3u = 22F / 64F, t3v = 19F / 32F;
+            float d1u = 33F / 64F, d1v = 0F, d2u = 55F / 64F, d2v = 0F, d3u = 44F / 64F, d3v = 31F / 32F;
+            pose.scale(0.3F, 0.3F, 0.3F);
+            X1Tess solid = new X1Tess(pose, buffers, PENDULUM).begin(INVERT_ADD_DEPTH_CULL);
+            for (int i = 0; i < 4; i++) {
+                pose.mulPose(Axis.YP.rotationDegrees(90F));
+                solid.v(0.0F, 1.75F, 0.0D, t1u, t1v).v(0.0F, 1.75F, 0.0D, t1u, t1v)
+                        .v(0.3F, 1.25F, -0.3D, t3u, t3v).v(-0.3F, 1.25F, -0.3D, t2u, t2v);
+                solid.v(-0.3F, 1.25F, -0.3D, d1u, d1v).v(0.3F, 1.25F, -0.3D, d2u, d2v)
+                        .v(0.0F, 0.25F, 0.0D, d3u, d3v).v(0.0F, 0.25F, 0.0D, d3u, d3v);
+            }
+            X1Tess tags = new X1Tess(pose, buffers, PENDULUM).begin(INVERT_ADD_DEPTH);
+            for (int i = 0; i < 4; i++) {
+                pose.mulPose(Axis.YP.rotationDegrees(45F));
+                tags.v(-0.2F, 1.90F, 0.0D, uMin, vMax).v(0.2F, 1.90F, 0.0D, uMax, vMax)
+                        .v(0.2F, 1.60F, 0.0D, uMax, vMin).v(-0.2F, 1.60F, 0.0D, uMin, vMin);
+            }
+            pose.popPose();
+            super.render(e, entityYaw, partialTick, pose, buffers, light);
+        }
+
+        @Override
+        public ResourceLocation getTextureLocation(dev.kneekura.fivedifficulties.forge.entity.PendulumEntity e) {
+            return PENDULUM;
         }
     }
 }

@@ -245,6 +245,16 @@ ASSETS = {
         "assets/five_difficulties_port/textures/item/aja_red_stone.png",
         "109e9709b829f253f65fb89f151a870c3f69eaa4ef9d99954695e31e06c08c49",
     ),
+    # P16f entity textures.
+    "assets/thkaguyamod/textures/PendulumTexture.png": (
+        "assets/five_difficulties_port/textures/entity/pendulum.png",
+        "7d0c3f7f9382593377833c72e5d4ecbc443f72a0af0c49557d4f1ffdd78d4c9f",
+    ),
+    # P16f pendulum.
+    "assets/thkaguyamod/textures/items/pendulum.png": (
+        "assets/five_difficulties_port/textures/item/nazrin_pendulum.png",
+        "e6eb78dd57afa5dae477ad7a87fbe5d9733adea7515d929012b61582020c6568",
+    ),
     # P15 danmaku crafting table.
     "assets/thkaguyamod/textures/blocks/danmaku_crafting_table.png": (
         "assets/five_difficulties_port/textures/block/danmaku_crafting_table.png",

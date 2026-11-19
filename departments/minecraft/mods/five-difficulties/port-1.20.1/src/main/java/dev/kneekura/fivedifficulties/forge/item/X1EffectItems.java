@@ -129,4 +129,38 @@ public final class X1EffectItems {
             return false;
         }
     }
+
+    /**
+     * ItemPendulum (ナズーリンペンデュラム): searches for the block item in the slot right of it (sneak: high
+     * sensitivity), announcing it in chat; the pendulum leaves the inventory while it hangs.
+     */
+    public static final class Pendulum extends Item {
+        public Pendulum(Properties p) {
+            super(p.stacksTo(1));
+        }
+
+        @Override
+        public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+            ItemStack stack = player.getItemInHand(hand);
+            var inv = player.getInventory();
+            ItemStack search = inv.items.get(inv.selected + 1);
+            if (search.isEmpty() || !(search.getItem() instanceof net.minecraft.world.item.BlockItem block)
+                    || inv.selected >= 8) {
+                return InteractionResultHolder.pass(stack);
+            }
+            int mode = player.isShiftKeyDown() ? 1 : 0;
+            String key = block.getBlock().getDescriptionId();
+            level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.EXPERIENCE_ORB_PICKUP,
+                    SoundSource.PLAYERS, 0.5F, 0.9F);
+            if (!level.isClientSide) {
+                level.addFreshEntity(new dev.kneekura.fivedifficulties.forge.entity.PendulumEntity(level, player, mode, key));
+                stack.shrink(1);
+                player.sendSystemMessage(net.minecraft.network.chat.Component.translatable("thKaguya.msg.pendulum1")
+                        .append(net.minecraft.network.chat.Component.translatable(search.getItem().getDescriptionId()))
+                        .append(net.minecraft.network.chat.Component.translatable(
+                                mode == 0 ? "thKaguya.msg.pendulum2" : "thKaguya.msg.pendulum3")));
+            }
+            return InteractionResultHolder.pass(stack);
+        }
+    }
 }
