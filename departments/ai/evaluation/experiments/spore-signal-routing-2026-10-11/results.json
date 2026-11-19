@@ -1,0 +1,66 @@
+{
+  "comparison": "independent deterministic alternative prefers an eligible existing unit; NOT original Spore AI",
+  "input_scope": "Conditional original Proto.checkForCalamities 50% per idle Calamity; assumed independent draws and valid placement",
+  "not_modeled": [
+    "Forge GoalSelector and tick rate",
+    "actual terrain placement",
+    "Mob availability across chunks",
+    "Womb spawn success/cost",
+    "live performance/tps",
+    "branch caller state"
+  ],
+  "results": [
+    {
+      "approximate_expected_goal_evaluations": "NOT_MODELED",
+      "eligible_unassigned_calamities": 0,
+      "exact_original_attempt_womb_probability": 1.0,
+      "independent_prefer_available_rate": 1.0,
+      "observed_original_womb_attempt_rate": 1.0,
+      "observed_womb_attempts": 30000
+    },
+    {
+      "approximate_expected_goal_evaluations": "NOT_MODELED",
+      "eligible_unassigned_calamities": 1,
+      "exact_original_attempt_womb_probability": 0.5,
+      "independent_prefer_available_rate": 0.0,
+      "observed_original_womb_attempt_rate": 0.502267,
+      "observed_womb_attempts": 15068
+    },
+    {
+      "approximate_expected_goal_evaluations": "NOT_MODELED",
+      "eligible_unassigned_calamities": 2,
+      "exact_original_attempt_womb_probability": 0.25,
+      "independent_prefer_available_rate": 0.0,
+      "observed_original_womb_attempt_rate": 0.2543,
+      "observed_womb_attempts": 7629
+    },
+    {
+      "approximate_expected_goal_evaluations": "NOT_MODELED",
+      "eligible_unassigned_calamities": 3,
+      "exact_original_attempt_womb_probability": 0.125,
+      "independent_prefer_available_rate": 0.0,
+      "observed_original_womb_attempt_rate": 0.126133,
+      "observed_womb_attempts": 3784
+    },
+    {
+      "approximate_expected_goal_evaluations": "NOT_MODELED",
+      "eligible_unassigned_calamities": 4,
+      "exact_original_attempt_womb_probability": 0.0625,
+      "independent_prefer_available_rate": 0.0,
+      "observed_original_womb_attempt_rate": 0.062133,
+      "observed_womb_attempts": 1864
+    },
+    {
+      "approximate_expected_goal_evaluations": "NOT_MODELED",
+      "eligible_unassigned_calamities": 5,
+      "exact_original_attempt_womb_probability": 0.03125,
+      "independent_prefer_available_rate": 0.0,
+      "observed_original_womb_attempt_rate": 0.030567,
+      "observed_womb_attempts": 917
+    }
+  ],
+  "rng_seed": 20261011,
+  "schema": "kneekura.spore.signal-branch-synthetic.v1",
+  "status": "PASS_SYNTHETIC_MODEL",
+  "trials_per_scenario": 30000
+}
