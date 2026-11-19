@@ -73,6 +73,15 @@ def run_command(action: str, prompt: str, max_iters: int, model: str, cost_ceili
     return cmd
 
 
+def child_env() -> dict[str, str]:
+    """Force UTF-8 for upstream output. On a Japanese Windows console (cp932) upstream `rich`
+    crashes with UnicodeEncodeError on characters such as an em dash (observed 2026-11-14)."""
+    env = dict(os.environ)
+    env["PYTHONUTF8"] = "1"
+    env["PYTHONIOENCODING"] = "utf-8"
+    return env
+
+
 def parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(description="Optional pinned mcbuild integration (no automatic world edits)")
     sub = p.add_subparsers(dest="action", required=True)
@@ -146,7 +155,7 @@ def main(argv: list[str] | None = None) -> int:
             raise RuntimeError("Install uv first: https://docs.astral.sh/uv/")
         if args.action == "install":
             print("Installing pinned upstream dependencies in the local checkout...")
-            return subprocess.call(["uv", "sync", "--frozen"], cwd=UPSTREAM)
+            return subprocess.call(["uv", "sync", "--frozen"], cwd=UPSTREAM, env=child_env())
         # demo and build are explicitly invoked; no auto package installation.
         cmd = run_command(
             args.action, args.prompt, args.max_iters,
@@ -154,7 +163,7 @@ def main(argv: list[str] | None = None) -> int:
         )
         RUNS.mkdir(parents=True, exist_ok=True)
         print("Output directory:", RUNS)
-        return subprocess.call(cmd, cwd=UPSTREAM)
+        return subprocess.call(cmd, cwd=UPSTREAM, env=child_env())
     except (OSError, RuntimeError, ValueError, subprocess.CalledProcessError) as exc:
         print(f"mcbuild bridge: {exc}", file=sys.stderr)
         return 2

@@ -10,7 +10,7 @@
 
 建築エンジン本体は現行版のまま利用し、完成した構造を **ブロックID/状態 + 相対XYZ座標 + 寸法・基準点** として保持する。ターゲットごとにブロック互換性を検査し、必要なら置換ルールを明示してSchematicを生成する。Minecraft 1.20.1 + Forgeは最初の出力先であり、**建築を計算するエンジンのバージョンを1.20.1に固定する理由ではない**。
 
-現行mcbuildは **Sponge Schematic v3 / DataVersion 3953（Minecraft 1.21）** を出力する。NeoForge MODの対象であるMinecraft **1.21.1のDataVersionは3955** と区別する。一方1.20.1向けのWorldEdit 7.2.15では通常 **v2** 形式が必要。したがって **v3をそのまま1.20.1に読み込めるとはしない**。将来の対象別エクスポータには形式変換と実ブロック定義の適合検査を設ける（現PRでは未実装）。
+現行mcbuildは **Sponge Schematic v3 / DataVersion 3953（Minecraft 1.21）** を出力する。NeoForge MODの対象であるMinecraft **1.21.1のDataVersionは3955** と区別する。一方1.20.1向けのWorldEdit 7.2.15では通常 **v2** 形式が必要。したがって **v3をそのまま1.20.1に読み込めるとはしない**。対象別エクスポータ [`portable/`](portable/README.md) が形式変換と公式ブロック定義の適合検査を行う（ファイルレベル実装済み、WorldEdit実機は未検証）。
 
 計画・監査は [mcbuildの軽量監査](mcbuild/AUDIT-2026-11-14.md) と [移植計画](mcbuild/PLAN-2026-11-14-CROSS-VERSION.md) を参照。未実装の変換を対応済みとは扱わない。
 

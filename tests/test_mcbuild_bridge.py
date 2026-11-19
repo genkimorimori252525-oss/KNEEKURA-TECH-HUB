@@ -75,3 +75,10 @@ def test_build_without_explicit_online_ack_does_not_spawn(monkeypatch, capsys):
     monkeypatch.setattr(bridge.subprocess, "run", unexpected)
     assert bridge.main(["build", "--prompt", "a test house"]) == 2
     assert "--online" in capsys.readouterr().err
+
+
+def test_upstream_children_run_with_utf8_output(monkeypatch):
+    monkeypatch.setenv("PYTHONIOENCODING", "cp932")
+    env = bridge.child_env()
+    assert env["PYTHONUTF8"] == "1"
+    assert env["PYTHONIOENCODING"] == "utf-8"

@@ -3,7 +3,7 @@
   "id": "minecraft-building-mcbuild",
   "genre": "建築",
   "label": "mcbuild — prompt-to-Minecraft schematic",
-  "integration_status": "OPTIONAL_LOCAL_BRIDGE / SCHEM_V2_CONVERSION_NOT_IMPLEMENTED / RUNTIME_NOT_VERIFIED",
+  "integration_status": "OPTIONAL_LOCAL_BRIDGE / SCHEM_V2_CONVERTER_FILE_LEVEL_IMPLEMENTED / WORLDEDIT_RUNTIME_NOT_VERIFIED",
   "upstream": {
     "repository": "https://github.com/harrynull/mcbuild",
     "clone_url": "https://github.com/harrynull/mcbuild.git",
@@ -17,8 +17,8 @@
     "anchor": {
       "minecraft": "1.20.1",
       "loader": "Forge",
-      "mode": "version-targeted schematic v2 export from completed block data (planned)",
-      "status": "SCHEM_V2_CONVERTER_NOT_IMPLEMENTED; STATIC_AUDIT_COMPLETE",
+      "mode": "version-targeted schematic v2 export from completed block data (departments/minecraft/building/portable)",
+      "status": "CONVERTER_FILE_LEVEL_READBACK_PASS; FORGE_WORLDEDIT_IMPORT_NOT_RUN",
       "data_version": 3465,
       "schematic_version": 2
     },
@@ -42,5 +42,6 @@
     "secrets_in_git": false
   },
   "audit_document": "departments/minecraft/building/mcbuild/AUDIT-2026-11-14.md",
-  "implementation_plan": "departments/minecraft/building/mcbuild/PLAN-2026-11-14-CROSS-VERSION.md"
+  "implementation_plan": "departments/minecraft/building/mcbuild/PLAN-2026-11-14-CROSS-VERSION.md",
+  "implementation_status": "departments/minecraft/building/mcbuild/IMPLEMENTATION-STATUS-2026-11-14.md"
 }
