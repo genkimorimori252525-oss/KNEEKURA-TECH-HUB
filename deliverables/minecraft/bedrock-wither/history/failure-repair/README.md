@@ -27,5 +27,19 @@ Do not create fake "success" cases before an incident exists.
 | [BWR-0005](BWR-0005-java-skull-impact-damage.md) | REPAIR_IN_PROGRESS | Java WitherSkull superclass gave wrong Bedrock difficulty damage |
 | [BWR-0006](BWR-0006-volley-gametest-ai-interference.md) | REPAIR_IN_PROGRESS | controller GameTest mixed ambient AI / shared batch interference |
 | [BWR-0007](BWR-0007-health-bucket-test-difficulty-assumption.md) | REPAIR_IN_PROGRESS | health-bucket fixture assumed Hard-scale absolute HP |
+| [BWR-0008](BWR-0008-living-reload-death-latch.md) | VERIFIED_FIXED (local GameTest) | healthy reload incorrectly finalized future death |
+| [BWR-0009](BWR-0009-spawn-visual-sync.md) | VERIFIED_FIXED (local GameTest) | renderer-facing spawn timer was not synchronized |
+| [BWR-0010](BWR-0010-cancelled-death-revival.md) | VERIFIED_FIXED (local GameTest) | canceled Forge death corrupted revived combat state |
+| [BWR-0011](BWR-0011-reward-fixture-scope.md) | VERIFIED_FIXED (test fixture) | repeated reward fixture rejected unrelated terrain drops |
 
 States are updated only after retained build/GameTest evidence exists. A compile success does not close a gameplay case; a gameplay pass does not imply direct Bedrock parity.
+
+- [BWR-0012](BWR-0012-unreachable-combat-and-state-gates.md): VERIFIED_FIXED (local GameTests) — ordinary combat reachability, cadence and state gates
+
+- [BWR-0013](BWR-0013-projectile-and-presentation-adaptation.md): VERIFIED_FIXED (local GameTests) — actual projectile dispatch and literal presentation contracts
+
+- [BWR-0014](BWR-0014-death-state-and-loot-lifetime.md): VERIFIED_FIXED (local GameTests) — death state, flicker and Nether Star lifetime
+
+- [BWR-0015](BWR-0015-completion-fixture-isolation.md): VERIFIED_FIXED (local GameTests) — ordinary-engine fixture isolation and cleanup
+
+- [BWR-0016](BWR-0016-official-persistence-inheritance.md): VERIFIED_FIXED (local GameTests) — inherited natural despawning contradicted the official persistent component

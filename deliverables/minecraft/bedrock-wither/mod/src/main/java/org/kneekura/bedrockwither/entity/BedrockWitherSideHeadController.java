@@ -19,7 +19,8 @@ import java.util.UUID;
  *
  * Current BDS preserves per-head next-update and idle counters plus three
  * alternative target slots. Historical Bedrock native aiStep provides the
- * still-corresponding execution shape:
+ * still-corresponding execution shape (including phase-independent head firing,
+ * gated during pathing, charge preparation/execution and shot delays):
  * - side heads update on 10..19 tick idle cadence;
  * - Normal/Hard idle counter >15 emits a dangerous random skull;
  * - a valid alternative target on Normal/Hard gets a normal skull and next
@@ -65,10 +66,13 @@ public final class BedrockWitherSideHeadController {
 
     private boolean canRun() {
         return owner.isAlive()
-                && owner.isAerialAttack()
                 && !owner.spawnController().isActive()
                 && !owner.deathController().isActive()
                 && !owner.runtimeState().charging()
+                && !owner.runtimeState().pathing()
+                && !owner.runtimeState().wantsMove()
+                && owner.runtimeState().delayShot() <= 0
+                && owner.getBedrockState() != BedrockWitherState.PHASE2_DASH_PREP
                 && owner.getBedrockState() != BedrockWitherState.PHASE_TRANSITION;
     }
 

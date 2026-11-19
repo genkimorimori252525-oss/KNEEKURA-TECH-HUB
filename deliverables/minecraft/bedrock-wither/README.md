@@ -6,7 +6,7 @@ Anchor: Minecraft Java Edition 1.20.1 / Forge / Java 17
 
 ## Purpose
 
-Build a standalone Java Edition boss that reproduces the **observable Bedrock Edition Wither behavior** as closely as supported by evidence and bounded runtime comparison.
+Build a standalone Java Edition boss that reproduces the **observable Bedrock Edition Wither behavior** as closely as supported by retained source evidence and explicitly labelled adaptation policies. The user has chosen code completion without empirical Bedrock measurements; automated Forge/repository verification is the software acceptance boundary.
 
 This directory is the product home. It is deliberately separate from the Hub's Wither research/design.
 

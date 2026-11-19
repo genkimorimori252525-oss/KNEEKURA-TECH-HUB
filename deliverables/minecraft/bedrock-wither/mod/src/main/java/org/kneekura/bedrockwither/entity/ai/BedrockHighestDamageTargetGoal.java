@@ -61,7 +61,8 @@ public final class BedrockHighestDamageTargetGoal extends Goal {
         List<Player> candidates = mob.level().getEntitiesOfClass(
                 Player.class,
                 area,
-                Player::isAlive
+                player -> player.isAlive() && !player.isCreative() && !player.isSpectator()
+                        && mob.canAttack(player)
         );
 
         return mob.threatLedger()

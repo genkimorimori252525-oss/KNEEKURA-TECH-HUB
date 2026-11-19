@@ -10,7 +10,10 @@ public enum BedrockWitherState {
     PHASE2_DASH_PREP(6),
     PHASE2_DASH(7),
     PHASE2_RECOVER(8),
-    DEATH_SEQUENCE(9);
+    DEATH_SEQUENCE(9),
+    // Append IDs: existing entity NBT stores numeric states 0..9.
+    PHASE2_BURST(10),
+    PHASE2_COOLDOWN(11);
 
     private final int id;
 

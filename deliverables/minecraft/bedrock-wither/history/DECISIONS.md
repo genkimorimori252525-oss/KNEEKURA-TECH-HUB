@@ -14,12 +14,12 @@ Reason: Java Wither owns private timers, attack and destruction behavior. Indepe
 Date: 2026-10-02  
 Status: ACTIVE
 
-Decision: reproduce measured player-visible/runtime behavior. Do not claim recovery of Bedrock's closed native implementation.
+Decision: reproduce evidence-backed player-visible/runtime behavior; see BWR-D007 for the current no-measurement completion boundary. Do not claim recovery of Bedrock's closed native implementation.
 
 ## BWR-D003 — research values are candidates until measured
 
 Date: 2026-10-02  
-Status: ACTIVE
+Status: SUPERSEDED FOR SOFTWARE COMPLETION BY BWR-D007
 
 Decision: exact cadence, dash and destruction constants from community-maintained sources remain `TBD_MEASURE` unless direct Bedrock observation or stronger evidence accepts them.
 
@@ -50,3 +50,15 @@ Decision: Bedrock-style delayed death visuals/explosion may extend rendering and
 Evidence lead: BEStyleWither Issue #4 and repair commit `3c519d708fb1856f4661a3670aad36a6be9353da`.
 
 Acceptance consequence: later death implementation must test `isDeadOrDying`, kill credit/events, loot and advancement-compatible attribution before visual parity is accepted.
+
+
+## BWR-D007 — source-backed software completion without empirical measurement
+
+Date: 2026-10-03
+Status: ACTIVE
+
+The user explicitly chose to finish code and not perform Bedrock measurements. Complete ordinary runtime behavior from official definitions, version-labelled technical references and isolated historical-native/adaptation policies. The absence of empirical measurements is a limit on parity claims, not permission to leave phase-2 combat or movement unreachable.
+
+Software acceptance requires reachable normal AI paths, bounded recovery, persistence and complete automated regression checks. Bedrock/Tank/client comparative acceptance is not performed or required for this pass. No native function-body identity or empirically exact Bedrock behavior is claimed.
+
+Preserve the original compatibility requirement: Forge semantic death, cancellation, attribution, events and exactly-once ordinary rewards remain authoritative at the Java integration boundary even where historical Bedrock delays differ.

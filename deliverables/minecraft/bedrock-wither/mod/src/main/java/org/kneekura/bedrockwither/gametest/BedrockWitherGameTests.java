@@ -116,6 +116,79 @@ public final class BedrockWitherGameTests {
         helper.succeed();
     }
 
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_spawnvisualticksfollowentitydatasnapshots")
+    public static void spawnVisualTicksFollowEntityDataSnapshots(GameTestHelper helper) {
+        BedrockWitherEntity server = createWither(helper);
+        server.setNoAi(true);
+        // A fresh replica uses constructor defaults, then receives only normal
+        // entity-data snapshots. It never receives the server runtimeState or NBT.
+        BedrockWitherEntity replica = ModEntities.BEDROCK_WITHER.get().create(helper.getLevel());
+        if (replica == null) {
+            helper.fail("Failed to create entity-data replica");
+            return;
+        }
+        copyInitialEntityData(server, replica);
+        if (replica.getVisualInvulnerableTicks() != 220) {
+            helper.fail("Initial spawn snapshot lost the visual countdown");
+            return;
+        }
+        for (int tick = 0; tick < 139; tick++) {
+            server.spawnController().tick();
+        }
+        copyInitialEntityData(server, replica);
+        if (replica.getVisualInvulnerableTicks() != 81) {
+            helper.fail("Mid-spawn entity-data snapshot did not update the visual countdown");
+            return;
+        }
+        net.minecraft.nbt.CompoundTag saved = new net.minecraft.nbt.CompoundTag();
+        server.saveWithoutId(saved);
+        BedrockWitherEntity restoredServer = ModEntities.BEDROCK_WITHER.get().create(helper.getLevel());
+        if (restoredServer == null) {
+            helper.fail("Failed to create mid-spawn saved copy");
+            return;
+        }
+        restoredServer.load(saved);
+        BedrockWitherEntity restoredReplica = ModEntities.BEDROCK_WITHER.get().create(helper.getLevel());
+        if (restoredReplica == null) {
+            helper.fail("Failed to create restored-spawn replica");
+            return;
+        }
+        copyInitialEntityData(restoredServer, restoredReplica);
+        if (restoredReplica.getVisualInvulnerableTicks() != 81) {
+            helper.fail("Restored spawn countdown did not reach initial entity data");
+            return;
+        }
+        for (int expected = 80; expected >= 0; expected--) {
+            server.spawnController().tick();
+            var dirty = server.getEntityData().packDirty();
+            if (dirty != null) {
+                replica.getEntityData().assignValues(dirty);
+            }
+            if (replica.getVisualInvulnerableTicks() != expected) {
+                helper.fail("Dirty spawn update expected " + expected + " visual ticks");
+                return;
+            }
+        }
+        BedrockWitherEntity lateReplica = ModEntities.BEDROCK_WITHER.get().create(helper.getLevel());
+        if (lateReplica == null) {
+            helper.fail("Failed to create late-tracking replica");
+            return;
+        }
+        copyInitialEntityData(server, lateReplica);
+        if (lateReplica.getVisualInvulnerableTicks() != 0) {
+            helper.fail("Late-tracking combat entity retained constructor spawn visuals");
+            return;
+        }
+        helper.succeed();
+    }
+
+    private static void copyInitialEntityData(BedrockWitherEntity source, BedrockWitherEntity replica) {
+        var initial = source.getEntityData().getNonDefaultValues();
+        if (initial != null) {
+            replica.getEntityData().assignValues(initial);
+        }
+    }
+
     @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_undeaddamageisrejected")
     public static void undeadDamageIsRejected(GameTestHelper helper) {
         BedrockWitherEntity wither = createCombatReadyWither(helper);
@@ -309,9 +382,14 @@ public final class BedrockWitherGameTests {
 
             // Current behavior returns to the original firing rate at half health.
             wither.runtimeState().setFireRate(5);
+            // Pin this existing controller contract to an already-grounded
+            // fixture. The separate ordinary-AI test exercises real descent.
+            wither.setNoAi(true);
+            wither.setOnGround(true);
             wither.setHealth(threshold);
+            wither.phaseController().tick();
 
-            helper.runAfterDelay(2, () -> {
+            {
                 if (wither.runtimeState().nativePhase()
                         != org.kneekura.bedrockwither.entity.BedrockWitherPhaseController.secondPhaseNativeId()) {
                     helper.fail("Half-health transition did not enter native phase 0");
@@ -326,8 +404,8 @@ public final class BedrockWitherGameTests {
                     helper.fail("Half-health transition did not reset firing to the original rate");
                     return;
                 }
-                if (wither.getBedrockState() != BedrockWitherState.PHASE2_DASH_PREP) {
-                    helper.fail("Half-health transition did not reach PHASE2_DASH_PREP");
+                if (wither.getBedrockState() != BedrockWitherState.PHASE2_BURST) {
+                    helper.fail("Half-health transition did not reach PHASE2_BURST");
                     return;
                 }
                 if (wither.runtimeState().wantsToExplode()) {
@@ -384,7 +462,7 @@ public final class BedrockWitherGameTests {
                 }
 
                 helper.succeed();
-            });
+            }
         });
     }
 
@@ -464,7 +542,8 @@ public final class BedrockWitherGameTests {
 
             java.util.List<BedrockWitherSkullEntity> skulls = helper.getLevel().getEntitiesOfClass(
                     BedrockWitherSkullEntity.class,
-                    wither.getBoundingBox().inflate(8.0D)
+                    wither.getBoundingBox().inflate(8.0D),
+                    skull -> skull.getOwner() == wither
             );
             long dangerousCount = skulls.stream()
                     .filter(BedrockWitherSkullEntity::isDangerous)
@@ -483,13 +562,17 @@ public final class BedrockWitherGameTests {
         BedrockWitherEntity wither = createWither(helper);
 
         helper.runAfterDelay(2, () -> {
+            // This controller fixture explicitly ends spawn before entering
+            // phase 2; public dash adapters must not override active spawn/death.
+            wither.spawnController().restore(0, BedrockWitherState.PHASE2_DASH_PREP);
+            wither.setAerialAttack(false);
             // Put the boss directly into the accepted native second-phase identity.
             wither.runtimeState().setNativePhase(
                     org.kneekura.bedrockwither.entity.BedrockWitherPhaseController.secondPhaseNativeId()
             );
             wither.setBedrockState(BedrockWitherState.PHASE2_DASH_PREP);
 
-            // Speed remains a measurement-gated value. Zero is deliberate here:
+            // Zero speed is deliberate in this controller-duration fixture:
             // this test validates the Bedrock duration/state/destruction loop only.
             wither.dashController().beginMeasuredDash(new Vec3(1.0D, 0.0D, 0.0D), 0.0D);
 
@@ -570,6 +653,7 @@ public final class BedrockWitherGameTests {
             // This test drives the volley controller synchronously. Re-establish
             // every precondition here so ambient server AI ticks cannot make the
             // controller-unit assertion nondeterministic.
+            wither.specialMovementController().cancelPath();
             wither.runtimeState().setNativePhase(
                     org.kneekura.bedrockwither.entity.BedrockWitherPhaseController.firstPhaseNativeId()
             );
@@ -619,7 +703,8 @@ public final class BedrockWitherGameTests {
 
             java.util.List<BedrockWitherSkullEntity> skulls = helper.getLevel().getEntitiesOfClass(
                     BedrockWitherSkullEntity.class,
-                    wither.getBoundingBox().inflate(12.0D)
+                    wither.getBoundingBox().inflate(12.0D),
+                    skull -> skull.getOwner() == wither
             );
             long dangerous = skulls.stream().filter(BedrockWitherSkullEntity::isDangerous).count();
             long normal = skulls.size() - dangerous;
@@ -641,9 +726,9 @@ public final class BedrockWitherGameTests {
             }
 
             wither.volleyController().tick();
-            if (wither.getBedrockState() != BedrockWitherState.PHASE1_BURST
-                    || wither.runtimeState().mainHeadAttackCountdown() != wither.runtimeState().fireRate()) {
-                helper.fail("Volley cooldown did not re-arm the next burst after 140 ticks");
+            if (wither.getBedrockState() != BedrockWitherState.PHASE1_REPOSITION
+                    || !wither.runtimeState().wantsMove()) {
+                helper.fail("Volley cooldown did not request the next reposition after 140 ticks");
                 return;
             }
 
@@ -766,6 +851,321 @@ public final class BedrockWitherGameTests {
             return;
         }
 
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_playerkillpreservesrewardeventsandemitsxponce")
+    public static void playerKillPreservesRewardEventsAndEmitsXpOnce(GameTestHelper helper) {
+        BedrockWitherEntity wither = createCombatReadyWither(helper);
+        wither.setNoAi(true);
+        // Own an explicitly high-altitude reward area. A relative +64 placed
+        // earlier fixtures near terrain (GameTests originate near world Y=-60)
+        // and overlapped ordinary-combat fixtures. Preserve the empty-reward
+        // precondition instead of deleting or ignoring another fixture's XP.
+        // No world/entity ticks occur inside this synchronous controller fixture.
+        wither.setPos(wither.getX(), helper.getLevel().getMaxBuildHeight() - 32.0D, wither.getZ());
+        net.minecraft.world.phys.AABB area = wither.getBoundingBox().inflate(16.0D);
+        boolean mobLoot = helper.getLevel().getGameRules().getBoolean(net.minecraft.world.level.GameRules.RULE_DOMOBLOOT);
+        int existingOrbs = helper.getLevel().getEntitiesOfClass(net.minecraft.world.entity.ExperienceOrb.class, area).size();
+        // Ordinary terrain drops are not reward inputs; the final blast can
+        // leave them in a reused fixture without affecting either assertion.
+        int existingStars = helper.getLevel().getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class, area,
+                item -> item.getItem().is(net.minecraft.world.item.Items.NETHER_STAR)).size();
+        if (!mobLoot || existingOrbs != 0 || existingStars != 0) {
+            wither.discard();
+            helper.fail("Reward fixture is not isolated: doMobLoot=" + mobLoot
+                    + ", existingOrbs=" + existingOrbs + ", existingStars=" + existingStars);
+            return;
+        }
+        net.minecraft.world.entity.player.Player player = helper.makeMockSurvivalPlayer();
+        net.minecraft.world.damagesource.DamageSource source = helper.getLevel().damageSources().playerAttack(player);
+        int[] events = {0, 0, 0}; // death, loot, experience
+        java.util.function.Consumer<net.minecraftforge.event.entity.living.LivingDeathEvent> death = event -> {
+            if (event.getEntity() == wither) {
+                events[0]++;
+                helper.assertTrue(event.getSource() == source && event.getSource().getEntity() == player
+                        && event.getSource().getDirectEntity() == player, "Death event lost player attribution");
+            }
+        };
+        java.util.function.Consumer<net.minecraftforge.event.entity.living.LivingDropsEvent> drops = event -> {
+            if (event.getEntity() == wither) {
+                events[1]++;
+                helper.assertTrue(event.getSource() == source && event.getSource().getEntity() == player
+                        && event.isRecentlyHit(), "Loot event lost player attribution");
+                int stars = event.getDrops().stream()
+                        .filter(item -> item.getItem().is(net.minecraft.world.item.Items.NETHER_STAR))
+                        .mapToInt(item -> item.getItem().getCount()).sum();
+                helper.assertTrue(stars == 1, "Loot event did not contain exactly one Nether Star");
+            }
+        };
+        java.util.function.Consumer<net.minecraftforge.event.entity.living.LivingExperienceDropEvent> experience = event -> {
+            if (event.getEntity() == wither) {
+                events[2]++;
+                helper.assertTrue(event.getAttackingPlayer() == player, "XP event lost player kill credit");
+                helper.assertTrue(event.getOriginalExperience() == 50 && event.getDroppedExperience() == 50,
+                        "XP event did not preserve the existing 50-XP contract");
+            }
+        };
+        var bus = net.minecraftforge.common.MinecraftForge.EVENT_BUS;
+        bus.addListener(net.minecraftforge.eventbus.api.EventPriority.NORMAL, false,
+                net.minecraftforge.event.entity.living.LivingDeathEvent.class, death);
+        bus.addListener(net.minecraftforge.eventbus.api.EventPriority.NORMAL, false,
+                net.minecraftforge.event.entity.living.LivingDropsEvent.class, drops);
+        bus.addListener(net.minecraftforge.eventbus.api.EventPriority.NORMAL, false,
+                net.minecraftforge.event.entity.living.LivingExperienceDropEvent.class, experience);
+        java.util.Map<UUID, Integer> xpSeen = new java.util.HashMap<>();
+        java.util.Map<UUID, Integer> starsSeen = new java.util.HashMap<>();
+        int[] emitted = {0, 0};
+        long fixtureTick = helper.getLevel().getGameTime();
+        try {
+            boolean accepted = wither.hurt(source, wither.getMaxHealth() * 10.0F);
+            helper.assertTrue(accepted && wither.isDeadOrDying() && wither.getKillCredit() == player,
+                    "Player-attributed killing hit lost semantic death or kill credit");
+            helper.assertTrue(events[0] == 1 && events[1] == 1 && events[2] == 1,
+                    "Initial accepted death did not preserve the three Forge lifecycle events");
+            observeRewardEmissions(helper, area, xpSeen, starsSeen, emitted);
+            helper.assertTrue(emitted[0] == 50 && emitted[1] == 1,
+                    "Actual reward entities did not contain 50 XP and one Nether Star");
+
+            // Forge may repost LivingDeathEvent on repeated die() calls, so its
+            // count is not the idempotency invariant. Loot/XP emissions are.
+            wither.die(source);
+            observeRewardEmissions(helper, area, xpSeen, starsSeen, emitted);
+            int duration = org.kneekura.bedrockwither.entity.BedrockWitherDeathController
+                    .PROVISIONAL_DEATH_DURATION_TICKS;
+            for (int tick = 0; tick < duration; tick++) {
+                wither.deathController().tickServer();
+                if (tick == 36) {
+                    int remaining = wither.getDeathTicksRemaining();
+                    wither.die(source);
+                    helper.assertTrue(wither.getDeathTicksRemaining() == remaining,
+                            "Repeated death restarted the active visual countdown");
+                }
+                observeRewardEmissions(helper, area, xpSeen, starsSeen, emitted);
+            }
+            wither.die(source);
+            wither.deathController().begin();
+            wither.deathController().tickServer();
+            observeRewardEmissions(helper, area, xpSeen, starsSeen, emitted);
+            helper.assertTrue(wither.isRemoved(), "Reward fixture did not finish visual removal");
+            helper.assertTrue(events[1] == 1 && events[2] == 1 && emitted[0] == 50 && emitted[1] == 1,
+                    "Repeated death/finalization duplicated loot or experience");
+            helper.assertTrue(helper.getLevel().getGameTime() == fixtureTick,
+                    "Reward fixture unexpectedly allowed ambient entity ticks");
+            helper.succeed();
+        } finally {
+            bus.unregister(death);
+            bus.unregister(drops);
+            bus.unregister(experience);
+            // XP may already exist when a later loot-listener assertion fails.
+            observeRewardEmissions(helper, area, xpSeen, starsSeen, emitted);
+            // These identities were observed only in the initially reward-empty
+            // area, so cleanup cannot remove another fixture's rewards.
+            for (net.minecraft.world.entity.ExperienceOrb orb : helper.getLevel().getEntitiesOfClass(
+                    net.minecraft.world.entity.ExperienceOrb.class, area)) {
+                if (xpSeen.containsKey(orb.getUUID())) orb.discard();
+            }
+            for (net.minecraft.world.entity.item.ItemEntity item : helper.getLevel().getEntitiesOfClass(
+                    net.minecraft.world.entity.item.ItemEntity.class, area)) {
+                if (starsSeen.containsKey(item.getUUID())) item.discard();
+            }
+            if (!wither.isRemoved()) wither.discard();
+        }
+    }
+
+    private static void observeRewardEmissions(GameTestHelper helper, net.minecraft.world.phys.AABB area,
+                                               java.util.Map<UUID, Integer> xpSeen,
+                                               java.util.Map<UUID, Integer> starsSeen, int[] emitted) {
+        // Observe positive per-entity changes between synchronous calls rather
+        // than counting only survivors of the final explosion. This cannot see
+        // an award created and destroyed within one call; ordinary Forge reward
+        // duplication is also checked by the event counters. With no ambient
+        // ticks, only award() merges XP here; count * value includes its stacks.
+        for (net.minecraft.world.entity.ExperienceOrb orb : helper.getLevel().getEntitiesOfClass(
+                net.minecraft.world.entity.ExperienceOrb.class, area, entity -> !entity.isRemoved())) {
+            net.minecraft.nbt.CompoundTag saved = new net.minecraft.nbt.CompoundTag();
+            orb.addAdditionalSaveData(saved);
+            int value = orb.getValue() * saved.getInt("Count");
+            int previous = xpSeen.getOrDefault(orb.getUUID(), 0);
+            emitted[0] += Math.max(0, value - previous);
+            xpSeen.put(orb.getUUID(), Math.max(previous, value));
+        }
+        for (net.minecraft.world.entity.item.ItemEntity item : helper.getLevel().getEntitiesOfClass(
+                net.minecraft.world.entity.item.ItemEntity.class, area,
+                entity -> !entity.isRemoved() && entity.getItem().is(net.minecraft.world.item.Items.NETHER_STAR))) {
+            int value = item.getItem().getCount();
+            int previous = starsSeen.getOrDefault(item.getUUID(), 0);
+            emitted[1] += Math.max(0, value - previous);
+            starsSeen.put(item.getUUID(), Math.max(previous, value));
+        }
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_cancelleddeathpreservesaerialstate")
+    public static void cancelledDeathPreservesAerialState(GameTestHelper helper) {
+        assertCancelledDeathPreservesCombat(helper, false);
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_cancelleddeathpreservesactivedash")
+    public static void cancelledDeathPreservesActiveDash(GameTestHelper helper) {
+        assertCancelledDeathPreservesCombat(helper, true);
+    }
+
+    private static void assertCancelledDeathPreservesCombat(GameTestHelper helper, boolean duringDash) {
+        BedrockWitherEntity wither = createCombatReadyWither(helper);
+        wither.setNoAi(true);
+        if (duringDash) {
+            // Own the phase-2 execution fixture; this explicit speed is not a
+            // claim about the unresolved current Bedrock dash speed.
+            wither.runtimeState().setNativePhase(
+                    org.kneekura.bedrockwither.entity.BedrockWitherPhaseController.secondPhaseNativeId());
+            wither.setAerialAttack(false);
+            wither.dashController().beginMeasuredDash(new Vec3(1.0D, 0.0D, 0.0D), 0.5D);
+        }
+        BedrockWitherState beforeState = wither.getBedrockState();
+        boolean beforeAerial = wither.isAerialAttack();
+        boolean beforeCharging = wither.runtimeState().charging();
+        int beforeChargeFrames = wither.runtimeState().chargeFrames();
+        int[] cancellations = {0};
+        java.util.function.Consumer<net.minecraftforge.event.entity.living.LivingDeathEvent> revival = event -> {
+            if (event.getEntity() == wither) {
+                cancellations[0]++;
+                wither.setHealth(32.0F);
+                event.setCanceled(true);
+            }
+        };
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(
+                net.minecraftforge.eventbus.api.EventPriority.NORMAL,
+                false,
+                net.minecraftforge.event.entity.living.LivingDeathEvent.class,
+                revival);
+        try {
+            wither.hurt(helper.getLevel().damageSources().genericKill(), Float.MAX_VALUE);
+        } finally {
+            net.minecraftforge.common.MinecraftForge.EVENT_BUS.unregister(revival);
+        }
+        if (cancellations[0] != 1 || !wither.isAlive() || wither.getHealth() != 32.0F) {
+            helper.fail("Scoped Forge revival did not cancel and restore the living entity");
+            return;
+        }
+        if (wither.getDeathTicksRemaining() != 0 || wither.deathController().isActive()
+                || wither.getBedrockState() != beforeState
+                || wither.isAerialAttack() != beforeAerial
+                || wither.runtimeState().charging() != beforeCharging
+                || wither.runtimeState().chargeFrames() != beforeChargeFrames) {
+            helper.fail("Canceled Forge death committed the custom death state");
+            return;
+        }
+
+        // After the scoped listener is gone, a genuine later death must still
+        // enter and finish the existing sequence. Reset only hit cooldown.
+        wither.invulnerableTime = 0;
+        wither.hurt(helper.getLevel().damageSources().genericKill(), Float.MAX_VALUE);
+        int duration = org.kneekura.bedrockwither.entity.BedrockWitherDeathController
+                .PROVISIONAL_DEATH_DURATION_TICKS;
+        if (cancellations[0] != 1 || !wither.isDeadOrDying()
+                || wither.getBedrockState() != BedrockWitherState.DEATH_SEQUENCE
+                || wither.getDeathTicksRemaining() != duration) {
+            helper.fail("A later accepted death did not enter the original death sequence");
+            return;
+        }
+        for (int tick = 0; tick < duration - 1; tick++) {
+            wither.deathController().tickServer();
+        }
+        if (wither.isRemoved() || wither.getDeathTicksRemaining() != 1) {
+            helper.fail("A later accepted death ended before its final tick");
+            return;
+        }
+        wither.deathController().tickServer();
+        if (!wither.isRemoved() || wither.getDeathTicksRemaining() != 0) {
+            helper.fail("A later accepted death did not finalize");
+            return;
+        }
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_livingreloadcanfinishdeathsequence")
+    public static void livingReloadCanFinishDeathSequence(GameTestHelper helper) {
+        BedrockWitherEntity original = createCombatReadyWither(helper);
+        original.setNoAi(true);
+        net.minecraft.nbt.CompoundTag saved = new net.minecraft.nbt.CompoundTag();
+        original.saveWithoutId(saved);
+        original.discard();
+
+        BedrockWitherEntity restored = ModEntities.BEDROCK_WITHER.get().create(helper.getLevel());
+        if (restored == null) {
+            helper.fail("Failed to create saved Wither copy");
+            return;
+        }
+        restored.load(saved);
+        if (!restored.isAlive() || restored.deathController().isActive()) {
+            helper.fail("Loading a living Wither incorrectly entered semantic/visual death");
+            return;
+        }
+        restored.hurt(helper.getLevel().damageSources().genericKill(), Float.MAX_VALUE);
+        if (!restored.isDeadOrDying()
+                || restored.getBedrockState() != BedrockWitherState.DEATH_SEQUENCE
+                || !restored.deathController().isActive()) {
+            helper.fail("Loading a living Wither disabled its later death sequence");
+            return;
+        }
+        int duration = org.kneekura.bedrockwither.entity.BedrockWitherDeathController
+                .PROVISIONAL_DEATH_DURATION_TICKS;
+        for (int tick = 0; tick < duration - 1; tick++) {
+            restored.deathController().tickServer();
+        }
+        if (restored.isRemoved() || restored.getDeathTicksRemaining() != 1) {
+            helper.fail("Reloaded Wither did not retain the full provisional death countdown");
+            return;
+        }
+        restored.deathController().tickServer();
+        if (!restored.isRemoved() || restored.getDeathTicksRemaining() != 0) {
+            helper.fail("Reloaded Wither did not finalize on the last death tick");
+            return;
+        }
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_activedeathreloadpreservesremainingticks")
+    public static void activeDeathReloadPreservesRemainingTicks(GameTestHelper helper) {
+        BedrockWitherEntity original = createCombatReadyWither(helper);
+        original.setNoAi(true);
+        original.hurt(helper.getLevel().damageSources().genericKill(), Float.MAX_VALUE);
+        for (int tick = 0; tick < 37; tick++) {
+            original.deathController().tickServer();
+        }
+        int remaining = original.getDeathTicksRemaining();
+        float swell = original.getDeathSwell();
+        net.minecraft.nbt.CompoundTag saved = new net.minecraft.nbt.CompoundTag();
+        original.saveWithoutId(saved);
+        original.discard();
+
+        BedrockWitherEntity restored = ModEntities.BEDROCK_WITHER.get().create(helper.getLevel());
+        if (restored == null) {
+            helper.fail("Failed to create dying Wither copy");
+            return;
+        }
+        restored.load(saved);
+        if (!restored.isDeadOrDying() || !restored.deathController().isActive()
+                || restored.getDeathTicksRemaining() != remaining) {
+            helper.fail("Loading a dying Wither lost its pending death sequence");
+            return;
+        }
+        assertClose(helper, swell, restored.getDeathSwell(), "Saved death swell");
+        for (int tick = 0; tick < remaining - 1; tick++) {
+            restored.deathController().tickServer();
+        }
+        if (restored.isRemoved() || restored.getDeathTicksRemaining() != 1) {
+            helper.fail("Saved death sequence restarted or finished early");
+            return;
+        }
+        restored.deathController().tickServer();
+        if (!restored.isRemoved()) {
+            helper.fail("Saved death sequence did not finish after its remaining ticks");
+            return;
+        }
+        float finalSwell = restored.getDeathSwell();
+        restored.deathController().tickServer();
+        assertClose(helper, finalSwell, restored.getDeathSwell(), "Finalized death tick is inert");
         helper.succeed();
     }
 

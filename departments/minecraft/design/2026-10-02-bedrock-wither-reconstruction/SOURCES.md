@@ -1,8 +1,8 @@
 # Bedrock Wither Reconstruction — Source Ledger
 
-Retrieved/reviewed: 2026-10-02
+Retrieved/reviewed: 2026-10-02; linked-source audit refreshed 2026-10-03
 
-This ledger separates official exposed behavior, maintained secondary observation and community reports. It is a reconnaissance source set, not proof that Bedrock native code has been recovered.
+This ledger separates official exposed behavior, maintained secondary observation and community reports. It is a reconnaissance source set, not proof that Bedrock native code has been recovered. The [2026-10-03 source audit](SOURCE-AUDIT-2026-10-03.md) corrects the historical interval decode and separates known values from unproved native details. The user-selected source-completion plan supersedes the earlier measurement-only next actions below.
 
 ## Official / primary-facing documentation
 

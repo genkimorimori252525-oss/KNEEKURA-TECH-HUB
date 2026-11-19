@@ -1,12 +1,16 @@
 package org.kneekura.bedrockwither.entity;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerBossEvent;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.Difficulty;
@@ -21,19 +25,27 @@ import net.minecraft.world.entity.PowerableMob;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.decoration.ArmorStand;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import org.kneekura.bedrockwither.entity.ai.BedrockFlyingMoveControl;
 import org.kneekura.bedrockwither.entity.ai.BedrockHighestDamageTargetGoal;
+import org.kneekura.bedrockwither.entity.ai.BedrockLookGoal;
 
 import java.util.HashSet;
 import java.util.List;
@@ -48,6 +60,8 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
             SynchedEntityData.defineId(BedrockWitherEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> DATA_AERIAL_ATTACK =
             SynchedEntityData.defineId(BedrockWitherEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Integer> DATA_SPAWNING_FRAMES =
+            SynchedEntityData.defineId(BedrockWitherEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DATA_DEATH_TICKS =
             SynchedEntityData.defineId(BedrockWitherEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Float> DATA_DEATH_OLD_SWELL =
@@ -113,9 +127,10 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
         this.runtimeState.setNativePhase(BedrockWitherPhaseController.firstPhaseNativeId());
         this.spawnController.initializeNewEntity();
         this.bossEvent.setDarkenScreen(true);
-        // Bedrock wither.json exposes movement.basic max_turn 180. The Java
-        // FlyingMoveControl is an adaptation layer, but the exposed turn cap is kept exact.
-        this.moveControl = new FlyingMoveControl(this, 180, true);
+        // Pinned Bedrock movement.basic exposes max_turn=180 degrees/tick.
+        // Vanilla FlyingMoveControl hard-codes yaw to 90, so use the bounded
+        // KNEEKURA adapter that applies the public 180-degree cap to yaw and pitch.
+        this.moveControl = new BedrockFlyingMoveControl(this);
         this.setNoGravity(true);
         this.xpReward = 50;
     }
@@ -141,6 +156,23 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
     }
 
     @Override
+    public boolean isPushable() {
+        // Pinned format 1.26.50 declares minecraft:pushable_by_entity {}.
+        // LivingEntity disables pushing while on a climbable block; Bedrock's
+        // pushability component is independent from can_climb, so preserve
+        // entity pushing even while the Wither is on a ladder/scaffolding.
+        return this.isAlive() && !this.isSpectator();
+    }
+
+    @Override
+    public boolean requiresCustomPersistence() {
+        // Pinned Mojang wither.json: minecraft:persistent {}. A species-level
+        // rule also covers old NBT with PersistenceRequired=false. The inherited
+        // checkDespawn still handles Peaceful removal before this natural-despawn gate.
+        return true;
+    }
+
+    @Override
     protected PathNavigation createNavigation(Level level) {
         // Bedrock exposes can_fly plus native/unique Wither movement while its public
         // JSON still names navigation.walk. Java needs an actual airborne navigation
@@ -158,6 +190,9 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
         super.defineSynchedData();
         this.entityData.define(DATA_STATE, BedrockWitherState.SPAWN_SEQUENCE.id());
         this.entityData.define(DATA_AERIAL_ATTACK, true);
+        // Identical server/client defaults matter for late tracking: completed
+        // spawn (zero) must be included in the initial non-default snapshot.
+        this.entityData.define(DATA_SPAWNING_FRAMES, BedrockWitherSpawnController.CURRENT_SPAWN_DURATION_TICKS);
         this.entityData.define(DATA_DEATH_TICKS, 0);
         this.entityData.define(DATA_DEATH_OLD_SWELL, 0.0F);
         this.entityData.define(DATA_DEATH_SWELL, 0.0F);
@@ -174,9 +209,23 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
     @Override
     protected void registerGoals() {
         // Current Mojang Bedrock wither.json generic goal ordering.
-        // Special wither_random_attack_pos_goal priority=3 is kept separate until
-        // its hidden native distances/timing are resolved.
-        this.goalSelector.addGoal(5, new RandomStrollGoal(this, 1.0D));
+        // behavior.float is an exposed priority-1 contract. It only owns JUMP,
+        // leaving the Wither's dedicated MOVE/attack controllers authoritative.
+        this.goalSelector.addGoal(1, new FloatGoal(this));
+
+        // The special reposition controller owns movement whenever combat or a
+        // lifecycle gate is active. Idle stroll must not overwrite its navigator.
+        this.goalSelector.addGoal(5, new RandomStrollGoal(this, 1.0D) {
+            @Override public boolean canUse() { return canRunIdleMovement() && super.canUse(); }
+            @Override public boolean canContinueToUse() {
+                return canRunIdleMovement() && super.canContinueToUse();
+            }
+        });
+        // Pinned Bedrock Wither: look_at_target priority 5 and look_at_player
+        // priority 6, explicit 1..2 second look_time. Public component defaults
+        // provide look_distance=8 and probability=0.02.
+        this.goalSelector.addGoal(5, new BedrockLookGoal(this, BedrockLookGoal.Source.CURRENT_TARGET));
+        this.goalSelector.addGoal(6, new BedrockLookGoal(this, BedrockLookGoal.Source.NEAREST_PLAYER));
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
 
         // Current Mojang Bedrock target ordering:
@@ -198,6 +247,35 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
         );
     }
 
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return SoundEvents.WITHER_AMBIENT;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return SoundEvents.WITHER_HURT;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.WITHER_DEATH;
+    }
+
+    private boolean canRunIdleMovement() {
+        return isAlive() && getTarget() == null
+                && getBedrockState() == BedrockWitherState.PHASE1_REPOSITION
+                && !runtimeState.pathing() && !runtimeState.wantsMove()
+                && !spawnController.isActive() && !deathController.isActive();
+    }
+
+    /** Guard active adapters before the next target-selector maintenance tick. */
+    public boolean isValidCombatTarget(LivingEntity target) {
+        return target != null && target.isAlive() && target.level() == this.level()
+                && (!(target instanceof net.minecraft.world.entity.player.Player player)
+                || (!player.isCreative() && !player.isSpectator() && this.canAttack(player)));
+    }
+
     private boolean isBedrockNearestTargetCandidate(LivingEntity candidate) {
         // Bedrock target filter accepts players and non-undead/non-inanimate targets.
         // ArmorStand is a Java LivingEntity but is the clearest Java analogue of
@@ -205,6 +283,12 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
         return candidate != this
                 && !(candidate instanceof ArmorStand)
                 && candidate.getMobType() != MobType.UNDEAD;
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (!level().isClientSide) dashController.afterEntityMovement();
     }
 
     @Override
@@ -219,11 +303,15 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
         this.spawnController.tick();
         this.stateMachine.tick();
         this.phaseController.tick();
-        this.hurtReactionController.tick();
-        this.dashController.tick();
-        this.volleyController.tick();
-        this.specialMovementController.tick();
-        this.sideHeadController.tick();
+        if (this.spawnController.isActive() || this.deathController.isActive()) {
+            this.specialMovementController.cancelPath();
+        } else if (this.getBedrockState() != BedrockWitherState.PHASE_TRANSITION) {
+            this.hurtReactionController.tick();
+            this.dashController.tick();
+            this.specialMovementController.tick();
+            this.volleyController.tick();
+            this.sideHeadController.tick();
+        }
         this.headTrackingController.tick();
         this.bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
         updateBossBarPlayers();
@@ -275,21 +363,73 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
         if (accepted && attacker instanceof LivingEntity livingAttacker && livingAttacker != this) {
             threatLedger.recordDamage(livingAttacker, amount, this.level().getGameTime());
             hurtReactionController.onAcceptedDamage(livingAttacker);
-            volleyController.onAcceptedDamage();
         }
+        if (accepted && this.isAlive()) volleyController.onAcceptedDamage();
         return accepted;
     }
 
     @Override
     public void die(DamageSource source) {
-        // LivingEntity invokes die() after lethal damage has already reduced
-        // health to zero, so isAlive() is not a valid gate here.
-        if (!this.isRemoved()
+        // Forge may cancel semantic death (for example, a revival listener).
+        // The inherited dead flag is set only after that event accepts death;
+        // health-based isAlive/isDeadOrDying cannot distinguish the decision.
+        super.die(source);
+        if (this.dead
+                && !this.isRemoved()
                 && getBedrockState() != BedrockWitherState.DEATH_SEQUENCE
                 && getDeathTicksRemaining() <= 0) {
             deathController.begin();
         }
-        super.die(source);
+    }
+
+    @Override
+    public net.minecraft.world.entity.item.ItemEntity spawnAtLocation(
+            net.minecraft.world.item.ItemStack stack, float offset) {
+        net.minecraft.world.entity.item.ItemEntity dropped = super.spawnAtLocation(stack, offset);
+        if (dropped != null && stack.is(net.minecraft.world.item.Items.NETHER_STAR)) {
+            // The retained Minecraft Wiki Bedrock drop contract specifies no
+            // timed despawning. Java's unlimited-age flag also survives item NBT.
+            // Preserve the ordinary Forge loot/event path and item count.
+            dropped.setUnlimitedLifetime();
+        }
+        return dropped;
+    }
+
+    @Override
+    public boolean killedEntity(ServerLevel level, LivingEntity victim) {
+        boolean accepted = super.killedEntity(level, victim);
+        if (accepted) {
+            createBedrockWitherRose(level, victim);
+        }
+        return accepted;
+    }
+
+    /**
+     * LivingEntity.createWitherRose is hard-wired to Java WitherBoss kill credit.
+     * This independent Monster therefore bridges the same Java integration
+     * contract explicitly: place when mobGriefing allows and the rose survives,
+     * otherwise drop exactly one rose item at the victim.
+     */
+    private void createBedrockWitherRose(ServerLevel level, LivingEntity victim) {
+        boolean placed = false;
+        if (level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
+            BlockPos pos = victim.blockPosition();
+            BlockState rose = Blocks.WITHER_ROSE.defaultBlockState();
+            if (level.getBlockState(pos).isAir() && rose.canSurvive(level, pos)) {
+                level.setBlock(pos, rose, 3);
+                placed = true;
+            }
+        }
+
+        if (!placed) {
+            level.addFreshEntity(new ItemEntity(
+                    level,
+                    victim.getX(),
+                    victim.getY(),
+                    victim.getZ(),
+                    new ItemStack(Items.WITHER_ROSE)
+            ));
+        }
     }
 
     @Override
@@ -349,7 +489,13 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
         if (getDeathTicksRemaining() > 0) {
             return getDeathTicksRemaining();
         }
-        return Math.max(0, runtimeState.spawningFrames());
+        return this.entityData.get(DATA_SPAWNING_FRAMES);
+    }
+
+    void setSpawningFrames(int value) {
+        int bounded = Math.max(0, value);
+        runtimeState.setSpawningFrames(bounded);
+        this.entityData.set(DATA_SPAWNING_FRAMES, bounded);
     }
 
     public int getDeathTicksRemaining() {
@@ -622,6 +768,9 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
         tag.putInt("ProjectileCounter", runtimeState.projectileCounter());
         tag.putInt("FireRate", runtimeState.fireRate());
         tag.putInt("HealthIntervals", runtimeState.healthIntervals());
+        tag.putInt("HistoricalRateHealthCursor", runtimeState.historicalRateHealthCursor());
+        tag.putBoolean("SecondVolley", runtimeState.secondVolley());
+        tag.putInt("TransitionTicks", runtimeState.transitionTicks());
         tag.putInt("LastHealthValue", runtimeState.lastHealthValue());
         tag.putInt("DelayShot", runtimeState.delayShot());
         tag.putInt("TimeSinceLastShot", runtimeState.timeSinceLastShot());
@@ -639,10 +788,17 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
         BedrockWitherState restoredState = BedrockWitherState.fromId(tag.getInt("BedrockState"));
-        if (restoredState == BedrockWitherState.PHASE2_DASH) {
-            // Dash execution depends on a measured speed and live target/world
-            // context. Never resume stale transient motion after load.
-            restoredState = BedrockWitherState.PHASE2_RECOVER;
+        boolean interruptedCharge = restoredState == BedrockWitherState.PHASE2_DASH
+                || restoredState == BedrockWitherState.PHASE2_DASH_PREP;
+        // A live target and path cannot be serialized reliably. Cancel motion even
+        // when load() reuses an existing object, then recover in a valid phase.
+        dashController.stopDash();
+        specialMovementController.cancelPath();
+        if (interruptedCharge) restoredState = BedrockWitherState.PHASE2_RECOVER;
+        if (restoredState == BedrockWitherState.PHASE1_HURT_REACTION) {
+            // Hurt destruction has its own persisted countdown. This obsolete
+            // transient state must not strand the ordinary center-head scheduler.
+            restoredState = BedrockWitherState.PHASE1_REPOSITION;
         }
         stateMachine.restore(restoredState, tag.getLong("StateEnteredGameTime"));
         difficultyHealthInitialized = tag.getBoolean("DifficultyHealthInitialized");
@@ -653,13 +809,18 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
             setAerialAttack(restoredState != BedrockWitherState.PHASE2_DASH_PREP
                     && restoredState != BedrockWitherState.PHASE2_DASH
                     && restoredState != BedrockWitherState.PHASE2_RECOVER
+                    && restoredState != BedrockWitherState.PHASE2_BURST
+                    && restoredState != BedrockWitherState.PHASE2_COOLDOWN
+                    && restoredState != BedrockWitherState.PHASE_TRANSITION
                     && restoredState != BedrockWitherState.DEATH_SEQUENCE);
         }
 
         if (tag.contains("NativePhase")) {
             runtimeState.setNativePhase(tag.getInt("NativePhase"));
         } else {
-            runtimeState.setNativePhase(BedrockWitherPhaseController.firstPhaseNativeId());
+            runtimeState.setNativePhase(isAerialAttack()
+                    ? BedrockWitherPhaseController.firstPhaseNativeId()
+                    : BedrockWitherPhaseController.secondPhaseNativeId());
         }
         if (tag.contains("HealthThreshold")) {
             runtimeState.setHealthThreshold(tag.getInt("HealthThreshold"));
@@ -671,12 +832,20 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
         runtimeState.setMaxSkeletons(tag.getInt("MaxSkeletons"));
         runtimeState.setDestroyBlocksTick(tag.getInt("DestroyBlocksTick"));
         runtimeState.setProjectileCounter(tag.getInt("ProjectileCounter"));
-        runtimeState.setFireRate(tag.getInt("FireRate"));
-        runtimeState.setHealthIntervals(tag.getInt("HealthIntervals"));
+        runtimeState.setFireRate(tag.contains("FireRate") ? Math.max(1, tag.getInt("FireRate"))
+                : BedrockWitherVolleyController.PROVISIONAL_NATIVE_BASE_FIRE_RATE_TICKS);
+        runtimeState.setHealthIntervals(Math.max(1, Math.round(getMaxHealth()) / 6));
+        runtimeState.setHistoricalRateHealthCursor(tag.contains("HistoricalRateHealthCursor")
+                ? tag.getInt("HistoricalRateHealthCursor") : Math.round(getHealth()));
+        runtimeState.setSecondVolley(tag.getBoolean("SecondVolley"));
+        runtimeState.setTransitionTicks(Math.min(BedrockWitherPhaseController.ADAPTER_MAX_DESCENT_TICKS,
+                tag.getInt("TransitionTicks")));
         volleyController.restoreLastHealthInterval(tag.getInt("LastHealthValue"));
-        runtimeState.setDelayShot(tag.getInt("DelayShot"));
+        runtimeState.setDelayShot(interruptedCharge ? BedrockWitherDashController.HISTORICAL_RECOVERY_TICKS
+                : Math.max(0, tag.getInt("DelayShot")));
         runtimeState.setTimeSinceLastShot(tag.getInt("TimeSinceLastShot"));
-        runtimeState.setMainHeadAttackCountdown(tag.getInt("MainHeadAttackCountdown"));
+        runtimeState.setMainHeadAttackCountdown(Math.max(1, tag.getInt("MainHeadAttackCountdown")));
+        runtimeState.setTimeTillNextShot(runtimeState.mainHeadAttackCountdown());
         int spawningFrames = tag.contains("SpawningFrames")
                 ? tag.getInt("SpawningFrames")
                 : 0;

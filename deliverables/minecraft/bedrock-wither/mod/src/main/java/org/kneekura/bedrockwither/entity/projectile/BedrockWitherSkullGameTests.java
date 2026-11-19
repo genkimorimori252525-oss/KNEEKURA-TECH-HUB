@@ -34,6 +34,10 @@ public final class BedrockWitherSkullGameTests {
         BlockPos pos = helper.absolutePos(new BlockPos(0, 1, 0));
         owner.moveTo(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D);
         target.moveTo(pos.getX() + 2.5D, pos.getY(), pos.getZ() + 0.5D);
+        // The ordinary cow's 10 HP saturates a 12-damage Hard impact. Keep this
+        // damage/effect fixture alive on every difficulty; exact assertions stay.
+        target.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).setBaseValue(40.0D);
+        target.setHealth(40.0F);
         helper.getLevel().addFreshEntity(owner);
         helper.getLevel().addFreshEntity(target);
 
@@ -45,29 +49,35 @@ public final class BedrockWitherSkullGameTests {
                 BedrockWitherSkullEntity.Kind.NORMAL
         );
 
-        float before = target.getHealth();
-        skull.onHitEntity(new EntityHitResult(target));
+        try {
+            float before = target.getHealth();
+            skull.onHitEntity(new EntityHitResult(target));
 
-        if (BedrockWitherSkullEntity.impactDamageFor(Difficulty.EASY) != 5.0F
-                || BedrockWitherSkullEntity.impactDamageFor(Difficulty.NORMAL) != 8.0F
-                || BedrockWitherSkullEntity.impactDamageFor(Difficulty.HARD) != 12.0F) {
-            helper.fail("Bedrock skull difficulty damage mapping is not 5/8/12");
-            return;
+            if (BedrockWitherSkullEntity.impactDamageFor(Difficulty.EASY) != 5.0F
+                    || BedrockWitherSkullEntity.impactDamageFor(Difficulty.NORMAL) != 8.0F
+                    || BedrockWitherSkullEntity.impactDamageFor(Difficulty.HARD) != 12.0F) {
+                helper.fail("Bedrock skull difficulty damage mapping is not 5/8/12");
+                return;
+            }
+
+            float expectedDamage = BedrockWitherSkullEntity.impactDamageFor(
+                    helper.getLevel().getDifficulty()
+            );
+            float actualDamage = before - target.getHealth();
+            if (Math.abs(actualDamage - expectedDamage) > 0.0001F) {
+                helper.fail("Bedrock skull impact damage expected "
+                        + expectedDamage + " on " + helper.getLevel().getDifficulty()
+                        + " but was " + actualDamage);
+                return;
+            }
+
+            assertWitherEffectMatchesDifficulty(helper, target);
+            helper.succeed();
+        } finally {
+            skull.discard();
+            target.discard();
+            owner.discard();
         }
-
-        float expectedDamage = BedrockWitherSkullEntity.impactDamageFor(
-                helper.getLevel().getDifficulty()
-        );
-        float actualDamage = before - target.getHealth();
-        if (Math.abs(actualDamage - expectedDamage) > 0.0001F) {
-            helper.fail("Bedrock skull impact damage expected "
-                    + expectedDamage + " on " + helper.getLevel().getDifficulty()
-                    + " but was " + actualDamage);
-            return;
-        }
-
-        assertWitherEffectMatchesDifficulty(helper, target);
-        helper.succeed();
     }
 
     private static void assertWitherEffectMatchesDifficulty(GameTestHelper helper, Cow target) {

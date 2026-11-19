@@ -26,6 +26,13 @@ public final class BedrockWitherBlockRules {
             return false;
         }
 
+        // Minecraft Wiki's retained 2025-11 Bedrock description distinguishes
+        // charge from blue-skull explosions: charge cannot break obsidian.
+        // Do not silently apply that exception to the projectile category.
+        if (attackType == BedrockWitherAttackType.CHARGE && state.is(Blocks.OBSIDIAN)) {
+            return false;
+        }
+
         // Current dangerous-skull observation excludes waterlogged/liquid blocks.
         // Keep the shared exclusion conservative until per-attack differences are
         // recovered from the current BDS body.

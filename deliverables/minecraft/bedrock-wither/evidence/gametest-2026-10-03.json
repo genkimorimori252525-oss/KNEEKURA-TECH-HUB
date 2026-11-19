@@ -1,0 +1,102 @@
+{
+  "format": "kneekura.product-gametest-evidence.v1",
+  "deliverable": "minecraft/bedrock-wither",
+  "recorded_at": "2026-10-03",
+  "baseline_commit": "c1221d3c6cb46ee719923d9f99abd8739ddb802d",
+  "local_source_commit": "b7fd04b037a4b3eed2450c51fe55c9e3ddfdfcca",
+  "source_files_sha256": {
+    "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/entity/BedrockWitherDeathController.java": "a4fd7e7baa6c8d4283179d829834bccad7c0f87641db5b9e66b6340ab9bbc77f",
+    "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/entity/BedrockWitherEntity.java": "2d7b15ec52cb2a67f41164c00b6438d0123394de5245aaa0bec6232347c47217",
+    "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/entity/BedrockWitherSpawnController.java": "3e8bff9680767af08782092f6f10708d009b6eac99947101970a887a6cfb8bdc",
+    "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/gametest/BedrockWitherGameTests.java": "022c3dfaba46dfdafeea9f827696830480c3f6cf1f950ffabeac970c358f8938"
+  },
+  "environment": {
+    "minecraft": "1.20.1",
+    "forge": "47.2.0",
+    "java": "Temurin 17.0.20.1+1",
+    "gradle": "8.1.1",
+    "runner": "isolated cloud Linux",
+    "launch_target": "forgegametestserveruserdev"
+  },
+  "red": {
+    "production_source": "baseline_commit",
+    "tests": "new regression tests in source_files_sha256",
+    "command": "gradle runGameTestServer --no-daemon --max-workers=2",
+    "required_tests": 21,
+    "passed": 19,
+    "failed": 2,
+    "failed_tests": [
+      "spawnvisualticksfollowentitydatasnapshots",
+      "livingreloadcanfinishdeathsequence"
+    ],
+    "expected_messages": [
+      "Mid-spawn entity-data snapshot did not update the visual countdown",
+      "Loading a living Wither disabled its later death sequence"
+    ],
+    "log_sha256": "d1b4725722f4713d9e294976b3083a36eb0a9385e73f80884bd3ed8b41cbc892"
+  },
+  "green": {
+    "command": "gradle build runGameTestServer --no-daemon --max-workers=2",
+    "exit_code": 0,
+    "required_tests": 21,
+    "passed": 21,
+    "failed": 0,
+    "server_log_summary": "All 21 required tests passed :)",
+    "build_summary": "BUILD SUCCESSFUL in 41s",
+    "log_sha256": "b0fc4bcb0b844dce9db51738bc890428663315228a78044a3153a22ca74a9bc1"
+  },
+  "new_assertion_scope": [
+    "healthy real NBT save/load preserves later semantic death and final removal",
+    "mid-death real NBT save/load preserves remaining countdown and swell; finalized ticking is inert",
+    "spawn renderer-facing timer follows actual non-default and dirty SynchedEntityData snapshots, including mid-spawn restoration and late tracking after completion"
+  ],
+  "review": {
+    "method": "independent source review and actual mapped 1.20.1 entity-data bytecode inspection",
+    "blocking_findings": 0
+  },
+  "environment_notes": [
+    "Initial Gradle transport used the environment proxy and existing OS Java trust store; no TLS validation was disabled",
+    "Initial asset preparation timed out on eight icons, then the same GameTest command completed after retry",
+    "Headless Forge startup logged non-fatal update-check/auth-service network warnings; test server ran and exited normally",
+    "Java deprecation and Gradle legacy-feature warnings remain"
+  ],
+  "not_proven": [
+    "current Bedrock parity or new timing constants",
+    "real client renderer or network wire delivery",
+    "exact final explosion-count idempotency",
+    "direct Bedrock reference measurements",
+    "Tank comparative acceptance"
+  ],
+  "retention": "Only hashes, source identities, compact results and limitations are tracked. Raw logs, worlds, credentials, assets and JARs are not included.",
+  "repository_suite": {
+    "command": "python -m pytest -q --basetemp=/dev/shm/wither-pytest-lifecycle-20261003",
+    "java": "17",
+    "passed": 3038,
+    "skipped": 435,
+    "failed": 0,
+    "errors": 0,
+    "duration_seconds": 225.35,
+    "log_sha256": "28020a411368cde36d9d62862bdce6a93e00e086aa6aad36866cb30773759cea",
+    "temporary_directory_reason": "Default temporary root carries an environment-created .git marker. A disposable Git-external temp directory satisfies the unchanged private-package destination guard."
+  },
+  "environment_attempts": [
+    {
+      "stage": "repository suite before Java 17 selection",
+      "passed": 2896,
+      "skipped": 550,
+      "failed": 7,
+      "errors": 20,
+      "log_sha256": "8d41a781e8c2c19ce78e7325aa267f49c0830a157390eb567059a0a994d5b1c5"
+    },
+    {
+      "stage": "repository suite with Java 17 and default temporary root",
+      "passed": 3037,
+      "skipped": 435,
+      "failed": 1,
+      "errors": 0,
+      "failure": "test_private_parent_validation_allows_real_external_directory",
+      "reason": "Environment-created .git marker on default temporary root",
+      "log_sha256": "4044279d2d257150f8a6a880d952658825c2690d01656bd34e09dfecb0ebb305"
+    }
+  ]
+}

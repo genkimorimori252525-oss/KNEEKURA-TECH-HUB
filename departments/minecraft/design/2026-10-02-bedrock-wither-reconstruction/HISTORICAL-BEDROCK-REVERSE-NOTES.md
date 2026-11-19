@@ -304,7 +304,7 @@ Historical Bedrock native code independently shows:
 4. hardcoded reload stores:
    - the current max health;
    - a half-health phase threshold;
-   - a health interval equal to maxHealth / 3;
+   - a health interval equal to maxHealth / 6;
    - a last-health cursor equal to maxHealth;
 5. after accepted damage, when health crosses the next stored interval, the firing-rate field is replaced with approximately half its previous integer value and the health cursor advances to that interval.
 
@@ -325,7 +325,7 @@ This is strong structural continuity, but current binary bodies are not availabl
 - **ACCEPTED order:** 3 normal + 1 dangerous.
 - **OBSERVED_CURRENT:** inter-volley cooldown = about 7 seconds / 140 game ticks.
 - **HISTORICAL_NATIVE_PROVISIONAL:** base fireRate = 20 ticks.
-- **HISTORICAL_NATIVE_PROVISIONAL:** health interval = maxHealth / 3.
+- **HISTORICAL_NATIVE_PROVISIONAL:** health interval = maxHealth / 6.
 - **HISTORICAL_NATIVE_PROVISIONAL:** crossing the next health interval halves the current fireRate, bounded to at least 1 in the Java adaptation.
 
 The provisional timing/equation lives only in `BedrockWitherVolleyController` so direct current-Bedrock measurement can replace it without touching projectile identity, targeting, phase or movement code.
@@ -361,3 +361,16 @@ KNEEKURA policy:
 - spawn countdown, visual invulnerability query and initial explosion remain distinct acceptance surfaces.
 
 This is another example of why historical Bedrock native bodies are structural/corroboration input, not unversioned current constants.
+
+
+## 2026-10-03 arithmetic correction and source-completion boundary
+
+The earlier ledger incorrectly decoded the native health interval as `maxHealth / 3`. The actual pinned `WitherBoss.c` lines 1773–1778 multiply by `715827883` with `SMMUL.W`, taking the signed high 32 bits, then apply the sign correction. For positive boss health this gives `maxHealth / 6`: 300→50, 450→75, 600→100. The preceding half-health threshold is separately `/2`.
+
+[Exact retained native block](https://github.com/PeratX/source/blob/ea30a251dd8fd16a7bd2e568209797a9c7be970f/Minecraft/Entity/WitherBoss.c#L1773-L1778)
+
+The damage block at lines 957–980 excludes Easy, uses a strict next-threshold comparison, halves the fire rate once per accepted damage event and advances its cursor once. Floating conversion uses `VCVTR`, whose rounding mode is not established by this text. A Java rounding/clamping choice must be labelled as an adapter. The first 20→10→5 progression does not depend on odd-value rounding.
+
+The Hard interval of 100 is consistent with the retained Wiki's 500/400 and 200/100 thresholds. The NBT reference's 75 value may describe Normal difficulty, but that explanation is an inference. Do not silently rewrite its documented bucket or claim a universal current native formula.
+
+The user has now chosen source-backed software completion without empirical Bedrock measurements. Historical values may therefore serve as explicit provisional execution policies; they still do not become verified current constants. See [source completion plan](SOURCE-COMPLETION-PLAN-2026-10-03.md). Historical active charge is 10 frames in lines 3157–3158, while the accepted technical report says approximately 20: retain 20 as the report-backed policy and preserve the disagreement.

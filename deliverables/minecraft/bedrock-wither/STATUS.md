@@ -1,59 +1,63 @@
 # Bedrock Wither — Current Status
 
-Updated: 2026-10-02  
-Lifecycle: **PROTOTYPE**  
-Milestone: **BWR-M1 — standalone boss reconstruction**
+Updated: 2026-10-04
+Lifecycle: **PROTOTYPE / source-backed software implementation**
+Milestone: **BWR-M1 — standalone boss code completion**
 
-## Current truth
+## Current completion boundary
 
-Completed:
-- Research/design is separated under `departments/minecraft/design/2026-10-02-bedrock-wither-reconstruction/`; product source remains under `deliverables/minecraft/bedrock-wither/mod/`.
-- Evidence priority is official Mojang/Microsoft definitions → current BDS structure → direct Bedrock observation → Bedrock technical documentation → community reports → Java prior art.
-- BEStyleWither is engineering prior art only and does not define Bedrock gameplay constants.
-- Mojang `bedrock-samples` Wither definitions are pinned at `46ba6ea985fb5a92d79a9419198f10dda14c199d`.
-- Current BDS 1.26.51.1 structure is mapped through LeviLamina generated headers; historical Bedrock reverse engineering is isolated as hypothesis/corroboration only.
-- Standalone `kneekura_bedrock_wither:bedrock_wither` exists without replacing `minecraft:wither`.
-- Official/native-resolved entity surface implemented: 1×3 collision box, follow range 70, effective runtime movement/flying speed 0.6 (public JSON still exposes 0.25), max-turn adaptation 180, undead family, fire/freezing immunity, water breathing, undead-source damage rejection, XP 50, boss HUD range 55 and sky darkening.
-- Target priority implemented from current Bedrock definitions: highest-damage Player path, hurt-by-target, then visible nearest non-undead/non-inanimate target.
-- Custom normal/dangerous skull entity owns Bedrock launch power 1.2/0.6, inertia 1.0, dangerous reflection gate, Bedrock→Java explosion-resistance translation with explicit unbreakable exceptions, explicit 5/8/12 impact damage, owner heal-on-kill=5, Wither II duration by difficulty, and power-1 explosion lifecycle.
-- Center-head projectile order is represented as 3 normal + 1 dangerous; ~7-second inter-volley cooldown is observed/current, while accelerated ticks-per-shot remain evidence-gated. Current NBT-style `lastHealthInterval` tracking uses monotonic 75-point buckets.
-- Official Bedrock model geometry, base scale 2 and body/head animation relationships are implemented without redistributing Bedrock texture bytes. AirAttack is synchronized separately from nativePhase and drives powered-shield visibility; the inflated armor geometry is implemented with Java's bundled Wither armor texture as a temporary asset substitute.
-- Native-like runtime state mirrors current BDS phase/shield/head/charge/projectile/movement/skeleton fields for observation.
-- Half-health transition uses native-like phase 1→0, one-shot latch, Normal/Hard skeleton count 3, Easy 0, projectile immunity in phase 2, and isolated provisional transition explosion power.
-- Phase-1 hurt reaction uses a non-resetting 20-tick timer, range-1 AABB destruction geometry (4×6×4) and one dangerous skull; exact fallback aim remains an explicit adaptation.
-- Phase-2 dash execution owns chargeDirection/chargeFrames/charging state, accepted 20-tick execution, range-2 destruction geometry (6×8×6) and 15 entity damage; exact current speed and preparation trigger remain measurement-gated.
-- Official Bedrock Nether Star loot contract is present.
-- Dedicated Forge CI passes build + GameTest.
-- Latest accepted runtime generation: source `da3ee83a14e3d110ffb34a0b442186a06e1cecae`, workflow run `37001222165`: **18/18 required GameTests passed** in isolated batches.
-- Bedrock-specific death lifecycle now preserves semantic death immediately while extending visual/removal ticking through a native-shaped death controller; current Mojang swell scaling and spawn/death invulnerability-skin timing are wired, while exact current death duration/XP timing remain provisional.
-- Special Wither repositioning has a measurement-gated controller boundary instead of guessed distance/speed constants.
-- Side-head scheduling now owns passive dangerous-skull timing, independent side targets and Normal/Hard targeted firing from Bedrock-native structure; attack range 30 remains historical-native provisional.
-- Three independent head pitch queries are server-authored and synchronized to the client model.
-- RED→GREEN history is preserved under `history/failure-repair/`.
+The user chose to finish the code without empirical Bedrock or Tank measurements. Ordinary combat now runs from source-backed, explicitly labelled policies rather than waiting for external measured values. Software acceptance is build, ordinary-runtime-path and regression verification; experimentally demonstrated Bedrock identity is not claimed.
 
-## Still unresolved / not claimed
+Current work is in [Draft PR81](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/pull/81), stacked on the existing Wither branch/PR75. The original branch remains unchanged. No merge or deployment is performed.
 
-- direct current-Bedrock reference measurements for remaining TBD values;
-- exact phase-1 special reposition/path generation;
-- exact current intra-volley cadence and health-speedup equation;
-- exact current passive dangerous-skull interval;
-- exact phase-transition action ordering and current binary confirmation of explosion power;
-- dash preparation trigger and exact speed/collision termination;
-- per-`WitherAttackType` current block-destruction predicate differences;
-- exact dangerous-skull reflection vector;
-- powered-shield query ↔ native shield-health relationship and armor-layer timing;
-- spawn sequence is implemented as the current 220-tick target; direct Bedrock comparative timing/visual acceptance remains pending;
-- death sequence duration/explosion/swell/flicker equations;
-- Tank comparative acceptance.
+## Implemented and exercised
 
-## Next action
+- Independent `kneekura_bedrock_wither:bedrock_wither`; vanilla Java Wither is unchanged. Forge 1.20.1 / 47.2.0 / Java 17 remains the anchor
+- Difficulty health 300/450/600, 1×3 collision box, follow range 70, movement/flying attribute 0.6, boss HUD 55/sky darkening, undead family, fire/freezing/water contracts and undead-source rejection
+- Official persistent-boss behavior prevents ordinary distance/idle-random despawning, including legacy false-persistence NBT; the earlier Peaceful-removal branch is preserved
+- Highest-damage eligible Player, retaliation, then visible nearest eligible target. Creative/spectator attackers cannot retain priority-1 targeting or enter immediate combat controllers
+- Pinned public supplemental goals are now present: `behavior.float` priority 1, `look_at_target` priority 5 and `look_at_player` priority 6. The look adapter preserves public distance 8 / probability 0.02 and the Wither-specific 1..2 second look window without replacing the dedicated three-head controller
+- Public `movement.basic max_turn=180` is now applied to both yaw and pitch through `BedrockFlyingMoveControl`; Java's inherited 90-degree flying-yaw cap is no longer used
+- Public `can_climb`, `pushable_by_entity` and `pushable_by_block` coexist: climbable blocks use inherited LivingEntity climbing, entity pushes remain enabled while climbing, and piston/shulker push behavior retains Java `PushReaction.NORMAL`
+- Ordinary phase-1 ascent, target-relative reposition, hover and 3-normal/1-dangerous center volleys; finite failed-path recovery
+- Per-shot acceleration uses an explicit historical-native fallback, with the corrected maxHP/6 interval. The documented 75-HP NBT bucket is separate. Phase reset, large-hit, healing and reload policies are tested
+- Reported 140-tick inter-volley pause is independent of per-shot cadence. Phase1 then repositions/settles; phase 2 emits its next projectile after the selected 140-tick pause
+- Half-health descent precedes one explosion and difficulty-aware skeleton summon; phase 2 projectile immunity and independent AirAttack shield presentation
+- Ordinary phase 2 continues volleys, prepares a charge after alternate bursts, executes bounded target-directed motion/destruction and resumes firing. Invalid/lost targets, unbreakable collisions, nonfinite vectors and spawn/death overrides are guarded
+- Side-head scheduling runs outside protected movement/transition/charge gates in both combat phases
+- Actual skull collisions dispatch direct damage/effects once, preserve owner kill healing, and use source-defined zero gravity and air/liquid inertia. Owner launch grace and non-damaging projectile reflection are exercised; prior Forge skipped impacts are respected
+- Pinned official body/swell/skin math and white/blue armor UV passes are wired through production-used presentation functions. Java texture/tint substitutes are explicitly documented
+- Accepted death uses native phase0, cancels residual combat motion and runs the historical-provisional visual countdown/flicker. Save/reload preserves progression; positive-health Forge cancellation preserves the live combat state
+- Ordinary player-attributed death/loot/XP events, actual 50 XP and one Nether Star, and reward idempotency remain covered. The star's documented unlimited lifetime survives item NBT reload
+- Independent-boss kill credit now restores Wither Rose behavior lost by intentionally not inheriting Java `WitherBoss`: place the rose when `mobGriefing` and survival rules permit, otherwise drop exactly one rose item
+- Wither sound integration now exposes ambient/hurt/death sounds and uses Java 1.20.1 Wither level-event bridges for block break (1022), spawn (1023) and skull shoot (1024)
+- Renderer-facing spawn ticks and independent head pitch remain synchronized through actual entity-data snapshot/dirty-data boundaries
+- Transient movement/preparation/charge reloads recover safely; volley alternation, rate cursor and pending transition work persist; obsolete hurt-state saves normalize into valid combat
 
-1. reconstruct the semantic/visual death lifecycle from current BDS death ECS + version-labelled native evidence;
-2. implement the special `wither_random_attack_pos_goal` boundary without inventing unresolved position/timing constants;
-3. bind remaining shield/death visual values only where current evidence is strong;
-4. move unresolved firing-speed, dash-speed and special-movement constants into Tank/direct Bedrock measurement;
-5. perform paired Tank acceptance before any final parity claim.
+## Verification
 
-## Safety against stale handoff
+The source-completion generation originally passed **60/60 required Forge GameTests**. The first parity-polish source `a2d838cf50052d3fb0e1dfeb3a826084e8e6da6b` raised that to 64. The public-contract-closure code source `020de6738646076ebb2dcbddaf3555df9c5f7791` now passes **66/66 required Forge GameTests** in hosted run `37149862840`: the prior 64 plus max-turn and climb/pushability regressions. The same exact code source passed the complete hosted Tech Hub suite in run `37149867531` with **3141 passed / 332 skipped / 8 warnings**.
 
-This file is the current product truth. Old plans/checkpoints do not override it. Any later product change that materially advances or invalidates this status must update this file or explicitly record why it remains current.
+[Current source-completion verification receipt](evidence/source-completion-2026-10-03.json) records the original 60-test completion. [Parity-polish receipt](evidence/parity-polish-2026-10-04.json) now records both audit passes: goals/sounds/Wither-Rose and the final public max-turn/pushability closure, with exact code source and hosted checks. [PR81](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/pull/81) remains the publication line.
+
+Historical hosted checkpoint `6e2faafcb5789ce5f3d8c355bf208d037cf96646` passed [24 GameTests](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/37138822902) and [3141 Python tests /332 skipped](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/37138825757). Those are prior-generation results, not evidence for the current parity-polish source.
+
+## Declared reconstruction choices
+
+See [ADOPTION](ADOPTION.md) and the [source audit](../../../departments/minecraft/design/2026-10-02-bedrock-wither-reconstruction/SOURCE-AUDIT-2026-10-03.md) for exact provenance/version limits.
+
+- Reposition radius10, uniform-angle choice and Java flying navigation remain declared adapters; native-shaped modifier15 and stop delay20 are historical inputs. The separate public `movement.basic max_turn=180` contract is now honored for both yaw and pitch
+- Aerial height5/damping0.6/ascent0.5 are historical-native inputs integrated into Java movement
+- Dash preparation20, horizontal speed2 and recovery20 are historical-shaped policies; active20 is the retained technical report, disagreeing with historical active10
+- A finite 120-tick path budget and 100-tick/void-bounded descent fallback are Java safety policies
+- Firing rounding/minimum1 and phase cursor reset are explicit Java adaptations; the current exact Bedrock acceleration equation is not claimed
+- Reflection vector/speed and same-vehicle grace use documented Java adaptations; zero configured reflection immunity does not prove native repeated-reflector behavior
+- Death200/power7/swell/overlay/flicker are historical-provisional policies. Forge reward timing remains ordinary and is not made to mimic delayed historical rewards
+- Native ShieldHealth remains a non-authoritative diagnostic field; no unsupported finite shield pool is invented
+- Java 1.20.1 Wither sound events are now wired as compatibility bridges, but exact Bedrock audio assets/mix/attenuation/timing, exact Bedrock textures, particles, live client/wire rendering and ServerPlayer advancement grants are not established by these headless tests
+
+## Handoff / next action
+
+Review the current Draft PR and its exact-head checks. No empirical measurement, Tank run, home runner or optional vanilla replacement is needed to complete the requested source-backed code pass. Unknown current-native details remain disclosed limitations, not permanently unreachable code paths.
+
+Read [current plan](../../../departments/minecraft/design/2026-10-02-bedrock-wither-reconstruction/SOURCE-COMPLETION-PLAN-2026-10-03.md), [acceptance](../../../departments/minecraft/design/2026-10-02-bedrock-wither-reconstruction/ACCEPTANCE.md) and ADOPTION before changing these policies. Preserve source identity, independent review and complete regression checks for later changes.
