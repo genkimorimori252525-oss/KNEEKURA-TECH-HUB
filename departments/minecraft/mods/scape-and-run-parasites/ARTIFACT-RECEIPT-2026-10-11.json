@@ -1,0 +1,61 @@
+{
+  "schema": "kneekura.mod-artifact-receipt.v1",
+  "date": "2026-10-11",
+  "acquisition": "user-provided conversation upload; locally inspected; no redistributed JAR",
+  "artifact": {
+    "filename": "SRParasites-1.12.2v1.9.21.jar",
+    "bytes": 27022807,
+    "sha256": "f803ab3882bc8047858a23e2376aaa8fb87d7e54a324b9183b4a033ee076ddea",
+    "jar_entries": 2465,
+    "class_files": 868,
+    "png_files": 621,
+    "ogg_files": 373,
+    "mcmod_info": {
+      "modid": "srparasites",
+      "name": "Scape and Run Parasites",
+      "version": "1.9.21",
+      "minecraft": "1.12.2",
+      "authors": [
+        "Dhanantry"
+      ],
+      "declared_dependencies": []
+    }
+  },
+  "source_tracking": {
+    "track": "COMPARATIVE-original-stable",
+    "platform": "Minecraft 1.12.2 Forge",
+    "anchor_destination": "Minecraft 1.20.1 Forge (NOT analyzed/tested)",
+    "frontier": "1.10.9 Alpha metadata only; no Alpha JAR analyzed",
+    "official_release_pointer": "https://www.curseforge.com/minecraft/mc-mods/scape-and-run-parasites/files/5370258",
+    "release_byte_equivalence": "NOT_VERIFIED (uploaded JAR not compared against downloaded official release)",
+    "license": "Original project All Rights Reserved; raw JAR/assets/decompiled source excluded from Git"
+  },
+  "bounded_static_review": {
+    "bytecode_tool": "JDK javap -p -c -constants",
+    "indexed_class_subset": 306,
+    "method_body_index_count": 3944,
+    "derived_entity_registry_mappings": 125,
+    "runtime_verification": "NOT_RUN",
+    "compilation_for_1_20_1": "NOT_RUN",
+    "source_binary_equivalence": "NOT_ESTABLISHED",
+    "category_scope": [
+      "ranged AI and volley timings",
+      "projectile hit effects and homing",
+      "bomb/area attack",
+      "flight/evasion AI",
+      "adaptive resistances and colony data",
+      "select world mutation and restoration"
+    ]
+  },
+  "primary_evidence_locator_format": "SHA256(JAR) + fully-qualified .class entry + method signature; no original class bytes published",
+  "key_anchors": [
+    "entity/ai/EntityAIAttackProjectile.class#func_75246_d,shoot",
+    "entity/ai/misc/EntityPMalleable.class#hasResistance,addResistance,func_70097_a,func_70014_b",
+    "util/ParasiteEventEntity.class#checkColony,spawnNext",
+    "world/SRPWorldData.class#addGlobalResistance,resetGlobalAdaptation",
+    "util/handlers/SRPEventHandlerBus.class#setNewParasiteTask",
+    "entity/projectile/EntityProjectileHomming.class#func_70071_h_,bulletHit",
+    "entity/ai/EntityAIAncientSummon.class#func_75246_d",
+    "entity/ai/misc/EntityPStationaryArchitect.class#freeDead"
+  ]
+}
