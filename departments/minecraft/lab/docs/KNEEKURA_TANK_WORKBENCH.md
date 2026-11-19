@@ -46,4 +46,7 @@ capabilitiesは`{"queries":["path_search","path_returned_nodes","movement_contro
 
 実機品質維持・性能と補正なし対照画像の受入は別途記録する。Nodeテストや単独HTMLのブラウザ確認を実機受入へ読み替えない。
 
+通常の水槽は[軽量MOD構成](KNEEKURA_TANK_CORE_PROFILE.md)を使用できる。
+互換試験では全構成へ戻し、実際のロードMODと実験入力の差を記録する。
+
 反復起動の保存先と既存の検証を維持する設定は[local iterationの手順・有限性能記録](KNEEKURA_TANK_FAST_ITERATION.md)を参照する。格子OFFの比較で観察用の明るさ補正もOFFになる条件を明示し、描画補正とworld光量を混同しない。
