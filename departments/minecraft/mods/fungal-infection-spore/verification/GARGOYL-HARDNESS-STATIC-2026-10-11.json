@@ -1,0 +1,21 @@
+{
+  "checks": {
+    "checks_candidate_hardness_with_center_blockpos_twice": true,
+    "may_destroy_candidate_block": true,
+    "retrieves_state_at_candidate_blockpos": true,
+    "uses_falling_block_after_hardness": true
+  },
+  "class_internal_path": "com/Harbinger/Spore/Sentities/EvolvedInfected/Gargoyl.class",
+  "class_sha256": "ff93579d0247e45fc2ca075ff55a5db6184fb47f4eee459c0e395e8a206c5780",
+  "direct_observation": "BlockState read at candidate BlockPos but getDestroySpeed called with original center BlockPos; original candidate state and queried coordinates may be inconsistent",
+  "fix_verified": "NO",
+  "hardness_with_center_position_call_count": 2,
+  "issue_reported_crash": "REPORTED",
+  "jar_sha256": "d20c4be6606f9752ecfd964eba625363eb76a28e327d67fe6dda4be748401489",
+  "method": "SmashStomp(Level,BlockPos,double,double)",
+  "runtime_reproduction": "NOT_RUN",
+  "schema": "kneekura.spore.gargoyl-hardness-bytecode.v1",
+  "status": "PASS_STATIC_CONTRACT",
+  "upstream_issue": "https://github.com/DynamicTreesTeam/DynamicTrees/issues/1201",
+  "upstream_repair_diff": "NOT_FOUND_OR_NOT_REVIEWED"
+}

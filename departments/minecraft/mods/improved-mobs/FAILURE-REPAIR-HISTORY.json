@@ -1,0 +1,223 @@
+{
+  "format": "kneekura.failure-history.v1",
+  "repository": "https://github.com/Flemmli97/ImprovedMobs",
+  "scope": {
+    "track": "ANCHOR",
+    "head_revision": "029b8c20302a76bac1af9f5140e2abb6f73fea5c",
+    "history_window": "Selected 2022–2026 issue/commit paths: target-selector concurrency; 1.20.1 Epic Fight/Drowned; old pathfinding Mixin conflict; recent open Frontier swim report",
+    "queries": [
+      "pathfinding",
+      "breaking",
+      "crash",
+      "target goal",
+      "epic fight",
+      "lithium"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "inspected_evidence_ids": [
+      "commit-9c4",
+      "before-9c4",
+      "after-9c4",
+      "issue-283",
+      "commit-7366",
+      "before-7366",
+      "after-7366",
+      "issue-131",
+      "commit-e048",
+      "issue-274",
+      "issue-304",
+      "issue-364"
+    ],
+    "deferred": [
+      "full source and binary equivalence",
+      "complete issue/PR history",
+      "immuntable raw evidence CAS import",
+      "live execution"
+    ],
+    "unavailable": [
+      "original runtime logs not acquired"
+    ]
+  },
+  "note": "Research-only JSON. Exact adapter CAS index_snapshot_id/document_id missing, therefore NOT imported; do not treat as schema-validated history artifact.",
+  "cases": [
+    {
+      "case_id": "IM-2024-TARGET-GOALS",
+      "origin": "UPSTREAM",
+      "track": "ANCHOR",
+      "environment": {
+        "minecraft": "1.20.1",
+        "loader": "Forge",
+        "reported_mod_version": "1.12.4 change history"
+      },
+      "affected_symbols": [
+        "EventCalls.onEntityLoad",
+        "GoalSelectorMixin",
+        "NearestAttackableTargetGoal"
+      ],
+      "before_revision": "e18ec801ef29991e59558190af72c40faf469b86",
+      "after_revision": "9c4c79712c12231c0bc8365e12acb663d70dd1a3",
+      "evidence": [
+        {
+          "id": "commit-9c4",
+          "role": "diff",
+          "url": "https://github.com/Flemmli97/ImprovedMobs/commit/9c4c79712c12231c0bc8365e12acb663d70dd1a3"
+        },
+        {
+          "id": "before-9c4",
+          "role": "before_code",
+          "url": "https://github.com/Flemmli97/ImprovedMobs/blob/e18ec801ef29991e59558190af72c40faf469b86/common/src/main/java/io/github/flemmli97/improvedmobs/events/EventCalls.java"
+        },
+        {
+          "id": "after-9c4",
+          "role": "after_code",
+          "url": "https://github.com/Flemmli97/ImprovedMobs/blob/9c4c79712c12231c0bc8365e12acb663d70dd1a3/common/src/main/java/io/github/flemmli97/improvedmobs/events/EventCalls.java"
+        }
+      ],
+      "causal_chain": [
+        "Before: remove existing villager-target goal and insert replacement",
+        "After: alter existing goal's targeting rules and insert only if absent"
+      ],
+      "symptom": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Possible concurrent exception during target goal replacement",
+        "evidence_ids": [
+          "commit-9c4"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "UNKNOWN",
+        "text": null,
+        "reason": "No pinned stack trace/reproduction obtained"
+      },
+      "root_cause": {
+        "basis": "INFERENCE",
+        "text": "Removing a Goal during active selector iteration risks concurrent modification",
+        "evidence_ids": [
+          "before-9c4",
+          "after-9c4"
+        ]
+      },
+      "repair": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "Stop removing target goal; modify matching existing Goal and add only when necessary",
+        "evidence_ids": [
+          "commit-9c4",
+          "after-9c4"
+        ]
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Scoped goal overlays should avoid destructive mutation of active selector collections",
+        "evidence_ids": [
+          "commit-9c4"
+        ]
+      },
+      "reproduction": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      }
+    },
+    {
+      "case_id": "IM-2024-EPICFIGHT-MOUNT",
+      "origin": "UPSTREAM",
+      "track": "ANCHOR",
+      "environment": {
+        "minecraft": "1.20.1",
+        "loader": "Forge",
+        "forge": "47.3.11",
+        "mod_version": "1.13.0",
+        "tenshilib": "1.7.6",
+        "other_mod": "Epic Fight 20.9.5"
+      },
+      "affected_symbols": [
+        "FlyRidingGoal",
+        "WaterRidingGoal",
+        "RiddenSummonEntity",
+        "EventCalls.onEntityLoad"
+      ],
+      "before_revision": "ba2306a03e0fb064c0bb85d3274405761f4fabd1",
+      "after_revision": "7366c81f37d9ffa74b78f36194c6f2c5a23e8505",
+      "evidence": [
+        {
+          "id": "issue-283",
+          "role": "issue",
+          "url": "https://github.com/Flemmli97/ImprovedMobs/issues/283"
+        },
+        {
+          "id": "commit-7366",
+          "role": "diff",
+          "url": "https://github.com/Flemmli97/ImprovedMobs/commit/7366c81f37d9ffa74b78f36194c6f2c5a23e8505"
+        },
+        {
+          "id": "before-7366",
+          "role": "before_code",
+          "url": "https://github.com/Flemmli97/ImprovedMobs/blob/ba2306a03e0fb064c0bb85d3274405761f4fabd1/common/src/main/java/io/github/flemmli97/improvedmobs/ai/FlyRidingGoal.java"
+        },
+        {
+          "id": "after-7366",
+          "role": "after_code",
+          "url": "https://github.com/Flemmli97/ImprovedMobs/blob/7366c81f37d9ffa74b78f36194c6f2c5a23e8505/common/src/main/java/io/github/flemmli97/improvedmobs/ai/FlyRidingGoal.java"
+        }
+      ],
+      "causal_chain": [
+        "Reported Drowned tick crash under Epic Fight",
+        "Before: immediate passenger mount/dismount calls from Goal",
+        "After: deferred scheduled mount/dismount consumed in mount entity tick"
+      ],
+      "symptom": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Drowned ticking entity crash in 1.20.1 Forge with Epic Fight",
+        "evidence_ids": [
+          "issue-283"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Spawning Drowned with Epic Fight 20.9.5 / Improved Mobs 1.13.0",
+        "evidence_ids": [
+          "issue-283"
+        ]
+      },
+      "root_cause": {
+        "basis": "INFERENCE",
+        "text": "Reentrant mount lifecycle during AI/pathing may conflict with other mod's transitions; exact stack cause unverified",
+        "evidence_ids": [
+          "issue-283",
+          "commit-7366"
+        ]
+      },
+      "repair": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "Scheduled ride/dismount performed during mount tick instead of directly in goal",
+        "evidence_ids": [
+          "commit-7366",
+          "before-7366",
+          "after-7366"
+        ]
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Use bounded deferred state transitions for vehicles and cross-mod AI interactions",
+        "evidence_ids": [
+          "commit-7366"
+        ]
+      },
+      "reproduction": {
+        "state": "REPORTED",
+        "evidence_ids": [
+          "issue-283"
+        ]
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      }
+    }
+  ]
+}

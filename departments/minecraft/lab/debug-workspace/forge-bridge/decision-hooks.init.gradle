@@ -1,0 +1,25 @@
+// Explicit ANCHOR development debug source-set hooks. No normal output is changed.
+gradle.beforeProject { project ->
+    if (project.path == ':') {
+        project.afterEvaluate {
+            if (System.getenv('KNEEKURA_DEBUG_ENABLED') != '1'
+                    || System.getenv('KNEEKURA_DEBUG_DECISION_HOOKS') != '1') {
+                throw new GradleException('EXPLICIT_DECISION_DEBUG_LAUNCH_REQUIRED')
+            }
+            def debugSources = project.sourceSets.findByName('kneekuraDebug')
+            def resourcesPath = System.getenv('KNEEKURA_DEBUG_DECISION_RESOURCES')
+            if (debugSources == null || resourcesPath == null
+                    || !project.file(resourcesPath).isDirectory()
+                    || !project.file(resourcesPath + '/kneekura-decision.mixins.json').isFile()) {
+                throw new GradleException('DECISION_DEBUG_SOURCE_SET_OR_RESOURCES_MISSING')
+            }
+            debugSources.resources.srcDir project.file(resourcesPath)
+            project.tasks.configureEach { task ->
+                if (task.name == 'runClient') {
+                    task.args '--mixin.config', 'kneekura-decision.mixins.json'
+                }
+            }
+            project.logger.lifecycle('KNEEKURA bounded Decision hooks explicitly configured')
+        }
+    }
+}
