@@ -20,6 +20,7 @@
 | 12 | [Warfare Wings](../mods/warfare-wings/README.md) | aircraft/content addon | user-supplied 1.1.4 JAR `dc302959…` pinned; static flight/weapon/data analysis complete for this batch; supplied-binary runtime and public-release equivalence unresolved | current public project/release lineage discovered only; exact FRONTIER source/binary snapshot not yet pinned | IN_PROGRESS (static / Kneekura-bird bridge / history partial) |
 | 13 | [Immersive Aircraft](../mods/immersive-aircraft/README.md) | aircraft physics / vehicle runtime dependency | official 1.3.3 Forge release fixed by Modrinth `GsVmbbkj`; source tag `550b38d3…`; physics/runtime boundary mapped; compiled-JAR byte equivalence unresolved | live 1.20.1 branch is 29 commits beyond the ANCHOR and materially changes core vehicle classes | IN_PROGRESS (physics / Kneekura-bird bridge / history partial) |
 | 14 | [Invasion Mod](../mods/invasion-mod/README.md) | siege / mob AI / pathfinding Mod | `aaa6812b` pinned — MC 1.20.1 legacyForge/Forge+NeoForge source; runtime/binary unresolved | `fce5d30` pinned — MC 26.3 / NeoForge | IN_PROGRESS (legacy JAR + siege systems mapped) |
+| 15 | [Jujutsu Craft](../mods/jujutsu-craft/README.md) | content/gameplay / combat Mod | exact distributed JAR ver50.1 pinned — MC 1.20.1 / Forge 47+ / SHA-256 094247a3… | latest public distribution is same ver50.1; public source not found | IN_PROGRESS (static evidence-backed; runtime NOT_RUN) |
 
 ## Rules
 
