@@ -1,0 +1,56 @@
+name: Optional reverse-engineering tools
+on:
+  pull_request:
+    paths:
+      - 'departments/minecraft/mod-ai/reverse-engineering/**'
+      - 'departments/minecraft/mod-ai/REVERSE-ENGINEERING.md'
+      - '.github/workflows/optional-re-tools.yml'
+  workflow_dispatch:
+    inputs:
+      real_tools:
+        description: Explicitly download tools and run authored-fixture smoke
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  contract:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Opt-in contracts only - no Java Node npm or provider installation
+        run: python -m unittest discover -s departments/minecraft/mod-ai/reverse-engineering/tests -p "test_*.py" -v
+  real-tool-smoke:
+    if: github.event_name == 'workflow_dispatch' && inputs.real_tools
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.11.0'
+      - name: Explicit authored-fixture and REA CLI acceptance
+        run: python departments/minecraft/mod-ai/reverse-engineering/smoke.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: re-smoke-summary
+          path: re-smoke-summary.json
+          if-no-files-found: error
