@@ -62,7 +62,7 @@ test('bounded crop keeps raw camera source and rejects out-of-bounds or enormous
 });
 test('derived persistence cannot traverse symlinks or rewrite finalized evidence',async t=>{
   const f=await fixture(t);const c=await compiler.compileVisualPacket(f);
-  await mkdir(path.join(f.runDir,'elsewhere')); await symlink(path.join(f.runDir,'elsewhere'),path.join(f.runDir,'evidence/derived'));
+  await mkdir(path.join(f.runDir,'elsewhere')); await symlink(path.join(f.runDir,'elsewhere'),path.join(f.runDir,'evidence/derived'),process.platform==='win32'?'junction':'dir');
   await assert.rejects(compiler.persistVisualPacket({store:f.store,compiled:c}),/SYMLINK/);
   const g=await fixture(t); const d=await compiler.compileVisualPacket(g);
   await writeFile(g.store.finalizationFile,'{}');

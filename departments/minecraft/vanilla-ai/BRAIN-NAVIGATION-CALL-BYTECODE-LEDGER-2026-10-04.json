@@ -1,0 +1,154 @@
+{
+  "schema": "kneekura.original-brain-navigation-call-source/v1",
+  "scope": "EXACT_KNOWN_SINK_CALL_WRITE_VIRTUAL_RETURN_AND_CACHED_FIELDS_NOT_COMPLETE_BRAIN_DECISION_OR_ARRIVAL",
+  "minecraft": "1.20.1",
+  "forge": "47.2.0",
+  "namespace": "Mojmap",
+  "minecraft_artifact_sha256": "1b6e6a166fbc06c6d2422cd5cf515a508977479045095363d5b4c8b89cc7b4eb",
+  "disassembly_provider": {
+    "name": "jdk-javap-v1",
+    "options": [
+      "-private",
+      "-s",
+      "-c",
+      "-l",
+      "-verbose"
+    ],
+    "executable_hash": "bd5a9f99365fd432f79162f4ed9ca9b956c78cc81dfb6962adb6d207075711fb",
+    "jdk_components": {
+      "release": "00d3211a59bc9f2577f93962e9210de8578c49fd2625022cb38606817d3a71f9",
+      "lib/modules": "81f0e1bb87cd303ddcce2b216e27da416bd20799d9a9811ea1b070123cefff0f"
+    },
+    "jdk_image_status": "HASHED"
+  },
+  "classes": [
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/MoveToTargetSink",
+      "class_hash": "e2b60638bb381a1d96702bea9701e594c001ae7138b8134b3ecbdee8f0771dae",
+      "disassembly_hash": "7cd6e7de45969754ab5ec0163cd39f89887b25b27a9d061dad8ee46386c4e846",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/brain-result-r50-source/MoveToTargetSink.javap.txt",
+      "selected_members": [
+        {
+          "kind": "FIELD",
+          "name": "path",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/Path;",
+          "line_start": 357,
+          "line_end": 363,
+          "slice_sha256": "59ab47b0d9bffaa14b08a83f6c7128a657e500c1e6c0a3aa544b85198d31eca1"
+        },
+        {
+          "kind": "FIELD",
+          "name": "lastTargetPos",
+          "descriptor": "Lnet/minecraft/core/BlockPos;",
+          "line_start": 364,
+          "line_end": 370,
+          "slice_sha256": "afc2e905ab61a9cbc6c4f5e12ec680ab2490ba06e86a9183dbb1f2b99b3a474c"
+        },
+        {
+          "kind": "FIELD",
+          "name": "speedModifier",
+          "descriptor": "F",
+          "line_start": 371,
+          "line_end": 374,
+          "slice_sha256": "f4e88cb75e50e64524e1cc866d53bce55502c680a19a3e3aea514f9c31635db3"
+        },
+        {
+          "kind": "METHOD",
+          "name": "stop",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/Mob;J)V",
+          "line_start": 593,
+          "line_end": 657,
+          "slice_sha256": "dc2a12ecd7047d68f018110809222e5bc8cee009309bfe35e0dd251f594b4fea"
+        },
+        {
+          "kind": "METHOD",
+          "name": "start",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/Mob;J)V",
+          "line_start": 658,
+          "line_end": 689,
+          "slice_sha256": "829a648d950bb67fd6d46907c42b1e26c93a3ee20a31d382d90aa2739f4d6cde"
+        },
+        {
+          "kind": "METHOD",
+          "name": "tick",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/Mob;J)V",
+          "line_start": 690,
+          "line_end": 794,
+          "slice_sha256": "bb3d02cf7d9c0a6fecae902b1cb6f62996eb33d76bbee3601a7fbab40b1cd6cd"
+        },
+        {
+          "kind": "METHOD",
+          "name": "tryComputePath",
+          "descriptor": "(Lnet/minecraft/world/entity/Mob;Lnet/minecraft/world/entity/ai/memory/WalkTarget;J)Z",
+          "line_start": 795,
+          "line_end": 943,
+          "slice_sha256": "42761525a57a231cc4c4679153ef121dcfc9c71b61e116f05cd6e19430c6c117"
+        },
+        {
+          "kind": "METHOD",
+          "name": "stop",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "line_start": 1044,
+          "line_end": 1061,
+          "slice_sha256": "dfdc710ff5f2905df6c436f9c07dd551b7089aa86933307f52b428e40b05a787"
+        },
+        {
+          "kind": "METHOD",
+          "name": "tick",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "line_start": 1062,
+          "line_end": 1079,
+          "slice_sha256": "e71aab9f3734fe07563b14296f155359152b88d24c3e58b4d6ef9f2dc8f277d0"
+        },
+        {
+          "kind": "METHOD",
+          "name": "start",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "line_start": 1080,
+          "line_end": 1096,
+          "slice_sha256": "811a84d0e9c6b06c563c678e477da156bb7f9475d10e4cccd9dbfda2840db542"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/Behavior",
+      "class_hash": "bb73feb84c79565213f7a6001c47d0e1cc2fc7d947a89d99ae5c70b5e058e7dd",
+      "disassembly_hash": "a14ed1bb37e1bbba57916781421c53353d6bff2b8346758b240b0a2d3968f6d0",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/goal-brain-research-r47-r3/Behavior.javap.txt",
+      "selected_members": [
+        {
+          "kind": "METHOD",
+          "name": "tryStart",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)Z",
+          "line_start": 335,
+          "line_end": 406,
+          "slice_sha256": "7ca1939e1c5216e8d3091a03ec3ab5e6a5c08de292b34d2cd5f357f9376589ea"
+        },
+        {
+          "kind": "METHOD",
+          "name": "start",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "line_start": 407,
+          "line_end": 426,
+          "slice_sha256": "df0dc227b1e9f780866e1475c5c707f62015eaa0566e9b143f40784fe2f66a71"
+        },
+        {
+          "kind": "METHOD",
+          "name": "tickOrStop",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "line_start": 427,
+          "line_end": 476,
+          "slice_sha256": "973e7969146f0fd85100b96e2b856836d95f60885cf3301eb0672d4b9eba278a"
+        },
+        {
+          "kind": "METHOD",
+          "name": "tick",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "line_start": 477,
+          "line_end": 496,
+          "slice_sha256": "ef658568139cee616e2b56e5237775b36d973faff01b46cff2c51760ed321a7f"
+        }
+      ]
+    }
+  ]
+}
