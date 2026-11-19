@@ -13,10 +13,13 @@ PR #80 is actively changing `departments/minecraft/lab/debug-workspace` and `dep
 - `contracts.mjs` — common finite-vector, intent, route-generation, landing-reservation and target-memory contracts.
 - `tier-a.mjs` — Hero/large-flyer simulator: direct-first routing, path fallback, stale async-route rejection, validated landing, contact completion, bounded recovery, LOS memory.
 - `tier-b.mjs` — Common hostile flyer: cheap direct steering, collision probe, CHASE/CHARGE, bounded recovery.
+- `observation-adapter.mjs` — read-only Tier A/Tier B model observation bridge with explicit non-runtime semantics.
+- `OBSERVATION-ADAPTER-2026-10-04.md` — mapping to PR #80 Decision vocabulary and strict evidence boundary.
 - `tests/contracts.test.mjs` — shared contract tests.
 - `tests/tier-a.test.mjs` — Tier A behavior tests.
 - `tests/tier-b.test.mjs` — Tier B behavior tests.
 - `tests/failure-regressions.test.mjs` — named regressions derived from Saint's Dragons, Cosy/Fowl, Ice and Fire/Dragon Fix, Book of Dragons and the synthesis invariants.
+- `tests/observation-adapter.test.mjs` — immutability, UNKNOWN/NOT_MODELED handling, tier boundaries and non-evidence promotion guards.
 
 ## Run
 
@@ -24,6 +27,8 @@ From this directory:
 
 ```bash
 node --test tests/*.test.mjs
+# or
+npm test
 ```
 
 The prototype uses only Node.js ESM built-ins and `node:test`.
@@ -55,3 +60,10 @@ Those belong to a later LAB adapter/runtime acceptance. The intended next integr
 - `landingId` -> landing candidate/reservation observation;
 - `targetVisible` / target memory status -> perception/LOS evidence;
 - `recoveryAttempts` -> movement recovery diagnostics.
+
+
+## Offline observation adapter
+
+The prototype now includes a read-only model-observation adapter. It deliberately does **not** emit PR #80's source-proven runtime snapshot schema. See [OBSERVATION-ADAPTER-2026-10-04.md](OBSERVATION-ADAPTER-2026-10-04.md).
+
+Its output uses the same high-level Decision stage vocabulary for future mapping while marking every fact as offline model state, with no runtime evidence, retained source observation IDs or causal claims.
