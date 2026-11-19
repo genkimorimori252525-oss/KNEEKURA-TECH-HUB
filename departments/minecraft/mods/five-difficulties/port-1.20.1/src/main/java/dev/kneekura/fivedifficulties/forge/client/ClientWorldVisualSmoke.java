@@ -64,7 +64,7 @@ public final class ClientWorldVisualSmoke {
     public static final String PASS_MARKER = "FIVE_DIFFICULTIES_P7B_WORLD_SMOKE_PASS";
     private static final String LEVEL_NAME = "five_difficulties_p7b_smoke";
 
-    private enum Phase { BOOT, WAIT_WORLD, SETTLE, FIRE, SHOOT_HOMING, P8_SPAWN, P8_SHOT, P9_SPAWN, P9_SHOT, P10_SPAWN, P10_SHOT, P11_SPAWN, P11_SHOT, P12_SPAWN, P12_SHOT, P15_OPEN, P15_SHOT, START_STOP, SHOOT_STOP, DONE }
+    private enum Phase { BOOT, WAIT_WORLD, SETTLE, FIRE, SHOOT_HOMING, P8_SPAWN, P8_SHOT, P9_SPAWN, P9_SHOT, P10_SPAWN, P10_SHOT, P11_SPAWN, P11_SHOT, P12_SPAWN, P12_SHOT, P15_OPEN, P15_SHOT, P16_SPAWN, P16_SHOT, START_STOP, SHOOT_STOP, DONE }
 
     private static final int[] P8_GRID_FORMS = {
             X1ShotTables.FORM_SMALL, X1ShotTables.FORM_MEDIUM, X1ShotTables.FORM_PEARL, X1ShotTables.FORM_CIRCLE,
@@ -189,6 +189,19 @@ public final class ClientWorldVisualSmoke {
                         requestShot(mc, "p15_crafting.png");
                     } else if (ticks > 15) {
                         server(mc, (level, player) -> player.closeContainer());
+                        next(Phase.P16_SPAWN);
+                    }
+                }
+                case P16_SPAWN -> {
+                    server(mc, ClientWorldVisualSmoke::spawnP16);
+                    next(Phase.P16_SHOT);
+                }
+                case P16_SHOT -> {
+                    if (++ticks == 12) requestShot(mc, "p16_items.png");
+                    else if (ticks > 12) {
+                        server(mc, (level, player) -> level.getEntitiesOfClass(net.minecraft.world.entity.Entity.class,
+                                player.getBoundingBox().inflate(48), e -> !(e instanceof net.minecraft.world.entity.player.Player))
+                                .forEach(net.minecraft.world.entity.Entity::discard));
                         next(Phase.START_STOP);
                     }
                 }
@@ -418,6 +431,48 @@ public final class ClientWorldVisualSmoke {
         // P14: a big power bonus falling in front of the camera
         level.addFreshEntity(new dev.kneekura.fivedifficulties.forge.entity.THItemEntity(level, 2.0D, -51.0D, 7.0D,
                 Vec3d.ZERO, dev.kneekura.fivedifficulties.forge.entity.THItemEntity.ITEM_ID_BIGPOWER));
+    }
+
+    private static net.minecraftforge.common.util.FakePlayer p16User(ServerLevel level, int n, double x, double z,
+                                                                     net.minecraft.world.item.Item held) {
+        var u = net.minecraftforge.common.util.FakePlayerFactory.get(level, new com.mojang.authlib.GameProfile(
+                java.util.UUID.fromString("00000000-0000-0000-0000-0000f916000" + n), "[FDP16-smoke" + n + "]"));
+        u.moveTo(x, -60.0D, z, 180F, 0F);
+        u.setYHeadRot(180F);
+        u.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, new net.minecraft.world.item.ItemStack(held));
+        u.startUsingItem(net.minecraft.world.InteractionHand.MAIN_HAND);
+        return u;
+    }
+
+    // P16: item-effect entities and the two hats on armour stands, facing the camera.
+    private static void spawnP16(ServerLevel level, ServerPlayer player) {
+        var scroll = p16User(level, 1, -3.0D, 9.0D, dev.kneekura.fivedifficulties.forge.PortRegistries.SORCERER_SUTRA_SCROLL.get());
+        level.addFreshEntity(new dev.kneekura.fivedifficulties.forge.entity.MazinkyoukanEntity(level, scroll));
+        var aja = p16User(level, 2, 3.0D, 9.0D, dev.kneekura.fivedifficulties.forge.PortRegistries.AJA_RED_STONE.get());
+        level.addFreshEntity(new dev.kneekura.fivedifficulties.forge.entity.AjaRedStoneEffectEntity(level, aja));
+        var seeker = p16User(level, 3, 0.5D, 9.0D, dev.kneekura.fivedifficulties.forge.PortRegistries.NAZRIN_PENDULUM.get());
+        for (int i = 0; i < 12; i++) {
+            level.setBlockAndUpdate(BlockPos.containing(-2 + i % 6, -61, 11 + i / 6),
+                    net.minecraft.world.level.block.Blocks.GOLD_BLOCK.defaultBlockState());
+        }
+        level.addFreshEntity(new dev.kneekura.fivedifficulties.forge.entity.PendulumEntity(level, seeker, 0,
+                net.minecraft.world.level.block.Blocks.GOLD_BLOCK.getDescriptionId()));
+        var wall = p16User(level, 4, 1.5D, 12.0D, dev.kneekura.fivedifficulties.forge.PortRegistries.HAKUROUKEN.get());
+        level.addFreshEntity(new dev.kneekura.fivedifficulties.forge.entity.HakurouReflecterEntity(level, wall));
+        var frozen = EntityType.ZOMBIE.create(level);
+        frozen.moveTo(-1.5D, -60.0D, 6.0D, 180F, 0F);
+        frozen.setNoAi(true);
+        level.addFreshEntity(frozen);
+        level.addFreshEntity(new dev.kneekura.fivedifficulties.forge.entity.CirnoIceBoxEntity(level, frozen));
+        for (int i = 0; i < 2; i++) {
+            ArmorStand stand = EntityType.ARMOR_STAND.create(level);
+            stand.moveTo(1.0D + i * 1.5D, -60.0D, 5.0D, 180F, 0F);
+            stand.setNoGravity(true);
+            stand.setItemSlot(net.minecraft.world.entity.EquipmentSlot.HEAD, new net.minecraft.world.item.ItemStack(i == 0
+                    ? dev.kneekura.fivedifficulties.forge.PortRegistries.MARISA_HAT.get()
+                    : dev.kneekura.fivedifficulties.forge.PortRegistries.SUWAKO_HAT.get()));
+            level.addFreshEntity(stand);
+        }
     }
 
     // P15: both tables in front of the camera; using the danmaku one opens its screen.
