@@ -39,6 +39,7 @@ Put a small `tank.json` in the MOD project and run one finite trial on the activ
   "id": "five-difficulties",
   "mods": [{"id": "five_difficulties_port", "jar": "build/libs/five_difficulties_port-*.jar", "kind": "forge-distribution"}],
   "world": "C:/.../Tank/fixtures/FIXTURE/game/saves/KNEEKURA_DEBUG_WORLD",
+  "subjectUuid": "UUID-OF-A-LIVING-ENTITY-SAVED-IN-THAT-WORLD",
   "mode": "LIFECYCLE"
 }
 ```
@@ -47,7 +48,7 @@ Put a small `tank.json` in the MOD project and run one finite trial on the activ
 node INSTALLED/native-host/tank.mjs run --project MOD_PROJECT_DIR
 ```
 
-Only developer facts go in `tank.json`; optional `playerUuid`, `subjectUuid` (required for non-LIFECYCLE modes), `maxTicks` (600), `maxWallMs` (30000), `maxEvents` (128). `jar`/`world` are absolute or project-relative; `*` is allowed in the JAR file name and the newest match wins (the summary reports the chosen file, its build time and the candidate count). `run` copies each JAR into `Tank/mods/<id>/<sha256>-<kind>.jar`, hashes the world inventory (bytes only), infers `playerUuid` from the world's single saved Player, takes `sourceRevision` from the project's git HEAD (null outside git; `sourceDirty` is reported), writes a new pinned v1 profile under `Tank/profiles/`, then performs the ordinary `prepare` and `start`. It prints one JSON summary: `PASS` with startup/exit/evidence counts, or `FAIL` with the trial, crash-report description, last error lines of `latest.log`, `launch-failure.json` and cleanup. It is exactly one trial on the shared lock; it never retries. A normal `gradlew build` output is `forge-distribution`; a `jar`-only (not reobfuscated) output is `mapped-dev`.
+Only developer facts go in `tank.json`. `subjectUuid` is required in every mode, LIFECYCLE included: READY waits until that living entity is loaded in the Overworld, so a wrong UUID ends as `READY timeout` after180s, not a fast error (it cannot be checked offline without NBT). Optional `playerUuid`, `maxTicks` (600), `maxWallMs` (30000), `maxEvents` (128). `jar`/`world` are absolute or project-relative; `*` is allowed in the JAR file name and the newest match wins (the summary reports the chosen file, its build time and the candidate count). `run` copies each JAR into `Tank/mods/<id>/<sha256>-<kind>.jar`, hashes the world inventory (bytes only), infers `playerUuid` from the world's single saved Player, takes `sourceRevision` from the project's git HEAD (null outside git; `sourceDirty` is reported), writes a new pinned v1 profile under `Tank/profiles/`, then performs the ordinary `prepare` and `start`. It prints one JSON summary: `PASS` with startup/exit/evidence counts, or `FAIL` with the trial, crash-report description, last error lines of `latest.log`, `launch-failure.json` and cleanup. It is exactly one trial on the shared lock; it never retries. A normal `gradlew build` output is `forge-distribution`; a `jar`-only (not reobfuscated) output is `mapped-dev`.
 
 Mixin refmaps: the client run always sets ForgeGradle's `mixin.env.remapRefMap=true` and `mixin.env.refMapRemappingFile=build/createSrgToMcp/output.srg` (MDK parity), so production SRG refmaps work in this official-name runtime. Do not hand-edit refmaps inside JARs. Launch fails closed with `TANK_REFMAP_REMAPPING_FILE_MISSING` when the host lacks that file.
 

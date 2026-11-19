@@ -8,20 +8,20 @@ import {hash,versions,inventory,inventoryHash,validateProfile} from './profile.m
 /**
  * `tank.json` in a MOD project: the few facts only its developer knows. Everything derivable
  * (hashes, inventory, revision, player UUID, immutable artifact copy) is derived here.
- * {schema:'kneekura.tank-project/v1', id, mods:[{id,jar,kind}], world, mode?, playerUuid?, subjectUuid?, maxTicks?, maxWallMs?, maxEvents?}
+ * {schema:'kneekura.tank-project/v1', id, mods:[{id,jar,kind}], world, subjectUuid, mode?, playerUuid?, maxTicks?, maxWallMs?, maxEvents?}
+ * subjectUuid is the living entity READY waits for (every mode, LIFECYCLE included); it cannot be read from a world without NBT, so it is never guessed.
  * `jar` and `world` are absolute or relative to the project; `jar` may use `*` in its file name (newest match wins).
  */
 export const PROJECT_SCHEMA='kneekura.tank-project/v1';
-export const LIFECYCLE_SUBJECT='7a4b0000-0000-4000-8000-000000000001';
-const optional=['mode','playerUuid','subjectUuid','maxTicks','maxWallMs','maxEvents'];
+const optional=['mode','playerUuid','maxTicks','maxWallMs','maxEvents'];
 export function validateProject(value){
  assert(value&&typeof value==='object'&&!Array.isArray(value),'TANK_PROJECT_OBJECT');
- for(const key of Object.keys(value))assert(['schema','id','mods','world',...optional].includes(key),'TANK_PROJECT_UNKNOWN_FIELD_'+key);
+ for(const key of Object.keys(value))assert(['schema','id','mods','world','subjectUuid',...optional].includes(key),'TANK_PROJECT_UNKNOWN_FIELD_'+key);
  assert.equal(value.schema,PROJECT_SCHEMA,'TANK_PROJECT_SCHEMA');assert(typeof value.id==='string'&&/^[a-z][a-z0-9-]{1,63}$/.test(value.id),'TANK_PROJECT_ID');
  assert(Array.isArray(value.mods)&&value.mods.length>0,'TANK_PROJECT_MODS');
  for(const m of value.mods){assert(m&&typeof m==='object'&&Object.keys(m).sort().join()==='id,jar,kind','TANK_PROJECT_MOD_FIELDS');assert(typeof m.jar==='string'&&m.jar.endsWith('.jar'),'TANK_PROJECT_JAR');}
  assert(typeof value.world==='string'&&value.world,'TANK_PROJECT_WORLD');const mode=value.mode??'LIFECYCLE';
- assert(mode==='LIFECYCLE'||value.subjectUuid,'TANK_PROJECT_SUBJECT_REQUIRED_FOR_'+mode);
+ assert(typeof value.subjectUuid==='string'&&value.subjectUuid,'TANK_PROJECT_SUBJECT_REQUIRED (UUID of a living entity saved in the world; READY waits for it)');
  return {...value,mode};
 }
 /** Newest regular file matching a `*` pattern in the last path component only. */
@@ -50,7 +50,7 @@ export async function buildProfile(projectDir,tankRoot){
  }
  const world=path.resolve(projectDir,project.world);const git=gitRevision(projectDir);
  const profile=validateProfile({schema:'kneekura.tank-profile/v1',id:project.id+'-'+project.mode.toLowerCase().replaceAll('_','-'),runtime:{minecraft:versions.minecraft,forge:versions.forge,java:versions.java},mods,
-  world:{directory:world,inventorySha256:inventoryHash(await inventory(world))},playerUuid:(project.playerUuid??await inferPlayerUuid(world)).toLowerCase(),subjectUuid:project.subjectUuid??LIFECYCLE_SUBJECT,
+  world:{directory:world,inventorySha256:inventoryHash(await inventory(world))},playerUuid:(project.playerUuid??await inferPlayerUuid(world)).toLowerCase(),subjectUuid:project.subjectUuid.toLowerCase(),
   sourceRevision:git.revision,mode:project.mode,maxTicks:project.maxTicks??600,maxWallMs:project.maxWallMs??30000,maxEvents:project.maxEvents??128});
  const profiles=path.join(tankRoot,'profiles');await fs.mkdir(profiles,{recursive:true});const file=path.join(profiles,profile.id+'-'+randomUUID()+'.json');
  await fs.writeFile(file,JSON.stringify(profile,null,2)+'\n',{flag:'wx'});return {profile,file,artifacts,sourceDirty:git.dirty};

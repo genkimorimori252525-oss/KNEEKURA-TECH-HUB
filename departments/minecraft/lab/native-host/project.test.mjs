@@ -3,10 +3,10 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import {validateProject,resolveJar,inferPlayerUuid,buildProfile,summarizeFailure,LIFECYCLE_SUBJECT} from './project.mjs';
+import {validateProject,resolveJar,inferPlayerUuid,buildProfile,summarizeFailure} from './project.mjs';
 import {hash,inventory,inventoryHash} from './profile.mjs';
 
-const player='380df991-f603-344c-a090-369bad2a924a';
+const player='380df991-f603-344c-a090-369bad2a924a',subject='67676767-1007-4000-8000-000000000001';
 async function project(t,extra={}){
  const root=await fs.mkdtemp(path.join(os.tmpdir(),'tank-project-'));t.after(()=>fs.rm(root,{recursive:true,force:true}));
  const dir=path.join(root,'mod'),tank=path.join(root,'Tank'),world=path.join(root,'fixture/KNEEKURA_DEBUG_WORLD');
@@ -14,14 +14,14 @@ async function project(t,extra={}){
  await fs.writeFile(path.join(world,'level.dat'),'level');await fs.writeFile(path.join(world,'playerdata',player+'.dat'),'p');await fs.writeFile(path.join(world,'playerdata',player+'.dat_old'),'p');
  const old=path.join(dir,'build/libs/demo-0.1.jar'),neu=path.join(dir,'build/libs/demo-0.2.jar');await fs.writeFile(old,'old');await fs.writeFile(neu,'new');
  await fs.utimes(old,new Date(1000),new Date(1000));await fs.utimes(neu,new Date(2000000),new Date(2000000));
- await fs.writeFile(path.join(dir,'tank.json'),JSON.stringify({schema:'kneekura.tank-project/v1',id:'demo',mods:[{id:'demo_mod',jar:'build/libs/demo-*.jar',kind:'forge-distribution'}],world:path.relative(dir,world),...extra}));
+ await fs.writeFile(path.join(dir,'tank.json'),JSON.stringify({schema:'kneekura.tank-project/v1',id:'demo',mods:[{id:'demo_mod',jar:'build/libs/demo-*.jar',kind:'forge-distribution'}],world:path.relative(dir,world),subjectUuid:subject,...extra}));
  return {dir,tank,world,neu};
 }
-test('tank.json needs only developer facts; unknown fields and non-LIFECYCLE without subject are rejected',()=>{
- const ok={schema:'kneekura.tank-project/v1',id:'demo',mods:[{id:'m',jar:'a.jar',kind:'mapped-dev'}],world:'w'};
+test('tank.json needs only developer facts; unknown fields and a missing subject are rejected in every mode',()=>{
+ const ok={schema:'kneekura.tank-project/v1',id:'demo',mods:[{id:'m',jar:'a.jar',kind:'mapped-dev'}],world:'w',subjectUuid:subject};
  assert.equal(validateProject(ok).mode,'LIFECYCLE');
  assert.throws(()=>validateProject({...ok,sha256:'x'}),/UNKNOWN_FIELD_sha256/);
- assert.throws(()=>validateProject({...ok,mode:'MANUAL_OBSERVE'}),/SUBJECT_REQUIRED/);
+ const {subjectUuid,...noSubject}=ok;assert.throws(()=>validateProject(noSubject),/SUBJECT_REQUIRED/);
  assert.throws(()=>validateProject({...ok,mods:[{id:'m',jar:'a.zip',kind:'mapped-dev'}]}),/TANK_PROJECT_JAR/);
 });
 test('newest matching build artifact is chosen and reported with the number of candidates',async t=>{
@@ -36,7 +36,7 @@ test('buildProfile stores the artifact by content hash and pins world inventory 
  const p=await project(t);const before=inventoryHash(await inventory(p.world));const built=await buildProfile(p.dir,p.tank);
  const m=built.profile.mods[0];assert.equal(m.sha256,hash(Buffer.from('new')));assert.equal(m.file,path.join(p.tank,'mods/demo_mod',m.sha256+'-forge-distribution.jar'));assert.equal(await fs.readFile(m.file,'utf8'),'new');
  assert.equal(built.profile.world.inventorySha256,before);assert.equal(inventoryHash(await inventory(p.world)),before);
- assert.equal(built.profile.id,'demo-lifecycle');assert.equal(built.profile.playerUuid,player);assert.equal(built.profile.subjectUuid,LIFECYCLE_SUBJECT);assert.equal(built.profile.sourceRevision,null);
+ assert.equal(built.profile.id,'demo-lifecycle');assert.equal(built.profile.playerUuid,player);assert.equal(built.profile.subjectUuid,subject);assert.equal(built.profile.sourceRevision,null);
  assert.deepEqual(JSON.parse(await fs.readFile(built.file,'utf8')),built.profile);
  const again=await buildProfile(p.dir,p.tank);assert.equal(again.profile.mods[0].file,m.file);assert.notEqual(again.file,built.file);
 });
