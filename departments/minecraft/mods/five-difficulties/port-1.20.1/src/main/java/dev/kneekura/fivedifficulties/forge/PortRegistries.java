@@ -395,6 +395,16 @@ public final class PortRegistries {
     public static final RegistryObject<Item> SHIP_GHOST_DIPPER_EMPTY = ITEMS.register("ship_ghost_dipper_empty",
             () -> new dev.kneekura.fivedifficulties.forge.item.X1ToolItems.Hisyaku(new Item.Properties(), true));
 
+    // ---- P16i armour ----
+    public static final RegistryObject<Item> FIRE_RAT_ROBE = ITEMS.register("fire_rat_robe",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1ArmorItems.FireRatRobe(new Item.Properties()));
+    public static final RegistryObject<Item> MARISA_HAT = ITEMS.register("marisa_hat",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1ArmorItems.MarisaHat(new Item.Properties()));
+    public static final RegistryObject<Item> KAPPA_CAP = ITEMS.register("kappa_cap",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1ArmorItems.KappaCap(new Item.Properties()));
+    public static final RegistryObject<Item> SUWAKO_HAT = ITEMS.register("suwako_hat",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1ArmorItems.Kerobou(new Item.Properties()));
+
     public static final RegistryObject<Item> SHOT_MATERIAL = ITEMS.register("shot_material",
             () -> new dev.kneekura.fivedifficulties.forge.item.ShotMaterialItem(new Item.Properties()));
 

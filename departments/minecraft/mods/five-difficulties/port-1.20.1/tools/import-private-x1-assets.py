@@ -290,6 +290,36 @@ ASSETS = {
         "assets/five_difficulties_port/textures/item/ship_ghost_dipper_empty.png",
         "14ad667945b23788b72d0a31517e1782473ae6dfb7176099e50f8ab0d657f713",
     ),
+    # P16i armour textures.
+    "assets/thkaguyamod/textures/armor/hinezumi_1.png": (
+        "assets/five_difficulties_port/textures/models/armor/hinezumi_1.png",
+        "2621e4959f29f6ec840bf1c701925da11c95d6c57c01b0d687123876174ec01b",
+    ),
+    "assets/thkaguyamod/textures/armor/MarisaHatTexture.png": (
+        "assets/five_difficulties_port/textures/models/armor/marisa_hat.png",
+        "07a8b4af15706d89d0732086fd0e2648850376dcdef5d4cfd8bc9189ef165bd1",
+    ),
+    "assets/thkaguyamod/textures/armor/SuwakoHatTexture.png": (
+        "assets/five_difficulties_port/textures/models/armor/suwako_hat.png",
+        "f8e4023012b4828ab807d0171bb132484778f39086671c330c7c6165b75a61a6",
+    ),
+    # P16i armour.
+    "assets/thkaguyamod/textures/items/hinezumi.png": (
+        "assets/five_difficulties_port/textures/item/fire_rat_robe.png",
+        "b096c7d334d458161fb4209c4dff4056ae94fefd47011e937e4e73716b351cf6",
+    ),
+    "assets/thkaguyamod/textures/items/MarisaHat.png": (
+        "assets/five_difficulties_port/textures/item/marisa_hat.png",
+        "af612c1e57d503d86209f3506ad52744d00463e7e0822efca4d2a9b7c818f17a",
+    ),
+    "assets/thkaguyamod/textures/items/kappaCap.png": (
+        "assets/five_difficulties_port/textures/item/kappa_cap.png",
+        "041283148e57936d1de213a617d4b1d921fd7e41eab67cc17417ad4d4458b9fa",
+    ),
+    "assets/thkaguyamod/textures/items/Kerobou.png": (
+        "assets/five_difficulties_port/textures/item/suwako_hat.png",
+        "66fc7cbde99c2dd443bb9774d6f4e879d3f2f01485c642006cd7b8e8273ca4ce",
+    ),
     # P15 danmaku crafting table.
     "assets/thkaguyamod/textures/blocks/danmaku_crafting_table.png": (
         "assets/five_difficulties_port/textures/block/danmaku_crafting_table.png",

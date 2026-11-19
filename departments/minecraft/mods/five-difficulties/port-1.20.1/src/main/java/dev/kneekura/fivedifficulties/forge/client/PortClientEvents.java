@@ -78,6 +78,8 @@ public final class PortClientEvents {
                 SakuyaTimeControllerModel::createBodyLayer
         );
         event.registerLayerDefinition(SilverKnifeModel.LAYER_LOCATION, SilverKnifeModel::createBodyLayer);
+        event.registerLayerDefinition(X1HatModels.MARISA_HAT, X1HatModels::createMarisaHat);
+        event.registerLayerDefinition(X1HatModels.SUWAKO_HAT, X1HatModels::createSuwakoHat);
         event.registerLayerDefinition(P12Renderers.HAKKERO_LAYER, P12Renderers::createHakkeroLayer);
         event.registerLayerDefinition(P12Renderers.HAKKERO2_LAYER, P12Renderers::createHakkero2Layer);
     }

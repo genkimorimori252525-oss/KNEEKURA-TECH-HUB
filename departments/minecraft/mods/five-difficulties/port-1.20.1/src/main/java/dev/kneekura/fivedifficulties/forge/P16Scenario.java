@@ -65,6 +65,7 @@ public final class P16Scenario {
             runPendulum();
             runSwordEffects();
             runTools();
+            runArmour();
             FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_RUNTIME_SCENARIO_PASS");
             ScenarioShutdown.finished(level.getServer(), ENV);
         } catch (Throwable failure) {
@@ -565,6 +566,42 @@ public final class P16Scenario {
         level.setBlockAndUpdate(target, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState());
         p.getInventory().clearContent();
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_DIPPER_PASS");
+    }
+
+    private static void runArmour() {
+        FakePlayer p = player();
+
+        // Fire rat robe: puts out the wearer, self-enchants Fire Protection V, chest defence 2, never wears.
+        ItemStack robe = new ItemStack(PortRegistries.FIRE_RAT_ROBE.get());
+        p.setSecondsOnFire(5);
+        robe.getItem().onArmorTick(robe, level, p);
+        robe.getItem().inventoryTick(robe, level, p, 0, false);
+        require(p.getRemainingFireTicks() <= 0, "the robe puts the fire out");
+        require(robe.getEnchantmentLevel(net.minecraft.world.item.enchantment.Enchantments.FIRE_PROTECTION) == 5
+                && ((net.minecraft.world.item.ArmorItem) robe.getItem()).getDefense() == 2 && !robe.isDamageableItem(), "robe stats");
+
+        // Kappa cap: dry it wears 1 a tick, but stops at 498.
+        ItemStack cap = new ItemStack(PortRegistries.KAPPA_CAP.get());
+        cap.getItem().onArmorTick(cap, level, p);
+        cap.setDamageValue(498);
+        cap.getItem().onArmorTick(cap, level, p);
+        require(cap.getMaxDamage() == 500 && cap.getDamageValue() == 498, "kappa cap wear " + cap.getDamageValue());
+
+        // Marisa hat: an item 4 away is taken as if touched.
+        net.minecraft.world.entity.item.ItemEntity apple = new net.minecraft.world.entity.item.ItemEntity(level, bx + 4, by, bz,
+                new ItemStack(net.minecraft.world.item.Items.APPLE));
+        level.addFreshEntity(apple);
+        ItemStack hat = new ItemStack(PortRegistries.MARISA_HAT.get());
+        hat.getItem().onArmorTick(hat, level, p);
+        require(p.getInventory().countItem(net.minecraft.world.item.Items.APPLE) == 1 && hat.getMaxDamage() == 40, "hat pulled the apple");
+
+        // Suwako hat: Thorns X when unenchanted.
+        ItemStack kero = new ItemStack(PortRegistries.SUWAKO_HAT.get());
+        kero.getItem().inventoryTick(kero, level, p, 0, false);
+        require(kero.getEnchantmentLevel(net.minecraft.world.item.enchantment.Enchantments.THORNS) == 10 && kero.getMaxDamage() == 620,
+                "kerobou thorns");
+        p.getInventory().clearContent();
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_ARMOUR_PASS");
     }
 
     private static void require(boolean ok, String what) {
