@@ -14,6 +14,7 @@
 | 6 | [Ages of Dominion](../mods/ages-of-dominion/README.md) | Minecraft-native RTS / unit-worker command system | no native 1.20.1 Forge source; explicit backport boundary mapped | `c1e71a0` / v4.2.0 / MC 26.1.2 NeoForge; 166 Java files inventoried | IN_PROGRESS (targeted RTS architecture mapped) |
 | 7 | [Olympus!](../mods/olympus/README.md) | flying combat mob / 3D navigation | `dcaccaa` / v1.0.8 / Forge 1.20.1 native; targeted Harpy flight AI mapped | `31237b1` / v1.0.9 / MC 1.21.1; core Harpy flight logic source-equivalent | IN_PROGRESS (targeted flight study complete) |
 | 8 | [Liberty's Villagers](../mods/liberty-villagers/README.md) | villager Brain / POI / village habits | Revived source `f2e2548` / MC 1.20.1 Forge line; distributed Forge 2.0.1 file 6930028; 78 Java / 46 mixins | `40e1384` / Revived MC 1.21.11 | IN_PROGRESS (targeted villager AI study complete) |
+| 9 | [Goofy Critters](../mods/goofy-critters/README.md) | exotic locomotion / multi-anchor movement | 1.0.0 Forge 1.20.1 file 7553632; release-era source candidate `9188e51`; exact binary/source identity unresolved | `96d01a7` archived frontier; Gestalt anchor locomotion + post-release NoSpin movement framework | IN_PROGRESS (targeted movement study complete) |
 
 ## Rules
 
