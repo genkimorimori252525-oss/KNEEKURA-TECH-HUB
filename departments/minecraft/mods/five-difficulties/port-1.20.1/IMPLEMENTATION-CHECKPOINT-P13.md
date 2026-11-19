@@ -86,3 +86,28 @@ Oracle: X1 `ItemOharaibouR`, `EntityOnmyoudama`, `RenderOnmyoudama`.
 Receipts: `FIVE_DIFFICULTIES_P13_GOHEI_PASS size=0.88 maxDistance=57.54` (10 ticks of charge, release costs
 1 durability, still bouncing after 60 ticks, a second charge vanishes when the gohei leaves the hand);
 `FIVE_DIFFICULTIES_P13_CLIENT_RESOURCES_PASS items=4`; the P12 in-world frame shows an orb.
+
+## P13c — wind gohei, Miracle Circle and Sanae's wind
+
+Oracle: X1 `ItemOharaibouS`, `EntityMiracleCircle`, `RenderMiracleCircle`, `EntitySanaeWind` (its live
+part: most of the file is commented-out older code), `RenderSanaeWind`.
+
+- `OharaibouSItem` (durability 50, block pose): holding right-click draws a pentagram 3 blocks ahead every
+  30 ticks (five colours). Released before 30 ticks it blows a wind (damage level / 5, at least 0.1;
+  lifetime level × 3 within 15..120; WIND01) for 1 durability. After 30+ ticks it charges every miracle
+  card in the main inventory that its pentagrams and level allow (Charge 1000): Miracle Fruit (any, Lv 20),
+  Fafrotskies (60 ticks, 25), Youryoku Spoiler (90, 30), Moses (120, 35), Yasaka (150, 40), repairing the
+  gohei 5 / 10 / 15 / 20 / 30. X1 sets Miracle Fruit's repair with setItemDamage (works in creative too,
+  and could go below 0; 1.20 clamps at 0).
+- `MiracleCircleEntity`: follows the player's view, spawns the next colour at count 30, turns 2.4° per
+  tick once complete, vanishes when the player stops using the item. X1's Yasaka wind at release is
+  commented out and so not ported.
+- `SanaeWindEntity`: gravity = 0.2 × the user's last-tick displacement (never downward, −0.1 while
+  sneaking); wind type 1 (unused by the item) turns 2° per tick at the user's speed.
+
+Receipts: `FIVE_DIFFICULTIES_P13_WIND_PASS hitAfter=5 knockUp=2.00` (two pentagrams after 35 ticks, a
+quick release blows a wind that knocks a husk up by 2.0 and costs 1 durability, the pentagrams vanish);
+`FIVE_DIFFICULTIES_P13_MIRACLE_CHARGE_PASS cards=5` (a 160-tick release at level 40 charges cards 14–18 and
+repairs the gohei from 40 to 0); `FIVE_DIFFICULTIES_P13_CLIENT_RESOURCES_PASS items=5`; the P12 in-world
+frame shows a half-drawn pentagram and a wind.
+

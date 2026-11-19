@@ -170,9 +170,11 @@ public final class ClientWorldVisualSmoke {
                 case P12_SHOT -> {
                     if (++ticks == 20) requestShot(mc, "p12_entities.png");
                     else if (ticks > 20) {
-                        server(mc, (level, player) -> level.getEntitiesOfClass(net.minecraft.world.entity.Entity.class,
-                                player.getBoundingBox().inflate(48), e -> !(e instanceof net.minecraft.world.entity.player.Player))
-                                .forEach(net.minecraft.world.entity.Entity::discard));
+                        server(mc, (level, player) -> {
+                            level.getEntitiesOfClass(net.minecraft.world.entity.Entity.class, player.getBoundingBox().inflate(48),
+                                    e -> !(e instanceof net.minecraft.world.entity.player.Player))
+                                    .forEach(net.minecraft.world.entity.Entity::discard);
+                        });
                         next(Phase.START_STOP);
                     }
                 }
@@ -386,6 +388,19 @@ public final class ClientWorldVisualSmoke {
                 new Vec3d(-0.5D, -55.5D, 6.0D), new Vec3d(0, 0, 1), 0F, new Vec3d(0, 1, 0), 0F, 9999, 0.0001D, 0.0D,
                 0.0D, Vec3d.ZERO, X1ShotTables.ORANGE, 1.2F, 10.0F, 0, 2000, 0);
         level.addFreshEntity(orb);
+        // P13c: a stand-in player at the camera charges the wind gohei (pentagram ahead) beside a held-still wind.
+        // (The camera player itself would release at once: its use key is not held.)
+        var charger = net.minecraftforge.common.util.FakePlayerFactory.get(level, new com.mojang.authlib.GameProfile(
+                java.util.UUID.fromString("00000000-0000-0000-0000-0000f9130c00"), "[FDP13c-smoke]"));
+        charger.moveTo(player.getX(), player.getY(), player.getZ(), player.getYRot(), player.getXRot());
+        charger.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,
+                new net.minecraft.world.item.ItemStack(dev.kneekura.fivedifficulties.forge.PortRegistries.WIND_MIKO_STICK.get()));
+        charger.startUsingItem(net.minecraft.world.InteractionHand.MAIN_HAND);
+        level.addFreshEntity(new dev.kneekura.fivedifficulties.forge.entity.MiracleCircleEntity(level, charger, 0));
+        var wind = new dev.kneekura.fivedifficulties.forge.entity.SanaeWindEntity(level, stand,
+                new Vec3d(-3.5D, -57.0D, 8.0D), new Vec3d(0, 0, 1), 0F, new Vec3d(0, 1, 0), 0F, 9999, 0.0001D, 0.0D,
+                0.0D, Vec3d.ZERO, 0, 1.0F, 1.0F, 0, 2000, 0);
+        level.addFreshEntity(wind);
     }
 
     // Source is an armor stand in front of the camera, so the Watch controller and its

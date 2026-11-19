@@ -122,6 +122,15 @@ ASSETS = {
         "assets/five_difficulties_port/textures/item/diffusion_amulet.png",
         "48a04fbb8993b87cce4abc2b175f006d8bdaef3254c323b86b023b749f152927",
     ),
+    # P13c wind gohei.
+    "assets/thkaguyamod/textures/items/mikoStick_S.png": (
+        "assets/five_difficulties_port/textures/item/wind_miko_stick.png",
+        "14c13c1bc39f532a843073d6df52ca9d6ef3de2625c19c70408dce7a65709523",
+    ),
+    "assets/thkaguyamod/textures/MiracleCircle.png": (
+        "assets/five_difficulties_port/textures/entity/miracle_circle.png",
+        "b934f402b23211aa5aeef96f2c6f30e2a49917d121670841b77bc5285437cc0d",
+    ),
     # P13b gohei and Yin-Yang Orb.
     "assets/thkaguyamod/textures/items/HakureiOharaibou.png": (
         "assets/five_difficulties_port/textures/item/hakurei_miko_stick.png",

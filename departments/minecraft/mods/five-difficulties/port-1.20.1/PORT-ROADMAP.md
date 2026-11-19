@@ -18,7 +18,8 @@ overlay); a checkpoint document; commit, push, CI green before the next phase.
 | P12 | the 5 cards with dedicated entities: Musou Fuuin (0), Master Spark (1), Satuzin Doll (8), Hikouchuu Nest (10), Fafrotskies (15) + Nuclear Shot, Hanabeeper | done |
 | P13 | danmaku-weapon items: Mini Hakkero, Nuclear Control Rod, Dragon Neck Jewel (+ entity); `itemEffectFinish` | done |
 | P13b | Oharaibou R (Yin-Yang Orb) | done |
-| P13c | Oharaibou S (Sanae Wind), Houtou, Gap (warp gaps), Gap Folding Umbrella; Henyori laser is dead code in X1 | next |
+| P13c | Oharaibou S (Miracle Circle, Sanae Wind) | done |
+| P13d | Houtou, Gap (warp gaps), Gap Folding Umbrella; Henyori laser is dead code in X1 | next |
 | P14 | power / point / bomb / extend / shot-material items, player power, death handler, config | |
 | P15 | danmaku crafting table (block, containers, GUIs, laser crafting) | |
 | P16 | remaining items and their entities (`entity/item`, `entity/effect`) | |

@@ -208,7 +208,10 @@ public final class ClientRuntimeSmoke {
         requireItemModel(minecraft, PortRegistries.HAKUREI_MIKO_STICK.get(), "Hakurei Shrine Maiden Stick");
         requireResource(minecraft, id("textures/item/hakurei_miko_stick.png"));
         requireResource(minecraft, id("textures/entity/shot/onmyoudama.png"));
-        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P13_CLIENT_RESOURCES_PASS items=4");
+        requireItemModel(minecraft, PortRegistries.WIND_MIKO_STICK.get(), "Wind Shrine Maiden Stick");
+        requireResource(minecraft, id("textures/item/wind_miko_stick.png"));
+        requireResource(minecraft, id("textures/entity/miracle_circle.png"));
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P13_CLIENT_RESOURCES_PASS items=5");
 
         var root = minecraft.getEntityModels().bakeLayer(SakuyaTimeControllerModel.LAYER_LOCATION);
         root.getChild("watch_base");

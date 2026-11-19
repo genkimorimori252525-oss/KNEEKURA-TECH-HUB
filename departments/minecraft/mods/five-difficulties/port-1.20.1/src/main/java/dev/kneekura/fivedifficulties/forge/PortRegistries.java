@@ -209,6 +209,22 @@ public final class PortRegistries {
     public static final RegistryObject<Item> HAKUREI_MIKO_STICK = ITEMS.register("hakurei_miko_stick",
             () -> new dev.kneekura.fivedifficulties.forge.item.OharaibouRItem(new Item.Properties()));
 
+    // ---- P13c ----
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.MiracleCircleEntity>> MIRACLE_CIRCLE =
+            ENTITIES.register("miracle_circle", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.MiracleCircleEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.MiracleCircleEntity::new, MobCategory.MISC)
+                    .sized(2.0F, 0.01F).clientTrackingRange(8).updateInterval(1)
+                    .build(FiveDifficultiesPort.MOD_ID + ":miracle_circle")); // X1 "MiracleCircle"
+
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.SanaeWindEntity>> SANAE_WIND =
+            ENTITIES.register("sanae_wind", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.SanaeWindEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.SanaeWindEntity::new, MobCategory.MISC)
+                    .sized(1.0F, 1.0F).clientTrackingRange(8).updateInterval(1).setShouldReceiveVelocityUpdates(true)
+                    .build(FiveDifficultiesPort.MOD_ID + ":sanae_wind")); // X1 "SanaeWind"
+
+    public static final RegistryObject<Item> WIND_MIKO_STICK = ITEMS.register("wind_miko_stick",
+            () -> new dev.kneekura.fivedifficulties.forge.item.OharaibouSItem(new Item.Properties()));
+
     public static final RegistryObject<Item> SHOT_MATERIAL = ITEMS.register("shot_material",
             () -> new dev.kneekura.fivedifficulties.forge.item.ShotMaterialItem(new Item.Properties()));
 

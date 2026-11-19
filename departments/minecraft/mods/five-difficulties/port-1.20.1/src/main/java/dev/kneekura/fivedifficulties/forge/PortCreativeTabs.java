@@ -22,6 +22,7 @@ public final class PortCreativeTabs {
             event.accept(PortRegistries.MINI_HAKKERO_ITEM.get());
             event.accept(PortRegistries.NUCLEAR_CONTROL_ROD.get());
             event.accept(PortRegistries.HAKUREI_MIKO_STICK.get());
+            event.accept(PortRegistries.WIND_MIKO_STICK.get());
         }
         if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) { // X1 CreativeTabs.tabMaterials
             PortRegistries.SHOT_ITEMS.forEach(item -> event.accept(item.get()));

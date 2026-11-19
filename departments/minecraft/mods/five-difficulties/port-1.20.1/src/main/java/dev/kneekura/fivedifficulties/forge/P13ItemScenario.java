@@ -34,7 +34,7 @@ import static dev.kneekura.fivedifficulties.core.x1.X1ShotTables.FORM_LIGHT;
 public final class P13ItemScenario {
     public static final String ENV = "FIVE_DIFFICULTIES_P13_RUNTIME_SCENARIO";
 
-    private enum Phase { IDLE, HAKKERO, ROD, JEWEL, GOHEI, DONE }
+    private enum Phase { IDLE, HAKKERO, ROD, JEWEL, GOHEI, WIND, DONE }
 
     private static Phase phase = Phase.IDLE;
     private static ServerLevel level;
@@ -48,6 +48,9 @@ public final class P13ItemScenario {
     private static dev.kneekura.fivedifficulties.forge.entity.OnmyoudamaEntity orb;
     private static int goheiStep;
     private static double orbMaxDistance;
+    private static dev.kneekura.fivedifficulties.forge.entity.SanaeWindEntity wind;
+    private static net.minecraft.world.entity.monster.Husk windTarget;
+    private static int windStep;
 
     private P13ItemScenario() {}
 
@@ -75,6 +78,10 @@ public final class P13ItemScenario {
         else if (e instanceof dev.kneekura.fivedifficulties.forge.entity.OnmyoudamaEntity o) {
             key = "orb";
             orb = o;
+        } else if (e instanceof dev.kneekura.fivedifficulties.forge.entity.MiracleCircleEntity) key = "circle";
+        else if (e instanceof dev.kneekura.fivedifficulties.forge.entity.SanaeWindEntity w) {
+            key = "wind";
+            wind = w;
         }
         else if (e instanceof THSetLaserEntity s && s.getShotId() == 24 && s.motion() != null && s.motion().special == EXPLOSION01) key = "spark";
         else if (e instanceof THLaserEntity) key = "laser";
@@ -112,6 +119,7 @@ public final class P13ItemScenario {
                 case ROD -> tickRod();
                 case JEWEL -> tickJewel();
                 case GOHEI -> tickGohei();
+                case WIND -> tickWind();
                 default -> {}
             }
         } catch (Throwable failure) {
@@ -279,6 +287,66 @@ public final class P13ItemScenario {
         } else if (goheiStep == 3 && ticks == 3) {
             require(orb.isRemoved(), "without the gohei in hand the charge vanishes");
             player.stopUsingItem();
+            startWind();
+        }
+    }
+
+    // ---- 5. Wind gohei: pentagrams while held, a quick release blows a knock-back wind,
+    //         a long one charges the miracle cards ----
+
+    private static void startWind() {
+        SEEN.clear();
+        player.moveTo(bx, by, bz, -90F, 0F);
+        windTarget = net.minecraft.world.entity.EntityType.HUSK.create(level);
+        windTarget.moveTo(bx + 3.0D, by, bz, 90F, 0F);
+        windTarget.setNoAi(true);
+        windTarget.setInvulnerable(true);
+        require(level.addFreshEntity(windTarget), "wind target");
+        hold(new ItemStack(PortRegistries.WIND_MIKO_STICK.get()));
+        player.getMainHandItem().use(level, player, InteractionHand.MAIN_HAND);
+        require(count("circle") == 1, "holding draws the first pentagram");
+        windStep = 0;
+        phase = Phase.WIND;
+        ticks = 0;
+    }
+
+    private static void tickWind() {
+        if (windStep == 0 && ticks == 35) {
+            require(count("circle") == 2, "a second pentagram after 30 ticks, got " + count("circle"));
+            // The fake player never ticks its use counter: releasing now is a release at 0 ticks.
+            player.releaseUsingItem();
+            require(count("wind") == 1 && player.getMainHandItem().getDamageValue() == 1, "a quick release blows a wind");
+            windStep = 1;
+            ticks = 0;
+        } else if (windStep == 1) {
+            double vy = windTarget.getDeltaMovement().y;
+            if (vy > 1.0D) {
+                int circles = level.getEntitiesOfClass(dev.kneekura.fivedifficulties.forge.entity.MiracleCircleEntity.class,
+                        player.getBoundingBox().inflate(16)).size();
+                require(circles == 0, "pentagrams vanish when the player stops using the gohei, left " + circles);
+                FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P13_WIND_PASS hitAfter={} knockUp={}", ticks,
+                        String.format("%.2f", vy));
+                windStep = 2;
+                ticks = 0;
+            } else {
+                require(ticks < 20, "the wind never knocked the husk up");
+            }
+        } else if (windStep == 2) {
+            ItemStack gohei = player.getMainHandItem();
+            gohei.setDamageValue(40);
+            player.experienceLevel = 40;
+            for (int n = 14; n <= 18; n++) {
+                player.getInventory().add(new ItemStack(PortRegistries.SPELL_CARD_ITEMS.get(n).get()));
+            }
+            gohei.releaseUsing(level, player, 72000 - 160); // 160 ticks: all five pentagrams
+            int charged = 0;
+            for (ItemStack st : player.getInventory().items) {
+                if (st.getItem() instanceof dev.kneekura.fivedifficulties.forge.spellcard.SpellCardItem
+                        && st.hasTag() && st.getTag().getInt("Charge") == 1000) charged++;
+            }
+            require(charged == 5, "five miracle cards charged, got " + charged);
+            require(gohei.getDamageValue() == 0, "charging repairs the gohei, damage " + gohei.getDamageValue());
+            FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P13_MIRACLE_CHARGE_PASS cards=5");
             FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P13_RUNTIME_SCENARIO_PASS");
             phase = Phase.DONE;
             ScenarioShutdown.finished(level.getServer(), ENV);
