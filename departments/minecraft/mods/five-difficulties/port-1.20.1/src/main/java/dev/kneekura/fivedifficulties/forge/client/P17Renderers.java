@@ -216,4 +216,24 @@ public final class P17Renderers {
             return TEX;
         }
     }
+
+    /** A RenderTHBoss subclass that only picks the model and texture (X1's RenderCirno, RenderSakuya, ...). */
+    public static final class SimpleBoss<T extends dev.kneekura.fivedifficulties.forge.entity.mob.DanmakuMobEntity,
+            M extends net.minecraft.client.model.EntityModel<T>> extends THBossRenderer<T, M> {
+        private final ResourceLocation texture;
+
+        public SimpleBoss(EntityRendererProvider.Context context, M model, String texture) {
+            super(context, model, 0.25F);
+            this.texture = mob(texture);
+        }
+
+        @Override
+        public ResourceLocation getTextureLocation(T e) {
+            return texture;
+        }
+    }
+
+    public static ModelLayerLocation mobLayer(String name) {
+        return layer(name);
+    }
 }

@@ -139,6 +139,7 @@ public final class P17Scenario {
         rumia.patternForTest(2);
         int fired = level.getEntitiesOfClass(THShotEntity.class, rumia.getBoundingBox().inflate(6), s -> s.getOwner() == rumia).size() - before;
         require(fired == 3 * (12 + 3 * 2), "rumia opens with 3 blue circles of 18, saw " + fired);
+        rumia.invulnerableTime = 0;
         rumia.hurt(level.damageSources().generic(), 100F);
         require(rumia.getHealth() <= 0.0F && rumia.deadFlag(), "phase 1 down");
         rumia.tickCount++;
@@ -146,7 +147,9 @@ public final class P17Scenario {
         require(rumia.getUsingSpellCardNo() == 28 && rumia.getHealth() == 44.0F && !rumia.deadFlag() && rumia.attackInterval == 60,
                 "phase 2: card 28 at 44 HP");
         rumia.attackInterval = 0;
+        rumia.invulnerableTime = 0;
         rumia.hurt(level.damageSources().generic(), 100F);
+        require(rumia.getHealth() <= 0.0F && rumia.deadFlag(), "phase 2 down");
         rumia.tickCount++;
         rumia.deathStepForTest();
         require(rumia.getDanmakuPattern() == DanmakuMobEntity.ATTACK_END, "the second death is final");
@@ -155,6 +158,47 @@ public final class P17Scenario {
         level.getEntitiesOfClass(THShotEntity.class, new net.minecraft.world.phys.AABB(bx - 30, by - 30, bz - 30, bx + 30, by + 30, bz + 30),
                 s -> s.getOwner() == rumia).forEach(Entity::discard);
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P17_RUMIA_PASS fired={}", fired);
+
+        // Cirno: four phases 38 -> card 19 (46) -> 32 -> card 9 (58) -> end; normal 1 opens with 7 crystal rings.
+        var cirno = spawn(PortRegistries.CIRNO.get(), 6, 2);
+        require(cirno.getMaxHealth() == 38.0F && cirno.getUsingSpellCardNo() == -1 && cirno.getFlyingHeight() == 2, "cirno phase 1");
+        Zombie foe2 = EntityType.ZOMBIE.create(level);
+        foe2.moveTo(bx + 6, by, bz + 8, 0F, 0F);
+        foe2.setNoAi(true);
+        level.addFreshEntity(foe2);
+        cirno.setTarget(foe2);
+        cirno.attackCounter = 40;
+        int cBefore = level.getEntitiesOfClass(THShotEntity.class, cirno.getBoundingBox().inflate(8), s -> s.getOwner() == cirno).size();
+        cirno.patternForTest(2);
+        int cFired = level.getEntitiesOfClass(THShotEntity.class, cirno.getBoundingBox().inflate(8), s -> s.getOwner() == cirno).size() - cBefore;
+        require(cFired == 2 + 3 + 4 + 5 + 6 + 7 + 8, "cirno rings 2..8 = 35 crystals, saw " + cFired);
+        int[] cards = {19, -1, 9};
+        float[] hp = {46.0F, 32.0F, 58.0F};
+        int[] wait = {60, 20, 60};
+        for (int k = 0; k < 3; k++) {
+            cirno.attackInterval = 0;
+            cirno.invulnerableTime = 0;
+            cirno.hurt(level.damageSources().generic(), 200F);
+            require(cirno.getHealth() <= 0.0F && cirno.deadFlag(), "cirno phase " + (k + 1) + " down");
+            cirno.tickCount++;
+            cirno.deathStepForTest();
+            require(cirno.getUsingSpellCardNo() == cards[k] && cirno.getHealth() == hp[k] && !cirno.deadFlag()
+                    && cirno.attackInterval == wait[k], "cirno phase " + (k + 2) + ": card " + cards[k] + " at " + hp[k]);
+        }
+        cirno.invulnerableTime = 0;
+        require(!cirno.hurt(level.damageSources().generic(), 10F) && cirno.getHealth() == 58.0F, "invulnerable between phases");
+        cirno.attackInterval = 0;
+        cirno.invulnerableTime = 0;
+        cirno.hurt(level.damageSources().generic(), 200F);
+        require(cirno.getHealth() <= 0.0F && cirno.deadFlag(), "cirno final phase down");
+        cirno.tickCount++;
+        cirno.deathStepForTest();
+        require(cirno.getDanmakuPattern() == DanmakuMobEntity.ATTACK_END, "cirno's fourth death is final");
+        cirno.discard();
+        foe2.discard();
+        level.getEntitiesOfClass(THShotEntity.class, new net.minecraft.world.phys.AABB(bx - 30, by - 30, bz - 30, bx + 30, by + 30, bz + 30),
+                s -> s.getOwner() == cirno).forEach(Entity::discard);
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P17_CIRNO_PASS fired={}", cFired);
 
         // Spawn rules accept egg spawns.
         require(THFairyEntity.checkFairySpawnRules(PortRegistries.TH_FAIRY.get(), level, MobSpawnType.SPAWN_EGG,

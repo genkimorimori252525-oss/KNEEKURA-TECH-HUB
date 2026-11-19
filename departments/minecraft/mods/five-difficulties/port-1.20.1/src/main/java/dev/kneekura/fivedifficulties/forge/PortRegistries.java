@@ -297,6 +297,15 @@ public final class PortRegistries {
     public static final RegistryObject<Item> RUMIA_SPAWN_EGG = ITEMS.register("rumia_spawn_egg",
             () -> new net.minecraftforge.common.ForgeSpawnEggItem(RUMIA, 0x671503, 0xC0C010, new Item.Properties()));
 
+    // ---- P17d mobs ----
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.mob.CirnoEntity>> CIRNO =
+            ENTITIES.register("cirno", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.mob.CirnoEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.mob.CirnoEntity::new, MobCategory.MONSTER)
+                    .sized(1.0F, 1.8F).clientTrackingRange(10)
+                    .build(FiveDifficultiesPort.MOD_ID + ":cirno"));
+    public static final RegistryObject<Item> CIRNO_SPAWN_EGG = ITEMS.register("cirno_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(CIRNO, 0x00FFE0, 0x00E0E0, new Item.Properties()));
+
     // ---- P13 danmaku-weapon items ----
     public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity>> DRAGON_NECK_JEWEL =
             ENTITIES.register("dragon_neck_jewel", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity>of(
