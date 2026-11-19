@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "profile_id": "minecraft-java-1.20.1-forge",
+  "minecraft": "1.20.1",
+  "loader": "forge",
+  "worldedit": "7.2.15 (commit 5ca4dffd1208846a24c9462b855690f835c9eadf)",
+  "schematic_version": 2,
+  "data_version": 3465,
+  "data_version_evidence": "server.jar version.json world_version=3465 (sha1 84194a2f286ef7c14ed7ce0090dba59902951553), 2026-11-14",
+  "registry": {
+    "format": "vanilla_reports_blocks_json",
+    "path": "departments/minecraft/local-artifacts/registries/minecraft-java-1.20.1/generated/reports/blocks.json",
+    "sha256": "f10d5da83ec8cd995d4f484b788c5b1467a490728e687c629a681450e3253017",
+    "generator": {
+      "method": "java -DbundlerMainClass=net.minecraft.data.Main -jar server.jar --reports",
+      "server_sha1": "84194a2f286ef7c14ed7ce0090dba59902951553",
+      "note": "Mojang data; generated locally by `fetch-registry`, never committed"
+    }
+  },
+  "mods": [],
+  "status": "FILE_LEVEL_IMPLEMENTED / WORLDEDIT_RUNTIME_NOT_RUN"
+}

@@ -5,6 +5,7 @@ import os from 'node:os';
 import {fileURLToPath} from 'node:url';
 import {spawn,spawnSync} from 'node:child_process';
 import {ownerFixture} from './tests/owner-action-fixture.mjs';
+import {maintenance} from './tests/owner-tank-rotation-fixtures.mjs';
 import {prepareOwnerControl,readPreparedOwnerControl} from './owner-prelaunch.mjs';
 import {buildRunSnapshot,writeImmutableRunSnapshot} from '../core.mjs';
 const root=fileURLToPath(new URL('../../',import.meta.url));
@@ -22,16 +23,24 @@ function run(command,args){const r=spawnSync(command,args,{cwd:root,encoding:'ut
  if(r.error||r.status!==0)throw new Error('Owner source verification failed',{cause:r.error});}
 try{
  const classes=path.join(temp,'classes');await mkdir(classes);
- const sources=['Env','ActionJournal','ArenaController','ArenaOwnerGrant','Durability','OwnerFiles','OwnerInputs','OwnerDispatch','OwnerTriggers','OwnerLifetime','MaterialLinkage'];
- const testNames=['OwnerEnvSelfTest','OwnerFilesSelfTest','OwnerInputsSelfTest','OwnerDispatchSelfTest','OwnerTriggersSelfTest','OwnerLifetimeSelfTest','MaterialLinkageSelfTest','OwnerInputsInterop'];
+ const sources=['Env','ActionJournal','ArenaController','ArenaOwnerGrant','Durability','OwnerFiles','OwnerInputs','OwnerDispatch','OwnerTriggers','OwnerLifetime','MaterialLinkage','TankRotationController','TankRotationPlan'];
+ const testNames=['OwnerEnvSelfTest','OwnerFilesSelfTest','OwnerInputsSelfTest','OwnerDispatchSelfTest','OwnerTriggersSelfTest','OwnerLifetimeSelfTest','MaterialLinkageSelfTest','OwnerInputsInterop','TankRotationSelfTest','TankRotationPlanSelfTest','TankRotationFilesSelfTest'];
  run(executable('javac'),['--release','17','-proc:none','-cp',gson,'-d',classes,
   ...sources.map(n=>path.join(main,'KneekuraDebug'+n+'.java')),...testNames.map(n=>path.join(tests,'KneekuraDebug'+n+'.java'))]);
  const cp=classes+path.delimiter+gson;
- for(const name of testNames.filter(n=>n.endsWith('SelfTest')))run(executable('java'),['-cp',cp,packageName+'.KneekuraDebug'+name]);
+ for(const name of testNames.filter(n=>n.endsWith('SelfTest')&&n!=='TankRotationPlanSelfTest'))run(executable('java'),['-cp',cp,packageName+'.KneekuraDebug'+name]);
  const jar=path.join(temp,'source-fixture.jar');run(executable('jar'),['--create','--file',jar,'-C',classes,'.']);
  run(executable('java'),['-cp',jar+path.delimiter+gson,packageName+'.KneekuraDebugMaterialLinkageSelfTest']);
- const fixture=await ownerFixture({after(fn){cleanup.push(fn);}},{capture:true,triggerCapture:{enabled:true,triggerKinds:['ARENA_EXIT'],offsetsMs:[-1000,0],toleranceMs:200,cooldownMs:1000,maxWindows:1,captureBudget:1,timeoutMs:1000,captureIndices:[0]}}),prepared=await prepareOwnerControl(fixture.options);
- const contextDir=path.join(temp,'interop');await mkdir(contextDir);
+ const ordinary=await ownerFixture({after(fn){cleanup.push(fn);}},{capture:true,triggerCapture:{enabled:true,triggerKinds:['ARENA_EXIT'],offsetsMs:[-1000,0],toleranceMs:200,cooldownMs:1000,maxWindows:1,captureBudget:1,timeoutMs:1000,captureIndices:[0]}});
+ const tank=await maintenance({after(fn){cleanup.push(fn);}});
+ for(const [index,fixture] of [ordinary,tank].entries()){
+ const prepared=await prepareOwnerControl(fixture.options);
+ const contextDir=path.join(temp,'interop-'+index);await mkdir(contextDir);
+ if(prepared.tankRotation){
+  const file=path.join(contextDir,'tank-plan-fixture.json');
+  await writeFile(file,JSON.stringify({plan:prepared.tankRotation,grant:prepared.grant,request:prepared.request,world:prepared.worldRegistration,trigger:null,previousOwnerBytes:fixture.previousOwnerBytes.toString('base64')}));
+  run(executable('java'),['-cp',cp,packageName+'.KneekuraDebugTankRotationPlanSelfTest',file]);
+ }
  await writeFile(path.join(contextDir,'context.json'),JSON.stringify({runDir:fixture.runDir,identity:fixture.identity,envelopeHash:prepared.envelopeHash}));
  await new Promise((resolve,reject)=>{
   const child=spawn(executable('java'),['-cp',cp,packageName+'.KneekuraDebugOwnerInputsInterop',contextDir],{cwd:root,stdio:['pipe','pipe','pipe']});
@@ -52,7 +61,8 @@ try{
     child.stdin.end('snapshot-ready\n');
    })().catch(error=>{failed=error;child.kill('SIGKILL');});
   });
-  child.on('close',code=>{clearTimeout(timer);if(failed||code!==0||!output.includes('NODE_JAVA_OWNER_INPUTS_VERIFIED'))reject(failed??new Error('Node/Java owner fixture rejected'));else resolve();});
+  child.on('close',code=>{clearTimeout(timer);if(failed||code!==0||!output.includes('NODE_JAVA_OWNER_INPUTS_VERIFIED')||!output.includes('tankRotation='+Boolean(prepared.tankRotation)))reject(failed??new Error('Node/Java owner fixture rejected'));else resolve();});
  });
+ }
  console.log('Node/Java exact owner input linkage passed using actual parser PID; owner installation and Minecraft NOT_RUN; target attestation NOT_ESTABLISHED');
 }finally{for(const fn of cleanup)await fn();await rm(temp,{recursive:true,force:true});}

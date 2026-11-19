@@ -1,0 +1,76 @@
+{
+  "format": "kneekura.warfare-wings.anchor-evidence.v1",
+  "captured_at": "2026-10-07T02:25:00+09:00",
+  "track": "ANCHOR",
+  "environment": {
+    "minecraft": "1.20.1",
+    "loader": "Forge",
+    "java": 17
+  },
+  "artifact": {
+    "filename": "warfare_wings-1.1.4-1.20.1-forge.jar",
+    "source_kind": "user_supplied",
+    "size_bytes": 29564937,
+    "sha1": "2f11c29973a563457bdc734ccc94fa6e17afbc68",
+    "sha256": "dc3029597c88859744633b6f5e4a9f21d449294b1aaac90ea0c1749d7aa98a43"
+  },
+  "embedded_metadata": {
+    "mod_id": "warfare_wings",
+    "version": "1.1.4",
+    "mod_loader": "javafml",
+    "loader_version": "[47,)",
+    "author": "VellEagle",
+    "declared_license": "GPL-3.0-only",
+    "dependencies": [
+      {
+        "mod_id": "immersive_aircraft",
+        "mandatory": true,
+        "version_range": "[1.1.0,)",
+        "side": "BOTH"
+      }
+    ]
+  },
+  "inventory": {
+    "warfare_wings_classes": 220,
+    "aircraft_json": 90,
+    "aircraft_json_with_ai_block": 90,
+    "base_aircraft": 24,
+    "scheme_or_livery_aircraft": 66,
+    "weapon_classes": 12,
+    "bullet_or_bomb_classes": 12,
+    "client_classes": 101,
+    "item_model_json": 106,
+    "entity_textures": 91,
+    "recipes": 104,
+    "active_common_mixins": 0,
+    "active_forge_mixins": 0
+  },
+  "base_role_counts": {
+    "fighter": 14,
+    "bomber": 5,
+    "attacker": 4,
+    "torpedo_bomber": 1
+  },
+  "base_doctrine_counts": {
+    "energy_fighter": 11,
+    "escort": 6,
+    "attacker": 4,
+    "turn_fighter": 3
+  },
+  "public_release_comparison": {
+    "curseforge_file_id": 7778796,
+    "public_release_filename": "warfare_wings-1.1.4-1.20.1-forge.jar",
+    "external_manifest_reported_sha1": "d0186bde4d69087d2317e692211447128a1d5314",
+    "supplied_artifact_matches_reported_public_sha1": false,
+    "conclusion": "PUBLIC_RELEASE_BYTE_IDENTITY_NOT_ESTABLISHED"
+  },
+  "license_conflict": {
+    "supplied_mods_toml": "GPL-3.0-only",
+    "public_project_pages": "All Rights Reserved",
+    "handling": "Do not redistribute raw JAR/assets; retain hashes, locators and derived summaries only until resolved."
+  },
+  "runtime": {
+    "supplied_artifact_launched_in_this_batch": false,
+    "state": "UNKNOWN"
+  }
+}
