@@ -113,7 +113,7 @@ public class NuclearShotEntity extends THShotEntity {
         float hitSize = this.getShotSize() * 0.5F;
         AABB search = this.getBoundingBox().expandTowards(toMc(m.motion)).inflate(hitSize);
         for (Entity e : this.level().getEntities(this, search, this::isNuclearCandidate)) {
-            if (e.getBoundingBox().inflate(hitSize).clip(start, end).isPresent()) onImpactEntity(e, m);
+            if (dev.kneekura.fivedifficulties.forge.shot.X1Hit.intercept(e.getBoundingBox().inflate(hitSize), start, end).isPresent()) onImpactEntity(e, m);
             if (this.isRemoved()) return;
         }
         boolean isHit = false;

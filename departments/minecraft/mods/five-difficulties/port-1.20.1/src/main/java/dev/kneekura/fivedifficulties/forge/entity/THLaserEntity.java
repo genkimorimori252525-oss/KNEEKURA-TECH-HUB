@@ -119,7 +119,7 @@ public class THLaserEntity extends THShotEntity {
             if (!e.isPickable() || e == user || e == source) continue;
             if (e instanceof SakuyaTimeControllerEntity || e instanceof Animal || e instanceof Villager) continue;
             if (!(e instanceof LivingEntity)) continue;
-            if (e.getBoundingBox().inflate(width).clip(start, end).isEmpty()) continue;
+            if (dev.kneekura.fivedifficulties.forge.shot.X1Hit.intercept(e.getBoundingBox().inflate(width), start, end).isEmpty()) continue;
             if (e instanceof Player player && (player.getAbilities().invulnerable || source instanceof Player)) continue;
             onImpactLaserEntity(e, m);
             if (this.isRemoved()) return;

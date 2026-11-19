@@ -394,7 +394,7 @@ public class THShotEntity extends Projectile {
         Entity best = null;
         double bestDistance = 0.0D;
         for (Entity candidate : this.level().getEntities(this, search, this::isCandidate)) {
-            Optional<Vec3> intercept = candidate.getBoundingBox().inflate(hitSize).clip(start, end);
+            Optional<Vec3> intercept = dev.kneekura.fivedifficulties.forge.shot.X1Hit.intercept(candidate.getBoundingBox().inflate(hitSize), start, end);
             if (intercept.isEmpty()) continue;
             double distance = start.distanceTo(intercept.get());
             if (distance < bestDistance || bestDistance == 0.0D) {

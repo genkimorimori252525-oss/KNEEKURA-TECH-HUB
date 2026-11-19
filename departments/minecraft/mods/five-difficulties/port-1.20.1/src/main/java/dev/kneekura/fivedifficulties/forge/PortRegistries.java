@@ -223,6 +223,13 @@ public final class PortRegistries {
                     .sized(1.5F, 1.5F).clientTrackingRange(8).updateInterval(1).setShouldReceiveVelocityUpdates(true)
                     .build(FiveDifficultiesPort.MOD_ID + ":hakurou_reflecter"));
 
+    // ---- P16j entities ----
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.SilverKnifeEntity>> SILVER_KNIFE_ENTITY =
+            ENTITIES.register("silver_knife", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.SilverKnifeEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.SilverKnifeEntity::new, MobCategory.MISC)
+                    .sized(0.1F, 0.1F).clientTrackingRange(8).updateInterval(1).setShouldReceiveVelocityUpdates(true)
+                    .build(FiveDifficultiesPort.MOD_ID + ":silver_knife"));
+
     // ---- P13 danmaku-weapon items ----
     public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity>> DRAGON_NECK_JEWEL =
             ENTITIES.register("dragon_neck_jewel", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity>of(
@@ -404,6 +411,16 @@ public final class PortRegistries {
             () -> new dev.kneekura.fivedifficulties.forge.item.X1ArmorItems.KappaCap(new Item.Properties()));
     public static final RegistryObject<Item> SUWAKO_HAT = ITEMS.register("suwako_hat",
             () -> new dev.kneekura.fivedifficulties.forge.item.X1ArmorItems.Kerobou(new Item.Properties()));
+
+    // ---- P16j silver knives ----
+    public static final RegistryObject<Item> SILVER_KNIFE_BLUE = ITEMS.register("silver_knife_blue",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1ShotItems.SilverKnife(new Item.Properties(), 0));
+    public static final RegistryObject<Item> SILVER_KNIFE_RED = ITEMS.register("silver_knife_red",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1ShotItems.SilverKnife(new Item.Properties(), 1));
+    public static final RegistryObject<Item> SILVER_KNIFE_GREEN = ITEMS.register("silver_knife_green",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1ShotItems.SilverKnife(new Item.Properties(), 2));
+    public static final RegistryObject<Item> SILVER_KNIFE_WHITE = ITEMS.register("silver_knife_white",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1ShotItems.SilverKnife(new Item.Properties(), 3));
 
     public static final RegistryObject<Item> SHOT_MATERIAL = ITEMS.register("shot_material",
             () -> new dev.kneekura.fivedifficulties.forge.item.ShotMaterialItem(new Item.Properties()));

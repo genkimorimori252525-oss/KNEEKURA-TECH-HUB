@@ -320,6 +320,23 @@ ASSETS = {
         "assets/five_difficulties_port/textures/item/suwako_hat.png",
         "66fc7cbde99c2dd443bb9774d6f4e879d3f2f01485c642006cd7b8e8273ca4ce",
     ),
+    # P16j silver knives.
+    "assets/thkaguyamod/textures/items/shot/SilverKnife_Blue.png": (
+        "assets/five_difficulties_port/textures/item/silver_knife_blue.png",
+        "368e7dc2d03ad146448e72b4a61f3cea192cc58f18821363466f463111c3d625",
+    ),
+    "assets/thkaguyamod/textures/items/shot/SilverKnife_Red.png": (
+        "assets/five_difficulties_port/textures/item/silver_knife_red.png",
+        "b2fdd9ff1fa364907f5c63a49a04d30eef6aa7ee2b0c21003f296d0499525af9",
+    ),
+    "assets/thkaguyamod/textures/items/shot/SilverKnife_Green.png": (
+        "assets/five_difficulties_port/textures/item/silver_knife_green.png",
+        "28c9ec919f7e5abf09043981acffd3ac2c836ae1402ce9c0fdb338c0787189d1",
+    ),
+    "assets/thkaguyamod/textures/items/shot/SilverKnife_White.png": (
+        "assets/five_difficulties_port/textures/item/silver_knife_white.png",
+        "e8527df432cf0f88c12842e48705ca138f51d7303eadeb304d31723df5224ad3",
+    ),
     # P15 danmaku crafting table.
     "assets/thkaguyamod/textures/blocks/danmaku_crafting_table.png": (
         "assets/five_difficulties_port/textures/block/danmaku_crafting_table.png",

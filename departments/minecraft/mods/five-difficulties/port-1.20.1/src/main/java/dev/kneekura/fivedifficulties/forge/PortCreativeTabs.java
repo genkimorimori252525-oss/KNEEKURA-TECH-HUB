@@ -15,6 +15,11 @@ public final class PortCreativeTabs {
 
     @SubscribeEvent
     public static void buildContents(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.COMBAT) { // P16j silver knives
+            event.accept(PortRegistries.SILVER_KNIFE_BLUE.get());
+            event.accept(PortRegistries.SILVER_KNIFE_RED.get());
+            event.accept(PortRegistries.SILVER_KNIFE_GREEN.get());
+        }
         if (event.getTabKey() == CreativeModeTabs.COMBAT) { // P16i armour
             event.accept(PortRegistries.FIRE_RAT_ROBE.get());
             event.accept(PortRegistries.MARISA_HAT.get());

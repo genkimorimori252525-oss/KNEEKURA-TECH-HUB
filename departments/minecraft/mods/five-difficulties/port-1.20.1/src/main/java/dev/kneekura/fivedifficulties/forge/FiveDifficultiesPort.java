@@ -17,6 +17,8 @@ public final class FiveDifficultiesPort {
                 net.minecraftforge.fml.config.ModConfig.Type.COMMON, X1Config.SPEC, "five_difficulties_port-common.toml");
         PortRegistries.register(modBus);
         PortNetwork.register();
+        modBus.addListener((net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent e) ->
+                e.enqueueWork(dev.kneekura.fivedifficulties.forge.item.X1ShotItems::registerDispenser));
         LOGGER.info("Five Difficulties X1 Preservation Port P2 bootstrap loaded");
     }
 }

@@ -320,4 +320,39 @@ public final class P16Renderers {
             return REFLECT;
         }
     }
+
+    /** RenderSilverKnife: ModelSilverKnife at half size, turned by yaw, pitch and the knife's Z angle; full bright. */
+    public static final class SilverKnife extends EntityRenderer<dev.kneekura.fivedifficulties.forge.entity.SilverKnifeEntity> {
+        private static final ResourceLocation[] TEX = {tex("shot/silver_knife_blue"), tex("shot/silver_knife_red"),
+                tex("shot/silver_knife_green"), tex("shot/silver_knife_white")};
+        private final net.minecraft.client.model.geom.ModelPart model;
+
+        public SilverKnife(EntityRendererProvider.Context context) {
+            super(context);
+            this.shadowRadius = 0.3F;
+            this.model = context.bakeLayer(SilverKnifeModel.LAYER_LOCATION);
+        }
+
+        @Override
+        public void render(dev.kneekura.fivedifficulties.forge.entity.SilverKnifeEntity e, float entityYaw, float partialTick,
+                           PoseStack pose, MultiBufferSource buffers, int light) {
+            float yaw = Mth.lerp(partialTick, e.yRotO, e.getYRot());
+            pose.pushPose();
+            pose.mulPose(Axis.YP.rotationDegrees(180F - yaw));
+            pose.mulPose(Axis.XP.rotationDegrees(-e.getXRot()));
+            pose.mulPose(Axis.ZP.rotationDegrees(e.getKnifeZAngle()));
+            pose.scale(0.5F, 0.5F, 0.5F);
+            model.render(pose, new X1Tess(pose, buffers, getTextureLocation(e)).modelSink(CUTOUT),
+                    net.minecraft.client.renderer.LightTexture.FULL_BRIGHT,
+                    net.minecraft.client.renderer.texture.OverlayTexture.NO_OVERLAY, 1F, 1F, 1F, 1F);
+            pose.popPose();
+            super.render(e, entityYaw, partialTick, pose, buffers, light);
+        }
+
+        @Override
+        public ResourceLocation getTextureLocation(dev.kneekura.fivedifficulties.forge.entity.SilverKnifeEntity e) {
+            int c = e.getKnifeColor();
+            return TEX[c >= 0 && c < 3 ? c : 3];
+        }
+    }
 }

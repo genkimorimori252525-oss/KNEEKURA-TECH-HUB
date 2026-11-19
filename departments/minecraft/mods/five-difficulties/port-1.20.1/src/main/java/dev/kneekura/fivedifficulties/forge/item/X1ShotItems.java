@@ -296,4 +296,68 @@ public final class X1ShotItems {
             return stack.getDamageValue() >= 6 ? UseAnim.NONE : UseAnim.DRINK;
         }
     }
+
+    /**
+     * ItemSilverKnife (blue / red / green / white; the creative list shows the first three): throws a knife at 0.28;
+     * a melee hit adds 3 mob damage and uses up a white knife.
+     */
+    public static final class SilverKnife extends Item {
+        private final int color;
+
+        public SilverKnife(Properties p, int color) {
+            super(p);
+            this.color = color;
+        }
+
+        public int color() {
+            return color;
+        }
+
+        @Override
+        public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+            target.hurt(attacker.damageSources().mobAttack(attacker), 3.0F);
+            if (color == 3) stack.shrink(1);
+            return true;
+        }
+
+        @Override
+        public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+            ItemStack stack = player.getItemInHand(hand);
+            double speed = 0.28D;
+            Vec3d angle = X1Danmaku.angle(player.getYRot(), player.getXRot());
+            Vec3d living = X1Danmaku.pos_Living(player);
+            Vec3d pos = new Vec3d(living.x() + angle.x() * speed, living.y() + angle.y() * speed, living.z() + angle.z() * speed);
+            level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS,
+                    0.5F, 0.4F / (level.random.nextFloat() * 4F + 0.8F));
+            if (!level.isClientSide) {
+                level.addFreshEntity(new dev.kneekura.fivedifficulties.forge.entity.SilverKnifeEntity(level, player, pos, angle,
+                        speed, color));
+                stack.shrink(1);
+            }
+            player.swing(hand);
+            return InteractionResultHolder.pass(stack);
+        }
+    }
+
+    /** X1 CommonProxy.registerDispenser: a dispenser fires a knife at 0.58 (its direction left unnormalized). */
+    public static void registerDispenser() {
+        net.minecraft.core.dispenser.DispenseItemBehavior knife = (source, stack) -> {
+            Level level = source.getLevel();
+            net.minecraft.core.Position at = net.minecraft.world.level.block.DispenserBlock.getDispensePosition(source);
+            Vec3d angle = new Vec3d(at.x() - source.x(), at.y() - source.y(), at.z() - source.z());
+            if (stack.getItem() instanceof SilverKnife k) {
+                level.addFreshEntity(new dev.kneekura.fivedifficulties.forge.entity.SilverKnifeEntity(level,
+                        new Vec3d(at.x(), at.y(), at.z()), angle, 0.58D, k.color()));
+            }
+            stack.shrink(1);
+            return stack;
+        };
+        for (var item : new net.minecraft.world.item.Item[] {
+                dev.kneekura.fivedifficulties.forge.PortRegistries.SILVER_KNIFE_BLUE.get(),
+                dev.kneekura.fivedifficulties.forge.PortRegistries.SILVER_KNIFE_RED.get(),
+                dev.kneekura.fivedifficulties.forge.PortRegistries.SILVER_KNIFE_GREEN.get(),
+                dev.kneekura.fivedifficulties.forge.PortRegistries.SILVER_KNIFE_WHITE.get()}) {
+            net.minecraft.world.level.block.DispenserBlock.registerBehavior(item, knife);
+        }
+    }
 }

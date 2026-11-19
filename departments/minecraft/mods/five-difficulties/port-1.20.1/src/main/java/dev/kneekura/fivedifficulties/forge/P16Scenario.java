@@ -66,6 +66,7 @@ public final class P16Scenario {
             runSwordEffects();
             runTools();
             runArmour();
+            runSilverKnife();
             FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_RUNTIME_SCENARIO_PASS");
             ScenarioShutdown.finished(level.getServer(), ENV);
         } catch (Throwable failure) {
@@ -602,6 +603,65 @@ public final class P16Scenario {
                 "kerobou thorns");
         p.getInventory().clearContent();
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_ARMOUR_PASS");
+    }
+
+    private static dev.kneekura.fivedifficulties.forge.entity.SilverKnifeEntity throwKnife(FakePlayer p, ItemStack stack) {
+        p.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, stack);
+        stack.getItem().use(level, p, net.minecraft.world.InteractionHand.MAIN_HAND);
+        var found = level.getEntitiesOfClass(dev.kneekura.fivedifficulties.forge.entity.SilverKnifeEntity.class,
+                p.getBoundingBox().inflate(3.0D), k -> k.shootingEntity == p && k.tickCount == 0);
+        require(found.size() == 1, "one thrown knife, saw " + found.size());
+        return found.get(0);
+    }
+
+    private static void tickKnife(Entity k, int n) {
+        for (int i = 0; i < n && !k.isRemoved(); i++) {
+            k.tickCount++;
+            k.tick();
+        }
+    }
+
+    private static void runSilverKnife() {
+        FakePlayer p = player();
+        // A blue knife waits 3 ticks, then flies; it hits a zombie for 4 (less armour) and bounces back.
+        Zombie z = zombie(5);
+        float hp = z.getHealth();
+        ItemStack blue = new ItemStack(PortRegistries.SILVER_KNIFE_BLUE.get(), 2);
+        var knife = throwKnife(p, blue);
+        require(blue.getCount() == 1, "one knife thrown");
+        double x0 = knife.getX();
+        tickKnife(knife, 3);
+        require(knife.getX() == x0, "the knife waits until its count passes 2");
+        tickKnife(knife, 40);
+        require(hp - z.getHealth() >= 3.5F, "the knife hit the zombie for " + (hp - z.getHealth()) + " knife dx=" + (knife.getX() - bx) + " dy=" + (knife.getY() - by) + " count=" + knife.getKnifeCount() + " removed=" + knife.isRemoved() + " zx=" + (z.getX() - bx));
+        z.discard();
+        knife.discard();
+
+        // Into a dirt wall: it sticks and can be picked up.
+        BlockPos wall = BlockPos.containing(bx + 4, by + 1, bz);
+        for (int dy = -1; dy <= 1; dy++) for (int dz = -1; dz <= 1; dz++)
+            level.setBlockAndUpdate(wall.offset(0, dy, dz), net.minecraft.world.level.block.Blocks.DIRT.defaultBlockState());
+        var stuck = throwKnife(p, new ItemStack(PortRegistries.SILVER_KNIFE_RED.get()));
+        tickKnife(stuck, 60);
+        require(stuck.inGround(), "the knife sticks in dirt at x " + (stuck.getX() - bx));
+        p.getInventory().clearContent();
+        stuck.playerTouch(p);
+        require(stuck.isRemoved() && p.getInventory().countItem(PortRegistries.SILVER_KNIFE_RED.get()) == 1, "picked up");
+        for (int dy = -1; dy <= 1; dy++) for (int dz = -1; dz <= 1; dz++)
+            level.setBlockAndUpdate(wall.offset(0, dy, dz), net.minecraft.world.level.block.Blocks.AIR.defaultBlockState());
+
+        // A green knife sheds white knives (count 0, delay -30) every other tick while fast.
+        p.setXRot(-20F);
+        var green = throwKnife(p, new ItemStack(PortRegistries.SILVER_KNIFE_GREEN.get()));
+        tickKnife(green, 12);
+        int whites = level.getEntitiesOfClass(dev.kneekura.fivedifficulties.forge.entity.SilverKnifeEntity.class,
+                green.getBoundingBox().inflate(16.0D), k -> k.getKnifeColor() == 3).size();
+        require(whites > 0, "the green knife shed white knives");
+        level.getEntitiesOfClass(dev.kneekura.fivedifficulties.forge.entity.SilverKnifeEntity.class,
+                p.getBoundingBox().inflate(48.0D)).forEach(Entity::discard);
+        p.setXRot(0F);
+        p.getInventory().clearContent();
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_SILVER_KNIFE_PASS whites=" + whites);
     }
 
     private static void require(boolean ok, String what) {

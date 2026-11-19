@@ -351,7 +351,7 @@ public final class X1Weapons {
             double d = 0.0D;
             for (Entity e : level.getEntities(player, player.getBoundingBox().expandTowards(look.scale(range)).inflate(1.0D))) {
                 if (!(e instanceof LivingEntity)) continue;
-                Optional<Vec3> at = e.getBoundingBox().inflate(0.3D).clip(from, to);
+                Optional<Vec3> at = dev.kneekura.fivedifficulties.forge.shot.X1Hit.intercept(e.getBoundingBox().inflate(0.3D), from, to);
                 if (at.isPresent()) {
                     double d1 = from.distanceTo(at.get());
                     if (d1 < d || d == 0.0D) {

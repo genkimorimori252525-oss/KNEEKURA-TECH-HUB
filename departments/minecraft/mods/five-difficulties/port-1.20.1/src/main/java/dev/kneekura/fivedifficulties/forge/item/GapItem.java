@@ -93,7 +93,7 @@ public class GapItem extends Item {
             AABB search = player.getBoundingBox().expandTowards(xMax, yMax, zMax).inflate(1.0D);
             for (Entity e : level.getEntities(player, search)) {
                 if (!(e instanceof LivingEntity)) continue;
-                Optional<Vec3> at = e.getBoundingBox().inflate(0.3F).clip(from, to);
+                Optional<Vec3> at = dev.kneekura.fivedifficulties.forge.shot.X1Hit.intercept(e.getBoundingBox().inflate(0.3F), from, to);
                 if (at.isEmpty()) continue;
                 double d1 = from.distanceTo(at.get());
                 if ((d1 < d || d == 0.0D) && d1 > 5.0D) {

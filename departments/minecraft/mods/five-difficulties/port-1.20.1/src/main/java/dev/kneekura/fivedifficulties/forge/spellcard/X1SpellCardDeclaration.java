@@ -67,7 +67,7 @@ public final class X1SpellCardDeclaration {
         AABB search = user.getBoundingBox().expandTowards(angleX * 32.0D, angleY * 32.0D, angleZ * 32.0D).inflate(1.0D);
         for (Entity e : world.getEntities(user, search)) {
             if (!(e instanceof LivingEntity living) || e instanceof Animal || e instanceof Villager) continue;
-            Optional<Vec3> intercept = e.getBoundingBox().inflate(0.3F).clip(start, end);
+            Optional<Vec3> intercept = dev.kneekura.fivedifficulties.forge.shot.X1Hit.intercept(e.getBoundingBox().inflate(0.3F), start, end);
             if (intercept.isEmpty()) continue;
             double distance = start.distanceTo(intercept.get());
             if (distance < nearDistance || nearDistance == 0.0D) {

@@ -120,7 +120,7 @@ public class OnmyoudamaEntity extends THShotEntity {
         Entity owner = this.getOwner();
         AABB search = this.getBoundingBox().expandTowards(toMc(m.motion)).inflate(hitSize);
         for (Entity e : this.level().getEntities(this, search)) {
-            if (e.equals(owner) && e.getBoundingBox().inflate(hitSize).clip(from, to).isPresent()) return true;
+            if (e.equals(owner) && dev.kneekura.fivedifficulties.forge.shot.X1Hit.intercept(e.getBoundingBox().inflate(hitSize), from, to).isPresent()) return true;
         }
         return false;
     }

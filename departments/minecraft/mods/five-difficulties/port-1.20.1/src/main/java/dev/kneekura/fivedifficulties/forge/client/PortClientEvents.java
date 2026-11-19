@@ -45,6 +45,7 @@ public final class PortClientEvents {
         event.registerEntityRenderer(PortRegistries.TH_ITEM.get(), THItemRenderer::new);
         event.registerEntityRenderer(PortRegistries.MUSOU_FUUIN.get(), P12Renderers.MusouFuuin::new);
         event.registerEntityRenderer(PortRegistries.DRAGON_NECK_JEWEL.get(), DragonNeckJewelRenderer::new);
+        event.registerEntityRenderer(PortRegistries.SILVER_KNIFE_ENTITY.get(), P16Renderers.SilverKnife::new);
         event.registerEntityRenderer(PortRegistries.CIRNO_ICE_BOX.get(), P16Renderers.CirnoIceBox::new);
         event.registerEntityRenderer(PortRegistries.HAKUROU_REFLECTER.get(), P16Renderers.HakurouReflecter::new);
         event.registerEntityRenderer(PortRegistries.PENDULUM_ENTITY.get(), P16Renderers.Pendulum::new);
