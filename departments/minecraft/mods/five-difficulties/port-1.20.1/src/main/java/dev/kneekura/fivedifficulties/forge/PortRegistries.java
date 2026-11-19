@@ -231,6 +231,25 @@ public final class PortRegistries {
     public static final RegistryObject<Item> GAP_FOLDING_UMBRELLA = ITEMS.register("gap_folding_umbrella",
             () -> new dev.kneekura.fivedifficulties.forge.item.GapFoldingUmbrellaItem(new Item.Properties()));
 
+    // ---- P14 bonus items ----
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.THItemEntity>> TH_ITEM =
+            ENTITIES.register("th_item", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.THItemEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.THItemEntity::new, MobCategory.MISC)
+                    .sized(1.2F, 1.2F).clientTrackingRange(8).updateInterval(1).setShouldReceiveVelocityUpdates(true)
+                    .build(FiveDifficultiesPort.MOD_ID + ":th_item")); // X1 "THItem"
+
+    /** X1 power_item damage 0 / 1 (THKaguyaItems.power_up_item_small / big). */
+    public static final RegistryObject<Item> POWER_ITEM_SMALL = ITEMS.register("power_item_small",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> POWER_ITEM_BIG = ITEMS.register("power_item_big",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> POINT_ITEM = ITEMS.register("point_item",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> BOMB_ITEM = ITEMS.register("bomb_item",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> EXTEND_ITEM = ITEMS.register("extend_item",
+            () -> new Item(new Item.Properties().stacksTo(8)));
+
     public static final RegistryObject<Item> SHOT_MATERIAL = ITEMS.register("shot_material",
             () -> new dev.kneekura.fivedifficulties.forge.item.ShotMaterialItem(new Item.Properties()));
 
@@ -262,6 +281,7 @@ public final class PortRegistries {
     public static void register(IEventBus modBus) {
         ITEMS.register(modBus);
         ENTITIES.register(modBus);
+        dev.kneekura.fivedifficulties.forge.spellcard.X1SpellCardDeclaration.bombItem = () -> BOMB_ITEM.get();
         dev.kneekura.fivedifficulties.forge.entity.OnmyoudamaEntity.mikoStick = () -> HAKUREI_MIKO_STICK.get();
         dev.kneekura.fivedifficulties.forge.entity.NuclearShotEntity.controlRod = () -> NUCLEAR_CONTROL_ROD.get();
         modBus.addListener((net.minecraftforge.event.entity.EntityAttributeCreationEvent event) ->

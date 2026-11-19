@@ -89,8 +89,10 @@ public final class THShotItem extends Item {
         }
         if (way > X1ShotTables.SHOT_MAX_NUMBER) way = X1ShotTables.SHOT_MAX_NUMBER;
 
-        // Player power (THKaguyaLib.getPlayerPower / 400) is not ported yet: bonus 0.
         float damagePlus = 0.0F;
+        if (living instanceof Player powered) {
+            damagePlus += dev.kneekura.fivedifficulties.forge.X1PlayerEvents.getPlayerPower(powered) / 400.0F;
+        }
         X1ShotData shot = X1ShotData.shot(type2, color, X1ShotTables.SIZE[type2],
                 X1ShotTables.DAMAGE[type2] + damagePlus, 0, 80, special);
         X1ShotPatterns patterns = X1ShotSpawner.patterns(level, living);

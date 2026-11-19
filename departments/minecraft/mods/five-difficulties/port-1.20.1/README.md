@@ -1,6 +1,6 @@
 # Five Difficulties X1 Preservation Port — Minecraft 1.20.1 Forge
 
-Status: **P13 complete — all 35 X1 spell cards and the danmaku-weapon items (Mini Hakkero, Nuclear Control Rod, Dragon Neck Jewel, both gohei, Gap, Gap Folding Umbrella) on top of every shot / laser form; see PORT-ROADMAP.md**.
+Status: **P14 complete — spell cards, danmaku-weapon items, bonus items (power / point / bomb / extend) and the X1 config on top of every shot / laser form; see PORT-ROADMAP.md**.
 
 Target:
 - Minecraft 1.20.1
@@ -255,3 +255,10 @@ cards are registered. See `IMPLEMENTATION-CHECKPOINT-P12.md` and `PORT-ROADMAP.m
 
 Mini Hakkero (explosive Master Spark, 32 fire charges), Nuclear Control Rod (charge, fire, recoil) and
 Dragon Neck Jewel (thrown, bursts into lasers and lights). See `IMPLEMENTATION-CHECKPOINT-P13.md`.
+
+
+## P14 bonus items and config
+
+Power / point / bomb / extend items and their dropped bonus entity, player power (shot damage), the
+extend that saves a dying player, bombs paying for spell cards, and X1's config. See
+`IMPLEMENTATION-CHECKPOINT-P14.md`.

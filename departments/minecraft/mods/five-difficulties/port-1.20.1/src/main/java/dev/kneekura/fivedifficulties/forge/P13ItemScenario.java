@@ -335,7 +335,9 @@ public final class P13ItemScenario {
                 windStep = 2;
                 ticks = 0;
             } else {
-                require(ticks < 20, "the wind never knocked the husk up");
+                require(ticks < 20, "the wind never knocked the husk up (wind removed " + wind.isRemoved() + " at "
+                        + wind.position().subtract(windTarget.position()) + " from the husk, husk vy " + vy
+                        + ", husk alive " + windTarget.isAlive() + ")");
             }
         } else if (windStep == 2) {
             ItemStack gohei = player.getMainHandItem();

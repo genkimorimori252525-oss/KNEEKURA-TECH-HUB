@@ -122,6 +122,27 @@ ASSETS = {
         "assets/five_difficulties_port/textures/item/diffusion_amulet.png",
         "48a04fbb8993b87cce4abc2b175f006d8bdaef3254c323b86b023b749f152927",
     ),
+    # P14 bonus items.
+    "assets/thkaguyamod/textures/items/material/SmallPowerUpItem.png": (
+        "assets/five_difficulties_port/textures/item/power_item_small.png",
+        "7fd29895d4937c6d1e19cac2f6afd8fd896c6eb4e71b839bfcd44d1926ec4b40",
+    ),
+    "assets/thkaguyamod/textures/items/material/BigPowerUpItem.png": (
+        "assets/five_difficulties_port/textures/item/power_item_big.png",
+        "572feea020916ccff0813cb1a7de01dc51fb588825bca3c4cdca6b70a73f1c7f",
+    ),
+    "assets/thkaguyamod/textures/items/material/THPointItem.png": (
+        "assets/five_difficulties_port/textures/item/point_item.png",
+        "95aaed45f5dc492adb57f60e9d1e5d762622a93db0c693b38600bb67411978c4",
+    ),
+    "assets/thkaguyamod/textures/items/material/BombItem.png": (
+        "assets/five_difficulties_port/textures/item/bomb_item.png",
+        "10c8f0bf4268dca5437b0ee897c97a0be5522a081c71e15cebea3a17fc641d6d",
+    ),
+    "assets/thkaguyamod/textures/items/material/ExtendItem.png": (
+        "assets/five_difficulties_port/textures/item/extend_item.png",
+        "3c43ae112781819913d840ea5aac250daa83cf3df9e1223e968e234501a293c8",
+    ),
     # P13d gaps.
     "assets/thkaguyamod/textures/items/sukima.png": (
         "assets/five_difficulties_port/textures/item/gap.png",

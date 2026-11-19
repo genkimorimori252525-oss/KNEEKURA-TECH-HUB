@@ -25,7 +25,6 @@ public final class SpecialCards {
 
     private static final int HARD = 3;
     /** THKaguyaConfig "Danmaku Level" default. */
-    private static final int DANMAKU_LEVEL = 2;
 
     private static Vec3d rot(Vec3d axis, Vec3d v, float a) {
         return getVectorFromRotation(axis, v, a);
@@ -534,7 +533,7 @@ public final class SpecialCards {
                     shot.setShotEndTime(90);
                     m.shotSpeed = 0.01D;
                     m.acceleration = 0.03D;
-                    m.limitSpeed = 0.2D + DANMAKU_LEVEL * 0.1D;
+                    m.limitSpeed = 0.2D + dev.kneekura.fivedifficulties.forge.X1Config.danmakuLevel() * 0.1D;
                     m.special = 0;
                 }
             }, null, null);

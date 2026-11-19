@@ -28,6 +28,11 @@ public final class PortCreativeTabs {
             PortRegistries.SHOT_ITEMS.forEach(item -> event.accept(item.get()));
             PortRegistries.LASER_ITEMS.forEach(item -> event.accept(item.get()));
             event.accept(PortRegistries.SHOT_MATERIAL.get());
+            event.accept(PortRegistries.POWER_ITEM_SMALL.get());
+            event.accept(PortRegistries.POWER_ITEM_BIG.get());
+            event.accept(PortRegistries.POINT_ITEM.get());
+            event.accept(PortRegistries.BOMB_ITEM.get());
+            event.accept(PortRegistries.EXTEND_ITEM.get());
         }
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) { // X1 tabMisc for the gaps
             event.accept(PortRegistries.GAP.get());

@@ -401,6 +401,9 @@ public final class ClientWorldVisualSmoke {
                 new Vec3d(-3.5D, -57.0D, 8.0D), new Vec3d(0, 0, 1), 0F, new Vec3d(0, 1, 0), 0F, 9999, 0.0001D, 0.0D,
                 0.0D, Vec3d.ZERO, 0, 1.0F, 1.0F, 0, 2000, 0);
         level.addFreshEntity(wind);
+        // P14: a big power bonus falling in front of the camera
+        level.addFreshEntity(new dev.kneekura.fivedifficulties.forge.entity.THItemEntity(level, 2.0D, -51.0D, 7.0D,
+                Vec3d.ZERO, dev.kneekura.fivedifficulties.forge.entity.THItemEntity.ITEM_ID_BIGPOWER));
     }
 
     // Source is an armor stand in front of the camera, so the Watch controller and its

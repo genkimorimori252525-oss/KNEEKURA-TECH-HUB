@@ -21,8 +21,6 @@ import static dev.kneekura.fivedifficulties.core.x1.X1ShotTables.YELLOW;
  * ignited ticks, so it freezes, bursts, then plays its 40-tick death while still alive.
  */
 public class DanmakuCreeperEntity extends Creeper {
-    /** THKaguyaConfig "Danmaku Level" default (P14 brings the config). */
-    private static final int DANMAKU_LEVEL = 2;
     private static final java.util.Random SHOT_RAND = new java.util.Random();
     private int timeSinceIgnited2;
     private final int fuseTime2 = 30;
@@ -51,9 +49,10 @@ public class DanmakuCreeperEntity extends Creeper {
 
     private void burst() {
         float damage = 5.0F;
-        float size = 0.1F + DANMAKU_LEVEL * 0.1F;
+        int danmakuLevel = dev.kneekura.fivedifficulties.forge.X1Config.danmakuLevel();
+        float size = 0.1F + danmakuLevel * 0.1F;
         int[] ways = {8, 12, 20, 32, 44};
-        int way = ways[DANMAKU_LEVEL];
+        int way = ways[danmakuLevel];
         Vec3d angle = X1Danmaku.angle_Random(SHOT_RAND); // THShotLib.angle_Random uses THShotLib's own Random
         Vec3d pos = X1Danmaku.pos_Living(this);
         Vec3d gravity = X1Danmaku.gravity(0.0D, -0.02D, 0.0D);

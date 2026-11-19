@@ -112,8 +112,12 @@ public class GapItem extends Item {
             lost = level.random.nextInt(100) < 15;
             if (!level.isClientSide) level.addFreshEntity(sukima2);
         }
-        level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENDERMAN_TELEPORT,
-                SoundSource.PLAYERS, 0.5F, 0.4F / (level.random.nextFloat() * 4F + 0.8F));
+        if (dev.kneekura.fivedifficulties.forge.X1Config.useDefaultGapSE()) {
+            level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENDERMAN_TELEPORT,
+                    SoundSource.PLAYERS, 0.5F, 0.4F / (level.random.nextFloat() * 4F + 0.8F));
+        } else {
+            level.playSound(null, player.getX(), player.getY(), player.getZ(), dev.kneekura.fivedifficulties.forge.PortRegistries.SOUND_SUKIMA.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
+        }
         if (!level.isClientSide) {
             level.addFreshEntity(sukima);
             if (lost && !player.getAbilities().instabuild) stack.shrink(1);

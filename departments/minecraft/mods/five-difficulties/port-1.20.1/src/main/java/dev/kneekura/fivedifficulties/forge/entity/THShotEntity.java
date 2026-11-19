@@ -377,8 +377,8 @@ public class THShotEntity extends Projectile {
     }
 
     private void explode(double x, double y, double z, float power) {
-        // THKaguyaConfig.MasterSparkDestroysBlocks defaults to true.
-        this.level().explode(this.getOwner(), x, y, z, power, Level.ExplosionInteraction.TNT);
+        this.level().explode(this.getOwner(), x, y, z, power,
+                dev.kneekura.fivedifficulties.forge.X1Config.masterSparkDestroysBlocks() ? Level.ExplosionInteraction.TNT : Level.ExplosionInteraction.NONE);
     }
 
     protected BlockHitResult clip(Vec3 start, Vec3 end) {

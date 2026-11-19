@@ -13,6 +13,8 @@ public final class FiveDifficultiesPort {
 
     public FiveDifficultiesPort() {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+        net.minecraftforge.fml.ModLoadingContext.get().registerConfig(
+                net.minecraftforge.fml.config.ModConfig.Type.COMMON, X1Config.SPEC, "five_difficulties_port-common.toml");
         PortRegistries.register(modBus);
         PortNetwork.register();
         LOGGER.info("Five Difficulties X1 Preservation Port P2 bootstrap loaded");

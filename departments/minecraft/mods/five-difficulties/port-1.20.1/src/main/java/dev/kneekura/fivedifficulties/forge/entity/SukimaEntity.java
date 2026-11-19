@@ -151,8 +151,9 @@ public class SukimaEntity extends Entity {
                 e.hurtMarked = true;
             }
             e.setPortalCooldown(40); // timeUntilPortal: two seconds of immunity
-            this.level().playSound(null, e.getX(), e.getY(), e.getZ(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.NEUTRAL,
-                    1.0F, 1.0F);
+            // THKaguyaConfig.sukimaWarpSE: the Enderman portal sound unless the gap SE is switched off
+            this.level().playSound(null, e.getX(), e.getY(), e.getZ(),
+                    dev.kneekura.fivedifficulties.forge.X1Config.useDefaultGapSE() ? SoundEvents.ENDERMAN_TELEPORT : dev.kneekura.fivedifficulties.forge.PortRegistries.SOUND_SUKIMA.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
         }
     }
 
@@ -191,8 +192,12 @@ public class SukimaEntity extends Entity {
         if (!this.level().isClientSide) {
             Item rod = remorseRod.get();
             if (held.getItem() instanceof DyeItem dye) {
-                this.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENDERMAN_TELEPORT,
-                        SoundSource.PLAYERS, 0.5F, 0.4F);
+                if (dev.kneekura.fivedifficulties.forge.X1Config.useDefaultGapSE()) {
+                    this.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENDERMAN_TELEPORT,
+                            SoundSource.PLAYERS, 0.5F, 0.4F);
+                } else {
+                    this.level().playSound(null, player.getX(), player.getY(), player.getZ(), dev.kneekura.fivedifficulties.forge.PortRegistries.SOUND_SUKIMA.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
+                }
                 setColor(15 - dye.getDyeColor().getId()); // 1.7.10 dye damage order
             } else if ((rod != null && held.is(rod)) || player.isShiftKeyDown()) {
                 this.spawnAtLocation(PortRegistries.GAP.get());

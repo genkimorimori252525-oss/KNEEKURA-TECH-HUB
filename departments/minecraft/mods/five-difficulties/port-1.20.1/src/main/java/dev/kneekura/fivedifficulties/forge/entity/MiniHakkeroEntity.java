@@ -19,8 +19,6 @@ import net.minecraft.world.level.Level;
  * Mini Hakkero item.
  */
 public class MiniHakkeroEntity extends Entity {
-    /** THKaguyaConfig "Master Spark Vol" default 50 / 100. */
-    private static final float MASTER_SPARK_VOL = 0.5F;
 
     public LivingEntity user;
     private LivingEntity tgEntity;
@@ -45,7 +43,7 @@ public class MiniHakkeroEntity extends Entity {
         this.damage = da;
         this.isSpellCard = false;
         level.playSound(null, this.getX(), this.getY(), this.getZ(), PortRegistries.SOUND_MASTERSPARK.get(),
-                SoundSource.NEUTRAL, MASTER_SPARK_VOL, 1.0F);
+                SoundSource.NEUTRAL, dev.kneekura.fivedifficulties.forge.X1Config.masterSparkVol(), 1.0F);
         this.lastTime = 0;
         X1Danmaku.createLaserB(user, this, X1Danmaku.pos_Entity(this), X1Danmaku.getVecFromAngle(getYRot(), getXRot()),
                 X1Danmaku.rotate_Default(), 0.0F, 9999,
@@ -79,7 +77,7 @@ public class MiniHakkeroEntity extends Entity {
         this.count = 0;
         this.circleAngle = 0F;
         level.playSound(null, this.getX(), this.getY(), this.getZ(), PortRegistries.SOUND_MASTERSPARK.get(),
-                SoundSource.NEUTRAL, MASTER_SPARK_VOL, 1.0F);
+                SoundSource.NEUTRAL, dev.kneekura.fivedifficulties.forge.X1Config.masterSparkVol(), 1.0F);
         this.lastTime = 0;
         this.isSpellCard = true;
         X1Danmaku.createLaserB(user, this, X1Danmaku.pos_Entity(this), X1Danmaku.getVecFromAngle(yaw, pitch),

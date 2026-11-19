@@ -20,8 +20,8 @@ overlay); a checkpoint document; commit, push, CI green before the next phase.
 | P13b | Oharaibou R (Yin-Yang Orb) | done |
 | P13c | Oharaibou S (Miracle Circle, Sanae Wind) | done |
 | P13d | Gap (warp gaps), Gap Folding Umbrella (Houtou and the Henyori laser are dead code in X1) | done |
-| P14 | power / point / bomb / extend / shot-material items, player power, death handler, config | next |
-| P15 | danmaku crafting table (block, containers, GUIs, laser crafting) | |
+| P14 | power / point / bomb / extend items, `EntityTHItem`, player power, extend on death, config | done |
+| P15 | danmaku crafting table (block, containers, GUIs, laser crafting) | next |
 | P16 | remaining items and their entities (`entity/item`, `entity/effect`) | |
 | P17 | X1 mobs: models, renderers, AI, spawning, Sanae merchant, Miracle Mallet, `DanmakuPatternRegistry`, mob spell-card mode | |
 | P18 | blocks / tile entity (Divine Spirit), recipes, creative tabs, lang completeness | |

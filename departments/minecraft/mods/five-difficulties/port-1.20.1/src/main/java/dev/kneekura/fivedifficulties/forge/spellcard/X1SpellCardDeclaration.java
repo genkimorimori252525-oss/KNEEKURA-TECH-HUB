@@ -100,7 +100,7 @@ public final class X1SpellCardDeclaration {
         if (user instanceof Player player) {
             player.sendSystemMessage(name);
             world.playSound(null, player.getX(), player.getY(), player.getZ(), PortRegistries.SOUND_SPELLCARD.get(),
-                    SoundSource.PLAYERS, 1.0F, 1.0F);
+                    SoundSource.PLAYERS, dev.kneekura.fivedifficulties.forge.X1Config.spellCardVol(), 1.0F);
             int bomb = 0;
             Item bombItemType = bombItem.get();
             while (bombItemType != null && bomb < needLevel && consumeOne(player, bombItemType)) bomb++;
@@ -109,7 +109,7 @@ public final class X1SpellCardDeclaration {
         if (target instanceof Player targetPlayer && firstAttack) {
             targetPlayer.sendSystemMessage(name);
             world.playSound(null, targetPlayer.getX(), targetPlayer.getY(), targetPlayer.getZ(),
-                    PortRegistries.SOUND_SPELLCARD.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
+                    PortRegistries.SOUND_SPELLCARD.get(), SoundSource.PLAYERS, dev.kneekura.fivedifficulties.forge.X1Config.spellCardVol(), 1.0F);
         }
         if (firstAttack) X1Danmaku.danmakuRemove(user, 40.0F, "Enemy", true);
     }

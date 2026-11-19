@@ -16,9 +16,6 @@ import net.minecraft.world.level.Level;
  * Master Spark. The hakkero returns to the inventory when it leaves.
  */
 public class MiniHakkeroItem extends Item {
-    /** THKaguyaConfig "Use Master Spark" default. */
-    public static boolean usingMasterSpark = true;
-
     public MiniHakkeroItem(Properties properties) {
         super(properties.stacksTo(1));
     }
@@ -26,7 +23,7 @@ public class MiniHakkeroItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        if (!usingMasterSpark) return InteractionResultHolder.pass(stack);
+        if (!dev.kneekura.fivedifficulties.forge.X1Config.usingMasterSpark()) return InteractionResultHolder.pass(stack);
         float yaw = player.getYRot(), pitch = player.getXRot();
         // (int) casts truncate toward zero, as in X1.
         BlockPos at = new BlockPos(

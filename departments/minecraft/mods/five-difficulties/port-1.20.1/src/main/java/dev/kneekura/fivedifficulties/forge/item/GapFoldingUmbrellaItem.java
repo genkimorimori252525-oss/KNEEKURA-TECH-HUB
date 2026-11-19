@@ -58,8 +58,12 @@ public class GapFoldingUmbrellaItem extends Item {
         }
         BlockPos at = new BlockPos((int) setX, (int) setY, (int) setZ);
         if (level.getBlockState(at).isRedstoneConductor(level, at)) return InteractionResultHolder.pass(stack);
-        level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENDERMAN_TELEPORT,
-                SoundSource.PLAYERS, 0.5F, 0.4F / (level.random.nextFloat() * 4F + 0.8F));
+        if (dev.kneekura.fivedifficulties.forge.X1Config.useDefaultGapSE()) {
+            level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENDERMAN_TELEPORT,
+                    SoundSource.PLAYERS, 0.5F, 0.4F / (level.random.nextFloat() * 4F + 0.8F));
+        } else {
+            level.playSound(null, player.getX(), player.getY(), player.getZ(), dev.kneekura.fivedifficulties.forge.PortRegistries.SOUND_SUKIMA.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
+        }
         if (nbt != null) {
             color = nbt.getByte("GapColor");
             if (color >= 16) color = 0;

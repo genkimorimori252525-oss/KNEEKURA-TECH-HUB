@@ -218,6 +218,12 @@ public final class ClientRuntimeSmoke {
             requireResource(minecraft, id("textures/" + t + ".png"));
         }
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P13_CLIENT_RESOURCES_PASS items=7");
+        for (var bonus : java.util.List.of(PortRegistries.POWER_ITEM_SMALL, PortRegistries.POWER_ITEM_BIG,
+                PortRegistries.POINT_ITEM, PortRegistries.BOMB_ITEM, PortRegistries.EXTEND_ITEM)) {
+            requireItemModel(minecraft, bonus.get(), bonus.getId().toString());
+            requireResource(minecraft, id("textures/item/" + bonus.getId().getPath() + ".png"));
+        }
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P14_CLIENT_RESOURCES_PASS bonusItems=5");
 
         var root = minecraft.getEntityModels().bakeLayer(SakuyaTimeControllerModel.LAYER_LOCATION);
         root.getChild("watch_base");
