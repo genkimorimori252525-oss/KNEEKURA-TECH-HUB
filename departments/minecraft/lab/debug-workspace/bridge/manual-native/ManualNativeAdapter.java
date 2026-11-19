@@ -117,7 +117,16 @@ public final class ManualNativeAdapter {
  }
  private static JsonObject shotState(Projectile shot){var x=new JsonObject();x.addProperty("uuid",shot.getUUID().toString());x.addProperty("owner",shot.getOwner()==null?null:shot.getOwner().getUUID().toString());x.addProperty("removed",shot.isRemoved());x.addProperty("x",shot.getX());x.addProperty("y",shot.getY());x.addProperty("z",shot.getZ());x.addProperty("scope","VANILLA_PROJECTILE_OWNER_NOT_TARGET_SPECIFIC_RALLY_STATE");return x;}
  private static synchronized void end(String why){if(!ended){reason=why;ended=true;ManualGrid.clear(why);ManualMotionDiagnostics.clear(why);observation("SESSION_END",bound(),new JsonObject());try{var x=new JsonObject();x.addProperty("reason",reason);x.addProperty("requestHash",requestHash);exclusive(output.resolve("window-end.json"),x);}catch(IOException e){errors.add(e.toString());}}}
+ // Courtesy for the human at the desk: vanilla grabs the cursor on world entry. Keep it free until the person
+ // clicks inside the window; that click is vanilla's own grab. Only ever releases, never grabs or injects input.
+ private static volatile boolean userClicked;private static boolean cursorReleaseRecorded;
  public static final class Client {
+  @SubscribeEvent public void click(net.minecraftforge.client.event.InputEvent.MouseButton.Pre event){if(event.getAction()==org.lwjgl.glfw.GLFW.GLFW_PRESS)userClicked=true;}
+  @SubscribeEvent public void freeCursor(TickEvent.ClientTickEvent event){
+   if(event.phase!=TickEvent.Phase.END||userClicked||env==null)return;var mc=Minecraft.getInstance();
+   if(mc.screen==null&&mc.mouseHandler.isMouseGrabbed()){mc.mouseHandler.releaseMouse();
+    if(!cursorReleaseRecorded){cursorReleaseRecorded=true;try{var x=new JsonObject();x.addProperty("at",Instant.now().toString());x.addProperty("requestHash",requestHash);x.addProperty("policy","RELEASED_UNTIL_FIRST_USER_CLICK");exclusive(output.resolve("cursor-released.json"),x);}catch(IOException failure){errors.add(failure.toString());}}}
+  }
   @SubscribeEvent public void tick(TickEvent.ClientTickEvent event){
    if(event.phase!=TickEvent.Phase.END||!initialize()||disabled)return;
    var mc=Minecraft.getInstance();
