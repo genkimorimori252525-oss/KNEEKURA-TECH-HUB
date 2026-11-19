@@ -18,6 +18,7 @@
 | 10 | [Youkai's Homecoming](../mods/youkai-homecoming/README.md) | danmaku / spell-card / virtual projectile system | `6d57442` / v2.7.0 / MC 1.20.1 Forge 47.1.3; targeted danmaku architecture mapped | current upstream remains same 2.7.0 / 1.20.1 source line | IN_PROGRESS (targeted danmaku study complete) |
 | 11 | [Kimetsu no Yaiba ver3](../mods/kimetsu-no-yaiba/README.md) | content/combat/worldgen Mod | uploaded JAR SHA `b4af6e8a…` / v3 / MC 1.20.1 Forge; 3,713 classes; bytecode whole-target map | no official public source/frontier pinned; current public 1.20.1 release is same ver3 line | IN_PROGRESS (static whole-target architecture mapped) |
 | 12 | [Warfare Wings](../mods/warfare-wings/README.md) | aircraft/content addon | user-supplied 1.1.4 JAR `dc302959…` pinned; static flight/weapon/data analysis complete for this batch; supplied-binary runtime and public-release equivalence unresolved | current public project/release lineage discovered only; exact FRONTIER source/binary snapshot not yet pinned | IN_PROGRESS (static / Kneekura-bird bridge / history partial) |
+| 13 | [Immersive Aircraft](../mods/immersive-aircraft/README.md) | aircraft physics / vehicle runtime dependency | official 1.3.3 Forge release fixed by Modrinth `GsVmbbkj`; source tag `550b38d3…`; physics/runtime boundary mapped; compiled-JAR byte equivalence unresolved | live 1.20.1 branch is 29 commits beyond the ANCHOR and materially changes core vehicle classes | IN_PROGRESS (physics / Kneekura-bird bridge / history partial) |
 
 ## Rules
 
