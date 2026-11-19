@@ -60,6 +60,7 @@ public final class P16Scenario {
             runWeapons();
             runShotItems();
             runEffectItems();
+            runAjaRedStone();
             FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_RUNTIME_SCENARIO_PASS");
             ScenarioShutdown.finished(level.getServer(), ENV);
         } catch (Throwable failure) {
@@ -384,6 +385,37 @@ public final class P16Scenario {
         p.getInventory().clearContent();
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_SUTRA_SCROLL_PASS");
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16D_EFFECT_ITEMS_PASS");
+    }
+
+    private static void runAjaRedStone() {
+        FakePlayer p = player();
+        // Not in use and no light gathered: nothing fires, the effect stays and gathers light.
+        var idle = new dev.kneekura.fivedifficulties.forge.entity.AjaRedStoneEffectEntity(level, p);
+        level.addFreshEntity(idle);
+        int none = fire(idle::tick);
+        require(none == 0 && !idle.isRemoved() && idle.lightLevel == idle.getLightPower(), "idle gathers " + idle.lightLevel);
+        idle.discard();
+        // 400 gathered -> damage 10: one red laser (width 0.1, length 3, damage 10, special 351), effect gone.
+        var stone = new dev.kneekura.fivedifficulties.forge.entity.AjaRedStoneEffectEntity(level, p);
+        level.addFreshEntity(stone);
+        stone.lightLevel = 400;
+        int n = fire(stone::tick);
+        require(n == 1 && lastShot instanceof dev.kneekura.fivedifficulties.forge.entity.THLaserEntity
+                && lastShot.motion().special == 351 && lastShot.shotDamage == 10F && stone.isRemoved(),
+                "aja laser shots=" + n + " damage=" + (lastShot == null ? -1 : lastShot.shotDamage));
+        // Special 351 sets undead on fire; others are untouched.
+        Zombie undead = zombie(3);
+        net.minecraft.world.entity.animal.Cow cow = EntityType.COW.create(level);
+        cow.moveTo(bx + 3, by, bz + 3, 0F, 0F);
+        level.addFreshEntity(cow);
+        var special = dev.kneekura.fivedifficulties.forge.shot.X1SpecialShotRegistry.get(351);
+        special.hitEntity(lastShot, lastShot.motion(), 351, undead);
+        special.hitEntity(lastShot, lastShot.motion(), 351, cow);
+        require(undead.getRemainingFireTicks() > 0 && cow.getRemainingFireTicks() <= 0, "only undead burn");
+        undead.discard();
+        cow.discard();
+        lastShot.discard();
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_AJA_RED_STONE_PASS idleLight=" + idle.lightLevel);
     }
 
     private static void require(boolean ok, String what) {

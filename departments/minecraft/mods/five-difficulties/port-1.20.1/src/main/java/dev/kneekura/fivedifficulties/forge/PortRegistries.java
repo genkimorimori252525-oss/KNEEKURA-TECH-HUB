@@ -197,6 +197,13 @@ public final class PortRegistries {
                     .sized(2.0F, 2.0F).clientTrackingRange(8).updateInterval(1).setShouldReceiveVelocityUpdates(true)
                     .build(FiveDifficultiesPort.MOD_ID + ":mazinkyoukan"));
 
+    // ---- P16e entities ----
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.AjaRedStoneEffectEntity>> AJA_RED_STONE_EFFECT =
+            ENTITIES.register("aja_red_stone_effect", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.AjaRedStoneEffectEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.AjaRedStoneEffectEntity::new, MobCategory.MISC)
+                    .sized(2.0F, 0.0F).clientTrackingRange(8).updateInterval(1).setShouldReceiveVelocityUpdates(true)
+                    .build(FiveDifficultiesPort.MOD_ID + ":aja_red_stone_effect"));
+
     // ---- P13 danmaku-weapon items ----
     public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity>> DRAGON_NECK_JEWEL =
             ENTITIES.register("dragon_neck_jewel", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity>of(
@@ -342,6 +349,10 @@ public final class PortRegistries {
             () -> new dev.kneekura.fivedifficulties.forge.item.X1EffectItems.SpiritualStrikeTalisman(new Item.Properties()));
     public static final RegistryObject<Item> SORCERER_SUTRA_SCROLL = ITEMS.register("sorcerer_sutra_scroll",
             () -> new dev.kneekura.fivedifficulties.forge.item.X1EffectItems.MazinKyoukan(new Item.Properties()));
+
+    // ---- P16e aja red stone ----
+    public static final RegistryObject<Item> AJA_RED_STONE = ITEMS.register("aja_red_stone",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1EffectItems.AjaRedStone(new Item.Properties()));
 
     public static final RegistryObject<Item> SHOT_MATERIAL = ITEMS.register("shot_material",
             () -> new dev.kneekura.fivedifficulties.forge.item.ShotMaterialItem(new Item.Properties()));

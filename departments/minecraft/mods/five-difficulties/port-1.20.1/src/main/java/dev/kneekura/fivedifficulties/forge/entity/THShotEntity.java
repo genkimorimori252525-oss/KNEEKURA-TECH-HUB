@@ -71,6 +71,9 @@ public class THShotEntity extends Projectile {
     /** X1 damageRate: reset to 1 on each impact; WIND01 doubles it for airborne targets. */
     private float damageRate = 1.0F;
 
+    /** For special shots: X1 {@code shot.damageRate *= rate}. */
+    public void multiplyDamageRate(float rate) { damageRate *= rate; }
+
     public THShotEntity(EntityType<? extends THShotEntity> type, Level level) {
         super(type, level);
     }

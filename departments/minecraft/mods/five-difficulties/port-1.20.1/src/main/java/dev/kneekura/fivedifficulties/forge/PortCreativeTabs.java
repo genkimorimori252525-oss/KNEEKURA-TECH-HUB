@@ -15,6 +15,9 @@ public final class PortCreativeTabs {
 
     @SubscribeEvent
     public static void buildContents(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.COMBAT) { // P16e aja red stone
+            event.accept(PortRegistries.AJA_RED_STONE.get());
+        }
         if (event.getTabKey() == CreativeModeTabs.COMBAT) { // P16d effect items
             event.accept(PortRegistries.SPIRITUAL_STRIKE_TALISMAN.get());
         }

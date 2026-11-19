@@ -240,6 +240,11 @@ ASSETS = {
         "assets/five_difficulties_port/textures/item/sorcerer_sutra_scroll.png",
         "251e8e9b05e6acc02f22d465bcdad4f0ee284d53cb07188b0af1ccb7ff2f1c3b",
     ),
+    # P16e aja red stone.
+    "assets/thkaguyamod/textures/items/AjaRedStone.png": (
+        "assets/five_difficulties_port/textures/item/aja_red_stone.png",
+        "109e9709b829f253f65fb89f151a870c3f69eaa4ef9d99954695e31e06c08c49",
+    ),
     # P15 danmaku crafting table.
     "assets/thkaguyamod/textures/blocks/danmaku_crafting_table.png": (
         "assets/five_difficulties_port/textures/block/danmaku_crafting_table.png",

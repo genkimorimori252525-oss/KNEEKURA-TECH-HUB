@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import dev.kneekura.fivedifficulties.forge.FiveDifficultiesPort;
 import dev.kneekura.fivedifficulties.forge.X1Config;
+import dev.kneekura.fivedifficulties.forge.entity.AjaRedStoneEffectEntity;
 import dev.kneekura.fivedifficulties.forge.entity.MazinkyoukanEntity;
 import dev.kneekura.fivedifficulties.forge.entity.SpiritualStrikeTalismanEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -14,6 +15,7 @@ import net.minecraft.util.Mth;
 
 import static dev.kneekura.fivedifficulties.forge.client.X1Tess.State.ADD_ALPHA_CULL;
 import static dev.kneekura.fivedifficulties.forge.client.X1Tess.State.CUTOUT;
+import static dev.kneekura.fivedifficulties.forge.client.X1Tess.State.INVERT_ADD;
 import static dev.kneekura.fivedifficulties.forge.client.X1Tess.State.INVERT_ADD_DEPTH;
 
 /** Renderers for the P16 item-effect entities. */
@@ -154,6 +156,50 @@ public final class P16Renderers {
         @Override
         public ResourceLocation getTextureLocation(MazinkyoukanEntity e) {
             return SCROLL;
+        }
+    }
+
+    /**
+     * RenderAjaRedStoneEffect: light^2 random red rays (length light^2 / 120) fanned around a camera-facing point,
+     * with X1's rotation step sin(360 / n) read as radians.
+     */
+    public static final class AjaRedStoneEffect extends EntityRenderer<AjaRedStoneEffectEntity> {
+        private static final ResourceLocation CIRCLE = tex("miracle_circle");
+        private final java.util.Random random = new java.util.Random();
+
+        public AjaRedStoneEffect(EntityRendererProvider.Context context) {
+            super(context);
+        }
+
+        @Override
+        public void render(AjaRedStoneEffectEntity e, float yaw, float partialTick, PoseStack pose, MultiBufferSource buffers,
+                           int light) {
+            pose.pushPose();
+            pose.mulPose(this.entityRenderDispatcher.cameraOrientation());
+            pose.mulPose(Axis.YP.rotationDegrees(180.0F));
+            int lightNum = e.getLightPower();
+            lightNum = lightNum * lightNum;
+            float widthX = 0.01F;
+            float lengthY = (float) lightNum / 120.0F;
+            float iniAngle = (float) random.nextInt(36000) / 100F;
+            float angleSpan = 360F / (float) lightNum;
+            float umin = 0.5F, umax = 38F / 64F, vmin = 0.0F, vmax = 1.0F;
+            pose.mulPose(Axis.ZP.rotationDegrees(Mth.sin(iniAngle / 180F * 3.141593F) / 3.141593F * 180F));
+            X1Tess t = new X1Tess(pose, buffers, CIRCLE).begin(INVERT_ADD);
+            for (int i = 0; i < lightNum; i++) {
+                float lengthY2 = lengthY * (0.2F + (float) random.nextInt(8000) / 8000.0F);
+                double zPos = (double) random.nextInt(10000) / 10000.0D;
+                pose.mulPose(Axis.ZP.rotationDegrees(Mth.sin(angleSpan) / 3.141593F * 180F));
+                t.color(1.0F * (float) random.nextInt(10000) / 10000.0F, 0.0F, 0.0F, 0.7F)
+                        .v(-widthX, 0.0F, 0.0D, umin, vmax).v(widthX, 0.0F, 0.0D, umax, vmax)
+                        .v(0.0F, lengthY2, zPos, umax, vmin).v(0.0F, lengthY2, zPos, umin, vmin);
+            }
+            pose.popPose();
+        }
+
+        @Override
+        public ResourceLocation getTextureLocation(AjaRedStoneEffectEntity e) {
+            return CIRCLE;
         }
     }
 }

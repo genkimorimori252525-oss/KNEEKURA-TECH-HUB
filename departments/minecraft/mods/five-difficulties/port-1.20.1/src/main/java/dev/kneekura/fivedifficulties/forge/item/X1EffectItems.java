@@ -61,4 +61,72 @@ public final class X1EffectItems {
             return true;
         }
     }
+
+    /**
+     * ItemAjaRedStone (エイジャの赤石, glint): while held in use, an effect gathers light; release fires a laser
+     * (special 351: undead hit are set on fire for the shot damage, damage rate x2, fizz).
+     */
+    public static final class AjaRedStone extends Item {
+        public AjaRedStone(Properties p) {
+            super(p.stacksTo(1));
+            dev.kneekura.fivedifficulties.forge.shot.X1SpecialShotRegistry.register(
+                    new dev.kneekura.fivedifficulties.forge.shot.X1SpecialShotRegistry.SpecialShot() {
+                        @Override
+                        public void move(dev.kneekura.fivedifficulties.forge.entity.THShotEntity shot,
+                                         dev.kneekura.fivedifficulties.core.x1.X1ShotMotion motion, int id) {}
+
+                        @Override
+                        public boolean hitBlock(dev.kneekura.fivedifficulties.forge.entity.THShotEntity shot,
+                                                dev.kneekura.fivedifficulties.core.x1.X1ShotMotion motion, int id,
+                                                net.minecraft.world.phys.BlockHitResult hit) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean hitEntity(dev.kneekura.fivedifficulties.forge.entity.THShotEntity shot,
+                                                 dev.kneekura.fivedifficulties.core.x1.X1ShotMotion motion, int id,
+                                                 net.minecraft.world.entity.Entity hit) {
+                            if (hit instanceof net.minecraft.world.entity.LivingEntity living
+                                    && living.getMobType() == net.minecraft.world.entity.MobType.UNDEAD) {
+                                living.setSecondsOnFire((int) shot.shotDamage);
+                                shot.multiplyDamageRate(2.0F);
+                                Level level = shot.level();
+                                level.playSound(null, shot.getX(), shot.getY(), shot.getZ(), SoundEvents.FIRE_EXTINGUISH,
+                                        SoundSource.NEUTRAL, 0.5F,
+                                        2.6F + (level.random.nextFloat() - level.random.nextFloat()) * 0.8F);
+                            }
+                            return false;
+                        }
+                    }, dev.kneekura.fivedifficulties.forge.entity.AjaRedStoneEffectEntity.SPECIAL_AJA_REDSTONE);
+        }
+
+        @Override
+        public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+            player.startUsingItem(hand);
+            if (!level.isClientSide) {
+                level.addFreshEntity(new dev.kneekura.fivedifficulties.forge.entity.AjaRedStoneEffectEntity(level, player));
+            }
+            return InteractionResultHolder.consume(player.getItemInHand(hand));
+        }
+
+        @Override
+        public int getUseDuration(ItemStack stack) {
+            return 72000;
+        }
+
+        @Override
+        public UseAnim getUseAnimation(ItemStack stack) {
+            return UseAnim.BLOCK;
+        }
+
+        @Override
+        public boolean isFoil(ItemStack stack) {
+            return true;
+        }
+
+        @Override
+        public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+            return false;
+        }
+    }
 }
