@@ -1,5 +1,15 @@
 # Minecraft MOD AI — connected headless adapters
 
+## Airborne AI cross-MOD research
+
+The 2026-10-04 static synthesis of reusable flight, landing, combat, flock,
+ecology and repair techniques is indexed at
+[airborne-ai/README.md](airborne-ai/README.md). It combines the existing
+Olympus Harpy baseline with Saint's Dragons, Alex's Mobs, Fowl Play,
+Cosy Critters, Ice and Fire, HMaG and observation-only Book of Dragons
+evidence. The synthesis is **STATIC_RESEARCH_COMPLETE / RUNTIME_NOT_RUN**;
+it does not promote every upstream MOD to full ANALYSIS-SPEC completion.
+
 ## Current status and AI entry point
 
 - **Original scope: COMPLETE_SCOPED_CURRENT_PLAN.** Read
