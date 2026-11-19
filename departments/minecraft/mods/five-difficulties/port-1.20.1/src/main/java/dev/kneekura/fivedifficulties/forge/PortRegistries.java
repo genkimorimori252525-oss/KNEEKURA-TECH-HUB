@@ -237,6 +237,13 @@ public final class PortRegistries {
                     .sized(2.0F, 2.0F).clientTrackingRange(8).updateInterval(1).setShouldReceiveVelocityUpdates(true)
                     .build(FiveDifficultiesPort.MOD_ID + ":yuuka_parasol"));
 
+    // ---- P16l entities ----
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.HisouEntity>> HISOU_ENTITY =
+            ENTITIES.register("hisou", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.HisouEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.HisouEntity::new, MobCategory.MISC)
+                    .sized(4.4F, 4.4F).clientTrackingRange(8).updateInterval(1).setShouldReceiveVelocityUpdates(true)
+                    .build(FiveDifficultiesPort.MOD_ID + ":hisou"));
+
     // ---- P13 danmaku-weapon items ----
     public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity>> DRAGON_NECK_JEWEL =
             ENTITIES.register("dragon_neck_jewel", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity>of(
@@ -432,6 +439,10 @@ public final class PortRegistries {
     // ---- P16k parasol ----
     public static final RegistryObject<Item> YUUKA_PARASOL = ITEMS.register("yuuka_parasol",
             () -> new dev.kneekura.fivedifficulties.forge.item.X1ShotItems.YuukaParasol(new Item.Properties()));
+
+    // ---- P16l hisou sword ----
+    public static final RegistryObject<Item> HISOU_SWORD = ITEMS.register("scarlet_perception_sword",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1Weapons.HisouSword(new Item.Properties()));
 
     public static final RegistryObject<Item> SHOT_MATERIAL = ITEMS.register("shot_material",
             () -> new dev.kneekura.fivedifficulties.forge.item.ShotMaterialItem(new Item.Properties()));

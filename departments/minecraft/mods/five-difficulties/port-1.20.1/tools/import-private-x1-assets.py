@@ -347,6 +347,21 @@ ASSETS = {
         "assets/five_difficulties_port/textures/item/yuuka_parasol.png",
         "6021b0a275a88f3a78faecfcc84840e0b287e38c71555ec4374d96ac40df092b",
     ),
+    # P16l entity textures.
+    "assets/thkaguyamod/textures/HisouTexture.png": (
+        "assets/five_difficulties_port/textures/entity/hisou.png",
+        "dffb522aa6bceba60bf1f819133ba844ee02e70719fdacf6a862af7ef4fd2580",
+    ),
+    # P16l hisou sword.
+    "assets/thkaguyamod/textures/items/hisousword.png": (
+        "assets/five_difficulties_port/textures/item/scarlet_perception_sword.png",
+        "3768afc2ae15156a092425c1bb4ceeb4de515a517450286f9e048a4b90be8c52",
+    ),
+    # P16l hisou sword animation (frametime 1).
+    "assets/thkaguyamod/textures/items/hisousword.png.mcmeta": (
+        "assets/five_difficulties_port/textures/item/scarlet_perception_sword.png.mcmeta",
+        "06a8bc09a601ca3355275be1b3e63ded522c87eed6667f67f993451022e570eb",
+    ),
     # P15 danmaku crafting table.
     "assets/thkaguyamod/textures/blocks/danmaku_crafting_table.png": (
         "assets/five_difficulties_port/textures/block/danmaku_crafting_table.png",

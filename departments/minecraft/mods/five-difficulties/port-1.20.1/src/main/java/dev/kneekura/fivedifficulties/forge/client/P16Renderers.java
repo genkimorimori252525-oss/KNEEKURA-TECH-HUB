@@ -421,4 +421,54 @@ public final class P16Renderers {
             return PARASOL;
         }
     }
+
+    public static final net.minecraft.client.model.geom.ModelLayerLocation HISOU_LAYER =
+            new net.minecraft.client.model.geom.ModelLayerLocation(new ResourceLocation(FiveDifficultiesPort.MOD_ID, "hisou"), "main");
+
+    /** ModelHisou: guard, blade and a flat 12×12 flame (64×32). */
+    public static net.minecraft.client.model.geom.builders.LayerDefinition createHisouLayer() {
+        var mesh = new net.minecraft.client.model.geom.builders.MeshDefinition();
+        var root = mesh.getRoot();
+        var zero = net.minecraft.client.model.geom.PartPose.ZERO;
+        root.addOrReplaceChild("hisou0", net.minecraft.client.model.geom.builders.CubeListBuilder.create().texOffs(32, 0)
+                .addBox(-2, -12, -2, 4, 8, 4), zero);
+        root.addOrReplaceChild("hisou1", net.minecraft.client.model.geom.builders.CubeListBuilder.create().texOffs(0, 0)
+                .addBox(-2, -4, -2, 4, 28, 4), zero);
+        root.addOrReplaceChild("hisou2", net.minecraft.client.model.geom.builders.CubeListBuilder.create().texOffs(32, 16)
+                .addBox(-2, -20, 0, 12, 12, 0), zero);
+        return net.minecraft.client.model.geom.builders.LayerDefinition.create(mesh, 64, 32);
+    }
+
+    /** RenderHisou: the sword model turned by yaw, pitch and its spin, additive, alpha num / 8. */
+    public static final class Hisou extends EntityRenderer<dev.kneekura.fivedifficulties.forge.entity.HisouEntity> {
+        private static final ResourceLocation HISOU = tex("hisou");
+        private final net.minecraft.client.model.geom.ModelPart model;
+
+        public Hisou(EntityRendererProvider.Context context) {
+            super(context);
+            this.shadowRadius = 0.5F;
+            this.model = context.bakeLayer(HISOU_LAYER);
+        }
+
+        @Override
+        public void render(dev.kneekura.fivedifficulties.forge.entity.HisouEntity e, float entityYaw, float partialTick,
+                           PoseStack pose, MultiBufferSource buffers, int light) {
+            float yaw = Mth.lerp(partialTick, e.yRotO, e.getYRot());
+            pose.pushPose();
+            pose.mulPose(Axis.YP.rotationDegrees(-yaw));
+            pose.mulPose(Axis.XP.rotationDegrees(e.getXRot()));
+            pose.mulPose(Axis.ZP.rotationDegrees(e.getAngle()));
+            pose.scale(0.3F, 0.7F, 0.3F);
+            model.render(pose, new X1Tess(pose, buffers, HISOU).modelSink(X1Tess.State.ADD_ALPHA_DEPTH),
+                    net.minecraft.client.renderer.LightTexture.FULL_BRIGHT,
+                    net.minecraft.client.renderer.texture.OverlayTexture.NO_OVERLAY, 1F, 1F, 1F, (float) e.getNum() * 0.125F);
+            pose.popPose();
+            super.render(e, entityYaw, partialTick, pose, buffers, light);
+        }
+
+        @Override
+        public ResourceLocation getTextureLocation(dev.kneekura.fivedifficulties.forge.entity.HisouEntity e) {
+            return HISOU;
+        }
+    }
 }

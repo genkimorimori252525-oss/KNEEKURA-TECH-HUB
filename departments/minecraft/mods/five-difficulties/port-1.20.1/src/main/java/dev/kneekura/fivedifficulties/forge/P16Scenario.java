@@ -68,6 +68,7 @@ public final class P16Scenario {
             runArmour();
             runSilverKnife();
             runParasol();
+            runHisou();
             FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_RUNTIME_SCENARIO_PASS");
             ScenarioShutdown.finished(level.getServer(), ENV);
         } catch (Throwable failure) {
@@ -706,6 +707,42 @@ public final class P16Scenario {
         p.stopUsingItem();
         p.getInventory().clearContent();
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_PARASOL_PASS shots=" + n);
+    }
+
+    private static void runHisou() {
+        FakePlayer p = player();
+        p.experienceLevel = 30;
+        var hand = net.minecraft.world.InteractionHand.MAIN_HAND;
+        // Temperament: the second hit on the same kind deals 10 more.
+        Zombie z = zombie(2);
+        ItemStack sword = new ItemStack(PortRegistries.HISOU_SWORD.get());
+        sword.getItem().hurtEnemy(sword, z, p);
+        float hp = z.getHealth();
+        sword.getItem().hurtEnemy(sword, z, p);
+        require(hp - z.getHealth() >= 9.0F && "entity.minecraft.zombie".equals(sword.getTag().getString("EntityName")),
+                "temperament bonus " + (hp - z.getHealth()));
+        z.discard();
+        // Right-click declares card 7 at a target and becomes eight swords; sword 8 fires 8 kishitu a tick.
+        Zombie aim = zombie(10);
+        p.setItemInHand(hand, sword);
+        sword.getItem().use(level, p, hand);
+        var swords = level.getEntitiesOfClass(dev.kneekura.fivedifficulties.forge.entity.HisouEntity.class,
+                p.getBoundingBox().inflate(6.0D), e -> e.userEntity == p);
+        require(sword.isEmpty() && swords.size() == 8, "eight swords, saw " + swords.size());
+        var mother = swords.stream().filter(e -> e.getNum() == 8).findFirst().orElseThrow();
+        mother.tickCount = 1;
+        int n = fire(mother::tick);
+        require(n == 8, "sword 8 fires 8, saw " + n);
+        mother.tickCount = 100;
+        mother.tick();
+        require(mother.isRemoved() && p.getInventory().countItem(PortRegistries.HISOU_SWORD.get()) == 1, "the sword returns");
+        swords.forEach(Entity::discard);
+        aim.discard();
+        level.getEntitiesOfClass(THShotEntity.class, p.getBoundingBox().inflate(48), e -> e.getOwner() == p).forEach(Entity::discard);
+        level.getEntitiesOfClass(dev.kneekura.fivedifficulties.forge.entity.SpellCardEntity.class, p.getBoundingBox().inflate(64),
+                c -> c.user == p).forEach(Entity::discard);
+        p.getInventory().clearContent();
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P16_HISOU_PASS shots=" + n);
     }
 
     private static void require(boolean ok, String what) {

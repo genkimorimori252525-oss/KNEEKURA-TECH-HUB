@@ -58,6 +58,7 @@ public final class X1Weapons {
     public static final Tier ROUKANKEN = new X1Tier(0, 251, 4.0F, 3.0F, 0, Ingredient.EMPTY);
     public static final Tier ICICLE = new X1Tier(0, 30, 0.0F, 2.0F, 0, Ingredient.EMPTY);
     public static final Tier HAKUROU = new X1Tier(0, 100, 0.0F, 0.0F, 0, Ingredient.EMPTY);
+    public static final Tier HISOU = new X1Tier(0, 200, 4.0F, 0.0F, 0, Ingredient.EMPTY);
     public static final Tier KAIGO = new X1Tier(0, 1, 0.0F, -4.0F, 0, Ingredient.EMPTY);
     /** ToolMaterial.IRON (2, 250, 6, 2, 14) with ItemDeathScythe's setMaxDamage(444). */
     public static final Tier DEATH_SCYTHE = new X1Tier(2, 444, 6.0F, 2.0F, 14, Ingredient.of(Items.IRON_INGOT));
@@ -530,6 +531,84 @@ public final class X1Weapons {
                 }
             }
             if (used) stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(player.getUsedItemHand()));
+        }
+    }
+
+    /**
+     * ItemHisou (緋想の剣, hisou 0/200/4/0, glint): remembers the kind of the last thing it hit ("temperament") and
+     * deals 10 more to that kind; leaves 15, wool 10; leaves broken above y 128 drop a heavenly peach 1 in 25.
+     * Right-click declares 「全人類の緋想天」 (card 7) and turns the sword into its eight sword entities.
+     */
+    public static final class HisouSword extends GuardSword {
+        public HisouSword(Properties p) {
+            super(HISOU, p);
+        }
+
+        private static String kind(LivingEntity e) {
+            return e.getType().getDescriptionId();
+        }
+
+        @Override
+        public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+            var nbt = stack.getTag();
+            if (nbt != null && nbt.contains("EntityName")) {
+                if (kind(target).equals(nbt.getString("EntityName"))) {
+                    target.hurt(attacker.damageSources().mobAttack(attacker), 10F);
+                    if (attacker instanceof Player player) player.magicCrit(target);
+                }
+            }
+            stack.getOrCreateTag().putString("EntityName", kind(target));
+            stack.hurtAndBreak(1, attacker, a -> a.broadcastBreakEvent(InteractionHand.MAIN_HAND));
+            return true;
+        }
+
+        @Override
+        public boolean mineBlock(ItemStack stack, Level level, BlockState state, net.minecraft.core.BlockPos pos, LivingEntity miner) {
+            if (state.is(BlockTags.LEAVES)) {
+                if (miner.getRandom().nextInt(25) == 1 && pos.getY() > 128 && !level.isClientSide) {
+                    level.addFreshEntity(new net.minecraft.world.entity.item.ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(),
+                            new ItemStack(dev.kneekura.fivedifficulties.forge.PortRegistries.HEAVENLY_PEACH.get())));
+                }
+                return true;
+            }
+            return super.mineBlock(stack, level, state, pos, miner);
+        }
+
+        @Override
+        public float getDestroySpeed(ItemStack stack, BlockState state) {
+            if (state.is(BlockTags.LEAVES)) return 15F;
+            if (state.is(BlockTags.WOOL)) return 10F;
+            return super.getDestroySpeed(stack, state);
+        }
+
+        @Override
+        public boolean isFoil(ItemStack stack) {
+            return true;
+        }
+
+        @Override
+        public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+            ItemStack stack = player.getItemInHand(hand);
+            if (level instanceof net.minecraft.server.level.ServerLevel server) {
+                if (!X1SpellCardDeclaration.check(server, stack, player, 7, 2, true)) return InteractionResultHolder.pass(stack);
+                var mother = new dev.kneekura.fivedifficulties.forge.entity.HisouEntity(level, player, null, 7 + 1,
+                        stack.getDamageValue());
+                level.addFreshEntity(mother);
+                stack.shrink(1);
+                for (int i = 0; i < 7; i++) {
+                    level.addFreshEntity(new dev.kneekura.fivedifficulties.forge.entity.HisouEntity(level, player, mother, i + 1, 0));
+                }
+            }
+            return InteractionResultHolder.pass(stack);
+        }
+
+        @Override
+        public void appendHoverText(ItemStack stack, Level level, java.util.List<net.minecraft.network.chat.Component> list,
+                                    net.minecraft.world.item.TooltipFlag flag) {
+            var nbt = stack.getTag();
+            if (nbt == null || !nbt.contains("EntityName")) return;
+            list.add(net.minecraft.network.chat.Component.translatable("thKaguya.item.kishitu").append(" : ")
+                    .append(net.minecraft.network.chat.Component.translatable(nbt.getString("EntityName"))));
         }
     }
 }
