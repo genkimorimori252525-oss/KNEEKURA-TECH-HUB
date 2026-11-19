@@ -258,6 +258,27 @@ public final class PortRegistries {
                     .sized(0.9F, 0.5F).clientTrackingRange(10).updateInterval(3).setShouldReceiveVelocityUpdates(true)
                     .build(FiveDifficultiesPort.MOD_ID + ":magic_broom"));
 
+    // ---- P17a mobs ----
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.mob.THFairyEntity>> TH_FAIRY =
+            ENTITIES.register("th_fairy", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.mob.THFairyEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.mob.THFairyEntity::new, MobCategory.MONSTER)
+                    .sized(0.6F, 1.5F).clientTrackingRange(10)
+                    .build(FiveDifficultiesPort.MOD_ID + ":th_fairy"));
+    public static final RegistryObject<Item> TH_FAIRY_SPAWN_EGG = ITEMS.register("th_fairy_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(TH_FAIRY, 0xFFFF80, 0xC0C000, new Item.Properties()));
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.mob.SunFlowerFairyEntity>> SUNFLOWER_FAIRY =
+            ENTITIES.register("sunflower_fairy", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.mob.SunFlowerFairyEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.mob.SunFlowerFairyEntity::new, MobCategory.MONSTER)
+                    .sized(0.9F, 1.7F).clientTrackingRange(10)
+                    .build(FiveDifficultiesPort.MOD_ID + ":sunflower_fairy"));
+    public static final RegistryObject<Item> SUNFLOWER_FAIRY_SPAWN_EGG = ITEMS.register("sunflower_fairy_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(SUNFLOWER_FAIRY, 0xDDDD60, 0xA0A000, new Item.Properties()));
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.mob.FamiliarEntity>> FAMILIAR =
+            ENTITIES.register("familiar", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.mob.FamiliarEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.mob.FamiliarEntity::new, MobCategory.MISC)
+                    .sized(0.6F, 0.6F).clientTrackingRange(10)
+                    .build(FiveDifficultiesPort.MOD_ID + ":familiar"));
+
     // ---- P13 danmaku-weapon items ----
     public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity>> DRAGON_NECK_JEWEL =
             ENTITIES.register("dragon_neck_jewel", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity>of(

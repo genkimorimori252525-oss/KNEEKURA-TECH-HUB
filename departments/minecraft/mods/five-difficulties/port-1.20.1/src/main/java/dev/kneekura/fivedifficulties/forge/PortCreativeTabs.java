@@ -15,6 +15,10 @@ public final class PortCreativeTabs {
 
     @SubscribeEvent
     public static void buildContents(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) { // P17a
+            event.accept(PortRegistries.TH_FAIRY_SPAWN_EGG.get());
+            event.accept(PortRegistries.SUNFLOWER_FAIRY_SPAWN_EGG.get());
+        }
         if (event.getTabKey() == CreativeModeTabs.COMBAT) { // P16o broom
             event.accept(PortRegistries.MARISA_BROOM.get());
         }

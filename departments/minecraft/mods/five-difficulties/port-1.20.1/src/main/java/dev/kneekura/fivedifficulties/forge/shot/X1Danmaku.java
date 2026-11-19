@@ -264,6 +264,12 @@ public final class X1Danmaku {
         lasers(user, source).createWideLaserA(pos, angle, first, limit, accel, gravity, laser, way, wide, distance);
     }
 
+    public static void createSphereLaserA(LivingEntity user, Entity source, Vec3d pos, Vec3d angle, double first,
+                                          double limit, double accel, Vec3d gravity, X1LaserData laser, int way,
+                                          double distance, float baseAngle) {
+        lasers(user, source).createSphereLaserA(pos, angle, first, limit, accel, gravity, laser, way, distance, baseAngle);
+    }
+
     public static void createCircleLaserA(LivingEntity user, Entity source, Vec3d pos, Vec3d angle, double first,
                                           double limit, double accel, Vec3d gravity, X1LaserData laser, int way,
                                           double distance) {

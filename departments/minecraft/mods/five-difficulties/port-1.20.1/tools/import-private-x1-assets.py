@@ -416,6 +416,27 @@ ASSETS = {
         "assets/five_difficulties_port/textures/item/magic_broom.png",
         "68ccbbb332c53ca0765d34011666151d8e487db85fd29c1dee0fe4efa1d6da63",
     ),
+    # P17a mob textures.
+    "assets/thkaguyamod/textures/mob/FairyTexture_0.png": (
+        "assets/five_difficulties_port/textures/entity/mob/fairy_0.png",
+        "b937cb1c90fd1e3853360bc592c49e24daeb6cfcd2339941b48ab00e31b9da7b",
+    ),
+    "assets/thkaguyamod/textures/mob/FairyTexture_1.png": (
+        "assets/five_difficulties_port/textures/entity/mob/fairy_1.png",
+        "6de99e4f0e3ea32bde0dae487b216b06417dbe1ead4742cd17e8507ccc7c8bcd",
+    ),
+    "assets/thkaguyamod/textures/mob/FairyTexture_2.png": (
+        "assets/five_difficulties_port/textures/entity/mob/fairy_2.png",
+        "441fa8fdec8bbbe2e971001f5eac5e3c3a2258208e7a0b31aac2b87a132f4ffb",
+    ),
+    "assets/thkaguyamod/textures/mob/FairyTexture_10.png": (
+        "assets/five_difficulties_port/textures/entity/mob/fairy_10.png",
+        "2aa86e796062f0c3046555c0a507130ed9eb6a766c853113cf9902e3837a3500",
+    ),
+    "assets/thkaguyamod/textures/mob/ZombieFairyTexture.png": (
+        "assets/five_difficulties_port/textures/entity/mob/zombie_fairy.png",
+        "4356e0e5022b1ed51521e71229f37e7c5a391bb54df0478c7e973b61cfe41af8",
+    ),
     # P15 danmaku crafting table.
     "assets/thkaguyamod/textures/blocks/danmaku_crafting_table.png": (
         "assets/five_difficulties_port/textures/block/danmaku_crafting_table.png",
