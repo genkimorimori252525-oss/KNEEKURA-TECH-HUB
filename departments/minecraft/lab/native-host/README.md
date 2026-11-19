@@ -29,6 +29,28 @@ $tankInstall = (Get-Content -LiteralPath (Join-Path $tankHome 'active-host.json'
 node (Join-Path $tankInstall 'native-host/tank.mjs') doctor --installation $tankInstall
 ```
 
+## One command for a MOD project (`tank run`)
+
+Put a small `tank.json` in the MOD project and run one finite trial on the active host:
+
+```json
+{
+  "schema": "kneekura.tank-project/v1",
+  "id": "five-difficulties",
+  "mods": [{"id": "five_difficulties_port", "jar": "build/libs/five_difficulties_port-*.jar", "kind": "forge-distribution"}],
+  "world": "C:/.../Tank/fixtures/FIXTURE/game/saves/KNEEKURA_DEBUG_WORLD",
+  "mode": "LIFECYCLE"
+}
+```
+
+```text
+node INSTALLED/native-host/tank.mjs run --project MOD_PROJECT_DIR
+```
+
+Only developer facts go in `tank.json`; optional `playerUuid`, `subjectUuid` (required for non-LIFECYCLE modes), `maxTicks` (600), `maxWallMs` (30000), `maxEvents` (128). `jar`/`world` are absolute or project-relative; `*` is allowed in the JAR file name and the newest match wins (the summary reports the chosen file, its build time and the candidate count). `run` copies each JAR into `Tank/mods/<id>/<sha256>-<kind>.jar`, hashes the world inventory (bytes only), infers `playerUuid` from the world's single saved Player, takes `sourceRevision` from the project's git HEAD (null outside git; `sourceDirty` is reported), writes a new pinned v1 profile under `Tank/profiles/`, then performs the ordinary `prepare` and `start`. It prints one JSON summary: `PASS` with startup/exit/evidence counts, or `FAIL` with the trial, crash-report description, last error lines of `latest.log`, `launch-failure.json` and cleanup. It is exactly one trial on the shared lock; it never retries. A normal `gradlew build` output is `forge-distribution`; a `jar`-only (not reobfuscated) output is `mapped-dev`.
+
+Mixin refmaps: the client run always sets ForgeGradle's `mixin.env.remapRefMap=true` and `mixin.env.refMapRemappingFile=build/createSrgToMcp/output.srg` (MDK parity), so production SRG refmaps work in this official-name runtime. Do not hand-edit refmaps inside JARs. Launch fails closed with `TANK_REFMAP_REMAPPING_FILE_MISSING` when the host lacks that file.
+
 ## Per-MOD profile and experiment
 
 `profile.mjs` defines the exact JSON schema `kneekura.tank-profile/v1`. Fields: `id`, exact `runtime` (minecraft/forge/java), `mods` (id/absolute file/sha256/kind), `world` (absolute directory/inventorySha256), exact `playerUuid`/`subjectUuid`, target code `sourceRevision`, `mode`, `maxTicks`, `maxWallMs`, `maxEvents`. No executable command/environment/capability fields. MOD IDs are unique and dependencies are explicit entries. Modes are LIFECYCLE, MANUAL_OBSERVE or MANUAL_RALLY; mode names do not establish gameplay acceptance. Bounds:1..2400ticks,1..120000ms,1..512events, zero default images/input/mutation/motion grants.
@@ -56,7 +78,7 @@ node INSTALLED/native-host/tank.mjs evidence --trial TRIAL
 
 READY binds the real connected survival Player, declared living subject, private world, request/material hashes and actual process. The generic observer records selected vanilla Projectile ownership changes, actual AttackEntityEvent/LivingHurtEvent and post-hurt state. Event cancellation at LOWEST can still change at another listener of equal priority; removal does not establish impact, health differences may have multiple causes, ownership does not expose target-specific Rally counters/tells. A typed target observer and human testimony are separate acceptance inputs.
 
-Before READY, an atomic native bootstrap claim binds the run/nonce/request/install/adapter hashes, PID/JVM start/executable and exact actual launch arguments. It grants cleanup only. `stop` before READY or explicit `abort` first requests graceful native shutdown, then revalidates actual identity immediately before any necessary exact-process termination. Both native and launcher exit must be verified before releasing that run's lock; absent/changed bootstrap identity remains UNKNOWN. The shared Gradle daemon is never adopted through ancestry. No READY, clean ACK or world acceptance is manufactured. Diagnostic-write failures cannot suppress a validated shutdown.
+Before READY, an atomic native bootstrap claim binds the run/nonce/request/install/adapter hashes, PID/JVM start/executable and exact actual launch arguments. It grants cleanup only. `stop` before READY or explicit `abort` first requests graceful native shutdown, then revalidates actual identity immediately before any necessary exact-process termination. Both native and launcher exit must be verified before releasing that run's lock; absent/changed bootstrap identity remains UNKNOWN. A launch that died before writing `manual-claim.json` has no bound runtime PID: `stop`/`abort` then take one full process snapshot (re-observed for at most10s, never terminating) and release only when the recorded launcher, its descendants and every java/node whose command line or `@argfile` carries this trial's request hash or trial path are all absent (`FAILED_BEFORE_NATIVE_CLAIM_NO_TRIAL_PROCESS_VERIFIED`). A failed listing, an unreadable java/node identity from the host JDK, or any match keeps the lock (`TANK_UNBOUND_TRIAL_PROCESS_UNKNOWN`/`_PRESENT`). Only this trial's own lock token is ever removed. The shared Gradle daemon is never adopted through ancestry. No READY, clean ACK or world acceptance is manufactured. Diagnostic-write failures cannot suppress a validated shutdown.
 
 At most8 startup screen transitions record class/title and client-world/Player/server availability, with no clicks, captures or continuous history. A retained LoadingErrorScreen plus missing pack.mcmeta exposed a faulty test MOD; fixing its metadata in a new JAR resolved the actual swap failure. Keep failures and verify the actual cause; do not silently accept a warning screen or edit an unrelated world. Long internal Windows evidence paths are supported by Node/Java; Python callers need extended-length path handling rather than treating a plain-path FileNotFoundError as evidence absence.
 

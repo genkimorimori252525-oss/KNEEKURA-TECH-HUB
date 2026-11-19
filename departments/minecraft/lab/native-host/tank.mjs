@@ -7,9 +7,10 @@ import {fileURLToPath,pathToFileURL} from 'node:url';
 import {parseArgs} from 'node:util';
 import {hash,versions,regularPath,inventory,inventoryHash,verifyProfile} from './profile.mjs';
 import {validateTerminalAck} from './shutdown.mjs';
-import {validateBootstrap,validateBootstrapProcess} from './bootstrap.mjs';
+import {validateBootstrap,validateBootstrapProcess,findTrialProcesses} from './bootstrap.mjs';
 import {preparePresentation} from './presentation.mjs';
 import {verifyManualClosure} from './manual-closure.mjs';
+import {buildProfile,summarizeFailure} from './project.mjs';
 
 const here=path.dirname(fileURLToPath(import.meta.url));
 const read=file=>fs.readFile(file,'utf8').then(JSON.parse);
@@ -98,9 +99,39 @@ export async function prepare(installed,profile){
  assert.equal(inventoryHash(await inventory(profile.world.directory)),profile.world.inventorySha256,'TANK_SOURCE_WORLD_CHANGED');return {status:'PREPARED_NOT_RUN',trial};
 }
 async function prepared(trial){trial=await regularPath(path.resolve(trial),true);const seal=await read(path.join(trial,'prepared.json'));assert.equal(seal.schema,'kneekura.tank-prepared/v1');const state=await verifyInstallation(seal.installed);assert.equal(seal.bundleHash,state.manifest.bundleHash);for(const row of seal.files){const file=path.resolve(trial,row.file);assert(within(trial,file),'TANK_PREPARED_ESCAPE');await regularPath(file);assert.equal(hash(await fs.readFile(file)),row.sha256,'TANK_PREPARED_TAMPERED');}return {trial,seal,state,config:await read(path.join(trial,'config.json'))};}
-async function cleanupFailedLaunch(p,core){
+/** One read-only snapshot of every process. Any failure is an exception: absence is never inferred from a failed listing. */
+export async function listProcesses(){
+ assert.equal(process.platform,'win32','TANK_PROCESS_LISTING_UNSUPPORTED');
+ const script="$ErrorActionPreference='Stop';@(Get-CimInstance Win32_Process | ForEach-Object { [pscustomobject]@{pid=[int]$_.ProcessId;parentPid=[int]$_.ParentProcessId;name=[string]$_.Name;commandLine=$_.CommandLine;executablePath=$_.ExecutablePath;startedAt=if($_.CreationDate){$_.CreationDate.ToUniversalTime().ToString('o')}else{$null}} }) | ConvertTo-Json -Compress -Depth 2";
+ const child=spawn('powershell.exe',['-NoProfile','-NonInteractive','-Command',script],{windowsHide:true});let out='',err='';child.stdout.on('data',b=>out+=b);child.stderr.on('data',b=>err+=b);
+ const code=await new Promise((resolve,reject)=>{child.once('error',reject);child.once('exit',resolve);});assert.equal(code,0,'TANK_PROCESS_LISTING_FAILED '+err.trim());
+ const rows=[].concat(JSON.parse(out)).map(row=>({pid:row.pid,parentPid:row.parentPid,name:row.name,commandLine:typeof row.commandLine==='string'?row.commandLine:null,executablePath:row.executablePath??null,startedAtEpochMs:row.startedAt?Date.parse(row.startedAt):NaN}));
+ for(const row of rows){if(!/^(java|javaw|node)\.exe$/i.test(row.name)||!row.commandLine)continue;row.argFiles=[];for(const match of row.commandLine.matchAll(/(?:^|\s)@(?:"([^"]+)"|(\S+))/g)){const file=match[1]??match[2];const text=await fs.stat(file).then(info=>info.isFile()&&info.size<=4194304?fs.readFile(file,'utf8'):null).catch(()=>null);row.argFiles.push({file,text});}}
+ assert(rows.length>0,'TANK_PROCESS_LISTING_EMPTY');return rows;
+}
+/** Launch died before the native claim: no bound runtime PID exists. Release only on positively observed absence. */
+export async function cleanupUnboundLaunch(p,core,current,{list=listProcesses,waitMs=10000,pollMs=500}={}){
+ const requestHash=hash(await fs.readFile(path.join(p.trial,'inputs/manual-request.json')));const javaExecutable=path.join(p.state.manifest.javaHome,'bin/java.exe');
+ assert(Number.isSafeInteger(current.pid)&&Number.isFinite(current.spawnedAtEpochMs),'TANK_UNBOUND_LAUNCHER_IDENTITY_MISSING');
+ const identity={launcherPid:current.pid,launcherSpawnedAtEpochMs:current.spawnedAtEpochMs,markers:[requestHash,p.trial],selfPid:process.pid,javaExecutable};
+ // A just-failed JVM may still be exiting; observe for a bounded time, never terminate an unbound process.
+ const deadline=Date.now()+waitMs;let scan;do{scan=findTrialProcesses(await list(),identity);if(scan.status!=='PRESENT')break;await new Promise(resolve=>setTimeout(resolve,pollMs));}while(Date.now()<deadline);
+ if(scan.status!=='NONE'){const detail=[...scan.present,...scan.unknown].map(x=>x.pid+':'+x.name+':'+x.reason).join(',');throw Error('TANK_UNBOUND_TRIAL_PROCESS_'+scan.status+' '+detail);}
+ const launcher=await core.stopCurrent(p.config,p.state.installed);assert.equal(launcher.cleanup?.status,'VERIFIED_EXIT','TANK_UNBOUND_LAUNCHER_EXIT_UNVERIFIED');
+ const result={status:'FAILED_BEFORE_NATIVE_CLAIM_NO_TRIAL_PROCESS_VERIFIED',processScan:scan,launcherExit:launcher.cleanup,forced:false,cleanShutdown:false,worldAcceptance:'NOT_ESTABLISHED',bootstrapScope:'CLEANUP_ONLY_NEVER_READY'};
+ return releaseFailedTrial(p,result);
+}
+async function releaseFailedTrial(p,result){
+ const output=path.join(p.trial,'failed-run-cleanup.json');if(!(await fs.stat(output).catch(()=>null)))await write(output,result);
+ const lock=await read(path.join(p.trial,'host-lock.json')).catch(error=>{if(error.code==='ENOENT')return null;throw error;});
+ // Remove only this trial's own token; a lock already taken by a later trial is never touched.
+ if(lock){assert.equal(path.resolve(lock.file).toLowerCase(),path.join(p.state.installed,'host-lock.json').toLowerCase());const held=await read(lock.file).catch(error=>{if(error.code==='ENOENT')return null;throw error;});if(held?.token===lock.token)await fs.unlink(lock.file);}
+ return result;
+}
+export async function cleanupFailedLaunch(p,core,options){
  const current=await core.readCurrent(p.config,p.state.installed);assert(current.runDir,'TANK_NO_RUN_TO_RECONCILE');
- const requestFile=path.join(p.trial,'inputs/manual-request.json'),request=await read(requestFile),binding=await read(path.join(p.trial,'manual-claim.json'));assert.equal(binding.requestHash,hash(await fs.readFile(requestFile)),'TANK_BOOTSTRAP_REQUEST_HASH');
+ const binding=await read(path.join(p.trial,'manual-claim.json')).catch(error=>{if(error.code==='ENOENT')return null;throw error;});if(!binding)return cleanupUnboundLaunch(p,core,current,options);
+ const requestFile=path.join(p.trial,'inputs/manual-request.json'),request=await read(requestFile);assert.equal(binding.requestHash,hash(await fs.readFile(requestFile)),'TANK_BOOTSTRAP_REQUEST_HASH');
  const java=path.join(p.state.manifest.javaHome,'bin/java.exe');const record=validateBootstrap(request,binding,current,java,hash(await fs.readFile(requestFile)));
  let observed=await core.inspectProcess(record.pid);let alive=validateBootstrapProcess(request,binding,observed,java);let forced=false;
  if(alive){
@@ -111,8 +142,7 @@ async function cleanupFailedLaunch(p,core){
  }
  const {verifyProcessesExited}=await import(pathToFileURL(path.join(p.state.installed,'debug-workspace/process-stop.mjs')));const nativeExit=await verifyProcessesExited([record],{inspect:core.inspectProcess});assert.equal(nativeExit.status,'VERIFIED_EXIT');const launcher=await core.stopCurrent(p.config,p.state.installed);assert.equal(launcher.cleanup?.status,'VERIFIED_EXIT');
  const result={status:'FAILED_RUN_NATIVE_AND_LAUNCHER_EXIT_VERIFIED',nativeExit,launcherExit:launcher.cleanup,forced,cleanShutdown:false,worldAcceptance:'NOT_ESTABLISHED',bootstrapScope:'CLEANUP_ONLY_NEVER_READY'};
- const output=path.join(p.trial,'failed-run-cleanup.json');if(!(await fs.stat(output).catch(()=>null)))await write(output,result);
- const lock=await read(path.join(p.trial,'host-lock.json'));assert.equal(path.resolve(lock.file).toLowerCase(),path.join(p.state.installed,'host-lock.json').toLowerCase());if(await fs.stat(lock.file).catch(()=>null))await unlock(lock);return result;
+ return releaseFailedTrial(p,result);
 }
 export async function commandRun(command,trial){
  assert(['start','status','stop','abort','evidence'].includes(command));const p=await prepared(trial);const lab=p.state.installed;const core=await import(pathToFileURL(path.join(lab,'debug-workspace/core.mjs')));
@@ -139,11 +169,24 @@ export async function commandRun(command,trial){
  }
  const current=await core.readCurrent(p.config,lab);return {status:current.status,runDir:current.runDir,live:current.live,closure:path.join(p.trial,'closed.json'),startup:path.join(p.trial,'startup.json'),nativeEvents:current.runDir?path.join(current.runDir,'evidence/derived/manual-interaction'):null,manualAcceptance:'NOT_ESTABLISHED_BY_LIFECYCLE'};
 }
+/**
+ * One command for MOD developers: tank.json → stored artifact + pinned profile → prepare → start → summary.
+ * Exactly one trial; a failure is reported with its digest and never retried.
+ */
+export async function runProject(projectDir,{installation}={}){
+ const installed=path.resolve(installation??(await read(path.join(defaultRoot(),'active-host.json'))).installed);
+ const built=await buildProfile(projectDir,path.resolve(installed,'../..'));
+ const base={project:path.resolve(projectDir),profile:built.file,artifacts:built.artifacts,sourceRevision:built.profile.sourceRevision,sourceDirty:built.sourceDirty,mode:built.profile.mode,installed};
+ const {trial}=await prepare(installed,built.profile);
+ try{const result=await commandRun('start',trial);return {...base,status:'PASS',result:result.status,trial,startupMs:result.startupMs,exit:result.closure.status,evidence:result.closure.finalization.status,counts:result.closure.finalization.counts,details:path.join(trial,'closed.json')};}
+ catch(error){return {...base,status:'FAIL',error:error.message,trial,failure:await summarizeFailure(trial)};}
+}
 export async function doctor(installed){try{const state=await verifyInstallation(installed);const receipt=await warmed(state).catch(error=>({error:error.message}));return {status:receipt.error?'NOT_WARMED':'VERIFIED_INSTALLATION',installed:state.installed,versions,bundleHash:state.manifest.bundleHash,warmError:receipt.error??null,lock:await read(path.join(state.installed,'host-lock.json')).catch(()=>null),nativeAcceptance:'NOT_ESTABLISHED_BY_DOCTOR'};}catch(error){return {status:'INVALID_INSTALLATION',error:error.message};}}
 
 if(process.argv[1]&&import.meta.url===pathToFileURL(path.resolve(process.argv[1])).href){
- const {values,positionals}=parseArgs({allowPositionals:true,options:{root:{type:'string'},'java-home':{type:'string'},installation:{type:'string'},profile:{type:'string'},trial:{type:'string'},online:{type:'boolean',default:false}}});const command=positionals[0];
- try{let result;if(command==='install'){assert(values['java-home'],'--java-home required');result=await install({root:values.root,javaHome:path.resolve(values['java-home'])});}else if(['doctor','warm','prepare'].includes(command)){assert(values.installation,'--installation required');result=command==='doctor'?await doctor(values.installation):command==='warm'?await warm(values.installation,{online:values.online}):await prepare(values.installation,await read(values.profile));}else{assert(values.trial,'--trial required');result=await commandRun(command,values.trial);}
+ const {values,positionals}=parseArgs({allowPositionals:true,options:{root:{type:'string'},'java-home':{type:'string'},installation:{type:'string'},profile:{type:'string'},trial:{type:'string'},project:{type:'string'},online:{type:'boolean',default:false}}});const command=positionals[0];
+ try{let result;if(command==='run'){assert(values.project,'--project required');result=await runProject(values.project,{installation:values.installation});if(result.status!=='PASS')process.exitCode=1;}
+  else if(command==='install'){assert(values['java-home'],'--java-home required');result=await install({root:values.root,javaHome:path.resolve(values['java-home'])});}else if(['doctor','warm','prepare'].includes(command)){assert(values.installation,'--installation required');result=command==='doctor'?await doctor(values.installation):command==='warm'?await warm(values.installation,{online:values.online}):await prepare(values.installation,await read(values.profile));}else{assert(values.trial,'--trial required');result=await commandRun(command,values.trial);}
   const output=result.closure?{status:result.status,trial:values.trial,startupMs:result.startupMs,windowEnd:result.windowEnd,exit:result.closure.status,evidence:result.closure.finalization.status,counts:result.closure.finalization.counts,details:path.join(values.trial,'closed.json')}:command==='stop'&&result.finalization?{status:result.status,trial:values.trial,shutdownSource:result.shutdownSource,evidence:result.finalization.status,counts:result.finalization.counts,details:path.join(values.trial,'closed.json')}:result;
   console.log(JSON.stringify(output));if(result.status==='INVALID_INSTALLATION')process.exitCode=1;
  }catch(error){console.error(JSON.stringify({status:'FAIL',error:error.message,trial:values.trial}));process.exitCode=1;}
