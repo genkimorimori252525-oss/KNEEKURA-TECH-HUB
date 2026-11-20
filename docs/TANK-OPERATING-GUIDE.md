@@ -1,5 +1,7 @@
 # Tank operation for AI agents
 
+> **New task? Read [Tank for AI agents](TANK-FOR-AGENTS.md) first**: the one-command `tank run` workflow, what to read in the summary, AI lens / `TankWhy`, scenarios and load budgets. This guide keeps the deeper, older observation routes.
+
 2026-10-08. Read with [Project Guide](PROJECT-GUIDE.md) and [AI Feedback](AI-FEEDBACK.md). Use the integrated `departments/minecraft/lab`; the standalone LAB is historical. Minecraft supplies actual runtime/render evidence; browser diagrams interpret retained samples.
 
 2026-10-23 launch routing: [Persistent TechHub native host](../departments/minecraft/lab/native-host/README.md), [design/plan](agent-decisions/2026-10-23-persistent-tank-host.md) and [actual results](agent-decisions/2026-10-23-persistent-tank-results.md). TechHub owns the reusable installation; target MODs/dependencies are hashed profile inputs. Install/warm/prepare do not launch; start is explicit, finite and offline. Temporary Reimu hosts and historical OBSERVE_GRID manual-launch instructions are superseded. This new observation-only route does not acquire existing Arena, roster, camera, input or mutation authority. Preserve those features' original source/owner contracts and acceptance limits below. A genuine native Natural lifecycle is verified; broader profile compatibility/manual gameplay must follow their own actual receipts.

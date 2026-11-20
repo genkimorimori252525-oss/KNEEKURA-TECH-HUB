@@ -1,5 +1,7 @@
 # Persistent TechHub Tank host
 
+> Task order for agents: [docs/TANK-FOR-AGENTS.md](../../../../docs/TANK-FOR-AGENTS.md). This file is the full reference.
+
 TechHub owns the platform; the tested MOD is a profile input. This opt-in native host reuses the canonical Debug supervisor. It does not start the historical LAB, SimLab server or Web Viewer. Three existing pure motion/display/PNG libraries are included solely to close the canonical evidence modules' static imports; none starts a service or records anything.
 
 Supported platform: Minecraft1.20.1, Forge47.4.10, JDK17, Gradle8.8 with official distribution checksum, ForgeGradle6.0.54 and official1.20.1 mappings. This is a development host: mapped development JARs load directly; Forge distribution JARs need explicit ForgeGradle dependency preparation. Other platforms/loaders and inferred artifact kinds are rejected. Actual MOD compatibility remains subject to Forge loading and native acceptance; profile-schema acceptance is not a compatibility result.

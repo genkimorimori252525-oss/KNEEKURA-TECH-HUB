@@ -6,7 +6,7 @@ Internal-purpose technology research infrastructure for discovering large amount
 
 Before using Tech Hub, read [Project Guide](docs/PROJECT-GUIDE.md) and [AI Feedback Ledger](docs/AI-FEEDBACK.md). Follow the selected tool's current source/contract and verify coherent work units without reducing quality.
 
-For Tank work, also read [Tank Operating Guide](docs/TANK-OPERATING-GUIDE.md). The [persistent native host](departments/minecraft/lab/native-host/README.md) keeps TechHub in charge of installation, target MOD profiles and finite launch/STOP/evidence; inspect its current acceptance records before execution.
+**Checking a Minecraft MOD in the real game? Start with [Tank for AI agents](docs/TANK-FOR-AGENTS.md)** (one `tank.json`, one command, PASS/FAIL summary, AI lens, scenarios, load budgets). For Tank work, also read [Tank Operating Guide](docs/TANK-OPERATING-GUIDE.md). The [persistent native host](departments/minecraft/lab/native-host/README.md) keeps TechHub in charge of installation, target MOD profiles and finite launch/STOP/evidence; inspect its current acceptance records before execution.
 
 ## Three roles
 
