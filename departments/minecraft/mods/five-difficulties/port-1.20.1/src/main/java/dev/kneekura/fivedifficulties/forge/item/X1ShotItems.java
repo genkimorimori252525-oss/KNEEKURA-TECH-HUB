@@ -359,6 +359,24 @@ public final class X1ShotItems {
                 dev.kneekura.fivedifficulties.forge.PortRegistries.SILVER_KNIFE_WHITE.get()}) {
             net.minecraft.world.level.block.DispenserBlock.registerBehavior(item, knife);
         }
+        // Shot items: an unspawned familiar fires from the dispenser's centre along its facing x 0.7 (X1 discards
+        // the normalized vector), placed SIZE[shotTypeTrans] + 1 ahead; one item used unless "Infinity".
+        net.minecraft.core.dispenser.DispenseItemBehavior shot = (source, stack) -> {
+            if (!(stack.getItem() instanceof THShotItem item)) return stack;
+            net.minecraft.server.level.ServerLevel level = source.getLevel();
+            net.minecraft.core.Position at = net.minecraft.world.level.block.DispenserBlock.getDispensePosition(source);
+            Vec3d angle = new Vec3d(at.x() - source.x(), at.y() - source.y(), at.z() - source.z());
+            var familiar = dev.kneekura.fivedifficulties.forge.PortRegistries.FAMILIAR.get().create(level);
+            item.shootDanmaku(level, stack, familiar, false, new Vec3d(source.x(), source.y(), source.z()), angle,
+                    dev.kneekura.fivedifficulties.core.x1.X1ShotTables.SIZE[
+                            dev.kneekura.fivedifficulties.core.x1.X1ShotTables.ITEM_SHOT_TYPE_TRANS[item.x1Type()]] + 1.0D);
+            var tag = stack.getTag();
+            if (tag == null || !tag.getBoolean("Infinity")) stack.shrink(1);
+            return stack;
+        };
+        for (var reg : dev.kneekura.fivedifficulties.forge.PortRegistries.SHOT_ITEMS) {
+            net.minecraft.world.level.block.DispenserBlock.registerBehavior(reg.get(), shot);
+        }
     }
 
     /**

@@ -412,6 +412,30 @@ public final class P17Scenario {
         fighter.discard();
         dolls.forEach(Entity::discard);
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P17_MALLET_DOLL_PASS size={}", size0 + 0.5F);
+        // Shot-item dispenser: an unspawned familiar fires the item's shot from the dispenser; one item used.
+        BlockPos dPos = BlockPos.containing(bx, by + 6, bz + 6);
+        level.setBlockAndUpdate(dPos, net.minecraft.world.level.block.Blocks.DISPENSER.defaultBlockState()
+                .setValue(net.minecraft.world.level.block.DispenserBlock.FACING, net.minecraft.core.Direction.EAST));
+        ItemStack ammo = new ItemStack(PortRegistries.SMALL_SHOT.get(), 3);
+        var dispenserBe = (net.minecraft.world.level.block.entity.DispenserBlockEntity) level.getBlockEntity(dPos);
+        dispenserBe.setItem(0, ammo);
+        try {
+            // dev runtime (runServer) uses official names; DispenserBlock.dispenseFrom is protected.
+            var m = net.minecraft.world.level.block.DispenserBlock.class.getDeclaredMethod("dispenseFrom",
+                    net.minecraft.server.level.ServerLevel.class, BlockPos.class);
+            m.setAccessible(true);
+            m.invoke(net.minecraft.world.level.block.Blocks.DISPENSER, level, dPos);
+        } catch (ReflectiveOperationException ex) {
+            throw new IllegalStateException(ex);
+        }
+        ItemStack dispensed = dispenserBe.getItem(0);
+        var dFired = level.getEntitiesOfClass(THShotEntity.class, new net.minecraft.world.phys.AABB(dPos).inflate(4));
+        require(dFired.size() == 1 && dispensed.getCount() == 2 && dFired.get(0).getDeltaMovement().x > 0
+                && dFired.get(0).getOwner() instanceof dev.kneekura.fivedifficulties.forge.entity.mob.FamiliarEntity,
+                "a dispenser fires one small shot east from a familiar, saw " + dFired.size() + " count=" + dispensed.getCount());
+        dFired.forEach(Entity::discard);
+        level.removeBlock(dPos, false);
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P17_DISPENSER_PASS shots={}", dFired.size());
     }
 
     private static void require(boolean ok, String what) {

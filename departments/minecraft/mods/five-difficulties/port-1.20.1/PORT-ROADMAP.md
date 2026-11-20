@@ -23,6 +23,6 @@ overlay); a checkpoint document; commit, push, CI green before the next phase.
 | P14 | power / point / bomb / extend items, `EntityTHItem`, player power, extend on death, config | done |
 | P15 | danmaku crafting table (block, containers, GUIs, laser crafting) | done |
 | P16 | remaining items and their entities (`entity/item`, `entity/effect`), 1.7.10 box intercepts (`X1Hit`); deferred: cursed decoy doll, Miko sword, Miracle Mallet, shot-item dispenser (need P17 mobs / P18 Divine Spirit); `EntityHakureiShield` has no spawner in X1 | done |
-| P17 | X1 mobs: models, renderers, AI, spawning, Sanae merchant, Miracle Mallet, `DanmakuPatternRegistry`, mob spell-card mode | next |
-| P18 | blocks / tile entity (Divine Spirit), recipes, creative tabs, lang completeness | |
+| P17 | X1 mobs (fairies, familiar, phantom, Rumia, Cirno, Wriggle, Toziko, Sakuya, Sanae, Reimu, Miko, Rinnosuke, cursed decoy doll), models, renderers, AI, spawning, traders, Miracle Mallet, shot-item dispenser, Hanabeeper spawns, `DanmakuPatternRegistry`, mob spell-card mode (checkpoints P17A–P17K) | done |
+| P18 | blocks / tile entity (Divine Spirit), Miko sword (needs Divine Spirit), recipes, creative tabs, lang completeness | next |
 | P19 | addons | |
