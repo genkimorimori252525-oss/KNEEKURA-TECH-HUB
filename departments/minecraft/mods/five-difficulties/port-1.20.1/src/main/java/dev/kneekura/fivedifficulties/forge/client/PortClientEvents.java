@@ -48,6 +48,8 @@ public final class PortClientEvents {
         event.registerEntityRenderer(PortRegistries.TH_ITEM.get(), THItemRenderer::new);
         event.registerEntityRenderer(PortRegistries.MUSOU_FUUIN.get(), P12Renderers.MusouFuuin::new);
         event.registerEntityRenderer(PortRegistries.DRAGON_NECK_JEWEL.get(), DragonNeckJewelRenderer::new);
+        event.registerEntityRenderer(PortRegistries.SAKUYA.get(), ctx -> new P17Renderers.SimpleBoss<>(ctx, new dev.kneekura.fivedifficulties.forge.client.mob.SakuyaModel(ctx.bakeLayer(P17Renderers.mobLayer("sakuya"))), "sakuya"));
+        event.registerEntityRenderer(PortRegistries.SANAE.get(), ctx -> new P17Renderers.SimpleBoss<>(ctx, new dev.kneekura.fivedifficulties.forge.client.mob.SanaeModel(ctx.bakeLayer(P17Renderers.mobLayer("sanae"))), "sanae"));
         event.registerEntityRenderer(PortRegistries.TOZIKO.get(), ctx -> new P17Renderers.SimpleBoss<>(ctx, new dev.kneekura.fivedifficulties.forge.client.mob.TozikoModel(ctx.bakeLayer(P17Renderers.mobLayer("toziko"))), "toziko"));
         event.registerEntityRenderer(PortRegistries.WRIGGLE.get(), ctx -> new P17Renderers.SimpleBoss<>(ctx, new dev.kneekura.fivedifficulties.forge.client.mob.WriggleModel(ctx.bakeLayer(P17Renderers.mobLayer("wriggle"))), "wriggle").bright());
         event.registerEntityRenderer(PortRegistries.CIRNO.get(), ctx -> new P17Renderers.SimpleBoss<>(ctx, new dev.kneekura.fivedifficulties.forge.client.mob.CirnoModel(ctx.bakeLayer(P17Renderers.mobLayer("cirno"))), "cirno"));
@@ -94,6 +96,8 @@ public final class PortClientEvents {
                 SakuyaTimeControllerModel::createBodyLayer
         );
         event.registerLayerDefinition(SilverKnifeModel.LAYER_LOCATION, SilverKnifeModel::createBodyLayer);
+        event.registerLayerDefinition(P17Renderers.mobLayer("sakuya"), dev.kneekura.fivedifficulties.forge.client.mob.SakuyaModel::createBodyLayer);
+        event.registerLayerDefinition(P17Renderers.mobLayer("sanae"), dev.kneekura.fivedifficulties.forge.client.mob.SanaeModel::createBodyLayer);
         event.registerLayerDefinition(P17Renderers.mobLayer("toziko"), dev.kneekura.fivedifficulties.forge.client.mob.TozikoModel::createBodyLayer);
         event.registerLayerDefinition(P17Renderers.mobLayer("wriggle"), dev.kneekura.fivedifficulties.forge.client.mob.WriggleModel::createBodyLayer);
         event.registerLayerDefinition(P17Renderers.mobLayer("cirno"), dev.kneekura.fivedifficulties.forge.client.mob.CirnoModel::createBodyLayer);

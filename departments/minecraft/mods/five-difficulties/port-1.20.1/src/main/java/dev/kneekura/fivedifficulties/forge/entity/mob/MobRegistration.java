@@ -24,6 +24,8 @@ public final class MobRegistration {
         event.put(PortRegistries.CIRNO.get(), DanmakuMobEntity.createDanmakuAttributes().build());
         event.put(PortRegistries.WRIGGLE.get(), DanmakuMobEntity.createDanmakuAttributes().build());
         event.put(PortRegistries.TOZIKO.get(), DanmakuMobEntity.createDanmakuAttributes().build());
+        event.put(PortRegistries.SAKUYA.get(), DanmakuMobEntity.createDanmakuAttributes().build());
+        event.put(PortRegistries.SANAE.get(), DanmakuMobEntity.createDanmakuAttributes().build());
     }
 
     @SubscribeEvent
@@ -42,5 +44,9 @@ public final class MobRegistration {
                 WriggleEntity::checkWriggleSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(PortRegistries.TOZIKO.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 TozikoEntity::checkTozikoSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
+        event.register(PortRegistries.SAKUYA.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                SakuyaEntity::checkTraderSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
+        event.register(PortRegistries.SANAE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                SanaeEntity::checkTraderSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
     }
 }

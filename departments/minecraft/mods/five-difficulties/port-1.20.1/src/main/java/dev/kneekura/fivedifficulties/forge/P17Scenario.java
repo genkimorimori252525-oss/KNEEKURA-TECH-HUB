@@ -280,6 +280,30 @@ public final class P17Scenario {
                 s -> s.getOwner() == toziko).forEach(Entity::discard);
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P17_TOZIKO_PASS arrows={}", arrows.size());
 
+        // Sakuya / Sanae: invulnerable traders that never leave NOT_ATTACK; fixed offers, 7 uses, saved as "Offers".
+        var sakuya = spawn(PortRegistries.SAKUYA.get(), -10, 2);
+        var sanae = spawn(PortRegistries.SANAE.get(), -12, 2);
+        sakuya.invulnerableTime = 0;
+        require(!sakuya.hurt(level.damageSources().generic(), 100F) && sakuya.getHealth() == 44.0F
+                && sakuya.getDanmakuPattern() == DanmakuMobEntity.NOT_ATTACK, "sakuya cannot be hurt");
+        require(!sanae.hurt(level.damageSources().generic(), 100F) && sanae.getHealth() == 56.0F, "sanae cannot be hurt");
+        var so = sakuya.getOffers();
+        require(so.size() == 2 && so.get(0).getBaseCostA().is(PortRegistries.SHOT_MATERIAL.get()) && so.get(0).getBaseCostA().getCount() == 16
+                && so.get(0).getResult().is(PortRegistries.SILVER_KNIFE_BLUE.get()) && so.get(1).getBaseCostA().getCount() == 64
+                && so.get(1).getResult().is(PortRegistries.SAKUYA_STOPWATCH.get()) && so.get(0).getMaxUses() == 7, "sakuya offers");
+        require(sanae.getOffers().size() == 1 && sanae.getOffers().get(0).getResult().is(PortRegistries.BYOUKIHEIYU_MAMORI.get()),
+                "sanae offer");
+        for (int i = 0; i < 7; i++) sakuya.notifyTrade(so.get(0));
+        require(so.get(0).isOutOfStock(), "a recipe locks after 7 trades and never restocks");
+        net.minecraft.nbt.CompoundTag saved = new net.minecraft.nbt.CompoundTag();
+        sakuya.addAdditionalSaveData(saved);
+        var reloaded = PortRegistries.SAKUYA.get().create(level);
+        reloaded.readAdditionalSaveData(saved);
+        require(reloaded.getOffers().get(0).isOutOfStock() && !reloaded.getOffers().get(1).isOutOfStock(), "offers survive save / load");
+        sakuya.discard();
+        sanae.discard();
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P17_TRADERS_PASS sakuya={} sanae={}", so.size(), 1);
+
         // Spawn rules accept egg spawns.
         require(THFairyEntity.checkFairySpawnRules(PortRegistries.TH_FAIRY.get(), level, MobSpawnType.SPAWN_EGG,
                 BlockPos.containing(bx, by, bz), level.random), "egg spawns allowed");

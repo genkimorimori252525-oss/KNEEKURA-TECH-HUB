@@ -324,6 +324,22 @@ public final class PortRegistries {
     public static final RegistryObject<Item> TOZIKO_SPAWN_EGG = ITEMS.register("toziko_spawn_egg",
             () -> new net.minecraftforge.common.ForgeSpawnEggItem(TOZIKO, 0x60D683, 0x376E91, new Item.Properties()));
 
+    // ---- P17g mobs ----
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.mob.SakuyaEntity>> SAKUYA =
+            ENTITIES.register("sakuya", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.mob.SakuyaEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.mob.SakuyaEntity::new, MobCategory.AMBIENT)
+                    .sized(1.0F, 1.8F).clientTrackingRange(10)
+                    .build(FiveDifficultiesPort.MOD_ID + ":sakuya"));
+    public static final RegistryObject<Item> SAKUYA_SPAWN_EGG = ITEMS.register("sakuya_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(SAKUYA, 0xC1C1D6, 0x3053E7, new Item.Properties()));
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.mob.SanaeEntity>> SANAE =
+            ENTITIES.register("sanae", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.mob.SanaeEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.mob.SanaeEntity::new, MobCategory.AMBIENT)
+                    .sized(0.6F, 1.7F).clientTrackingRange(10)
+                    .build(FiveDifficultiesPort.MOD_ID + ":sanae"));
+    public static final RegistryObject<Item> SANAE_SPAWN_EGG = ITEMS.register("sanae_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(SANAE, 0x6BD245, 0x2937E0, new Item.Properties()));
+
     // ---- P13 danmaku-weapon items ----
     public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity>> DRAGON_NECK_JEWEL =
             ENTITIES.register("dragon_neck_jewel", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity>of(
