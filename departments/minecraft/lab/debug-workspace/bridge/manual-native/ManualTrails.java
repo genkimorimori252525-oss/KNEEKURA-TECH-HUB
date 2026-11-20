@@ -55,7 +55,8 @@ public final class ManualTrails {
   var t=new JsonArray();c.types.stream().limit(32).forEach(t::add);x.add("entityTypes",t);x.add("errors",new Gson().toJsonTree(c.errors));return x;
  }
 
- @SubscribeEvent public void sample(TickEvent.ServerTickEvent event){
+ @SubscribeEvent public void sample(TickEvent.ServerTickEvent event){long t0=System.nanoTime();try{sample0(event);}finally{ManualScenario.overhead(System.nanoTime()-t0);}}
+ private void sample0(TickEvent.ServerTickEvent event){
   var c=active;if(c==null||event.phase!=TickEvent.Phase.END)return;
   try{
    if(System.nanoTime()>=c.deadline||!c.live.getAsBoolean()){clear("WINDOW_ENDED");return;}

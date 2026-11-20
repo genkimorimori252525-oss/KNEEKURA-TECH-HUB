@@ -39,14 +39,14 @@ import java.util.regex.Pattern;
  */
 public final class ManualAiLens {
  static final int EVERY=5,MAX_MOBS=32,MAX_LABELS=16,MAX_LABEL_LINES=5,MAX_WHY=8,MAX_PATH=32,MAX_FIELDS=8,MAX_RECORDS=10000,MAX_LINES=2048;
- static final double RANGE_XZ=48,RANGE_Y=32,LABEL_RANGE=24;
+ static final double RANGE_XZ=48,RANGE_Y=32,LABEL_RANGE=24,LABEL_MIN=3,GROUP=4;
  static final Pattern STATE_NAME=Pattern.compile("(?i)phase|state|stage|mode"),FLAG_NAME=Pattern.compile("(?i)phase|state|stage|mode|attack|charg|cast|enrag|angry|aggro");
  record Probe(String name,Field field,EntityDataAccessor<?> accessor){}
  record View(UUID id,List<String> labels,UUID target,double[] path){}
  private static final Map<Class<?>,List<Probe>> PROBES=new ConcurrentHashMap<>();
  private static final class Context {
   final MinecraftServer server;final UUID player;final String requestHash;final Path output;final long deadline;final BooleanSupplier live;final BufferedWriter log;
-  final Map<UUID,String> lastKey=new HashMap<>();final Map<UUID,Map<String,String>> lastFields=new HashMap<>();final Map<String,long[]> churn=new HashMap<>();final Set<String> types=new TreeSet<>(),goals=new TreeSet<>(),explained=new TreeSet<>();final List<String> errors=new ArrayList<>();
+  final Map<UUID,String> lastKey=new HashMap<>(),lastType=new HashMap<>();final Map<UUID,Map<String,String>> lastFields=new HashMap<>();final Map<String,long[]> churn=new HashMap<>();final Set<String> types=new TreeSet<>(),goals=new TreeSet<>(),explained=new TreeSet<>();final List<String> errors=new ArrayList<>();
   long whyErrors,sampledTicks,records,droppedRecords,overflowMobs,renders,renderNanos,renderMaxNanos,truncatedFrames;int maxMobs,maxLines,maxLabels,stateProbes;String reason="ACTIVE";boolean firstReceipt,closed;
   volatile List<View> snapshot=List.of();
   Context(MinecraftServer server,UUID player,String requestHash,Path output,long deadline,BooleanSupplier live,BufferedWriter log){this.server=server;this.player=player;this.requestHash=requestHash;this.output=output;this.deadline=deadline;this.live=live;this.log=log;}
@@ -115,7 +115,8 @@ public final class ManualAiLens {
   return out;
  }
 
- @SubscribeEvent public void sample(TickEvent.ServerTickEvent event){
+ @SubscribeEvent public void sample(TickEvent.ServerTickEvent event){long t0=System.nanoTime();try{sample0(event);}finally{ManualScenario.overhead(System.nanoTime()-t0);}}
+ private void sample0(TickEvent.ServerTickEvent event){
   var c=active;if(c==null||event.phase!=TickEvent.Phase.END)return;
   try{
    if(System.nanoTime()>=c.deadline||!c.live.getAsBoolean()){clear("WINDOW_ENDED");return;}
@@ -136,7 +137,7 @@ public final class ManualAiLens {
     var nav=m.getNavigation();var path=nav.getPath();double[] points=null;
     if(path!=null&&!path.isDone()){int from=path.getNextNodeIndex(),to=Math.min(path.getNodeCount(),from+MAX_PATH);points=new double[Math.max(0,to-from)*3];
      for(int i=from;i<to;i++){var n=path.getNode(i);points[(i-from)*3]=n.x+0.5;points[(i-from)*3+1]=n.y+0.1;points[(i-from)*3+2]=n.z+0.5;}}
-    if(!key.equals(c.lastKey.put(id,key))){
+    c.lastType.put(id,type);if(!key.equals(c.lastKey.put(id,key))){
      var r=new JsonObject();r.addProperty("tick",tick);r.addProperty("event","CHANGE");r.addProperty("uuid",id.toString());r.addProperty("type",type);
      var pos=new JsonArray();pos.add(Math.round(m.getX()*10)/10.0);pos.add(Math.round(m.getY()*10)/10.0);pos.add(Math.round(m.getZ()*10)/10.0);r.add("pos",pos);
      r.add("goals",new Gson().toJsonTree(goals));r.add("targetGoals",new Gson().toJsonTree(targets));
@@ -154,7 +155,7 @@ public final class ManualAiLens {
     views.add(new View(id,List.copyOf(labels),target==null?null:target.getUUID(),points));
    }
    for(var it=c.lastKey.keySet().iterator();it.hasNext();){var id=it.next();if(seen.contains(id))continue;it.remove();c.lastFields.remove(id);
-    var r=new JsonObject();r.addProperty("tick",tick);r.addProperty("event","GONE");r.addProperty("uuid",id.toString());r.addProperty("why",level.getEntity(id)==null?"REMOVED":"OUT_OF_SELECTION");record(c,r);}
+    var r=new JsonObject();r.addProperty("tick",tick);r.addProperty("event","GONE");r.addProperty("uuid",id.toString());r.addProperty("type",c.lastType.remove(id));r.addProperty("why",level.getEntity(id)==null?"REMOVED":"OUT_OF_SELECTION");record(c,r);}
    c.snapshot=List.copyOf(views);c.sampledTicks++;if(c.sampledTicks%20==0)synchronized(ManualAiLens.class){if(!c.closed)c.log.flush();}
   }catch(Exception e){synchronized(ManualAiLens.class){c.errors.add(e.toString());}clear("SAMPLE_FAILED");}
  }
@@ -190,11 +191,19 @@ public final class ManualAiLens {
    buffers.endBatch(RenderType.lines());pose.popPose();pushed=false;
    var font=mc.font;var rotation=event.getCamera().rotation();int labels=0;
    var near=views.stream().filter(v->!v.labels().isEmpty()&&client.containsKey(v.id())).sorted(Comparator.comparingDouble(v->client.get(v.id()).getPosition(partial).distanceToSqr(camera))).toList();
+   // Group: mobs within GROUP blocks of an already chosen label with identical lines share it ("x N"), so crowds stay readable.
+   record Group(net.minecraft.world.phys.Vec3 at,float height,List<String> lines,int[] count){}
+   var groups=new ArrayList<Group>();
    for(var v:near){
-    var self=client.get(v.id());var at=self.getPosition(partial);if(labels>=MAX_LABELS||at.distanceToSqr(camera)>LABEL_RANGE*LABEL_RANGE)break;labels++;
-    pose.pushPose();pose.translate(at.x-camera.x,at.y+self.getBbHeight()+0.35+0.25*v.labels().size()-camera.y,at.z-camera.z);pose.mulPose(rotation);pose.scale(-0.025f,-0.025f,0.025f);
-    for(int i=0;i<v.labels().size();i++){var s=v.labels().get(i);int color=s.startsWith("> ")?0xFFFFFFFF:s.startsWith("@ ")?0xFFFF8A65:s.startsWith("~ ")?0xFFB0BEC5:s.startsWith("? ")?0xFFCE93D8:0xFFFFD54F;
-     font.drawInBatch(s,-font.width(s)/2f,i*10,color,false,pose.last().pose(),buffers,Font.DisplayMode.NORMAL,0x60000000,0xF000F0);}
+    var self=client.get(v.id());var at=self.getPosition(partial);if(at.distanceToSqr(camera)>LABEL_RANGE*LABEL_RANGE)break;if(at.distanceToSqr(camera)<LABEL_MIN*LABEL_MIN)continue; // pressed against the camera: a label would cover the screen
+    Group same=null;for(var g:groups)if(g.lines().equals(v.labels())&&g.at().distanceToSqr(at)<GROUP*GROUP){same=g;break;}
+    if(same!=null){same.count()[0]++;continue;}if(groups.size()>=MAX_LABELS)continue;groups.add(new Group(at,self.getBbHeight(),v.labels(),new int[]{1}));
+   }
+   for(var g:groups){
+    labels++;var at=g.at();var text=new ArrayList<>(g.lines());if(g.count()[0]>1)text.set(0,text.get(0)+"  x"+g.count()[0]);
+    pose.pushPose();pose.translate(at.x-camera.x,at.y+g.height()+0.35+0.25*text.size()-camera.y,at.z-camera.z);pose.mulPose(rotation);pose.scale(-0.025f,-0.025f,0.025f);
+    for(int i=0;i<text.size();i++){var t=text.get(i);int color=t.startsWith("> ")?0xFFFFFFFF:t.startsWith("@ ")?0xFFFF8A65:t.startsWith("~ ")?0xFFB0BEC5:t.startsWith("? ")?0xFFCE93D8:0xFFFFD54F;
+     font.drawInBatch(t,-font.width(t)/2f,i*10,color,false,pose.last().pose(),buffers,Font.DisplayMode.NORMAL,0x60000000,0xF000F0);}
     pose.popPose();
    }
    buffers.endBatch();
