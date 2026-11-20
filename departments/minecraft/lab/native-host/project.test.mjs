@@ -51,9 +51,9 @@ test('failure digest is bounded to crash description and last error lines',async
 // Fixture names, look/view presets and the MOD self-test channel.
 import {resolveFixture,parseSelfTest,VIEWS} from './project.mjs';
 test('presets: default view is tank-sized, look grid selects v2 presentation, selfTest flag is carried',async t=>{
- const p=await project(t);const plain=await buildProfile(p.dir,p.tank);assert.equal(plain.profile.schema,'kneekura.tank-profile/v1');assert.deepEqual(plain.profile.view,VIEWS.tank);assert.equal(Object.hasOwn(plain.profile,'selfTest'),false);
- const q=await project(t,{look:'grid',view:'native',selfTest:true});const grid=await buildProfile(q.dir,q.tank);
- assert.equal(grid.profile.schema,'kneekura.tank-profile/v2');assert.deepEqual(grid.profile.presentation,{grid:true,brightness:'NATIVE'});assert.equal(Object.hasOwn(grid.profile,'view'),false);assert.equal(grid.profile.selfTest,true);
+ const p=await project(t);const plain=await buildProfile(p.dir,p.tank);assert.equal(plain.profile.schema,'kneekura.tank-profile/v1');assert.deepEqual(plain.profile.view,VIEWS.tank);assert.equal(Object.hasOwn(plain.profile,'selfTest'),false);assert.equal(plain.profile.trails,true);
+ const q=await project(t,{look:'grid',view:'native',selfTest:true,trails:false});const grid=await buildProfile(q.dir,q.tank);
+ assert.equal(grid.profile.schema,'kneekura.tank-profile/v2');assert.deepEqual(grid.profile.presentation,{grid:true,brightness:'NATIVE'});assert.equal(Object.hasOwn(grid.profile,'view'),false);assert.equal(grid.profile.selfTest,true);assert.equal(Object.hasOwn(grid.profile,'trails'),false);
  assert.throws(()=>validateProject({schema:'kneekura.tank-project/v1',id:'dd',mods:[{id:'m',jar:'a.jar',kind:'mapped-dev'}],world:'w',subjectUuid:subject,look:'neon'}),/LOOK/);
 });
 test('@fixture supplies world, player and subject; unknown or duplicate names are refused',async t=>{
