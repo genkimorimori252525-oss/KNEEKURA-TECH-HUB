@@ -13,12 +13,13 @@ import {hash,versions,inventory,inventoryHash,validateProfile} from './profile.m
  * subjectUuid is the living entity READY waits for (every mode); it cannot be read from a world without NBT, so it is never guessed.
  * look: 'plain' (default) | 'grid' (client grid, v2 presentation). view: 'tank' (default; render 4 / simulation 5) | 'native' (game defaults).
  * trails: true (default) draws sampled Mob/Projectile trails near the Player; false disables.
+ * ai: true (default) shows what nearby Mob AI is doing (running goals, target, path, MOD state fields) and logs ai.jsonl; false disables.
  * selfTest: true passes -Dkneekura.tank.selfTest=<trial nonce>; the MOD reports `KNEEKURA_TANK_SELFTEST <nonce> PASS|FAIL <name> ...` and `... DONE pass=N fail=M`.
  * `jar` may use `*` in its file name (newest match wins).
  */
 export const PROJECT_SCHEMA='kneekura.tank-project/v1',FIXTURE_SCHEMA='kneekura.tank-fixture/v1';
 export const VIEWS=Object.freeze({tank:{renderDistance:4,simulationDistance:5},native:null});
-const optional=['mode','playerUuid','subjectUuid','look','view','selfTest','trails','maxTicks','maxWallMs','maxEvents'];
+const optional=['mode','playerUuid','subjectUuid','look','view','selfTest','trails','ai','maxTicks','maxWallMs','maxEvents'];
 export function validateProject(value){
  assert(value&&typeof value==='object'&&!Array.isArray(value),'TANK_PROJECT_OBJECT');
  for(const key of Object.keys(value))assert(['schema','id','mods','world',...optional].includes(key),'TANK_PROJECT_UNKNOWN_FIELD_'+key);
@@ -30,7 +31,8 @@ export function validateProject(value){
  const look=value.look??'plain';assert(['plain','grid'].includes(look),'TANK_PROJECT_LOOK');const view=value.view??'tank';assert(Object.hasOwn(VIEWS,view),'TANK_PROJECT_VIEW');
  assert(value.selfTest===undefined||typeof value.selfTest==='boolean','TANK_PROJECT_SELFTEST');
  assert(value.trails===undefined||typeof value.trails==='boolean','TANK_PROJECT_TRAILS');
- return {...value,mode,look,view,selfTest:value.selfTest===true,trails:value.trails!==false};
+ assert(value.ai===undefined||typeof value.ai==='boolean','TANK_PROJECT_AI');
+ return {...value,mode,look,view,selfTest:value.selfTest===true,trails:value.trails!==false,ai:value.ai!==false};
 }
 /** `@name` → the fixture whose tank-fixture.json declares that name. Exactly one match. */
 export async function resolveFixture(tankRoot,name){
@@ -82,7 +84,7 @@ export async function buildProfile(projectDir,tankRoot){
  const profile=validateProfile({schema:project.look==='grid'?'kneekura.tank-profile/v2':'kneekura.tank-profile/v1',id:project.id+'-'+project.mode.toLowerCase().replaceAll('_','-'),runtime:{minecraft:versions.minecraft,forge:versions.forge,java:versions.java},mods,
   world:{directory:world,inventorySha256:inventoryHash(await inventory(world))},playerUuid:(project.playerUuid??fixture?.playerUuid??await inferPlayerUuid(world)).toLowerCase(),subjectUuid:subjectUuid.toLowerCase(),
   sourceRevision:git.revision,mode:project.mode,maxTicks:project.maxTicks??600,maxWallMs:project.maxWallMs??30000,maxEvents:project.maxEvents??128,
-  ...(project.look==='grid'?{presentation:{grid:true,brightness:'NATIVE'}}:{}),...(view?{view:{...view}}:{}),...(project.selfTest?{selfTest:true}:{}),...(project.trails?{trails:true}:{})});
+  ...(project.look==='grid'?{presentation:{grid:true,brightness:'NATIVE'}}:{}),...(view?{view:{...view}}:{}),...(project.selfTest?{selfTest:true}:{}),...(project.trails?{trails:true}:{}),...(project.ai?{ai:true}:{})});
  const profiles=path.join(tankRoot,'profiles');await fs.mkdir(profiles,{recursive:true});const file=path.join(profiles,profile.id+'-'+randomUUID()+'.json');
  await fs.writeFile(file,JSON.stringify(profile,null,2)+'\n',{flag:'wx'});return {profile,file,artifacts,sourceDirty:git.dirty};
 }
