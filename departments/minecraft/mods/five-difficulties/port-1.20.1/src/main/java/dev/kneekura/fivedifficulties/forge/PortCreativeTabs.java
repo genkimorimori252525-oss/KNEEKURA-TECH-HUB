@@ -15,6 +15,9 @@ public final class PortCreativeTabs {
 
     @SubscribeEvent
     public static void buildContents(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) { // P18b yin-yang orb
+            event.accept(PortRegistries.YIN_YANG_ORB.get());
+        }
         if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) { // P18a divine spirit (X1 tabDecorations)
             event.accept(PortRegistries.DIVINE_SPIRIT_RED_ITEM.get());
             event.accept(PortRegistries.DIVINE_SPIRIT_BLUE_ITEM.get());

@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ORO",
+    "LRR",
+    "SLO"
+  ],
+  "key": {
+    "O": {
+      "item": "minecraft:orange_dye"
+    },
+    "R": {
+      "item": "minecraft:red_dye"
+    },
+    "L": [
+      {
+        "item": "minecraft:oak_leaves"
+      },
+      {
+        "item": "minecraft:spruce_leaves"
+      },
+      {
+        "item": "minecraft:birch_leaves"
+      },
+      {
+        "item": "minecraft:jungle_leaves"
+      }
+    ],
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "five_difficulties_port:tengu_fan"
+  }
+}

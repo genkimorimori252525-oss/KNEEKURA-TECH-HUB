@@ -16,6 +16,7 @@ public final class FiveDifficultiesPort {
         net.minecraftforge.fml.ModLoadingContext.get().registerConfig(
                 net.minecraftforge.fml.config.ModConfig.Type.COMMON, X1Config.SPEC, "five_difficulties_port-common.toml");
         PortRegistries.register(modBus);
+        net.minecraftforge.common.crafting.CraftingHelper.register(dev.kneekura.fivedifficulties.forge.crafting.RecipelessItemsCondition.SERIALIZER);
         PortNetwork.register();
         modBus.addListener((net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent e) ->
                 e.enqueueWork(dev.kneekura.fivedifficulties.forge.item.X1ShotItems::registerDispenser));

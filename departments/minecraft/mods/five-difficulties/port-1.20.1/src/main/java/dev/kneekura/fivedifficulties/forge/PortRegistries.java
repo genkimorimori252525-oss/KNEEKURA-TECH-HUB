@@ -592,6 +592,10 @@ public final class PortRegistries {
     public static final RegistryObject<Item> CURSED_DECOY_DOLL_ITEM = ITEMS.register("cursed_decoy_doll",
             () -> new dev.kneekura.fivedifficulties.forge.item.X1MalletItems.CursedDecoyDoll(new Item.Properties()));
 
+    // ---- P18b yin-yang orb ----
+    public static final RegistryObject<Item> YIN_YANG_ORB = ITEMS.register("yin_yang_orb",
+            () -> new Item(new Item.Properties().stacksTo(1)));
+
     public static final RegistryObject<Item> SHOT_MATERIAL = ITEMS.register("shot_material",
             () -> new dev.kneekura.fivedifficulties.forge.item.ShotMaterialItem(new Item.Properties()));
 

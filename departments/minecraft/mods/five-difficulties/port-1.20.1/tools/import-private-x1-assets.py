@@ -531,6 +531,11 @@ ASSETS = {
         "assets/five_difficulties_port/textures/item/toyosatomimi_sword.png",
         "b727ebcb7eb350661732558309bec48a1523dd16f1183456cf08a5bf853389e3",
     ),
+    # P18b yin-yang orb.
+    "assets/thkaguyamod/textures/items/material/Onmyoudama.png": (
+        "assets/five_difficulties_port/textures/item/yin_yang_orb.png",
+        "a7b29efd97219d5d0953a531a3cb1bf5b8924afc494ec3472c142fd328945cf0",
+    ),
     # P15 danmaku crafting table.
     "assets/thkaguyamod/textures/blocks/danmaku_crafting_table.png": (
         "assets/five_difficulties_port/textures/block/danmaku_crafting_table.png",

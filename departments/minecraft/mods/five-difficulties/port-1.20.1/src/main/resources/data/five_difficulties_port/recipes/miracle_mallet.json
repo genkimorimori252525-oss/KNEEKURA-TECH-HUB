@@ -1,0 +1,27 @@
+{
+  "conditions": [
+    {
+      "type": "five_difficulties_port:recipeless_items_recipe"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "RSR",
+    " S "
+  ],
+  "key": {
+    "R": {
+      "item": "minecraft:redstone_block"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "G": {
+      "item": "minecraft:gold_block"
+    }
+  },
+  "result": {
+    "item": "five_difficulties_port:miracle_mallet"
+  }
+}

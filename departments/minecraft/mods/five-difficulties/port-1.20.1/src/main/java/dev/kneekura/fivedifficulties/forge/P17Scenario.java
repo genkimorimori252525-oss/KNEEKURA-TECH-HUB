@@ -471,6 +471,27 @@ public final class P17Scenario {
         undead.discard();
         cow.discard();
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P18A_DIVINE_SPIRIT_PASS spirits={}", made);
+        // P18b recipes: X1 THKaguyaRecipe as JSON; the 7 "recipeless items" recipes need the config switch (off).
+        var rm = level.getServer().getRecipeManager();
+        long ours = rm.getRecipes().stream().filter(r -> r.getId().getNamespace().equals(FiveDifficultiesPort.MOD_ID)).count();
+        var menu = new net.minecraft.world.inventory.CraftingMenu(0, p.getInventory());
+        var grid = new net.minecraft.world.inventory.TransientCraftingContainer(menu, 3, 3);
+        for (int i = 0; i < 9; i++) grid.setItem(i, new ItemStack(net.minecraft.world.item.Items.REDSTONE));
+        grid.setItem(4, new ItemStack(net.minecraft.world.item.Items.ENDER_PEARL));
+        var pearl = rm.getRecipeFor(net.minecraft.world.item.crafting.RecipeType.CRAFTING, grid, level)
+                .map(r -> r.assemble(grid, level.registryAccess())).orElse(ItemStack.EMPTY);
+        for (int i = 0; i < 9; i++) grid.setItem(i, ItemStack.EMPTY);
+        grid.setItem(0, new ItemStack(PortRegistries.SHOT_MATERIAL.get()));
+        grid.setItem(1, new ItemStack(PortRegistries.SHOT_MATERIAL.get()));
+        grid.setItem(3, new ItemStack(PortRegistries.SHOT_MATERIAL.get()));
+        grid.setItem(4, new ItemStack(PortRegistries.SHOT_MATERIAL.get()));
+        var medium = rm.getRecipeFor(net.minecraft.world.item.crafting.RecipeType.CRAFTING, grid, level)
+                .map(r -> r.assemble(grid, level.registryAccess())).orElse(ItemStack.EMPTY);
+        boolean malletRecipe = rm.getRecipes().stream().anyMatch(r -> r.getResultItem(level.registryAccess()).is(PortRegistries.MIRACLE_MALLET.get()));
+        require(ours == 102 && pearl.is(PortRegistries.HOURAI_PEARL_RED.get()) && !malletRecipe
+                && dev.kneekura.fivedifficulties.forge.X1Config.recipelessItemsRecipe() == false,
+                "recipes: ours=" + ours + " pearl=" + pearl + " mallet=" + malletRecipe);
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P18B_RECIPES_PASS recipes={} medium={}", ours, medium);
     }
 
     private static void require(boolean ok, String what) {

@@ -1,0 +1,27 @@
+{
+  "conditions": [
+    {
+      "type": "five_difficulties_port:recipeless_items_recipe"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "I I",
+    "CPC",
+    "C C"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "C": {
+      "item": "five_difficulties_port:crystal_shot"
+    },
+    "I": {
+      "item": "minecraft:ice"
+    }
+  },
+  "result": {
+    "item": "five_difficulties_port:spell_card_iciclefall"
+  }
+}
