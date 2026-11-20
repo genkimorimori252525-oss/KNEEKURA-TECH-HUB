@@ -175,6 +175,13 @@ export async function commandRun(command,trial){
  * One command for MOD developers: tank.json → stored artifact + pinned profile → prepare → start → summary.
  * Exactly one trial; a failure is reported with its digest and never retried.
  */
+/** Where the AI lens wrote, and which entity/goal classes explained themselves through tankWhy(). Informational: never changes PASS/FAIL. */
+export async function summarizeAi(trial){
+ const hit=(await fs.readdir(path.join(trial,'runtime'),{recursive:true}).catch(()=>[])).find(x=>path.basename(x)==='ai-result.json');
+ if(!hit)return {status:'NO_AI_RESULT'};const file=path.join(trial,'runtime',hit),r=await read(file);
+ return {status:'RECORDED',log:path.join(path.dirname(file),'ai.jsonl'),records:r.records,droppedRecords:r.droppedRecords,goalsSeen:r.goalsSeen?.length??0,explainedClasses:r.explainedClasses??[],whyErrors:r.whyErrors??0,details:file,
+  next:(r.explainedClasses??[]).length?'read "why" in ai.jsonl':'no tankWhy() found: copy native-host/templates/TankWhy.java into the MOD to explain decisions'};
+}
 export async function runProject(projectDir,{installation}={}){
  const installed=path.resolve(installation??(await read(path.join(defaultRoot(),'active-host.json'))).installed);
  const built=await buildProfile(projectDir,path.resolve(installed,'../..'));
@@ -183,6 +190,7 @@ export async function runProject(projectDir,{installation}={}){
  try{const result=await commandRun('start',trial);const summary={...base,status:'PASS',result:result.status,trial,startupMs:result.startupMs,exit:result.closure.status,evidence:result.closure.finalization.status,counts:result.closure.finalization.counts,details:path.join(trial,'closed.json')};
   if(built.profile.selfTest){const nonce=(await read(path.join(trial,'inputs/manual-request.json'))).nonce;const selfTest=parseSelfTest(await fs.readFile(path.join(trial,'game/logs/latest.log'),'utf8').catch(()=>''),nonce);await write(path.join(trial,'selftest-result.json'),{nonce,...selfTest});
    summary.selfTest={status:selfTest.status,pass:selfTest.pass,fail:selfTest.fail,failed:selfTest.rows.filter(r=>r.verdict==='FAIL').slice(0,16),scope:selfTest.scope,details:path.join(trial,'selftest-result.json')};if(selfTest.status!=='PASS')summary.status='FAIL';}
+  if(built.profile.ai)summary.ai=await summarizeAi(trial);
   return summary;}
  catch(error){return {...base,status:'FAIL',error:error.message,trial,failure:await summarizeFailure(trial)};}
 }

@@ -38,7 +38,7 @@ import java.util.regex.Pattern;
  * It does not show WHY (scores, private conditions). Server thread samples every 5 ticks; ai.jsonl records changes only.
  */
 public final class ManualAiLens {
- static final int EVERY=5,MAX_MOBS=32,MAX_LABELS=16,MAX_LABEL_LINES=4,MAX_PATH=32,MAX_FIELDS=8,MAX_RECORDS=10000,MAX_LINES=2048;
+ static final int EVERY=5,MAX_MOBS=32,MAX_LABELS=16,MAX_LABEL_LINES=5,MAX_WHY=8,MAX_PATH=32,MAX_FIELDS=8,MAX_RECORDS=10000,MAX_LINES=2048;
  static final double RANGE_XZ=48,RANGE_Y=32,LABEL_RANGE=24;
  static final Pattern STATE_NAME=Pattern.compile("(?i)phase|state|stage|mode"),FLAG_NAME=Pattern.compile("(?i)phase|state|stage|mode|attack|charg|cast|enrag|angry|aggro");
  record Probe(String name,Field field,EntityDataAccessor<?> accessor){}
@@ -46,8 +46,8 @@ public final class ManualAiLens {
  private static final Map<Class<?>,List<Probe>> PROBES=new ConcurrentHashMap<>();
  private static final class Context {
   final MinecraftServer server;final UUID player;final String requestHash;final Path output;final long deadline;final BooleanSupplier live;final BufferedWriter log;
-  final Map<UUID,String> lastKey=new HashMap<>();final Map<UUID,Map<String,String>> lastFields=new HashMap<>();final Map<String,long[]> churn=new HashMap<>();final Set<String> types=new TreeSet<>(),goals=new TreeSet<>();final List<String> errors=new ArrayList<>();
-  long sampledTicks,records,droppedRecords,overflowMobs,renders,renderNanos,renderMaxNanos,truncatedFrames;int maxMobs,maxLines,maxLabels,stateProbes;String reason="ACTIVE";boolean firstReceipt,closed;
+  final Map<UUID,String> lastKey=new HashMap<>();final Map<UUID,Map<String,String>> lastFields=new HashMap<>();final Map<String,long[]> churn=new HashMap<>();final Set<String> types=new TreeSet<>(),goals=new TreeSet<>(),explained=new TreeSet<>();final List<String> errors=new ArrayList<>();
+  long whyErrors,sampledTicks,records,droppedRecords,overflowMobs,renders,renderNanos,renderMaxNanos,truncatedFrames;int maxMobs,maxLines,maxLabels,stateProbes;String reason="ACTIVE";boolean firstReceipt,closed;
   volatile List<View> snapshot=List.of();
   Context(MinecraftServer server,UUID player,String requestHash,Path output,long deadline,BooleanSupplier live,BufferedWriter log){this.server=server;this.player=player;this.requestHash=requestHash;this.output=output;this.deadline=deadline;this.live=live;this.log=log;}
  }
@@ -71,12 +71,23 @@ public final class ManualAiLens {
   x.addProperty("sampledTicks",c.sampledTicks);x.addProperty("records",c.records);x.addProperty("droppedRecords",c.droppedRecords);x.addProperty("maxMobs",c.maxMobs);x.addProperty("overflowMobs",c.overflowMobs);
   x.addProperty("stateProbes",c.stateProbes);x.addProperty("renderedFrames",c.renders);x.addProperty("maxLinesPerFrame",c.maxLines);x.addProperty("maxLabelsPerFrame",c.maxLabels);x.addProperty("truncatedFrames",c.truncatedFrames);
   x.addProperty("renderCpuMeanNanos",c.renders==0?0:c.renderNanos/c.renders);x.addProperty("renderCpuMaxNanos",c.renderMaxNanos);x.addProperty("rawPixelsVerified",false);
-  var t=new JsonArray();c.types.stream().limit(32).forEach(t::add);x.add("entityTypes",t);var g=new JsonArray();c.goals.stream().limit(64).forEach(g::add);x.add("goalsSeen",g);
+  var t=new JsonArray();c.types.stream().limit(32).forEach(t::add);x.add("entityTypes",t);var g=new JsonArray();c.goals.stream().limit(64).forEach(g::add);x.add("goalsSeen",g);var ex=new JsonArray();c.explained.stream().limit(32).forEach(ex::add);x.add("explainedClasses",ex);x.addProperty("whyErrors",c.whyErrors);
   x.add("errors",new Gson().toJsonTree(c.errors));return x;
  }
 
  static String simple(Class<?> k){var n=k.getName();return n.substring(n.lastIndexOf('.')+1);}
  static boolean vanilla(Class<?> k){var n=k.getName();return n.startsWith("net.minecraft.")||n.startsWith("net.minecraftforge.");}
+ /** Optional MOD-owned explanation: a public no-arg tankWhy() returning a Map or String, on the entity or a running goal. */
+ private static final Map<Class<?>,Optional<Method>> WHY=new ConcurrentHashMap<>();
+ static Optional<Method> whyMethod(Class<?> k){return WHY.computeIfAbsent(k,x->{try{var w=x.getMethod("tankWhy");try{w.setAccessible(true);}catch(Throwable ignored){}return Modifier.isStatic(w.getModifiers())?Optional.empty():Optional.of(w);}catch(Throwable e){return Optional.empty();}});}
+ static void why(Context c,Object owner,String prefix,Map<String,String> out){
+  var w=whyMethod(owner.getClass());if(w.isEmpty())return;
+  try{Object v=w.get().invoke(owner);
+   if(v instanceof Map<?,?> map){for(var e:map.entrySet()){if(out.size()>=MAX_WHY)break;out.put(prefix+e.getKey(),clip(String.valueOf(e.getValue())));}}
+   else if(v!=null&&out.size()<MAX_WHY)out.put(prefix.isEmpty()?"why":prefix+"why",clip(String.valueOf(v)));
+  }catch(Throwable e){c.whyErrors++;if(c.errors.size()<16)c.errors.add("tankWhy "+simple(owner.getClass())+": "+(e.getCause()!=null?e.getCause():e));}
+ }
+ static String clip(String s){return s.length()>60?s.substring(0,60):s;}
  static List<String> running(GoalSelector s){return s.getRunningGoals().sorted(Comparator.comparingInt(WrappedGoal::getPriority)).map(w->w.getPriority()+":"+simple(w.getGoal().getClass())).toList();}
  /** Read-only probes of state-like members declared by MOD classes between the concrete type and Mob; cached per class. */
  static List<Probe> probes(Class<?> type){return PROBES.computeIfAbsent(type,ManualAiLens::scan);}
@@ -118,8 +129,10 @@ public final class ManualAiLens {
     var goals=running(m.goalSelector);var targets=running(m.targetSelector);goals.forEach(c.goals::add);targets.forEach(c.goals::add);
     var brain=m.getBrain();var activities=brain.getActiveActivities().stream().map(Activity::getName).sorted().toList();
     var behaviors=brain.getRunningBehaviors().stream().map(b->b.debugString()).sorted().limit(6).toList();
-    var fields=state(m);c.stateProbes=Math.max(c.stateProbes,fields.size());LivingEntity target=m.getTarget();
-    var key=goals+"|"+targets+"|"+activities+"|"+behaviors+"|"+stable(c,m,id,fields)+"|"+(target==null?"":target.getUUID());
+    var fields=state(m);c.stateProbes=Math.max(c.stateProbes,fields.size());
+    var whys=new LinkedHashMap<String,String>();why(c,m,"",whys);for(var s:List.of(m.goalSelector,m.targetSelector))s.getRunningGoals().forEach(g->why(c,g.getGoal(),simple(g.getGoal().getClass())+".",whys));
+    if(!whys.isEmpty())c.explained.add(simple(m.getClass()));var tracked=new LinkedHashMap<String,String>(fields);whys.forEach((k,v)->tracked.put("?"+k,v));LivingEntity target=m.getTarget();
+    var key=goals+"|"+targets+"|"+activities+"|"+behaviors+"|"+stable(c,m,id,tracked)+"|"+(target==null?"":target.getUUID());
     var nav=m.getNavigation();var path=nav.getPath();double[] points=null;
     if(path!=null&&!path.isDone()){int from=path.getNextNodeIndex(),to=Math.min(path.getNodeCount(),from+MAX_PATH);points=new double[Math.max(0,to-from)*3];
      for(int i=from;i<to;i++){var n=path.getNode(i);points[(i-from)*3]=n.x+0.5;points[(i-from)*3+1]=n.y+0.1;points[(i-from)*3+2]=n.z+0.5;}}
@@ -128,7 +141,7 @@ public final class ManualAiLens {
      var pos=new JsonArray();pos.add(Math.round(m.getX()*10)/10.0);pos.add(Math.round(m.getY()*10)/10.0);pos.add(Math.round(m.getZ()*10)/10.0);r.add("pos",pos);
      r.add("goals",new Gson().toJsonTree(goals));r.add("targetGoals",new Gson().toJsonTree(targets));
      if(!activities.isEmpty())r.add("activities",new Gson().toJsonTree(activities));if(!behaviors.isEmpty())r.add("behaviors",new Gson().toJsonTree(behaviors));
-     if(!fields.isEmpty())r.add("state",new Gson().toJsonTree(fields));
+     if(!fields.isEmpty())r.add("state",new Gson().toJsonTree(fields));if(!whys.isEmpty())r.add("why",new Gson().toJsonTree(whys));
      if(target!=null){var t=new JsonObject();t.addProperty("uuid",target.getUUID().toString());t.addProperty("type",EntityType.getKey(target.getType()).toString());r.add("target",t);}
      var goal=nav.getTargetPos();if(points!=null&&goal!=null){var to=new JsonArray();to.add(goal.getX());to.add(goal.getY());to.add(goal.getZ());r.add("pathTo",to);}
      record(c,r);
@@ -136,6 +149,7 @@ public final class ManualAiLens {
     var labels=new ArrayList<String>();
     for(var s:goals){if(labels.size()<2)labels.add("> "+s);}for(var s:behaviors){if(labels.size()<2)labels.add("> "+s);}
     for(var s:targets){if(labels.size()<3)labels.add("@ "+s);}if(labels.isEmpty()&&!activities.isEmpty())labels.add("~ "+String.join(",",activities));
+    int whyLines=0;for(var e:whys.entrySet()){if(whyLines<2&&labels.size()<MAX_LABEL_LINES){labels.add("? "+e.getKey()+"="+e.getValue());whyLines++;}}
     for(var e:fields.entrySet()){if(labels.size()<MAX_LABEL_LINES)labels.add(e.getKey()+"="+e.getValue());}
     views.add(new View(id,List.copyOf(labels),target==null?null:target.getUUID(),points));
    }
@@ -179,7 +193,7 @@ public final class ManualAiLens {
    for(var v:near){
     var self=client.get(v.id());var at=self.getPosition(partial);if(labels>=MAX_LABELS||at.distanceToSqr(camera)>LABEL_RANGE*LABEL_RANGE)break;labels++;
     pose.pushPose();pose.translate(at.x-camera.x,at.y+self.getBbHeight()+0.35+0.25*v.labels().size()-camera.y,at.z-camera.z);pose.mulPose(rotation);pose.scale(-0.025f,-0.025f,0.025f);
-    for(int i=0;i<v.labels().size();i++){var s=v.labels().get(i);int color=s.startsWith("> ")?0xFFFFFFFF:s.startsWith("@ ")?0xFFFF8A65:s.startsWith("~ ")?0xFFB0BEC5:0xFFFFD54F;
+    for(int i=0;i<v.labels().size();i++){var s=v.labels().get(i);int color=s.startsWith("> ")?0xFFFFFFFF:s.startsWith("@ ")?0xFFFF8A65:s.startsWith("~ ")?0xFFB0BEC5:s.startsWith("? ")?0xFFCE93D8:0xFFFFD54F;
      font.drawInBatch(s,-font.width(s)/2f,i*10,color,false,pose.last().pose(),buffers,Font.DisplayMode.NORMAL,0x60000000,0xF000F0);}
     pose.popPose();
    }
