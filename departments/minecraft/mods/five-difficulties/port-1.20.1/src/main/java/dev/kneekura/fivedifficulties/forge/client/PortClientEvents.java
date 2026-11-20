@@ -48,6 +48,8 @@ public final class PortClientEvents {
         event.registerEntityRenderer(PortRegistries.TH_ITEM.get(), THItemRenderer::new);
         event.registerEntityRenderer(PortRegistries.MUSOU_FUUIN.get(), P12Renderers.MusouFuuin::new);
         event.registerEntityRenderer(PortRegistries.DRAGON_NECK_JEWEL.get(), DragonNeckJewelRenderer::new);
+        event.registerEntityRenderer(PortRegistries.DIVINE_SPIRIT.get(), DivineSpiritRenderers.Spirit::new);
+        event.registerBlockEntityRenderer(PortRegistries.DIVINE_SPIRIT_BLOCK_ENTITY.get(), DivineSpiritRenderers.Block::new);
         event.registerEntityRenderer(PortRegistries.CURSED_DECOY_DOLL.get(), ctx -> new P17Renderers.Plain<>(ctx, new dev.kneekura.fivedifficulties.forge.client.mob.CursedDecoyDollModel(ctx.bakeLayer(P17Renderers.mobLayer("cursed_decoy_doll"))), "cursed_decoy_doll"));
         event.registerEntityRenderer(PortRegistries.RINNOSUKE.get(), ctx -> new P17Renderers.Plain<>(ctx, new dev.kneekura.fivedifficulties.forge.client.mob.RinnosukeModel(ctx.bakeLayer(P17Renderers.mobLayer("rinnosuke"))), "rinnosuke"));
         event.registerEntityRenderer(PortRegistries.REIMU.get(), ctx -> new P17Renderers.SimpleBoss<>(ctx, new dev.kneekura.fivedifficulties.forge.client.mob.ReimuModel(ctx.bakeLayer(P17Renderers.mobLayer("reimu"))), "reimu"));

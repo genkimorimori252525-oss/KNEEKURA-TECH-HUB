@@ -614,6 +614,71 @@ public final class PortRegistries {
                     .displayItems((params, out) -> SPELL_CARD_ITEMS.values().forEach(i -> out.accept(i.get())))
                     .build());
 
+
+    // ---- P18a Divine Spirit (X1 divine_spirit metadata 0..7, one block per colour) ----
+    private static final DeferredRegister<net.minecraft.world.level.block.entity.BlockEntityType<?>> BLOCK_ENTITIES =
+            DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, FiveDifficultiesPort.MOD_ID);
+    public static final RegistryObject<net.minecraft.world.level.block.Block> DIVINE_SPIRIT_RED =
+            BLOCKS.register("divine_spirit_red", () -> new dev.kneekura.fivedifficulties.forge.block.DivineSpiritBlock(0));
+    public static final RegistryObject<Item> DIVINE_SPIRIT_RED_ITEM = ITEMS.register("divine_spirit_red",
+            () -> new net.minecraft.world.item.BlockItem(DIVINE_SPIRIT_RED.get(), new Item.Properties()));
+    public static final RegistryObject<net.minecraft.world.level.block.Block> DIVINE_SPIRIT_BLUE =
+            BLOCKS.register("divine_spirit_blue", () -> new dev.kneekura.fivedifficulties.forge.block.DivineSpiritBlock(1));
+    public static final RegistryObject<Item> DIVINE_SPIRIT_BLUE_ITEM = ITEMS.register("divine_spirit_blue",
+            () -> new net.minecraft.world.item.BlockItem(DIVINE_SPIRIT_BLUE.get(), new Item.Properties()));
+    public static final RegistryObject<net.minecraft.world.level.block.Block> DIVINE_SPIRIT_GREEN =
+            BLOCKS.register("divine_spirit_green", () -> new dev.kneekura.fivedifficulties.forge.block.DivineSpiritBlock(2));
+    public static final RegistryObject<Item> DIVINE_SPIRIT_GREEN_ITEM = ITEMS.register("divine_spirit_green",
+            () -> new net.minecraft.world.item.BlockItem(DIVINE_SPIRIT_GREEN.get(), new Item.Properties()));
+    public static final RegistryObject<net.minecraft.world.level.block.Block> DIVINE_SPIRIT_YELLOW =
+            BLOCKS.register("divine_spirit_yellow", () -> new dev.kneekura.fivedifficulties.forge.block.DivineSpiritBlock(3));
+    public static final RegistryObject<Item> DIVINE_SPIRIT_YELLOW_ITEM = ITEMS.register("divine_spirit_yellow",
+            () -> new net.minecraft.world.item.BlockItem(DIVINE_SPIRIT_YELLOW.get(), new Item.Properties()));
+    public static final RegistryObject<net.minecraft.world.level.block.Block> DIVINE_SPIRIT_PURPLE =
+            BLOCKS.register("divine_spirit_purple", () -> new dev.kneekura.fivedifficulties.forge.block.DivineSpiritBlock(4));
+    public static final RegistryObject<Item> DIVINE_SPIRIT_PURPLE_ITEM = ITEMS.register("divine_spirit_purple",
+            () -> new net.minecraft.world.item.BlockItem(DIVINE_SPIRIT_PURPLE.get(), new Item.Properties()));
+    public static final RegistryObject<net.minecraft.world.level.block.Block> DIVINE_SPIRIT_AQUA =
+            BLOCKS.register("divine_spirit_aqua", () -> new dev.kneekura.fivedifficulties.forge.block.DivineSpiritBlock(5));
+    public static final RegistryObject<Item> DIVINE_SPIRIT_AQUA_ITEM = ITEMS.register("divine_spirit_aqua",
+            () -> new net.minecraft.world.item.BlockItem(DIVINE_SPIRIT_AQUA.get(), new Item.Properties()));
+    public static final RegistryObject<net.minecraft.world.level.block.Block> DIVINE_SPIRIT_ORANGE =
+            BLOCKS.register("divine_spirit_orange", () -> new dev.kneekura.fivedifficulties.forge.block.DivineSpiritBlock(6));
+    public static final RegistryObject<Item> DIVINE_SPIRIT_ORANGE_ITEM = ITEMS.register("divine_spirit_orange",
+            () -> new net.minecraft.world.item.BlockItem(DIVINE_SPIRIT_ORANGE.get(), new Item.Properties()));
+    public static final RegistryObject<net.minecraft.world.level.block.Block> DIVINE_SPIRIT_WHITE =
+            BLOCKS.register("divine_spirit_white", () -> new dev.kneekura.fivedifficulties.forge.block.DivineSpiritBlock(7));
+    public static final RegistryObject<Item> DIVINE_SPIRIT_WHITE_ITEM = ITEMS.register("divine_spirit_white",
+            () -> new net.minecraft.world.item.BlockItem(DIVINE_SPIRIT_WHITE.get(), new Item.Properties()));
+    /** By X1 metadata (colour index). */
+    public static final java.util.List<RegistryObject<Item>> DIVINE_SPIRIT_ITEMS = java.util.List.of(
+            DIVINE_SPIRIT_RED_ITEM,
+            DIVINE_SPIRIT_BLUE_ITEM,
+            DIVINE_SPIRIT_GREEN_ITEM,
+            DIVINE_SPIRIT_YELLOW_ITEM,
+            DIVINE_SPIRIT_PURPLE_ITEM,
+            DIVINE_SPIRIT_AQUA_ITEM,
+            DIVINE_SPIRIT_ORANGE_ITEM,
+            DIVINE_SPIRIT_WHITE_ITEM);
+    public static final RegistryObject<net.minecraft.world.level.block.entity.BlockEntityType<dev.kneekura.fivedifficulties.forge.block.DivineSpiritBlock.DivineSpiritBlockEntity>> DIVINE_SPIRIT_BLOCK_ENTITY =
+            BLOCK_ENTITIES.register("divine_spirit", () -> net.minecraft.world.level.block.entity.BlockEntityType.Builder.of(
+                    dev.kneekura.fivedifficulties.forge.block.DivineSpiritBlock.DivineSpiritBlockEntity::new,
+                    DIVINE_SPIRIT_RED.get(),
+                    DIVINE_SPIRIT_BLUE.get(),
+                    DIVINE_SPIRIT_GREEN.get(),
+                    DIVINE_SPIRIT_YELLOW.get(),
+                    DIVINE_SPIRIT_PURPLE.get(),
+                    DIVINE_SPIRIT_AQUA.get(),
+                    DIVINE_SPIRIT_ORANGE.get(),
+                    DIVINE_SPIRIT_WHITE.get()).build(null));
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.DivineSpiritEntity>> DIVINE_SPIRIT =
+            ENTITIES.register("divine_spirit", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.DivineSpiritEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.DivineSpiritEntity::new, MobCategory.MISC)
+                    .sized(1.2F, 1.2F).clientTrackingRange(10).updateInterval(1)
+                    .build(FiveDifficultiesPort.MOD_ID + ":divine_spirit"));
+    public static final RegistryObject<Item> TOYOSATOMIMI_SWORD = ITEMS.register("toyosatomimi_sword",
+            () -> new dev.kneekura.fivedifficulties.forge.item.MikoSwordItem(new Item.Properties()));
+
     private static RegistryObject<Item> shotItem(String name, int x1Type) {
         return ITEMS.register(name, () -> new THShotItem(x1Type, new Item.Properties()));
     }
@@ -622,6 +687,7 @@ public final class PortRegistries {
 
     public static void register(IEventBus modBus) {
         BLOCKS.register(modBus);
+        BLOCK_ENTITIES.register(modBus);
         MENUS.register(modBus);
         ITEMS.register(modBus);
         ENTITIES.register(modBus);

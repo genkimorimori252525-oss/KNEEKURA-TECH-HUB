@@ -15,6 +15,19 @@ public final class PortCreativeTabs {
 
     @SubscribeEvent
     public static void buildContents(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) { // P18a divine spirit (X1 tabDecorations)
+            event.accept(PortRegistries.DIVINE_SPIRIT_RED_ITEM.get());
+            event.accept(PortRegistries.DIVINE_SPIRIT_BLUE_ITEM.get());
+            event.accept(PortRegistries.DIVINE_SPIRIT_GREEN_ITEM.get());
+            event.accept(PortRegistries.DIVINE_SPIRIT_YELLOW_ITEM.get());
+            event.accept(PortRegistries.DIVINE_SPIRIT_PURPLE_ITEM.get());
+            event.accept(PortRegistries.DIVINE_SPIRIT_AQUA_ITEM.get());
+            event.accept(PortRegistries.DIVINE_SPIRIT_ORANGE_ITEM.get());
+            event.accept(PortRegistries.DIVINE_SPIRIT_WHITE_ITEM.get());
+        }
+        if (event.getTabKey() == CreativeModeTabs.COMBAT) { // P18a
+            event.accept(PortRegistries.TOYOSATOMIMI_SWORD.get());
+        }
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) { // P17j mallet and doll
             event.accept(PortRegistries.MIRACLE_MALLET.get());
             event.accept(PortRegistries.CURSED_DECOY_DOLL_ITEM.get());

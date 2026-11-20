@@ -233,7 +233,10 @@ public final class ClientWorldVisualSmoke {
                         server(mc, (level, player) -> level.getEntitiesOfClass(net.minecraft.world.entity.Entity.class,
                                 player.getBoundingBox().inflate(48), e -> !(e instanceof net.minecraft.world.entity.player.Player))
                                 .forEach(net.minecraft.world.entity.Entity::discard));
-                        server(mc, (level, player) -> level.getServer().setDifficulty(Difficulty.PEACEFUL, true));
+                        server(mc, (level, player) -> {
+                            level.getServer().setDifficulty(Difficulty.PEACEFUL, true);
+                            for (int c = 0; c < 8; c++) level.removeBlock(net.minecraft.core.BlockPos.containing(-4 + c, -56, 6), false);
+                        });
                         next(Phase.START_STOP);
                     }
                 }
@@ -499,6 +502,12 @@ public final class ClientWorldVisualSmoke {
     // P17: the danmaku mobs in a row facing the camera (no AI, so they hold still).
     private static void spawnP17(ServerLevel level, ServerPlayer player) {
         level.getServer().setDifficulty(Difficulty.NORMAL, true); // X1 danmaku mobs remove themselves in peaceful
+        // P18a: the eight Divine Spirit blocks in a row above the mobs.
+        for (int c = 0; c < 8; c++) {
+            level.setBlockAndUpdate(net.minecraft.core.BlockPos.containing(-4 + c, -56, 6),
+                    ((net.minecraft.world.item.BlockItem) dev.kneekura.fivedifficulties.forge.PortRegistries.DIVINE_SPIRIT_ITEMS.get(c).get())
+                            .getBlock().defaultBlockState());
+        }
         net.minecraft.world.entity.EntityType<?>[] types = {
                 dev.kneekura.fivedifficulties.forge.PortRegistries.TH_FAIRY.get(),
                 dev.kneekura.fivedifficulties.forge.PortRegistries.SUNFLOWER_FAIRY.get(),

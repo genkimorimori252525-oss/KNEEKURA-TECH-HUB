@@ -494,6 +494,43 @@ ASSETS = {
         "assets/five_difficulties_port/textures/entity/mob/cursed_decoy_doll.png",
         "d30c8420d173068c875a10e8401cc53fe703891c0eeb11abcbcc585e3d02c690",
     ),
+    # P18a divine spirit blocks and the Toyosatomimi sword.
+    "assets/thkaguyamod/textures/blocks/divinespirit_red.png": (
+        "assets/five_difficulties_port/textures/block/divine_spirit_red.png",
+        "1dbe219e524ce008c30131b6724220c0436071871e6385d3e78942c82724be8c",
+    ),
+    "assets/thkaguyamod/textures/blocks/divinespirit_blue.png": (
+        "assets/five_difficulties_port/textures/block/divine_spirit_blue.png",
+        "0293ad9495472df21bc1534ceb9c4231efe8ad0220100aaf78dd7fa154c3f25a",
+    ),
+    "assets/thkaguyamod/textures/blocks/divinespirit_green.png": (
+        "assets/five_difficulties_port/textures/block/divine_spirit_green.png",
+        "331bd1291319ae67d63c771751eec55cdebed676c822dc4099d11aa96d924a77",
+    ),
+    "assets/thkaguyamod/textures/blocks/divinespirit_yellow.png": (
+        "assets/five_difficulties_port/textures/block/divine_spirit_yellow.png",
+        "6157d8ea58ca9d76c6e78777b49cdacd59f96484fa196041a04ceb58d3e55fa9",
+    ),
+    "assets/thkaguyamod/textures/blocks/divinespirit_purple.png": (
+        "assets/five_difficulties_port/textures/block/divine_spirit_purple.png",
+        "5f12d5bc87bd031f765f0b507e5effc22d2c4028962cb852d456e84a9862511c",
+    ),
+    "assets/thkaguyamod/textures/blocks/divinespirit_aqua.png": (
+        "assets/five_difficulties_port/textures/block/divine_spirit_aqua.png",
+        "225bbd8e999faf2969242a77f967ce7f7417c0a0b18e3a043a7c2e024bcae868",
+    ),
+    "assets/thkaguyamod/textures/blocks/divinespirit_orange.png": (
+        "assets/five_difficulties_port/textures/block/divine_spirit_orange.png",
+        "11118f6519d72d9375c05fb60776ce64cc30d42536271997bf9c311b834cd4fe",
+    ),
+    "assets/thkaguyamod/textures/blocks/divinespirit_white.png": (
+        "assets/five_difficulties_port/textures/block/divine_spirit_white.png",
+        "135c77e9782b9453972a50fa1a988da3ee74c277a678a39fb1f65122eb36e37a",
+    ),
+    "assets/thkaguyamod/textures/items/toyosatomimiSword.png": (
+        "assets/five_difficulties_port/textures/item/toyosatomimi_sword.png",
+        "b727ebcb7eb350661732558309bec48a1523dd16f1183456cf08a5bf853389e3",
+    ),
     # P15 danmaku crafting table.
     "assets/thkaguyamod/textures/blocks/danmaku_crafting_table.png": (
         "assets/five_difficulties_port/textures/block/danmaku_crafting_table.png",

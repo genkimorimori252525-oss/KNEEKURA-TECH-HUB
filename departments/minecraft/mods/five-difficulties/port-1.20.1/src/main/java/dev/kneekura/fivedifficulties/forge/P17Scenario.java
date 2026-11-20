@@ -436,6 +436,41 @@ public final class P17Scenario {
         dFired.forEach(Entity::discard);
         level.removeBlock(dPos, false);
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P17_DISPENSER_PASS shots={}", dFired.size());
+        // P18a Divine Spirit: block (light 8, no collision, drops itself), the Toyosatomimi sword, the spirit entity.
+        BlockPos sPos = BlockPos.containing(bx - 6, by + 4, bz + 6);
+        level.setBlockAndUpdate(sPos, PortRegistries.DIVINE_SPIRIT_BLUE.get().defaultBlockState());
+        var sState = level.getBlockState(sPos);
+        var sDrops = net.minecraft.world.level.block.Block.getDrops(sState, level, sPos, level.getBlockEntity(sPos));
+        require(sState.getLightEmission(level, sPos) == 8 && sState.getCollisionShape(level, sPos).isEmpty()
+                && level.getBlockEntity(sPos) instanceof dev.kneekura.fivedifficulties.forge.block.DivineSpiritBlock.DivineSpiritBlockEntity
+                && sDrops.size() == 1 && sDrops.get(0).is(PortRegistries.DIVINE_SPIRIT_BLUE_ITEM.get()), "divine spirit block");
+        level.removeBlock(sPos, false);
+        var undead = EntityType.ZOMBIE.create(level);
+        undead.moveTo(bx + 3, by, bz + 20, 0F, 0F);
+        undead.setNoAi(true);
+        level.addFreshEntity(undead);
+        var cow = EntityType.COW.create(level);
+        cow.moveTo(bx - 3, by, bz + 20, 0F, 0F);
+        cow.setNoAi(true);
+        level.addFreshEntity(cow);
+        p.moveTo(bx, by, bz + 20, 0F, 0F);
+        ItemStack sword = new ItemStack(PortRegistries.TOYOSATOMIMI_SWORD.get());
+        int made = dev.kneekura.fivedifficulties.forge.item.MikoSwordItem.release(sword, level, p, 72000 - 6);
+        var spirits = level.getEntitiesOfClass(dev.kneekura.fivedifficulties.forge.entity.DivineSpiritEntity.class,
+                new net.minecraft.world.phys.AABB(bx - 8, by - 4, bz + 14, bx + 8, by + 6, bz + 26));
+        java.util.Set<Integer> colors = new java.util.HashSet<>();
+        spirits.forEach(sp -> colors.add(sp.getDivineSpiritColor()));
+        require(made == 2 && spirits.size() == 2 && colors.equals(java.util.Set.of(7, 3)) && sword.getDamageValue() == 2,
+                "sword: a zombie (7) and a cow (3) within 6 leave spirits, made=" + made + " colors=" + colors);
+        var spirit = spirits.get(0);
+        int sc = spirit.getDivineSpiritColor();
+        spirit.playerTouch(p);
+        require(spirit.isRemoved() && p.getInventory().countItem(PortRegistries.DIVINE_SPIRIT_ITEMS.get(sc).get()) == 1,
+                "touching a spirit gives its block");
+        spirits.forEach(Entity::discard);
+        undead.discard();
+        cow.discard();
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P18A_DIVINE_SPIRIT_PASS spirits={}", made);
     }
 
     private static void require(boolean ok, String what) {
