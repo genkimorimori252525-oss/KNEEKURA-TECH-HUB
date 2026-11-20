@@ -184,6 +184,8 @@ public final class PortRegistries {
                             dev.kneekura.fivedifficulties.forge.entity.DanmakuCreeperEntity::new, MobCategory.MONSTER)
                     .sized(0.6F, 1.7F).clientTrackingRange(8).updateInterval(1)
                     .build(FiveDifficultiesPort.MOD_ID + ":danmaku_creeper"));
+    public static final RegistryObject<Item> DANMAKU_CREEPER_SPAWN_EGG = ITEMS.register("danmaku_creeper_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(DANMAKU_CREEPER, 0x0FF080, 0xC0C000, new Item.Properties()));
 
     // ---- P16d entities ----
     public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.SpiritualStrikeTalismanEntity>> SPIRITUAL_STRIKE_TALISMAN_ENTITY =
@@ -360,6 +362,13 @@ public final class PortRegistries {
                     .build(FiveDifficultiesPort.MOD_ID + ":rinnosuke"));
     public static final RegistryObject<Item> RINNOSUKE_SPAWN_EGG = ITEMS.register("rinnosuke_spawn_egg",
             () -> new net.minecraftforge.common.ForgeSpawnEggItem(RINNOSUKE, 0x373737, 0x2D2DE0, new Item.Properties()));
+
+    // ---- P17j mobs ----
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.mob.CursedDecoyDollEntity>> CURSED_DECOY_DOLL =
+            ENTITIES.register("cursed_decoy_doll", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.mob.CursedDecoyDollEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.mob.CursedDecoyDollEntity::new, MobCategory.MISC)
+                    .sized(1.0F, 1.8F).clientTrackingRange(10)
+                    .build(FiveDifficultiesPort.MOD_ID + ":cursed_decoy_doll"));
 
     // ---- P13 danmaku-weapon items ----
     public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity>> DRAGON_NECK_JEWEL =
@@ -576,6 +585,12 @@ public final class PortRegistries {
     // ---- P16o broom ----
     public static final RegistryObject<Item> MARISA_BROOM = ITEMS.register("magic_broom",
             () -> new dev.kneekura.fivedifficulties.forge.item.X1EffectItems.MarisaBroom(new Item.Properties()));
+
+    // ---- P17j mallet and doll ----
+    public static final RegistryObject<Item> MIRACLE_MALLET = ITEMS.register("miracle_mallet",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1MalletItems.MiracleMallet(new Item.Properties()));
+    public static final RegistryObject<Item> CURSED_DECOY_DOLL_ITEM = ITEMS.register("cursed_decoy_doll",
+            () -> new dev.kneekura.fivedifficulties.forge.item.X1MalletItems.CursedDecoyDoll(new Item.Properties()));
 
     public static final RegistryObject<Item> SHOT_MATERIAL = ITEMS.register("shot_material",
             () -> new dev.kneekura.fivedifficulties.forge.item.ShotMaterialItem(new Item.Properties()));

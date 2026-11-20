@@ -48,6 +48,7 @@ public final class PortClientEvents {
         event.registerEntityRenderer(PortRegistries.TH_ITEM.get(), THItemRenderer::new);
         event.registerEntityRenderer(PortRegistries.MUSOU_FUUIN.get(), P12Renderers.MusouFuuin::new);
         event.registerEntityRenderer(PortRegistries.DRAGON_NECK_JEWEL.get(), DragonNeckJewelRenderer::new);
+        event.registerEntityRenderer(PortRegistries.CURSED_DECOY_DOLL.get(), ctx -> new P17Renderers.Plain<>(ctx, new dev.kneekura.fivedifficulties.forge.client.mob.CursedDecoyDollModel(ctx.bakeLayer(P17Renderers.mobLayer("cursed_decoy_doll"))), "cursed_decoy_doll"));
         event.registerEntityRenderer(PortRegistries.RINNOSUKE.get(), ctx -> new P17Renderers.Plain<>(ctx, new dev.kneekura.fivedifficulties.forge.client.mob.RinnosukeModel(ctx.bakeLayer(P17Renderers.mobLayer("rinnosuke"))), "rinnosuke"));
         event.registerEntityRenderer(PortRegistries.REIMU.get(), ctx -> new P17Renderers.SimpleBoss<>(ctx, new dev.kneekura.fivedifficulties.forge.client.mob.ReimuModel(ctx.bakeLayer(P17Renderers.mobLayer("reimu"))), "reimu"));
         event.registerEntityRenderer(PortRegistries.MIKO.get(), ctx -> new P17Renderers.SimpleBoss<>(ctx, new dev.kneekura.fivedifficulties.forge.client.mob.MikoModel(ctx.bakeLayer(P17Renderers.mobLayer("miko"))), "miko"));
@@ -99,6 +100,7 @@ public final class PortClientEvents {
                 SakuyaTimeControllerModel::createBodyLayer
         );
         event.registerLayerDefinition(SilverKnifeModel.LAYER_LOCATION, SilverKnifeModel::createBodyLayer);
+        event.registerLayerDefinition(P17Renderers.mobLayer("cursed_decoy_doll"), dev.kneekura.fivedifficulties.forge.client.mob.CursedDecoyDollModel::createBodyLayer);
         event.registerLayerDefinition(P17Renderers.mobLayer("rinnosuke"), dev.kneekura.fivedifficulties.forge.client.mob.RinnosukeModel::createBodyLayer);
         event.registerLayerDefinition(P17Renderers.mobLayer("reimu"), dev.kneekura.fivedifficulties.forge.client.mob.ReimuModel::createBodyLayer);
         event.registerLayerDefinition(P17Renderers.mobLayer("miko"), dev.kneekura.fivedifficulties.forge.client.mob.MikoModel::createBodyLayer);

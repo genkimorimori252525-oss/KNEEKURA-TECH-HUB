@@ -15,6 +15,13 @@ public final class PortCreativeTabs {
 
     @SubscribeEvent
     public static void buildContents(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) { // P17j mallet and doll
+            event.accept(PortRegistries.MIRACLE_MALLET.get());
+            event.accept(PortRegistries.CURSED_DECOY_DOLL_ITEM.get());
+        }
+        if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) { // P17j
+            event.accept(PortRegistries.DANMAKU_CREEPER_SPAWN_EGG.get());
+        }
         if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) { // P17i
             event.accept(PortRegistries.RINNOSUKE_SPAWN_EGG.get());
         }

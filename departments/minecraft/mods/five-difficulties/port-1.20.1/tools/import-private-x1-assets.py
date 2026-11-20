@@ -188,10 +188,6 @@ ASSETS = {
         "assets/five_difficulties_port/textures/item/roukanken.png",
         "1f62aaa294a9a73cc54858c226a67a1fbc3ca6dd62386767f235f803ecd10c3a",
     ),
-    "assets/thkaguyamod/textures/items/roukanSword.png": (
-        "assets/five_difficulties_port/textures/item/roukanken_senpuuzin.png",
-        "1f62aaa294a9a73cc54858c226a67a1fbc3ca6dd62386767f235f803ecd10c3a",
-    ),
     "assets/thkaguyamod/textures/items/deathScythe.png": (
         "assets/five_difficulties_port/textures/item/death_scythe.png",
         "6edced0174438767a5f4b26eefc346cb7d8a3efe990f3388d59093ada588e837",
@@ -483,6 +479,20 @@ ASSETS = {
     "assets/thkaguyamod/textures/mob/RinnosukeTexture.png": (
         "assets/five_difficulties_port/textures/entity/mob/rinnosuke.png",
         "68a8b2ecec0ac4ac08101b4b7a06fbb4cfaa5d786601fc52ffb9229a19706b6e",
+    ),
+    # P17j mallet and doll.
+    "assets/thkaguyamod/textures/items/UchidenoKoduchi.png": (
+        "assets/five_difficulties_port/textures/item/miracle_mallet.png",
+        "ca8394e574297861812b74d56c1351d9d725b1e23b6ba3b54e83dc6c8b3e66cb",
+    ),
+    "assets/thkaguyamod/textures/items/cursedDecoyDoll.png": (
+        "assets/five_difficulties_port/textures/item/cursed_decoy_doll.png",
+        "6059ccf799d12162e40805826ff5439ccd9daf1aabd61f026b50ac1faef49ecf",
+    ),
+    # P17j mob textures.
+    "assets/thkaguyamod/textures/mob/DecoyTexture.png": (
+        "assets/five_difficulties_port/textures/entity/mob/cursed_decoy_doll.png",
+        "d30c8420d173068c875a10e8401cc53fe703891c0eeb11abcbcc585e3d02c690",
     ),
     # P15 danmaku crafting table.
     "assets/thkaguyamod/textures/blocks/danmaku_crafting_table.png": (

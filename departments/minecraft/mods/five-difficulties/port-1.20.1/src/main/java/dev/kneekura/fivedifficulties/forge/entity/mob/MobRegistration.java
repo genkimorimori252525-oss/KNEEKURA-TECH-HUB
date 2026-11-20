@@ -28,6 +28,7 @@ public final class MobRegistration {
         event.put(PortRegistries.SANAE.get(), DanmakuMobEntity.createDanmakuAttributes().build());
         event.put(PortRegistries.REIMU.get(), DanmakuMobEntity.createDanmakuAttributes().build());
         event.put(PortRegistries.MIKO.get(), DanmakuMobEntity.createDanmakuAttributes().build());
+        event.put(PortRegistries.CURSED_DECOY_DOLL.get(), DanmakuMobEntity.createDanmakuAttributes().build());
         event.put(PortRegistries.RINNOSUKE.get(), RinnosukeEntity.createAttributes().build());
     }
 
@@ -57,5 +58,11 @@ public final class MobRegistration {
                 MikoEntity::checkNoSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(PortRegistries.RINNOSUKE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 RinnosukeEntity::checkRinnosukeSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
+        // X1 adds the desert spawn only when spawnHanabeeper is on; otherwise the vanilla monster rule.
+        event.register(PortRegistries.DANMAKU_CREEPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                (type, level, reason, pos, random) -> (reason != net.minecraft.world.entity.MobSpawnType.NATURAL
+                        || dev.kneekura.fivedifficulties.forge.X1Config.spawnHanabeeper())
+                        && net.minecraft.world.entity.monster.Monster.checkMonsterSpawnRules(type, level, reason, pos, random),
+                SpawnPlacementRegisterEvent.Operation.REPLACE);
     }
 }

@@ -1,5 +1,9 @@
 package dev.kneekura.fivedifficulties.forge;
 
+import dev.kneekura.fivedifficulties.core.x1.X1ShotTables;
+import dev.kneekura.fivedifficulties.core.x1.X1ShotData;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.InteractionHand;
 import dev.kneekura.fivedifficulties.forge.spellcard.cards.SpecialCards;
 import com.mojang.authlib.GameProfile;
 import dev.kneekura.fivedifficulties.core.x1.X1DanmakuPatterns;
@@ -364,6 +368,50 @@ public final class P17Scenario {
                 BlockPos.containing(bx, by, bz), level.random), "egg spawns allowed");
         FakePlayer p = FakePlayerFactory.get(level, new GameProfile(UUID.fromString("00000000-0000-0000-0000-0000f9170001"), "[FDP17]"));
         p.moveTo(bx, by, bz, 0F, 0F);
+
+        // Hanabeeper: spawn egg registered; desert spawns only with spawnHanabeeper (default off).
+        require(PortRegistries.DANMAKU_CREEPER_SPAWN_EGG.get() instanceof net.minecraftforge.common.ForgeSpawnEggItem,
+                "hanabeeper spawn egg");
+        require(dev.kneekura.fivedifficulties.forge.X1Config.spawnHanabeeper() || !net.minecraft.world.entity.SpawnPlacements.checkSpawnRules(
+                PortRegistries.DANMAKU_CREEPER.get(), level, MobSpawnType.NATURAL, BlockPos.containing(bx, by, bz), level.random),
+                "no natural hanabeeper while the switch is off");
+        // Miracle Mallet: your shots within 20 grow by 0.5; +30 damage per use; heals 1 per inventory tick.
+        p.getFoodData().setFoodLevel(20);
+        dev.kneekura.fivedifficulties.forge.shot.X1Danmaku.createShot(p, new dev.kneekura.fivedifficulties.core.math.Vec3d(bx, by + 1, bz),
+                new dev.kneekura.fivedifficulties.core.math.Vec3d(0, 0, 1), 0.0D,
+                X1ShotData.shot(X1ShotTables.FORM_SMALL, X1ShotTables.RED, 1, 200, 0));
+        var mine = level.getEntitiesOfClass(THShotEntity.class, new net.minecraft.world.phys.AABB(bx - 3, by - 3, bz - 3, bx + 3, by + 3, bz + 3),
+                sh -> sh.getOwner() == p);
+        require(mine.size() == 1, "one shot of the player's, saw " + mine.size());
+        float size0 = mine.get(0).getShotSize();
+        ItemStack mallet = new ItemStack(PortRegistries.MIRACLE_MALLET.get());
+        p.setItemInHand(InteractionHand.MAIN_HAND, mallet);
+        mallet.getItem().use(level, p, InteractionHand.MAIN_HAND);
+        require(Math.abs(mine.get(0).getShotSize() - (size0 + 0.5F)) < 0.011F && mallet.getDamageValue() == 30,
+                "mallet grows the shot by 0.5 and takes 30 damage");
+        mallet.getItem().inventoryTick(mallet, level, p, 0, true);
+        require(mallet.getDamageValue() == 29, "mallet heals one a tick");
+        mine.forEach(Entity::discard);
+        // Cursed decoy doll: placed at the user, one at a time within 40, 1 damage per use; mobs that are fighting
+        // switch to it and everything living takes it as its revenge target.
+        ItemStack doll = new ItemStack(PortRegistries.CURSED_DECOY_DOLL_ITEM.get());
+        p.setItemInHand(InteractionHand.MAIN_HAND, doll);
+        doll.getItem().use(level, p, InteractionHand.MAIN_HAND);
+        var dolls = level.getEntitiesOfClass(dev.kneekura.fivedifficulties.forge.entity.mob.CursedDecoyDollEntity.class,
+                new net.minecraft.world.phys.AABB(bx - 3, by - 3, bz - 3, bx + 3, by + 3, bz + 3));
+        require(dolls.size() == 1 && doll.getDamageValue() == 1 && doll.isEnchanted() == false, "a doll is placed");
+        doll.getItem().use(level, p, InteractionHand.MAIN_HAND);
+        require(doll.getDamageValue() == 1, "no second doll within 40");
+        Zombie fighter = EntityType.ZOMBIE.create(level);
+        fighter.moveTo(bx + 4, by, bz, 0F, 0F);
+        fighter.setNoAi(true);
+        level.addFreshEntity(fighter);
+        fighter.setTarget(p);
+        dolls.get(0).inDecoyEffectedArea(fighter);
+        require(fighter.getTarget() == dolls.get(0) && fighter.getLastHurtByMob() == dolls.get(0), "the zombie turns on the doll");
+        fighter.discard();
+        dolls.forEach(Entity::discard);
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P17_MALLET_DOLL_PASS size={}", size0 + 0.5F);
     }
 
     private static void require(boolean ok, String what) {
