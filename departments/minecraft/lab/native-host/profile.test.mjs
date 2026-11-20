@@ -17,3 +17,9 @@ test('artifact-only provenance is explicit instead of inventing a source commit'
 
 import {diagnosticDefaults} from './diagnostics.mjs';
 test('v3 opts into finite diagnostics while v1/v2 reject implicit tracing',()=>{const p={...profile(),schema:'kneekura.tank-profile/v3',presentation:{grid:true,brightness:'NATIVE'},diagnostics:{...diagnosticDefaults(),maxWallMs:2000}};assert.equal(validateProfile(p).schema,'kneekura.tank-profile/v3');for(const schema of ['kneekura.tank-profile/v1','kneekura.tank-profile/v2'])assert.throws(()=>validateProfile({...p,schema}));for(const mutate of [x=>delete x.diagnostics,x=>x.diagnostics.maxWallMs=2001,x=>x.diagnostics.capture=true]){const x=structuredClone(p);mutate(x);assert.throws(()=>validateProfile(x));}});
+test('optional selfTest/view are accepted only in their exact forms; absent keeps the original exact profile',()=>{
+ assert.equal(validateProfile({...profile(),selfTest:true}).selfTest,true);assert.deepEqual(validateProfile({...profile(),view:{renderDistance:4,simulationDistance:5}}).view,{renderDistance:4,simulationDistance:5});
+ assert.equal(validateProfile({...profile(),trails:true}).trails,true);assert.equal(validateProfile({...profile(),ai:true}).ai,true);
+ for(const bad of [{trails:false},{ai:false},{ai:1},{selfTest:false},{selfTest:'yes'},{view:{renderDistance:1,simulationDistance:5}},{view:{renderDistance:4,simulationDistance:4}},{view:{renderDistance:4}},{view:{renderDistance:4,simulationDistance:5,fov:70}}])assert.throws(()=>validateProfile({...profile(),...bad}));
+ assert.equal(Object.hasOwn(validateProfile(profile()),'view'),false);
+});

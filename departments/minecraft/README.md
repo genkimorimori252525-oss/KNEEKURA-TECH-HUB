@@ -1,5 +1,7 @@
 # Minecraft Technology Department
 
+> Testing a MOD in the real game: [Tank for AI agents](../../docs/TANK-FOR-AGENTS.md) (`lab/native-host/tank.mjs run --project DIR`).
+
 KNEEKURA TECH HUB の Minecraft MOD 開発専用部門。
 
 ## 互換性方針 — Anchor + Frontier

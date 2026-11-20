@@ -7,9 +7,11 @@ import {fileURLToPath,pathToFileURL} from 'node:url';
 import {parseArgs} from 'node:util';
 import {hash,versions,regularPath,inventory,inventoryHash,verifyProfile} from './profile.mjs';
 import {validateTerminalAck} from './shutdown.mjs';
-import {validateBootstrap,validateBootstrapProcess} from './bootstrap.mjs';
+import {validateBootstrap,validateBootstrapProcess,findTrialProcesses} from './bootstrap.mjs';
 import {preparePresentation} from './presentation.mjs';
 import {verifyManualClosure} from './manual-closure.mjs';
+import {judge} from './scenario.mjs';
+import {buildProfile,summarizeFailure,parseSelfTest} from './project.mjs';
 
 const here=path.dirname(fileURLToPath(import.meta.url));
 const read=file=>fs.readFile(file,'utf8').then(JSON.parse);
@@ -61,7 +63,7 @@ export async function warm(installed,{online=false}={}){
  try{await gradle(state.installed,state.manifest,['classes','prepareRunClient','writeTankClasspath',...(online?[]:['--offline']),'--console=plain','-Dnet.minecraftforge.gradle.check.certs=false'],{KNEEKURA_TANK_PROFILE:'',KNEEKURA_TANK_CLASSPATH:path.join(dir,'classpath.txt')},path.join(dir,'gradle.log'));
   const cp=(await fs.readFile(path.join(dir,'classpath.txt'),'utf8')).trim();assert(cp&&!/[\r\n"]/.test(cp),'TANK_CLASSPATH_FORMAT');const runtimeCp=(await fs.readFile(path.join(dir,'runtime-classpath.txt'),'utf8')).trim();assert(runtimeCp&&!/[\r\n"]/.test(runtimeCp),'TANK_RUNTIME_CLASSPATH_FORMAT');const dependencies=[];for(const file of new Set([...cp.split(path.delimiter),...runtimeCp.split(path.delimiter)])){await regularPath(file);dependencies.push({file,sha256:hash(await fs.readFile(file))});}
   const classes=path.join(dir,'classes');await fs.mkdir(classes);const bridge=path.join(state.installed,'debug-workspace/forge-bridge/src/main/java/com/github/tartaricacid/touhoulittlemaid/sim/debug');const native=path.join(state.installed,'debug-workspace/bridge/manual-native');
-  const sources=['KneekuraDebugEnv.java','KneekuraDebugReadyWriter.java'].map(x=>path.join(bridge,x)).concat(['ManualDiagnosticsLimits.java','ManualMotionDiagnostics.java','ManualPresentation.java','ManualGridGeometry.java','ManualGrid.java','ManualRequest.java','ManualRequestSelfTest.java','ManualShutdown.java','ManualNativeAdapter.java'].map(x=>path.join(native,x)));
+  const sources=['KneekuraDebugEnv.java','KneekuraDebugReadyWriter.java'].map(x=>path.join(bridge,x)).concat(['ManualDiagnosticsLimits.java','ManualMotionDiagnostics.java','ManualPresentation.java','ManualGridGeometry.java','ManualGrid.java','ManualTrails.java','ManualAiLens.java','ManualScenario.java','ManualRequest.java','ManualRequestSelfTest.java','ManualShutdown.java','ManualNativeAdapter.java'].map(x=>path.join(native,x)));
   const args=['--release','17','-encoding','UTF-8','-proc:none','-cp',cp,'-d',classes,...sources];const argFile=path.join(dir,'javac.args');await fs.writeFile(argFile,args.map(x=>'"'+x.replaceAll('\\','/')+'"').join('\n'),{flag:'wx'});
   await runTool(path.join(state.manifest.javaHome,'bin/javac.exe'),['-J-Duser.language=en','@'+argFile],{cwd:dir,env:process.env,log:path.join(dir,'javac.log')});
   await runTool(path.join(state.manifest.javaHome,'bin/java.exe'),['-ea','-cp',classes+path.delimiter+cp,'kneekura.manual.ManualRequestSelfTest'],{cwd:dir,env:process.env,log:path.join(dir,'guards.log')});
@@ -84,6 +86,8 @@ export async function prepare(installed,profile){
  await write(path.join(inputs,'profile.json'),profile);await write(path.join(inputs,'world-inventory.json'),checked.worldInventory);await fs.cp(profile.world.directory,world,{recursive:true,force:false,errorOnExist:true});assert.equal(inventoryHash(await inventory(world)),profile.world.inventorySha256,'TANK_COPY_CHANGED');
  const mods=[];for(const entry of profile.mods){const file=path.join(inputs,entry.id+'-'+entry.sha256+'.jar');await fs.copyFile(entry.file,file,fs.constants.COPYFILE_EXCL);assert.equal(hash(await fs.readFile(file)),entry.sha256,'TANK_COPY_MOD_CHANGED');mods.push({...entry,file});}
  const adapter=path.join(inputs,'manual-adapter.jar');await fs.copyFile(warmState.adapter,adapter,fs.constants.COPYFILE_EXCL);
+ // Client options live in the private game directory only; sealed in inputs. The world is never touched.
+ if(profile.view){const options=path.join(inputs,'options.txt');await fs.writeFile(options,`renderDistance:${profile.view.renderDistance}\nsimulationDistance:${profile.view.simulationDistance}\n`,{flag:'wx'});await fs.copyFile(options,path.join(game,'options.txt'),fs.constants.COPYFILE_EXCL);}
  const runtimeProfile={gameDir:game,worldDir:world,materialDir:inputs,adapter,mods,playerUuid:profile.playerUuid};await write(path.join(inputs,'runtime-profile.json'),runtimeProfile);
  const {validateManualSession}=await import(pathToFileURL(path.join(state.installed,'debug-workspace/bridge/manual-session.mjs')));
  // Resolve production-to-development remapping during preparation, not launch.
@@ -92,15 +96,46 @@ export async function prepare(installed,profile){
  const resolved=await read(resolvedFile);assert.equal(resolved.length,mods.length,'TANK_RESOLVED_MATERIAL_COUNT');for(const m of resolved){assert(mods.some(x=>x.id===m.id),'TANK_RESOLVED_FOREIGN_MOD');await regularPath(m.file);assert.equal(hash(await fs.readFile(m.file)),m.sha256,'TANK_RESOLVED_MATERIAL_CHANGED');}
  const presentation=['kneekura.tank-profile/v2','kneekura.tank-profile/v3'].includes(profile.schema)?await preparePresentation(world,profile.presentation):null;
  const request=validateManualSession({v:profile.schema==='kneekura.tank-profile/v3'?3:presentation?2:1,purpose:'MANUAL_INTERACTION',mode:profile.mode,nonce:randomUUID(),playerUuid:profile.playerUuid,subjectUuid:profile.subjectUuid,trialDir:trial,worldDir:world,maxTicks:profile.maxTicks,maxWallMs:profile.maxWallMs,maxEvents:profile.maxEvents,captures:0,grants:['MANUAL_EVENT_OBSERVATION',...(presentation?['CLIENT_TANK_GRID_PRESENTATION']:[]),...(profile.diagnostics?['FINITE_MOTION_DIAGNOSTICS']:[])],...(presentation?{presentation}:{}),...(profile.diagnostics?{diagnostics:profile.diagnostics}:{}),sourceRevisions:{target:profile.sourceRevision??'ARTIFACT_ONLY',techHub:state.manifest.sourceRevision},productHash:hash(Buffer.from(JSON.stringify(profile.mods))),adapterHash:warmState.adapterHash,installHash:state.manifest.bundleHash,materials:resolved.map(({id,sha256})=>({id,sha256}))});await write(path.join(inputs,'manual-request.json'),request);const requestHash=hash(await fs.readFile(path.join(inputs,'manual-request.json')));
- const config={schemaVersion:1,workspaceId:'tank-'+request.nonce,workspaceDir:path.join(state.installed,'native-host/host'),runtimeRoot:path.join(trial,'runtime'),worldName:'KNEEKURA_DEBUG_WORLD',gameDir:game,requireExistingWorld:true,requireGitIdentity:false,decisionHooks:false,motionOverlay:false,readyTimeoutMs:180000,launch:{command:process.execPath,args:[path.join(state.installed,'native-host/launch-gradle.mjs')],env:{JAVA_HOME:state.manifest.javaHome,KNEEKURA_TANK_WRAPPER:path.join(state.installed,'native-host/host/gradlew.bat'),KNEEKURA_TANK_PROFILE:path.join(inputs,'runtime-profile.json'),KNEEKURA_TANK_INSTALL_SHA256:state.manifest.bundleHash,KNEEKURA_MANUAL_ENABLED:'1',KNEEKURA_MANUAL_REQUEST:path.join(inputs,'manual-request.json'),KNEEKURA_MANUAL_REQUEST_SHA256:requestHash,KNEEKURA_DEBUG_MOD_PROFILE:'TANK_CORE'}}};await write(path.join(trial,'config.json'),config);
+ if(profile.scenario)await write(path.join(inputs,'scenario.json'),profile.scenario);
+ const config={schemaVersion:1,workspaceId:'tank-'+request.nonce,workspaceDir:path.join(state.installed,'native-host/host'),runtimeRoot:path.join(trial,'runtime'),worldName:'KNEEKURA_DEBUG_WORLD',gameDir:game,requireExistingWorld:true,requireGitIdentity:false,decisionHooks:false,motionOverlay:false,readyTimeoutMs:180000,launch:{command:process.execPath,args:[path.join(state.installed,'native-host/launch-gradle.mjs')],env:{JAVA_HOME:state.manifest.javaHome,KNEEKURA_TANK_WRAPPER:path.join(state.installed,'native-host/host/gradlew.bat'),KNEEKURA_TANK_PROFILE:path.join(inputs,'runtime-profile.json'),KNEEKURA_TANK_INSTALL_SHA256:state.manifest.bundleHash,KNEEKURA_MANUAL_ENABLED:'1',KNEEKURA_MANUAL_REQUEST:path.join(inputs,'manual-request.json'),KNEEKURA_MANUAL_REQUEST_SHA256:requestHash,KNEEKURA_DEBUG_MOD_PROFILE:'TANK_CORE',...(profile.selfTest?{KNEEKURA_TANK_SELFTEST:request.nonce}:{}),...(profile.trails?{KNEEKURA_TANK_TRAILS:'1'}:{}),...(profile.ai?{KNEEKURA_TANK_AI:'1'}:{}),...(profile.scenario?{KNEEKURA_TANK_SCENARIO:path.join(inputs,'scenario.json')}:{})}}};await write(path.join(trial,'config.json'),config);
  const files=await snapshot(inputs,'inputs');files.push({file:'config.json',sha256:hash(await fs.readFile(path.join(trial,'config.json')))});
  await write(path.join(trial,'prepared.json'),{schema:'kneekura.tank-prepared/v1',installed:state.installed,bundleHash:state.manifest.bundleHash,profileHash:hash(Buffer.from(JSON.stringify(profile))),files,worldHash:profile.world.inventorySha256,status:'PREPARED_NOT_RUN'});
  assert.equal(inventoryHash(await inventory(profile.world.directory)),profile.world.inventorySha256,'TANK_SOURCE_WORLD_CHANGED');return {status:'PREPARED_NOT_RUN',trial};
 }
 async function prepared(trial){trial=await regularPath(path.resolve(trial),true);const seal=await read(path.join(trial,'prepared.json'));assert.equal(seal.schema,'kneekura.tank-prepared/v1');const state=await verifyInstallation(seal.installed);assert.equal(seal.bundleHash,state.manifest.bundleHash);for(const row of seal.files){const file=path.resolve(trial,row.file);assert(within(trial,file),'TANK_PREPARED_ESCAPE');await regularPath(file);assert.equal(hash(await fs.readFile(file)),row.sha256,'TANK_PREPARED_TAMPERED');}return {trial,seal,state,config:await read(path.join(trial,'config.json'))};}
-async function cleanupFailedLaunch(p,core){
+/** One read-only snapshot of every process. Any failure is an exception: absence is never inferred from a failed listing. */
+export async function listProcesses(){
+ assert.equal(process.platform,'win32','TANK_PROCESS_LISTING_UNSUPPORTED');
+ const script="$ErrorActionPreference='Stop';@(Get-CimInstance Win32_Process | ForEach-Object { [pscustomobject]@{pid=[int]$_.ProcessId;parentPid=[int]$_.ParentProcessId;name=[string]$_.Name;commandLine=$_.CommandLine;executablePath=$_.ExecutablePath;startedAt=if($_.CreationDate){$_.CreationDate.ToUniversalTime().ToString('o')}else{$null}} }) | ConvertTo-Json -Compress -Depth 2";
+ const child=spawn('powershell.exe',['-NoProfile','-NonInteractive','-Command',script],{windowsHide:true});let out='',err='';child.stdout.on('data',b=>out+=b);child.stderr.on('data',b=>err+=b);
+ const code=await new Promise((resolve,reject)=>{child.once('error',reject);child.once('exit',resolve);});assert.equal(code,0,'TANK_PROCESS_LISTING_FAILED '+err.trim());
+ const rows=[].concat(JSON.parse(out)).map(row=>({pid:row.pid,parentPid:row.parentPid,name:row.name,commandLine:typeof row.commandLine==='string'?row.commandLine:null,executablePath:row.executablePath??null,startedAtEpochMs:row.startedAt?Date.parse(row.startedAt):NaN}));
+ for(const row of rows){if(!/^(java|javaw|node)\.exe$/i.test(row.name)||!row.commandLine)continue;row.argFiles=[];for(const match of row.commandLine.matchAll(/(?:^|\s)@(?:"([^"]+)"|(\S+))/g)){const file=match[1]??match[2];const text=await fs.stat(file).then(info=>info.isFile()&&info.size<=4194304?fs.readFile(file,'utf8'):null).catch(()=>null);row.argFiles.push({file,text});}}
+ assert(rows.length>0,'TANK_PROCESS_LISTING_EMPTY');return rows;
+}
+/** Launch died before the native claim: no bound runtime PID exists. Release only on positively observed absence. */
+export async function cleanupUnboundLaunch(p,core,current,{list=listProcesses,waitMs=10000,pollMs=500}={}){
+ const requestHash=hash(await fs.readFile(path.join(p.trial,'inputs/manual-request.json')));const javaExecutable=path.join(p.state.manifest.javaHome,'bin/java.exe');
+ assert(Number.isSafeInteger(current.pid)&&Number.isFinite(current.spawnedAtEpochMs),'TANK_UNBOUND_LAUNCHER_IDENTITY_MISSING');
+ const identity={launcherPid:current.pid,launcherSpawnedAtEpochMs:current.spawnedAtEpochMs,markers:[requestHash,p.trial],selfPid:process.pid,javaExecutable};
+ // A just-failed JVM may still be exiting; observe for a bounded time, never terminate an unbound process.
+ const deadline=Date.now()+waitMs;let scan;do{scan=findTrialProcesses(await list(),identity);if(scan.status!=='PRESENT')break;await new Promise(resolve=>setTimeout(resolve,pollMs));}while(Date.now()<deadline);
+ if(scan.status!=='NONE'){const detail=[...scan.present,...scan.unknown].map(x=>x.pid+':'+x.name+':'+x.reason).join(',');throw Error('TANK_UNBOUND_TRIAL_PROCESS_'+scan.status+' '+detail);}
+ const launcher=await core.stopCurrent(p.config,p.state.installed);assert.equal(launcher.cleanup?.status,'VERIFIED_EXIT','TANK_UNBOUND_LAUNCHER_EXIT_UNVERIFIED');
+ const result={status:'FAILED_BEFORE_NATIVE_CLAIM_NO_TRIAL_PROCESS_VERIFIED',processScan:scan,launcherExit:launcher.cleanup,forced:false,cleanShutdown:false,worldAcceptance:'NOT_ESTABLISHED',bootstrapScope:'CLEANUP_ONLY_NEVER_READY'};
+ return releaseFailedTrial(p,result);
+}
+async function releaseFailedTrial(p,result){
+ const output=path.join(p.trial,'failed-run-cleanup.json');if(!(await fs.stat(output).catch(()=>null)))await write(output,result);
+ const lock=await read(path.join(p.trial,'host-lock.json')).catch(error=>{if(error.code==='ENOENT')return null;throw error;});
+ // Remove only this trial's own token; a lock already taken by a later trial is never touched.
+ if(lock){assert.equal(path.resolve(lock.file).toLowerCase(),path.join(p.state.installed,'host-lock.json').toLowerCase());const held=await read(lock.file).catch(error=>{if(error.code==='ENOENT')return null;throw error;});if(held?.token===lock.token)await fs.unlink(lock.file);}
+ return result;
+}
+export async function cleanupFailedLaunch(p,core,options){
  const current=await core.readCurrent(p.config,p.state.installed);assert(current.runDir,'TANK_NO_RUN_TO_RECONCILE');
- const requestFile=path.join(p.trial,'inputs/manual-request.json'),request=await read(requestFile),binding=await read(path.join(p.trial,'manual-claim.json'));assert.equal(binding.requestHash,hash(await fs.readFile(requestFile)),'TANK_BOOTSTRAP_REQUEST_HASH');
+ const binding=await read(path.join(p.trial,'manual-claim.json')).catch(error=>{if(error.code==='ENOENT')return null;throw error;});if(!binding)return cleanupUnboundLaunch(p,core,current,options);
+ const requestFile=path.join(p.trial,'inputs/manual-request.json'),request=await read(requestFile);assert.equal(binding.requestHash,hash(await fs.readFile(requestFile)),'TANK_BOOTSTRAP_REQUEST_HASH');
  const java=path.join(p.state.manifest.javaHome,'bin/java.exe');const record=validateBootstrap(request,binding,current,java,hash(await fs.readFile(requestFile)));
  let observed=await core.inspectProcess(record.pid);let alive=validateBootstrapProcess(request,binding,observed,java);let forced=false;
  if(alive){
@@ -111,8 +146,7 @@ async function cleanupFailedLaunch(p,core){
  }
  const {verifyProcessesExited}=await import(pathToFileURL(path.join(p.state.installed,'debug-workspace/process-stop.mjs')));const nativeExit=await verifyProcessesExited([record],{inspect:core.inspectProcess});assert.equal(nativeExit.status,'VERIFIED_EXIT');const launcher=await core.stopCurrent(p.config,p.state.installed);assert.equal(launcher.cleanup?.status,'VERIFIED_EXIT');
  const result={status:'FAILED_RUN_NATIVE_AND_LAUNCHER_EXIT_VERIFIED',nativeExit,launcherExit:launcher.cleanup,forced,cleanShutdown:false,worldAcceptance:'NOT_ESTABLISHED',bootstrapScope:'CLEANUP_ONLY_NEVER_READY'};
- const output=path.join(p.trial,'failed-run-cleanup.json');if(!(await fs.stat(output).catch(()=>null)))await write(output,result);
- const lock=await read(path.join(p.trial,'host-lock.json'));assert.equal(path.resolve(lock.file).toLowerCase(),path.join(p.state.installed,'host-lock.json').toLowerCase());if(await fs.stat(lock.file).catch(()=>null))await unlock(lock);return result;
+ return releaseFailedTrial(p,result);
 }
 export async function commandRun(command,trial){
  assert(['start','status','stop','abort','evidence'].includes(command));const p=await prepared(trial);const lab=p.state.installed;const core=await import(pathToFileURL(path.join(lab,'debug-workspace/core.mjs')));
@@ -139,11 +173,63 @@ export async function commandRun(command,trial){
  }
  const current=await core.readCurrent(p.config,lab);return {status:current.status,runDir:current.runDir,live:current.live,closure:path.join(p.trial,'closed.json'),startup:path.join(p.trial,'startup.json'),nativeEvents:current.runDir?path.join(current.runDir,'evidence/derived/manual-interaction'):null,manualAcceptance:'NOT_ESTABLISHED_BY_LIFECYCLE'};
 }
+/**
+ * One command for MOD developers: tank.json → stored artifact + pinned profile → prepare → start → summary.
+ * Exactly one trial; a failure is reported with its digest and never retried.
+ */
+/** Where the AI lens wrote, and which entity/goal classes explained themselves through tankWhy(). Informational: never changes PASS/FAIL. */
+export async function summarizeAi(trial){
+ const hit=(await fs.readdir(path.join(trial,'runtime'),{recursive:true}).catch(()=>[])).find(x=>path.basename(x)==='ai-result.json');
+ if(!hit)return {status:'NO_AI_RESULT'};const file=path.join(trial,'runtime',hit),r=await read(file);
+ return {status:'RECORDED',log:path.join(path.dirname(file),'ai.jsonl'),records:r.records,droppedRecords:r.droppedRecords,goalsSeen:r.goalsSeen?.length??0,explainedClasses:r.explainedClasses??[],whyErrors:r.whyErrors??0,details:file,
+  next:(r.explainedClasses??[]).length?'read "why" in ai.jsonl':'no tankWhy() found: copy native-host/templates/TankWhy.java into the MOD to explain decisions'};
+}
+async function findRuntimeFile(trial,name){const hit=(await fs.readdir(path.join(trial,'runtime'),{recursive:true}).catch(()=>[])).find(x=>path.basename(x)===name);return hit?path.join(trial,'runtime',hit):null;}
+/** Judge the scenario/expect of one finished trial from its recorded facts and write scenario-judgement.json. */
+export async function judgeTrial(trial,profile){
+ const file=await findRuntimeFile(trial,'scenario-result.json');if(!file)return {status:'FAIL',why:'NO_SCENARIO_RESULT'};
+ const result=await read(file),dir=path.dirname(file);
+ const aiLines=(await fs.readFile(path.join(dir,'ai.jsonl'),'utf8').catch(()=>'')).split(/\r?\n/).filter(Boolean).map(x=>JSON.parse(x));
+ const seenTypes=[...((await read(path.join(dir,'ai-result.json')).catch(()=>({}))).entityTypes??[]),...((await read(path.join(dir,'trails-result.json')).catch(()=>({}))).entityTypes??[])];
+ const verdict=judge({expect:profile.expect??[],result,aiLines,seenTypes});const out=path.join(trial,'scenario-judgement.json');await write(out,verdict);
+ return {status:verdict.status,passed:verdict.passed,failed:verdict.failed,failures:verdict.rows.filter(r=>r.status!=='PASS').slice(0,16),segments:verdict.segments,screenshots:verdict.screenshots,errors:result.errors,details:out};
+}
+export async function runProject(projectDir,{installation}={}){
+ const installed=path.resolve(installation??(await read(path.join(defaultRoot(),'active-host.json'))).installed);
+ const built=await buildProfile(projectDir,path.resolve(installed,'../..'));
+ const base={project:path.resolve(projectDir),profile:built.file,artifacts:built.artifacts,sourceRevision:built.profile.sourceRevision,sourceDirty:built.sourceDirty,mode:built.profile.mode,installed};
+ const {trial}=await prepare(installed,built.profile);
+ try{const result=await commandRun('start',trial);const summary={...base,status:'PASS',result:result.status,trial,startupMs:result.startupMs,exit:result.closure.status,evidence:result.closure.finalization.status,counts:result.closure.finalization.counts,details:path.join(trial,'closed.json')};
+  if(built.profile.selfTest){const nonce=(await read(path.join(trial,'inputs/manual-request.json'))).nonce;const selfTest=parseSelfTest(await fs.readFile(path.join(trial,'game/logs/latest.log'),'utf8').catch(()=>''),nonce);await write(path.join(trial,'selftest-result.json'),{nonce,...selfTest});
+   summary.selfTest={status:selfTest.status,pass:selfTest.pass,fail:selfTest.fail,failed:selfTest.rows.filter(r=>r.verdict==='FAIL').slice(0,16),scope:selfTest.scope,details:path.join(trial,'selftest-result.json')};if(selfTest.status!=='PASS')summary.status='FAIL';}
+  if(built.profile.ai)summary.ai=await summarizeAi(trial);
+  if(built.profile.scenario){summary.scenario=await judgeTrial(trial,built.profile);if(summary.scenario.status!=='PASS')summary.status='FAIL';}
+  return summary;}
+ catch(error){return {...base,status:'FAIL',error:error.message,trial,failure:await summarizeFailure(trial)};}
+}
+/**
+ * A warm/prepare interrupted from outside (e.g. a watchdog) leaves host-lock.json behind. Release it only when the
+ * recorded owner PID is gone (or is no longer a node process) and no process command line references this installation.
+ * Trial locks (`run:`) are never handled here: stop/abort reconcile those against the trial's own identity.
+ */
+export async function releaseStaleLock(installed,{list=listProcesses}={}){
+ installed=await regularPath(path.resolve(installed),true);const file=path.join(installed,'host-lock.json');
+ const lock=await read(file).catch(error=>{if(error.code==='ENOENT')return null;throw error;});if(!lock)return {status:'NO_LOCK',installed};
+ assert(typeof lock.operation==='string'&&!lock.operation.startsWith('run:'),'TANK_TRIAL_LOCK_USE_STOP_OR_ABORT');assert(['warm'].includes(lock.operation)||lock.operation.startsWith('prepare:'),'TANK_LOCK_OPERATION_UNKNOWN');
+ const rows=await list();const needle=installed.toLowerCase().replaceAll('/','\\');
+ const byPid=new Map(rows.map(row=>[row.pid,row]));const self=new Set();for(let row=byPid.get(process.pid);row&&!self.has(row.pid);row=byPid.get(row.parentPid))self.add(row.pid);
+ const owner=rows.find(row=>row.pid===lock.pid&&!self.has(row.pid)&&/^node(\.exe)?$/i.test(row.name??''));
+ const users=rows.filter(row=>!self.has(row.pid)&&(row.commandLine==null?/^(java|javaw|node)(\.exe)?$/i.test(row.name??''):row.commandLine.toLowerCase().replaceAll('/','\\').includes(needle)));
+ if(owner||users.length)throw Error('TANK_LOCK_OWNER_OR_USER_PRESENT '+[owner,...users].filter(Boolean).map(row=>row.pid+':'+row.name).join(','));
+ assert.equal((await read(file)).token,lock.token,'TANK_LOCK_REPLACED');const receipts=path.join(installed,'released-locks');await fs.mkdir(receipts,{recursive:true});
+ const receipt={status:'STALE_LOCK_RELEASED',lock,checkedProcesses:rows.length,at:new Date().toISOString()};await write(path.join(receipts,lock.token+'.json'),receipt);await fs.unlink(file);return {...receipt,installed};
+}
 export async function doctor(installed){try{const state=await verifyInstallation(installed);const receipt=await warmed(state).catch(error=>({error:error.message}));return {status:receipt.error?'NOT_WARMED':'VERIFIED_INSTALLATION',installed:state.installed,versions,bundleHash:state.manifest.bundleHash,warmError:receipt.error??null,lock:await read(path.join(state.installed,'host-lock.json')).catch(()=>null),nativeAcceptance:'NOT_ESTABLISHED_BY_DOCTOR'};}catch(error){return {status:'INVALID_INSTALLATION',error:error.message};}}
 
 if(process.argv[1]&&import.meta.url===pathToFileURL(path.resolve(process.argv[1])).href){
- const {values,positionals}=parseArgs({allowPositionals:true,options:{root:{type:'string'},'java-home':{type:'string'},installation:{type:'string'},profile:{type:'string'},trial:{type:'string'},online:{type:'boolean',default:false}}});const command=positionals[0];
- try{let result;if(command==='install'){assert(values['java-home'],'--java-home required');result=await install({root:values.root,javaHome:path.resolve(values['java-home'])});}else if(['doctor','warm','prepare'].includes(command)){assert(values.installation,'--installation required');result=command==='doctor'?await doctor(values.installation):command==='warm'?await warm(values.installation,{online:values.online}):await prepare(values.installation,await read(values.profile));}else{assert(values.trial,'--trial required');result=await commandRun(command,values.trial);}
+ const {values,positionals}=parseArgs({allowPositionals:true,options:{root:{type:'string'},'java-home':{type:'string'},installation:{type:'string'},profile:{type:'string'},trial:{type:'string'},project:{type:'string'},online:{type:'boolean',default:false}}});const command=positionals[0];
+ try{let result;if(command==='run'){assert(values.project,'--project required');result=await runProject(values.project,{installation:values.installation});if(result.status!=='PASS')process.exitCode=1;}
+  else if(command==='install'){assert(values['java-home'],'--java-home required');result=await install({root:values.root,javaHome:path.resolve(values['java-home'])});}else if(['doctor','warm','prepare','release-stale-lock'].includes(command)){assert(values.installation,'--installation required');result=command==='release-stale-lock'?await releaseStaleLock(values.installation):command==='doctor'?await doctor(values.installation):command==='warm'?await warm(values.installation,{online:values.online}):await prepare(values.installation,await read(values.profile));}else{assert(values.trial,'--trial required');result=await commandRun(command,values.trial);}
   const output=result.closure?{status:result.status,trial:values.trial,startupMs:result.startupMs,windowEnd:result.windowEnd,exit:result.closure.status,evidence:result.closure.finalization.status,counts:result.closure.finalization.counts,details:path.join(values.trial,'closed.json')}:command==='stop'&&result.finalization?{status:result.status,trial:values.trial,shutdownSource:result.shutdownSource,evidence:result.finalization.status,counts:result.finalization.counts,details:path.join(values.trial,'closed.json')}:result;
   console.log(JSON.stringify(output));if(result.status==='INVALID_INSTALLATION')process.exitCode=1;
  }catch(error){console.error(JSON.stringify({status:'FAIL',error:error.message,trial:values.trial}));process.exitCode=1;}

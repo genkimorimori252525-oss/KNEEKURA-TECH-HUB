@@ -42,7 +42,7 @@ public final class ManualNativeAdapter {
  private static volatile String forgeAt;
  public ManualNativeAdapter(){
   FMLJavaModLoadingContext.get().getModEventBus().addListener((FMLClientSetupEvent e)->forgeAt=Instant.now().toString());
-  MinecraftForge.EVENT_BUS.register(new Client());MinecraftForge.EVENT_BUS.register(new Server());MinecraftForge.EVENT_BUS.register(new ManualGrid());MinecraftForge.EVENT_BUS.register(new ManualMotionDiagnostics());
+  MinecraftForge.EVENT_BUS.register(new Client());MinecraftForge.EVENT_BUS.register(new Server());MinecraftForge.EVENT_BUS.register(new ManualGrid());MinecraftForge.EVENT_BUS.register(new ManualTrails());MinecraftForge.EVENT_BUS.register(new ManualAiLens());MinecraftForge.EVENT_BUS.register(new ManualScenario());MinecraftForge.EVENT_BUS.register(new ManualMotionDiagnostics());
  }
  private static KneekuraDebugEnv.Config env;
  private static JsonObject request;
@@ -55,6 +55,9 @@ public final class ManualNativeAdapter {
  private static int startupDiagnostics;
  private static String previousScreen="UNOBSERVED";
  private static int ticks,stable;
+ // Bounded READY-wait explanation (<=8 reason changes) and a fail-fast for a declared subject that never loads.
+ private static String lastWait="";private static int waitRecords;private static long subjectWaitSince=-1;
+ static final long SUBJECT_WAIT_LIMIT_MS=20000;
  private static long sequence,dropped;
  private static String reason="NOT_RUN";
  private static final List<String> errors=new CopyOnWriteArrayList<>();
@@ -113,8 +116,17 @@ public final class ManualNativeAdapter {
   String line=GSON.toJson(row)+"\n";try{writer.execute(()->{try{stream.write(line);stream.flush();}catch(IOException e){errors.add(e.toString());}});}catch(RejectedExecutionException e){dropped++;}
  }
  private static JsonObject shotState(Projectile shot){var x=new JsonObject();x.addProperty("uuid",shot.getUUID().toString());x.addProperty("owner",shot.getOwner()==null?null:shot.getOwner().getUUID().toString());x.addProperty("removed",shot.isRemoved());x.addProperty("x",shot.getX());x.addProperty("y",shot.getY());x.addProperty("z",shot.getZ());x.addProperty("scope","VANILLA_PROJECTILE_OWNER_NOT_TARGET_SPECIFIC_RALLY_STATE");return x;}
- private static synchronized void end(String why){if(!ended){reason=why;ended=true;ManualGrid.clear(why);ManualMotionDiagnostics.clear(why);observation("SESSION_END",bound(),new JsonObject());try{var x=new JsonObject();x.addProperty("reason",reason);x.addProperty("requestHash",requestHash);exclusive(output.resolve("window-end.json"),x);}catch(IOException e){errors.add(e.toString());}}}
+ private static synchronized void end(String why){if(!ended){reason=why;ended=true;ManualGrid.clear(why);ManualTrails.clear(why);ManualAiLens.clear(why);ManualScenario.clear(why);ManualMotionDiagnostics.clear(why);observation("SESSION_END",bound(),new JsonObject());try{var x=new JsonObject();x.addProperty("reason",reason);x.addProperty("requestHash",requestHash);exclusive(output.resolve("window-end.json"),x);}catch(IOException e){errors.add(e.toString());}}}
+ // Courtesy for the human at the desk: vanilla grabs the cursor on world entry. Keep it free until the person
+ // clicks inside the window; that click is vanilla's own grab. Only ever releases, never grabs or injects input.
+ private static volatile boolean userClicked;private static boolean cursorReleaseRecorded;
  public static final class Client {
+  @SubscribeEvent public void click(net.minecraftforge.client.event.InputEvent.MouseButton.Pre event){if(event.getAction()==org.lwjgl.glfw.GLFW.GLFW_PRESS)userClicked=true;}
+  @SubscribeEvent public void freeCursor(TickEvent.ClientTickEvent event){
+   if(event.phase!=TickEvent.Phase.END||userClicked||env==null)return;var mc=Minecraft.getInstance();
+   if(mc.screen==null&&mc.mouseHandler.isMouseGrabbed()){mc.mouseHandler.releaseMouse();
+    if(!cursorReleaseRecorded){cursorReleaseRecorded=true;try{var x=new JsonObject();x.addProperty("at",Instant.now().toString());x.addProperty("requestHash",requestHash);x.addProperty("policy","RELEASED_UNTIL_FIRST_USER_CLICK");exclusive(output.resolve("cursor-released.json"),x);}catch(IOException failure){errors.add(failure.toString());}}}
+  }
   @SubscribeEvent public void tick(TickEvent.ClientTickEvent event){
    if(event.phase!=TickEvent.Phase.END||!initialize()||disabled)return;
    var mc=Minecraft.getInstance();
@@ -125,7 +137,12 @@ public final class ManualNativeAdapter {
    }catch(Exception e){errors.add(e.toString());}
    if(!ready&&!stopRequested&&(System.nanoTime()-initializedNanos)/1_000_000>=180000){stopRequested=true;try{var x=new JsonObject();x.addProperty("requestHash",requestHash);x.addProperty("status","STARTUP_TIMEOUT_NOT_WORLD_ACCEPTANCE");exclusive(output.resolve("bootstrap-timeout.json"),x);}catch(IOException failure){errors.add(failure.toString());}mc.stop();return;}
    if(!ready){
-    if(mc.level==null||mc.player==null||mc.getConnection()==null||forgeAt==null||bound()==null||mc.getSingleplayerServer().overworld().getEntity(subjectId)==null||!mc.getSingleplayerServer().overworld().getEntity(subjectId).isAlive()){stable=0;return;}
+    String wait=mc.level==null||mc.player==null||mc.getConnection()==null?"CLIENT_WORLD":forgeAt==null?"FORGE_LOADING":bound()==null?"PLAYER_BINDING":mc.getSingleplayerServer().overworld().getEntity(subjectId)==null?"SUBJECT_NOT_LOADED":!mc.getSingleplayerServer().overworld().getEntity(subjectId).isAlive()?"SUBJECT_NOT_ALIVE":null;
+    if(wait!=null){stable=0;
+     if(!wait.equals(lastWait)&&waitRecords<8){lastWait=wait;waitRecords++;var w=new JsonObject();w.addProperty("at",Instant.now().toString());w.addProperty("requestHash",requestHash);w.addProperty("reason",wait);w.addProperty("subjectUuid",subjectId.toString());try{Files.writeString(output.resolve("ready-wait.jsonl"),GSON.toJson(w)+"\n",StandardOpenOption.CREATE,StandardOpenOption.APPEND);}catch(IOException failure){errors.add(failure.toString());}}
+     // The Player is bound and its spawn area loaded: a subject still absent after the limit will not appear. Same self-stop path as the startup timeout.
+     if(wait.startsWith("SUBJECT_")){if(subjectWaitSince<0)subjectWaitSince=System.nanoTime();else if(!stopRequested&&(System.nanoTime()-subjectWaitSince)/1_000_000>=SUBJECT_WAIT_LIMIT_MS){stopRequested=true;try{var x=new JsonObject();x.addProperty("requestHash",requestHash);x.addProperty("status",wait+"_NOT_WORLD_ACCEPTANCE");x.addProperty("subjectUuid",subjectId.toString());x.addProperty("waitedMs",SUBJECT_WAIT_LIMIT_MS);exclusive(output.resolve("bootstrap-subject.json"),x);}catch(IOException failure){errors.add(failure.toString());}mc.stop();}}else subjectWaitSince=-1;
+     return;}
     if(++stable<5)return;
     try{
      String now=Instant.now().toString();List<String> mods=ModList.get().getMods().stream().map(m->m.getModId()+"@"+m.getVersion()).sorted().toList();String probe;
@@ -133,7 +150,7 @@ public final class ManualNativeAdapter {
      var runtime=new KneekuraDebugReadyWriter.RuntimeInfo(net.minecraft.SharedConstants.getCurrentVersion().getName(),net.minecraftforge.versions.forge.ForgeVersion.getVersion(),System.getProperty("java.version"),"integrated-singleplayer",probe,ProcessHandle.current().info().command().orElseThrow(),mods);
      var milestones=new KneekuraDebugReadyWriter.Milestones(JVM,forgeAt,now,now,now,now);
      var binding=new JsonObject();binding.addProperty("playerUuid",bound().getUUID().toString());binding.addProperty("worldDir",request.get("worldDir").getAsString());binding.addProperty("requestHash",requestHash);binding.addProperty("pid",PID);binding.addProperty("runSnapshotId",env.runSnapshotId());exclusive(output.resolve("binding.json"),binding);
-     beganNanos=System.nanoTime();ManualMotionDiagnostics.arm(mc.getSingleplayerServer(),request,requestHash,output,beganNanos,()->ready&&!ended&&!closing&&!disabled);ManualGrid.arm(mc.getSingleplayerServer(),request,requestHash,output,beganNanos,()->ready&&!ended&&!closing&&!disabled);ready=true;ManualMotionDiagnostics.activate();observation("NATIVE_PLAYER_BOUND",bound(),binding.deepCopy());
+     beganNanos=System.nanoTime();ManualMotionDiagnostics.arm(mc.getSingleplayerServer(),request,requestHash,output,beganNanos,()->ready&&!ended&&!closing&&!disabled);ManualGrid.arm(mc.getSingleplayerServer(),request,requestHash,output,beganNanos,()->ready&&!ended&&!closing&&!disabled);ManualTrails.arm(mc.getSingleplayerServer(),playerId,requestHash,output,beganNanos,request.get("maxWallMs").getAsLong(),()->ready&&!ended&&!closing&&!disabled);ManualAiLens.arm(mc.getSingleplayerServer(),playerId,requestHash,output,beganNanos,request.get("maxWallMs").getAsLong(),()->ready&&!ended&&!closing&&!disabled);ManualScenario.arm(mc.getSingleplayerServer(),playerId,output,mc.gameDirectory,()->ready&&!ended&&!closing&&!disabled);ready=true;ManualMotionDiagnostics.activate();observation("NATIVE_PLAYER_BOUND",bound(),binding.deepCopy());
      KneekuraDebugReadyWriter.write(env,new KneekuraDebugReadyWriter.ReadyState(PID,milestones,runtime));
     }catch(Exception e){errors.add(e.toString());disabled=true;System.err.println("MANUAL_READY_FAILED "+e);}
    }
@@ -153,8 +170,8 @@ public final class ManualNativeAdapter {
    for(var it=shots.entrySet().iterator();it.hasNext();){var shot=it.next().getValue();String state=String.valueOf(shotState(shot).get("owner"));if(!state.equals(shotStates.get(shot.getUUID()))||shot.isRemoved())observation(shot.isRemoved()?"PROJECTILE_REMOVED_NOT_IMPACT_PROOF":"OWNERSHIP_CHANGE_END",shot,shotState(shot));shotStates.put(shot.getUUID(),state);if(shot.isRemoved()){it.remove();shotStates.remove(shot.getUUID());}}
   }
   @SubscribeEvent public void stopping(ServerStoppingEvent e){if(ready)end("USER_OR_NATIVE_STOP");}
-  @SubscribeEvent public void stopped(ServerStoppedEvent e){ManualGrid.clear("SERVER_STOPPED");if(env==null||disabled)return;worldStopped=true;closing=true;writer.shutdown();boolean clean=false;try{clean=writer.awaitTermination(3,TimeUnit.SECONDS);stream.flush();stream.close();try(var f=FileChannel.open(raw,StandardOpenOption.WRITE)){f.force(true);}clean&=errors.isEmpty()&&dropped==0;}catch(Exception failure){errors.add(failure.toString());}
-   try{var result=new JsonObject();result.addProperty("scope","FINITE_MANUAL_EVENTS_NOT_COMPLETE_RALLY");result.addProperty("requestHash",requestHash);result.addProperty("reason",reason);result.addProperty("ticks",ticks);result.addProperty("pid",PID);result.addProperty("worldStopped",worldStopped);result.addProperty("events",sequence);result.addProperty("dropped",dropped);result.add("errors",GSON.toJsonTree(errors));result.add("presentation",ManualGrid.finish());result.add("diagnostics",ManualMotionDiagnostics.finish());exclusive(output.resolve("result.json"),result);
+  @SubscribeEvent public void stopped(ServerStoppedEvent e){ManualGrid.clear("SERVER_STOPPED");ManualTrails.clear("SERVER_STOPPED");ManualAiLens.clear("SERVER_STOPPED");ManualScenario.clear("SERVER_STOPPED");if(env==null||disabled)return;worldStopped=true;closing=true;writer.shutdown();boolean clean=false;try{clean=writer.awaitTermination(3,TimeUnit.SECONDS);stream.flush();stream.close();try(var f=FileChannel.open(raw,StandardOpenOption.WRITE)){f.force(true);}clean&=errors.isEmpty()&&dropped==0;}catch(Exception failure){errors.add(failure.toString());}
+   try{var result=new JsonObject();result.addProperty("scope","FINITE_MANUAL_EVENTS_NOT_COMPLETE_RALLY");result.addProperty("requestHash",requestHash);result.addProperty("reason",reason);result.addProperty("ticks",ticks);result.addProperty("pid",PID);result.addProperty("worldStopped",worldStopped);result.addProperty("events",sequence);result.addProperty("dropped",dropped);result.add("errors",GSON.toJsonTree(errors));result.add("presentation",ManualGrid.finish());result.add("trails",ManualTrails.finish());result.add("ai",ManualAiLens.finish());result.add("scenario",ManualScenario.finish());result.add("diagnostics",ManualMotionDiagnostics.finish());exclusive(output.resolve("result.json"),result);
     var ack=new JsonObject();ack.addProperty("v",1);ack.addProperty("debugSessionId",env.debugSessionId());ack.addProperty("runId",env.runId());ack.addProperty("runSnapshotId",env.runSnapshotId());ack.addProperty("processEpoch",env.processEpoch());ack.addProperty("clean",clean);ack.addProperty("status",clean?"CLEAN_EVIDENCE_SHUTDOWN":"MANUAL_EVIDENCE_UNCLEAN");ack.addProperty("ackedAt",Instant.now().toString());ack.addProperty("finalWriterSeq",sequence);ack.addProperty("writerDroppedTotal",dropped);ack.addProperty("remainingQueue",writer.getQueue().size());ack.addProperty("worldStopped",true);exclusive(env.shutdownAckFile(),ack);
    }catch(IOException failure){System.err.println("MANUAL_CLOSE_FAILED "+failure);}
   }
