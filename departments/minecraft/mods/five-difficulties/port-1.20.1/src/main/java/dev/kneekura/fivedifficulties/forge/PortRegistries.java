@@ -340,6 +340,18 @@ public final class PortRegistries {
     public static final RegistryObject<Item> SANAE_SPAWN_EGG = ITEMS.register("sanae_spawn_egg",
             () -> new net.minecraftforge.common.ForgeSpawnEggItem(SANAE, 0x6BD245, 0x2937E0, new Item.Properties()));
 
+    // ---- P17h mobs ----
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.mob.ReimuEntity>> REIMU =
+            ENTITIES.register("reimu", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.mob.ReimuEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.mob.ReimuEntity::new, MobCategory.MONSTER)
+                    .sized(1.0F, 1.8F).clientTrackingRange(10)
+                    .build(FiveDifficultiesPort.MOD_ID + ":reimu"));
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.mob.MikoEntity>> MIKO =
+            ENTITIES.register("miko", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.mob.MikoEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.mob.MikoEntity::new, MobCategory.MONSTER)
+                    .sized(1.0F, 1.8F).clientTrackingRange(10)
+                    .build(FiveDifficultiesPort.MOD_ID + ":miko"));
+
     // ---- P13 danmaku-weapon items ----
     public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity>> DRAGON_NECK_JEWEL =
             ENTITIES.register("dragon_neck_jewel", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity>of(

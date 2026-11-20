@@ -347,7 +347,12 @@ public abstract class DanmakuMobEntity extends PathfinderMob {
     /** X1 entityToAttack was set without line-of-sight checks; the client never had it. */
     @Override
     public boolean isInvulnerableTo(DamageSource source) {
-        return attackInterval > 0 || super.isInvulnerableTo(source);
+        return isX1Invulnerable() || super.isInvulnerableTo(source);
+    }
+
+    /** X1 isEntityInvulnerable: between phases by default; Reimu / Miko / the traders replace it. */
+    public boolean isX1Invulnerable() {
+        return attackInterval > 0;
     }
 
     @Override

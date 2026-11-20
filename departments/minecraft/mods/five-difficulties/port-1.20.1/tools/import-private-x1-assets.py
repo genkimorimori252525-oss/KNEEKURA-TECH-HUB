@@ -470,6 +470,15 @@ ASSETS = {
         "assets/five_difficulties_port/textures/entity/mob/sanae.png",
         "b31a98e6b61b2b33c02adb13e7f7865c2930463e0c614a530a8566df2c81cd95",
     ),
+    # P17h mob textures.
+    "assets/thkaguyamod/textures/mob/ReimuTexture.png": (
+        "assets/five_difficulties_port/textures/entity/mob/reimu.png",
+        "8dd2653abad46b4eb133a6ea273fd0c573cd39fc2a0ed5debf6872f92213a966",
+    ),
+    "assets/thkaguyamod/textures/mob/MikoTexture.png": (
+        "assets/five_difficulties_port/textures/entity/mob/miko.png",
+        "0f6036ad0f63c156844d2cbe8ed22151e0047f462019c91ed730769c8f14b667",
+    ),
     # P15 danmaku crafting table.
     "assets/thkaguyamod/textures/blocks/danmaku_crafting_table.png": (
         "assets/five_difficulties_port/textures/block/danmaku_crafting_table.png",

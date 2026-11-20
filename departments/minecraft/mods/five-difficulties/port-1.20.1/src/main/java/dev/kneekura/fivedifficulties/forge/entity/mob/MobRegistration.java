@@ -26,6 +26,8 @@ public final class MobRegistration {
         event.put(PortRegistries.TOZIKO.get(), DanmakuMobEntity.createDanmakuAttributes().build());
         event.put(PortRegistries.SAKUYA.get(), DanmakuMobEntity.createDanmakuAttributes().build());
         event.put(PortRegistries.SANAE.get(), DanmakuMobEntity.createDanmakuAttributes().build());
+        event.put(PortRegistries.REIMU.get(), DanmakuMobEntity.createDanmakuAttributes().build());
+        event.put(PortRegistries.MIKO.get(), DanmakuMobEntity.createDanmakuAttributes().build());
     }
 
     @SubscribeEvent
@@ -48,5 +50,9 @@ public final class MobRegistration {
                 SakuyaEntity::checkTraderSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(PortRegistries.SANAE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 SanaeEntity::checkTraderSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
+        event.register(PortRegistries.REIMU.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                ReimuEntity::checkNoSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
+        event.register(PortRegistries.MIKO.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                MikoEntity::checkNoSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
     }
 }

@@ -304,6 +304,35 @@ public final class P17Scenario {
         sanae.discard();
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P17_TRADERS_PASS sakuya={} sanae={}", so.size(), 1);
 
+        // Reimu: starts in card 0 at 74 HP and is hittable even between phases (X1 replaces isEntityInvulnerable).
+        var reimu = spawn(PortRegistries.REIMU.get(), -14, 2);
+        require(reimu.getMaxHealth() == 74.0F && reimu.getUsingSpellCardNo() == 0, "reimu starts in card 0");
+        reimu.attackInterval = 50;
+        reimu.invulnerableTime = 0;
+        // X1 attackEntityFrom returns true only for a living attacker; the damage itself is what matters here.
+        reimu.hurt(level.damageSources().generic(), 4F);
+        require(reimu.getHealth() == 70.0F, "reimu takes damage while attackInterval > 0, hp=" + reimu.getHealth());
+        reimu.attackInterval = 0;
+        reimu.invulnerableTime = 0;
+        reimu.hurt(level.damageSources().generic(), 500F);
+        reimu.deathStepForTest();
+        require(reimu.getDanmakuPattern() == DanmakuMobEntity.ATTACK_END, "reimu's card death is final");
+        require(!dev.kneekura.fivedifficulties.forge.entity.mob.ReimuEntity.checkNoSpawnRules(PortRegistries.REIMU.get(), level,
+                MobSpawnType.NATURAL, BlockPos.containing(bx, by, bz), level.random), "reimu never spawns naturally");
+        reimu.discard();
+        // Miko: invulnerable NOT_ATTACK; right-click cycles the in-memory danmaku level.
+        var miko = spawn(PortRegistries.MIKO.get(), -16, 2);
+        miko.invulnerableTime = 0;
+        require(!miko.hurt(level.damageSources().generic(), 100F) && miko.getHealth() == 74.0F, "miko cannot be hurt");
+        int levelBefore = dev.kneekura.fivedifficulties.forge.X1Config.danmakuLevel();
+        String first = dev.kneekura.fivedifficulties.forge.entity.mob.MikoEntity.cycleDanmakuLevel(null);
+        int after = dev.kneekura.fivedifficulties.forge.X1Config.danmakuLevel();
+        for (int i = 0; i < 3; i++) dev.kneekura.fivedifficulties.forge.entity.mob.MikoEntity.cycleDanmakuLevel(null);
+        require(levelBefore == 2 && "HARD".equals(first) && after == 3 && dev.kneekura.fivedifficulties.forge.X1Config.danmakuLevel() == 2,
+                "miko cycles NORMAL -> HARD and around back to NORMAL");
+        miko.discard();
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P17_REIMU_MIKO_PASS cycle={}", first);
+
         // Spawn rules accept egg spawns.
         require(THFairyEntity.checkFairySpawnRules(PortRegistries.TH_FAIRY.get(), level, MobSpawnType.SPAWN_EGG,
                 BlockPos.containing(bx, by, bz), level.random), "egg spawns allowed");

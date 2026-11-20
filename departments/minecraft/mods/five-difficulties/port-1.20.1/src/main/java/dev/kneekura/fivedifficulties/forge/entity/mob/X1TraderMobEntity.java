@@ -51,9 +51,8 @@ public abstract class X1TraderMobEntity extends DanmakuMobEntity implements Merc
 
     /** isEntityInvulnerable: true exactly while NOT_ATTACK (X1 does not look at attackInterval here). */
     @Override
-    public boolean isInvulnerableTo(DamageSource source) {
-        if (getDanmakuPattern() == NOT_ATTACK) return !source.is(net.minecraft.tags.DamageTypeTags.BYPASSES_INVULNERABILITY);
-        return super.isInvulnerableTo(source);
+    public boolean isX1Invulnerable() {
+        return getDanmakuPattern() == NOT_ATTACK;
     }
 
     /** applyPotionDamageCalculations × 0.05 while invulnerable (only reachable by bypassing damage). */

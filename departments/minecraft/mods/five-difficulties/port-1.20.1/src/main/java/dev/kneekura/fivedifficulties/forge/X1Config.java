@@ -81,7 +81,12 @@ public final class X1Config {
     public static boolean spawnBoss() { return get(SPAWN_BOSS, true); }
     /** X1 stores 100 − the configured percentage. */
     public static int fairySpawnRate() { return 100 - get(FAIRY_SPAWN_RATE, 50); }
-    public static int danmakuLevel() { return get(DANMAKU_LEVEL, 2); }
+    /** X1 assigns THKaguyaConfig.danmakuLevel at run time (Miko); like X1 it lives in memory only, not the file. */
+    private static Integer danmakuLevelOverride;
+
+    public static int danmakuLevel() { return danmakuLevelOverride != null ? danmakuLevelOverride : get(DANMAKU_LEVEL, 2); }
+
+    public static void setDanmakuLevelInMemory(int level) { danmakuLevelOverride = level; }
     public static float danmakuAccuracy() { return get(DANMAKU_ACCURACY, 80); }
     public static boolean spawnHanabeeper() { return get(SPAWN_HANABEEPER, false); }
     public static boolean recipelessItemsRecipe() { return get(RECIPELESS_ITEMS_RECIPE, false); }
