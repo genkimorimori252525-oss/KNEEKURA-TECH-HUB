@@ -509,7 +509,8 @@ public final class ClientWorldVisualSmoke {
                 dev.kneekura.fivedifficulties.forge.PortRegistries.SAKUYA.get(),
                 dev.kneekura.fivedifficulties.forge.PortRegistries.SANAE.get(),
                 dev.kneekura.fivedifficulties.forge.PortRegistries.REIMU.get(),
-                dev.kneekura.fivedifficulties.forge.PortRegistries.MIKO.get()};
+                dev.kneekura.fivedifficulties.forge.PortRegistries.MIKO.get(),
+                dev.kneekura.fivedifficulties.forge.PortRegistries.RINNOSUKE.get()};
         for (int i = 0; i < types.length; i++) {
             var e = types[i].create(level);
             if (!(e instanceof net.minecraft.world.entity.Mob mob)) continue;

@@ -251,6 +251,22 @@ public final class P17Renderers {
         }
     }
 
+    /** A plain RenderLiving (no boss plate): X1's RenderRinnosuke. */
+    public static final class Plain<T extends net.minecraft.world.entity.Mob, M extends net.minecraft.client.model.EntityModel<T>>
+            extends net.minecraft.client.renderer.entity.MobRenderer<T, M> {
+        private final ResourceLocation texture;
+
+        public Plain(EntityRendererProvider.Context context, M model, String texture) {
+            super(context, model, 0.25F);
+            this.texture = mob(texture);
+        }
+
+        @Override
+        public ResourceLocation getTextureLocation(T e) {
+            return texture;
+        }
+    }
+
     public static ModelLayerLocation mobLayer(String name) {
         return layer(name);
     }

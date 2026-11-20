@@ -352,6 +352,15 @@ public final class PortRegistries {
                     .sized(1.0F, 1.8F).clientTrackingRange(10)
                     .build(FiveDifficultiesPort.MOD_ID + ":miko"));
 
+    // ---- P17i mobs ----
+    public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.mob.RinnosukeEntity>> RINNOSUKE =
+            ENTITIES.register("rinnosuke", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.mob.RinnosukeEntity>of(
+                            dev.kneekura.fivedifficulties.forge.entity.mob.RinnosukeEntity::new, MobCategory.AMBIENT)
+                    .sized(0.6F, 1.8F).clientTrackingRange(10)
+                    .build(FiveDifficultiesPort.MOD_ID + ":rinnosuke"));
+    public static final RegistryObject<Item> RINNOSUKE_SPAWN_EGG = ITEMS.register("rinnosuke_spawn_egg",
+            () -> new net.minecraftforge.common.ForgeSpawnEggItem(RINNOSUKE, 0x373737, 0x2D2DE0, new Item.Properties()));
+
     // ---- P13 danmaku-weapon items ----
     public static final RegistryObject<EntityType<dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity>> DRAGON_NECK_JEWEL =
             ENTITIES.register("dragon_neck_jewel", () -> EntityType.Builder.<dev.kneekura.fivedifficulties.forge.entity.DragonNeckJewelEntity>of(

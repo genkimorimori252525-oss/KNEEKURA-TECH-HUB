@@ -28,6 +28,7 @@ public final class MobRegistration {
         event.put(PortRegistries.SANAE.get(), DanmakuMobEntity.createDanmakuAttributes().build());
         event.put(PortRegistries.REIMU.get(), DanmakuMobEntity.createDanmakuAttributes().build());
         event.put(PortRegistries.MIKO.get(), DanmakuMobEntity.createDanmakuAttributes().build());
+        event.put(PortRegistries.RINNOSUKE.get(), RinnosukeEntity.createAttributes().build());
     }
 
     @SubscribeEvent
@@ -54,5 +55,7 @@ public final class MobRegistration {
                 ReimuEntity::checkNoSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(PortRegistries.MIKO.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 MikoEntity::checkNoSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
+        event.register(PortRegistries.RINNOSUKE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                RinnosukeEntity::checkRinnosukeSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
     }
 }

@@ -333,6 +333,32 @@ public final class P17Scenario {
         miko.discard();
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P17_REIMU_MIKO_PASS cycle={}", first);
 
+        // Rinnosuke: 1.7.10 villager trading with X1's eight trades; lightning turns him into a witch.
+        var rinno = spawn(PortRegistries.RINNOSUKE.get(), -18, 0);
+        var offers = rinno.getOffers();
+        var all = dev.kneekura.fivedifficulties.forge.entity.mob.RinnosukeEntity.rinnosukeTrades();
+        require(offers.size() == 1 && all.size() == 8 && all.stream().anyMatch(o -> o.getResult().is(offers.get(0).getResult().getItem())),
+                "rinnosuke opens with one of the eight trades");
+        for (int i = 0; i < 7; i++) rinno.notifyTrade(offers.get(0));
+        require(offers.get(0).isOutOfStock(), "7 uses");
+        rinno.resetStep();
+        var rAfter = rinno.getOffers();
+        require((rAfter.size() == 2 || !rAfter.get(0).isOutOfStock()) && rinno.hasEffect(net.minecraft.world.effect.MobEffects.REGENERATION),
+                "a reset adds (or refreshes) one trade and regenerates, size=" + rAfter.size());
+        int rinnoOffers = rAfter.size();
+        net.minecraft.nbt.CompoundTag rTag = new net.minecraft.nbt.CompoundTag();
+        rinno.addAdditionalSaveData(rTag);
+        var rinno2 = PortRegistries.RINNOSUKE.get().create(level);
+        rinno2.readAdditionalSaveData(rTag);
+        require(rinno2.getOffers().size() == rinnoOffers, "offers survive save / load");
+        var bolt = EntityType.LIGHTNING_BOLT.create(level);
+        bolt.moveTo(rinno.getX(), rinno.getY(), rinno.getZ());
+        rinno.thunderHit(level, bolt);
+        var witches = level.getEntitiesOfClass(net.minecraft.world.entity.monster.Witch.class, rinno.getBoundingBox().inflate(2));
+        require(rinno.isRemoved() && witches.size() == 1, "lightning makes a witch");
+        witches.forEach(Entity::discard);
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P17_RINNOSUKE_PASS offers={}", rinnoOffers);
+
         // Spawn rules accept egg spawns.
         require(THFairyEntity.checkFairySpawnRules(PortRegistries.TH_FAIRY.get(), level, MobSpawnType.SPAWN_EGG,
                 BlockPos.containing(bx, by, bz), level.random), "egg spawns allowed");

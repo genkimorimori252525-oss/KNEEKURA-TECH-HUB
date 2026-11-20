@@ -479,6 +479,11 @@ ASSETS = {
         "assets/five_difficulties_port/textures/entity/mob/miko.png",
         "0f6036ad0f63c156844d2cbe8ed22151e0047f462019c91ed730769c8f14b667",
     ),
+    # P17i mob textures.
+    "assets/thkaguyamod/textures/mob/RinnosukeTexture.png": (
+        "assets/five_difficulties_port/textures/entity/mob/rinnosuke.png",
+        "68a8b2ecec0ac4ac08101b4b7a06fbb4cfaa5d786601fc52ffb9229a19706b6e",
+    ),
     # P15 danmaku crafting table.
     "assets/thkaguyamod/textures/blocks/danmaku_crafting_table.png": (
         "assets/five_difficulties_port/textures/block/danmaku_crafting_table.png",
