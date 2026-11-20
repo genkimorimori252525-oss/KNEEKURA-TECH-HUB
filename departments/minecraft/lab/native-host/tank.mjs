@@ -186,12 +186,29 @@ export async function runProject(projectDir,{installation}={}){
   return summary;}
  catch(error){return {...base,status:'FAIL',error:error.message,trial,failure:await summarizeFailure(trial)};}
 }
+/**
+ * A warm/prepare interrupted from outside (e.g. a watchdog) leaves host-lock.json behind. Release it only when the
+ * recorded owner PID is gone (or is no longer a node process) and no process command line references this installation.
+ * Trial locks (`run:`) are never handled here: stop/abort reconcile those against the trial's own identity.
+ */
+export async function releaseStaleLock(installed,{list=listProcesses}={}){
+ installed=await regularPath(path.resolve(installed),true);const file=path.join(installed,'host-lock.json');
+ const lock=await read(file).catch(error=>{if(error.code==='ENOENT')return null;throw error;});if(!lock)return {status:'NO_LOCK',installed};
+ assert(typeof lock.operation==='string'&&!lock.operation.startsWith('run:'),'TANK_TRIAL_LOCK_USE_STOP_OR_ABORT');assert(['warm'].includes(lock.operation)||lock.operation.startsWith('prepare:'),'TANK_LOCK_OPERATION_UNKNOWN');
+ const rows=await list();const needle=installed.toLowerCase().replaceAll('/','\\');
+ const byPid=new Map(rows.map(row=>[row.pid,row]));const self=new Set();for(let row=byPid.get(process.pid);row&&!self.has(row.pid);row=byPid.get(row.parentPid))self.add(row.pid);
+ const owner=rows.find(row=>row.pid===lock.pid&&!self.has(row.pid)&&/^node(\.exe)?$/i.test(row.name??''));
+ const users=rows.filter(row=>!self.has(row.pid)&&(row.commandLine==null?/^(java|javaw|node)(\.exe)?$/i.test(row.name??''):row.commandLine.toLowerCase().replaceAll('/','\\').includes(needle)));
+ if(owner||users.length)throw Error('TANK_LOCK_OWNER_OR_USER_PRESENT '+[owner,...users].filter(Boolean).map(row=>row.pid+':'+row.name).join(','));
+ assert.equal((await read(file)).token,lock.token,'TANK_LOCK_REPLACED');const receipts=path.join(installed,'released-locks');await fs.mkdir(receipts,{recursive:true});
+ const receipt={status:'STALE_LOCK_RELEASED',lock,checkedProcesses:rows.length,at:new Date().toISOString()};await write(path.join(receipts,lock.token+'.json'),receipt);await fs.unlink(file);return {...receipt,installed};
+}
 export async function doctor(installed){try{const state=await verifyInstallation(installed);const receipt=await warmed(state).catch(error=>({error:error.message}));return {status:receipt.error?'NOT_WARMED':'VERIFIED_INSTALLATION',installed:state.installed,versions,bundleHash:state.manifest.bundleHash,warmError:receipt.error??null,lock:await read(path.join(state.installed,'host-lock.json')).catch(()=>null),nativeAcceptance:'NOT_ESTABLISHED_BY_DOCTOR'};}catch(error){return {status:'INVALID_INSTALLATION',error:error.message};}}
 
 if(process.argv[1]&&import.meta.url===pathToFileURL(path.resolve(process.argv[1])).href){
  const {values,positionals}=parseArgs({allowPositionals:true,options:{root:{type:'string'},'java-home':{type:'string'},installation:{type:'string'},profile:{type:'string'},trial:{type:'string'},project:{type:'string'},online:{type:'boolean',default:false}}});const command=positionals[0];
  try{let result;if(command==='run'){assert(values.project,'--project required');result=await runProject(values.project,{installation:values.installation});if(result.status!=='PASS')process.exitCode=1;}
-  else if(command==='install'){assert(values['java-home'],'--java-home required');result=await install({root:values.root,javaHome:path.resolve(values['java-home'])});}else if(['doctor','warm','prepare'].includes(command)){assert(values.installation,'--installation required');result=command==='doctor'?await doctor(values.installation):command==='warm'?await warm(values.installation,{online:values.online}):await prepare(values.installation,await read(values.profile));}else{assert(values.trial,'--trial required');result=await commandRun(command,values.trial);}
+  else if(command==='install'){assert(values['java-home'],'--java-home required');result=await install({root:values.root,javaHome:path.resolve(values['java-home'])});}else if(['doctor','warm','prepare','release-stale-lock'].includes(command)){assert(values.installation,'--installation required');result=command==='release-stale-lock'?await releaseStaleLock(values.installation):command==='doctor'?await doctor(values.installation):command==='warm'?await warm(values.installation,{online:values.online}):await prepare(values.installation,await read(values.profile));}else{assert(values.trial,'--trial required');result=await commandRun(command,values.trial);}
   const output=result.closure?{status:result.status,trial:values.trial,startupMs:result.startupMs,windowEnd:result.windowEnd,exit:result.closure.status,evidence:result.closure.finalization.status,counts:result.closure.finalization.counts,details:path.join(values.trial,'closed.json')}:command==='stop'&&result.finalization?{status:result.status,trial:values.trial,shutdownSource:result.shutdownSource,evidence:result.finalization.status,counts:result.finalization.counts,details:path.join(values.trial,'closed.json')}:result;
   console.log(JSON.stringify(output));if(result.status==='INVALID_INSTALLATION')process.exitCode=1;
  }catch(error){console.error(JSON.stringify({status:'FAIL',error:error.message,trial:values.trial}));process.exitCode=1;}
