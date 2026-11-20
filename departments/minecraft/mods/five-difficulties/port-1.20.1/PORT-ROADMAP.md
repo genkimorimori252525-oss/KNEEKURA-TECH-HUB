@@ -24,5 +24,5 @@ overlay); a checkpoint document; commit, push, CI green before the next phase.
 | P15 | danmaku crafting table (block, containers, GUIs, laser crafting) | done |
 | P16 | remaining items and their entities (`entity/item`, `entity/effect`), 1.7.10 box intercepts (`X1Hit`); deferred: cursed decoy doll, Miko sword, Miracle Mallet, shot-item dispenser (need P17 mobs / P18 Divine Spirit); `EntityHakureiShield` has no spawner in X1 | done |
 | P17 | X1 mobs (fairies, familiar, phantom, Rumia, Cirno, Wriggle, Toziko, Sakuya, Sanae, Reimu, Miko, Rinnosuke, cursed decoy doll), models, renderers, AI, spawning, traders, Miracle Mallet, shot-item dispenser, Hanabeeper spawns, `DanmakuPatternRegistry`, mob spell-card mode (checkpoints P17A–P17K) | done |
-| P18 | blocks / tile entity (Divine Spirit), Miko sword (needs Divine Spirit), recipes, creative tabs, lang completeness | next |
-| P19 | addons | |
+| P18 | Divine Spirit blocks / tile renderer / entity, Toyosatomimi sword (P18A); 109 X1 recipes with the config-gated recipeless set, yin-yang orb (P18B); creative tabs and lang audited — every item is in a tab (white pearl / white knife hidden as in X1), names come from X1 keys; effect entities keep X1's missing names | done |
+| P19 | addons: only compiled `.class` files exist (Battler Sakuya, Last Judgment, TOHOU MAIDs — the last needs LittleMaidMob); Illusion Laser is not in the archive. Needs a decision before work | blocked (decision) |
