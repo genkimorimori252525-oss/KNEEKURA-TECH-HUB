@@ -531,11 +531,6 @@ ASSETS = {
         "assets/five_difficulties_port/textures/item/toyosatomimi_sword.png",
         "b727ebcb7eb350661732558309bec48a1523dd16f1183456cf08a5bf853389e3",
     ),
-    # P18b yin-yang orb.
-    "assets/thkaguyamod/textures/items/material/Onmyoudama.png": (
-        "assets/five_difficulties_port/textures/item/yin_yang_orb.png",
-        "a7b29efd97219d5d0953a531a3cb1bf5b8924afc494ec3472c142fd328945cf0",
-    ),
     # P15 danmaku crafting table.
     "assets/thkaguyamod/textures/blocks/danmaku_crafting_table.png": (
         "assets/five_difficulties_port/textures/block/danmaku_crafting_table.png",
@@ -1009,7 +1004,23 @@ def canonical_inner(raw: bytes) -> bytes:
                 return candidate
     raise SystemExit("canonical X1 inner archive not found in verified outer bundle")
 
+def reject_duplicate_sources() -> None:
+    """A repeated ASSETS key silently drops the earlier destination (lost roukanken and bloodthirsty orb textures).
+    One X1 file used by two port items maps to one texture; models share it instead."""
+    import ast
+    import collections
+
+    tree = ast.parse(Path(__file__).read_text(encoding="utf-8"))
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Dict):
+            counts = collections.Counter(k.value for k in node.keys if isinstance(k, ast.Constant))
+            dups = sorted(k for k, v in counts.items() if v > 1)
+            if dups:
+                raise SystemExit(f"duplicate ASSETS source keys: {dups}")
+
+
 def main() -> None:
+    reject_duplicate_sources()
     ap = argparse.ArgumentParser()
     ap.add_argument("archive", type=Path)
     ap.add_argument(
