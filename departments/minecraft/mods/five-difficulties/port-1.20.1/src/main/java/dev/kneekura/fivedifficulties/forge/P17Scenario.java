@@ -492,6 +492,56 @@ public final class P17Scenario {
                 && dev.kneekura.fivedifficulties.forge.X1Config.recipelessItemsRecipe() == false,
                 "recipes: ours=" + ours + " pearl=" + pearl + " mallet=" + malletRecipe);
         FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P18B_RECIPES_PASS recipes={} medium={}", ours, medium);
+        // P18D spell-card lock-on (port change): no enemy -> invisible aim point; enemies -> nearest to the view.
+        double lx = bx + 40.5D, ly = by + 60.0D, lz = bz - 40.5D;
+        p.moveTo(lx, ly, lz, 0F, 0F); // yaw 0 looks along +Z
+        p.experienceLevel = 50;
+        ItemStack lockCard = new ItemStack(PortRegistries.SPELL_CARD_ITEMS.get(22).get());
+        java.util.function.Supplier<dev.kneekura.fivedifficulties.forge.entity.SpellCardEntity> lockCardOf = () ->
+                level.getEntitiesOfClass(dev.kneekura.fivedifficulties.forge.entity.SpellCardEntity.class,
+                        p.getBoundingBox().inflate(64.0D), c -> c.user == p).stream().findFirst().orElse(null);
+        Runnable clearCards = () -> {
+            level.getEntitiesOfClass(dev.kneekura.fivedifficulties.forge.entity.SpellCardEntity.class,
+                    p.getBoundingBox().inflate(64.0D)).forEach(Entity::discard);
+            level.getEntitiesOfClass(dev.kneekura.fivedifficulties.forge.entity.SpellCardCircleEntity.class,
+                    p.getBoundingBox().inflate(64.0D)).forEach(Entity::discard);
+        };
+        clearCards.run();
+        require(dev.kneekura.fivedifficulties.forge.spellcard.X1SpellCardDeclaration.check(level, lockCard, p, 22,
+                dev.kneekura.fivedifficulties.forge.spellcard.X1SpellCardDeclaration.NORMAL, true), "declare with no enemy");
+        var aimCard = lockCardOf.get();
+        require(aimCard != null && aimCard.target instanceof net.minecraft.world.entity.decoration.ArmorStand
+                && !aimCard.target.isAddedToWorld() && Math.abs(aimCard.target.getZ() - (lz + 16.0D)) < 0.01D,
+                "aim point 16 ahead: " + (aimCard == null ? null : aimCard.target));
+        clearCards.run();
+        java.util.function.BiFunction<Double, Double, net.minecraft.world.entity.monster.Husk> husk = (dx, dz) -> {
+            var h = EntityType.HUSK.create(level);
+            h.moveTo(lx + dx, ly + p.getEyeHeight() - h.getBbHeight() / 2.0D, lz + dz, 0F, 0F);
+            h.setNoAi(true);
+            h.setNoGravity(true);
+            level.addFreshEntity(h);
+            return h;
+        };
+        var wide = husk.apply(20.0D * Math.tan(Math.toRadians(20)), 20.0D);   // 20 degrees, near
+        var narrow = husk.apply(30.0D * Math.tan(Math.toRadians(10)), 30.0D); // 10 degrees, far: wins
+        var outside = husk.apply(10.0D * Math.tan(Math.toRadians(40)), 10.0D); // 40 degrees: outside the cone
+        var tooFar = husk.apply(0.0D, 36.0D);                                  // dead ahead but beyond 32
+        require(dev.kneekura.fivedifficulties.forge.spellcard.X1SpellCardDeclaration.lockOn(level, p) == narrow,
+                "lock-on picks the smallest angle");
+        require(dev.kneekura.fivedifficulties.forge.spellcard.X1SpellCardDeclaration.check(level, lockCard, p, 22,
+                dev.kneekura.fivedifficulties.forge.spellcard.X1SpellCardDeclaration.NORMAL, true), "declare with lock-on");
+        var lockedCard = lockCardOf.get();
+        require(lockedCard != null && lockedCard.target == narrow, "card locked on the narrow husk");
+        clearCards.run();
+        narrow.discard();
+        require(dev.kneekura.fivedifficulties.forge.spellcard.X1SpellCardDeclaration.lockOn(level, p) == wide,
+                "then the 20-degree husk");
+        wide.discard();
+        require(dev.kneekura.fivedifficulties.forge.spellcard.X1SpellCardDeclaration.lockOn(level, p) == null,
+                "40 degrees and 36 blocks are ignored");
+        outside.discard();
+        tooFar.discard();
+        FiveDifficultiesPort.LOGGER.info("FIVE_DIFFICULTIES_P18D_LOCK_ON_PASS");
     }
 
     private static void require(boolean ok, String what) {

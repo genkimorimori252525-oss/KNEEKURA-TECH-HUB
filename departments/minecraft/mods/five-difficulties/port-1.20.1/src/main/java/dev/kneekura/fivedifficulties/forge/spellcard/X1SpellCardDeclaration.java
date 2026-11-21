@@ -39,6 +39,10 @@ public final class X1SpellCardDeclaration {
     /**
      * Declares spell card {@code number} for {@code user} at a living target within 32 blocks of its
      * line of sight. Returns true when a card was declared.
+     * <p>Port change (not X1): a player no longer needs an enemy on the exact sight line. Without one, the
+     * enemy closest to the view direction (within {@link #LOCK_ON_ANGLE_DEG} degrees, {@link #LOCK_ON_RANGE}
+     * blocks, visible) is locked on; with none at all, the card is declared at an invisible point where the
+     * player is looking. Mobs keep X1's rule.
      */
     public static boolean check(ServerLevel world, ItemStack stack, LivingEntity user, int number, int level,
                                 boolean firstAttack) {
@@ -78,9 +82,80 @@ public final class X1SpellCardDeclaration {
         for (SpellCardEntity active : world.getEntitiesOfClass(SpellCardEntity.class, user.getBoundingBox().inflate(64.0D))) {
             if (active.user == user) return false;
         }
+        if (hit == null && user instanceof Player) {
+            hit = lockOn(world, user);
+            if (hit == null) hit = aimPoint(world, user);
+        }
         if (hit == null) return false;
         declare(world, user, hit, number, needLevel, level, firstAttack);
         return true;
+    }
+
+    /** Soft lock-on cone half angle and reach (the reach is X1's 32-block sight line). */
+    public static final double LOCK_ON_ANGLE_DEG = 30.0D;
+    public static final double LOCK_ON_RANGE = 32.0D;
+    /** Distance of the invisible aim point when the sight line hits nothing. */
+    public static final double AIM_POINT_DISTANCE = 16.0D;
+
+    /** The visible enemy nearest to the view direction inside the lock-on cone, or null. */
+    public static LivingEntity lockOn(ServerLevel world, LivingEntity user) {
+        Vec3 eye = user.getEyePosition();
+        Vec3 look = user.getLookAngle();
+        double minCos = Math.cos(Math.toRadians(LOCK_ON_ANGLE_DEG));
+        LivingEntity best = null;
+        double bestCos = minCos;
+        double bestDist = Double.MAX_VALUE;
+        for (LivingEntity e : world.getEntitiesOfClass(LivingEntity.class, user.getBoundingBox().inflate(LOCK_ON_RANGE),
+                e -> e != user && e.isAlive() && lockOnCandidate(user, e))) {
+            Vec3 to = e.getBoundingBox().getCenter().subtract(eye);
+            double dist = to.length();
+            if (dist > LOCK_ON_RANGE || dist < 1.0E-4D) continue;
+            double cos = to.dot(look) / dist;
+            if (cos < minCos) continue;
+            // Prefer the smaller angle; within 1 degree of each other, the nearer one.
+            boolean closerAngle = cos > bestCos + 1.5E-4D;
+            boolean sameAngle = Math.abs(cos - bestCos) <= 1.5E-4D;
+            if (!(closerAngle || (sameAngle && dist < bestDist))) continue;
+            if (!visible(world, user, eye, e)) continue;
+            best = e;
+            bestCos = cos;
+            bestDist = dist;
+        }
+        return best;
+    }
+
+    private static boolean lockOnCandidate(LivingEntity user, LivingEntity e) {
+        // X1's sight line skips animals and villagers; the cone also skips players, allies, golems and armour stands.
+        return !(e instanceof Animal) && !(e instanceof Villager) && !(e instanceof Player)
+                && !(e instanceof net.minecraft.world.entity.decoration.ArmorStand)
+                && !(e instanceof net.minecraft.world.entity.animal.IronGolem)
+                && !(e instanceof net.minecraft.world.entity.animal.SnowGolem)
+                && !e.isSpectator() && !e.isInvisible() && !e.isAlliedTo(user) && e.isPickable();
+    }
+
+    private static boolean visible(ServerLevel world, LivingEntity user, Vec3 eye, LivingEntity e) {
+        Vec3 c = e.getBoundingBox().getCenter();
+        return world.clip(new ClipContext(eye, c, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, user)).getType()
+                == HitResult.Type.MISS
+                || world.clip(new ClipContext(eye, e.getEyePosition(), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, user))
+                .getType() == HitResult.Type.MISS;
+    }
+
+    /**
+     * An invisible, never-spawned target where the player looks (the first block on the eye line within
+     * {@link #AIM_POINT_DISTANCE}, otherwise that far ahead). The card aims at it and it never dies, so the
+     * card runs its whole pattern instead of turning on its user.
+     */
+    public static LivingEntity aimPoint(ServerLevel world, LivingEntity user) {
+        Vec3 eye = user.getEyePosition();
+        Vec3 far = eye.add(user.getLookAngle().scale(AIM_POINT_DISTANCE));
+        BlockHitResult b = world.clip(new ClipContext(eye, far, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, user));
+        Vec3 at = b.getType() == HitResult.Type.MISS ? far : b.getLocation();
+        var stand = new net.minecraft.world.entity.decoration.ArmorStand(world, at.x, at.y, at.z);
+        stand.setInvisible(true);
+        stand.setNoGravity(true);
+        stand.setInvulnerable(true);
+        return stand;
     }
 
     private static int countBombs(Player player) {

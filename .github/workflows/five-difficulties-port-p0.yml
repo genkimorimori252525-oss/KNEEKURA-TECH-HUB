@@ -222,6 +222,7 @@ jobs:
           grep -F "FIVE_DIFFICULTIES_P17_DISPENSER_PASS" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
           grep -F "FIVE_DIFFICULTIES_P18A_DIVINE_SPIRIT_PASS" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
           grep -F "FIVE_DIFFICULTIES_P18B_RECIPES_PASS" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
+          grep -F "FIVE_DIFFICULTIES_P18D_LOCK_ON_PASS" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
           grep -F "FIVE_DIFFICULTIES_P17_RUNTIME_SCENARIO_PASS" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
           grep -F "Done (" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
           ! grep -F "Failed to start the minecraft server" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
@@ -235,7 +236,7 @@ jobs:
               ;;
           esac
 
-          echo "P18B_WORLD_RUNTIME_PASS" | tee "$GITHUB_WORKSPACE/forge-evidence/runtime-verdict.txt"
+          echo "P18D_WORLD_RUNTIME_PASS" | tee "$GITHUB_WORKSPACE/forge-evidence/runtime-verdict.txt"
 
       - name: Retain bounded compile evidence
         if: always()
