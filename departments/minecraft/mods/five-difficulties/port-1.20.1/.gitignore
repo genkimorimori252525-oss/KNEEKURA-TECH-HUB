@@ -1,3 +1,5 @@
 # Original X1 asset bytes are private local overlays, never committed to public TECH-HUB.
 # Use tools/import-private-x1-assets.py with --resources pointing at a build copy.
 src/main/resources/assets/five_difficulties_port/textures/**/*.png
+# Sound files are supplied by the player (X1 ships none); keep them out of the public repo.
+src/main/resources/assets/five_difficulties_port/sounds/**/*.ogg
