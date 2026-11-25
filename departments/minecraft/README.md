@@ -39,6 +39,11 @@ ANCHOR と FRONTIER は必ず別 SourceSnapshot にする。別バージョン�
 
 これにより『1.20.1しか見ないため新技術を取り逃す』ことと、『最新版のコードが1.20.1でそのまま動くと思い込む』ことの両方を避ける。
 
+## Forge ≒ NeoForge 移植部（2026-11-25）
+
+[移植部](porting/README.md) を独立登録。Forge 1.20.1 ⇄ NeoForge 1.21.1を初期対象に、ModPorterの変換知識、版別Primers、公式MDKを固定原典として参照する。AIによる手動移植を支援し、自動変換ツールは導入しない。逆移植は独立した検証対象。初期規則・作業テンプレートは静的候補で実機未検証。
+
+
 ## 標準の移植成果
 
 FRONTIER で得た技術は VERSION-PORTABILITY.md で次へ分解する。
