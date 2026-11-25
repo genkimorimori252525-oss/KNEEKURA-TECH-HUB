@@ -36,6 +36,8 @@
 | 26 | [noisium-forge-2.3.0+mc1.20-1.20.1.jar](../mods/noisium/README.md) | `CHUNK_WORLDGEN_IO` | source 2.3.0 @ `8cf45180`; **binary parity NOT_CHECKED** | NOT_ANALYZED | **PERFORMANCE_NOT_VERIFIED** | PHASE_6_SERVER_WORLD_STATIC_REVIEW |
 | 27 | [saturn-mc1.20.1-0.1.3.jar](../cohorts/2026-10-11-forge-1.20.1/PHASE-7-SOURCE-IDENTITY-GATES.md) | `MEMORY` | Saturn 0.1.3 Forge 1.20.1 source NOT_FOUND | NOT_ANALYZED | **PERFORMANCE_NOT_VERIFIED** | SOURCE_IDENTITY_BLOCKED |
 
+| 28 | [Voxy](../mods/voxy/README.md) | `CULLING_LOD` / `RENDERING_GPU` / `CACHE_DATA_STRUCTURE` | Forge 1.20.1 adaptation target; unofficial candidates only | 26.3 Fabric dev 0.2.20-beta @ `5bf33350`; binary parity NOT_CHECKED | **PERFORMANCE_NOT_VERIFIED** | Selected source mechanism review; runtime NOT_RUN |
+
 ## 2026-10-11 input cohort — 58 files, 27 optimization candidates
 
 All 58 names, source-identity states and excluded/diagnostic/related groups live at [full input manifest](../cohorts/2026-10-11-forge-1.20.1/INPUT-MANIFEST.json) and [phase-one analysis](../cohorts/2026-10-11-forge-1.20.1/README.md). The 27 rows above are **research candidates**, NOT fully analyzed, not recommended install combinations, and **NOT** claims that the pinned source revision equals the named release JAR. Forge/NeoForge/version drift and full access gaps are preserved.
