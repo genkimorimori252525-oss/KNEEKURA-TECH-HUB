@@ -31,6 +31,8 @@
 | 15 | [Jujutsu Craft](../mods/jujutsu-craft/README.md) | content/gameplay / combat Mod | exact distributed JAR ver50.1 pinned — MC 1.20.1 / Forge 47+ / SHA-256 094247a3… | latest public distribution is same ver50.1; public source not found | IN_PROGRESS (static evidence-backed; runtime NOT_RUN) |
 | 16 | [Jujutsu Kaisen (Jujutsu Verse)](../mods/jujutsu-verse/README.md) | content/gameplay / combat + VFX reference Mod | V8.1 pinned `d0f2f4e4…` (historical); [V9.0 selected static audit](../mods/jujutsu-verse/versions/9.0/README.md) pinned `fdf1f8a6…` — both MC 1.20.1 / Forge 47+ | latest reviewed public V9.0; separate artifact, no original source version-diff verified | V8.1 historical static; V9.0 PARTIAL_STATIC_ANALYSIS (runtime NOT_RUN; history NOT_ANALYZED) |
 
+| 17 | [LotMoreSteves](../mods/lotmoresteves/README.md) | exotic humanoid locomotion / boss combat | no native 1.20.1 Forge release in official listing; adaptation only | 0.1.8 / Forge 1.16.5 / official metadata; binary not acquired | IN_PROGRESS (reconnaissance only; static NOT_ANALYZED; runtime NOT_RUN) |
+
 ## Rules
 
 - One target may have multiple independently pinned version/loader tracks.
